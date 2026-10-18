@@ -1,0 +1,32 @@
+{
+  "limitations": [
+    "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+    "31 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+  ],
+  "n_eligible_animals": 775,
+  "note": "Stage 1 = implemented and mock-tested pipeline run on these extracts. It does NOT certify real-data readiness; stages 2-5 require authorized pilot reconciliation, scientist review of mappings, held-out real-study evaluation and prospective shadow validation.",
+  "qc_checks": {
+    "all_obs_have_animal": true,
+    "arm_keys_resolved": true,
+    "finite_log_weights": true,
+    "n_quarantined_hard": 0,
+    "n_quarantined_soft": 0,
+    "one_baseline_per_animal_max": true,
+    "passed": true,
+    "positive_weights": true,
+    "sex_values": [
+      "F",
+      "M"
+    ],
+    "unique_animal_keys": true,
+    "unique_obs_keys": true
+  },
+  "qualification_stage_achieved": 0,
+  "stage_definitions": {
+    "1": "implemented and mock-tested; pipeline executed on the extracts",
+    "2": "authorized pilot reconciliation against source records",
+    "3": "scientist-reviewed cohort, arm and regimen mappings",
+    "4": "held-out real-study evaluation",
+    "5": "prospective shadow validation"
+  }
+}

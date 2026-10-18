@@ -1,0 +1,141 @@
+{
+  "domains": {
+    "BW": {
+      "columns": [
+        "BWDTC",
+        "BWDY",
+        "BWORRES",
+        "BWORRESU",
+        "BWSEQ",
+        "BWSTRESC",
+        "BWSTRESN",
+        "BWSTRESU",
+        "BWTEST",
+        "BWTESTCD",
+        "DOMAIN",
+        "STUDYID",
+        "USUBJID"
+      ],
+      "files": 17,
+      "formats": [
+        "csv",
+        "parquet"
+      ],
+      "rows": 6479
+    },
+    "DM": {
+      "columns": [
+        "ARM",
+        "ARMCD",
+        "DOMAIN",
+        "RFENDTC",
+        "RFSTDTC",
+        "SEX",
+        "SPECIES",
+        "STRAIN",
+        "STUDYID",
+        "SUBJID",
+        "USUBJID"
+      ],
+      "files": 17,
+      "formats": [
+        "csv",
+        "parquet"
+      ],
+      "rows": 826
+    },
+    "DS": {
+      "columns": [
+        "DOMAIN",
+        "DSDECOD",
+        "DSSEQ",
+        "DSSTDTC",
+        "DSSTDY",
+        "DSTERM",
+        "STUDYID",
+        "USUBJID"
+      ],
+      "files": 17,
+      "formats": [
+        "csv"
+      ],
+      "rows": 826
+    },
+    "EX": {
+      "columns": [
+        "DOMAIN",
+        "EXDOSE",
+        "EXDOSU",
+        "EXENDTC",
+        "EXROUTE",
+        "EXSEQ",
+        "EXSTDTC",
+        "EXTRT",
+        "STUDYID",
+        "USUBJID"
+      ],
+      "files": 17,
+      "formats": [
+        "csv"
+      ],
+      "rows": 826
+    },
+    "SUPPBW": {
+      "columns": [
+        "IDVAR",
+        "IDVARVAL",
+        "QLABEL",
+        "QNAM",
+        "QVAL",
+        "RDOMAIN",
+        "STUDYID",
+        "USUBJID"
+      ],
+      "files": 17,
+      "formats": [
+        "csv"
+      ],
+      "rows": 484
+    },
+    "TS": {
+      "columns": [
+        "DOMAIN",
+        "STUDYID",
+        "TSPARMCD",
+        "TSSEQ",
+        "TSVAL"
+      ],
+      "files": 17,
+      "formats": [
+        "csv"
+      ],
+      "rows": 102
+    },
+    "TX": {
+      "columns": [
+        "DOMAIN",
+        "SET",
+        "SETCD",
+        "STUDYID",
+        "TXPARMCD",
+        "TXSEQ",
+        "TXVAL"
+      ],
+      "files": 17,
+      "formats": [
+        "csv"
+      ],
+      "rows": 90
+    }
+  },
+  "layout": "per_study",
+  "metadata_tables": [
+    "arm_regimen",
+    "compound_reference",
+    "study_metadata"
+  ],
+  "n_studies": 17,
+  "root": "runs\\smoke\\synthetic\\send",
+  "source": "local",
+  "warnings": []
+}

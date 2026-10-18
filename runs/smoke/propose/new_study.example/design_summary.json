@@ -1,0 +1,90 @@
+{
+  "labels": [
+    "no candidate met all prespecified criteria under any proposing model; this is a valid outcome, not a failure"
+  ],
+  "monte_carlo_nonconclusive": true,
+  "oracle_contrast_pct_at_T": {
+    "high": -22.19,
+    "low": -15.53
+  },
+  "proposals": {
+    "spline": {
+      "effect_shapes": {
+        "high": {
+          "3.0": 0.407,
+          "7.0": 0.789,
+          "10.0": 0.955,
+          "14.0": 1.016,
+          "17.0": 1.016,
+          "21.0": 1.089,
+          "24.0": 1.121,
+          "28.0": 1.0
+        },
+        "low": {
+          "3.0": 0.431,
+          "7.0": 0.835,
+          "10.0": 1.012,
+          "14.0": 1.077,
+          "17.0": 1.079,
+          "21.0": 1.159,
+          "24.0": 1.183,
+          "28.0": 1.0
+        }
+      },
+      "finalists": [],
+      "n_candidates": 40,
+      "n_feasible": 0,
+      "predicted_contrast_pct_at_T": {
+        "high": -8.99,
+        "low": -3.39
+      },
+      "seconds": 96.5134129524231,
+      "shape_notes": [],
+      "status": "no_feasible_design",
+      "unreliable_bayesian": false
+    },
+    "transformer": {
+      "effect_shapes": {
+        "high": {
+          "3.0": 0.547,
+          "7.0": 0.639,
+          "10.0": 0.749,
+          "14.0": 0.915,
+          "17.0": 1.01,
+          "21.0": 1.059,
+          "24.0": 1.05,
+          "28.0": 1.0
+        },
+        "low": {
+          "3.0": 0.416,
+          "7.0": 0.506,
+          "10.0": 0.641,
+          "14.0": 0.879,
+          "17.0": 1.019,
+          "21.0": 1.083,
+          "24.0": 1.067,
+          "28.0": 1.0
+        }
+      },
+      "finalists": [],
+      "n_candidates": 40,
+      "n_feasible": 0,
+      "predicted_contrast_pct_at_T": {
+        "high": -20.56,
+        "low": -16.04
+      },
+      "seconds": 101.59911274909973,
+      "shape_notes": [],
+      "status": "no_feasible_design",
+      "unreliable_bayesian": false
+    }
+  },
+  "replicates_final": null,
+  "replicates_proposal": 400,
+  "status": "no_feasible_design",
+  "validation": {
+    "problems": [],
+    "status": "supported",
+    "warnings": []
+  }
+}

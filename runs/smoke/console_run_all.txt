@@ -1,0 +1,21 @@
+INFO [generate] cached (key efd5df7e2d8f4af0); use --force to rerun
+INFO [ingest] cached (key 137a14ffbade8ba6); use --force to rerun
+INFO [prepare] cached (key feda14205081a545); use --force to rerun
+INFO [train_spline] cached (key 0b35b9892b6b941e); use --force to rerun
+INFO [train_transformer] cached (key 14cdab82a34a6dc5); use --force to rerun
+INFO [evaluate] spline/test in 9.0s
+INFO [evaluate] spline/test_compound_holdout in 4.2s
+INFO [evaluate] transformer/test in 5.5s
+INFO [evaluate] transformer/test_compound_holdout in 2.7s
+INFO [design] proposal spline: 6/8 feasible (9s); finalists ['ancova|endpoint_only|n=10/10/10|equal', 'gls|weekly|n=10/10/10|equal']
+INFO [design] proposal transformer: 5/8 feasible (19s); finalists ['ancova|endpoint_only|n=10/10/10|equal', 'gls|weekly|n=10/10/10|equal']
+INFO [design] final eval under fresh_spline: 2/2 feasible (3s)
+INFO [design] final eval under fresh_transformer: 2/2 feasible (10s)
+INFO [design] final eval under generator_B: 2/2 feasible (2s)
+INFO [design] final eval under stress_covariance_shift: 2/2 feasible (2s)
+INFO [design] final eval under stress_heterogeneity: 0/2 feasible (2s)
+INFO [design] final eval under stress_delayed_effect: 2/2 feasible (2s)
+INFO [design] final eval under stress_transient_effect: 0/2 feasible (2s)
+INFO [design] final eval under stress_heavy_tails: 2/2 feasible (2s)
+INFO [design] final eval under oracle_generator_A: 2/2 feasible (2s)
+INFO [run-all] finished in 82s; report at runs\smoke\report\report.md

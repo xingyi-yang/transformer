@@ -1,0 +1,9 @@
+........................................................................ [ 67%]
+..................................                                       [100%]
+============================= slowest 5 durations =============================
+10.95s setup    tests/integration/test_bayesian_smoke.py::test_diagnostics_recorded_and_reliability_is_a_decision
+7.82s setup    tests/integration/test_smoke_pipeline.py::test_artifacts_written
+7.63s call     tests/unit/test_design_workflow.py::test_workflow_end_to_end_small
+7.06s call     tests/integration/test_smoke_pipeline.py::test_propose_design_from_serialized_artifacts
+2.70s call     tests/unit/test_models.py::test_early_history_conditioning_reduces_error
+106 passed in 42.96s

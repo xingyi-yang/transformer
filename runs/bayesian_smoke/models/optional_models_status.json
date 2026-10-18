@@ -1,0 +1,54 @@
+{
+  "chronos2": {
+    "capabilities": [
+      "univariate/multivariate zero-shot probabilistic forecasting from observed history"
+    ],
+    "extra": {},
+    "limitations": [
+      "pretrained weights must be downloaded: explicit permission required",
+      "covariate support must be verified against the installed version before use",
+      "no baseline-only pre-study support"
+    ],
+    "name": "chronos2",
+    "package": "chronos",
+    "reason": "disabled in config",
+    "requires_download": true,
+    "status": "not_run",
+    "task": "secondary (early-history, zero-shot first; fine-tuning separate)"
+  },
+  "deepar": {
+    "capabilities": [
+      "autoregressive recurrent probabilistic model with a likelihood head",
+      "static and dynamic covariates"
+    ],
+    "extra": {},
+    "limitations": [
+      "needs observed history for conditioning",
+      "irregular visit times require explicit handling"
+    ],
+    "name": "deepar",
+    "package": "gluonts",
+    "reason": "disabled in config",
+    "requires_download": false,
+    "status": "not_run",
+    "task": "secondary (early-history forecasting)"
+  },
+  "tft": {
+    "capabilities": [
+      "static covariates (sex, strain, compound descriptors)",
+      "known future inputs (planned dose features)",
+      "observed past targets (early history)"
+    ],
+    "extra": {},
+    "limitations": [
+      "requires an observed encoder window: no genuine baseline-only pre-study support",
+      "not interchangeable with the custom baseline-conditioned transformer"
+    ],
+    "name": "tft",
+    "package": "pytorch_forecasting",
+    "reason": "disabled in config",
+    "requires_download": false,
+    "status": "not_run",
+    "task": "secondary (early-history forecasting)"
+  }
+}

@@ -1,0 +1,212 @@
+<!doctype html><html><head><meta charset='utf-8'><title>SYNTHETIC PROOF OF CONCEPT - NOT REAL-WORLD VALIDATION</title><style>body{font-family:sans-serif;max-width:1200px;margin:auto;font-size:13px}table{border-collapse:collapse;font-size:11px}td,th{border:1px solid #ccc;padding:2px 5px}blockquote{background:#fff3cd;padding:6px;border-left:4px solid #e0a800}</style></head><body>
+<h1>send_bw report: bayesian_smoke</h1>
+<blockquote><b>SYNTHETIC PROOF OF CONCEPT - NOT REAL-WORLD VALIDATION</b></blockquote>
+<p>Body weight is the only modelled endpoint. Results cannot establish total animal requirements for a toxicology program, cannot justify reducing welfare observations or protocol checks, and are not regulatory-grade.</p>
+<h2>Run provenance</h2>
+<ul>
+<li>config: <code>configs/bayesian_smoke.yaml</code> (hash <code>f47e272c2e751999</code>), seed 20261017</li>
+<li>git revision: not available (git not installed / not a repo)</li>
+<li>software: arviz=1.3.0, matplotlib=3.11.2, numpy=2.5.4, nutpie=0.16.11, pandas=3.0.6, platform=Windows-11-10.0.26300-SP0, pyarrow=26.0.0, pydantic=2.14.1, pymc=6.3.2, pytensor=3.3.4, python=3.14.7, scikit-learn=1.9.1, scipy=1.18.1, torch=2.14.1+cpu</li>
+</ul>
+<table><tr><th>stage</th><th>status</th><th>seconds</th><th>key</th></tr>
+<tr><td>design</td><td>evaluated</td><td>42.1</td><td>NA</td></tr>
+<tr><td>evaluate</td><td>NA</td><td>13.6</td><td>NA</td></tr>
+<tr><td>generate</td><td>NA</td><td>0.2</td><td>de470559004a9279</td></tr>
+<tr><td>ingest</td><td>NA</td><td>0.5</td><td>8423b63bfba03ea7</td></tr>
+<tr><td>optional_models</td><td>{&#x27;chronos2&#x27;: &#x27;not_run&#x27;, &#x27;deepar&#x27;: &#x27;not_run&#x27;, &#x27;tft&#x27;: &#x27;not_run&#x27;}</td><td>NA</td><td>NA</td></tr>
+<tr><td>prepare</td><td>NA</td><td>0.2</td><td>2a9ae4f9580b3692</td></tr>
+<tr><td>report</td><td>NA</td><td>NA</td><td>NA</td></tr>
+<tr><td>train_bayesian</td><td>trained</td><td>50.6</td><td>496a227b3b37e440</td></tr>
+<tr><td>train_spline</td><td>trained</td><td>1.7</td><td>50050de1e7c86064</td></tr>
+</table>
+<h2>Data ingestion and QC</h2>
+<ul>
+<li>weights: 6479, animals: 826, quarantined/flagged records: 0, mapping version: example-send-0.1</li>
+<li>eligible animals: 775, modelling observations: 3941</li>
+<li>QC checks: {&#x27;all_obs_have_animal&#x27;: True, &#x27;arm_keys_resolved&#x27;: True, &#x27;finite_log_weights&#x27;: True, &#x27;n_quarantined_hard&#x27;: 0, &#x27;n_quarantined_soft&#x27;: 0, &#x27;one_baseline_per_animal_max&#x27;: True, &#x27;passed&#x27;: True, &#x27;positive_weights&#x27;: True, &#x27;sex_values&#x27;: [&#x27;F&#x27;, &#x27;M&#x27;], &#x27;unique_animal_keys&#x27;: True, &#x27;unique_obs_keys&#x27;: True}</li>
+</ul>
+<p>Exclusion counts (animals):</p>
+<table><tr><th>reason</th><th>n</th></tr>
+<tr><td>species_out_of_scope</td><td>50</td></tr>
+<tr><td>too_few_post_baseline_obs</td><td>1</td></tr>
+</table>
+<p>Limitations recorded during ingestion:</p>
+<ul>
+<li>3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)</li>
+<li>31 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects</li>
+</ul>
+<p>Mapping warnings by type: none</p>
+<p>Frozen study-level splits: {&#x27;test&#x27;: 3, &#x27;test_compound_holdout&#x27;: 1, &#x27;train&#x27;: 9, &#x27;validation&#x27;: 3} (hash <code>47b9e5e7daf20bb0</code>); compound holdout: [&#x27;CMP01&#x27;]</p>
+<h2>Models</h2>
+<h3>spline</h3>
+<ul>
+<li>ridge alpha 100.0 (validation-selected), train RMSE 0.0466, validation RMSE 0.0506, OOF RMSE 0.0701, 62 mean parameters, 7 study-bootstrap members</li>
+<li>covariance (OOF residual ML): ell=5.7184, sd_a0=0.0272, sd_a1=0.0575, sd_s0=0.0311, sd_s1=0.0375, sigma_m=0.0069, sigma_p=0.0255</li>
+<li>covariance fit: {&#x27;converged&#x27;: True, &#x27;message&#x27;: &#x27;CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH&#x27;, &#x27;n_animals&#x27;: 431, &#x27;n_obs&#x27;: 1845, &#x27;n_studies&#x27;: 9, &#x27;nll&#x27;: -3575.8651116777655, &#x27;params_at_bound&#x27;: []}</li>
+</ul>
+<h3>transformer: not_run</h3>
+<h3>bayesian</h3>
+<ul>
+<li>status: <b>RELIABLE (diagnostic targets met)</b></li>
+<li>NUTS (4 chains, 2000 warmup, 2000 draws, seed 20261017): R-hat max 1.006, bulk ESS min 633, tail ESS min 963, divergences 0, max-treedepth hits 0; thresholds {&#x27;rhat_max&#x27;: 1.01, &#x27;ess_bulk_min&#x27;: 400, &#x27;ess_tail_min&#x27;: 400}</li>
+<li>sampler warnings: none</li>
+<li>worst R-hat parameters: {&#x27;sigma_p&#x27;: 1.0063754266284817, &#x27;ell&#x27;: 1.0056097565092188, &#x27;sd_a[0]&#x27;: 1.0043833706168621, &#x27;theta[14]&#x27;: 1.003719683516778, &#x27;theta[38]&#x27;: 1.0035465958573464}</li>
+<li>priors (on training-standardized scale): {&#x27;s_beta&#x27;: 0.35, &#x27;s_sd&#x27;: 0.3, &#x27;s_sigma&#x27;: 0.3, &#x27;m_ell&#x27;: 1.9459101490553132, &#x27;s_ell&#x27;: 0.75}</li>
+<li>prior predictive (pct change at last observation, 2.5/50/97.5%): [-44.7, 9.1, 115.5] vs observed [0.9, 31.9, 70.3]; grams [117, 246, 534]; plausible=True</li>
+<li>posterior predictive (one-step) p-values by time bin: {&#x27;&lt;=7&#x27;: {&#x27;p_mean&#x27;: 0.451625, &#x27;p_sd&#x27;: 0.7715}, &#x27;8-14&#x27;: {&#x27;p_mean&#x27;: 0.463875, &#x27;p_sd&#x27;: 0.255625}, &#x27;15-21&#x27;: {&#x27;p_mean&#x27;: 0.5795, &#x27;p_sd&#x27;: 0.47675}, &#x27;22-28&#x27;: {&#x27;p_mean&#x27;: 0.448875, &#x27;p_sd&#x27;: 0.630875}}; extreme bins: []</li>
+<li>posterior means (log-weight scale): {&#x27;sd_s&#x27;: [0.06876269301717608, 0.29219918287992686], &#x27;sd_a&#x27;: [0.1605319063615331, 0.33343214089745893], &#x27;sigma_p&#x27;: 0.16780337367113554, &#x27;ell&#x27;: 3.9778735982489466, &#x27;sd_s_scaled_logw&#x27;: [0.00933559546847874, 0.03967054296296469], &#x27;sd_a_scaled_logw&#x27;: [0.0217946806882714, 0.045268552568613715], &#x27;sigma_p_scaled_logw&#x27;: 0.022781894456175445}</li>
+</ul>
+<p>Prior / likelihood / random-effect sensitivity (validation studies):</p>
+<table><tr><th>variant</th><th>reliable</th><th>rhat_max</th><th>mean_pred_change_day28_validation</th><th>sd_s_logw</th><th>sd_a_logw</th><th>sigma_p_logw</th><th>ell</th></tr>
+<tr><td>main</td><td>True</td><td>1.0064</td><td>0.2941</td><td>[0.0093, 0.0397]</td><td>[0.0218, 0.0453]</td><td>0.0228</td><td>3.9779</td></tr>
+<tr><td>prior_scale_x0.5</td><td>True</td><td>1.0063</td><td>0.2938</td><td>[0.0093, 0.0329]</td><td>[0.0220, 0.0442]</td><td>0.0227</td><td>3.8868</td></tr>
+<tr><td>prior_scale_x2.0</td><td>False</td><td>1.0184</td><td>0.2946</td><td>[0.0099, 0.0439]</td><td>[0.0216, 0.0458]</td><td>0.0227</td><td>3.9632</td></tr>
+<tr><td>student_t</td><td>False</td><td>1.0108</td><td>0.2939</td><td>[0.0094, 0.0398]</td><td>[0.0226, 0.0456]</td><td>0.0213</td><td>3.6544</td></tr>
+<tr><td>no_animal_intercept</td><td>False</td><td>1.0214</td><td>0.2952</td><td>[0.0096, 0.0406]</td><td>[0.0323, 0.0490]</td><td>0.0280</td><td>7.9908</td></tr>
+</table>
+<h3>Optional models (not required benchmarks)</h3>
+<table><tr><th>model</th><th>status</th><th>task</th><th>reason</th></tr>
+<tr><td>chronos2</td><td>not_run</td><td>secondary (early-history, zero-shot first; fine-tuning separate)</td><td>disabled in config</td></tr>
+<tr><td>deepar</td><td>not_run</td><td>secondary (early-history forecasting)</td><td>disabled in config</td></tr>
+<tr><td>tft</td><td>not_run</td><td>secondary (early-history forecasting)</td><td>disabled in config</td></tr>
+</table>
+<h2>Held-out evaluation</h2>
+<h3>Primary task: pre-study prediction of new studies</h3>
+<table><tr><th>model</th><th>split</th><th>studies</th><th>obs</th><th>RMSE log</th><th>RMSE g</th><th>MAE g</th><th>cov80</th><th>cov95</th><th>CRPS</th><th>SB RMSE</th><th>SB cov95</th><th>energy</th><th>grp-mean cov90</th><th>contrast cov90</th><th>contrast bias</th><th>var ratio</th><th>incr ratio</th><th>max cov90</th></tr>
+<tr><td>bayesian</td><td>test_compound_holdout</td><td>1</td><td>512</td><td>0.086</td><td>23.681</td><td>18.668</td><td>0.498</td><td>0.654</td><td>0.053</td><td>0.086</td><td>0.654</td><td>0.181</td><td>0.509</td><td>0.200</td><td>-0.030</td><td>1.058</td><td>4.185</td><td>0.833</td></tr>
+<tr><td>bayesian</td><td>test</td><td>3</td><td>573</td><td>0.072</td><td>23.369</td><td>16.934</td><td>0.660</td><td>0.859</td><td>0.040</td><td>0.073</td><td>0.828</td><td>0.087</td><td>0.688</td><td>0.667</td><td>-0.027</td><td>1.077</td><td>0.976</td><td>0.767</td></tr>
+<tr><td>spline</td><td>test_compound_holdout</td><td>1</td><td>512</td><td>0.044</td><td>11.971</td><td>8.911</td><td>0.934</td><td>0.992</td><td>0.026</td><td>0.044</td><td>0.992</td><td>0.080</td><td>1.000</td><td>1.000</td><td>-0.007</td><td>1.232</td><td>1.053</td><td>0.955</td></tr>
+<tr><td>spline</td><td>test</td><td>3</td><td>573</td><td>0.084</td><td>26.493</td><td>19.988</td><td>0.728</td><td>0.914</td><td>0.047</td><td>0.084</td><td>0.909</td><td>0.101</td><td>0.680</td><td>0.750</td><td>0.014</td><td>1.302</td><td>1.058</td><td>0.774</td></tr>
+</table>
+<p>SB = study-balanced. Coverage targets: cov80=0.80, cov95=0.95, group-mean/contrast/max cov90=0.90; variance and increment ratios target 1. Few test studies -&gt; wide uncertainty.</p>
+<p>Residual correlation by gap (observed vs predicted):</p>
+<table><tr><th>model</th><th>split</th><th>gap_bin</th><th>corr_obs</th><th>corr_pred</th><th>n_pairs</th></tr>
+<tr><td>bayesian</td><td>test_compound_holdout</td><td>(0,4]</td><td>0.920</td><td>0.922</td><td>7</td></tr>
+<tr><td>bayesian</td><td>test_compound_holdout</td><td>(4,8]</td><td>0.885</td><td>0.877</td><td>6</td></tr>
+<tr><td>bayesian</td><td>test_compound_holdout</td><td>(8,15]</td><td>0.800</td><td>0.817</td><td>9</td></tr>
+<tr><td>bayesian</td><td>test_compound_holdout</td><td>(15,100]</td><td>0.681</td><td>0.718</td><td>6</td></tr>
+<tr><td>bayesian</td><td>test</td><td>(4,8]</td><td>0.830</td><td>0.850</td><td>9</td></tr>
+<tr><td>bayesian</td><td>test</td><td>(8,15]</td><td>0.772</td><td>0.777</td><td>6</td></tr>
+<tr><td>bayesian</td><td>test</td><td>(15,100]</td><td>0.668</td><td>0.696</td><td>3</td></tr>
+<tr><td>spline</td><td>test_compound_holdout</td><td>(0,4]</td><td>0.920</td><td>0.926</td><td>7</td></tr>
+<tr><td>spline</td><td>test_compound_holdout</td><td>(4,8]</td><td>0.885</td><td>0.875</td><td>6</td></tr>
+<tr><td>spline</td><td>test_compound_holdout</td><td>(8,15]</td><td>0.800</td><td>0.806</td><td>9</td></tr>
+<tr><td>spline</td><td>test_compound_holdout</td><td>(15,100]</td><td>0.681</td><td>0.693</td><td>6</td></tr>
+<tr><td>spline</td><td>test</td><td>(4,8]</td><td>0.830</td><td>0.864</td><td>9</td></tr>
+<tr><td>spline</td><td>test</td><td>(8,15]</td><td>0.772</td><td>0.774</td><td>6</td></tr>
+<tr><td>spline</td><td>test</td><td>(15,100]</td><td>0.668</td><td>0.662</td><td>3</td></tr>
+</table>
+<h3>Secondary task: early-history forecasting (kept separate)</h3>
+<table><tr><th>model</th><th>split</th><th>status</th><th>rmse_log</th><th>cov90</th><th>crps_log</th><th>n_obs</th><th>note</th></tr>
+<tr><td>bayesian</td><td>test_compound_holdout</td><td>not_run</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>early-history conditioning not implemented for this model</td></tr>
+<tr><td>bayesian</td><td>test</td><td>not_run</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>early-history conditioning not implemented for this model</td></tr>
+<tr><td>spline</td><td>test_compound_holdout</td><td>conditioned</td><td>0.035</td><td>0.946</td><td>0.019</td><td>259</td><td>NA</td></tr>
+<tr><td>spline</td><td>test_compound_holdout</td><td>pre_study</td><td>0.052</td><td>0.985</td><td>0.030</td><td>259</td><td>NA</td></tr>
+<tr><td>spline</td><td>test</td><td>conditioned</td><td>0.038</td><td>0.955</td><td>0.021</td><td>287</td><td>NA</td></tr>
+<tr><td>spline</td><td>test</td><td>pre_study</td><td>0.100</td><td>0.801</td><td>0.058</td><td>287</td><td>NA</td></tr>
+</table>
+<p>Success on the secondary task does not establish success on the primary task.</p>
+<img src='plots/trajectories.png' alt='trajectories' style='max-width:100%'>
+<h2>Experimental design</h2>
+<ul>
+<li>request validation: {&#x27;problems&#x27;: [], &#x27;status&#x27;: &#x27;supported&#x27;, &#x27;warnings&#x27;: []}</li>
+<li>overall status: <b>evaluated</b></li>
+<li>power = conditional power at the prespecified meaningful effects (Holm, all required); &#x27;assurance&#x27; columns use model-predicted effects and are a separate quantity</li>
+<li>secondary estimand (GLS only): fixed weighted average of contrasts at the request&#x27;s query times; reported for bias/coverage, not used for feasibility</li>
+<li>replicates: proposal 400, final 600 -&gt; <b>low replication: nonconclusive software check</b></li>
+</ul>
+<blockquote>SYNTHETIC PROOF OF CONCEPT</blockquote>
+<blockquote>conditional power at prespecified effects is reported separately from predictive assurance under model-predicted effects</blockquote>
+<blockquote>Analytical schedule only; protocol-required welfare weighings and clinical observations are performed regardless and are not optimized.</blockquote>
+<h3>Proposal under bayesian</h3>
+<ul>
+<li>feasible candidates 6/8; status feasible_found; finalists [&#x27;ancova|endpoint_only|n=6/6/6|equal&#x27;, &#x27;ancova|endpoint_only|n=10/10/10|equal&#x27;]; comparator ancova|endpoint_only|n=6/6/6|equal</li>
+<li>effect-shape notes: model-predicted shapes</li>
+<li>model-predicted contrast at T (%): {&#x27;high&#x27;: -14.64, &#x27;low&#x27;: -7.68}; synthetic oracle: {&#x27;high&#x27;: -22.19, &#x27;low&#x27;: -15.53}</li>
+</ul>
+<table><tr><th>candidate</th><th>n_animals</th><th>n_measurements</th><th>power</th><th>power_ci_lo</th><th>fwer_max_point</th><th>fwer_max_ci_hi</th><th>coverage_min</th><th>bias_frac</th><th>failure_rate_max</th><th>feasible</th><th>assurance_all_required_model_effect</th><th>secondary_coverage_min</th><th>secondary_bias_max_abs</th></tr>
+<tr><td>ancova</td><td>endpoint_only</td><td>n=6/6/6</td><td>equal</td><td>36</td><td>72</td><td>0.868</td><td>0.830</td><td>0.037</td><td>0.061</td><td>0.960</td><td>0.013</td><td>0.000</td><td>True</td><td>0.975</td><td>NA</td><td>NA</td></tr>
+<tr><td>gls</td><td>weekly</td><td>n=6/6/6</td><td>equal</td><td>36</td><td>180</td><td>0.790</td><td>0.747</td><td>0.018</td><td>0.036</td><td>0.963</td><td>0.067</td><td>0.000</td><td>False</td><td>0.935</td><td>0.973</td><td>0.005</td></tr>
+<tr><td>ancova</td><td>endpoint_only</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>120</td><td>0.993</td><td>0.978</td><td>0.045</td><td>0.070</td><td>0.955</td><td>0.009</td><td>0.000</td><td>True</td><td>0.998</td><td>NA</td><td>NA</td></tr>
+<tr><td>gls</td><td>weekly</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>300</td><td>0.990</td><td>0.975</td><td>0.018</td><td>0.036</td><td>0.945</td><td>0.059</td><td>0.000</td><td>True</td><td>0.995</td><td>0.970</td><td>0.005</td></tr>
+<tr><td>ancova</td><td>endpoint_only</td><td>n=15/15/15</td><td>equal</td><td>90</td><td>180</td><td>1.000</td><td>0.991</td><td>0.048</td><td>0.073</td><td>0.953</td><td>0.003</td><td>0.000</td><td>True</td><td>1.000</td><td>NA</td><td>NA</td></tr>
+<tr><td>gls</td><td>weekly</td><td>n=15/15/15</td><td>equal</td><td>90</td><td>450</td><td>1.000</td><td>0.991</td><td>0.020</td><td>0.039</td><td>0.930</td><td>0.064</td><td>0.000</td><td>True</td><td>1.000</td><td>0.953</td><td>0.005</td></tr>
+<tr><td>ancova</td><td>endpoint_only</td><td>n=20/20/20</td><td>equal</td><td>120</td><td>240</td><td>1.000</td><td>0.991</td><td>0.048</td><td>0.073</td><td>0.953</td><td>0.002</td><td>0.000</td><td>True</td><td>1.000</td><td>NA</td><td>NA</td></tr>
+<tr><td>gls</td><td>weekly</td><td>n=20/20/20</td><td>equal</td><td>120</td><td>600</td><td>1.000</td><td>0.991</td><td>0.033</td><td>0.055</td><td>0.897</td><td>0.065</td><td>0.000</td><td>False</td><td>1.000</td><td>0.945</td><td>0.005</td></tr>
+</table>
+<h3>Proposal under spline</h3>
+<ul>
+<li>feasible candidates 6/8; status feasible_found; finalists [&#x27;ancova|endpoint_only|n=10/10/10|equal&#x27;, &#x27;gls|weekly|n=10/10/10|equal&#x27;]; comparator ancova|endpoint_only|n=10/10/10|equal</li>
+<li>effect-shape notes: model-predicted shapes</li>
+<li>model-predicted contrast at T (%): {&#x27;high&#x27;: -8.99, &#x27;low&#x27;: -3.39}; synthetic oracle: {&#x27;high&#x27;: -22.19, &#x27;low&#x27;: -15.53}</li>
+</ul>
+<table><tr><th>candidate</th><th>n_animals</th><th>n_measurements</th><th>power</th><th>power_ci_lo</th><th>fwer_max_point</th><th>fwer_max_ci_hi</th><th>coverage_min</th><th>bias_frac</th><th>failure_rate_max</th><th>feasible</th><th>assurance_all_required_model_effect</th><th>secondary_coverage_min</th><th>secondary_bias_max_abs</th></tr>
+<tr><td>ancova</td><td>endpoint_only</td><td>n=6/6/6</td><td>equal</td><td>36</td><td>72</td><td>0.605</td><td>0.555</td><td>0.050</td><td>0.076</td><td>0.945</td><td>0.035</td><td>0.000</td><td>False</td><td>0.412</td><td>NA</td><td>NA</td></tr>
+<tr><td>gls</td><td>weekly</td><td>n=6/6/6</td><td>equal</td><td>36</td><td>180</td><td>0.565</td><td>0.515</td><td>0.037</td><td>0.061</td><td>0.943</td><td>0.110</td><td>0.000</td><td>False</td><td>0.388</td><td>0.948</td><td>0.008</td></tr>
+<tr><td>ancova</td><td>endpoint_only</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>120</td><td>0.922</td><td>0.892</td><td>0.055</td><td>0.082</td><td>0.945</td><td>0.013</td><td>0.000</td><td>True</td><td>0.613</td><td>NA</td><td>NA</td></tr>
+<tr><td>gls</td><td>weekly</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>300</td><td>0.877</td><td>0.841</td><td>0.050</td><td>0.076</td><td>0.930</td><td>0.089</td><td>0.000</td><td>True</td><td>0.618</td><td>0.930</td><td>0.007</td></tr>
+<tr><td>ancova</td><td>endpoint_only</td><td>n=15/15/15</td><td>equal</td><td>90</td><td>180</td><td>0.975</td><td>0.955</td><td>0.060</td><td>0.088</td><td>0.938</td><td>0.017</td><td>0.000</td><td>True</td><td>0.735</td><td>NA</td><td>NA</td></tr>
+<tr><td>gls</td><td>weekly</td><td>n=15/15/15</td><td>equal</td><td>90</td><td>450</td><td>0.973</td><td>0.951</td><td>0.055</td><td>0.082</td><td>0.915</td><td>0.088</td><td>0.000</td><td>True</td><td>0.743</td><td>0.912</td><td>0.006</td></tr>
+<tr><td>ancova</td><td>endpoint_only</td><td>n=20/20/20</td><td>equal</td><td>120</td><td>240</td><td>0.995</td><td>0.982</td><td>0.060</td><td>0.088</td><td>0.940</td><td>0.016</td><td>0.000</td><td>True</td><td>0.818</td><td>NA</td><td>NA</td></tr>
+<tr><td>gls</td><td>weekly</td><td>n=20/20/20</td><td>equal</td><td>120</td><td>600</td><td>0.995</td><td>0.982</td><td>0.048</td><td>0.073</td><td>0.915</td><td>0.089</td><td>0.000</td><td>True</td><td>0.825</td><td>0.905</td><td>0.006</td></tr>
+</table>
+<img src='plots/power_vs_animals.png' alt='power' style='max-width:100%'>
+<h3>Fresh independent evaluation of finalists</h3>
+<ul>
+<li><code>fresh_spline</code>: fresh batch from the proposing response model</li>
+<li><code>fresh_bayesian</code>: fresh batch from the proposing response model</li>
+<li><code>generator_B</code>: independent generator B (different growth/effect/covariance families)</li>
+<li><code>stress_covariance_shift</code>: generator A with sigma_p x1.6 and ell x2</li>
+<li><code>stress_heterogeneity</code>: generator A with animal/study slope SD x1.6</li>
+<li><code>stress_delayed_effect</code>: generator A with a delayed effect shape</li>
+<li><code>stress_transient_effect</code>: generator A with a transient effect shape</li>
+<li><code>stress_heavy_tails</code>: generator B with t(3) measurement noise x1.5</li>
+<li><code>oracle_generator_A</code>: synthetic oracle (true data-generating parameters)</li>
+</ul>
+<table><tr><th>simulator</th><th>candidate</th><th>n_animals</th><th>power</th><th>power_ci_lo</th><th>fwer_max_point</th><th>fwer_max_ci_hi</th><th>coverage_min</th><th>bias_frac</th><th>failure_rate_max</th><th>feasible</th></tr>
+<tr><td>fresh_spline</td><td>ancova</td><td>endpoint_only</td><td>n=6/6/6</td><td>equal</td><td>36</td><td>0.680</td><td>0.641</td><td>0.045</td><td>0.065</td><td>0.948</td><td>0.016</td><td>0.000</td><td>False</td></tr>
+<tr><td>fresh_spline</td><td>ancova</td><td>endpoint_only</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.933</td><td>0.910</td><td>0.048</td><td>0.069</td><td>0.947</td><td>0.004</td><td>0.000</td><td>True</td></tr>
+<tr><td>fresh_spline</td><td>gls</td><td>weekly</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.898</td><td>0.871</td><td>0.045</td><td>0.065</td><td>0.950</td><td>0.071</td><td>0.000</td><td>True</td></tr>
+<tr><td>fresh_bayesian</td><td>ancova</td><td>endpoint_only</td><td>n=6/6/6</td><td>equal</td><td>36</td><td>0.860</td><td>0.830</td><td>0.050</td><td>0.071</td><td>0.947</td><td>0.009</td><td>0.000</td><td>True</td></tr>
+<tr><td>fresh_bayesian</td><td>ancova</td><td>endpoint_only</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.987</td><td>0.974</td><td>0.052</td><td>0.073</td><td>0.945</td><td>0.008</td><td>0.000</td><td>True</td></tr>
+<tr><td>fresh_bayesian</td><td>gls</td><td>weekly</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.975</td><td>0.959</td><td>0.038</td><td>0.057</td><td>0.955</td><td>0.056</td><td>0.000</td><td>True</td></tr>
+<tr><td>generator_B</td><td>ancova</td><td>endpoint_only</td><td>n=6/6/6</td><td>equal</td><td>36</td><td>0.640</td><td>0.600</td><td>0.043</td><td>0.063</td><td>0.945</td><td>0.017</td><td>0.000</td><td>False</td></tr>
+<tr><td>generator_B</td><td>ancova</td><td>endpoint_only</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.913</td><td>0.888</td><td>0.053</td><td>0.074</td><td>0.947</td><td>0.011</td><td>0.000</td><td>True</td></tr>
+<tr><td>generator_B</td><td>gls</td><td>weekly</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.912</td><td>0.886</td><td>0.053</td><td>0.074</td><td>0.948</td><td>0.053</td><td>0.000</td><td>True</td></tr>
+<tr><td>stress_covariance_shift</td><td>ancova</td><td>endpoint_only</td><td>n=6/6/6</td><td>equal</td><td>36</td><td>0.640</td><td>0.600</td><td>0.045</td><td>0.065</td><td>0.948</td><td>0.052</td><td>0.000</td><td>False</td></tr>
+<tr><td>stress_covariance_shift</td><td>ancova</td><td>endpoint_only</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.910</td><td>0.884</td><td>0.053</td><td>0.074</td><td>0.943</td><td>0.043</td><td>0.000</td><td>True</td></tr>
+<tr><td>stress_covariance_shift</td><td>gls</td><td>weekly</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.848</td><td>0.817</td><td>0.040</td><td>0.059</td><td>0.945</td><td>0.103</td><td>0.000</td><td>True</td></tr>
+<tr><td>stress_heterogeneity</td><td>ancova</td><td>endpoint_only</td><td>n=6/6/6</td><td>equal</td><td>36</td><td>0.460</td><td>0.420</td><td>0.033</td><td>0.051</td><td>0.953</td><td>0.028</td><td>0.000</td><td>False</td></tr>
+<tr><td>stress_heterogeneity</td><td>ancova</td><td>endpoint_only</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.785</td><td>0.750</td><td>0.040</td><td>0.059</td><td>0.945</td><td>0.014</td><td>0.000</td><td>False</td></tr>
+<tr><td>stress_heterogeneity</td><td>gls</td><td>weekly</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.855</td><td>0.824</td><td>0.100</td><td>0.127</td><td>0.892</td><td>0.077</td><td>0.000</td><td>False</td></tr>
+<tr><td>stress_delayed_effect</td><td>ancova</td><td>endpoint_only</td><td>n=6/6/6</td><td>equal</td><td>36</td><td>0.872</td><td>0.842</td><td>0.048</td><td>0.069</td><td>0.948</td><td>0.025</td><td>0.000</td><td>True</td></tr>
+<tr><td>stress_delayed_effect</td><td>ancova</td><td>endpoint_only</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.990</td><td>0.978</td><td>0.050</td><td>0.071</td><td>0.947</td><td>0.029</td><td>0.000</td><td>True</td></tr>
+<tr><td>stress_delayed_effect</td><td>gls</td><td>weekly</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.985</td><td>0.972</td><td>0.038</td><td>0.057</td><td>0.962</td><td>0.012</td><td>0.000</td><td>True</td></tr>
+<tr><td>stress_transient_effect</td><td>ancova</td><td>endpoint_only</td><td>n=6/6/6</td><td>equal</td><td>36</td><td>0.848</td><td>0.817</td><td>0.050</td><td>0.071</td><td>0.947</td><td>0.013</td><td>0.000</td><td>True</td></tr>
+<tr><td>stress_transient_effect</td><td>ancova</td><td>endpoint_only</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.983</td><td>0.970</td><td>0.068</td><td>0.092</td><td>0.932</td><td>0.011</td><td>0.000</td><td>False</td></tr>
+<tr><td>stress_transient_effect</td><td>gls</td><td>weekly</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.838</td><td>0.806</td><td>0.033</td><td>0.051</td><td>0.865</td><td>0.214</td><td>0.000</td><td>False</td></tr>
+<tr><td>stress_heavy_tails</td><td>ancova</td><td>endpoint_only</td><td>n=6/6/6</td><td>equal</td><td>36</td><td>0.602</td><td>0.561</td><td>0.045</td><td>0.065</td><td>0.950</td><td>0.019</td><td>0.000</td><td>False</td></tr>
+<tr><td>stress_heavy_tails</td><td>ancova</td><td>endpoint_only</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.887</td><td>0.859</td><td>0.062</td><td>0.084</td><td>0.940</td><td>0.034</td><td>0.000</td><td>True</td></tr>
+<tr><td>stress_heavy_tails</td><td>gls</td><td>weekly</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.840</td><td>0.808</td><td>0.043</td><td>0.063</td><td>0.953</td><td>0.050</td><td>0.000</td><td>True</td></tr>
+<tr><td>oracle_generator_A</td><td>ancova</td><td>endpoint_only</td><td>n=6/6/6</td><td>equal</td><td>36</td><td>0.853</td><td>0.822</td><td>0.047</td><td>0.067</td><td>0.952</td><td>0.019</td><td>0.000</td><td>True</td></tr>
+<tr><td>oracle_generator_A</td><td>ancova</td><td>endpoint_only</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.985</td><td>0.972</td><td>0.048</td><td>0.069</td><td>0.950</td><td>0.003</td><td>0.000</td><td>True</td></tr>
+<tr><td>oracle_generator_A</td><td>gls</td><td>weekly</td><td>n=10/10/10</td><td>equal</td><td>60</td><td>0.965</td><td>0.947</td><td>0.040</td><td>0.059</td><td>0.947</td><td>0.062</td><td>0.000</td><td>True</td></tr>
+</table>
+<h3>Recommendations</h3>
+<ul>
+<li><b>bayesian</b>: recommended -&gt; <code>ancova|endpoint_only|n=10/10/10|equal</code> (60 animals, 120 analytical weighings)</li>
+<li>criteria NOT met under (stress/oracle, reported not vetoing): [&#x27;stress_heterogeneity&#x27;, &#x27;stress_transient_effect&#x27;]</li>
+<li>comparator <code>ancova|endpoint_only|n=6/6/6|equal</code> feasible in final evaluation: False; resource claim allowed: False</li>
+<li><b>spline</b>: recommended -&gt; <code>ancova|endpoint_only|n=10/10/10|equal</code> (60 animals, 120 analytical weighings)</li>
+<li>criteria NOT met under (stress/oracle, reported not vetoing): [&#x27;stress_heterogeneity&#x27;, &#x27;stress_transient_effect&#x27;]</li>
+</ul>
+<h2>Statistical assumptions not yet validated</h2>
+<ul>
+<li>Pooled-sex analysis assumes a common treatment effect across sexes.</li>
+<li>GLS benefit from intermediate visits relies on the fixed quadratic group-difference basis; bias is only checked under the simulated mechanisms.</li>
+<li>The working covariance is a historical plug-in from training studies; model-based SEs with df = N_animals - (3 + G k) are an approximation (no Kenward-Roger).</li>
+<li>Missingness is simulated as MAR missed visits and non-informative dropout; informative termination is not addressed and no power claims are made for it.</li>
+<li>Spline/transformer parameter uncertainty comes from study bootstrap of the mean only; covariance parameter uncertainty is not propagated for those models.</li>
+<li>Synthetic generators are illustrative and not biologically validated.</li>
+</ul>
+</body></html>

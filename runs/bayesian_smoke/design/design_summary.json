@@ -1,0 +1,386 @@
+{
+  "labels": [
+    "SYNTHETIC PROOF OF CONCEPT",
+    "conditional power at prespecified effects is reported separately from predictive assurance under model-predicted effects",
+    "Analytical schedule only; protocol-required welfare weighings and clinical observations are performed regardless and are not optimized."
+  ],
+  "monte_carlo_nonconclusive": true,
+  "oracle_contrast_pct_at_T": {
+    "high": -22.19,
+    "low": -15.53
+  },
+  "proposals": {
+    "bayesian": {
+      "comparator": "ancova|endpoint_only|n=6/6/6|equal",
+      "effect_shapes": {
+        "high": {
+          "7.0": 0.695,
+          "14.0": 0.914,
+          "21.0": 1.063,
+          "28.0": 1.0
+        },
+        "low": {
+          "7.0": 0.722,
+          "14.0": 0.923,
+          "21.0": 1.069,
+          "28.0": 1.0
+        }
+      },
+      "finalists": [
+        "ancova|endpoint_only|n=6/6/6|equal",
+        "ancova|endpoint_only|n=10/10/10|equal"
+      ],
+      "n_candidates": 8,
+      "n_feasible": 6,
+      "predicted_contrast_pct_at_T": {
+        "high": -14.64,
+        "low": -7.68
+      },
+      "seconds": 8.203270435333252,
+      "shape_notes": [],
+      "status": "feasible_found",
+      "unreliable_bayesian": false
+    },
+    "spline": {
+      "comparator": "ancova|endpoint_only|n=10/10/10|equal",
+      "effect_shapes": {
+        "high": {
+          "7.0": 0.789,
+          "14.0": 1.016,
+          "21.0": 1.089,
+          "28.0": 1.0
+        },
+        "low": {
+          "7.0": 0.835,
+          "14.0": 1.077,
+          "21.0": 1.159,
+          "28.0": 1.0
+        }
+      },
+      "finalists": [
+        "ancova|endpoint_only|n=10/10/10|equal",
+        "gls|weekly|n=10/10/10|equal"
+      ],
+      "n_candidates": 8,
+      "n_feasible": 6,
+      "predicted_contrast_pct_at_T": {
+        "high": -8.99,
+        "low": -3.39
+      },
+      "seconds": 9.09584355354309,
+      "shape_notes": [],
+      "status": "feasible_found",
+      "unreliable_bayesian": false
+    }
+  },
+  "recommendations": {
+    "bayesian": {
+      "comparator": {
+        "design": "ancova|endpoint_only|n=6/6/6|equal",
+        "feasible_final": false,
+        "n_animals": 36,
+        "n_measurements": 72
+      },
+      "cost": 62.4,
+      "design": "ancova|endpoint_only|n=10/10/10|equal",
+      "finalist_checks": [
+        {
+          "candidate": "ancova|endpoint_only|n=6/6/6|equal",
+          "fresh_same_model": true,
+          "generator_B": false
+        },
+        {
+          "candidate": "ancova|endpoint_only|n=10/10/10|equal",
+          "fresh_same_model": true,
+          "generator_B": true
+        }
+      ],
+      "n_animals": 60,
+      "n_measurements": 120,
+      "not_robust_under": [
+        "stress_heterogeneity",
+        "stress_transient_effect"
+      ],
+      "proposing_model": "bayesian",
+      "resource_claim_allowed": false,
+      "status": "recommended",
+      "under_each_simulator": [
+        {
+          "bias_frac": 0.004027087255642748,
+          "coverage_min": 0.9466666666666667,
+          "failure_rate_max": 0.0,
+          "feasible": true,
+          "fwer_max_ci_hi": 0.06867969714975301,
+          "fwer_max_point": 0.04833333333333333,
+          "power": 0.9333333333333333,
+          "power_ci_lo": 0.9103224678290975,
+          "simulator": "fresh_spline"
+        },
+        {
+          "bias_frac": 0.007850840674347997,
+          "coverage_min": 0.945,
+          "failure_rate_max": 0.0,
+          "feasible": true,
+          "fwer_max_ci_hi": 0.07253795599311111,
+          "fwer_max_point": 0.051666666666666666,
+          "power": 0.9866666666666667,
+          "power_ci_lo": 0.9738977663757112,
+          "simulator": "fresh_bayesian"
+        },
+        {
+          "bias_frac": 0.011367396550864802,
+          "coverage_min": 0.9466666666666667,
+          "failure_rate_max": 0.0,
+          "feasible": true,
+          "fwer_max_ci_hi": 0.07445957566604727,
+          "fwer_max_point": 0.05333333333333334,
+          "power": 0.9133333333333333,
+          "power_ci_lo": 0.8879006810816338,
+          "simulator": "generator_B"
+        },
+        {
+          "bias_frac": 0.04318848538037152,
+          "coverage_min": 0.9433333333333334,
+          "failure_rate_max": 0.0,
+          "feasible": true,
+          "fwer_max_ci_hi": 0.07445957566604727,
+          "fwer_max_point": 0.05333333333333334,
+          "power": 0.91,
+          "power_ci_lo": 0.8842012602229488,
+          "simulator": "stress_covariance_shift"
+        },
+        {
+          "bias_frac": 0.014226115309343383,
+          "coverage_min": 0.945,
+          "failure_rate_max": 0.0,
+          "feasible": false,
+          "fwer_max_ci_hi": 0.058934280187772574,
+          "fwer_max_point": 0.04,
+          "power": 0.785,
+          "power_ci_lo": 0.7499309030015662,
+          "simulator": "stress_heterogeneity"
+        },
+        {
+          "bias_frac": 0.029348958769102117,
+          "coverage_min": 0.9466666666666667,
+          "failure_rate_max": 0.0,
+          "feasible": true,
+          "fwer_max_ci_hi": 0.07061140603267455,
+          "fwer_max_point": 0.05,
+          "power": 0.99,
+          "power_ci_lo": 0.9783620442905984,
+          "simulator": "stress_delayed_effect"
+        },
+        {
+          "bias_frac": 0.011091560247991935,
+          "coverage_min": 0.9316666666666666,
+          "failure_rate_max": 0.0,
+          "feasible": false,
+          "fwer_max_ci_hi": 0.09156272540292817,
+          "fwer_max_point": 0.06833333333333333,
+          "power": 0.9833333333333333,
+          "power_ci_lo": 0.9695635405010712,
+          "simulator": "stress_transient_effect"
+        },
+        {
+          "bias_frac": 0.033997035849818294,
+          "coverage_min": 0.94,
+          "failure_rate_max": 0.0,
+          "feasible": true,
+          "fwer_max_ci_hi": 0.08400061259554074,
+          "fwer_max_point": 0.06166666666666667,
+          "power": 0.8866666666666667,
+          "power_ci_lo": 0.8585428327872869,
+          "simulator": "stress_heavy_tails"
+        },
+        {
+          "bias_frac": 0.00326791890268842,
+          "coverage_min": 0.95,
+          "failure_rate_max": 0.0,
+          "feasible": true,
+          "fwer_max_ci_hi": 0.06867969714975301,
+          "fwer_max_point": 0.04833333333333333,
+          "power": 0.985,
+          "power_ci_lo": 0.9717169716419893,
+          "simulator": "oracle_generator_A"
+        }
+      ],
+      "unreliable_bayesian": false
+    },
+    "spline": {
+      "comparator_note": "recommended design is itself the endpoint comparator, or no comparator",
+      "cost": 62.4,
+      "design": "ancova|endpoint_only|n=10/10/10|equal",
+      "finalist_checks": [
+        {
+          "candidate": "ancova|endpoint_only|n=10/10/10|equal",
+          "fresh_same_model": true,
+          "generator_B": true
+        },
+        {
+          "candidate": "gls|weekly|n=10/10/10|equal",
+          "fresh_same_model": true,
+          "generator_B": true
+        }
+      ],
+      "n_animals": 60,
+      "n_measurements": 120,
+      "not_robust_under": [
+        "stress_heterogeneity",
+        "stress_transient_effect"
+      ],
+      "proposing_model": "spline",
+      "resource_claim_allowed": false,
+      "status": "recommended",
+      "under_each_simulator": [
+        {
+          "bias_frac": 0.004027087255642748,
+          "coverage_min": 0.9466666666666667,
+          "failure_rate_max": 0.0,
+          "feasible": true,
+          "fwer_max_ci_hi": 0.06867969714975301,
+          "fwer_max_point": 0.04833333333333333,
+          "power": 0.9333333333333333,
+          "power_ci_lo": 0.9103224678290975,
+          "simulator": "fresh_spline"
+        },
+        {
+          "bias_frac": 0.007850840674347997,
+          "coverage_min": 0.945,
+          "failure_rate_max": 0.0,
+          "feasible": true,
+          "fwer_max_ci_hi": 0.07253795599311111,
+          "fwer_max_point": 0.051666666666666666,
+          "power": 0.9866666666666667,
+          "power_ci_lo": 0.9738977663757112,
+          "simulator": "fresh_bayesian"
+        },
+        {
+          "bias_frac": 0.011367396550864802,
+          "coverage_min": 0.9466666666666667,
+          "failure_rate_max": 0.0,
+          "feasible": true,
+          "fwer_max_ci_hi": 0.07445957566604727,
+          "fwer_max_point": 0.05333333333333334,
+          "power": 0.9133333333333333,
+          "power_ci_lo": 0.8879006810816338,
+          "simulator": "generator_B"
+        },
+        {
+          "bias_frac": 0.04318848538037152,
+          "coverage_min": 0.9433333333333334,
+          "failure_rate_max": 0.0,
+          "feasible": true,
+          "fwer_max_ci_hi": 0.07445957566604727,
+          "fwer_max_point": 0.05333333333333334,
+          "power": 0.91,
+          "power_ci_lo": 0.8842012602229488,
+          "simulator": "stress_covariance_shift"
+        },
+        {
+          "bias_frac": 0.014226115309343383,
+          "coverage_min": 0.945,
+          "failure_rate_max": 0.0,
+          "feasible": false,
+          "fwer_max_ci_hi": 0.058934280187772574,
+          "fwer_max_point": 0.04,
+          "power": 0.785,
+          "power_ci_lo": 0.7499309030015662,
+          "simulator": "stress_heterogeneity"
+        },
+        {
+          "bias_frac": 0.029348958769102117,
+          "coverage_min": 0.9466666666666667,
+          "failure_rate_max": 0.0,
+          "feasible": true,
+          "fwer_max_ci_hi": 0.07061140603267455,
+          "fwer_max_point": 0.05,
+          "power": 0.99,
+          "power_ci_lo": 0.9783620442905984,
+          "simulator": "stress_delayed_effect"
+        },
+        {
+          "bias_frac": 0.011091560247991935,
+          "coverage_min": 0.9316666666666666,
+          "failure_rate_max": 0.0,
+          "feasible": false,
+          "fwer_max_ci_hi": 0.09156272540292817,
+          "fwer_max_point": 0.06833333333333333,
+          "power": 0.9833333333333333,
+          "power_ci_lo": 0.9695635405010712,
+          "simulator": "stress_transient_effect"
+        },
+        {
+          "bias_frac": 0.033997035849818294,
+          "coverage_min": 0.94,
+          "failure_rate_max": 0.0,
+          "feasible": true,
+          "fwer_max_ci_hi": 0.08400061259554074,
+          "fwer_max_point": 0.06166666666666667,
+          "power": 0.8866666666666667,
+          "power_ci_lo": 0.8585428327872869,
+          "simulator": "stress_heavy_tails"
+        },
+        {
+          "bias_frac": 0.00326791890268842,
+          "coverage_min": 0.95,
+          "failure_rate_max": 0.0,
+          "feasible": true,
+          "fwer_max_ci_hi": 0.06867969714975301,
+          "fwer_max_point": 0.04833333333333333,
+          "power": 0.985,
+          "power_ci_lo": 0.9717169716419893,
+          "simulator": "oracle_generator_A"
+        }
+      ],
+      "unreliable_bayesian": false
+    }
+  },
+  "replicates_final": 600,
+  "replicates_proposal": 400,
+  "request_id": "NEW-RAT-28D-SMOKE",
+  "simulators": [
+    {
+      "label": "",
+      "name": "fresh_spline"
+    },
+    {
+      "label": "",
+      "name": "fresh_bayesian"
+    },
+    {
+      "label": "independent generator B (different growth/effect/covariance families)",
+      "name": "generator_B"
+    },
+    {
+      "label": "generator A with sigma_p x1.6 and ell x2",
+      "name": "stress_covariance_shift"
+    },
+    {
+      "label": "generator A with animal/study slope SD x1.6",
+      "name": "stress_heterogeneity"
+    },
+    {
+      "label": "generator A with a delayed effect shape",
+      "name": "stress_delayed_effect"
+    },
+    {
+      "label": "generator A with a transient effect shape",
+      "name": "stress_transient_effect"
+    },
+    {
+      "label": "generator B with t(3) measurement noise x1.5",
+      "name": "stress_heavy_tails"
+    },
+    {
+      "label": "synthetic oracle (true data-generating parameters)",
+      "name": "oracle_generator_A"
+    }
+  ],
+  "status": "evaluated",
+  "validation": {
+    "problems": [],
+    "status": "supported",
+    "warnings": []
+  }
+}

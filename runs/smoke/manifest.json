@@ -1,0 +1,102 @@
+{
+  "config_hash": "acd2757a73831d6c",
+  "config_path": "configs/smoke.yaml",
+  "created_utc": "2026-10-18T02:57:48.087209+00:00",
+  "git_revision": null,
+  "seed": 20261017,
+  "software": {
+    "arviz": "1.3.0",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4",
+    "nutpie": "0.16.11",
+    "pandas": "3.0.6",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "pyarrow": "26.0.0",
+    "pydantic": "2.14.1",
+    "pymc": "6.3.2",
+    "pyreadstat": null,
+    "pytensor": "3.3.4",
+    "python": "3.14.7",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "snowflake-connector-python": null,
+    "torch": "2.14.1+cpu"
+  },
+  "stages": {
+    "design": {
+      "completed_utc": "2026-10-18T02:59:09.178195+00:00",
+      "key": null,
+      "seconds": 57.887473583221436,
+      "status": "evaluated"
+    },
+    "evaluate": {
+      "completed_utc": "2026-10-18T02:58:11.265079+00:00",
+      "key": null,
+      "n_results": 8,
+      "seconds": 22.4578275680542
+    },
+    "generate": {
+      "completed_utc": "2026-10-18T00:58:05.329521+00:00",
+      "generator": "A",
+      "key": "efd5df7e2d8f4af0",
+      "label": "SYNTHETIC SEND-like data (not certified SEND-conformant)",
+      "metadata_dir": "runs\\smoke\\synthetic\\metadata",
+      "n_studies": 17,
+      "seconds": 0.24653267860412598,
+      "send_dir": "runs\\smoke\\synthetic\\send",
+      "send_hash": "9c309b2df92fb38533dfb987fe10d7ac7d7a2afe55cda7b5bd49eccc14f61a31",
+      "truth_dir": "runs\\smoke\\synthetic\\truth"
+    },
+    "ingest": {
+      "completed_utc": "2026-10-18T02:57:03.973198+00:00",
+      "key": "137a14ffbade8ba6",
+      "mapping_version": "example-send-0.1",
+      "n_animals": 826,
+      "n_bw": 6479,
+      "n_quarantine": 0,
+      "seconds": 0.45600318908691406
+    },
+    "optional_models": {
+      "completed_utc": "2026-10-18T02:57:48.330961+00:00",
+      "key": null,
+      "status": {
+        "chronos2": "not_run",
+        "deepar": "not_run",
+        "tft": "not_run"
+      }
+    },
+    "prepare": {
+      "completed_utc": "2026-10-18T00:58:06.138224+00:00",
+      "compound_holdout": [
+        "CMP01"
+      ],
+      "key": "feda14205081a545",
+      "n_eligible_animals": 775,
+      "split_counts": {
+        "test": 3,
+        "test_compound_holdout": 1,
+        "train": 9,
+        "validation": 3
+      },
+      "split_hash": "47b9e5e7daf20bb0"
+    },
+    "report": {
+      "completed_utc": "2026-10-18T02:59:10.011641+00:00",
+      "key": null,
+      "path": "runs\\smoke\\report\\report.md"
+    },
+    "train_spline": {
+      "completed_utc": "2026-10-18T00:58:07.983162+00:00",
+      "key": "0b35b9892b6b941e",
+      "seconds": 1.7990038394927979,
+      "status": "trained"
+    },
+    "train_transformer": {
+      "completed_utc": "2026-10-18T00:58:11.037076+00:00",
+      "key": "14cdab82a34a6dc5",
+      "seconds": 3.043914556503296,
+      "status": "trained"
+    }
+  },
+  "synthetic_data": true
+}
