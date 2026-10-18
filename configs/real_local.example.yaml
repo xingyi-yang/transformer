@@ -1,0 +1,25 @@
+# Template for AUTHORIZED local real SEND extracts. Copy outside version control, edit paths.
+# Real records must stay in approved storage; do not commit outputs from real data.
+run_name: real_local
+output_dir: D:/approved_storage/send_bw_runs/real_local   # must be approved storage
+seed: 1
+synthetic: {enabled: false}
+mapping: configs/mappings/example_send.yaml   # replace with a scientist-reviewed mapping profile
+source:
+  type: local
+  root: D:/approved_storage/send_extracts           # per-study folders with dm/bw/ex/ds/ts/tx (csv/parquet/xpt)
+  layout: per_study
+  metadata_dir: D:/approved_storage/send_metadata   # curated arm_regimen.csv, compound_reference.csv, study_metadata.csv
+cohort: {species: RAT, study_classes: [REPEAT_DOSE_TOX], max_day: 28}
+splits: {method: chronological, validation: 0.2, test: 0.2}
+models:
+  spline: {enabled: true, n_bootstrap: 30}
+  transformer: {enabled: true, n_members: 5}
+  bayesian: {enabled: false}
+evaluation: {n_draws: 400, contrast_day: 28}
+design:
+  request: configs/new_study.example.yaml
+  proposal_models: [spline, transformer]
+  replicates_proposal: 1000
+  replicates_final: 4000
+  oracle: false

@@ -1,0 +1,37 @@
+# Example reviewed mapping profile for SEND-like body-weight extracts.
+# Illustrative: real sponsors must review every entry (see docs/real_data_qualification.md).
+mapping_version: example-send-0.1
+send_version: "3.1"
+description: >
+  Example mapping for SEND 3.1-like extracts. Synthetic data produced by send_bw uses this profile.
+  Not an official CDISC mapping.
+domain_aliases:
+  BODYWEIGHT: BW
+  DEMOG: DM
+column_renames: {}
+body_weight:
+  testcd: [BW, BODYWT]
+  value_priority: [standardized, original]
+  units_to_grams: {g: 1.0, gram: 1.0, grams: 1.0, kg: 1000.0}
+  exclude_fasted: true
+timing:
+  reference: RFSTDTC          # elapsed day 0 = reference date = SEND study day 1
+  no_day_zero: true
+  partial_date_rule: study_day_else_quarantine
+  baseline:
+    max_day: 0                # day-1 measurement assumed predose (review per study!)
+    window_days: 7
+supplemental:
+  SUPPBW:
+    BWFAST: FASTING
+supplemental_true_values: ["Y", "YES"]
+disposition_terms:
+  TERMINAL SACRIFICE: SCHEDULED_SACRIFICE
+  RECOVERY SACRIFICE: RECOVERY_SACRIFICE
+  FOUND DEAD: DEATH
+  MORIBUND SACRIFICE: UNSCHEDULED_REMOVAL
+  REMOVED FROM STUDY: UNSCHEDULED_REMOVAL
+sex_values: {M: M, F: F, MALE: M, FEMALE: F}
+species_values: {RAT: RAT, DOG: DOG}
+regimen_source: curated
+study_overrides: {}

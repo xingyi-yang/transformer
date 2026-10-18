@@ -1,0 +1,59 @@
+# Bayesian smoke run: short NUTS chains on subsampled training animals.
+# Short chains are a SOFTWARE CHECK; reliability is decided by the recorded diagnostics only.
+run_name: bayesian_smoke
+output_dir: runs/bayesian_smoke
+seed: 20261017
+synthetic:
+  enabled: true
+  out_dir: runs/bayesian_smoke/synthetic
+  generator: A
+  n_studies: 16
+  n_compounds: 7
+  n_per_sex: [4, 6]
+mapping: configs/mappings/example_send.yaml
+source:
+  type: local
+  root: runs/bayesian_smoke/synthetic/send
+  layout: per_study
+  metadata_dir: runs/bayesian_smoke/synthetic/metadata
+cohort:
+  species: RAT
+  study_classes: [REPEAT_DOSE_TOX]
+  max_day: 28
+splits:
+  method: random
+  validation: 0.2
+  test: 0.2
+  compound_holdout_auto: 1
+models:
+  spline: {enabled: true, n_bootstrap: 6}
+  transformer: {enabled: false}
+  bayesian:
+    enabled: true
+    # first executed attempt (draws/tune 1000, target_accept 0.9) gave R-hat 1.017, bulk ESS 288,
+    # 2 divergences -> unreliable; settings below are the second attempt
+    draws: 2000
+    tune: 2000
+    chains: 4
+    sampler: nutpie
+    target_accept: 0.95
+    max_animals_per_study: 16
+    sensitivity:
+      enabled: true
+      prior_scale_factors: [0.5, 2.0]
+      student_t: true
+      reduced_random_effects: true
+      draws: 1500
+      tune: 1500
+evaluation:
+  n_draws: 150
+  contrast_day: 28
+  early_history_window_day: 14
+design:
+  request: configs/new_study.smoke.yaml
+  proposal_models: [spline, bayesian]
+  replicates_proposal: 400
+  replicates_final: 600
+  n_finalists: 2
+  stress: true
+  oracle: true

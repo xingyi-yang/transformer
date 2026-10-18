@@ -1,0 +1,42 @@
+# Research-scale synthetic run (not executed in the build session unless recorded in README).
+run_name: research
+output_dir: runs/research
+seed: 31415
+synthetic:
+  enabled: true
+  out_dir: runs/research/synthetic
+  generator: A
+  n_studies: 40
+  n_compounds: 12
+  n_per_sex: [5, 10]
+mapping: configs/mappings/example_send.yaml
+source:
+  type: local
+  root: runs/research/synthetic/send
+  layout: per_study
+  metadata_dir: runs/research/synthetic/metadata
+cohort:
+  species: RAT
+  study_classes: [REPEAT_DOSE_TOX]
+  max_day: 28
+splits:
+  method: random
+  validation: 0.2
+  test: 0.2
+  compound_holdout_auto: 2
+models:
+  spline: {enabled: true, n_bootstrap: 30}
+  transformer: {enabled: true, n_members: 5, max_epochs: 150, patience: 15, d_model: 48, n_heads: 4, n_layers: 2}
+  bayesian: {enabled: false}
+evaluation:
+  n_draws: 400
+  contrast_day: 28
+  early_history_window_day: 14
+design:
+  request: configs/new_study.example.yaml
+  proposal_models: [spline, transformer]
+  replicates_proposal: 1000
+  replicates_final: 4000
+  n_finalists: 3
+  stress: true
+  oracle: true

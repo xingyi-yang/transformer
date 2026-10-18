@@ -1,0 +1,40 @@
+# Template for a READ-ONLY Snowflake extraction. Disabled by default (authorized: false).
+# Set authorized: true ONLY after explicit written authorization. Credentials are NEVER stored here:
+# every connection field is an environment-variable reference resolved at runtime.
+run_name: real_snowflake
+output_dir: D:/approved_storage/send_bw_runs/real_snowflake
+seed: 1
+synthetic: {enabled: false}
+mapping: configs/mappings/example_send.yaml
+source:
+  type: snowflake
+  metadata_dir: D:/approved_storage/send_metadata
+  snowflake:
+    authorized: false
+    connection:
+      account: env:SNOWFLAKE_ACCOUNT
+      user: env:SNOWFLAKE_USER
+      authenticator: env:SNOWFLAKE_AUTHENTICATOR   # e.g. externalbrowser / key-pair; no passwords in files
+      role: env:SNOWFLAKE_ROLE                      # read-only role
+      warehouse: env:SNOWFLAKE_WAREHOUSE
+    database: SEND_DB
+    schema: SEND
+    tables: {DM: DM, BW: BW, EX: EX, DS: DS, TS: TS, TX: TX, SUPPBW: SUPPBW}
+    columns:                  # explicit projection allowlist; SELECT * is never issued
+      BW: [STUDYID, USUBJID, BWSEQ, BWTESTCD, BWORRES, BWORRESU, BWSTRESN, BWSTRESU, BWDTC, BWDY, BWSTAT, BWREASND]
+      DM: [STUDYID, USUBJID, SEX, SPECIES, STRAIN, ARMCD, ARM, SETCD, RFSTDTC, RFENDTC]
+      EX: [STUDYID, USUBJID, EXSEQ, EXTRT, EXDOSE, EXDOSU, EXROUTE, EXSTDTC, EXENDTC, EXSTDY, EXENDY]
+      DS: [STUDYID, USUBJID, DSSEQ, DSTERM, DSDECOD, DSSTDTC, DSSTDY]
+      TS: [STUDYID, TSSEQ, TSPARMCD, TSVAL]
+      TX: [STUDYID, SETCD, TXSEQ, TXPARMCD, TXVAL]
+      SUPPBW: [STUDYID, USUBJID, IDVAR, IDVARVAL, QNAM, QVAL]
+    batch_size: 50000
+    max_studies_per_query: 200
+    as_of_timestamp: null     # set for reproducible time-travel snapshots
+    authorized_export_dir: null
+cohort: {species: RAT, study_classes: [REPEAT_DOSE_TOX], max_day: 28}
+splits: {method: chronological, validation: 0.2, test: 0.2}
+models:
+  spline: {enabled: true}
+  transformer: {enabled: false}
+  bayesian: {enabled: false}

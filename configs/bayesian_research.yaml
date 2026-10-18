@@ -1,0 +1,38 @@
+# Research-scale Bayesian run (long chains, all training animals). Not executed in the build session.
+run_name: bayesian_research
+output_dir: runs/bayesian_research
+seed: 31415
+synthetic:
+  enabled: true
+  out_dir: runs/bayesian_research/synthetic
+  generator: A
+  n_studies: 40
+  n_compounds: 12
+  n_per_sex: [5, 10]
+mapping: configs/mappings/example_send.yaml
+source:
+  type: local
+  root: runs/bayesian_research/synthetic/send
+  layout: per_study
+  metadata_dir: runs/bayesian_research/synthetic/metadata
+cohort: {species: RAT, study_classes: [REPEAT_DOSE_TOX], max_day: 28}
+splits: {method: random, validation: 0.2, test: 0.2, compound_holdout_auto: 2}
+models:
+  spline: {enabled: true, n_bootstrap: 30}
+  transformer: {enabled: false}
+  bayesian:
+    enabled: true
+    draws: 2000
+    tune: 2000
+    chains: 4
+    sampler: nutpie
+    target_accept: 0.95
+    sensitivity: {enabled: true, prior_scale_factors: [0.5, 2.0], student_t: true, reduced_random_effects: true,
+                  draws: 1000, tune: 1000}
+evaluation: {n_draws: 400, contrast_day: 28, early_history_window_day: 14}
+design:
+  request: configs/new_study.example.yaml
+  proposal_models: [spline, bayesian]
+  replicates_proposal: 1000
+  replicates_final: 4000
+  n_finalists: 3
