@@ -37,9 +37,10 @@
   correction. Under the higher-heterogeneity stress scenario, GLS was **anti-conservative (FWER 0.10)**.
 - An experimental visit-saturated analysis (`mmrm`) is implemented as an opt-in candidate. Its
   sandwich multiplier and endpoint-animal df are experimental. Complete-data streams (exploratory
-  B=600, locked B=2000) and an exploratory MCAR / design-dependent stream (B=600) met sourced
-  inference tolerances on the small matrix. That is not design qualification and not a reason to
-  switch defaults. It is not claimed valid under prior-outcome-dependent MAR when \(V_0\) is
+  B=600, locked B=2000) met sourced inference tolerances on the small matrix. Under locked MCAR /
+  design-dependent missingness (B=2000), C1 biweekly at \(n=8\) exceeded the FWER point ceiling
+  (0.0675 > 0.065); ANCOVA still met. That is not design qualification and not a reason to switch
+  defaults or retune C1. It is not claimed valid under prior-outcome-dependent MAR when \(V_0\) is
   misspecified. Production request configs remain `ancova` / `gls`.
 - MAR missed visits and non-informative dropout only. Informative termination is not modelled, and no power
   claims are made for it.
