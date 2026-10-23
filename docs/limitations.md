@@ -46,6 +46,11 @@
   missed FWER and coverage under slope heterogeneity on the same matrix. This default
   change is a synthetic software policy, not design qualification. See
   `docs/remediation/analysis_closeout_20261022/CLOSEOUT.md`.
+- Exploratory A-default stress (B=600, seed `20270401`, complete data) on
+  covariance shift, heavy tails, and delayed alternatives: ANCOVA met all six
+  mechanism×size inference cells. C1 delayed at \(n=6\) missed FWER 0.067.
+  B meeting those three stresses does not restore it as a default (the
+  close-out was slope heterogeneity). Not locked. Not design qualification.
 - MAR missed visits and non-informative dropout only. Informative termination is not modelled, and no power
   claims are made for it.
 - Generators A and B are illustrative and not biologically validated. Feasibility under them does not

@@ -510,7 +510,7 @@ def write_report(path: Path, wall_s: float, n_fits: int, n_studies: int,
         "",
         "## Per-cell operating characteristics",
         "",
-        "Full rows are in `cell_oc.csv`. Replicate-level fits are in `replicate_results.csv`.",
+        "Full rows are in `cell_oc.csv`. Replicate-level draws are not archived; this runner plus the seed reproduces them.",
         "",
         "| Analysis | Mechanism | Schedule | Scenario | n/sex | FWER | Coverage min | Bias max | Power-all | Fail |",
         "| --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: |",
@@ -592,11 +592,10 @@ def write_bundle(fits: pd.DataFrame, wall_s: float, out: Path) -> dict:
             "Do not claim prior-outcome MAR validity.",
         ],
     }
-    fits.to_csv(out / "replicate_results.csv", index=False)
     cells.to_csv(out / "cell_oc.csv", index=False)
     (out / "gate_review.json").write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     write_report(out / "REPORT.md", wall_s, n_fits, n_studies, cells, reviews)
-    names = ("replicate_results.csv", "cell_oc.csv", "gate_review.json", "REPORT.md")
+    names = ("cell_oc.csv", "gate_review.json", "REPORT.md")
     manifest = {"bundle_dir": str(out.relative_to(ROOT)), "labels": STATUS, "files": {}}
     for name in names:
         p = out / name
