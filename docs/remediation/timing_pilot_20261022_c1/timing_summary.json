@@ -1,0 +1,84 @@
+{
+  "pilot_id": "c1-timing-pilot-20261022",
+  "status": "timing_only_completed_not_operating_characteristics",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation.",
+    "Timing-only pilot. Not an operating-characteristic evaluation."
+  ],
+  "master_seed": 20261022,
+  "n_replicates": 20,
+  "working_covariance": "unstressed HierarchicalCovariance.animal_cov (historical plug-in stand-in)",
+  "dgp": "HierarchicalCovariance.sample plus specified mean path; complete data",
+  "analyses": [
+    "A_endpoint_ancova",
+    "B_rm_gls_quadratic weekly/biweekly",
+    "C1_mmrm_visit_contrast weekly/biweekly"
+  ],
+  "scenarios": [
+    "global_null",
+    "partial_null_low",
+    "partial_null_high",
+    "heterogeneity_global_null",
+    "heterogeneity_partial_null_low",
+    "alternative_transient",
+    "partial_null_low_transient",
+    "partial_null_high_transient"
+  ],
+  "sizes": [
+    [
+      6,
+      6,
+      6
+    ],
+    [
+      8,
+      8,
+      8
+    ]
+  ],
+  "per_analysis": [
+    {
+      "analysis": "A_endpoint_ancova",
+      "count": 320,
+      "mean": 0.09503488437019314,
+      "median": 0.0931925000031697,
+      "max": 0.30174800008353486,
+      "failure_rate": 0.0
+    },
+    {
+      "analysis": "B_rm_gls_quadratic",
+      "count": 640,
+      "mean": 0.3952763953158467,
+      "median": 0.4170165000232373,
+      "max": 0.8703349999450438,
+      "failure_rate": 0.0
+    },
+    {
+      "analysis": "C1_mmrm_visit_contrast",
+      "count": 640,
+      "mean": 0.45794150937688016,
+      "median": 0.4528639999534789,
+      "max": 0.7448850001310348,
+      "failure_rate": 0.0
+    }
+  ],
+  "estimates": {
+    "measured_wall_seconds_pilot": 0.6263623170000301,
+    "n_study_datasets": 320,
+    "n_analysis_fits": 1600,
+    "mean_ms_per_fit": 0.36029413875112937,
+    "median_ms_per_fit": 0.2931949999265271,
+    "p90_ms_per_fit": 0.6639905999463737,
+    "failure_rate_all": 0.0,
+    "projected_exploratory_B600_seconds": 17.29411866005421,
+    "projected_locked_B2000_seconds": 57.6470622001807,
+    "projection_note": "Linear in mean_ms_per_fit from this pilot. Not a guarantee."
+  },
+  "forbidden_use": [
+    "Do not compute or cite FWER, coverage, bias, interval width, or power from this pilot.",
+    "Do not tune C1 to these draws."
+  ]
+}
