@@ -425,6 +425,13 @@ def write_report(path: Path, wall_s: float, n_fits: int, n_studies: int,
         )
     lines += [
         "",
+        "## Interpretation (exploratory only)",
+        "",
+        "- B fails where it was predicted to fail: restricted GLS misses FWER and coverage under slope heterogeneity; weekly transient bias matches the algebraic ~0.016 fixture.",
+        "- A meets sourced inference tolerances on this complete-data matrix. High power reflects large alternative deltas, not the deferred 5% cell.",
+        "- C1 also meets those tolerances here. Complete-data coefficients match A; realized SEs do not. Weekly and biweekly C1 endpoint contrasts are numerically identical on complete data; that is not a missingness result.",
+        "- Meeting a tolerated FWER gate is not “FWER = 0.05.” This stream does not make C1 primary and does not justify switching defaults.",
+        "",
         "## Constraints on use",
         "",
         "- Do not treat this stream as locked confirmation (that would be independent seed `20261201`, B=2000).",
