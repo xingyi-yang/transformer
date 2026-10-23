@@ -236,6 +236,8 @@ def build_report(run) -> Path:
             L.append("")
     L += ["## Statistical assumptions not yet validated", "",
           "- Pooled-sex analysis assumes a common treatment effect across sexes.",
+          "- The production default final analysis is endpoint ANCOVA. GLS is requestable "
+          "and is not a default after locked synthetic diagnostics; it is not design qualification.",
           "- GLS benefit from intermediate visits relies on the fixed quadratic group-difference basis; bias is "
           "only checked under the simulated mechanisms.",
           "- The working covariance is a historical plug-in from training studies; model-based SEs with "

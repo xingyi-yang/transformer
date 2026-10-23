@@ -7,7 +7,9 @@ a common treatment effect across sexes is assumed (equal allocation per sex).
 endpoint_ancova: OLS of Z(T) on group, centered baseline and sex. Uses only Z(T); it cannot gain
 power from intermediate visits.
 
-rm_gls: repeated-measures GLS using all post-baseline scheduled visits with
+rm_gls: implemented and requestable; not a production default after locked
+A/B/C1 diagnostics (see docs/remediation/analysis_closeout_20261022/CLOSEOUT.md).
+Repeated-measures GLS using all post-baseline scheduled visits with
   - time-specific intercepts, sex-by-time and baseline-by-time effects (saturated over visits),
   - group-by-time effects through a FIXED basis psi(t) = [t/T, (t/T)^2] (truncated to the number
     of visits), anchored at 0 at baseline, so Delta_g(T) = psi(T)' gamma_g = sum(gamma_g),

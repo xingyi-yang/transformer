@@ -73,7 +73,10 @@ class Request(BaseModel):
     candidate_n_per_sex: list[int] = Field(default_factory=lambda: [4, 6, 8, 10])
     candidate_allocations: dict[str, dict[str, float]] = Field(default_factory=lambda: {"equal": {}})
     candidate_schedules: dict[str, list[float]]
-    analyses: list[str] = Field(default_factory=lambda: ["ancova", "gls"])
+    # Production default is ANCOVA only. gls and mmrm remain requestable; they
+    # are not defaults after locked A/B/C1 diagnostics (see
+    # docs/remediation/analysis_closeout_20261022/CLOSEOUT.md).
+    analyses: list[str] = Field(default_factory=lambda: ["ancova"])
     gls_variance: str = "model"
     missing_data: dict[str, float] = Field(default_factory=lambda: {"p_missed_visit": 0.02, "p_dropout": 0.02})
     costs: dict[str, float] = Field(default_factory=lambda: {"per_animal": 1.0, "per_measurement": 0.02,

@@ -89,21 +89,27 @@ task (conditioning on DAY ≤ 14) is evaluated separately and only for the Gauss
   truth, labelled as a synthetic reference).
 - **Estimand:** Δ_g(T), fixed across candidates.
 - **Methods:**
-  - Endpoint ANCOVA (always endpoint-only, so it cannot gain from intermediate visits).
-  - Repeated-measures GLS with time-saturated intercept, sex and baseline terms, and a group basis
-    ψ(t) = [t/T, (t/T)²] (so Δ_g(T) = Σγ_g).
-  - GLS uses a historical plug-in working covariance (the spline's covariance), scaled by an estimated factor, with
-    model-based variance (CR1 is available) and t tests on df = N_animals − (3 + G·k).
+  - Endpoint ANCOVA is the **production default** (always endpoint-only, so it cannot gain
+    from intermediate visits). Locked complete and locked MCAR diagnostics on the small
+    matrix are recorded under `docs/remediation/`; they are not design qualification.
+    See `docs/remediation/analysis_closeout_20261022/CLOSEOUT.md`.
+  - Repeated-measures GLS remains **implemented and requestable**, not a production default.
+    Time-saturated intercept, sex and baseline terms, and a group basis
+    ψ(t) = [t/T, (t/T)²] (so Δ_g(T) = Σγ_g). Historical plug-in working covariance
+    (the spline's covariance), scaled by an estimated factor, model-based variance
+    (CR1 is available) and t tests on df = N_animals − (3 + G·k). Locked streams
+    missed FWER and coverage under slope heterogeneity ×1.6; weekly transient bias
+    remains ~0.016.
   - Holm correction across active−control comparisons.
   - Opt-in experimental `mmrm` (`mmrm_visit_contrast`): visit-saturated treatment means and an
     explicit endpoint contrast, with historical plug-in \(V_0\) weights and animal-level CR1
-    sandwich SEs. It is **not** a default production analysis. Synthetic complete-data
-    (exploratory B=600, locked B=2000) and MCAR / design-dependent (exploratory B=600,
-    locked B=2000) diagnostics are recorded under `docs/remediation/`. Locked MCAR found
-    one C1 miss (biweekly \(n=8\) FWER point 0.0675). Those streams are not design
-    qualification. Secondary contrasts are formed only from scheduled visits; missing query days
-    are marked not estimable rather than interpolated. See
-    `docs/remediation/final_analysis_proposal_20261022_c1/DECISION_MEMO.md`.
+    sandwich SEs. It is **not** a default production analysis and was **not promoted**.
+    Synthetic complete-data (exploratory B=600, locked B=2000) and MCAR / design-dependent
+    (exploratory B=600, locked B=2000) diagnostics are recorded under `docs/remediation/`.
+    Locked MCAR found one C1 miss (biweekly \(n=8\) FWER point 0.0675). C1 was not retuned.
+    Those streams are not design qualification. Secondary contrasts are formed only from
+    scheduled visits; missing query days are marked not estimable rather than interpolated.
+    See `docs/remediation/final_analysis_proposal_20261022_c1/DECISION_MEMO.md`.
 - **Performance:** per-comparison, any and all-required power under the specified effects (conditional power),
   FWER under the global null and every partial null, bias, CI coverage and width, and failure rate. All use
   Clopper-Pearson intervals and MCSEs. "Assurance" uses model-predicted effects and is reported separately.

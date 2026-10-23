@@ -10,7 +10,9 @@ The pipeline does the following:
   baseline-conditioned transformer.
 - Evaluates them on held-out studies.
 - Simulates complete study trajectories to evaluate candidate group sizes and analytical schedules under a
-  fixed estimand and final analysis (endpoint ANCOVA or repeated-measures GLS, with Holm correction).
+  fixed estimand and a prespecified final analysis. The production default is endpoint
+  ANCOVA with Holm correction. Repeated-measures GLS remains requestable but is not a
+  default after locked synthetic diagnostics; visit-saturated MMRM is an opt-in candidate.
 
 Body weight only. This cannot establish total animal requirements or justify reducing welfare
 observations. See `docs/limitations.md`.

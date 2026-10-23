@@ -1,6 +1,7 @@
 """Deterministic checks for experimental mmrm_visit_contrast (Candidate C1).
 
-No Monte Carlo calibration. Production request configs remain ancova/gls only.
+No Monte Carlo calibration. Production request configs default to ancova only.
+gls and mmrm remain requestable; mmrm is not a default.
 """
 
 from __future__ import annotations
@@ -16,7 +17,7 @@ from send_bw.simulation.analysis import (
     rm_gls,
     secondary_visit_weights,
 )
-from send_bw.simulation.designs import enumerate_candidates, load_request
+from send_bw.simulation.designs import Request, enumerate_candidates, load_request
 from send_bw.simulation.paths import fixed_shape
 
 
@@ -44,11 +45,36 @@ def _mean_Z(zb, sex, group, times, deltas, shape: str):
     return Z
 
 
-def test_default_requests_do_not_enable_mmrm():
+def test_default_requests_are_ancova_only():
+    bare = Request(
+        request_id="T",
+        species="RAT",
+        strain="SPRAGUE-DAWLEY",
+        baseline_distribution={"M": {"mean_g": 250.0, "sd_g": 15.0}, "F": {"mean_g": 190.0, "sd_g": 12.0}},
+        groups=[{"name": "control", "is_control": True, "end_dy": 28},
+                {"name": "low", "compound_id": "CMP03", "dose": 30, "end_dy": 28}],
+        horizon_day=28,
+        meaningful_effects_pct={"low": -8.0},
+        candidate_schedules={"endpoint_only": [28], "weekly": [7, 14, 21, 28]},
+    )
+    assert bare.analyses == ["ancova"]
+    assert {c.analysis for c in enumerate_candidates(bare)} == {"ancova"}
+
     for name in ("new_study.example.yaml", "new_study.smoke.yaml"):
         req = load_request(ROOT / "configs" / name)
+        assert req.analyses == ["ancova"]
         assert "mmrm" not in req.analyses
-        assert set(c.analysis for c in enumerate_candidates(req)) <= {"ancova", "gls"}
+        assert "gls" not in req.analyses
+        assert {c.analysis for c in enumerate_candidates(req)} == {"ancova"}
+
+
+def test_gls_and_mmrm_remain_requestable():
+    req = load_request(ROOT / "configs" / "new_study.example.yaml")
+    over = req.model_copy(update={"analyses": ["ancova", "gls", "mmrm"]})
+    names = {c.analysis for c in enumerate_candidates(over)}
+    assert names == {"ancova", "gls", "mmrm"}
+    assert all(c.schedule == (req.horizon_day,) for c in enumerate_candidates(over) if c.analysis == "ancova")
+    assert all(len(c.schedule) > 1 for c in enumerate_candidates(over) if c.analysis in {"gls", "mmrm"})
 
 
 def test_mmrm_recovers_transient_endpoint_where_gls_does_not():

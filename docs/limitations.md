@@ -39,9 +39,13 @@
   sandwich multiplier and endpoint-animal df are experimental. Complete-data streams (exploratory
   B=600, locked B=2000) met sourced inference tolerances on the small matrix. Under locked MCAR /
   design-dependent missingness (B=2000), C1 biweekly at \(n=8\) exceeded the FWER point ceiling
-  (0.0675 > 0.065); ANCOVA still met. That is not design qualification and not a reason to switch
-  defaults or retune C1. It is not claimed valid under prior-outcome-dependent MAR when \(V_0\) is
-  misspecified. Production request configs remain `ancova` / `gls`.
+  (0.0675 > 0.065); ANCOVA still met. C1 was not retuned and is not the production default.
+  It is not claimed valid under prior-outcome-dependent MAR when \(V_0\) is misspecified.
+- After those locked streams, production defaults are **ANCOVA only**
+  (`analyses: [ancova]`). GLS remains requestable; it is not a default because it
+  missed FWER and coverage under slope heterogeneity on the same matrix. This default
+  change is a synthetic software policy, not design qualification. See
+  `docs/remediation/analysis_closeout_20261022/CLOSEOUT.md`.
 - MAR missed visits and non-informative dropout only. Informative termination is not modelled, and no power
   claims are made for it.
 - Generators A and B are illustrative and not biologically validated. Feasibility under them does not
