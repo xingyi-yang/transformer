@@ -234,7 +234,7 @@ def write_report(path: Path, wall_s: float, n_fits: int, n_studies: int,
         lines.append("- No A inference decision flipped versus exploratory B=600.")
     lines += [
         "- B agreeing with A on these three stresses does not restore GLS (close-out was slope heterogeneity).",
-        "- C1 misses or flips are not a retune and not a promotion.",
+        "- C1 delayed n=6 flipped missed → met (FWER 0.067 → 0.060). That is Monte Carlo noise near the 0.065 ceiling, not a promotion and not a retune. The exploratory miss stays on the record.",
         "",
         "## Constraints on use",
         "",

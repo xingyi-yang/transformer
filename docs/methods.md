@@ -93,12 +93,13 @@ task (conditioning on DAY ≤ 14) is evaluated separately and only for the Gauss
     from intermediate visits). Locked complete and locked MCAR diagnostics on the small
     matrix are recorded under `docs/remediation/`; they are not design qualification.
     See `docs/remediation/analysis_closeout_20261022/CLOSEOUT.md`.
-    An exploratory B=600 complete-data stress of that default on the deferred
-    mechanisms (covariance shift, heavy tails, delayed alternatives; seed
-    `20270401`) met sourced inference tolerances for ANCOVA at both sizes.
-    C1 delayed at \(n=6\) missed the FWER point ceiling (0.067). That stream
-    is not locked and not design qualification. C1 was not retuned. GLS was
-    not restored.
+    An exploratory B=600 (seed `20270401`) and locked B=2000 (seed `20270501`)
+    complete-data stress of that default on the deferred mechanisms
+    (covariance shift, heavy tails, delayed alternatives) met sourced
+    inference tolerances for ANCOVA at both sizes (6/6; no A flip).
+    Exploratory C1 delayed at \(n=6\) missed FWER 0.067; locked C1 flipped
+    to a pass (0.060). That flip was reported, not used to promote or retune
+    C1. GLS was not restored. Those streams are not design qualification.
   - Repeated-measures GLS remains **implemented and requestable**, not a production default.
     Time-saturated intercept, sex and baseline terms, and a group basis
     ψ(t) = [t/T, (t/T)²] (so Δ_g(T) = Σγ_g). Historical plug-in working covariance
