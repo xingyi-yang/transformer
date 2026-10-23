@@ -26,8 +26,13 @@
 - Three of the four Bayesian sensitivity variants did not meet the diagnostic targets at 1500 draws.
 - The transformer is a compact custom architecture, not a TFT. It overstates between-animal variance
   (predicted/observed ratio ≈ 1.47 in the smoke run) because it shares the spline covariance.
-- Early-history conditioning is implemented only for the Gaussian-layer models (spline, transformer).
-- TFT, Chronos-2 and DeepAR are not implemented (`not_run`).
+- Early-history conditioning for the required benchmarks is implemented only for the Gaussian-layer
+  models (spline, transformer). The Bayesian model reports `not_run`.
+- TFT is an optional early-history-only PyTorch Forecasting adapter. It stays `not_run` unless
+  `send-bw[tft]` is installed and the installed API verifies. It refuses baseline-only / pre-study
+  prediction and design simulation. Quantile-spread variance is an approximation, not a fitted
+  residual covariance. It is not the required custom transformer and is not a final analysis.
+  Chronos-2 and DeepAR remain unimplemented (`not_run`).
 
 ## Statistical assumptions not validated
 - A common treatment effect across sexes (pooled analysis).

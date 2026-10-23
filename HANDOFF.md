@@ -26,7 +26,9 @@ Real-data qualification stage: **1** (implemented and mock-tested only).
   - Custom baseline-conditioned transformer (schedule-invariant masking, shared covariance).
   - PyMC Bayesian model (QR, ZeroSumNormal non-centered effects, OU residual, prior and posterior predictive checks,
     sensitivity runs, diagnostics-based reliability, new-study draws with new effects).
-  - Optional TFT/Chronos-2/DeepAR adapters that only check capabilities and dependencies and report `not_run`.
+  - Optional TFT: verified PyTorch Forecasting early-history adapter (`models/tft.py`). Stays
+    `not_run` without `send-bw[tft]`. Refuses baseline-only and design use; never registered as
+    `transformer`. Chronos-2/DeepAR still only check capabilities and report `not_run`.
 - **Design**:
   - Request schema with applicability gates (`not_supported`).
   - Production default: endpoint ANCOVA. Repeated-measures GLS remains requestable
@@ -95,7 +97,10 @@ was not recorded separately ("n/r"). Attempt-1 diagnostics are archived in
 
 ## 3. Optional or incomplete
 
-- TFT, Chronos-2 and DeepAR: `not_run`. The libraries are not installed, and Chronos would also need download permission. Only capability declarations exist.
+- TFT: adapter implemented (`models/tft.py`) but `not_run` here because `pytorch_forecasting` is
+  not installed. Chronos-2 and DeepAR: `not_run` (capability declarations only; Chronos also needs
+  download permission). The default environment must not install the TFT extra (smoke asserts
+  optional status `not_run` while those deps are missing).
 - XPT reading: the code path exists but was not exercised, because pyreadstat is not installed. A clear-error test exists.
 - The Snowflake connector is not installed. The adapter is tested only with a mock connection.
 - define.xml parsing: not implemented. A reviewed mapping profile is required instead.
@@ -158,3 +163,7 @@ to `[ancova]`.
    spline and transformer if those generators are used in a later locked evaluation.
 4. Research-scale configs (`research.yaml`, `bayesian_research.yaml`) remain unrun
    software-capacity work, not a substitute for real-data qualification.
+5. TFT remains optional. Do not install `pytorch-forecasting` into the default
+   environment, do not treat a local extra-enabled fit as design qualification, and
+   do not implement Chronos-2/DeepAR unless they are named. The analysis chapter
+   stays as written.

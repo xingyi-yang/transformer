@@ -30,7 +30,8 @@ models:
   transformer: {enabled: true, n_members: 2, max_epochs: 40, patience: 8, d_model: 32, n_heads: 2}
   bayesian: {enabled: false}          # see bayesian_smoke.yaml
   optional:                           # never required, never substituted for a required benchmark
-    tft: {enabled: true}
+    # TFT extra is not installed in the default env; status stays not_run (early-history only).
+    tft: {enabled: true, max_epochs: 8, hidden_size: 16, attention_head_size: 2, dropout: 0.1}
     chronos2: {enabled: true, download_permission: false}
     deepar: {enabled: true}
 evaluation:

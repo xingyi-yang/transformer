@@ -32,9 +32,14 @@ from send_bw.utils.artifacts import (
 )
 
 MODEL_CLASSES = {}
+REQUIRED_MODELS = ("spline", "transformer", "bayesian")
+OPTIONAL_TRAIN = ("tft",)
 
 
 def model_class(name: str):
+    """Required benchmark classes only. Optional TFT is never registered here."""
+    if name in OPTIONAL_TRAIN:
+        raise KeyError(f"{name!r} is an optional early-history adapter, not a required benchmark")
     if not MODEL_CLASSES:
         from send_bw.models.spline import SplineModel
         from send_bw.models.transformer import TransformerModel
@@ -217,13 +222,16 @@ class Run:
 
     # ------------------------------------------------------------------ train
     def enabled_models(self) -> list[str]:
-        return [m for m in ("spline", "transformer", "bayesian") if self.cfg.get("models", {}).get(m, {}).get("enabled")]
+        return [m for m in REQUIRED_MODELS if self.cfg.get("models", {}).get(m, {}).get("enabled")]
 
     def train(self, models: list[str] | None = None, force: bool = False) -> dict[str, Any]:
         prep = self.load_prepared()
         tr, va = prep["data"]["train"], prep["data"]["validation"]
         out = {}
-        for name in models or self.enabled_models():
+        requested = list(models) if models else self.enabled_models()
+        for name in requested:
+            if name in OPTIONAL_TRAIN:
+                continue
             mcfg = dict(self.cfg["models"][name])
             mcfg.setdefault("seed", self.seed)
             key = cache_key(self.manifest.data["stages"]["prepare"]["key"], mcfg,
@@ -255,15 +263,67 @@ class Run:
         from send_bw.models.optional_adapters import optional_status
 
         opt = optional_status(self.cfg.get("models", {}))
+        opt = self._train_optional(prep, opt, force)
         write_json(self.p("models", "optional_models_status.json"), opt)
         self.manifest.record_stage("optional_models", key=None, status={k: v["status"] for k, v in opt.items()})
         return out
 
+    def _train_optional(self, prep: dict[str, Any], opt: dict[str, dict[str, Any]], force: bool) -> dict[str, dict[str, Any]]:
+        """Train optional adapters that are adapter_ready. Failures are recorded, not raised."""
+        tft = opt.get("tft") or {}
+        if tft.get("status") != "adapter_ready":
+            return opt
+        mcfg = dict((self.cfg.get("models", {}).get("optional", {}) or {}).get("tft") or {})
+        mcfg.setdefault("seed", self.seed)
+        mcfg.setdefault("early_history_window_day",
+                        self.cfg.get("evaluation", {}).get("early_history_window_day", 14))
+        key = cache_key(self.manifest.data["stages"].get("prepare", {}).get("key"), mcfg)
+        if self._skip("train_tft", key, force) and self.p("models", "tft", "model.json").exists():
+            tft["status"] = "trained"
+            tft["reason"] = ("cached; early-history only; not a required benchmark; "
+                             "not used for design or pre-study")
+            opt["tft"] = tft
+            return opt
+        try:
+            from send_bw.models.tft import TFTEarlyHistoryModel
+
+            t0 = time.time()
+            model = TFTEarlyHistoryModel()
+            hist = model.fit(prep["data"]["train"], prep["data"]["validation"], mcfg)
+            model.save(self.p("models", "tft"))
+            write_json(self.p("models", "tft", "training_history.json"), hist)
+            tft["status"] = "trained"
+            tft["reason"] = ("trained for early-history forecasting only; not a required benchmark; "
+                             "not used for design or pre-study")
+            tft.setdefault("extra", {})["history"] = {k: hist[k] for k in hist
+                                                       if k in ("n_train_series", "n_val_series", "n_train_obs",
+                                                                "max_epochs", "quantiles", "note")}
+            self.manifest.record_stage("train_tft", key=key, seconds=time.time() - t0, status="trained")
+            self.log.info(f"[train] tft (optional early-history) done in {time.time() - t0:.1f}s")
+        except Exception as e:  # noqa: BLE001
+            tft["status"] = "failed"
+            tft["reason"] = f"TFT training failed: {type(e).__name__}: {e}"
+            self.manifest.record_stage("train_tft", key=None, status="failed", reason=tft["reason"])
+            self.log.info(f"[train] tft failed: {tft['reason']}")
+        opt["tft"] = tft
+        return opt
+
     def load_model(self, name: str):
         return model_class(name).load(self.p("models", name))
 
+    def load_optional_model(self, name: str):
+        if name != "tft":
+            raise KeyError(f"unknown optional model {name!r}")
+        from send_bw.models.tft import TFTEarlyHistoryModel
+
+        return TFTEarlyHistoryModel.load(self.p("models", name))
+
     def available_models(self) -> list[str]:
-        return [m for m in ("spline", "transformer", "bayesian") if self.p("models", m, "model.json").exists()]
+        """Required benchmarks only. Optional TFT is never a design/pre-study generator."""
+        return [m for m in REQUIRED_MODELS if self.p("models", m, "model.json").exists()]
+
+    def optional_trained(self) -> list[str]:
+        return [m for m in OPTIONAL_TRAIN if self.p("models", m, "model.json").exists()]
 
     # ------------------------------------------------------------------ evaluate
     def evaluate(self, force: bool = False) -> dict[str, Any]:
@@ -290,6 +350,17 @@ class Run:
                 eh["split"] = split
                 res[f"{name}|{split}|early_history"] = eh
                 self.log.info(f"[evaluate] {name}/{split} in {time.time() - t0:.1f}s")
+        for name in self.optional_trained():
+            model = self.load_optional_model(name)
+            for split in [s for s in ("test", "test_compound_holdout") if s in prep["data"]]:
+                d = prep["data"][split]
+                if not len(d.obs):
+                    continue
+                t0 = time.time()
+                eh = evaluate_early_history(model, d, float(ecfg.get("early_history_window_day", 14)))
+                eh["split"] = split
+                res[f"{name}|{split}|early_history"] = eh
+                self.log.info(f"[evaluate] {name}/{split} early-history only in {time.time() - t0:.1f}s")
         write_json(self.p("evaluation", "metrics.json"), res)
         self.manifest.record_stage("evaluate", key=None, n_results=len(res), seconds=time.time() - t_start)
         return res

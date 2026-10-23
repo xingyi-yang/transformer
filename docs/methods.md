@@ -63,8 +63,15 @@ Reliability requires R-hat ≤ 1.01, bulk and tail ESS ≥ 400 and zero divergen
 unreliable and is not ranked. New-study prediction uses one posterior draw per simulated study,
 with a new study effect drawn once and new animal effects. A documented simplification: there is no white-noise nugget separate from the OU term.
 
-**Optional (TFT, Chronos-2, DeepAR):** `models/optional_adapters.py` only declares capabilities and checks
-dependencies and download permission. All three report `not_run` in this build.
+**Optional (TFT, Chronos-2, DeepAR):** never required, never registered as `transformer`, and never
+used as a design simulator. Chronos-2 and DeepAR still only declare capabilities and stay
+`not_run`. TFT is a verified PyTorch Forecasting adapter (`models/tft.py`) for the
+**secondary early-history task only**. It is built with `TimeSeriesDataSet` (observed rows
+only; `allow_missing_timesteps=True` so irregular calendar days are acceptable, but unobserved
+`LOGW` is never filled with 0) and `TemporalFusionTransformer.from_dataset` on CPU. MEAN is the
+0.5 quantile; VAR is a quantile-spread approximation. Without `send-bw[tft]` it stays `not_run`.
+It refuses baseline-only / pre-study prediction and `sample_study`. Installing the extra is not
+part of the default environment and is not a scientific-readiness claim.
 
 ## Validation of predictions
 
@@ -76,7 +83,10 @@ These run on held-out test studies and a compound-holdout study:
 - PIT and sex-by-horizon tables.
 
 Study-balanced and observation-weighted summaries and effective sample sizes are reported. The early-history
-task (conditioning on DAY ≤ 14) is evaluated separately and only for the Gaussian-layer models.
+task (conditioning on DAY ≤ window) is evaluated separately. Gaussian-layer models condition through
+the shared covariance and also report a pre-study comparison. The optional TFT adapter, when the
+extra is installed and trained, is scored on the conditioned task only; its pre-study comparison
+is `not_supported` and is not fabricated.
 
 ## Design simulation (ADEMP)
 
