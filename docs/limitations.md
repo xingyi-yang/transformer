@@ -26,8 +26,13 @@
 - Three of the four Bayesian sensitivity variants did not meet the diagnostic targets at 1500 draws.
 - The transformer is a compact custom architecture, not a TFT. It overstates between-animal variance
   (predicted/observed ratio ≈ 1.47 in the smoke run) because it shares the spline covariance.
-- Early-history conditioning is implemented only for the Gaussian-layer models (spline, transformer).
-- TFT, Chronos-2 and DeepAR are not implemented (`not_run`).
+- Early-history conditioning for the required benchmarks is implemented only for the Gaussian-layer
+  models (spline, transformer). The Bayesian model reports `not_run`.
+- TFT is an optional early-history-only PyTorch Forecasting adapter. It stays `not_run` unless
+  `send-bw[tft]` is installed and the installed API verifies. It refuses baseline-only / pre-study
+  prediction and design simulation. Quantile-spread variance is an approximation, not a fitted
+  residual covariance. It is not the required custom transformer and is not a final analysis.
+  Chronos-2 and DeepAR remain unimplemented (`not_run`).
 
 ## Statistical assumptions not validated
 - A common treatment effect across sexes (pooled analysis).
@@ -35,6 +40,25 @@
   stress scenario, GLS bias reached 21% of δ and coverage fell to 0.87.
 - Plug-in historical working covariance with model-based SEs and df = N − (3 + G·k), with no Kenward-Roger
   correction. Under the higher-heterogeneity stress scenario, GLS was **anti-conservative (FWER 0.10)**.
+- An experimental visit-saturated analysis (`mmrm`) is implemented as an opt-in candidate. Its
+  sandwich multiplier and endpoint-animal df are experimental. Complete-data streams (exploratory
+  B=600, locked B=2000) met sourced inference tolerances on the small matrix. Under locked MCAR /
+  design-dependent missingness (B=2000), C1 biweekly at \(n=8\) exceeded the FWER point ceiling
+  (0.0675 > 0.065); ANCOVA still met. C1 was not retuned and is not the production default.
+  It is not claimed valid under prior-outcome-dependent MAR when \(V_0\) is misspecified.
+- After those locked streams, production defaults are **ANCOVA only**
+  (`analyses: [ancova]`). GLS remains requestable; it is not a default because it
+  missed FWER and coverage under slope heterogeneity on the same matrix. This default
+  change is a synthetic software policy, not design qualification. See
+  `docs/remediation/analysis_closeout_20261022/CLOSEOUT.md`.
+- Exploratory A-default stress (B=600, seed `20270401`) and locked B=2000
+  (seed `20270501`), complete data, on covariance shift, heavy tails, and
+  delayed alternatives: ANCOVA met all six mechanism×size inference cells
+  in both streams (no A flip). Exploratory C1 delayed at \(n=6\) missed
+  FWER 0.067; locked C1 flipped to a pass (0.060). The flip was reported,
+  not patched, and is not a promotion. B meeting those three stresses does
+  not restore it as a default (the close-out was slope heterogeneity).
+  Not design qualification.
 - MAR missed visits and non-informative dropout only. Informative termination is not modelled, and no power
   claims are made for it.
 - Generators A and B are illustrative and not biologically validated. Feasibility under them does not

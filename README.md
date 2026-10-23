@@ -10,7 +10,9 @@ The pipeline does the following:
   baseline-conditioned transformer.
 - Evaluates them on held-out studies.
 - Simulates complete study trajectories to evaluate candidate group sizes and analytical schedules under a
-  fixed estimand and final analysis (endpoint ANCOVA or repeated-measures GLS, with Holm correction).
+  fixed estimand and a prespecified final analysis. The production default is endpoint
+  ANCOVA with Holm correction. Repeated-measures GLS remains requestable but is not a
+  default after locked synthetic diagnostics; visit-saturated MMRM is an opt-in candidate.
 
 Body weight only. This cannot establish total animal requirements or justify reducing welfare
 observations. See `docs/limitations.md`.
@@ -23,7 +25,8 @@ exact dependency-install command was not recorded. The equivalent setup is:
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\pip install -e ".[bayesian,dev]"     # core + PyMC/ArviZ/nutpie + pytest/ruff
-# optional extras: ".[snowflake]" (connector), ".[xpt]" (pyreadstat); not installed in the build session
+# optional extras: ".[snowflake]" (connector), ".[xpt]" (pyreadstat), ".[tft]" (pytorch-forecasting; early-history only)
+# do not install ".[tft]" in the default/smoke environment; optional adapters stay not_run without it
 ```
 
 Versions used for the recorded runs: numpy 2.5.4, pandas 3.0.6, scipy 1.18.1, torch 2.14.1+cpu,

@@ -1,0 +1,449 @@
+"""Optional Temporal Fusion Transformer adapter (early-history only).
+
+This is a verified PyTorch Forecasting wrapper. It is **not** the required custom
+baseline-conditioned transformer in ``models/transformer.py`` and must never be
+registered under that name.
+
+Capabilities (honest):
+- Condition on **observed** encoder visits (DAY <= window) plus static biology /
+  planned-regimen covariates and known-future planned-dose features.
+- Score later observations on the secondary early-history task.
+
+Refused (not fabricated):
+- Baseline-only / pre-study mean prediction (no observed encoder window).
+- ``sample_study`` / design simulation of complete hypothetical studies.
+
+Panel construction passes **observed rows only**. ``allow_missing_timesteps`` is
+enabled so an irregular calendar ``DAY`` is acceptable, but this adapter never
+inserts unobserved target rows and never fills ``LOGW`` with 0. The PF
+``time_idx`` is a dense per-animal visit rank so missing calendar days do not
+become fabricated encoder history. Decoder target placeholders are not
+observations.
+
+Variance is a quantile-spread approximation from QuantileLoss, not a learned
+Gaussian covariance. Installing the extra is required; the default environment
+must stay ``not_run``.
+"""
+
+from __future__ import annotations
+
+import inspect
+import json
+import pickle
+import tempfile
+from pathlib import Path
+from typing import Any
+
+import numpy as np
+import pandas as pd
+
+from send_bw.data.features import FeatureSpec
+from send_bw.models.base import ModelData, ResponseModel, study_balanced_weights
+from send_bw.models.optional_adapters import BASELINE_ONLY_REASON, DESIGN_REASON, verify_tft_api
+
+NAME = "tft"
+TARGET = "LOGW"
+GROUP_IDS = ["USUBJID"]
+STATIC_CATS = ["SEX", "STRAIN", "ROUTE", "COMPOUND_ID", "CTRL"]
+STATIC_REALS = ["ZB_C", "LD", "INV_INTERVAL", "START", "END", "D1", "D2", "D3"]
+KNOWN_REALS = ["DAY", "TAU", "EXPO", "OFF", "LCUM"]
+QUANTILES = [0.1, 0.25, 0.5, 0.75, 0.9]
+_Z_10_90 = 1.2815515655446004
+
+
+def _require_api() -> dict[str, Any]:
+    verified = verify_tft_api()
+    if not verified["ok"]:
+        raise RuntimeError(verified["reason"])
+    return verified
+
+
+def _pf():
+    """Import verified PyTorch Forecasting symbols (after ``verify_tft_api``)."""
+    _require_api()
+    from pytorch_forecasting import TemporalFusionTransformer, TimeSeriesDataSet
+    from pytorch_forecasting.metrics import QuantileLoss
+
+    return TimeSeriesDataSet, TemporalFusionTransformer, QuantileLoss
+
+
+def _trainer_cls():
+    _require_api()
+    try:
+        from lightning.pytorch import Trainer
+        from lightning.pytorch.callbacks import EarlyStopping, ModelCheckpoint
+    except ImportError:  # pragma: no cover
+        from pytorch_lightning import Trainer
+        from pytorch_lightning.callbacks import EarlyStopping, ModelCheckpoint
+    return Trainer, EarlyStopping, ModelCheckpoint
+
+
+def _call_dataset_factory(fn, *args, predict: bool = False, **overrides):
+    """Use from_dataset / from_parameters with whichever predict kwarg the install has."""
+    params = inspect.signature(fn).parameters
+    kw = dict(overrides)
+    if "stop_randomization" in params:
+        kw.setdefault("stop_randomization", True)
+    if "predict" in params:
+        kw["predict"] = predict
+    elif "predict_mode" in params:
+        kw["predict_mode"] = predict
+    return fn(*args, **kw)
+
+
+def _make_trainer(tmp: str, max_epochs: int, callbacks: list):
+    Trainer, _, _ = _trainer_cls()
+    params = inspect.signature(Trainer.__init__).parameters
+    kw: dict[str, Any] = {"max_epochs": max_epochs, "logger": False, "callbacks": callbacks,
+                          "default_root_dir": tmp}
+    for key, val in (("accelerator", "cpu"), ("devices", 1), ("enable_checkpointing", True),
+                     ("enable_progress_bar", False), ("enable_model_summary", False)):
+        if key in params:
+            kw[key] = val
+    return Trainer(**kw)
+
+
+def quantiles_to_mean_var(q: np.ndarray, levels: list[float]) -> tuple[np.ndarray, np.ndarray]:
+    """Map QuantileLoss output to a mean and an approximate variance.
+
+    MEAN is the 0.5 quantile. VAR uses the 0.10–0.90 spread as a Gaussian-scale
+    approximation; this is not a fitted residual covariance.
+    """
+    q = np.asarray(q, float)
+    if q.ndim == 1:
+        q = q.reshape(1, -1)
+    levels = [float(x) for x in levels]
+    i50 = levels.index(0.5)
+    mean = q[..., i50]
+    if 0.1 in levels and 0.9 in levels:
+        sd = (q[..., levels.index(0.9)] - q[..., levels.index(0.1)]) / (2.0 * _Z_10_90)
+    else:
+        i_hi = int(np.argmax(levels))
+        i_lo = int(np.argmin(levels))
+        sd = (q[..., i_hi] - q[..., i_lo]) / 3.289707  # ~0.02–0.98 if those are the ends
+    var = np.maximum(sd, 1e-6) ** 2
+    return mean, var
+
+
+def _ctrl_label(is_control: pd.Series) -> pd.Series:
+    return pd.Series(np.where(is_control.astype(bool), "C", "A"), index=is_control.index)
+
+
+def build_observed_panel(data: ModelData) -> pd.DataFrame:
+    """One row per **observed** post-baseline weight; no filled calendar days."""
+    if data.obs.empty:
+        return pd.DataFrame()
+    animals = data.animals.reset_index(drop=True)
+    af = data.spec.animal_features(animals, data.compound_ref)
+    af = af.reset_index(drop=True)
+    af["USUBJID"] = animals["USUBJID"].to_numpy()
+    static = animals[["USUBJID", "STUDYID", "SEX", "STRAIN", "ROUTE", "COMPOUND_ID", "IS_CONTROL"]].copy()
+    static["CTRL"] = _ctrl_label(static["IS_CONTROL"])
+    static = static.merge(af[["USUBJID", *STATIC_REALS]], on="USUBJID", how="left", validate="one_to_one")
+    obs = data.obs[["USUBJID", "STUDYID", "DAY", "LOGW"]].copy()
+    rows = animals.set_index("USUBJID").loc[obs["USUBJID"]].reset_index()
+    tf = data.spec.time_features(obs["DAY"].to_numpy(), rows)
+    panel = pd.concat([obs.reset_index(drop=True), tf.reset_index(drop=True)], axis=1)
+    panel = panel.merge(static.drop(columns=["STUDYID"]), on="USUBJID", how="left", validate="many_to_one")
+    w = pd.Series(study_balanced_weights(panel["STUDYID"].to_numpy()), index=panel.index)
+    panel["WEIGHT"] = w.to_numpy(float)
+    panel = panel.sort_values(["USUBJID", "DAY"], kind="stable").reset_index(drop=True)
+    panel["time_idx"] = panel.groupby("USUBJID", sort=False).cumcount().astype(int)
+    for c in STATIC_CATS:
+        panel[c] = panel[c].astype(str)
+    return panel
+
+
+class TFTEarlyHistoryModel(ResponseModel):
+    name = NAME
+    task = "early_history"
+    supports_early_history = True
+    supports_pre_study = False
+    supports_design = False
+
+    def __init__(self):
+        self.spec: FeatureSpec | None = None
+        self.compound_ref = pd.DataFrame()
+        self.dataset_parameters: dict[str, Any] | None = None
+        self.net = None
+        self.quantiles: list[float] = list(QUANTILES)
+        self.history: dict[str, Any] = {}
+        self.encoder_window_day: float = 14.0
+        self.max_encoder_length: int = 8
+        self.max_prediction_length: int = 6
+        self.min_encoder_length: int = 1
+
+    def fit(self, train: ModelData, validation: ModelData, config: dict[str, Any]) -> dict[str, Any]:
+        TimeSeriesDataSet, TemporalFusionTransformer, QuantileLoss = _pf()
+        _, EarlyStopping, ModelCheckpoint = _trainer_cls()
+        self.spec, self.compound_ref = train.spec, train.compound_ref
+        self.encoder_window_day = float(config.get("encoder_window_day", config.get("early_history_window_day", 14)))
+        self.max_encoder_length = int(config.get("max_encoder_length", 8))
+        self.max_prediction_length = int(config.get("max_prediction_length", 6))
+        self.min_encoder_length = int(config.get("min_encoder_length", 1))
+        self.quantiles = [float(x) for x in config.get("quantiles", QUANTILES)]
+        if 0.5 not in self.quantiles:
+            raise ValueError("TFT QuantileLoss quantiles must include 0.5 (used as MEAN)")
+
+        train_panel = build_observed_panel(train)
+        val_panel = build_observed_panel(validation)
+        min_len = self.min_encoder_length + 1
+        train_panel = _enough_visits(train_panel, min_len)
+        val_panel = _enough_visits(val_panel, min_len)
+        if train_panel.empty or train_panel["USUBJID"].nunique() < 2:
+            raise RuntimeError("TFT training panel has too few observed series after the encoder-length filter")
+        if val_panel.empty:
+            raise RuntimeError("TFT validation panel is empty after the encoder-length filter")
+
+        seed = int(config.get("seed", 0))
+        import torch
+
+        torch.set_num_threads(int(config.get("torch_threads", 4)))
+        torch.manual_seed(seed)
+        np.random.seed(seed)
+
+        ds_kwargs = dict(
+            time_idx="time_idx",
+            target=TARGET,
+            group_ids=list(GROUP_IDS),
+            weight="WEIGHT",
+            max_encoder_length=self.max_encoder_length,
+            min_encoder_length=self.min_encoder_length,
+            max_prediction_length=self.max_prediction_length,
+            min_prediction_length=1,
+            static_categoricals=list(STATIC_CATS),
+            static_reals=list(STATIC_REALS),
+            time_varying_known_reals=list(KNOWN_REALS),
+            time_varying_unknown_reals=[TARGET],
+            allow_missing_timesteps=True,  # irregular DAY is allowed; we do not insert unobserved Y
+            add_relative_time_idx=True,
+            add_target_scales=False,
+            add_encoder_length=True,
+        )
+        training = TimeSeriesDataSet(train_panel, **ds_kwargs)
+        validation_ds = _call_dataset_factory(TimeSeriesDataSet.from_dataset, training, val_panel, predict=False)
+        self.dataset_parameters = training.get_parameters()
+        train_dl = training.to_dataloader(
+            train=True, batch_size=int(config.get("batch_size", 64)), num_workers=0)
+        val_dl = validation_ds.to_dataloader(
+            train=False, batch_size=int(config.get("batch_size", 64)), num_workers=0)
+
+        loss = QuantileLoss(quantiles=self.quantiles)
+        tft = TemporalFusionTransformer.from_dataset(
+            training,
+            hidden_size=int(config.get("hidden_size", 16)),
+            lstm_layers=int(config.get("lstm_layers", 1)),
+            dropout=float(config.get("dropout", 0.1)),
+            attention_head_size=int(config.get("attention_head_size", 2)),
+            hidden_continuous_size=int(config.get("hidden_continuous_size", 8)),
+            learning_rate=float(config.get("lr", 3e-3)),
+            loss=loss,
+            output_size=len(self.quantiles),
+            optimizer=str(config.get("optimizer", "adamw")),
+            reduce_on_plateau_patience=int(config.get("reduce_on_plateau_patience", 4)),
+            log_interval=-1,
+            log_val_interval=-1,
+        )
+        with tempfile.TemporaryDirectory(prefix="send_bw_tft_") as tmp:
+            callbacks = [
+                EarlyStopping(monitor="val_loss", patience=int(config.get("patience", 6)), mode="min"),
+                ModelCheckpoint(dirpath=tmp, filename="best", monitor="val_loss", mode="min", save_top_k=1),
+            ]
+            trainer = _make_trainer(tmp, int(config.get("max_epochs", 20)), callbacks)
+            trainer.fit(tft, train_dl, val_dl)
+            best = callbacks[1].best_model_path
+            if best:
+                self.net = TemporalFusionTransformer.load_from_checkpoint(best)
+            else:
+                self.net = tft
+            self.net.eval()
+            self._best_checkpoint_bytes = Path(best).read_bytes() if best else None
+
+        self.history = {
+            "name": self.name,
+            "task": self.task,
+            "library": "pytorch_forecasting.TemporalFusionTransformer",
+            "not_the_required_transformer": True,
+            "n_train_series": int(train_panel["USUBJID"].nunique()),
+            "n_val_series": int(val_panel["USUBJID"].nunique()),
+            "n_train_obs": int(len(train_panel)),
+            "max_encoder_length": self.max_encoder_length,
+            "max_prediction_length": self.max_prediction_length,
+            "min_encoder_length": self.min_encoder_length,
+            "encoder_window_day": self.encoder_window_day,
+            "quantiles": self.quantiles,
+            "allow_missing_timesteps": True,
+            "observed_rows_only": True,
+            "filled_target_with_zero": False,
+            "max_epochs": int(config.get("max_epochs", 20)),
+            "note": ("early-history only; baseline-only pre-study and design simulation are not supported; "
+                     "VAR is a quantile-spread approximation"),
+        }
+        return self.history
+
+    def predict_mean(self, context: pd.DataFrame, times: np.ndarray, member: int | None = None) -> np.ndarray:
+        raise NotImplementedError(BASELINE_ONLY_REASON)
+
+    def sample_study(self, context: pd.DataFrame, regimens: pd.DataFrame, times: np.ndarray, n_draws: int,
+                     seed: int) -> dict[str, np.ndarray]:
+        raise NotImplementedError(DESIGN_REASON)
+
+    def predict_marginals(self, context: pd.DataFrame, times: np.ndarray,
+                          history: pd.DataFrame | None = None) -> pd.DataFrame:
+        if history is None or not len(history):
+            raise ValueError(BASELINE_ONLY_REASON)
+        if self.net is None or self.dataset_parameters is None or self.spec is None:
+            raise RuntimeError("TFT adapter is not fitted")
+        TimeSeriesDataSet, _, _ = _pf()
+        times = np.asarray(times, float)
+        ctx = context.reset_index(drop=True)
+        hist = history.copy()
+        if "LOGW" not in hist.columns:
+            raise ValueError("early-history encoder requires LOGW")
+        rows = []
+        for _, animal in ctx.iterrows():
+            u = animal["USUBJID"]
+            hh = hist.loc[hist["USUBJID"] == u].sort_values("DAY")
+            if hh.empty:
+                continue  # no observed encoder window: do not fabricate
+            enc = self._animal_rows(animal, hh["DAY"].to_numpy(float), hh["LOGW"].to_numpy(float))
+            dec = self._animal_rows(animal, times, np.repeat(hh["LOGW"].to_numpy(float)[-1], len(times)))
+            both = pd.concat([enc, dec], ignore_index=True)
+            both["time_idx"] = np.arange(len(both), dtype=int)
+            rows.append(both)
+        if not rows:
+            return pd.DataFrame(columns=["USUBJID", "DAY", "MEAN", "VAR"])
+        panel = pd.concat(rows, ignore_index=True)
+        n_dec = int(len(times))
+        enc_cap = max(self.max_encoder_length, int(panel.groupby("USUBJID").size().max() - n_dec))
+        pred_ds = _call_dataset_factory(
+            TimeSeriesDataSet.from_parameters, self.dataset_parameters, panel, predict=True,
+            min_prediction_length=n_dec, max_prediction_length=n_dec,
+            min_encoder_length=self.min_encoder_length, max_encoder_length=enc_cap)
+        raw = self.net.predict(pred_ds, mode="quantiles", return_index=True)
+        q, index = _unpack_predict(raw, pred_ds)
+        mean, var = quantiles_to_mean_var(q, self.quantiles)
+        if index is None:
+            raise RuntimeError("TFT predict() did not return an index; cannot align USUBJID/DAY")
+        out = index.copy()
+        if "USUBJID" not in out.columns:
+            raise RuntimeError("TFT predict index is missing USUBJID")
+        # decoder time_idx maps back to the panel DAY
+        key = panel[["USUBJID", "time_idx", "DAY"]].drop_duplicates()
+        tcol = "time_idx" if "time_idx" in out.columns else None
+        if tcol is None:
+            # some PF versions store the decoder start; broadcast times in order
+            recs = []
+            for i, u in enumerate(out["USUBJID"].to_numpy()):
+                for j, t in enumerate(times):
+                    recs.append((u, t, float(mean[i, j]), float(var[i, j])))
+            return pd.DataFrame(recs, columns=["USUBJID", "DAY", "MEAN", "VAR"])
+        recs = []
+        for i, row in out.reset_index(drop=True).iterrows():
+            u = row["USUBJID"]
+            for j in range(mean.shape[1]):
+                ti = int(row[tcol]) + j if mean.ndim > 1 else int(row[tcol])
+                hit = key[(key["USUBJID"] == u) & (key["time_idx"] == ti)]
+                day = float(hit["DAY"].iloc[0]) if len(hit) else float(times[min(j, len(times) - 1)])
+                recs.append((u, day, float(mean[i, j] if mean.ndim > 1 else mean[i]),
+                             float(var[i, j] if var.ndim > 1 else var[i])))
+        return pd.DataFrame(recs, columns=["USUBJID", "DAY", "MEAN", "VAR"])
+
+    def _animal_rows(self, animal: pd.Series, days: np.ndarray, logw: np.ndarray) -> pd.DataFrame:
+        n = len(days)
+        one = pd.DataFrame([animal.to_dict()] * n).reset_index(drop=True)
+        one["CTRL"] = _ctrl_label(one["IS_CONTROL"])
+        af = self.spec.animal_features(one, self.compound_ref).reset_index(drop=True)
+        tf = self.spec.time_features(np.asarray(days, float), one)
+        out = pd.DataFrame({
+            "USUBJID": one["USUBJID"].to_numpy(), "STUDYID": one["STUDYID"].to_numpy(),
+            "DAY": np.asarray(days, float), "LOGW": np.asarray(logw, float),
+            "WEIGHT": np.ones(n, float),
+        })
+        for c in STATIC_CATS:
+            out[c] = one[c].astype(str).to_numpy()
+        for c in STATIC_REALS:
+            out[c] = af[c].to_numpy(float)
+        for c in KNOWN_REALS:
+            if c != "DAY":
+                out[c] = tf[c].to_numpy(float)
+        return out
+
+    def save(self, path: Path) -> None:
+        path = Path(path)
+        path.mkdir(parents=True, exist_ok=True)
+        if self.net is None:
+            raise RuntimeError("TFT adapter is not fitted")
+        self.compound_ref.to_csv(path / "compound_reference.csv", index=False)
+        (path / "dataset_parameters.pkl").write_bytes(pickle.dumps(self.dataset_parameters, protocol=4))
+        ckpt = path / "tft.ckpt"
+        if getattr(self, "_best_checkpoint_bytes", None):
+            ckpt.write_bytes(self._best_checkpoint_bytes)
+        else:
+            trainer = _make_trainer(str(path), 1, [])
+            trainer.strategy.connect(self.net)
+            trainer.save_checkpoint(str(ckpt))
+        (path / "model.json").write_text(json.dumps({
+            "name": self.name, "task": self.task, "spec": self.spec.to_dict(),
+            "quantiles": self.quantiles, "encoder_window_day": self.encoder_window_day,
+            "max_encoder_length": self.max_encoder_length,
+            "max_prediction_length": self.max_prediction_length,
+            "min_encoder_length": self.min_encoder_length,
+            "history": self.history,
+            "not_the_required_transformer": True,
+        }, indent=1, default=float), encoding="utf-8")
+
+    @classmethod
+    def load(cls, path: Path) -> TFTEarlyHistoryModel:
+        path = Path(path)
+        d = json.loads((path / "model.json").read_text(encoding="utf-8"))
+        if d.get("name") != NAME:
+            raise ValueError(f"refusing to load name={d.get('name')!r} as the optional TFT adapter")
+        m = cls()
+        m.spec = FeatureSpec.from_dict(d["spec"])
+        m.quantiles = [float(x) for x in d["quantiles"]]
+        m.encoder_window_day = float(d["encoder_window_day"])
+        m.max_encoder_length = int(d["max_encoder_length"])
+        m.max_prediction_length = int(d["max_prediction_length"])
+        m.min_encoder_length = int(d["min_encoder_length"])
+        m.history = d.get("history") or {}
+        m.compound_ref = pd.read_csv(path / "compound_reference.csv")
+        m.dataset_parameters = pickle.loads((path / "dataset_parameters.pkl").read_bytes())
+        _, TemporalFusionTransformer, _ = _pf()
+        m.net = TemporalFusionTransformer.load_from_checkpoint(path / "tft.ckpt")
+        m.net.eval()
+        return m
+
+
+def _enough_visits(panel: pd.DataFrame, min_len: int) -> pd.DataFrame:
+    if panel.empty:
+        return panel
+    n = panel.groupby("USUBJID")["time_idx"].transform("count")
+    return panel.loc[n >= min_len].reset_index(drop=True)
+
+
+def _unpack_predict(raw: Any, dataset) -> tuple[np.ndarray, pd.DataFrame | None]:
+    """Accept the several return shapes PF ``predict(..., return_index=True)`` has used."""
+    index = None
+    pred = raw
+    if hasattr(raw, "output") and hasattr(raw, "index"):
+        pred, index = raw.output, raw.index
+    elif isinstance(raw, (tuple, list)) and len(raw) >= 2:
+        pred, index = raw[0], raw[1]
+    elif hasattr(raw, "prediction"):
+        pred = raw.prediction
+        index = getattr(raw, "index", None)
+    if hasattr(pred, "detach"):
+        pred = pred.detach().cpu().numpy()
+    pred = np.asarray(pred, float)
+    if index is None:
+        try:
+            index = dataset.decoded_index
+        except Exception:  # noqa: BLE001
+            index = None
+    if index is not None and not isinstance(index, pd.DataFrame):
+        try:
+            index = pd.DataFrame(index)
+        except Exception:  # noqa: BLE001
+            index = None
+    return pred, index

@@ -63,8 +63,15 @@ Reliability requires R-hat ≤ 1.01, bulk and tail ESS ≥ 400 and zero divergen
 unreliable and is not ranked. New-study prediction uses one posterior draw per simulated study,
 with a new study effect drawn once and new animal effects. A documented simplification: there is no white-noise nugget separate from the OU term.
 
-**Optional (TFT, Chronos-2, DeepAR):** `models/optional_adapters.py` only declares capabilities and checks
-dependencies and download permission. All three report `not_run` in this build.
+**Optional (TFT, Chronos-2, DeepAR):** never required, never registered as `transformer`, and never
+used as a design simulator. Chronos-2 and DeepAR still only declare capabilities and stay
+`not_run`. TFT is a verified PyTorch Forecasting adapter (`models/tft.py`) for the
+**secondary early-history task only**. It is built with `TimeSeriesDataSet` (observed rows
+only; `allow_missing_timesteps=True` so irregular calendar days are acceptable, but unobserved
+`LOGW` is never filled with 0) and `TemporalFusionTransformer.from_dataset` on CPU. MEAN is the
+0.5 quantile; VAR is a quantile-spread approximation. Without `send-bw[tft]` it stays `not_run`.
+It refuses baseline-only / pre-study prediction and `sample_study`. Installing the extra is not
+part of the default environment and is not a scientific-readiness claim.
 
 ## Validation of predictions
 
@@ -76,7 +83,10 @@ These run on held-out test studies and a compound-holdout study:
 - PIT and sex-by-horizon tables.
 
 Study-balanced and observation-weighted summaries and effective sample sizes are reported. The early-history
-task (conditioning on DAY ≤ 14) is evaluated separately and only for the Gaussian-layer models.
+task (conditioning on DAY ≤ window) is evaluated separately. Gaussian-layer models condition through
+the shared covariance and also report a pre-study comparison. The optional TFT adapter, when the
+extra is installed and trained, is scored on the conditioned task only; its pre-study comparison
+is `not_supported` and is not fabricated.
 
 ## Design simulation (ADEMP)
 
@@ -89,18 +99,41 @@ task (conditioning on DAY ≤ 14) is evaluated separately and only for the Gauss
   truth, labelled as a synthetic reference).
 - **Estimand:** Δ_g(T), fixed across candidates.
 - **Methods:**
-  - Endpoint ANCOVA (always endpoint-only, so it cannot gain from intermediate visits).
-  - Repeated-measures GLS with time-saturated intercept, sex and baseline terms, and a group basis
-    ψ(t) = [t/T, (t/T)²] (so Δ_g(T) = Σγ_g).
-  - GLS uses a historical plug-in working covariance (the spline's covariance), scaled by an estimated factor, with
-    model-based variance (CR1 is available) and t tests on df = N_animals − (3 + G·k).
+  - Endpoint ANCOVA is the **production default** (always endpoint-only, so it cannot gain
+    from intermediate visits). Locked complete and locked MCAR diagnostics on the small
+    matrix are recorded under `docs/remediation/`; they are not design qualification.
+    See `docs/remediation/analysis_closeout_20261022/CLOSEOUT.md`.
+    An exploratory B=600 (seed `20270401`) and locked B=2000 (seed `20270501`)
+    complete-data stress of that default on the deferred mechanisms
+    (covariance shift, heavy tails, delayed alternatives) met sourced
+    inference tolerances for ANCOVA at both sizes (6/6; no A flip).
+    Exploratory C1 delayed at \(n=6\) missed FWER 0.067; locked C1 flipped
+    to a pass (0.060). That flip was reported, not used to promote or retune
+    C1. GLS was not restored. Those streams are not design qualification.
+  - Repeated-measures GLS remains **implemented and requestable**, not a production default.
+    Time-saturated intercept, sex and baseline terms, and a group basis
+    ψ(t) = [t/T, (t/T)²] (so Δ_g(T) = Σγ_g). Historical plug-in working covariance
+    (the spline's covariance), scaled by an estimated factor, model-based variance
+    (CR1 is available) and t tests on df = N_animals − (3 + G·k). Locked streams
+    missed FWER and coverage under slope heterogeneity ×1.6; weekly transient bias
+    remains ~0.016.
   - Holm correction across active−control comparisons.
+  - Opt-in experimental `mmrm` (`mmrm_visit_contrast`): visit-saturated treatment means and an
+    explicit endpoint contrast, with historical plug-in \(V_0\) weights and animal-level CR1
+    sandwich SEs. It is **not** a default production analysis and was **not promoted**.
+    Synthetic complete-data (exploratory B=600, locked B=2000) and MCAR / design-dependent
+    (exploratory B=600, locked B=2000) diagnostics are recorded under `docs/remediation/`.
+    Locked MCAR found one C1 miss (biweekly \(n=8\) FWER point 0.0675). C1 was not retuned.
+    Those streams are not design qualification. Secondary contrasts are formed only from
+    scheduled visits; missing query days are marked not estimable rather than interpolated.
+    See `docs/remediation/final_analysis_proposal_20261022_c1/DECISION_MEMO.md`.
 - **Performance:** per-comparison, any and all-required power under the specified effects (conditional power),
   FWER under the global null and every partial null, bias, CI coverage and width, and failure rate. All use
   Clopper-Pearson intervals and MCSEs. "Assurance" uses model-predicted effects and is reported separately.
 
 Complete latent paths are simulated on the union grid **before** schedules, sample sizes and missingness
-(MAR missed visits and non-informative dropout) are applied. Candidates use nested animal subsets and visit
+(missed visits and dropout drawn independently of \(Z\); MCAR / design-dependent, not prior-outcome MAR)
+are applied. Candidates use nested animal subsets and visit
 subsets of the same paths (common random numbers). Specified-effect scenarios add δ·s_g(t) to control
 paths, with s_g(T) = 1 exactly. Failed analyses count as non-rejections and are tabulated.
 

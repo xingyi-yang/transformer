@@ -1,0 +1,101 @@
+{
+  "pilot_id": "a-stress-timing-pilot-20270301",
+  "status": "timing_only_completed_not_operating_characteristics",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation.",
+    "Timing-only A-default stress pilot. Not an operating-characteristic evaluation."
+  ],
+  "master_seed": 20270301,
+  "n_replicates": 20,
+  "subject": "A_endpoint_ancova (production default after analysis close-out)",
+  "comparators": [
+    "B_rm_gls_quadratic",
+    "C1_mmrm_visit_contrast"
+  ],
+  "working_covariance": "unstressed HierarchicalCovariance.animal_cov (historical plug-in stand-in)",
+  "dgp": "HierarchicalCovariance family plus specified mean path; complete data. covariance_shift: sigma_p x1.6, ell x2. heavy_tails: t(3) measurement at sigma_m x1.5, variance-normalized. delayed: fixed_shape delayed. Heterogeneity and transient not re-run.",
+  "analyses": [
+    "A_endpoint_ancova",
+    "B_rm_gls_quadratic weekly/biweekly",
+    "C1_mmrm_visit_contrast weekly/biweekly"
+  ],
+  "mechanisms": [
+    "covariance_shift",
+    "heavy_tails",
+    "delayed"
+  ],
+  "scenarios": [
+    "covshift_global_null",
+    "covshift_partial_null_low",
+    "covshift_partial_null_high",
+    "covshift_alternative",
+    "heavytail_global_null",
+    "heavytail_partial_null_low",
+    "heavytail_partial_null_high",
+    "heavytail_alternative",
+    "delayed_alternative",
+    "delayed_partial_null_low",
+    "delayed_partial_null_high"
+  ],
+  "sizes": [
+    [
+      6,
+      6,
+      6
+    ],
+    [
+      8,
+      8,
+      8
+    ]
+  ],
+  "per_analysis": [
+    {
+      "analysis": "A_endpoint_ancova",
+      "count": 440,
+      "mean": 0.09537913863575588,
+      "median": 0.09313650002695795,
+      "max": 0.33413099981771666,
+      "failure_rate": 0.0
+    },
+    {
+      "analysis": "B_rm_gls_quadratic",
+      "count": 880,
+      "mean": 0.396673296592615,
+      "median": 0.4414224999891303,
+      "max": 2.235958999790455,
+      "failure_rate": 0.0
+    },
+    {
+      "analysis": "C1_mmrm_visit_contrast",
+      "count": 880,
+      "mean": 0.45594759431795945,
+      "median": 0.5196355000407493,
+      "max": 0.8909690000109549,
+      "failure_rate": 0.0
+    }
+  ],
+  "estimates": {
+    "measured_wall_seconds_pilot": 0.8602768340001603,
+    "n_study_datasets": 440,
+    "n_analysis_fits": 2200,
+    "mean_ms_per_fit": 0.36012418409138097,
+    "median_ms_per_fit": 0.29490749989236065,
+    "p90_ms_per_fit": 0.6524284997794894,
+    "failure_rate_all": 0.0,
+    "projected_exploratory_B600_fits": 66000,
+    "projected_exploratory_B600_seconds": 23.768196150031144,
+    "projected_locked_B2000_fits": 220000,
+    "projected_locked_B2000_seconds": 79.22732050010381,
+    "projection_note": "Linear in mean_ms_per_fit from this pilot. Not a guarantee."
+  },
+  "forbidden_use": [
+    "Do not compute or cite FWER, coverage, bias, interval width, or power from this pilot.",
+    "Do not tune C1 to these draws.",
+    "Do not restore GLS as a production default from this pilot.",
+    "Do not change the ANCOVA default from this pilot."
+  ]
+}

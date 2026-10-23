@@ -4,7 +4,8 @@ Aims: choose group sizes / analytical schedules meeting power, FWER, precision a
 Data-generating mechanisms: response-model simulators (proposal), fresh batches, independent
 generator B, stress scenarios and a synthetic oracle (generator A truth; synthetic only).
 Estimand: Delta_g(T) (fixed across candidates). Methods: endpoint ANCOVA, repeated-measures GLS,
-Holm. Performance: power (per comparison / any / all-required), FWER (global and partial nulls),
+and opt-in experimental mmrm_visit_contrast (not a default). Holm. Performance: power
+(per comparison / any / all-required), FWER (global and partial nulls),
 bias, coverage, CI width, failure rate, with Monte Carlo SEs and Clopper-Pearson intervals.
 Failed analyses count as non-rejections and are reported separately.
 """
@@ -18,7 +19,13 @@ import pandas as pd
 from scipy import stats
 
 from send_bw.models.covariance import HierarchicalCovariance
-from send_bw.simulation.analysis import confidence_interval, endpoint_ancova, holm, rm_gls
+from send_bw.simulation.analysis import (
+    confidence_interval,
+    endpoint_ancova,
+    holm,
+    mmrm_visit_contrast,
+    rm_gls,
+)
 from send_bw.simulation.designs import Candidate, Request
 from send_bw.simulation.metrics import prop_summary
 from send_bw.simulation.paths import SimBatch, scenarios
@@ -60,8 +67,12 @@ def evaluate_candidates(batch: SimBatch, req: Request, cands: list[Candidate], w
                 zb, sx, gr = batch.zb[b][sel], batch.sex[sel], batch.group[sel]
                 if cand.analysis == "ancova":
                     res = endpoint_ancova(zb, sx, gr, Z[:, -1], G)
-                else:
+                elif cand.analysis == "gls":
                     res = rm_gls(zb, sx, gr, Z, times, T, V0, G, variance=req.gls_variance, secondary=sec)
+                elif cand.analysis == "mmrm":
+                    res = mmrm_visit_contrast(zb, sx, gr, Z, times, T, V0, G, secondary=sec)
+                else:
+                    raise ValueError(f"unknown analysis {cand.analysis}")
                 if res.failed:
                     rec["failed"][b] = True
                     rec["reasons"].append(res.reason)
@@ -75,10 +86,10 @@ def evaluate_candidates(batch: SimBatch, req: Request, cands: list[Candidate], w
                     rec["sec_lo"][b], rec["sec_hi"][b] = res.sec_est - q * res.sec_se, res.sec_est + q * res.sec_se
             truth = sc["deltas"] if sc["deltas"] is not None else None
             row = _summarize(cand, sname, rec, truth, batch.truth_pred if truth is None else None, req)
-            if sec is not None and truth is not None and cand.analysis == "gls":
+            if sec is not None and truth is not None and cand.analysis in {"gls", "mmrm"}:
                 t2 = truth * sec_shape
                 ok = ~rec["failed"]
-                if ok.sum() > 1:
+                if ok.sum() > 1 and np.isfinite(rec["sec_est"][ok]).all():
                     e2 = rec["sec_est"][ok] - t2
                     c2 = (rec["sec_lo"][ok] <= t2) & (t2 <= rec["sec_hi"][ok])
                     row["secondary_bias_max_abs"] = float(np.max(np.abs(e2.mean(0))))

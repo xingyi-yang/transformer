@@ -26,11 +26,15 @@ Real-data qualification stage: **1** (implemented and mock-tested only).
   - Custom baseline-conditioned transformer (schedule-invariant masking, shared covariance).
   - PyMC Bayesian model (QR, ZeroSumNormal non-centered effects, OU residual, prior and posterior predictive checks,
     sensitivity runs, diagnostics-based reliability, new-study draws with new effects).
-  - Optional TFT/Chronos-2/DeepAR adapters that only check capabilities and dependencies and report `not_run`.
+  - Optional TFT: verified PyTorch Forecasting early-history adapter (`models/tft.py`). Stays
+    `not_run` without `send-bw[tft]`. Refuses baseline-only and design use; never registered as
+    `transformer`. Chronos-2/DeepAR still only check capabilities and report `not_run`.
 - **Design**:
   - Request schema with applicability gates (`not_supported`).
-  - Endpoint ANCOVA; repeated-measures GLS (model-based or CR1); Holm; the secondary weighted-average estimand
-    (GLS only, reported).
+  - Production default: endpoint ANCOVA. Repeated-measures GLS remains requestable
+    (model-based or CR1) and is not a default after locked A/B/C1 diagnostics.
+    Opt-in experimental `mmrm`. Holm; the secondary weighted-average estimand
+    (GLS/MMRM only, reported). See `docs/remediation/analysis_closeout_20261022/CLOSEOUT.md`.
   - Common-random-number trajectory simulator; scenarios (alternative, global and partial nulls, model-predicted
     assurance); Clopper-Pearson intervals and MCSEs.
   - Feasibility, Pareto frontier, finalists plus ANCOVA comparator, fresh, generator B, stress and oracle evaluation,
@@ -93,7 +97,10 @@ was not recorded separately ("n/r"). Attempt-1 diagnostics are archived in
 
 ## 3. Optional or incomplete
 
-- TFT, Chronos-2 and DeepAR: `not_run`. The libraries are not installed, and Chronos would also need download permission. Only capability declarations exist.
+- TFT: adapter implemented (`models/tft.py`) but `not_run` here because `pytorch_forecasting` is
+  not installed. Chronos-2 and DeepAR: `not_run` (capability declarations only; Chronos also needs
+  download permission). The default environment must not install the TFT extra (smoke asserts
+  optional status `not_run` while those deps are missing).
 - XPT reading: the code path exists but was not exercised, because pyreadstat is not installed. A clear-error test exists.
 - The Snowflake connector is not installed. The adapter is tested only with a mock connection.
 - define.xml parsing: not implemented. A reviewed mapping profile is required instead.
@@ -129,11 +136,34 @@ These cover pooled-sex common effects, the GLS ψ(t) basis, plug-in working cova
 MAR missingness and non-informative dropout, the illustrative generators, and Monte Carlo precision at smoke
 replication. See `docs/limitations.md`.
 
-## 7. Suggested next steps
+## 7. Analysis close-out (synthetic; not design qualification)
 
-1. Run `configs/research.yaml` and `configs/bayesian_research.yaml` (expect hours) for conclusive Monte Carlo
-   precision and full-data Bayesian diagnostics.
-2. Make CR1 or a small-sample-corrected variance the GLS default, or add a covariance-misspecification
-   check to feasibility. Consider a more flexible GLS group basis.
-3. Propagate covariance-parameter uncertainty (bootstrap the covariance fit) for the spline and transformer.
-4. After authorization: a stage-2 pilot on a handful of studies with `validate-real` and record-level reconciliation.
+Locked complete (seed `20261201`, B=2000) and locked MCAR 2%/2% (seed `20270201`, B=2000)
+on the pre-specified 8×2 matrix:
+
+- **A** (ANCOVA) met sourced inference tolerances. It is the production default.
+- **B** (quadratic GLS) missed FWER and coverage under slope heterogeneity in every
+  locked stream. It remains implemented and is **not** a production default.
+- **C1** (visit-saturated MMRM) remains a frozen opt-in candidate. Locked MCAR
+  biweekly at \(n=8\) missed the FWER point ceiling (0.0675). C1 was not retuned
+  and was not promoted.
+
+This is not design qualification and not an operational recommendation. Historical
+smoke artifacts still searched `[ancova, gls]`; shipped request YAMLs now default
+to `[ancova]`.
+
+## 8. Suggested next steps
+
+1. After authorization: a stage-2 pilot on a handful of studies with `validate-real`
+   and record-level reconciliation. No real data has been accessed.
+2. Deferred diagnostic cells remain deferred (covariance shift, heavy tails, delayed
+   alternatives, 5% effect, control-heavy, twice-weekly, prior-outcome MAR, C2).
+   Do not retune C1 or restore GLS as a default to chase a passing cell.
+3. Propagate covariance-parameter uncertainty (bootstrap the covariance fit) for the
+   spline and transformer if those generators are used in a later locked evaluation.
+4. Research-scale configs (`research.yaml`, `bayesian_research.yaml`) remain unrun
+   software-capacity work, not a substitute for real-data qualification.
+5. TFT remains optional. Do not install `pytorch-forecasting` into the default
+   environment, do not treat a local extra-enabled fit as design qualification, and
+   do not implement Chronos-2/DeepAR unless they are named. The analysis chapter
+   stays as written.

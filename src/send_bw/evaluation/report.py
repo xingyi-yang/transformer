@@ -147,6 +147,8 @@ def build_report(run) -> Path:
     for k, v in ev.items():
         if not k.endswith("pre_study"):
             continue
+        if v.get("status") == "not_supported" or "observation_weighted" not in v:
+            continue
         ow, sb = v["observation_weighted"], v["study_balanced"]
         rows.append({"model": v["model"], "split": v["split"], "studies": v["effective_sample_sizes"]["n_studies"],
                      "obs": v["effective_sample_sizes"]["n_obs"], "RMSE log": ow["rmse_log"], "RMSE g": ow["rmse_g"],
@@ -168,9 +170,16 @@ def build_report(run) -> Path:
         if k.endswith("early_history"):
             if v.get("status") != "ok":
                 eh.append({"model": v["model"], "split": v["split"], "status": v.get("status"), "note": v.get("reason")})
-            else:
-                for w in ("conditioned", "pre_study"):
-                    eh.append({"model": v["model"], "split": v["split"], "status": w, **v[w]})
+                continue
+            cond = v.get("conditioned")
+            if isinstance(cond, dict) and "rmse_log" in cond:
+                eh.append({"model": v["model"], "split": v["split"], "status": "conditioned", **cond})
+            pre = v.get("pre_study")
+            if isinstance(pre, dict) and pre.get("status") == "not_supported":
+                eh.append({"model": v["model"], "split": v["split"], "status": "not_supported",
+                           "note": pre.get("reason")})
+            elif isinstance(pre, dict) and "rmse_log" in pre:
+                eh.append({"model": v["model"], "split": v["split"], "status": "pre_study", **pre})
     L += _table(eh, ["model", "split", "status", "rmse_log", "cov90", "crps_log", "n_obs", "note"])
     L += ["Success on the secondary task does not establish success on the primary task.", ""]
     _plot_eval(run, plots)
@@ -236,6 +245,8 @@ def build_report(run) -> Path:
             L.append("")
     L += ["## Statistical assumptions not yet validated", "",
           "- Pooled-sex analysis assumes a common treatment effect across sexes.",
+          "- The production default final analysis is endpoint ANCOVA. GLS is requestable "
+          "and is not a default after locked synthetic diagnostics; it is not design qualification.",
           "- GLS benefit from intermediate visits relies on the fixed quadratic group-difference basis; bias is "
           "only checked under the simulated mechanisms.",
           "- The working covariance is a historical plug-in from training studies; model-based SEs with "
