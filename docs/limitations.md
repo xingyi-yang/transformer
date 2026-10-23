@@ -36,8 +36,11 @@
 - Plug-in historical working covariance with model-based SEs and df = N − (3 + G·k), with no Kenward-Roger
   correction. Under the higher-heterogeneity stress scenario, GLS was **anti-conservative (FWER 0.10)**.
 - An experimental visit-saturated analysis (`mmrm`) is implemented as an opt-in candidate. Its
-  sandwich multiplier and endpoint-animal df are experimental. It is not claimed valid under
-  prior-outcome-dependent MAR when \(V_0\) is misspecified, and it has not been calibrated.
+  sandwich multiplier and endpoint-animal df are experimental. Complete-data streams (exploratory
+  B=600, locked B=2000) and an exploratory MCAR / design-dependent stream (B=600) met sourced
+  inference tolerances on the small matrix. That is not design qualification and not a reason to
+  switch defaults. It is not claimed valid under prior-outcome-dependent MAR when \(V_0\) is
+  misspecified. Production request configs remain `ancova` / `gls`.
 - MAR missed visits and non-informative dropout only. Informative termination is not modelled, and no power
   claims are made for it.
 - Generators A and B are illustrative and not biologically validated. Feasibility under them does not
