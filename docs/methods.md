@@ -95,6 +95,12 @@ task (conditioning on DAY ≤ 14) is evaluated separately and only for the Gauss
   - GLS uses a historical plug-in working covariance (the spline's covariance), scaled by an estimated factor, with
     model-based variance (CR1 is available) and t tests on df = N_animals − (3 + G·k).
   - Holm correction across active−control comparisons.
+  - Opt-in experimental `mmrm` (`mmrm_visit_contrast`): visit-saturated treatment means and an
+    explicit endpoint contrast, with historical plug-in \(V_0\) weights and animal-level CR1
+    sandwich SEs. It is **not** a default production analysis and has not been Monte Carlo
+    calibrated. Secondary contrasts are formed only from scheduled visits; missing query days
+    are marked not estimable rather than interpolated. See
+    `docs/remediation/final_analysis_proposal_20261022_c1/DECISION_MEMO.md`.
 - **Performance:** per-comparison, any and all-required power under the specified effects (conditional power),
   FWER under the global null and every partial null, bias, CI coverage and width, and failure rate. All use
   Clopper-Pearson intervals and MCSEs. "Assurance" uses model-predicted effects and is reported separately.

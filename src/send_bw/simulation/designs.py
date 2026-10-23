@@ -101,7 +101,7 @@ class Request(BaseModel):
         if self.sex_strategy != "pooled_with_sex_covariate":
             raise ValueError("only pooled_with_sex_covariate is implemented")
         for a in self.analyses:
-            if a not in {"ancova", "gls"}:
+            if a not in {"ancova", "gls", "mmrm"}:
                 raise ValueError(f"unknown analysis {a}")
         if self.secondary_contrast is not None:
             t, w = self.secondary_contrast.get("times", []), self.secondary_contrast.get("weights", [])
@@ -218,8 +218,8 @@ def enumerate_candidates(req: Request) -> list[Candidate]:
             # so it can never appear to benefit from extra visits.
             sched = [req.horizon_day]
             sname = "endpoint_only"
-        if an == "gls" and len(sched) == 1:
-            continue  # single-visit GLS duplicates endpoint ANCOVA
+        if an in {"gls", "mmrm"} and len(sched) == 1:
+            continue  # single-visit repeated measures duplicates endpoint ANCOVA
         per = tuple(int(round(n * alloc.get(nm, 1.0))) for nm in names)
         if min(per) < mn or sum(per) * len(req.sexes) > mx_total:
             continue

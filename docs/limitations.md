@@ -35,6 +35,9 @@
   stress scenario, GLS bias reached 21% of δ and coverage fell to 0.87.
 - Plug-in historical working covariance with model-based SEs and df = N − (3 + G·k), with no Kenward-Roger
   correction. Under the higher-heterogeneity stress scenario, GLS was **anti-conservative (FWER 0.10)**.
+- An experimental visit-saturated analysis (`mmrm`) is implemented as an opt-in candidate. Its
+  sandwich multiplier and endpoint-animal df are experimental. It is not claimed valid under
+  prior-outcome-dependent MAR when \(V_0\) is misspecified, and it has not been calibrated.
 - MAR missed visits and non-informative dropout only. Informative termination is not modelled, and no power
   claims are made for it.
 - Generators A and B are illustrative and not biologically validated. Feasibility under them does not

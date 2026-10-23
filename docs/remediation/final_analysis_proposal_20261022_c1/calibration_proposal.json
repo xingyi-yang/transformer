@@ -1,0 +1,270 @@
+{
+  "proposal_id": "final-analysis-c1-diagnostic-20261022-v2",
+  "status": "c1_implemented_opt_in_calibration_not_executed",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "implementation": {
+    "function": "send_bw.simulation.analysis.mmrm_visit_contrast",
+    "opt_in_analysis_name": "mmrm",
+    "production_defaults_changed": false,
+    "configs_still_ancova_gls": true,
+    "cli_calibrate_analysis": false,
+    "c2_included": false,
+    "monte_carlo_executed": false
+  },
+  "missingness": {
+    "supported_now": {
+      "complete": "All scheduled visits observed.",
+      "mcar": "Visit absence independent of outcomes and of covariates except through the realized design.",
+      "covariate_dependent": "Absence may depend on zb, sex, group already in the mean. Not prior outcomes."
+    },
+    "not_supported_for_c1_claims": {
+      "prior_outcome_mar_dropout": "Absence depends on previously observed Z. Historical V0 GLS plus sandwich is not claimed consistent when V0 is misspecified."
+    }
+  },
+  "diagnostic_matrix": {
+    "analyses": [
+      "endpoint_ancova",
+      "rm_gls_quadratic",
+      "mmrm_visit_contrast"
+    ],
+    "scenarios": [
+      {
+        "name": "global_null",
+        "deltas": [
+          0.0,
+          0.0
+        ],
+        "shape": "linear",
+        "cov_scale": {}
+      },
+      {
+        "name": "partial_null_low",
+        "deltas": [
+          0.0,
+          -0.15
+        ],
+        "shape": "linear",
+        "cov_scale": {}
+      },
+      {
+        "name": "partial_null_high",
+        "deltas": [
+          -0.1,
+          0.0
+        ],
+        "shape": "linear",
+        "cov_scale": {}
+      },
+      {
+        "name": "heterogeneity_global_null",
+        "deltas": [
+          0.0,
+          0.0
+        ],
+        "shape": "linear",
+        "cov_scale": {
+          "animal_slope": 1.6,
+          "study_slope": 1.6
+        }
+      },
+      {
+        "name": "heterogeneity_partial_null_low",
+        "deltas": [
+          0.0,
+          -0.15
+        ],
+        "shape": "linear",
+        "cov_scale": {
+          "animal_slope": 1.6,
+          "study_slope": 1.6
+        }
+      },
+      {
+        "name": "alternative_transient",
+        "deltas": [
+          -0.1,
+          -0.15
+        ],
+        "shape": "transient",
+        "cov_scale": {}
+      },
+      {
+        "name": "partial_null_low_transient",
+        "deltas": [
+          0.0,
+          -0.15
+        ],
+        "shape": "transient",
+        "cov_scale": {}
+      },
+      {
+        "name": "partial_null_high_transient",
+        "deltas": [
+          -0.1,
+          0.0
+        ],
+        "shape": "transient",
+        "cov_scale": {}
+      }
+    ],
+    "n_per_sex": [
+      [
+        6,
+        6,
+        6
+      ],
+      [
+        8,
+        8,
+        8
+      ]
+    ],
+    "allocation": "equal",
+    "schedules": {
+      "endpoint_only": [
+        28.0
+      ],
+      "biweekly": [
+        14.0,
+        28.0
+      ],
+      "weekly": [
+        7.0,
+        14.0,
+        21.0,
+        28.0
+      ]
+    },
+    "missingness": [
+      "complete"
+    ],
+    "deferred_to_later_locked_evaluation": [
+      "covariance_shift",
+      "heavy_tails",
+      "delayed_alternatives",
+      "meaningful_5pct",
+      "control_heavy allocation",
+      "twice_weekly",
+      "prior_outcome_mar",
+      "C2/Satterthwaite"
+    ]
+  },
+  "cell_inventory": {
+    "unique_study_draws_per_replicate": 16,
+    "fits_per_unique_study": 5,
+    "exploratory": {
+      "B": 600,
+      "master_seed": 20261101,
+      "n_study_datasets": 9600,
+      "n_analysis_fits": 48000
+    },
+    "diagnostic_locked": {
+      "B": 2000,
+      "master_seed": 20261201,
+      "n_study_datasets": 32000,
+      "n_analysis_fits": 160000
+    },
+    "timing_pilot_requested": {
+      "purpose": "Measure ms/fit only. Discarded for operating-characteristic claims.",
+      "n_replicates": 20,
+      "n_study_datasets": 320,
+      "n_analysis_fits": 1600
+    }
+  },
+  "acceptance_sources": {
+    "nominal_alpha": {
+      "value": 0.05,
+      "source": "configs/new_study.example.yaml:alpha"
+    },
+    "fwer_max": {
+      "value": 0.05,
+      "source": "configs/new_study.example.yaml:fwer_max"
+    },
+    "fwer_tolerance": {
+      "value": 0.015,
+      "source": "configs/new_study.example.yaml:fwer_tolerance"
+    },
+    "fwer_upper_tolerance": {
+      "value": 0.045,
+      "source": "configs/new_study.example.yaml:fwer_upper_tolerance"
+    },
+    "coverage_min": {
+      "value": 0.92,
+      "source": "configs/new_study.example.yaml:coverage_min"
+    },
+    "max_abs_bias_fraction": {
+      "value": 0.15,
+      "source": "configs/new_study.example.yaml:max_abs_bias_fraction"
+    },
+    "max_failure_rate": {
+      "value": 0.02,
+      "source": "configs/new_study.example.yaml:max_failure_rate"
+    },
+    "power_target": {
+      "value": 0.8,
+      "source": "configs/new_study.example.yaml:power_target"
+    },
+    "power_lower_tolerance": {
+      "value": 0.06,
+      "source": "configs/new_study.example.yaml:power_lower_tolerance"
+    },
+    "feasibility_application": {
+      "source": "src/send_bw/simulation/optimize.py::feasibility",
+      "note": "Power gates apply to a chosen design's alternative cell, not every small n."
+    },
+    "clopper_pearson_at_B2000_p05": {
+      "mcse": 0.004873397172404482,
+      "cp95_k100_n2000": [
+        0.04086426771825133,
+        0.060481722083151876
+      ]
+    }
+  },
+  "algebraic_verification_complete_data": {
+    "endpoint_ancova": {
+      "max_abs_bias": 8.326672684688674e-17,
+      "max_null_spillover": 5.0513759841663877e-17,
+      "all_unbiased": true
+    },
+    "rm_gls_quadratic": {
+      "max_abs_bias": 0.016060953623614233,
+      "max_null_spillover": 3.774758283725532e-15,
+      "all_unbiased": false
+    },
+    "mmrm_visit_contrast": {
+      "max_abs_bias": 2.67841304690819e-15,
+      "max_null_spillover": 2.6490938888506185e-15,
+      "all_unbiased": true
+    }
+  },
+  "complete_data_se_check": {
+    "description": "Deterministic nonzero-residual complete-data check; not Monte Carlo.",
+    "est_ancova": [
+      -0.000923619735026054,
+      0.01611285814352002
+    ],
+    "est_mmrm": [
+      -0.0009236197350278108,
+      0.01611285814351824
+    ],
+    "max_abs_est_diff": 1.779826286352204e-15,
+    "se_ancova_ols": [
+      0.01052127478459396,
+      0.01052127478459396
+    ],
+    "se_mmrm_cr1": [
+      0.007753041996374927,
+      0.011669968639383403
+    ],
+    "se_ratio_mmrm_over_ancova": [
+      0.7368918838359314,
+      1.1091782011502491
+    ],
+    "realized_se_equal": false
+  }
+}
