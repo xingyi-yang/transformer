@@ -9,9 +9,24 @@ Generator A (log weight Z = log W, t = elapsed days, tau = t / 28):
                exp(-(t - end) / tau_off) after the last planned (or actual) dose
     Cov(OU(t), OU(t')) = sigma_p^2 exp(-|t - t'| / ell);  m(t) ~ N(0, sigma_m^2) iid
 
-Generator B is structurally different: Gompertz growth, Hill effect with partial
-tolerance (transient) and onset lag, quadratic study effects, an extra random-walk
-component, Student-t (df=4) measurement noise and dose-dependent variance inflation.
+Official bank (Generator A only): one saturating-exponential growth family with
+shared tau_g=40. Generator B (Gompertz) exists for design-stress evaluation and
+is not the official forecasting bank.
+
+Observability:
+    D1, D2, D3 are curated production descriptors written to
+    metadata/compound_reference.csv. They are not SEND domains. A comparable
+    table would have to be supplied at prediction time; missing D1–D3 on an
+    active arm raises UnsupportedContextError. Hidden compound truth
+    (A, ED50, tau_on, tau_off, and the link+noise that maps D1–D3 onto them)
+    is written only to truth/params.json.
+
+The trajectory uses the *actual* regimen after dose deviations (act.dose /
+act.end_day). Production features use the planned regimen only.
+
+Missing visits (p_missing if day>0) and death (p_death) are iid Bernoulli /
+uniform-day draws. They do not depend on treatment, dose, or weight (MCAR-ish,
+not informative dropout).
 
 Truth (parameters and latent paths) is written to a separate directory that no
 fitting or feature code reads.

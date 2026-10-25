@@ -157,7 +157,7 @@ def build_catboost_table(obs: pd.DataFrame, animals: pd.DataFrame, spec: Feature
 
 
 class QuantileCatBoostModel:
-    """CatBoost MultiQuantile on early-history tabular rows. Not a TFT."""
+    """Separate CatBoost Quantile heads (one model per level). Not MultiQuantile. Not a TFT."""
 
     name = "catboost_quantile"
     quantiles = list(CATBOOST_QUANTILES)

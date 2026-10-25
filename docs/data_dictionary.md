@@ -37,7 +37,7 @@ Formats: CSV (read as text), Parquet, and SAS XPT (optional `pyreadstat` extra, 
 |---|---|---|---|
 | `study_metadata` | STUDYID | SPECIES, STRAIN, STUDY_CLASS, STUDY_START, SEND_VERSION, DURATION_DAYS | study context; cross-checked against DM |
 | `arm_regimen` | STUDYID, ARMCD | COMPOUND_ID, IS_CONTROL, PLANNED_DOSE, DOSE_UNIT, ROUTE, INTERVAL_DAYS, PLANNED_START_DY, PLANNED_END_DY (SEND study days), COHORT | **planned** regimens; one row per arm (duplicates rejected). Arms without a row get `REGIMEN_AVAILABLE = False` and are excluded from modelling |
-| `compound_reference` | COMPOUND_ID | D1, D2, D3 (numeric descriptors), CLASS | curated compound identity/descriptors; compounds are never inferred by splitting EXTRT |
+| `compound_reference` | COMPOUND_ID | D1, D2, D3 (numeric descriptors), CLASS | curated **production** descriptors (not SEND domains). Comparable columns must exist at prediction time or active-arm features fail. Hidden generator parameters `A`, `ED50`, `tau_on`, `tau_off` are **not** in this table |
 
 ## Canonical tables (summary)
 

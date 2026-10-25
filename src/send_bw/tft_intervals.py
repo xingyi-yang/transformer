@@ -42,16 +42,38 @@ def conformal_nonconformity(y: np.ndarray, lo: np.ndarray, hi: np.ndarray) -> np
     return np.maximum(lo - y, y - hi)
 
 
-def conformal_margin(scores: np.ndarray, alpha: float = ALPHA_80) -> float:
-    """Finite-sample (1-alpha) quantile of CQR residuals. Validation only."""
+def romano_cqr_k(n: int, alpha: float = ALPHA_80) -> int:
+    """Romano 1-based order index ``ceil((n+1)(1-alpha))``.
+
+    When ``k == n+1`` the exact finite-sample quantile is ``+inf``. Practical
+    CQR then uses the sample maximum (the previous ``q=1, method=higher``).
+    """
+    if int(n) < 1:
+        raise ValueError("n must be positive")
+    return int(np.ceil((int(n) + 1) * (1.0 - float(alpha))))
+
+
+def romano_cqr_quantile(scores: np.ndarray, alpha: float = ALPHA_80) -> float:
+    """Exact Romano CQR residual quantile: the k-th order statistic.
+
+    Equivalent to ``np.quantile(..., q=k/n, method='higher')`` for the n
+    checked in this repository when ``k <= n``. Uses the sorted sample
+    directly so the result does not depend on NumPy quantile interpolation.
+    """
     s = np.asarray(scores, float)
-    s = s[np.isfinite(s)]
+    s = np.sort(s[np.isfinite(s)])
     if s.size == 0:
         raise ValueError("no finite calibration scores")
     n = int(s.size)
-    q = float(np.ceil((n + 1) * (1.0 - float(alpha))) / n)
-    q = min(q, 1.0)
-    return float(np.quantile(s, q, method="higher"))
+    k = romano_cqr_k(n, alpha)
+    if k >= n + 1:
+        return float(s[-1])
+    return float(s[k - 1])
+
+
+def conformal_margin(scores: np.ndarray, alpha: float = ALPHA_80) -> float:
+    """Finite-sample (1-alpha) quantile of CQR residuals. Validation only."""
+    return romano_cqr_quantile(scores, alpha=alpha)
 
 
 def fit_cqr_margin(fut: pd.DataFrame, pred: pd.DataFrame, *,
@@ -76,7 +98,7 @@ def fit_cqr_margin(fut: pd.DataFrame, pred: pd.DataFrame, *,
         "n_studies": int(mm["STUDYID"].nunique()) if "STUDYID" in mm.columns else None,
         "cal_coverage80": float(np.mean(covered)),
         "cal_mean_residual": float(np.mean(scores)),
-        "quantile_rule": "ceil((n+1)(1-alpha))/n, method=higher",
+        "quantile_rule": "Romano k=ceil((n+1)(1-alpha)); Q=E_(k) (max if k=n+1)",
         "test_outcomes_used": False,
         "merge": card,
         "note": ("Margin is fit on the caller-supplied pairs only "

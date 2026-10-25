@@ -14,6 +14,8 @@ import numpy as np
 import pandas as pd
 
 T_REF = 28.0
+# Curated production descriptors (compound_reference). Not hidden PK parameters
+# A / ED50 / tau_on / tau_off, which never enter FEATURE_REGISTRY.
 DESCRIPTORS = ["D1", "D2", "D3"]
 
 FEATURE_REGISTRY: dict[str, str] = {

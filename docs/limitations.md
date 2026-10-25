@@ -35,8 +35,12 @@
   residual covariance. A global PF `GroupNormalizer` on mixed RAT+DOG `LOGW`, plus a train/predict
   `UNK` vs `"nan"` compound-token mismatch, produced a dog-scale collapse (MAE ≈ 0.55) on one
   extra split; the adapter now uses a species-or-global normalizer without `relu`. That repair
-  is a synthetic diagnostic, not real-data qualification. Chronos-2 and DeepAR remain
-  unimplemented (`not_run`).
+is a synthetic diagnostic, not real-data qualification. DeepAR remains
+`not_run`. Chronos-2 ran on the official_seq cell in `HISTORY_ONLY` mode
+(visit-rank `LOGW`, no elapsed `DAY` in the sequence). That adapter does not
+use Chronos-2's covariate interface; `COVARIATE_AWARE` can pass `DAY` but still
+indexes the series by visit rank. Official Chronos errors are therefore not a
+test of elapsed-time encoding.
 
 ## Statistical assumptions not validated
 - A common treatment effect across sexes (pooled analysis).

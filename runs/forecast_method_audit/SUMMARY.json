@@ -1,0 +1,916 @@
+{
+  "catboost": {
+    "encoder_summaries": "history_summaries uses encoder DAY/LOGW only",
+    "features": [
+      "SEX",
+      "STRAIN",
+      "SPECIES",
+      "ROUTE",
+      "COMPOUND_ID",
+      "CTRL",
+      "ZB_C",
+      "LD",
+      "INV_INTERVAL",
+      "START",
+      "END",
+      "D1",
+      "D2",
+      "D3",
+      "latest_logw",
+      "latest_weight_g",
+      "logw_std",
+      "n_encoder",
+      "history_span",
+      "recent_trend",
+      "trend_missing",
+      "var_missing",
+      "origin_day",
+      "last_obs_day",
+      "target_day",
+      "elapsed_from_origin",
+      "elapsed_from_last_obs"
+    ],
+    "future_outcome_features": [],
+    "heads": "one CatBoostRegressor per quantile (Quantile:alpha=q), not MultiQuantile",
+    "known_future_calendar": [
+      "target_day",
+      "elapsed_from_origin",
+      "elapsed_from_last_obs"
+    ],
+    "label": "y_logw (not a feature)",
+    "ok": true
+  },
+  "chronos_saved": {
+    "default_if_absent": "history_only_univariate",
+    "history_covariate_mode": null,
+    "n_train_series": 210,
+    "note": "Older official_seq model.json omitted covariate_mode; load() defaults to HISTORY_ONLY. v3_official_seq never passed covariate_mode, so the run used visit-rank LOGW.",
+    "saved_covariate_mode": null
+  },
+  "chronos_visit_rank": {
+    "adapter_limitation": "HISTORY_ONLY passes a raw LOGW ndarray. Chronos sees visit rank (unit steps). Elapsed DAY is discarded. Two series with the same visit count and different calendar spacing are indistinguishable.",
+    "covariate_aware_constant": "covariate_aware_origin",
+    "forbidden_covariates": [
+      "LOGW",
+      "Y",
+      "WEIGHT_G",
+      "ACTUAL_DOSE",
+      "EXDOSE_ACTUAL",
+      "DOSE_DEVIATION",
+      "DISPOSITION",
+      "DISPOSITION_DAY",
+      "DEATH_DAY",
+      "Z0_TRUE",
+      "Z_LATENT"
+    ],
+    "model_capability": "COVARIATE_AWARE can pass DAY plus planned statics as past/future covariates. The sequence index is still unit steps; irregular spacing is a covariate, not the time index. Official_seq did not use this mode.",
+    "not_a_chronos_inability": true,
+    "official_seq_mode": "history_only_univariate"
+  },
+  "classification": {
+    "confirmed_bugs": [
+      {
+        "detail": "conformal_margin used np.quantile(k/n, method='higher'). NumPy 'higher' is the Hyndman-Fan next-rank rule on q*(n-1), not Romano's k-th order statistic. For official validation n=214, k=172, it returned sorted[172] instead of sorted[171]. Locked CQR tables were not overwritten. Romano margins and rescored official-test metrics are in runs/forecast_method_audit/. TFT point forecasts are unaffected.",
+        "id": "cqr_numpy_higher_one_rank_too_large",
+        "severity": "scoring (CQR margin only; q0.5 / MAE unchanged)"
+      },
+      {
+        "detail": "QuantileCatBoostModel claimed MultiQuantile; fit() trains one Quantile:alpha=q head per level. Scoring was already correct. Docstring fixed.",
+        "id": "catboost_docstring_multiquantile",
+        "severity": "documentation"
+      },
+      {
+        "detail": "docs/limitations.md still said Chronos-2 remained unimplemented. Official_seq ran HISTORY_ONLY Chronos-2. Stale sentence corrected.",
+        "id": "limitations_chronos_unimplemented",
+        "severity": "documentation"
+      },
+      {
+        "detail": "PR #24 wrote that QuantileLoss is 2\u00d7 pinball on the normalized target. One locked batch shows decoder y and TFT.forward predictions on raw LOGW; the normalizer inverse-transforms before the loss. Corrected.",
+        "id": "pr24_tft_loss_said_normalized",
+        "severity": "documentation"
+      }
+    ],
+    "design_limitations": [
+      "D1\u2013D3 are curated synthetic descriptors, not SEND fields. Comparable columns must be supplied at prediction time.",
+      "Hidden A/ED50/tau_on/tau_off never enter production features.",
+      "Weight responds to actual dose deviations; models see planned regimen only.",
+      "Missingness and death are MCAR-ish (constant p, independent of treatment/weight), not informative dropout.",
+      "Official growth family is one saturating exponential (tau_g=40). Gompertz exists only as Generator B.",
+      "Spline sigma_m sits at ~1e-4 (optimizer floor). Animal intercept absorbs measurement; not generator truth (0.010).",
+      "Official Chronos-2 used visit-rank LOGW (HISTORY_ONLY). Elapsed DAY is an adapter omission, not a model inability.",
+      "COVARIATE_AWARE can pass DAY but the sequence index remains unit steps.",
+      "CQR k=n+1 (n<4 at alpha=0.2) uses the sample max instead of Romano +inf.",
+      "Official test is a study holdout (SYNA-010/011). Those studies use train compounds CMP03/CMP06, not a new compound.",
+      "FeatureSpec.check_context is not enforced at TFT score time (already recorded in PR #24).",
+      "CQR pair residuals are (USUBJID, DAY), not study-balanced; exchangeability is an assumption."
+    ],
+    "development_reference": "target-only TFT",
+    "no_refit_required": true,
+    "unresolved": [
+      "Whether a real SEND warehouse would have D1\u2013D3-like descriptors at prediction time (qualification, not this synthetic bank).",
+      "Whether a Chronos encoding that used elapsed time as the index (not just a covariate) would change official_seq errors \u2014 not measured; would need a new adapter and a new unlocked run.",
+      "Study-level finite-sample CQR coverage is not guaranteed by the pair-level Romano rule."
+    ]
+  },
+  "cqr_from_saved": {
+    "corrected_test_metrics": [
+      {
+        "bank": "official_test",
+        "cqr": {
+          "coverage80": 0.7776162790697674,
+          "crossing": 0.0,
+          "interval_score80": 0.1970303350125005,
+          "interval_width80": 0.13825326223989653,
+          "mae_log": 0.049927255392452546,
+          "mean_quantile_loss": 0.016583398653801415,
+          "mean_quantile_loss_name": "pinball_on_cqr_shifted_endpoints",
+          "n_scored": 115,
+          "per_study": [
+            {
+              "STUDYID": "SYNA-010",
+              "coverage80": 0.9302325581395349,
+              "interval_width80": 0.13865653463703892,
+              "mae_log": 0.03704286676015763,
+              "mean_quantile_loss": 0.012626129864736027,
+              "n_obs": 43,
+              "rmse_log": 0.04688549067203112
+            },
+            {
+              "STUDYID": "SYNA-011",
+              "coverage80": 0.625,
+              "interval_width80": 0.13784998984275412,
+              "mae_log": 0.06281164402474747,
+              "mean_quantile_loss": 0.020540667442866804,
+              "n_obs": 72,
+              "rmse_log": 0.07270033160413152
+            }
+          ],
+          "q0_5_unchanged": true,
+          "status": "ok"
+        },
+        "locked_scores_not_overwritten": true,
+        "margin": 0.012656276413822276,
+        "raw": {
+          "coverage80": 0.6453488372093024,
+          "crossing": 0.0,
+          "interval_score80": 0.20607438057659344,
+          "interval_width80": 0.11294070941225197,
+          "mae_log": 0.049927255392452546,
+          "mean_quantile_loss": 0.016764279565083275,
+          "n_scored": 115,
+          "per_study": [
+            {
+              "STUDYID": "SYNA-010",
+              "coverage80": 0.7906976744186046,
+              "interval_width80": 0.11334398180939437,
+              "mae_log": 0.03704286676015763,
+              "mean_quantile_loss": 0.012416820886865333,
+              "n_obs": 43,
+              "rmse_log": 0.04688549067203112
+            },
+            {
+              "STUDYID": "SYNA-011",
+              "coverage80": 0.5,
+              "interval_width80": 0.11253743701510957,
+              "mae_log": 0.06281164402474747,
+              "mean_quantile_loss": 0.021111738243301217,
+              "n_obs": 72,
+              "rmse_log": 0.07270033160413152
+            }
+          ],
+          "status": "ok"
+        },
+        "seed": 82001,
+        "source_predictions": "runs/tft_stability/predictions/official_test_to_82001.csv"
+      },
+      {
+        "bank": "official_test",
+        "cqr": {
+          "coverage80": 0.6823320413436693,
+          "crossing": 0.0,
+          "interval_score80": 0.270189925973194,
+          "interval_width80": 0.1586443185176552,
+          "mae_log": 0.06282318970083106,
+          "mean_quantile_loss": 0.021900832405129567,
+          "mean_quantile_loss_name": "pinball_on_cqr_shifted_endpoints",
+          "n_scored": 115,
+          "per_study": [
+            {
+              "STUDYID": "SYNA-010",
+              "coverage80": 0.7674418604651163,
+              "interval_width80": 0.15702006707375282,
+              "mae_log": 0.062340731479566557,
+              "mean_quantile_loss": 0.021340777034047635,
+              "n_obs": 43,
+              "rmse_log": 0.07791494674061594
+            },
+            {
+              "STUDYID": "SYNA-011",
+              "coverage80": 0.5972222222222222,
+              "interval_width80": 0.16026856996155756,
+              "mae_log": 0.06330564792209557,
+              "mean_quantile_loss": 0.0224608877762115,
+              "n_obs": 72,
+              "rmse_log": 0.07555005655596145
+            }
+          ],
+          "q0_5_unchanged": true,
+          "status": "ok"
+        },
+        "locked_scores_not_overwritten": true,
+        "margin": 1.823486985585987e-05,
+        "raw": {
+          "coverage80": 0.6823320413436693,
+          "crossing": 0.0,
+          "interval_score80": 0.2702113825723171,
+          "interval_width80": 0.15860784877794348,
+          "mae_log": 0.06282318970083106,
+          "mean_quantile_loss": 0.021901261537112027,
+          "n_scored": 115,
+          "per_study": [
+            {
+              "STUDYID": "SYNA-010",
+              "coverage80": 0.7674418604651163,
+              "interval_width80": 0.1569835973340411,
+              "mae_log": 0.062340731479566557,
+              "mean_quantile_loss": 0.02134089577273507,
+              "n_obs": 43,
+              "rmse_log": 0.07791494674061594
+            },
+            {
+              "STUDYID": "SYNA-011",
+              "coverage80": 0.5972222222222222,
+              "interval_width80": 0.16023210022184584,
+              "mae_log": 0.06330564792209557,
+              "mean_quantile_loss": 0.022461627301488988,
+              "n_obs": 72,
+              "rmse_log": 0.07555005655596145
+            }
+          ],
+          "status": "ok"
+        },
+        "seed": 82021,
+        "source_predictions": "runs/tft_stability/predictions/official_test_to_82021.csv"
+      },
+      {
+        "bank": "official_test",
+        "cqr": {
+          "coverage80": 0.8260658914728682,
+          "crossing": 0.0,
+          "interval_score80": 0.17693061823548886,
+          "interval_width80": 0.1318693936461141,
+          "mae_log": 0.03878519682870181,
+          "mean_quantile_loss": 0.013615500569174942,
+          "mean_quantile_loss_name": "pinball_on_cqr_shifted_endpoints",
+          "n_scored": 115,
+          "per_study": [
+            {
+              "STUDYID": "SYNA-010",
+              "coverage80": 0.8604651162790697,
+              "interval_width80": 0.1331090524343072,
+              "mae_log": 0.0406901403205123,
+              "mean_quantile_loss": 0.013737242730111307,
+              "n_obs": 43,
+              "rmse_log": 0.054351672615919874
+            },
+            {
+              "STUDYID": "SYNA-011",
+              "coverage80": 0.7916666666666666,
+              "interval_width80": 0.130629734857921,
+              "mae_log": 0.03688025333689133,
+              "mean_quantile_loss": 0.013493758408238575,
+              "n_obs": 72,
+              "rmse_log": 0.046602982497061164
+            }
+          ],
+          "q0_5_unchanged": true,
+          "status": "ok"
+        },
+        "locked_scores_not_overwritten": true,
+        "margin": 0.010303654603185386,
+        "raw": {
+          "coverage80": 0.7448320413436693,
+          "crossing": 0.0,
+          "interval_score80": 0.1791649761122508,
+          "interval_width80": 0.11126208443974334,
+          "mae_log": 0.03878519682870181,
+          "mean_quantile_loss": 0.01366018772671018,
+          "n_scored": 115,
+          "per_study": [
+            {
+              "STUDYID": "SYNA-010",
+              "coverage80": 0.7674418604651163,
+              "interval_width80": 0.11250174322793643,
+              "mae_log": 0.0406901403205123,
+              "mean_quantile_loss": 0.013745132952125656,
+              "n_obs": 43,
+              "rmse_log": 0.054351672615919874
+            },
+            {
+              "STUDYID": "SYNA-011",
+              "coverage80": 0.7222222222222222,
+              "interval_width80": 0.11002242565155024,
+              "mae_log": 0.03688025333689133,
+              "mean_quantile_loss": 0.013575242501294705,
+              "n_obs": 72,
+              "rmse_log": 0.046602982497061164
+            }
+          ],
+          "status": "ok"
+        },
+        "seed": 82031,
+        "source_predictions": "runs/tft_stability/predictions/official_test_to_82031.csv"
+      }
+    ],
+    "locked_cqr_artifacts_rewritten": false,
+    "protocol": "official validation pairs from runs/tft_stability (not test)",
+    "seeds": [
+      {
+        "margins_match": false,
+        "n_cal": 214,
+        "official_test_cqr_romano": {
+          "coverage80": 0.7776162790697674,
+          "crossing": 0.0,
+          "interval_score80": 0.1970303350125005,
+          "interval_width80": 0.13825326223989653,
+          "mae_log": 0.049927255392452546,
+          "mean_quantile_loss": 0.016583398653801415,
+          "mean_quantile_loss_name": "pinball_on_cqr_shifted_endpoints",
+          "n_scored": 115,
+          "per_study": [
+            {
+              "STUDYID": "SYNA-010",
+              "coverage80": 0.9302325581395349,
+              "interval_width80": 0.13865653463703892,
+              "mae_log": 0.03704286676015763,
+              "mean_quantile_loss": 0.012626129864736027,
+              "n_obs": 43,
+              "rmse_log": 0.04688549067203112
+            },
+            {
+              "STUDYID": "SYNA-011",
+              "coverage80": 0.625,
+              "interval_width80": 0.13784998984275412,
+              "mae_log": 0.06281164402474747,
+              "mean_quantile_loss": 0.020540667442866804,
+              "n_obs": 72,
+              "rmse_log": 0.07270033160413152
+            }
+          ],
+          "q0_5_unchanged": true,
+          "status": "ok"
+        },
+        "official_test_raw": {
+          "coverage80": 0.6453488372093024,
+          "crossing": 0.0,
+          "interval_score80": 0.20607438057659344,
+          "interval_width80": 0.11294070941225197,
+          "mae_log": 0.049927255392452546,
+          "mean_quantile_loss": 0.016764279565083275,
+          "n_scored": 115,
+          "per_study": [
+            {
+              "STUDYID": "SYNA-010",
+              "coverage80": 0.7906976744186046,
+              "interval_width80": 0.11334398180939437,
+              "mae_log": 0.03704286676015763,
+              "mean_quantile_loss": 0.012416820886865333,
+              "n_obs": 43,
+              "rmse_log": 0.04688549067203112
+            },
+            {
+              "STUDYID": "SYNA-011",
+              "coverage80": 0.5,
+              "interval_width80": 0.11253743701510957,
+              "mae_log": 0.06281164402474747,
+              "mean_quantile_loss": 0.021111738243301217,
+              "n_obs": 72,
+              "rmse_log": 0.07270033160413152
+            }
+          ],
+          "status": "ok"
+        },
+        "order_statistic": {
+          "alpha": 0.2,
+          "conformal_margin": 0.012656276413822276,
+          "k": 172,
+          "k_equals_n_plus_1": false,
+          "n": 214,
+          "numpy_higher_k_over_n": 0.013129955045204866,
+          "q_used_by_legacy": 0.8037383177570093,
+          "romano": 0.012656276413822276,
+          "romano_matches_margin": true,
+          "romano_matches_numpy_higher": false
+        },
+        "romano_margin": 0.012656276413822276,
+        "seed": 82001,
+        "stored_margin": 0.013129955045204866
+      },
+      {
+        "margins_match": false,
+        "n_cal": 214,
+        "official_test_cqr_romano": {
+          "coverage80": 0.6823320413436693,
+          "crossing": 0.0,
+          "interval_score80": 0.270189925973194,
+          "interval_width80": 0.1586443185176552,
+          "mae_log": 0.06282318970083106,
+          "mean_quantile_loss": 0.021900832405129567,
+          "mean_quantile_loss_name": "pinball_on_cqr_shifted_endpoints",
+          "n_scored": 115,
+          "per_study": [
+            {
+              "STUDYID": "SYNA-010",
+              "coverage80": 0.7674418604651163,
+              "interval_width80": 0.15702006707375282,
+              "mae_log": 0.062340731479566557,
+              "mean_quantile_loss": 0.021340777034047635,
+              "n_obs": 43,
+              "rmse_log": 0.07791494674061594
+            },
+            {
+              "STUDYID": "SYNA-011",
+              "coverage80": 0.5972222222222222,
+              "interval_width80": 0.16026856996155756,
+              "mae_log": 0.06330564792209557,
+              "mean_quantile_loss": 0.0224608877762115,
+              "n_obs": 72,
+              "rmse_log": 0.07555005655596145
+            }
+          ],
+          "q0_5_unchanged": true,
+          "status": "ok"
+        },
+        "official_test_raw": {
+          "coverage80": 0.6823320413436693,
+          "crossing": 0.0,
+          "interval_score80": 0.2702113825723171,
+          "interval_width80": 0.15860784877794348,
+          "mae_log": 0.06282318970083106,
+          "mean_quantile_loss": 0.021901261537112027,
+          "n_scored": 115,
+          "per_study": [
+            {
+              "STUDYID": "SYNA-010",
+              "coverage80": 0.7674418604651163,
+              "interval_width80": 0.1569835973340411,
+              "mae_log": 0.062340731479566557,
+              "mean_quantile_loss": 0.02134089577273507,
+              "n_obs": 43,
+              "rmse_log": 0.07791494674061594
+            },
+            {
+              "STUDYID": "SYNA-011",
+              "coverage80": 0.5972222222222222,
+              "interval_width80": 0.16023210022184584,
+              "mae_log": 0.06330564792209557,
+              "mean_quantile_loss": 0.022461627301488988,
+              "n_obs": 72,
+              "rmse_log": 0.07555005655596145
+            }
+          ],
+          "status": "ok"
+        },
+        "order_statistic": {
+          "alpha": 0.2,
+          "conformal_margin": 1.823486985585987e-05,
+          "k": 172,
+          "k_equals_n_plus_1": false,
+          "n": 214,
+          "numpy_higher_k_over_n": 0.0019024968453216218,
+          "q_used_by_legacy": 0.8037383177570093,
+          "romano": 1.823486985585987e-05,
+          "romano_matches_margin": true,
+          "romano_matches_numpy_higher": false
+        },
+        "romano_margin": 1.823486985585987e-05,
+        "seed": 82021,
+        "stored_margin": 0.0019024968453216218
+      },
+      {
+        "margins_match": false,
+        "n_cal": 214,
+        "official_test_cqr_romano": {
+          "coverage80": 0.8260658914728682,
+          "crossing": 0.0,
+          "interval_score80": 0.17693061823548886,
+          "interval_width80": 0.1318693936461141,
+          "mae_log": 0.03878519682870181,
+          "mean_quantile_loss": 0.013615500569174942,
+          "mean_quantile_loss_name": "pinball_on_cqr_shifted_endpoints",
+          "n_scored": 115,
+          "per_study": [
+            {
+              "STUDYID": "SYNA-010",
+              "coverage80": 0.8604651162790697,
+              "interval_width80": 0.1331090524343072,
+              "mae_log": 0.0406901403205123,
+              "mean_quantile_loss": 0.013737242730111307,
+              "n_obs": 43,
+              "rmse_log": 0.054351672615919874
+            },
+            {
+              "STUDYID": "SYNA-011",
+              "coverage80": 0.7916666666666666,
+              "interval_width80": 0.130629734857921,
+              "mae_log": 0.03688025333689133,
+              "mean_quantile_loss": 0.013493758408238575,
+              "n_obs": 72,
+              "rmse_log": 0.046602982497061164
+            }
+          ],
+          "q0_5_unchanged": true,
+          "status": "ok"
+        },
+        "official_test_raw": {
+          "coverage80": 0.7448320413436693,
+          "crossing": 0.0,
+          "interval_score80": 0.1791649761122508,
+          "interval_width80": 0.11126208443974334,
+          "mae_log": 0.03878519682870181,
+          "mean_quantile_loss": 0.01366018772671018,
+          "n_scored": 115,
+          "per_study": [
+            {
+              "STUDYID": "SYNA-010",
+              "coverage80": 0.7674418604651163,
+              "interval_width80": 0.11250174322793643,
+              "mae_log": 0.0406901403205123,
+              "mean_quantile_loss": 0.013745132952125656,
+              "n_obs": 43,
+              "rmse_log": 0.054351672615919874
+            },
+            {
+              "STUDYID": "SYNA-011",
+              "coverage80": 0.7222222222222222,
+              "interval_width80": 0.11002242565155024,
+              "mae_log": 0.03688025333689133,
+              "mean_quantile_loss": 0.013575242501294705,
+              "n_obs": 72,
+              "rmse_log": 0.046602982497061164
+            }
+          ],
+          "status": "ok"
+        },
+        "order_statistic": {
+          "alpha": 0.2,
+          "conformal_margin": 0.010303654603185386,
+          "k": 172,
+          "k_equals_n_plus_1": false,
+          "n": 214,
+          "numpy_higher_k_over_n": 0.010473068257673468,
+          "q_used_by_legacy": 0.8037383177570093,
+          "romano": 0.010303654603185386,
+          "romano_matches_margin": true,
+          "romano_matches_numpy_higher": false
+        },
+        "romano_margin": 0.010303654603185386,
+        "seed": 82031,
+        "stored_margin": 0.010473068257673468
+      }
+    ],
+    "status": "ok"
+  },
+  "cqr_order_statistic_grid": [
+    {
+      "alpha": 0.2,
+      "conformal_margin": 0.6404226504432821,
+      "k": 4,
+      "k_equals_n_plus_1": true,
+      "n": 3,
+      "numpy_higher_k_over_n": 0.6404226504432821,
+      "q_used_by_legacy": 1.0,
+      "romano": 0.6404226504432821,
+      "romano_matches_margin": true,
+      "romano_matches_numpy_higher": true
+    },
+    {
+      "alpha": 0.2,
+      "conformal_margin": 1.3040000451301372,
+      "k": 4,
+      "k_equals_n_plus_1": false,
+      "n": 4,
+      "numpy_higher_k_over_n": 1.3040000451301372,
+      "q_used_by_legacy": 1.0,
+      "romano": 1.3040000451301372,
+      "romano_matches_margin": true,
+      "romano_matches_numpy_higher": true
+    },
+    {
+      "alpha": 0.2,
+      "conformal_margin": 0.9034701816518086,
+      "k": 17,
+      "k_equals_n_plus_1": false,
+      "n": 20,
+      "numpy_higher_k_over_n": 0.9470809631292422,
+      "q_used_by_legacy": 0.85,
+      "romano": 0.9034701816518086,
+      "romano_matches_margin": true,
+      "romano_matches_numpy_higher": false
+    },
+    {
+      "alpha": 0.2,
+      "conformal_margin": 1.3203609870818391,
+      "k": 41,
+      "k_equals_n_plus_1": false,
+      "n": 50,
+      "numpy_higher_k_over_n": 1.3458754237823045,
+      "q_used_by_legacy": 0.82,
+      "romano": 1.3203609870818391,
+      "romano_matches_margin": true,
+      "romano_matches_numpy_higher": false
+    },
+    {
+      "alpha": 0.2,
+      "conformal_margin": 0.9166547888245957,
+      "k": 139,
+      "k_equals_n_plus_1": false,
+      "n": 172,
+      "numpy_higher_k_over_n": 0.9174879834442943,
+      "q_used_by_legacy": 0.8081395348837209,
+      "romano": 0.9166547888245957,
+      "romano_matches_margin": true,
+      "romano_matches_numpy_higher": false
+    },
+    {
+      "alpha": 0.2,
+      "conformal_margin": 0.8328944493608352,
+      "k": 172,
+      "k_equals_n_plus_1": false,
+      "n": 214,
+      "numpy_higher_k_over_n": 0.8442439176815353,
+      "q_used_by_legacy": 0.8037383177570093,
+      "romano": 0.8328944493608352,
+      "romano_matches_margin": true,
+      "romano_matches_numpy_higher": false
+    },
+    {
+      "alpha": 0.2,
+      "conformal_margin": 0.804078958119873,
+      "k": 173,
+      "k_equals_n_plus_1": false,
+      "n": 215,
+      "numpy_higher_k_over_n": 0.8060195271707506,
+      "q_used_by_legacy": 0.8046511627906977,
+      "romano": 0.804078958119873,
+      "romano_matches_margin": true,
+      "romano_matches_numpy_higher": false
+    }
+  ],
+  "descriptor_observability": {
+    "comparable_at_prediction_time": "Only if a compound_reference table with D1\u2013D3 is supplied. Those columns are not SEND domains. FeatureSpec.animal_features raises UnsupportedContextError when an active arm is missing a descriptor. Official test compounds CMP03/CMP06 were in train; compound-holdout CMP01 was not.",
+    "d1_d2_d3": "production",
+    "hidden_compound_truth": [
+      "A",
+      "ED50",
+      "tau_on",
+      "tau_off"
+    ],
+    "hidden_in_feature_registry": [],
+    "hidden_written_to": "truth/params.json (compounds)",
+    "production_includes_descriptors": true,
+    "written_to": "metadata/compound_reference.csv"
+  },
+  "development_reference": "tft_target_only",
+  "dose_deviation": {
+    "actual_dose_availability": "truth_only",
+    "any_nonzero_effect_delta": true,
+    "arm_rows": 72,
+    "compound_reference_rows": 6,
+    "examples": [
+      {
+        "USUBJID": "SYNA-002-0013",
+        "actual_dose": 30.0,
+        "actual_end": 24.0,
+        "delta_effect_t28": 0.0004205485372314543,
+        "effect_actual_t28": -0.0008504434549380322,
+        "effect_planned_t28": -0.0012709919921694865,
+        "planned_dose": 30.0,
+        "planned_end": 27.0
+      },
+      {
+        "USUBJID": "SYNA-003-0027",
+        "actual_dose": 10.0,
+        "actual_end": 14.0,
+        "delta_effect_t28": 0.024968623178768072,
+        "effect_actual_t28": -0.006740856563168874,
+        "effect_planned_t28": -0.03170947974193695,
+        "planned_dose": 10.0,
+        "planned_end": 27.0
+      },
+      {
+        "USUBJID": "SYNA-003-0029",
+        "actual_dose": 15.0,
+        "actual_end": 27.0,
+        "delta_effect_t28": 0.028633687675891785,
+        "effect_actual_t28": -0.04417923516302256,
+        "effect_planned_t28": -0.07281292283891434,
+        "planned_dose": 30.0,
+        "planned_end": 27.0
+      },
+      {
+        "USUBJID": "SYNA-004-0042",
+        "actual_dose": 100.0,
+        "actual_end": 19.0,
+        "delta_effect_t28": 0.051382314251709325,
+        "effect_actual_t28": -0.05770753712719175,
+        "effect_planned_t28": -0.10908985137890108,
+        "planned_dose": 100.0,
+        "planned_end": 27.0
+      },
+      {
+        "USUBJID": "SYNA-006-0011",
+        "actual_dose": 1.5,
+        "actual_end": 27.0,
+        "delta_effect_t28": 0.005498012879218195,
+        "effect_actual_t28": -0.005958890928853024,
+        "effect_planned_t28": -0.011456903808071218,
+        "planned_dose": 3.0,
+        "planned_end": 27.0
+      },
+      {
+        "USUBJID": "SYNA-008-0023",
+        "actual_dose": 15.0,
+        "actual_end": 27.0,
+        "delta_effect_t28": 0.008203498684995203,
+        "effect_actual_t28": -0.0164312996431245,
+        "effect_planned_t28": -0.024634798328119704,
+        "planned_dose": 30.0,
+        "planned_end": 27.0
+      },
+      {
+        "USUBJID": "SYNA-008-0027",
+        "actual_dose": 50.0,
+        "actual_end": 27.0,
+        "delta_effect_t28": 0.007087414506950815,
+        "effect_actual_t28": -0.030782116044320358,
+        "effect_planned_t28": -0.03786953055127117,
+        "planned_dose": 100.0,
+        "planned_end": 27.0
+      },
+      {
+        "USUBJID": "SYNA-011-0029",
+        "actual_dose": 150.0,
+        "actual_end": 27.0,
+        "delta_effect_t28": 0.0006381352594946447,
+        "effect_actual_t28": -0.003036669192748051,
+        "effect_planned_t28": -0.003674804452242696,
+        "planned_dose": 300.0,
+        "planned_end": 27.0
+      }
+    ],
+    "exdose_actual_availability": "optional",
+    "features_use": "PLANNED_DOSE / planned start-end (production)",
+    "mean_abs_delta_t28": 0.015854029371782437,
+    "n_deviations_in_truth": 9,
+    "n_examples": 8,
+    "trajectory_uses": "act regimen in generate_dataset (dose or early stop)"
+  },
+  "growth_family": {
+    "a_gmax_rat_m": 0.95,
+    "families_differ_at_t28": true,
+    "formula": "gmax(sex,strain,z0) * (1 - exp(-t / tau_g))",
+    "generator_b": "Gompertz; not the official forecasting bank",
+    "limited_family": true,
+    "official_bank": "Generator A saturating exponential, shared tau_g=40",
+    "tau_g": 40.0
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "locked_dirs_written": false,
+  "missingness_death": {
+    "code_path": "iid rng.random() < p_*; does not read dose or weight",
+    "configured_p_death": 0.015,
+    "configured_p_missing": 0.02,
+    "corr_death_vs_baseline_logw": -0.02159212038135739,
+    "corr_death_vs_dose": 0.1007569186583624,
+    "corr_death_vs_treated": 0.08688554260581142,
+    "death_rate": 0.017948717948717947,
+    "missingness_proxy": {
+      "corr_short_vs_dose": -0.047897443270451805,
+      "corr_short_vs_treated": 0.03708820927385981,
+      "frac_below_study_mode": 0.08616187989556136,
+      "mean_visits_control": 5.184210526315789,
+      "mean_visits_treated": 4.762081784386617,
+      "n_alive_with_visits": 383
+    },
+    "n_animals": 390,
+    "n_dead": 7,
+    "note": "Death and missed visits are sampled independently of treatment and weight in generate_dataset. Official-bank correlations are Monte Carlo noise around that independence, not a designed MAR process."
+  },
+  "production_features": {
+    "hidden_compound_not_in_registry": [
+      "A",
+      "ED50",
+      "tau_on",
+      "tau_off"
+    ],
+    "leaked_into_production": [],
+    "ok": true,
+    "production": [
+      "SEX_M",
+      "ZB_C",
+      "IS_CONTROL",
+      "LD",
+      "INV_INTERVAL",
+      "D1",
+      "D2",
+      "D3",
+      "TAU",
+      "EXPO",
+      "OFF",
+      "LCUM",
+      "START",
+      "END"
+    ],
+    "truth_only": [
+      "Z0_TRUE",
+      "Z_LATENT",
+      "U_STUDY_SLOPE",
+      "U_STUDY_BASELINE",
+      "DOSE_DEVIATION",
+      "DEATH_DAY",
+      "ACTUAL_DOSE"
+    ]
+  },
+  "retrained": false,
+  "spline_cov": {
+    "copied_from_truth": false,
+    "covariance_fit_on": "train_oof_all_species",
+    "fitted": {
+      "ell": 4.186712954560104,
+      "sd_a0": 0.014877920096262669,
+      "sd_a1": 0.05456611772069469,
+      "sd_s0": 0.012134387104900352,
+      "sd_s1": 0.04195113786021985,
+      "sigma_m": 0.00010046441653525946,
+      "sigma_p": 0.02709018835410635
+    },
+    "generator_a": {
+      "ell": 6.0,
+      "sd_animal_slope": 0.045,
+      "sd_study_slope": 0.035,
+      "sigma_m": 0.01,
+      "sigma_p": 0.022,
+      "tau_g": 40.0
+    },
+    "init_defaults_resemble_generator": "HierarchicalCovariance defaults sigma_p=0.02, ell=5, sigma_m=0.01 are starting values; official params are L-BFGS-B ML on train OOF.",
+    "mean_target": "Y = LOGW - BASELINE_LOGW, train split only",
+    "n_obs": 983,
+    "n_studies": 6,
+    "reconstruct_logw": "predict_mean = BASELINE_LOGW + Yhat",
+    "sigma_m_bound_flagged": false,
+    "sigma_m_near_lower_bound_1e4": true
+  },
+  "tft_one_batch": {
+    "checkpoint": "runs/tft_primary/models/tft_target_only",
+    "decoder_y_masked_max": 6.082675457000732,
+    "decoder_y_masked_mean": 5.964792251586914,
+    "decoder_y_masked_min": 5.826000213623047,
+    "decoder_y_masked_std": 0.07742749899625778,
+    "evidence": "decoder y and TFT.forward(pred) are both ~5.8 (raw LOGW). Zeros in the unmasked tensor are decoder padding, not a normalized target. QuantileLoss sees the inverse-transformed head.",
+    "loss_target": "raw_LOGW",
+    "n_animals_in_batch_panel": 12,
+    "normalizer_center": 5.616034787007186,
+    "normalizer_scale": 0.24517972917854378,
+    "panel_logw_mean": 5.691048969780319,
+    "panel_logw_std": 0.2111496772015115,
+    "pf_quantile_loss": "2 * pinball on raw LOGW after transform_output",
+    "pr24_normalized_claim": false,
+    "prediction_masked_max": 6.0601325035095215,
+    "prediction_masked_mean": 5.92712926864624,
+    "prediction_masked_min": 5.77086877822876,
+    "reported_pinball": "unscaled 1x pinball on raw LOGW",
+    "retrained": false,
+    "status": "ok",
+    "target_scale_center": 5.616034984588623,
+    "target_scale_scale": 0.24517972767353058
+  },
+  "transformer": {
+    "best_val_rmse_member0": 0.06542059034109116,
+    "compound_holdout_cmp01": "SYNA-001 / SYNA-008; not in spec.compound_ids",
+    "compound_ids": [
+      "CMP03",
+      "CMP04",
+      "CMP05",
+      "CMP06"
+    ],
+    "evaluation_studies_in_compound_ids": false,
+    "fit_norm_on": "train only (_data(..., fit_norm=True))",
+    "official_test_compounds": {
+      "SYNA-010": "CMP03",
+      "SYNA-011": "CMP06"
+    },
+    "official_test_studies": [
+      "SYNA-010",
+      "SYNA-011"
+    ],
+    "reconstruct_logw": "BASELINE_LOGW + y_scale * net",
+    "shared_cov_sigma_p": 0.02709018835410635,
+    "validation_role": "early stopping, not official test"
+  }
+}

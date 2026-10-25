@@ -31,10 +31,12 @@ Study and animal IDs are grouping keys only.
 
 **A. Hierarchical spline (frequentist).** Ridge regression on a B-spline time basis interacted with
 sex, baseline, compound descriptors and planned-exposure features. Training uses study-balanced weights, and alpha is
-selected on the validation studies. The covariance layer is fitted by maximum likelihood (L-BFGS-B, batched
-Woodbury) to **study-level out-of-fold residuals**:
+selected on the validation studies. The mean target is `Y = LOGW − BASELINE_LOGW`;
+`predict_mean` reconstructs `LOGW = baseline + Ŷ`. The covariance layer is fitted by maximum likelihood (L-BFGS-B, batched
+Woodbury) to **study-level out-of-fold residuals** on the training studies (not generator truth):
 `Cov = B(t)Ω_s B(t)' + B(t)Ω_a B(t)' + σ_p² exp(−|t−t'|/ℓ) + σ_m² I`, with `B(t) = [1, t/28]`
-and diagonal Ω. Parameter uncertainty comes from study-bootstrap refits of the mean. **One member is applied
+and diagonal Ω. Official target-only fit: σ_p ≈ 0.027 vs generator 0.022, ℓ ≈ 4.19 vs 6,
+σ_m ≈ 1×10⁻⁴ (optimizer floor; animal intercept absorbs measurement). Parameter uncertainty comes from study-bootstrap refits of the mean. **One member is applied
 to a whole simulated study.** Covariance parameters are not bootstrapped (documented limitation).
 
 **C. Baseline-conditioned transformer (custom; not a TFT).** Context tokens (biology, baseline,
@@ -42,8 +44,11 @@ compound descriptors, planned regimen) and query tokens (time and planned-exposu
 time). A boolean attention mask lets each query see only the context tokens and itself, so predictions
 do not depend on which other times are queried (schedule invariance, which is tested). The defaults are d_model 32,
 2 heads, 1 layer, dropout 0.1, AdamW, a loss on observed targets only with study-normalized weights,
-validation early stopping, and bootstrap members. For the primary backbone comparison it **uses the spline's
-covariance layer**.
+validation early stopping, and bootstrap members. Feature scales are fit on **train only**.
+`predict_mean` reconstructs `LOGW = baseline + y_scale · net`. For the primary backbone comparison it **uses the spline's
+covariance layer**. Official cell `compound_ids` are the training compounds CMP03–06;
+evaluation studies SYNA-010/011 were not in the checkpoint. Those test studies reuse
+train compounds (CMP03 / CMP06), so official test is a study holdout, not a new-compound holdout.
 
 **B. Bayesian hierarchical model (PyMC, NUTS via nutpie).**
 `Y/s_y = Xβ + B(t)'u_s + B(t)'b_i + e_i(t)`. Design features:
@@ -80,14 +85,23 @@ target species via `from_parameters` so donor SPECIES classes are kept.
 An 80% Winkler interval score is reported alongside pinball and coverage.
 CQR (experimental) adds a single margin to `q0.1`/`q0.9` and leaves `q0.5`
 unchanged (Romano-style residual `max(q0.1−y, y−q0.9)`, finite-sample
-`ceil((n+1)(1−α))/n` with `method=higher`). The margin is pair-level
+`k = ceil((n+1)(1−α))`, `Q = E_{(k)}`; if `k = n+1` the code uses the
+sample max instead of `+∞`). A previous helper used
+`np.quantile(k/n, method='higher')`, which is one rank larger than
+Romano (NumPy indexes `q(n−1)`). Locked CQR artifacts were left in
+place; Romano-rescored metrics are saved under
+`runs/forecast_method_audit/`. The margin is pair-level
 `(USUBJID, DAY)`, not study-balanced. Study-held-out CV fits it on a
 **calibration** split. The earlier stability run fit it on official
 **validation**. Neither uses test outcomes. Pinball computed on CQR
 endpoints is not the TFT QuantileLoss; raw and calibrated tables are
-stored separately. PF training `QuantileLoss` is `2 × pinball` on the
-normalized target; reported `mean_quantile_loss` is unscaled pinball on
-raw `LOGW`. `FeatureSpec.check_context` is not enforced at TFT score
+stored separately. PF training `QuantileLoss` is `2 × pinball` on **raw** `LOGW`
+(confirmed by replaying one locked target-only batch: decoder `y` and
+`transform_output(pred)` both sit near 5.8; `GroupNormalizer`
+center ≈ 5.616 / scale ≈ 0.245 standardizes the head only).
+A previous note that the loss used the normalized target was wrong.
+Reported `mean_quantile_loss` is unscaled (1×) pinball on raw `LOGW`.
+`FeatureSpec.check_context` is not enforced at TFT score
 time (official target-only train never saw interval 7 or dose 1000;
 validation SYNA-005 and eight SYNA-010 test animals still score).
 Target-only is the development reference; fine-tune and CQR are not a
@@ -101,6 +115,38 @@ exclude animals with fewer than `min_encoder_length + 1` observed visits
 it stays `not_run`. It refuses baseline-only / pre-study prediction and `sample_study`.
 Installing the extra is not part of the default environment and is not a scientific-readiness
 claim.
+
+Quantile CatBoost (extension baseline) fits **one `Quantile:alpha=q` head per
+level**, not CatBoost MultiQuantile. Features are encoder summaries plus known
+future calendar (`target_day`, elapsed days). `y_logw` is the label.
+
+Chronos-2 official_seq used `history_only_univariate`: the model sees visit-rank
+`LOGW` with no elapsed-day index. Two series with the same visit count and
+different calendar spacing are indistinguishable. That is an **adapter**
+limitation. `covariate_aware_origin` can pass `DAY` as a covariate; the
+sequence index is still unit steps. Official_seq did not use that mode.
+
+## Synthetic generator (official bank)
+
+Official forecasting data are **Generator A** only. Growth is one saturating
+exponential with shared `tau_g = 40`. Generator B (Gompertz, Hill/tolerance,
+random walk, t-noise) is a design-stress mechanism, not the official bank.
+
+`D1`, `D2`, `D3` are curated **production** descriptors in
+`metadata/compound_reference.csv`. They are not SEND domains. A comparable
+table must be supplied at prediction time; missing descriptors on an active arm
+raise `UnsupportedContextError`. Hidden compound truth (`A`, `ED50`, `tau_on`,
+`tau_off`, and the noisy link from D1–D3) lives only in `truth/params.json` and
+is not a feature.
+
+The latent weight path uses the **actual** regimen after dose deviations
+(`p_dose_deviation = 0.04`: half dose or early stop). Production features use
+the planned regimen only (`ACTUAL_DOSE` is `truth_only`; `EXDOSE_ACTUAL` is
+optional / post-hoc).
+
+Missed visits (`p_missing = 0.02` if `day > 0`) and death (`p_death = 0.015`,
+uniform day) are iid and independent of treatment and weight (MCAR-ish, not
+informative dropout).
 
 ## Validation of predictions
 
