@@ -1,0 +1,22 @@
+{
+  "checkpoint_revision": "amazon/chronos-2",
+  "device_map": "cpu",
+  "filled_target_with_zero": false,
+  "forecast_type": "quantiles",
+  "library": "chronos.Chronos2Pipeline",
+  "mode": "zero_shot",
+  "name": "chronos2",
+  "not_the_required_transformer": true,
+  "note": "official Chronos2Pipeline zero-shot; no fine-tune",
+  "observed_rows_only": true,
+  "pretrained_id": "amazon/chronos-2",
+  "quantiles": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "seconds": 0.12365913391113281,
+  "task": "early_history"
+}

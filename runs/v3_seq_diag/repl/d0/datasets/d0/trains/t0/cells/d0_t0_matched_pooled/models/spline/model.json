@@ -1,0 +1,339 @@
+{
+  "name": "spline",
+  "spec": {
+    "species": "RAT",
+    "strains": [
+      "BEAGLE",
+      "SPRAGUE-DAWLEY",
+      "WISTAR HAN"
+    ],
+    "routes": [
+      "INTRAVENOUS",
+      "ORAL GAVAGE"
+    ],
+    "sexes": [
+      "F",
+      "M"
+    ],
+    "zb_mean": {
+      "F": 5.287988036644072,
+      "M": 5.579659373271437
+    },
+    "max_dose": 1000.0,
+    "max_day": 28.0,
+    "intervals": [
+      1.0,
+      7.0
+    ],
+    "compound_ids": [
+      "CMP02",
+      "CMP03",
+      "CMP04",
+      "CMP05",
+      "CMP06"
+    ],
+    "descriptor_ranges": {
+      "D1": [
+        -2.3173,
+        0.05
+      ],
+      "D2": [
+        -0.5704,
+        0.9019
+      ],
+      "D3": [
+        -2.1481,
+        0.8479
+      ]
+    },
+    "t_ref": 28.0,
+    "version": "features-v1",
+    "animal_cols": [
+      "SEX_M",
+      "ZB_C",
+      "IS_CONTROL",
+      "LD",
+      "INV_INTERVAL",
+      "START",
+      "END",
+      "D1",
+      "D2",
+      "D3",
+      "STRAIN_SPRAGUE-DAWLEY",
+      "STRAIN_WISTAR HAN",
+      "ROUTE_ORAL GAVAGE",
+      "SPECIES_RAT"
+    ],
+    "time_cols": [
+      "TAU",
+      "EXPO",
+      "OFF",
+      "LCUM"
+    ],
+    "sharing": "pooled",
+    "species_levels": [
+      "DOG",
+      "RAT"
+    ],
+    "zb_mean_by_species": {
+      "DOG": {
+        "F": 9.047809639691796,
+        "M": 9.199122620798326
+      },
+      "RAT": {
+        "F": 5.287988036644072,
+        "M": 5.579659373271437
+      }
+    },
+    "declared_species": [
+      "RAT",
+      "DOG"
+    ],
+    "fixed_schema": false
+  },
+  "design": {
+    "tau_hi": 1.000001,
+    "expo_hi": 1.000001,
+    "off_hi": 0.001001,
+    "time_knots": [
+      0.3571,
+      0.5,
+      0.75
+    ],
+    "expo_knots": [
+      0.5,
+      0.75
+    ],
+    "off_knots": [],
+    "strain_cols": [
+      "STRAIN_SPRAGUE-DAWLEY",
+      "STRAIN_WISTAR HAN"
+    ],
+    "route_cols": [
+      "ROUTE_ORAL GAVAGE"
+    ],
+    "species_cols": [
+      "SPECIES_RAT"
+    ],
+    "rich": true,
+    "species_treatment": false,
+    "col_names": [
+      "tb[0]",
+      "tb[1]",
+      "tb[2]",
+      "tb[3]",
+      "tb[4]",
+      "tb[5]",
+      "tb[6]",
+      "tb_sex[0]",
+      "tb_sex[1]",
+      "tb_sex[2]",
+      "tb_sex[3]",
+      "tb_sex[4]",
+      "tb_sex[5]",
+      "tb_sex[6]",
+      "tb_zb[0]",
+      "tb_zb[1]",
+      "tb_zb[2]",
+      "tb_zb[3]",
+      "tb_zb[4]",
+      "tb_zb[5]",
+      "tb_zb[6]",
+      "tb_STRAIN_SPRAGUE-DAWLEY[0]",
+      "tb_STRAIN_SPRAGUE-DAWLEY[1]",
+      "tb_STRAIN_SPRAGUE-DAWLEY[2]",
+      "tb_STRAIN_SPRAGUE-DAWLEY[3]",
+      "tb_STRAIN_SPRAGUE-DAWLEY[4]",
+      "tb_STRAIN_SPRAGUE-DAWLEY[5]",
+      "tb_STRAIN_SPRAGUE-DAWLEY[6]",
+      "tb_STRAIN_WISTAR HAN[0]",
+      "tb_STRAIN_WISTAR HAN[1]",
+      "tb_STRAIN_WISTAR HAN[2]",
+      "tb_STRAIN_WISTAR HAN[3]",
+      "tb_STRAIN_WISTAR HAN[4]",
+      "tb_STRAIN_WISTAR HAN[5]",
+      "tb_STRAIN_WISTAR HAN[6]",
+      "tb_SPECIES_RAT[0]",
+      "tb_SPECIES_RAT[1]",
+      "tb_SPECIES_RAT[2]",
+      "tb_SPECIES_RAT[3]",
+      "tb_SPECIES_RAT[4]",
+      "tb_SPECIES_RAT[5]",
+      "tb_SPECIES_RAT[6]",
+      "eb_ld[0]",
+      "eb_ld[1]",
+      "eb_ld[2]",
+      "eb_ld[3]",
+      "eb_ld2[0]",
+      "eb_ld2[1]",
+      "eb_ld2[2]",
+      "eb_ld2[3]",
+      "eb_ld_D1[0]",
+      "eb_ld_D1[1]",
+      "eb_ld_D1[2]",
+      "eb_ld_D1[3]",
+      "eb_ld_D2[0]",
+      "eb_ld_D2[1]",
+      "eb_ld_D2[2]",
+      "eb_ld_D2[3]",
+      "eb_ld_D3[0]",
+      "eb_ld_D3[1]",
+      "eb_ld_D3[2]",
+      "eb_ld_D3[3]",
+      "eb_ld_inv[0]",
+      "eb_ld_inv[1]",
+      "eb_ld_inv[2]",
+      "eb_ld_inv[3]",
+      "eb_ld_ROUTE_ORAL GAVAGE[0]",
+      "eb_ld_ROUTE_ORAL GAVAGE[1]",
+      "eb_ld_ROUTE_ORAL GAVAGE[2]",
+      "eb_ld_ROUTE_ORAL GAVAGE[3]",
+      "eb_ld_sex[0]",
+      "eb_ld_sex[1]",
+      "eb_ld_sex[2]",
+      "eb_ld_sex[3]",
+      "ob_ld[0]",
+      "ob_ld_D1[0]"
+    ],
+    "scale": [
+      0.06991617280716957,
+      0.1616973516580939,
+      0.2135232514329948,
+      0.2658862468233172,
+      0.2214192297194961,
+      0.14299393902618243,
+      0.40378560590985657,
+      0.050811014767399874,
+      0.12412989275759673,
+      0.1760869199587529,
+      0.22728484673168156,
+      0.17545764375606518,
+      0.10750381185255098,
+      0.3053502344560869,
+      0.006341983200794257,
+      0.015952159928293075,
+      0.023715148496127315,
+      0.03105551859389255,
+      0.02298961368946965,
+      0.0137346027684037,
+      0.03839992118510351,
+      0.05715986102281024,
+      0.1163348033833544,
+      0.16041754005867162,
+      0.20358437279095942,
+      0.152384483685453,
+      0.10882933508221469,
+      0.25025023948287,
+      0.00726322493935589,
+      0.09234108306543141,
+      0.14505197807510214,
+      0.19344177235003707,
+      0.151683958438384,
+      0.06841048357113787,
+      0.2710072956658776,
+      0.05719148025785596,
+      0.1412017481969093,
+      0.19678725101457725,
+      0.2513332853733028,
+      0.19993164214360168,
+      0.12329928211654906,
+      0.3535452780711624,
+      0.6235317196409077,
+      0.7657382976712211,
+      0.5301960368642816,
+      0.9334238937442458,
+      2.3443083297345835,
+      2.947994868917191,
+      1.9279895808276593,
+      3.5211189963148923,
+      0.5918610745331311,
+      0.7397420884787922,
+      0.5070023829699528,
+      0.7777091525744413,
+      0.4468232995828323,
+      0.5629607031857308,
+      0.3586937693617939,
+      0.6045550185288342,
+      1.0757637097811485,
+      1.3609734944426317,
+      0.8716862755440551,
+      1.4375865090471718,
+      0.43956014342384303,
+      0.546757583249498,
+      0.3547423582182304,
+      0.6322381241055577,
+      0.5763852147434814,
+      0.7159104664886874,
+      0.47757846141879223,
+      0.8568306368839719,
+      0.4742848246315405,
+      0.6002112863018247,
+      0.38491888990761414,
+      0.6851957906222687,
+      1.0,
+      1.0
+    ]
+  },
+  "cov": {
+    "sd_s0": 0.051149105128755694,
+    "sd_s1": 0.031348453707188126,
+    "sd_a0": 0.00023327916660570504,
+    "sd_a1": 0.0005731763797762162,
+    "sigma_p": 0.09776902560841748,
+    "ell": 12.708726629247813,
+    "sigma_m": 0.00010000000000000009,
+    "fit_info": {
+      "converged": true,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "nll": -1961.6919800184944,
+      "n_obs": 1754,
+      "n_animals": 373,
+      "n_studies": 10,
+      "params_at_bound": [
+        "sigma_m"
+      ]
+    }
+  },
+  "history": {
+    "alpha": 0.1,
+    "validation_rmse_by_alpha": {
+      "0.1": 0.05079555995394793,
+      "1.0": 0.050859254208364596,
+      "10.0": 0.05141378495396961,
+      "100.0": 0.05421431592148668,
+      "300.0": 0.05783625085940139,
+      "1000.0": 0.06842514350284362,
+      "3000.0": 0.0941202337325131,
+      "10000.0": 0.14372871520706293
+    },
+    "train_rmse": 0.053815830778557075,
+    "validation_rmse": 0.05079555995394793,
+    "oof_rmse": 0.12262860108242912,
+    "n_params": 76,
+    "n_members": 5,
+    "covariance": {
+      "sd_s0": 0.051149105128755694,
+      "sd_s1": 0.031348453707188126,
+      "sd_a0": 0.00023327916660570504,
+      "sd_a1": 0.0005731763797762162,
+      "sigma_p": 0.09776902560841748,
+      "ell": 12.708726629247813,
+      "sigma_m": 0.00010000000000000009,
+      "fit_info": {
+        "converged": true,
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "nll": -1961.6919800184944,
+        "n_obs": 1754,
+        "n_animals": 373,
+        "n_studies": 10,
+        "params_at_bound": [
+          "sigma_m"
+        ]
+      }
+    },
+    "covariance_fit_on": "train_oof_all_species",
+    "lambda_growth": null,
+    "lambda_treatment": null,
+    "increment_moment": null
+  }
+}

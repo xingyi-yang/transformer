@@ -1,0 +1,139 @@
+{
+  "coverage50": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.5391304347826087,
+    "study_balanced": 0.5523255813953488,
+    "weight_mean": 0.9999999999999999
+  },
+  "coverage80": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.6347826086956522,
+    "study_balanced": 0.6708656330749354,
+    "weight_mean": 0.9999999999999999
+  },
+  "crps_justified": false,
+  "crps_log": null,
+  "crps_note": "CRPS not reported: predictive representation is a finite quantile set, not samples and not a fitted Gaussian. Marginal quantiles are not a complete trajectory simulator.",
+  "interval_width50": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.11642346174820616,
+    "study_balanced": 0.11583335940227957,
+    "weight_mean": 0.9999999999999999
+  },
+  "interval_width80": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.18660222758417544,
+    "study_balanced": 0.18807849873251997,
+    "weight_mean": 0.9999999999999999
+  },
+  "mean_quantile_loss": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.02029338060818297,
+    "study_balanced": 0.019728218885853972,
+    "weight_mean": 0.9999999999999999
+  },
+  "n_obs_available": 115,
+  "n_pred_rows": 115,
+  "n_scored": 115,
+  "per_horizon": [
+    {
+      "DAY": 21.0,
+      "coverage80": 0.5862068965517241,
+      "interval_width80": 0.1846061821641593,
+      "mean_quantile_loss": 0.019576655309645037,
+      "n_obs": 58,
+      "rmse_log": 0.0503891422045874
+    },
+    {
+      "DAY": 28.0,
+      "coverage80": 0.6842105263157895,
+      "interval_width80": 0.18863329134489357,
+      "mean_quantile_loss": 0.02102268003476542,
+      "n_obs": 57,
+      "rmse_log": 0.05487421791409917
+    }
+  ],
+  "per_study": [
+    {
+      "STUDYID": "SYNA-010",
+      "coverage80": 0.813953488372093,
+      "interval_width80": 0.19393267742423115,
+      "mean_quantile_loss": 0.01748706033179072,
+      "n_obs": 43,
+      "rmse_log": 0.05244957099943552
+    },
+    {
+      "STUDYID": "SYNA-011",
+      "coverage80": 0.5277777777777778,
+      "interval_width80": 0.1822243200408088,
+      "mean_quantile_loss": 0.021969377439917233,
+      "n_obs": 72,
+      "rmse_log": 0.05270929327769437
+    }
+  ],
+  "point_definition": {
+    "column": "q0.5",
+    "point": "median",
+    "rmse_log": "study-balanced mean of |point - LOGW|; identical to official_seq. Chronos-2 official mean is the median (forecast_type=QUANTILES)."
+  },
+  "quantile_loss": {
+    "0.1": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.015537499403823068,
+      "study_balanced": 0.014865040532541878,
+      "weight_mean": 0.9999999999999999
+    },
+    "0.25": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.026227801511433523,
+      "study_balanced": 0.024933058120731717,
+      "weight_mean": 0.9999999999999999
+    },
+    "0.5": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.026306089865085747,
+      "study_balanced": 0.026289716069282473,
+      "weight_mean": 0.9999999999999999
+    },
+    "0.75": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.019952163767788463,
+      "study_balanced": 0.019760388353621813,
+      "weight_mean": 0.9999999999999999
+    },
+    "0.9": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.013443348492784047,
+      "study_balanced": 0.012792891353091985,
+      "weight_mean": 0.9999999999999999
+    }
+  },
+  "quantiles": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "representation": "tft_quantiles",
+  "rmse_log": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.052612179730171495,
+    "study_balanced": 0.05257943213856495,
+    "weight_mean": 0.9999999999999999
+  },
+  "status": "ok",
+  "task": "early_history",
+  "trajectory_simulator": false
+}
