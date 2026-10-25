@@ -135,6 +135,67 @@ def _rank(results: dict[str, Any], metric: str) -> list[dict[str, Any]]:
     return rows
 
 
+def ranking_sign_changes(off: dict[str, Any]) -> dict[str, Any]:
+    """Compare corrected rankings and transfer signs to the published tables."""
+    mae = [r["model"] for r in off.get("rank_mae") or []]
+    rmse = [r["model"] for r in off.get("rank_rmse") or []]
+    legacy = [r["model"] for r in off.get("rank_legacy_animal_mae") or []]
+    changed_signs = [
+        {"family": fam, "metric": r.get("metric"), "sign": r.get("sign"),
+         "published_sign": r.get("published_sign")}
+        for fam, rows in (off.get("sign_vs_published") or {}).items()
+        for r in rows
+        if r.get("sign_changed")
+    ]
+    swaps = []
+    for i in range(max(len(mae), len(legacy))):
+        a = mae[i] if i < len(mae) else None
+        b = legacy[i] if i < len(legacy) else None
+        if a != b:
+            swaps.append({
+                "rank": i + 1,
+                "study_balanced_mae": a,
+                "legacy_animal_mae": b,
+            })
+    if mae == rmse:
+        mae_rmse_note = "Corrected MAE and true RMSE produce the same ranking."
+    else:
+        mae_rmse_note = "Corrected MAE and true RMSE rankings differ."
+    if not swaps:
+        grouping_note = (
+            "Study-balanced MAE ranking matches legacy animal-balanced MAE.")
+    else:
+        bits = ", ".join(
+            f"rank {s['rank']}: {s['study_balanced_mae']} vs {s['legacy_animal_mae']}"
+            for s in swaps
+        )
+        grouping_note = (
+            "Study-balanced MAE ranking differs from legacy animal-balanced MAE "
+            f"({bits})."
+        )
+    if changed_signs:
+        sign_note = (
+            "Transfer signs changed for: "
+            + ", ".join(f"{c['family']}/{c['metric']}" for c in changed_signs)
+            + "."
+        )
+    else:
+        sign_note = (
+            "Transfer signs (helpful/harmful) do not change vs published "
+            "official-seq deltas."
+        )
+    return {
+        "mae_equals_rmse_ranking": mae == rmse,
+        "study_mae_equals_legacy_animal_mae_ranking": not swaps,
+        "legacy_vs_study_mae_rank_swaps": swaps,
+        "transfer_signs_changed": changed_signs,
+        "any_transfer_sign_changed": bool(changed_signs),
+        "mae_rmse_note": mae_rmse_note,
+        "grouping_note": grouping_note,
+        "sign_note": sign_note,
+    }
+
+
 def _sign_table(old_rows: list[dict[str, Any]] | None, new_block: dict[str, Any]) -> list[dict[str, Any]]:
     out = []
     old_map = {r.get("metric"): r for r in (old_rows or [])}
@@ -204,6 +265,7 @@ def execute_v3_eval_correct(config_path: str | Path, force: bool = False) -> dic
     official_block["rank_mae"] = _rank(official_block["results"], "mae_log")
     official_block["rank_rmse"] = _rank(official_block["results"], "rmse_log")
     official_block["rank_legacy_animal_mae"] = _rank(official_block["results"], "legacy_animal_balanced_mae")
+    official_block["ranking_sign_changes"] = ranking_sign_changes(official_block)
 
     eligibility = {
         "official_seq_target_only_train": _eligibility(off_cell, min_past, pred_len),
@@ -345,6 +407,12 @@ def _write_report(parent: Path, out: dict[str, Any]) -> None:
         f"- MAE: `{[r['model'] for r in off.get('rank_mae') or []]}`",
         f"- RMSE: `{[r['model'] for r in off.get('rank_rmse') or []]}`",
         f"- Legacy animal MAE: `{[r['model'] for r in off.get('rank_legacy_animal_mae') or []]}`",
+        "",
+        "### Ranking and sign changes vs published official-seq tables",
+        "",
+        f"- {(off.get('ranking_sign_changes') or {}).get('mae_rmse_note')}",
+        f"- {(off.get('ranking_sign_changes') or {}).get('grouping_note')}",
+        f"- {(off.get('ranking_sign_changes') or {}).get('sign_note')}",
         "",
         "### Paired transfer (pooled − target-only; Δ>0 harmful)",
         "",

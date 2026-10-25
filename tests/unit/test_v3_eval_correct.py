@@ -12,7 +12,11 @@ from send_bw.evaluation.quantile_forecast import (
     score_quantile_table,
     series_eligibility,
 )
-from send_bw.v3_eval_correct import EvalCorrectError, execute_v3_eval_correct
+from send_bw.v3_eval_correct import (
+    EvalCorrectError,
+    execute_v3_eval_correct,
+    ranking_sign_changes,
+)
 
 Q = [0.1, 0.25, 0.5, 0.75, 0.9]
 
@@ -128,6 +132,27 @@ def test_paired_transfer_accepts_scalars_and_dicts():
     mets = {r["metric"]: r["delta_pooled_minus_target"] for r in tr["rows"]}
     assert mets["mae_log"] == pytest.approx(0.02)
     assert mets["rmse_log"] == pytest.approx(-0.02)
+
+
+def test_ranking_sign_changes_records_swap_not_sign():
+    off = {
+        "rank_mae": [{"model": "tft_target_only"}, {"model": "spline_target_only"}],
+        "rank_rmse": [{"model": "tft_target_only"}, {"model": "spline_target_only"}],
+        "rank_legacy_animal_mae": [
+            {"model": "spline_target_only"}, {"model": "tft_target_only"},
+        ],
+        "sign_vs_published": {
+            "spline": [{"metric": "mae_log", "sign": "helpful",
+                        "published_sign": "helpful", "sign_changed": False}],
+        },
+    }
+    note = ranking_sign_changes(off)
+    assert note["mae_equals_rmse_ranking"] is True
+    assert note["study_mae_equals_legacy_animal_mae_ranking"] is False
+    assert note["any_transfer_sign_changed"] is False
+    assert note["legacy_vs_study_mae_rank_swaps"][0]["rank"] == 1
+    assert "tft_target_only vs spline_target_only" in note["grouping_note"]
+    assert "do not change" in note["sign_note"]
 
 
 def test_executor_refuses_preserved_train_and_real(tmp_path):
