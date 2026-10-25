@@ -1,0 +1,18 @@
+{"ts": "2026-10-25T00:58:26.596652+00:00", "level": "INFO", "logger": "send_bw", "msg": "[ingest] 3682 weights, 472 animals, 0 quarantined/flagged records"}
+{"ts": "2026-10-25T00:58:26.705017+00:00", "level": "INFO", "logger": "send_bw", "msg": "[prepare] splits {'train': 7, 'validation': 2, 'test': 2, 'test_compound_holdout': 1} (frozen hash 6fa9f415c5ed3fa2)"}
+{"ts": "2026-10-25T00:58:28.163767+00:00", "level": "INFO", "logger": "send_bw", "msg": "[train] spline done in 1.4s"}
+{"ts": "2026-10-25T00:58:29.724697+00:00", "level": "INFO", "logger": "send_bw", "msg": "[train] transformer done in 1.6s"}
+{"ts": "2026-10-25T00:58:30.619561+00:00", "level": "INFO", "logger": "send_bw", "msg": "bayesian: dropping 1 non-identifiable design column(s) [44]"}
+{"ts": "2026-10-25T01:00:34.271714+00:00", "level": "INFO", "logger": "send_bw", "msg": "[ingest] cached (key cdb9ac0493992fef); use --force to rerun"}
+{"ts": "2026-10-25T01:00:34.305818+00:00", "level": "INFO", "logger": "send_bw", "msg": "[prepare] cached (key 6daa9dc952aa22e9); use --force to rerun"}
+{"ts": "2026-10-25T01:00:34.334035+00:00", "level": "INFO", "logger": "send_bw", "msg": "[train_spline] cached (key 42a2ad8608371b2b); use --force to rerun"}
+{"ts": "2026-10-25T01:00:34.334160+00:00", "level": "INFO", "logger": "send_bw", "msg": "[train_transformer] cached (key 418a70a672fa165d); use --force to rerun"}
+{"ts": "2026-10-25T01:00:36.329896+00:00", "level": "INFO", "logger": "send_bw", "msg": "bayesian: dropping 1 non-identifiable design column(s) [44]"}
+{"ts": "2026-10-25T01:01:02.489472+00:00", "level": "INFO", "logger": "send_bw", "msg": "bayesian[main] 26s rhat_max=1.084 ess_bulk_min=29 divergences=0"}
+{"ts": "2026-10-25T01:01:02.518609+00:00", "level": "INFO", "logger": "send_bw", "msg": "[train] bayesian done in 27.9s"}
+{"ts": "2026-10-25T01:01:10.266522+00:00", "level": "INFO", "logger": "send_bw", "msg": "[evaluate] spline/test in 7.7s"}
+{"ts": "2026-10-25T01:01:15.117081+00:00", "level": "INFO", "logger": "send_bw", "msg": "[evaluate] spline/test_compound_holdout in 4.9s"}
+{"ts": "2026-10-25T01:01:17.357652+00:00", "level": "INFO", "logger": "send_bw", "msg": "[evaluate] transformer/test in 2.2s"}
+{"ts": "2026-10-25T01:01:18.841254+00:00", "level": "INFO", "logger": "send_bw", "msg": "[evaluate] transformer/test_compound_holdout in 1.5s"}
+{"ts": "2026-10-25T01:01:18.975439+00:00", "level": "INFO", "logger": "send_bw", "msg": "[evaluate] bayesian/test in 0.1s"}
+{"ts": "2026-10-25T01:01:19.065815+00:00", "level": "INFO", "logger": "send_bw", "msg": "[evaluate] bayesian/test_compound_holdout in 0.1s"}

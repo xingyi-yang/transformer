@@ -1,0 +1,34 @@
+{
+  "bayesian": "unreliable",
+  "bayesian_cells": [
+    {
+      "counted_as_successful_benchmark": false,
+      "name": "r0_both_context_specific_k0",
+      "reason": "Bayesian diagnostics failed the reliability gate",
+      "reliable": false,
+      "status": "unreliable"
+    },
+    {
+      "counted_as_successful_benchmark": false,
+      "name": "r0_both_pooled_k1",
+      "reason": "Bayesian diagnostics failed the reliability gate",
+      "reliable": false,
+      "status": "unreliable"
+    },
+    {
+      "counted_as_successful_benchmark": false,
+      "name": "r0_both_selective_regularized_k1",
+      "reason": "Bayesian diagnostics failed the reliability gate",
+      "reliable": false,
+      "status": "unreliable"
+    }
+  ],
+  "correctness_failures": [],
+  "evaluation_pack": "completed",
+  "note": "Unfavorable transfer is a published result, not a failure. Unreliable Bayesian fits are not counted as a successful benchmark.",
+  "replicated_transfer_uncertainty": "completed",
+  "selective_regularized": "completed",
+  "selective_v1": "completed",
+  "sparse_history_encoder": "completed",
+  "sparse_target_study_training": "completed"
+}

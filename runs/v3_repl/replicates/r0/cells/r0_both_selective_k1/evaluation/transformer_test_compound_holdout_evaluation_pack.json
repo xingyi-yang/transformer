@@ -1,0 +1,99 @@
+{
+  "contrast": {
+    "bias": 0.020601793052154233,
+    "coverage90": 1.0,
+    "n_contrasts": 4,
+    "study_level": {
+      "bias_study_mean": 0.020601793052154233,
+      "n_studies_with_contrast": 1,
+      "rmse_study_mean": 0.03443243699086397
+    },
+    "width90": 0.11879603732889671
+  },
+  "group_mean": {
+    "between_animal_var_ratio_pred_over_obs": 1.3432881274921307,
+    "coverage90": 0.6875
+  },
+  "individual": {
+    "coverage80": 0.700374531835206,
+    "coverage95": 0.8576779026217228,
+    "crps_study_balanced": 0.03575184120505406,
+    "effective_sample_sizes": {
+      "n_animals": 34,
+      "n_obs": 267,
+      "n_studies": 1
+    },
+    "rmse_log_study_balanced": 0.06463393944076101,
+    "width80_log": 0.13435860268985222,
+    "width95_log": 0.19462686814794902
+  },
+  "model": "transformer",
+  "note": "Coverage and widths are predictive-interval diagnostics under the fitted layer. They are not a complete parameter-uncertainty statement except when a reliable Bayesian posterior is counted separately.",
+  "split": "test_compound_holdout",
+  "status": "completed",
+  "task": "predose_conditioned",
+  "temporal": {
+    "correlation_by_gap": [
+      {
+        "corr_obs": 0.9211896869585067,
+        "corr_pred": 0.910481586761735,
+        "gap_bin": "(0,4]",
+        "n_pairs": 7
+      },
+      {
+        "corr_obs": 0.8780460387721948,
+        "corr_pred": 0.8466589780008894,
+        "gap_bin": "(4,8]",
+        "n_pairs": 6
+      },
+      {
+        "corr_obs": 0.78781863499484,
+        "corr_pred": 0.7691604894528877,
+        "gap_bin": "(8,15]",
+        "n_pairs": 9
+      },
+      {
+        "corr_obs": 0.6437777307529898,
+        "corr_pred": 0.6704733935561533,
+        "gap_bin": "(15,100]",
+        "n_pairs": 6
+      }
+    ],
+    "distributional": {
+      "cov80": 0.700374531835206,
+      "cov95": 0.8576779026217228,
+      "crps_log_study_balanced": 0.03575184120505406,
+      "energy_score_mean": 0.11414505443141139,
+      "pit_histogram_10bins": [
+        4,
+        8,
+        19,
+        9,
+        23,
+        29,
+        30,
+        23,
+        47,
+        75
+      ]
+    },
+    "extrema_max_cov90": 0.9117647058823529,
+    "increment_sd_ratio_pred_over_obs": 1.096407669621965,
+    "pit_histogram_10bins": [
+      4,
+      8,
+      19,
+      9,
+      23,
+      29,
+      30,
+      23,
+      47,
+      75
+    ]
+  },
+  "uncertainty_limitations": {
+    "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+    "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+  }
+}

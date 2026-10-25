@@ -1,0 +1,159 @@
+{
+  "config_hash": "7a3683122e3a292e",
+  "config_path": "runs/v3_repl/replicates/r0/cells/r0_both_selective_regularized_k1/effective.yaml",
+  "created_utc": "2026-10-25T01:01:33.314603+00:00",
+  "git_revision": "fbf219628c5606db3dc4c300e3f82d66a0b7a102",
+  "seed": 4242,
+  "software": {
+    "arviz": "1.3.0",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4",
+    "nutpie": "0.16.11",
+    "pandas": "3.1.0",
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "pyarrow": "26.0.0",
+    "pydantic": "2.14.1",
+    "pymc": "6.3.2",
+    "pyreadstat": null,
+    "pytensor": "3.3.4",
+    "python": "3.12.3",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "snowflake-connector-python": null,
+    "torch": "2.14.1"
+  },
+  "stages": {
+    "evaluate": {
+      "completed_utc": "2026-10-25T01:01:45.894125+00:00",
+      "key": null,
+      "n_results": 6,
+      "seconds": 0.6066749095916748
+    },
+    "ingest": {
+      "completed_utc": "2026-10-25T00:58:36.928817+00:00",
+      "key": "cdb9ac0493992fef",
+      "mapping_version": "example-send-0.1",
+      "n_animals": 472,
+      "n_bw": 3682,
+      "n_quarantine": 0,
+      "seconds": 0.3628120422363281
+    },
+    "optional_models": {
+      "completed_utc": "2026-10-25T01:01:45.271192+00:00",
+      "key": null,
+      "status": {
+        "chronos2": "not_run",
+        "deepar": "not_run",
+        "tft": "not_run"
+      }
+    },
+    "prepare": {
+      "completed_utc": "2026-10-25T00:58:37.164553+00:00",
+      "compound_holdout": [
+        "CMP01"
+      ],
+      "key": "b7ebc824089ccbc6",
+      "n_donor_studies": 1,
+      "n_eligible_animals": 410,
+      "seconds": 0.23511600494384766,
+      "sharing": "selective_regularized",
+      "sparse_target_train": null,
+      "split_counts": {
+        "test": 2,
+        "test_compound_holdout": 1,
+        "train": 8,
+        "validation": 2
+      },
+      "split_hash": "a24cfb9719109e92",
+      "target_manifest": {
+        "all_target": {
+          "hash": "9fa16954f4d5c828",
+          "n": 11,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-003",
+            "SYNA-004",
+            "SYNA-005",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009",
+            "SYNA-011",
+            "SYNA-012"
+          ]
+        },
+        "test": {
+          "hash": "298a3ce08799bc77",
+          "n": 2,
+          "studyids": [
+            "SYNA-006",
+            "SYNA-009"
+          ]
+        },
+        "train": {
+          "hash": "007718ba753abc1d",
+          "n": 7,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-003",
+            "SYNA-004",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-011"
+          ]
+        },
+        "validation": {
+          "hash": "37fb8b3fef2c9ca6",
+          "n": 2,
+          "studyids": [
+            "SYNA-005",
+            "SYNA-012"
+          ]
+        },
+        "version": "target-manifest-v1"
+      },
+      "train_seed": 4242
+    },
+    "train_bayesian": {
+      "completed_utc": "2026-10-25T01:01:45.270751+00:00",
+      "counted_as_successful_benchmark": false,
+      "diagnostics_summary": {
+        "divergences": 0,
+        "ess_bulk_min": 57.94622256614108,
+        "ess_tail_min": 102.28879654372301,
+        "rhat_max": 1.0367751315780893
+      },
+      "key": "19cd4092bb488736",
+      "matched_data": {
+        "generate_seed": 20261026,
+        "matched_to": [
+          "spline",
+          "transformer"
+        ],
+        "note": "Bayesian uses the same prepared train/validation as spline and transformer.",
+        "same_prepare_key": "b7ebc824089ccbc6",
+        "train_seed": 4242,
+        "train_studyids_hash": "741868f092a4efd5",
+        "validation_studyids_hash": "37fb8b3fef2c9ca6"
+      },
+      "reliable": false,
+      "seconds": 11.89992094039917,
+      "status": "trained"
+    },
+    "train_spline": {
+      "completed_utc": "2026-10-25T00:58:37.663614+00:00",
+      "key": "7fae9427e0593e0a",
+      "seconds": 0.47133469581604004,
+      "status": "trained"
+    },
+    "train_transformer": {
+      "completed_utc": "2026-10-25T00:58:38.766929+00:00",
+      "key": "91f9a122094ff287",
+      "seconds": 1.102064847946167,
+      "status": "trained"
+    }
+  },
+  "synthetic_data": false
+}

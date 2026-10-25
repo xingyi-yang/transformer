@@ -1,0 +1,110 @@
+{
+  "main": {
+    "chains": 2,
+    "divergences": 0,
+    "draws": 400,
+    "dropped_nonidentifiable_columns": [
+      44
+    ],
+    "ess_bulk_min": 28.65745664348488,
+    "ess_tail_min": 63.04250471904472,
+    "likelihood": "normal",
+    "maxdepth_hits": 0,
+    "posterior_predictive": {
+      "by_time_bin": {
+        "15-21": {
+          "p_mean": 0.53375,
+          "p_sd": 0.64625
+        },
+        "22-28": {
+          "p_mean": 0.4125,
+          "p_sd": 0.45625
+        },
+        "8-14": {
+          "p_mean": 0.445,
+          "p_sd": 0.59875
+        },
+        "<=7": {
+          "p_mean": 0.4625,
+          "p_sd": 0.7375
+        }
+      },
+      "extreme_bins": [],
+      "note": "one-step conditional replicates (likelihood factorization); full-trajectory new-study checks are in the held-out evaluation"
+    },
+    "posterior_summary": {
+      "ell": 7.154869999703208,
+      "sd_a": [
+        0.12502810005311493,
+        0.32836041629377577
+      ],
+      "sd_a_scaled_logw": [
+        0.01620108264563088,
+        0.0425487889495981
+      ],
+      "sd_s": [
+        0.09737300538003213,
+        0.2955000284371708
+      ],
+      "sd_s_scaled_logw": [
+        0.01261754843067423,
+        0.03829075528191718
+      ],
+      "sigma_p": 0.19846731985987529,
+      "sigma_p_scaled_logw": 0.025717302351557177
+    },
+    "prior_predictive": {
+      "grams_last_obs_q025_q50_q975": [
+        108.78793832098572,
+        233.65503846039212,
+        529.3616724115964
+      ],
+      "note": "weakly informative: prior predictive should cover, not match, observed changes",
+      "observed_pct_change_q025_q50_q975": [
+        4.209334726576147,
+        31.247594144971536,
+        66.65086709327502
+      ],
+      "pct_change_last_obs_q025_q50_q975": [
+        -46.73893531995958,
+        8.149109661505182,
+        124.79358202652757
+      ],
+      "plausible": true
+    },
+    "priors": {
+      "m_ell": 1.9459101490553132,
+      "s_beta": 0.35,
+      "s_ell": 0.75,
+      "s_sd": 0.3,
+      "s_sigma": 0.3
+    },
+    "random_effects": "full",
+    "reliable": false,
+    "rhat_max": 1.083694820814383,
+    "sampler_warnings": [],
+    "seconds": 25.855639934539795,
+    "seed": 4242,
+    "thresholds": {
+      "ess_bulk_min": 400,
+      "ess_tail_min": 400,
+      "rhat_max": 1.01
+    },
+    "tune": 400,
+    "worst_rhat_params": {
+      "beta[23]": 1.0716348298642773,
+      "beta[5]": 1.06812697254403,
+      "theta[21]": 1.082231213328291,
+      "theta[22]": 1.0725599524283327,
+      "theta[23]": 1.083694820814383
+    }
+  },
+  "n_animals": 56,
+  "n_beta": 44,
+  "n_obs": 282,
+  "n_studies": 7,
+  "reliable": false,
+  "s_y": 0.12957953163127547,
+  "sharing": "context_specific",
+  "species_treatment": false
+}
