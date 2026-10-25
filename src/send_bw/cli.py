@@ -280,7 +280,12 @@ def main(argv: list[str] | None = None) -> int:
                               "execute": lock.get("execute"),
                               "n_model_fits": lock.get("n_model_fits"),
                               "estimated_runtime_seconds": lock.get("estimated_runtime_seconds"),
+                              "seconds_total": out.get("seconds_total"),
+                              "compute_cap_hit": out.get("compute_cap_hit"),
                               "protected_unchanged": (out.get("protected") or {}).get("unchanged"),
+                              "proposal_hash": (lock.get("proposal") or {}).get("config_hash"),
+                              "science_fingerprint_match": (lock.get("proposal") or {}).get(
+                                  "science_fingerprint_match"),
                               "real_data_accessed": out.get("real_data_accessed"),
                               "parent": out.get("output_dir")},
                              indent=2, default=str))

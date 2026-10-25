@@ -20,7 +20,10 @@ from send_bw.protected_hashes import compare_snapshots, snapshot_protected
 from send_bw.share_policy import (
     ABSTAIN_METRIC,
     ABSTAIN_MIN_IMPROVEMENT,
+    PREFIX_LABEL,
+    PREFIX_RULE,
     decide_abstention,
+    prefix_random_overlap,
     val_score,
 )
 from send_bw.sharing import LABELS, SELECTIVE_REGULARIZED, SELECTIVE_V1
@@ -32,8 +35,35 @@ from send_bw.v3_share_repl import PRESERVED as SHARE_REPL_PRESERVED
 from send_bw.v3_share_repl import WINDOW, _compact, _sign_rows
 
 PRESERVED = tuple(SHARE_REPL_PRESERVED) + ("runs/v3_share_repl",)
+PROPOSAL_DIR = "runs/v3_share_abstain"
+PROPOSAL_CONFIG = "configs/v3_share_abstain.frozen.yaml"
 SHARE_REPL_SUMMARY = Path("runs/v3_share_repl/SUMMARY.json")
 SHARE_REPL_CELLS = Path("runs/v3_share_repl/datasets")
+
+
+class RuntimeCapExceeded(Exception):
+    def __init__(self, where: str, elapsed: float, cap: float):
+        super().__init__(f"compute cap {cap}s exceeded at {where} ({elapsed:.1f}s)")
+        self.where = where
+        self.elapsed = elapsed
+        self.cap = cap
+
+
+class RuntimeCap:
+    def __init__(self, seconds: float):
+        self.cap = float(seconds)
+        self.t0 = time.time()
+        self.hit = False
+        self.where: str | None = None
+
+    def elapsed(self) -> float:
+        return time.time() - self.t0
+
+    def check(self, where: str) -> None:
+        if self.hit or self.elapsed() > self.cap:
+            self.hit = True
+            self.where = where
+            raise RuntimeCapExceeded(where, self.elapsed(), self.cap)
 
 POLICY_ARMS = (
     {"key": "target_only", "sharing": "context_specific", "k": 0, "donor_rule": "zero"},
@@ -243,6 +273,45 @@ def locked_budget(cfg: dict[str, Any]) -> dict[str, Any]:
         "execute": bool(ev.get("execute")),
         "training_seed_variability_estimated": n_tr > 1,
         "dataset_variability_estimated": n_ds > 1,
+        "prefix_rule": PREFIX_RULE,
+        "prefix_rule_label": PREFIX_LABEL,
+        "prefix_is_learned": False,
+        "prefix_is_similarity_based": False,
+        "prefix_is_validation_ranked": False,
+        "confirmatory": False,
+    }
+
+
+def science_fingerprint(cfg: dict[str, Any]) -> dict[str, Any]:
+    """Scientific settings only. execute / output_dir / run_name are excluded."""
+    ev = dict(cfg.get("share_abstain") or {})
+    for drop in ("execute", "proposal_config"):
+        ev.pop(drop, None)
+    models = cfg.get("models") or {}
+    return {
+        "generate_seed": cfg.get("generate_seed"),
+        "train_seed": cfg.get("train_seed"),
+        "share_abstain": ev,
+        "synthetic": {k: (cfg.get("synthetic") or {}).get(k) for k in
+                      ("generator", "n_studies", "n_other_species_studies",
+                       "n_compounds", "n_per_sex")},
+        "cohort": {k: (cfg.get("cohort") or {}).get(k) for k in
+                   ("species", "donor_species", "study_classes", "max_day")},
+        "models": {
+            "spline": {k: (models.get("spline") or {}).get(k)
+                       for k in ("n_bootstrap", "oof_folds")},
+            "transformer": {k: (models.get("transformer") or {}).get(k)
+                            for k in ("n_members", "max_epochs", "patience",
+                                      "d_model", "n_heads", "n_layers")},
+            "optional": models.get("optional"),
+            "bayesian_enabled": (models.get("bayesian") or {}).get("enabled"),
+        },
+        "evaluation": dict(cfg.get("evaluation") or {}),
+        "budget": {k: locked_budget(cfg).get(k) for k in
+                   ("n_trained_cells", "n_model_fits", "additional_fits_for_abstention",
+                    "generate_seeds", "train_seeds", "banks", "densities",
+                    "sparse_target_train_n", "compute_cap_seconds",
+                    "estimated_runtime_seconds", "donor_rng_seed")},
     }
 
 
@@ -260,33 +329,55 @@ def execute_v3_share_abstain(config_path: str | Path, force: bool = False) -> di
         raise ShareAbstainError("retune_after_test is forbidden")
     if ev.get("predose") or ev.get("bayesian") or ev.get("tft") or ev.get("chronos"):
         raise ShareAbstainError("TFT, Chronos, Bayesian, and predose stay off")
+    budget = locked_budget(cfg)
+    if budget["execute"] and parent.resolve() == Path(PROPOSAL_DIR).resolve():
+        raise ShareAbstainError(
+            "execution must not overwrite the unexecuted proposal directory "
+            f"{PROPOSAL_DIR}; use a separate approved output_dir"
+        )
     parent.mkdir(parents=True, exist_ok=True)
     hashes_before = snapshot_protected()
     write_json(parent / "protected_hashes_before.json", hashes_before)
+    proposal_cfg = load_yaml(PROPOSAL_CONFIG) if Path(PROPOSAL_CONFIG).exists() else None
+    proposal_hash = cache_key(proposal_cfg) if proposal_cfg is not None else None
+    science = science_fingerprint(cfg)
+    proposal_science = science_fingerprint(proposal_cfg) if proposal_cfg is not None else None
+    science_match = science == proposal_science
+    if budget["execute"] and proposal_cfg is not None and not science_match:
+        raise ShareAbstainError(
+            "approved execution settings differ from the frozen proposal; stop for review"
+        )
     audit = audit_existing_selection()
     write_json(parent / "selective_audit.json", audit)
     erratum = audit.get("erratum") or {}
-    _write_erratum(erratum)
-    _write_audit_md(audit)
-    budget = locked_budget(cfg)
+    if not budget["execute"]:
+        _write_erratum(erratum)
+        _write_audit_md(audit)
     lock = {
         "config_path": str(config_path), "config_hash": cache_key(cfg),
         "git_revision": git_revision(), **budget,
+        "proposal": {
+            "path": PROPOSAL_CONFIG,
+            "config_hash": proposal_hash,
+            "output_dir": PROPOSAL_DIR,
+            "execute": False,
+            "relationship": (
+                "approved execution of the unexecuted frozen proposal"
+                if budget["execute"] else "unexecuted frozen proposal"
+            ),
+            "science_fingerprint_match": science_match,
+        },
+        "science_fingerprint": science,
         "retune_after_test": False, "real_data": False, "design": False,
         "new_architectures": False, "fabricate_encoder_history": False,
         "selector_sees_generator_labels": False,
-        "labels": list(LABELS), "preserved": list(PRESERVED),
+        "prefix_rule_label": PREFIX_LABEL,
+        "labels": list(LABELS), "preserved": list(PRESERVED) + [PROPOSAL_DIR],
     }
     write_json(parent / "freeze_lock.json", lock)
     write_json(parent / "versions.json", collect_versions())
 
     if not budget["execute"]:
-        hashes_after = snapshot_protected()
-        cmp = compare_snapshots(hashes_before, hashes_after)
-        write_json(parent / "protected_hashes_after.json", hashes_after)
-        write_json(parent / "protected_hashes_compare.json", cmp)
-        if not cmp["unchanged"]:
-            raise ShareAbstainError("protected artifacts changed: " + ", ".join(cmp["changed"]))
         out = {
             "status": "locked_not_executed",
             "labels": list(LABELS),
@@ -294,77 +385,126 @@ def execute_v3_share_abstain(config_path: str | Path, force: bool = False) -> di
             "freeze_lock": lock,
             "audit": {"n_pr14_cells": len(audit.get("pr14_cells") or [])},
             "erratum": erratum,
-            "protected": cmp,
             "execute_command": (
-                "send-bw v3-share-abstain --config configs/v3_share_abstain.frozen.yaml"
+                "send-bw v3-share-abstain --config configs/v3_share_abstain.approved.yaml"
             ),
-            "execute_requires": "share_abstain.execute: true in the frozen config after approval",
+            "execute_requires": (
+                "separate approved config with execute:true; do not edit the frozen proposal"
+            ),
             "real_data_accessed": False,
             "authorization_present": bool(discover_authorization(None).get("authorized")),
             "design_run": False,
             "new_architectures": False,
         }
-        write_json(parent / "SUMMARY.json", out)
-        _write_lock_report(parent, out)
-        return out
+        return _finalize(parent, hashes_before, out, report="lock")
 
     return _run_locked(cfg, parent, lock, hashes_before, force)
+
+
+def _finalize(parent: Path, hashes_before: dict[str, Any], out: dict[str, Any],
+              report: str) -> dict[str, Any]:
+    hashes_after = snapshot_protected()
+    cmp = compare_snapshots(hashes_before, hashes_after)
+    write_json(parent / "protected_hashes_after.json", hashes_after)
+    write_json(parent / "protected_hashes_compare.json", cmp)
+    out["protected"] = cmp
+    write_json(parent / "SUMMARY.json", out)
+    if report == "lock":
+        _write_lock_report(parent, out)
+    else:
+        _write_exec_report(parent, out)
+    if not cmp["unchanged"]:
+        raise ShareAbstainError("protected artifacts changed: " + ", ".join(cmp["changed"]))
+    return out
 
 
 def _run_locked(cfg: dict[str, Any], parent: Path, lock: dict[str, Any],
                 hashes_before: dict[str, Any], force: bool) -> dict[str, Any]:
     window = float(lock["encoder_window_day"])
-    cap = int(lock["compute_cap_seconds"])
-    t_wall = time.time()
+    cap = RuntimeCap(int(lock["compute_cap_seconds"]))
     failures: list[dict[str, Any]] = []
     replicates: list[dict[str, Any]] = []
-
-    for i, gen in enumerate(lock["generate_seeds"]):
-        for j, trn in enumerate(lock["train_seeds"]):
-            for bank in lock["banks"]:
-                if time.time() - t_wall > cap:
-                    raise ShareAbstainError(f"compute cap {cap}s exceeded")
-                bcfg = _bank_cfg(cfg, parent, i, gen, bank)
-                _run_from_cfg(bcfg).generate(force=force)
-                for dens in lock["densities"]:
-                    sparse_n = (int(lock["sparse_target_train_n"]) if dens == "sparse" else None)
-                    rec = _run_slice(
-                        cfg, parent, i, j, gen, trn, bank, dens, sparse_n, window,
-                        lock, force, failures)
-                    replicates.append(rec)
-                    if time.time() - t_wall > cap:
-                        raise ShareAbstainError(f"compute cap {cap}s exceeded")
-
-    hashes_after = snapshot_protected()
-    cmp = compare_snapshots(hashes_before, hashes_after)
-    write_json(parent / "protected_hashes_after.json", hashes_after)
-    write_json(parent / "protected_hashes_compare.json", cmp)
-    if not cmp["unchanged"]:
-        raise ShareAbstainError("protected artifacts changed: " + ", ".join(cmp["changed"]))
+    status = "executed"
+    try:
+        for i, gen in enumerate(lock["generate_seeds"]):
+            for j, trn in enumerate(lock["train_seeds"]):
+                for bank in lock["banks"]:
+                    cap.check(f"before_generate_d{i}_{bank}")
+                    bcfg = _bank_cfg(cfg, parent, i, gen, bank)
+                    _run_from_cfg(bcfg).generate(force=force)
+                    cap.check(f"after_generate_d{i}_{bank}")
+                    for dens in lock["densities"]:
+                        cap.check(f"before_slice_d{i}_{bank}_{dens}")
+                        sparse_n = (int(lock["sparse_target_train_n"]) if dens == "sparse" else None)
+                        rec = _run_slice(
+                            cfg, parent, i, j, gen, trn, bank, dens, sparse_n, window,
+                            lock, force, failures, cap)
+                        replicates.append(rec)
+                        cap.check(f"after_slice_d{i}_{bank}_{dens}")
+    except RuntimeCapExceeded as e:
+        status = "timeout"
+        failures.append({
+            "dataset_index": None, "bank": None, "density": None,
+            "model": None, "reason": str(e), "scored": False, "timeout": True,
+            "where": e.where,
+        })
     out = {
-        "status": "executed",
-        "labels": list(LABELS) + ["Share-or-abstain diagnostic."],
+        "status": status,
+        "labels": list(LABELS) + [
+            "Share-or-abstain diagnostic.",
+            "Prefix donor choice is STUDYID sort, not learned ranking.",
+            "Two dataset seeds and one training seed are not confirmatory.",
+        ],
         "output_dir": str(parent),
         "freeze_lock": lock,
         "replicates": replicates,
         "failures": failures,
         "aggregated_across_incomplete": False,
+        "confirmatory": False,
         "real_data_accessed": False,
         "design_run": False,
         "predose_evaluated": False,
         "new_architectures": False,
-        "protected": cmp,
-        "seconds_total": time.time() - t_wall,
+        "seconds_total": cap.elapsed(),
+        "compute_cap_seconds": cap.cap,
+        "compute_cap_hit": cap.hit,
+        "compute_cap_where": cap.where,
+        "prefix_versus_random": [
+            {"dataset_index": r.get("dataset_index"), "bank": r.get("bank"),
+             "density": r.get("density"), **(r.get("prefix_versus_random") or {})}
+            for r in replicates
+        ],
+        "abstention_counts": _abstention_counts(replicates),
     }
-    write_json(parent / "SUMMARY.json", out)
-    _write_exec_report(parent, out)
-    return out
+    return _finalize(parent, hashes_before, out, report="exec")
+
+
+def _checkpoint_ref(run, name: str) -> dict[str, Any]:
+    dest = run.p("models", name)
+    hist_p = dest / "training_history.json"
+    hist = read_json(hist_p) if hist_p.exists() else {}
+    return {
+        "dir": str(dest),
+        "training_history": str(hist_p) if hist_p.exists() else None,
+        "ridge_alpha": hist.get("alpha"),
+        "validation_rmse": hist.get("validation_rmse") or hist.get("best_val_rmse_member0"),
+        "source": "training_validation",
+        "test_outcomes_used": False,
+    }
+
+
+def _n_val_studies(block: dict[str, Any]) -> int | None:
+    if block.get("n_studies") is not None:
+        return int(block["n_studies"])
+    mae = block.get("mae_log")
+    if isinstance(mae, dict) and mae.get("n_studies") is not None:
+        return int(mae["n_studies"])
+    return None
 
 
 def _run_slice(cfg, parent, i, j, gen, trn, bank, dens, sparse_n, window,
-               lock, force, failures) -> dict[str, Any]:
+               lock, force, failures, cap: RuntimeCap) -> dict[str, Any]:
     from send_bw.pipeline import model_class
-    from send_bw.utils.artifacts import read_json as _rj
 
     cells: dict[str, Any] = {}
     hashes: dict[str, Any] = {}
@@ -373,6 +513,7 @@ def _run_slice(cfg, parent, i, j, gen, trn, bank, dens, sparse_n, window,
     if bank == "matched" and dens == "full":
         arms = arms + [REGULARIZED_ARM]
     for arm in arms:
+        cap.check(f"before_train_d{i}_{bank}_{dens}_{arm['key']}")
         spec = {
             "name": f"d{i}_t{j}_{bank}_{dens}_{arm['key']}",
             "dataset_index": i, "train_index": j, "bank": bank,
@@ -394,11 +535,12 @@ def _run_slice(cfg, parent, i, j, gen, trn, bank, dens, sparse_n, window,
         run.prepare(force=force)
         run.train(["spline", "transformer"], force=force)
         cells[arm["key"]] = run
-        man = _rj(run.p("splits", "target_manifest.json"))
+        man = read_json(run.p("splits", "target_manifest.json"))
         hashes[arm["key"]] = {n: (man.get(n) or {}).get("hash") for n in
                               ("validation", "test", "all_target")}
         if reuse is None:
             reuse = str(run.p("splits", "x").parent)
+        cap.check(f"after_train_d{i}_{bank}_{dens}_{arm['key']}")
     test_hash = hashes["target_only"]["test"]
     val_hash = hashes["target_only"]["validation"]
     if any(h.get("test") != test_hash or h.get("validation") != val_hash for h in hashes.values()):
@@ -408,52 +550,102 @@ def _run_slice(cfg, parent, i, j, gen, trn, bank, dens, sparse_n, window,
     test = prep["data"]["test"]
     val = prep["data"]["validation"]
     pred_dir = parent / f"repl/d{i}_t{j}_{bank}_{dens}/predictions"
+    dec_dir = parent / f"repl/d{i}_t{j}_{bank}_{dens}/decisions"
     pred_dir.mkdir(parents=True, exist_ok=True)
+    dec_dir.mkdir(parents=True, exist_ok=True)
     results: dict[str, Any] = {}
     val_results: dict[str, Any] = {}
-    donor_records: dict[str, Any] = {}
+    donor_records: dict[str, Any] = {
+        key: read_json(run.p("splits", "donor_order.json")) for key, run in cells.items()
+    }
+
+    # Validation-only abstention decisions are written before any test scoring.
+    for name in ("spline", "transformer"):
+        cap.check(f"before_val_{name}_d{i}_{bank}_{dens}")
+        for key in ("target_only", "selected_one"):
+            mk = f"{name}_{key}"
+            try:
+                model = model_class(name).load(cells[key].p("models", name))
+                val_results[mk] = _score_gaussian(model, val, window, None)
+            except Exception as e:  # noqa: BLE001
+                val_results[mk] = {"status": "failed", "reason": f"{type(e).__name__}: {e}"}
+                failures.append({"dataset_index": i, "bank": bank, "density": dens,
+                                 "model": mk, "reason": str(e), "scored": False,
+                                 "split": "validation"})
+        to_key, sel_key = f"{name}_target_only", f"{name}_selected_one"
+        v_to, v_sel = val_results.get(to_key) or {}, val_results.get(sel_key) or {}
+        dec = decide_abstention(
+            val_score(v_to), val_score(v_sel), n_val_studies=_n_val_studies(v_to))
+        chosen = to_key if dec["decision"] == "target_only" else sel_key
+        record = {
+            "model": name,
+            "saved_before_test": True,
+            "test_scored": False,
+            "donor_rule_candidate": PREFIX_RULE,
+            "donor_rule_label": PREFIX_LABEL,
+            "learned": False,
+            "similarity_based": False,
+            "validation_ranked_donors": False,
+            "target_only_donors": (donor_records.get("target_only") or {}).get("selected") or [],
+            "candidate_donors": (donor_records.get("selected_one") or {}).get("selected") or [],
+            "checkpoint_target_only": _checkpoint_ref(cells["target_only"], name),
+            "checkpoint_candidate": _checkpoint_ref(cells["selected_one"], name),
+            "validation": {
+                "metric": ABSTAIN_METRIC,
+                "target_only": _compact(v_to) if v_to.get("status") == "ok" else v_to,
+                "candidate": _compact(v_sel) if v_sel.get("status") == "ok" else v_sel,
+                "n_val_studies": _n_val_studies(v_to),
+            },
+            "decision": {**dec, "chosen_arm": chosen},
+        }
+        write_json(dec_dir / f"{name}_abstain.json", record)
+
+    n_rand = len((donor_records.get("random_one") or {}).get("selected") or [])
+    n_sel = len((donor_records.get("selected_one") or {}).get("selected") or [])
+    if n_rand != n_sel:
+        raise ShareAbstainError(f"random/prefix donor counts differ: {n_rand} vs {n_sel}")
+    overlap = prefix_random_overlap(
+        (donor_records.get("selected_one") or {}).get("selected") or [],
+        (donor_records.get("random_one") or {}).get("selected") or [],
+    )
+
     for key, run in cells.items():
-        donor_records[key] = _rj(run.p("splits", "donor_order.json"))
         for name in ("spline", "transformer"):
             mk = f"{name}_{key}"
+            cap.check(f"before_test_{mk}_d{i}_{bank}_{dens}")
             t1 = time.time()
             try:
                 model = model_class(name).load(run.p("models", name))
                 sc = _score_gaussian(model, test, window, pred_dir / f"{mk}.csv")
                 sc["seconds"] = time.time() - t1
                 results[mk] = sc
-                val_results[mk] = _score_gaussian(model, val, window, None)
             except Exception as e:  # noqa: BLE001
                 results[mk] = {"status": "failed", "reason": f"{type(e).__name__}: {e}"}
                 failures.append({"dataset_index": i, "bank": bank, "density": dens,
-                                 "model": mk, "reason": str(e), "scored": False})
-
-    n_rand = len((donor_records.get("random_one") or {}).get("selected") or [])
-    n_sel = len((donor_records.get("selected_one") or {}).get("selected") or [])
-    if n_rand != n_sel:
-        raise ShareAbstainError(f"random/selected donor counts differ: {n_rand} vs {n_sel}")
+                                 "model": mk, "reason": str(e), "scored": False,
+                                 "split": "test"})
 
     abstain: dict[str, Any] = {}
     for name in ("spline", "transformer"):
-        to_key, sel_key = f"{name}_target_only", f"{name}_selected_one"
-        dec = decide_abstention(
-            val_score(val_results.get(to_key) or {}),
-            val_score(val_results.get(sel_key) or {}),
-            n_val_studies=(val_results.get(to_key) or {}).get("n_studies")
-            or ((val_results.get(to_key) or {}).get("mae_log") or {}).get("n_studies"),
-        )
-        chosen = to_key if dec["decision"] == "target_only" else sel_key
+        rec_path = dec_dir / f"{name}_abstain.json"
+        record = read_json(rec_path)
+        chosen = (record.get("decision") or {}).get("chosen_arm")
         src = results.get(chosen) or {"status": "failed", "reason": "chosen arm missing"}
         chosen_block = _compact(src) if src.get("status") == "ok" else src
         results[f"{name}_selected_abstain"] = {
-            **chosen_block, "chosen_arm": chosen, "abstention": dec,
+            **chosen_block, "chosen_arm": chosen,
+            "abstention": record.get("decision"),
+            "decision_path": str(rec_path),
         }
-        abstain[name] = {**dec, "chosen_arm": chosen}
+        abstain[name] = {**(record.get("decision") or {}), "chosen_arm": chosen,
+                         "saved_before_test": True, "decision_path": str(rec_path)}
         if src.get("status") == "ok":
             src_csv = pred_dir / f"{chosen}.csv"
             dest = pred_dir / f"{name}_selected_abstain.csv"
             if src_csv.exists():
                 dest.write_bytes(src_csv.read_bytes())
+        record["test_scored"] = True
+        write_json(rec_path.with_name(f"{name}_abstain_after_test.json"), record)
 
     transfer = {}
     for name in ("spline", "transformer"):
@@ -471,12 +663,41 @@ def _run_slice(cfg, parent, i, j, gen, trn, bank, dens, sparse_n, window,
         "target_holdout_hashes": hashes,
         "donor_records": donor_records,
         "random_selected_equal_k": n_rand == n_sel and n_rand == 1,
+        "prefix_versus_random": overlap,
+        "prefix_rule_label": PREFIX_LABEL,
         "abstention": abstain,
         "results": {k: _compact(v) if isinstance(v, dict) and "mae_log" in v
                     and isinstance(v.get("mae_log"), dict) else v
                     for k, v in results.items()},
         "paired_transfer": transfer,
     }
+
+
+def _abstention_counts(replicates: list[dict[str, Any]]) -> dict[str, Any]:
+    out: dict[str, Any] = {}
+    for name in ("spline", "transformer"):
+        rows = [(r.get("abstention") or {}).get(name) or {} for r in replicates]
+        n = len(rows)
+        n_to = sum(1 for d in rows if d.get("decision") == "target_only")
+        n_share = sum(1 for d in rows if d.get("decision") == "share")
+        out[name] = {
+            "n_decisions": n,
+            "n_target_only": n_to,
+            "n_share": n_share,
+            "target_only_over_n": f"{n_to}/{n}",
+            "share_over_n": f"{n_share}/{n}",
+        }
+    n = 2 * len(replicates)
+    n_to = sum(out[m]["n_target_only"] for m in ("spline", "transformer"))
+    n_share = sum(out[m]["n_share"] for m in ("spline", "transformer"))
+    out["overall"] = {
+        "n_decisions": n,
+        "n_target_only": n_to,
+        "n_share": n_share,
+        "target_only_over_n": f"{n_to}/{n}",
+        "share_over_n": f"{n_share}/{n}",
+    }
+    return out
 
 
 def _write_erratum(erratum: dict[str, Any]) -> None:
@@ -609,24 +830,109 @@ def _write_lock_report(parent: Path, out: dict[str, Any]) -> None:
 
 
 def _write_exec_report(parent: Path, out: dict[str, Any]) -> None:
+    lock = out.get("freeze_lock") or {}
+    counts = out.get("abstention_counts") or {}
     lines = [
-        "# Share-or-abstain — executed",
+        "# Share-or-abstain — executed (not confirmatory)",
         "",
         "> **Synthetic diagnostic. Not design qualification. No real-data "
         "validation. No operational recommendation.**",
         "",
-        f"- seconds_total: `{out.get('seconds_total')}`",
-        f"- failures: `{out.get('failures')}`",
+        "Two dataset seeds and one training seed are **not confirmatory**. "
+        "Prefix donor choice is a STUDYID sort, not learned / similarity / "
+        "validation-ranked selection. The unexecuted frozen proposal is unchanged.",
         "",
+        f"- proposal: `{(lock.get('proposal') or {}).get('path')}` "
+        f"hash `{(lock.get('proposal') or {}).get('config_hash')}`",
+        f"- approved config hash: `{lock.get('config_hash')}`",
+        f"- science_fingerprint_match: `{(lock.get('proposal') or {}).get('science_fingerprint_match')}`",
+        f"- generate_seeds: `{lock.get('generate_seeds')}`; train_seeds: `{lock.get('train_seeds')}`",
+        f"- seconds_total: `{out.get('seconds_total')}`; "
+        f"cap: `{out.get('compute_cap_seconds')}`; hit: `{out.get('compute_cap_hit')}`",
+        f"- status: `{out.get('status')}`; confirmatory: False",
+        f"- prefix rule: `{PREFIX_LABEL}`",
+        "",
+        "## Abstention counts (validation-only decisions)",
+        "",
+        f"- spline: `{(counts.get('spline') or {}).get('target_only_over_n')}` target-only, "
+        f"`{(counts.get('spline') or {}).get('share_over_n')}` share",
+        f"- transformer: `{(counts.get('transformer') or {}).get('target_only_over_n')}` target-only, "
+        f"`{(counts.get('transformer') or {}).get('share_over_n')}` share",
+        f"- overall: `{(counts.get('overall') or {}).get('target_only_over_n')}` target-only, "
+        f"`{(counts.get('overall') or {}).get('share_over_n')}` share",
+        "",
+        "## Prefix versus random one-donor overlap",
+        "",
+        "| dataset | bank | density | prefix | random | intersection | equal |",
+        "|---|---|---|---|---|---|---|",
     ]
+    for row in out.get("prefix_versus_random") or []:
+        lines.append(
+            f"| {row.get('dataset_index')} | {row.get('bank')} | {row.get('density')} | "
+            f"{row.get('prefix_ids')} | {row.get('random_ids')} | "
+            f"{row.get('intersection')} | {row.get('equal')} |"
+        )
+    lines += ["", "## Replicates", ""]
     for rec in out.get("replicates") or []:
         lines += [
             f"### d{rec.get('dataset_index')} t{rec.get('train_index')} "
             f"{rec.get('bank')} {rec.get('density')}",
             "",
-            f"abstention: `{rec.get('abstention')}`",
+            f"prefix-versus-random: `{rec.get('prefix_versus_random')}`",
             "",
+            "| model | MAE | RMSE | status |",
+            "|---|---|---|---|",
         ]
+        for key, b in (rec.get("results") or {}).items():
+            if not isinstance(b, dict):
+                continue
+            if b.get("status") not in {None, "ok"} and "mae_log" not in b:
+                lines.append(f"| {key} | — | — | {b.get('status')}: {(b.get('reason') or '')[:80]} |")
+                continue
+            lines.append(
+                f"| {key} | {_fmt_num(b.get('mae_log'))} | {_fmt_num(b.get('rmse_log'))} | "
+                f"{b.get('status') or 'ok'} |"
+            )
+        lines += [
+            "",
+            "Validation decisions (saved before test):",
+            "",
+            f"`{rec.get('abstention')}`",
+            "",
+            "Paired test Δ vs target-only (Δ>0 harmful):",
+            "",
+            "| family | metric | target-only | other | Δ | sign |",
+            "|---|---|---|---|---|---|",
+        ]
+        for fam, block in (rec.get("paired_transfer") or {}).items():
+            for r in block.get("rows") or []:
+                lines.append(
+                    f"| {fam} | {r.get('metric')} | {r.get('target_only')} | {r.get('pooled')} | "
+                    f"{r.get('delta_pooled_minus_target')} | {r.get('sign')} |"
+                )
+        lines.append("")
+    lines += [
+        "## Failures (not aggregated as complete)",
+        "",
+        "- aggregated_across_incomplete: False",
+        f"- failures: `{out.get('failures')}`",
+        "",
+        "## Guardrails",
+        "",
+        f"- real_data_accessed: {out.get('real_data_accessed')}",
+        f"- design_run: {out.get('design_run')}",
+        f"- protected unchanged: `{(out.get('protected') or {}).get('unchanged')}`",
+        "- confirmatory: False",
+        "",
+    ]
     text = "\n".join(lines)
     (parent / "RESULTS.md").write_text(text, encoding="utf-8")
-    Path("docs/v3/share_abstain_RESULTS.md").write_text(text, encoding="utf-8")
+    Path("docs/v3/share_abstain_run_RESULTS.md").write_text(text, encoding="utf-8")
+
+
+def _fmt_num(v: Any) -> str:
+    if isinstance(v, float):
+        return f"{v:.4f}"
+    if v is None:
+        return "n/a"
+    return str(v)

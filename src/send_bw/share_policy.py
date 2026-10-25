@@ -21,6 +21,24 @@ RANDOM_RULE = "rng_choice_without_replacement"
 ALL_RULE = "all_eligible"
 ZERO_RULE = "zero_donors"
 EXPLICIT_RULE = "explicit_ids"
+PREFIX_LABEL = (
+    "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)"
+)
+RANDOM_LABEL = "prespecified-RNG one-donor draw (not ranked)"
+ALL_LABEL = "all eligible donors"
+ZERO_LABEL = "zero donors"
+RULE_LABELS = {
+    PREFIX_RULE: PREFIX_LABEL,
+    "prefix": PREFIX_LABEL,
+    "selected": PREFIX_LABEL,
+    RANDOM_RULE: RANDOM_LABEL,
+    "random": RANDOM_LABEL,
+    ALL_RULE: ALL_LABEL,
+    "all": ALL_LABEL,
+    ZERO_RULE: ZERO_LABEL,
+    "zero": ZERO_LABEL,
+    EXPLICIT_RULE: "explicit donor IDs (not a ranker)",
+}
 
 ABSTAIN_METRIC = "val_rmse_log"
 ABSTAIN_MIN_IMPROVEMENT = 0.0
@@ -40,30 +58,14 @@ def resolve_donors(
     """Pick k donors from the eligible bank. Never uses target test outcomes."""
     bank = donor_study_order(eligible)
     if not allow_donors or int(k) <= 0 and explicit is None and rule != ALL_RULE:
-        return {
-            "eligible": bank,
-            "selected": [],
-            "k": 0,
-            "rule": ZERO_RULE,
-            "rng_seed": None,
-            "test_outcomes_used": False,
-            "validation_outcomes_used": False,
-        }
+        return _donor_record(bank, [], ZERO_RULE, None)
     if explicit is not None:
         wanted = [str(s) for s in explicit]
         missing = [s for s in wanted if s not in set(bank)]
         if missing:
             raise ValueError(f"requested donors not in eligible bank: {missing}")
         selected = list(dict.fromkeys(wanted))
-        return {
-            "eligible": bank,
-            "selected": selected,
-            "k": len(selected),
-            "rule": EXPLICIT_RULE,
-            "rng_seed": None,
-            "test_outcomes_used": False,
-            "validation_outcomes_used": False,
-        }
+        return _donor_record(bank, selected, EXPLICIT_RULE, None)
     key = str(rule)
     if key in {"zero", ZERO_RULE}:
         selected: list[str] = []
@@ -87,14 +89,42 @@ def resolve_donors(
         used = PREFIX_RULE
     else:
         raise ValueError(f"unknown donor rule {rule!r}")
+    return _donor_record(
+        bank, selected, used, int(rng_seed) if used == RANDOM_RULE else None)
+
+
+def _donor_record(eligible: list[str], selected: list[str], rule: str,
+                  rng_seed: int | None) -> dict[str, Any]:
     return {
-        "eligible": bank,
-        "selected": selected,
+        "eligible": list(eligible),
+        "selected": list(selected),
         "k": len(selected),
-        "rule": used,
-        "rng_seed": int(rng_seed) if used == RANDOM_RULE else None,
+        "rule": rule,
+        "rule_label": RULE_LABELS.get(rule, rule),
+        "learned": False,
+        "similarity_based": False,
+        "validation_ranked": False,
+        "rng_seed": rng_seed,
         "test_outcomes_used": False,
         "validation_outcomes_used": False,
+    }
+
+
+def prefix_random_overlap(prefix_ids: list[str], random_ids: list[str]) -> dict[str, Any]:
+    a = {str(s) for s in prefix_ids}
+    b = {str(s) for s in random_ids}
+    return {
+        "prefix_ids": sorted(a),
+        "random_ids": sorted(b),
+        "intersection": sorted(a & b),
+        "overlap_count": len(a & b),
+        "equal": a == b,
+        "prefix_rule": PREFIX_RULE,
+        "prefix_rule_label": PREFIX_LABEL,
+        "random_rule": RANDOM_RULE,
+        "learned": False,
+        "similarity_based": False,
+        "validation_ranked": False,
     }
 
 

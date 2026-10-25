@@ -20,12 +20,21 @@ PROTECTED_PATHS = (
     "runs/v3_share_repl/RESULTS.md",
     "runs/v3_share_repl/SUMMARY.json",
     "runs/v3_share_repl/freeze_lock.json",
+    "configs/v3_share_abstain.frozen.yaml",
+    "docs/v3/share_abstain_protocol.md",
+    "docs/v3/share_abstain_RESULTS.md",
+    "docs/v3/share_repl_ERRATUM.md",
+    "docs/v3/selective_sharing_audit.md",
+    "runs/v3_share_abstain/RESULTS.md",
+    "runs/v3_share_abstain/SUMMARY.json",
+    "runs/v3_share_abstain/freeze_lock.json",
 )
 
 PROTECTED_DIRS = (
     "runs/v3_eval_correct",
     "runs/v3_cov_chronos",
     "runs/v3_share_repl",
+    "runs/v3_share_abstain",
 )
 
 

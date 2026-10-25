@@ -14,17 +14,29 @@ from send_bw.data.splits import (
 )
 from send_bw.evaluation.quantile_forecast import score_quantile_table
 from send_bw.protected_hashes import compare_snapshots, snapshot_protected
-from send_bw.share_policy import decide_abstention, resolve_donors, val_score
+from send_bw.share_policy import (
+    PREFIX_LABEL,
+    PREFIX_RULE,
+    decide_abstention,
+    prefix_random_overlap,
+    resolve_donors,
+    val_score,
+)
 from send_bw.v3_research import load_yaml
 from send_bw.v3_share_abstain import (
+    PROPOSAL_DIR,
+    RuntimeCap,
+    RuntimeCapExceeded,
     ShareAbstainError,
     audit_existing_selection,
     erratum_from_share_repl,
     execute_v3_share_abstain,
     locked_budget,
+    science_fingerprint,
 )
 
 FROZEN = "configs/v3_share_abstain.frozen.yaml"
+APPROVED = "configs/v3_share_abstain.approved.yaml"
 Q = [0.1, 0.25, 0.5, 0.75, 0.9]
 
 
@@ -74,9 +86,18 @@ def test_random_and_selected_have_equal_k():
     rnd = resolve_donors(eligible, k=1, rule="random", rng_seed=91001)
     assert pref["k"] == rnd["k"] == 1
     assert pref["selected"] == ["D-a"]
+    assert pref["rule"] == PREFIX_RULE
+    assert pref["rule_label"] == PREFIX_LABEL
+    assert pref["learned"] is False
+    assert pref["similarity_based"] is False
+    assert pref["validation_ranked"] is False
+    assert "not learned" in PREFIX_LABEL
     assert rnd["selected"][0] in {"D-a", "D-b", "D-c"}
     assert pref["test_outcomes_used"] is False
     assert rnd["test_outcomes_used"] is False
+    ov = prefix_random_overlap(pref["selected"], rnd["selected"])
+    assert ov["overlap_count"] in {0, 1}
+    assert ov["learned"] is False
     zero = resolve_donors(eligible, k=0, rule="zero", allow_donors=False)
     assert zero["selected"] == []
     assert zero["eligible"] == ["D-a", "D-b", "D-c"]
@@ -184,3 +205,67 @@ def test_protected_snapshot_roundtrip():
     assert cmp["unchanged"] is True
     assert Path("runs/v3_share_repl/SUMMARY.json").is_file()
     assert before["files"]["runs/v3_share_repl/SUMMARY.json"] is not None
+    assert before["files"]["configs/v3_share_abstain.frozen.yaml"] is not None
+    assert before["directories"]["runs/v3_share_abstain"] is not None
+
+
+def test_approved_science_matches_frozen_proposal():
+    frozen = load_yaml(FROZEN)
+    approved = load_yaml(APPROVED)
+    assert frozen["share_abstain"]["execute"] is False
+    assert approved["share_abstain"]["execute"] is True
+    assert approved["output_dir"] != frozen["output_dir"]
+    assert approved["output_dir"] != PROPOSAL_DIR
+    fp_f = science_fingerprint(frozen)
+    fp_a = science_fingerprint(approved)
+    assert fp_f == fp_a
+    assert fp_a["budget"]["n_model_fits"] == 68
+    assert fp_a["budget"]["n_trained_cells"] == 34
+    assert fp_a["budget"]["compute_cap_seconds"] == 600
+    assert fp_a["budget"]["generate_seeds"] == [76001, 77010]
+    assert locked_budget(approved)["execute"] is True
+
+
+def test_execute_refuses_proposal_directory(tmp_path):
+    cfg = tmp_path / "into_proposal.yaml"
+    cfg.write_text(
+        "output_dir: runs/v3_share_abstain\ngenerate_seed: 76001\ntrain_seed: 85001\n"
+        "share_abstain: {execute: true}\n",
+        encoding="utf-8")
+    with pytest.raises(ShareAbstainError, match="unexecuted proposal"):
+        execute_v3_share_abstain(cfg)
+
+
+def test_execute_stops_if_science_differs(tmp_path):
+    cfg = tmp_path / "changed.yaml"
+    cfg.write_text(
+        f"output_dir: {tmp_path / 'out'}\ngenerate_seed: 1\ntrain_seed: 2\n"
+        "share_abstain: {execute: true, n_dataset_seeds: 9}\n",
+        encoding="utf-8")
+    with pytest.raises(ShareAbstainError, match="differ from the frozen proposal"):
+        execute_v3_share_abstain(cfg)
+
+
+def test_runtime_cap_raises_during_check():
+    cap = RuntimeCap(0.0)
+    cap.t0 = cap.t0 - 1.0
+    with pytest.raises(RuntimeCapExceeded, match="exceeded"):
+        cap.check("unit_test")
+    assert cap.hit is True
+    assert cap.where == "unit_test"
+
+
+def test_decision_record_is_marked_before_test():
+    rec = {
+        "saved_before_test": True,
+        "test_scored": False,
+        "donor_rule_candidate": PREFIX_RULE,
+        "donor_rule_label": PREFIX_LABEL,
+        "learned": False,
+        "validation_ranked_donors": False,
+        "decision": decide_abstention(0.10, 0.12),
+    }
+    assert rec["saved_before_test"] is True
+    assert rec["test_scored"] is False
+    assert rec["decision"]["test_outcomes_used"] is False
+    assert rec["decision"]["decision"] == "target_only"
