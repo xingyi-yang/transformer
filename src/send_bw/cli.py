@@ -92,7 +92,8 @@ def main(argv: list[str] | None = None) -> int:
     for name in ["generate", "inspect-source", "ingest", "prepare", "validate-real", "train", "evaluate",
                  "design", "report", "run-all", "validate-request", "propose-design", "v3-pilot",
                  "v3-eval", "v3-repl", "v3-research", "v3-closeout", "v3-increment",
-                 "v3-limitations", "v3-objective", "v3-official-seq", "historical-audit"]:
+                 "v3-limitations", "v3-objective", "v3-official-seq", "v3-seq-diag",
+                 "historical-audit"]:
         s = sub.add_parser(name)
         artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout",
                                 "v3-increment", "v3-limitations")
@@ -202,6 +203,20 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"status": "ok",
                               "retuned_after_test": False,
                               "n_results": len(out.get("results") or {}),
+                              "blockers": len(out.get("blockers") or []),
+                              "real_data_accessed": out.get("real_data_accessed"),
+                              "parent": out.get("output_dir")},
+                             indent=2, default=str))
+            return 0
+        if args.cmd == "v3-seq-diag":
+            from send_bw.v3_seq_diag import execute_v3_seq_diag
+
+            out = execute_v3_seq_diag(args.config, force=args.force)
+            print(json.dumps({"status": "ok",
+                              "retuned_after_test": False,
+                              "official_seq_modified": out.get("official_seq_modified"),
+                              "predose_evaluated": out.get("predose_evaluated"),
+                              "n_replicates": len(out.get("replicates") or []),
                               "blockers": len(out.get("blockers") or []),
                               "real_data_accessed": out.get("real_data_accessed"),
                               "parent": out.get("output_dir")},
