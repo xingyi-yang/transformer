@@ -1,0 +1,3498 @@
+{
+  "authorization_present": false,
+  "chronos_finetune_failures": [
+    {
+      "dataset_index": 0,
+      "model": "chronos2_target_only",
+      "reason": "ValueError: The dataset is empty after filtering based on the length of the time series (length >= min_past + prediction_length). Please provide longer time series or reduce `min_past` or `prediction_length`.",
+      "scored": false
+    },
+    {
+      "dataset_index": 0,
+      "model": "chronos2_pooled",
+      "reason": "ValueError: The dataset is empty after filtering based on the length of the time series (length >= min_past + prediction_length). Please provide longer time series or reduce `min_past` or `prediction_length`.",
+      "scored": false
+    }
+  ],
+  "chronos_finetune_pool": {
+    "aggregated_across_incomplete_datasets": false,
+    "label": "history_only_univariate",
+    "n_datasets": 2,
+    "n_finetune_complete": 1,
+    "note": "Chronos-2 LoRA scores are not averaged across datasets. 1 of 2 datasets completed fine-tunes."
+  },
+  "covariate_aware_comparison": false,
+  "design_run": false,
+  "eligibility": {
+    "official_seq_pooled_train": {
+      "fabricated_history": false,
+      "length_histogram": {
+        "1": 3,
+        "2": 1,
+        "3": 19,
+        "4": 202,
+        "5": 2,
+        "7": 17,
+        "8": 69
+      },
+      "min_past": 2,
+      "n_eligible": 69,
+      "n_ineligible": 244,
+      "n_series": 313,
+      "note": "Chronos-2 fit keeps series with length >= min_past + prediction_length. Ineligible series are reported, not padded.",
+      "prediction_length": 6,
+      "required_observed_visits": 8
+    },
+    "official_seq_target_only_train": {
+      "fabricated_history": false,
+      "length_histogram": {
+        "1": 3,
+        "2": 1,
+        "3": 13,
+        "4": 157,
+        "5": 1,
+        "7": 6,
+        "8": 33
+      },
+      "min_past": 2,
+      "n_eligible": 33,
+      "n_ineligible": 181,
+      "n_series": 214,
+      "note": "Chronos-2 fit keeps series with length >= min_past + prediction_length. Ineligible series are reported, not padded.",
+      "prediction_length": 6,
+      "required_observed_visits": 8
+    },
+    "seq_diag_d0_target_only_train": {
+      "fabricated_history": false,
+      "length_histogram": {
+        "3": 26,
+        "4": 191,
+        "5": 1,
+        "6": 2,
+        "7": 8,
+        "8": 39
+      },
+      "min_past": 2,
+      "n_eligible": 39,
+      "n_ineligible": 228,
+      "n_series": 267,
+      "note": "Chronos-2 fit keeps series with length >= min_past + prediction_length. Ineligible series are reported, not padded.",
+      "prediction_length": 6,
+      "required_observed_visits": 8
+    },
+    "seq_diag_d1_target_only_train": {
+      "fabricated_history": false,
+      "length_histogram": {
+        "2": 2,
+        "3": 11,
+        "4": 185,
+        "7": 5,
+        "8": 41
+      },
+      "min_past": 2,
+      "n_eligible": 41,
+      "n_ineligible": 203,
+      "n_series": 244,
+      "note": "Chronos-2 fit keeps series with length >= min_past + prediction_length. Ineligible series are reported, not padded.",
+      "prediction_length": 6,
+      "required_observed_visits": 8
+    }
+  },
+  "freeze_lock": {
+    "config_hash": "f4b5b4a680982f01",
+    "config_path": "configs/v3_eval_correct.frozen.yaml",
+    "design": false,
+    "git_revision": "9865d223771ff7368be9eba85e70ee9e89f33f88",
+    "grouping": "STUDYID",
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "new_architectures": false,
+    "official_seq_dir": "runs/v3_official_seq",
+    "official_seq_rewritten": false,
+    "predose": false,
+    "real_data": false,
+    "rmse_log_definition": "true RMSE; prior published rmse_log was |error|",
+    "seq_diag_dir": "runs/v3_seq_diag",
+    "seq_diag_rewritten": false,
+    "training": false
+  },
+  "horizon_units": {
+    "calendar_day": "DAY",
+    "fabricated_history": false,
+    "visit_step": "observed future-visit rank"
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation.",
+    "Evaluation correctness.",
+    "No additional training.",
+    "Chronos-2 is history-only/univariate."
+  ],
+  "official_seq": {
+    "name": "official_seq_frozen_holdout",
+    "paired_transfer": {
+      "chronos2_finetune": {
+        "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+        "rows": [
+          {
+            "delta_pooled_minus_target": 0.001611424431936348,
+            "harmful_if_positive": true,
+            "metric": "mae_log",
+            "pooled": 0.12866709216199795,
+            "target_only": 0.1270556677300616
+          },
+          {
+            "delta_pooled_minus_target": 0.0015451117016521687,
+            "harmful_if_positive": true,
+            "metric": "rmse_log",
+            "pooled": 0.14447782286906424,
+            "target_only": 0.14293271116741207
+          },
+          {
+            "delta_pooled_minus_target": -4.271812829684252e-05,
+            "harmful_if_positive": true,
+            "metric": "mean_quantile_loss",
+            "pooled": 0.042167473972915176,
+            "target_only": 0.04221019210121202
+          }
+        ]
+      },
+      "spline": {
+        "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+        "rows": [
+          {
+            "delta_pooled_minus_target": -0.011988452953137399,
+            "harmful_if_positive": true,
+            "metric": "mae_log",
+            "pooled": 0.034297829802250976,
+            "target_only": 0.046286282755388375
+          },
+          {
+            "delta_pooled_minus_target": -0.01683732478340246,
+            "harmful_if_positive": true,
+            "metric": "rmse_log",
+            "pooled": 0.04195454498695002,
+            "target_only": 0.05879186977035248
+          },
+          {
+            "delta_pooled_minus_target": -0.0021793414580607053,
+            "harmful_if_positive": true,
+            "metric": "mean_quantile_loss",
+            "pooled": 0.01443948644115832,
+            "target_only": 0.016618827899219025
+          }
+        ]
+      },
+      "tft": {
+        "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+        "rows": [
+          {
+            "delta_pooled_minus_target": 0.007057156920631941,
+            "harmful_if_positive": true,
+            "metric": "mae_log",
+            "pooled": 0.05257943213856495,
+            "target_only": 0.045522275217933006
+          },
+          {
+            "delta_pooled_minus_target": 0.006670443524113681,
+            "harmful_if_positive": true,
+            "metric": "rmse_log",
+            "pooled": 0.06483274991213397,
+            "target_only": 0.05816230638802029
+          },
+          {
+            "delta_pooled_minus_target": 0.0037845369913858326,
+            "harmful_if_positive": true,
+            "metric": "mean_quantile_loss",
+            "pooled": 0.019728218885853972,
+            "target_only": 0.01594368189446814
+          }
+        ]
+      },
+      "transformer": {
+        "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+        "rows": [
+          {
+            "delta_pooled_minus_target": -0.00501315571441751,
+            "harmful_if_positive": true,
+            "metric": "mae_log",
+            "pooled": 0.035522599392165205,
+            "target_only": 0.040535755106582715
+          },
+          {
+            "delta_pooled_minus_target": -0.005983756722794706,
+            "harmful_if_positive": true,
+            "metric": "rmse_log",
+            "pooled": 0.04530355609205898,
+            "target_only": 0.051287312814853686
+          },
+          {
+            "delta_pooled_minus_target": -0.0018073224976448837,
+            "harmful_if_positive": true,
+            "metric": "mean_quantile_loss",
+            "pooled": 0.01236552710014258,
+            "target_only": 0.014172849597787463
+          }
+        ]
+      }
+    },
+    "published_paired_transfer": {
+      "chronos2_finetune": {
+        "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+        "rows": [
+          {
+            "delta_pooled_minus_target": 0.0017175427798567233,
+            "harmful_if_positive": true,
+            "metric": "rmse_log",
+            "pooled": 0.13396545199049495,
+            "target_only": 0.13224790921063823
+          },
+          {
+            "delta_pooled_minus_target": -6.532480747031832e-05,
+            "harmful_if_positive": true,
+            "metric": "mean_quantile_loss",
+            "pooled": 0.04408690100908479,
+            "target_only": 0.04415222581655511
+          }
+        ]
+      },
+      "spline": {
+        "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+        "rows": [
+          {
+            "delta_pooled_minus_target": -0.009958091034459195,
+            "harmful_if_positive": true,
+            "metric": "rmse_log",
+            "pooled": 0.033481211391917634,
+            "target_only": 0.04343930242637683
+          },
+          {
+            "delta_pooled_minus_target": -0.0005955476236056082,
+            "harmful_if_positive": true,
+            "metric": "mean_quantile_loss",
+            "pooled": 0.014863163690000031,
+            "target_only": 0.01545871131360564
+          }
+        ]
+      },
+      "tft": {
+        "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+        "rows": [
+          {
+            "delta_pooled_minus_target": 0.0075244601208263595,
+            "harmful_if_positive": true,
+            "metric": "rmse_log",
+            "pooled": 0.05280747718424303,
+            "target_only": 0.04528301706341667
+          },
+          {
+            "delta_pooled_minus_target": 0.004519617414092587,
+            "harmful_if_positive": true,
+            "metric": "mean_quantile_loss",
+            "pooled": 0.020343781741419313,
+            "target_only": 0.015824164327326726
+          }
+        ]
+      },
+      "transformer": {
+        "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+        "rows": [
+          {
+            "delta_pooled_minus_target": -0.005104169385345393,
+            "harmful_if_positive": true,
+            "metric": "rmse_log",
+            "pooled": 0.03582867920089618,
+            "target_only": 0.04093284858624157
+          },
+          {
+            "delta_pooled_minus_target": -0.0017235042719135028,
+            "harmful_if_positive": true,
+            "metric": "mean_quantile_loss",
+            "pooled": 0.012529612998654528,
+            "target_only": 0.01425311727056803
+          }
+        ]
+      }
+    },
+    "rank_legacy_animal_mae": [
+      {
+        "legacy_animal_balanced_mae": 0.03348121139191763,
+        "model": "spline_pooled",
+        "rank": 1
+      },
+      {
+        "legacy_animal_balanced_mae": 0.035828679200896184,
+        "model": "transformer_pooled",
+        "rank": 2
+      },
+      {
+        "legacy_animal_balanced_mae": 0.0409328485862416,
+        "model": "transformer_target_only",
+        "rank": 3
+      },
+      {
+        "legacy_animal_balanced_mae": 0.04343930242637682,
+        "model": "spline_target_only",
+        "rank": 4
+      },
+      {
+        "legacy_animal_balanced_mae": 0.04528301706341664,
+        "model": "tft_target_only",
+        "rank": 5
+      },
+      {
+        "legacy_animal_balanced_mae": 0.052807477184243,
+        "model": "tft_pooled",
+        "rank": 6
+      },
+      {
+        "legacy_animal_balanced_mae": 0.11840832903723096,
+        "model": "last_value",
+        "rank": 7
+      },
+      {
+        "legacy_animal_balanced_mae": 0.1322479092106382,
+        "model": "chronos2_target_only",
+        "rank": 8
+      },
+      {
+        "legacy_animal_balanced_mae": 0.1339654437691646,
+        "model": "chronos2_pooled",
+        "rank": 9
+      },
+      {
+        "legacy_animal_balanced_mae": 0.14124651697767754,
+        "model": "chronos2_zero_shot",
+        "rank": 10
+      }
+    ],
+    "rank_mae": [
+      {
+        "mae_log": 0.034297829802250976,
+        "model": "spline_pooled",
+        "rank": 1
+      },
+      {
+        "mae_log": 0.035522599392165205,
+        "model": "transformer_pooled",
+        "rank": 2
+      },
+      {
+        "mae_log": 0.040535755106582715,
+        "model": "transformer_target_only",
+        "rank": 3
+      },
+      {
+        "mae_log": 0.045522275217933006,
+        "model": "tft_target_only",
+        "rank": 4
+      },
+      {
+        "mae_log": 0.046286282755388375,
+        "model": "spline_target_only",
+        "rank": 5
+      },
+      {
+        "mae_log": 0.05257943213856495,
+        "model": "tft_pooled",
+        "rank": 6
+      },
+      {
+        "mae_log": 0.11404581646847428,
+        "model": "last_value",
+        "rank": 7
+      },
+      {
+        "mae_log": 0.1270556677300616,
+        "model": "chronos2_target_only",
+        "rank": 8
+      },
+      {
+        "mae_log": 0.12866709216199795,
+        "model": "chronos2_pooled",
+        "rank": 9
+      },
+      {
+        "mae_log": 0.13549874475031243,
+        "model": "chronos2_zero_shot",
+        "rank": 10
+      }
+    ],
+    "rank_rmse": [
+      {
+        "model": "spline_pooled",
+        "rank": 1,
+        "rmse_log": 0.04195454498695002
+      },
+      {
+        "model": "transformer_pooled",
+        "rank": 2,
+        "rmse_log": 0.04530355609205898
+      },
+      {
+        "model": "transformer_target_only",
+        "rank": 3,
+        "rmse_log": 0.051287312814853686
+      },
+      {
+        "model": "tft_target_only",
+        "rank": 4,
+        "rmse_log": 0.05816230638802029
+      },
+      {
+        "model": "spline_target_only",
+        "rank": 5,
+        "rmse_log": 0.05879186977035248
+      },
+      {
+        "model": "tft_pooled",
+        "rank": 6,
+        "rmse_log": 0.06483274991213397
+      },
+      {
+        "model": "last_value",
+        "rank": 7,
+        "rmse_log": 0.13073640885243382
+      },
+      {
+        "model": "chronos2_target_only",
+        "rank": 8,
+        "rmse_log": 0.14293271116741207
+      },
+      {
+        "model": "chronos2_pooled",
+        "rank": 9,
+        "rmse_log": 0.14447782286906424
+      },
+      {
+        "model": "chronos2_zero_shot",
+        "rank": 10,
+        "rmse_log": 0.15104188222956427
+      }
+    ],
+    "results": {
+      "chronos2_pooled": {
+        "chronos_label": "history_only_univariate",
+        "covariates_used": false,
+        "coverage80": 0.9534883720930232,
+        "crps_justified": false,
+        "grouping": "STUDYID",
+        "interval_width80": 0.6901646683074398,
+        "legacy_animal_balanced_mae": 0.1339654437691646,
+        "mae_log": 0.12866709216199795,
+        "mae_log_pooled": 0.13425609559064683,
+        "mean_quantile_loss": 0.042167473972915176,
+        "merge": {
+          "duplicate_obs_keys": 0,
+          "duplicate_pred_keys": 0,
+          "grouping_column": "STUDYID",
+          "inflated": false,
+          "n_keys_in_both": 115,
+          "n_matched": 115,
+          "n_obs": 115,
+          "n_obs_key_unique": 115,
+          "n_obs_only": 0,
+          "n_pred": 115,
+          "n_pred_key_unique": 115,
+          "n_pred_only": 0,
+          "one_to_one": true
+        },
+        "n_scored": 115,
+        "n_studies": 2,
+        "per_horizon_day": [
+          {
+            "DAY": 21.0,
+            "coverage80": 0.9655172413793104,
+            "interval_width80": 0.6489014954402529,
+            "mae_log": 0.10137133431780058,
+            "mean_quantile_loss": 0.03670176636853363,
+            "n_obs": 58,
+            "rmse_log": 0.11223313488767199
+          },
+          {
+            "DAY": 28.0,
+            "coverage80": 0.9649122807017544,
+            "interval_width80": 0.811566478327701,
+            "mae_log": 0.16771778249985883,
+            "mean_quantile_loss": 0.05160769251452084,
+            "n_obs": 57,
+            "rmse_log": 0.18489764761875435
+          }
+        ],
+        "per_horizon_step": [
+          {
+            "coverage80": 0.9655172413793104,
+            "horizon_step": 1,
+            "interval_width80": 0.6489014954402529,
+            "mae_log": 0.10137133431780058,
+            "mean_quantile_loss": 0.03670176636853363,
+            "n_obs": 58,
+            "rmse_log": 0.11223313488767199
+          },
+          {
+            "coverage80": 0.9649122807017544,
+            "horizon_step": 2,
+            "interval_width80": 0.811566478327701,
+            "mae_log": 0.16771778249985883,
+            "mean_quantile_loss": 0.05160769251452084,
+            "n_obs": 57,
+            "rmse_log": 0.18489764761875435
+          }
+        ],
+        "point_definition": "median",
+        "rmse_log": 0.14447782286906424,
+        "rmse_log_pooled": 0.15263628340320576,
+        "status": "ok"
+      },
+      "chronos2_target_only": {
+        "chronos_label": "history_only_univariate",
+        "covariates_used": false,
+        "coverage80": 0.9534883720930232,
+        "crps_justified": false,
+        "grouping": "STUDYID",
+        "interval_width80": 0.701389488400723,
+        "legacy_animal_balanced_mae": 0.1322479092106382,
+        "mae_log": 0.1270556677300616,
+        "mae_log_pooled": 0.13254525777034498,
+        "mean_quantile_loss": 0.04221019210121202,
+        "merge": {
+          "duplicate_obs_keys": 0,
+          "duplicate_pred_keys": 0,
+          "grouping_column": "STUDYID",
+          "inflated": false,
+          "n_keys_in_both": 115,
+          "n_matched": 115,
+          "n_obs": 115,
+          "n_obs_key_unique": 115,
+          "n_obs_only": 0,
+          "n_pred": 115,
+          "n_pred_key_unique": 115,
+          "n_pred_only": 0,
+          "one_to_one": true
+        },
+        "n_scored": 115,
+        "n_studies": 2,
+        "per_horizon_day": [
+          {
+            "DAY": 21.0,
+            "coverage80": 0.9655172413793104,
+            "interval_width80": 0.6586231774297254,
+            "mae_log": 0.09973132690413378,
+            "mean_quantile_loss": 0.036815797925371395,
+            "n_obs": 58,
+            "rmse_log": 0.11064798266608308
+          },
+          {
+            "DAY": 28.0,
+            "coverage80": 0.9649122807017544,
+            "interval_width80": 0.8257071930065489,
+            "mae_log": 0.16593487163420897,
+            "mean_quantile_loss": 0.05161925166996514,
+            "n_obs": 57,
+            "rmse_log": 0.183104136081847
+          }
+        ],
+        "per_horizon_step": [
+          {
+            "coverage80": 0.9655172413793104,
+            "horizon_step": 1,
+            "interval_width80": 0.6586231774297254,
+            "mae_log": 0.09973132690413378,
+            "mean_quantile_loss": 0.036815797925371395,
+            "n_obs": 58,
+            "rmse_log": 0.11064798266608308
+          },
+          {
+            "coverage80": 0.9649122807017544,
+            "horizon_step": 2,
+            "interval_width80": 0.8257071930065489,
+            "mae_log": 0.16593487163420897,
+            "mean_quantile_loss": 0.05161925166996514,
+            "n_obs": 57,
+            "rmse_log": 0.183104136081847
+          }
+        ],
+        "point_definition": "median",
+        "rmse_log": 0.14293271116741207,
+        "rmse_log_pooled": 0.150971886729723,
+        "status": "ok"
+      },
+      "chronos2_zero_shot": {
+        "chronos_label": "history_only_univariate",
+        "covariates_used": false,
+        "coverage80": 0.9534883720930232,
+        "crps_justified": false,
+        "grouping": "STUDYID",
+        "interval_width80": 0.7114559392750417,
+        "legacy_animal_balanced_mae": 0.14124651697767754,
+        "mae_log": 0.13549874475031243,
+        "mae_log_pooled": 0.14150560432398157,
+        "mean_quantile_loss": 0.043743266596594305,
+        "merge": {
+          "duplicate_obs_keys": 0,
+          "duplicate_pred_keys": 0,
+          "grouping_column": "STUDYID",
+          "inflated": false,
+          "n_keys_in_both": 115,
+          "n_matched": 115,
+          "n_obs": 115,
+          "n_obs_key_unique": 115,
+          "n_obs_only": 0,
+          "n_pred": 115,
+          "n_pred_key_unique": 115,
+          "n_pred_only": 0,
+          "one_to_one": true
+        },
+        "n_scored": 115,
+        "n_studies": 2,
+        "per_horizon_day": [
+          {
+            "DAY": 21.0,
+            "coverage80": 0.9655172413793104,
+            "interval_width80": 0.673125776751288,
+            "mae_log": 0.10856796624265998,
+            "mean_quantile_loss": 0.038192120753122186,
+            "n_obs": 58,
+            "rmse_log": 0.11928362229275746
+          },
+          {
+            "DAY": 28.0,
+            "coverage80": 0.9649122807017544,
+            "interval_width80": 0.8324653391252484,
+            "mae_log": 0.1750210957049755,
+            "mean_quantile_loss": 0.053393908917504916,
+            "n_obs": 57,
+            "rmse_log": 0.1922919204779584
+          }
+        ],
+        "per_horizon_step": [
+          {
+            "coverage80": 0.9655172413793104,
+            "horizon_step": 1,
+            "interval_width80": 0.673125776751288,
+            "mae_log": 0.10856796624265998,
+            "mean_quantile_loss": 0.038192120753122186,
+            "n_obs": 58,
+            "rmse_log": 0.11928362229275746
+          },
+          {
+            "coverage80": 0.9649122807017544,
+            "horizon_step": 2,
+            "interval_width80": 0.8324653391252484,
+            "mae_log": 0.1750210957049755,
+            "mean_quantile_loss": 0.053393908917504916,
+            "n_obs": 57,
+            "rmse_log": 0.1922919204779584
+          }
+        ],
+        "point_definition": "median",
+        "rmse_log": 0.15104188222956427,
+        "rmse_log_pooled": 0.15969809017303205,
+        "status": "ok"
+      },
+      "last_value": {
+        "chronos_label": null,
+        "covariates_used": null,
+        "coverage80": 0.0,
+        "crps_justified": false,
+        "grouping": "STUDYID",
+        "interval_width80": 0.0,
+        "legacy_animal_balanced_mae": 0.11840832903723096,
+        "mae_log": 0.11404581646847428,
+        "mae_log_pooled": 0.11876327761791937,
+        "mean_quantile_loss": 0.05702290823423714,
+        "merge": {
+          "duplicate_obs_keys": 0,
+          "duplicate_pred_keys": 0,
+          "grouping_column": "STUDYID",
+          "inflated": false,
+          "n_keys_in_both": 115,
+          "n_matched": 115,
+          "n_obs": 115,
+          "n_obs_key_unique": 115,
+          "n_obs_only": 0,
+          "n_pred": 115,
+          "n_pred_key_unique": 115,
+          "n_pred_only": 0,
+          "one_to_one": true
+        },
+        "n_scored": 115,
+        "n_studies": 2,
+        "per_horizon_day": [
+          {
+            "DAY": 21.0,
+            "coverage80": 0.0,
+            "interval_width80": 0.0,
+            "mae_log": 0.08636720887656203,
+            "mean_quantile_loss": 0.043183604438281016,
+            "n_obs": 58,
+            "rmse_log": 0.09797543530342162
+          },
+          {
+            "DAY": 28.0,
+            "coverage80": 0.0,
+            "interval_width80": 0.0,
+            "mae_log": 0.15172769844245843,
+            "mean_quantile_loss": 0.07586384922122921,
+            "n_obs": 57,
+            "rmse_log": 0.16902611141228174
+          }
+        ],
+        "per_horizon_step": [
+          {
+            "coverage80": 0.0,
+            "horizon_step": 1,
+            "interval_width80": 0.0,
+            "mae_log": 0.08636720887656203,
+            "mean_quantile_loss": 0.043183604438281016,
+            "n_obs": 58,
+            "rmse_log": 0.09797543530342162
+          },
+          {
+            "coverage80": 0.0,
+            "horizon_step": 2,
+            "interval_width80": 0.0,
+            "mae_log": 0.15172769844245843,
+            "mean_quantile_loss": 0.07586384922122921,
+            "n_obs": 57,
+            "rmse_log": 0.16902611141228174
+          }
+        ],
+        "point_definition": "median",
+        "rmse_log": 0.13073640885243382,
+        "rmse_log_pooled": 0.13784783308321508,
+        "status": "ok"
+      },
+      "spline_pooled": {
+        "chronos_label": null,
+        "covariates_used": null,
+        "coverage80": 1.0,
+        "crps_justified": true,
+        "grouping": "STUDYID",
+        "interval_width80": 0.2233051864930938,
+        "legacy_animal_balanced_mae": 0.03348121139191763,
+        "mae_log": 0.034297829802250976,
+        "mae_log_pooled": 0.033632950217821436,
+        "mean_quantile_loss": 0.01443948644115832,
+        "merge": {
+          "duplicate_obs_keys": 0,
+          "duplicate_pred_keys": 0,
+          "grouping_column": "STUDYID",
+          "inflated": false,
+          "n_keys_in_both": 115,
+          "n_matched": 115,
+          "n_obs": 115,
+          "n_obs_key_unique": 115,
+          "n_obs_only": 0,
+          "n_pred": 116,
+          "n_pred_key_unique": 116,
+          "n_pred_only": 1,
+          "one_to_one": true
+        },
+        "n_scored": 115,
+        "n_studies": 2,
+        "per_horizon_day": [
+          {
+            "DAY": 21.0,
+            "coverage80": 1.0,
+            "interval_width80": 0.21554407779695745,
+            "mae_log": 0.02723457683277538,
+            "mean_quantile_loss": 0.013142255532524561,
+            "n_obs": 58,
+            "rmse_log": 0.03366213404683146
+          },
+          {
+            "DAY": 28.0,
+            "coverage80": 1.0,
+            "interval_width80": 0.2606661655087315,
+            "mae_log": 0.040143575767517425,
+            "mean_quantile_loss": 0.016729850822373247,
+            "n_obs": 57,
+            "rmse_log": 0.04811075373565566
+          }
+        ],
+        "per_horizon_step": [
+          {
+            "coverage80": 1.0,
+            "horizon_step": 1,
+            "interval_width80": 0.21554407779695745,
+            "mae_log": 0.02723457683277538,
+            "mean_quantile_loss": 0.013142255532524561,
+            "n_obs": 58,
+            "rmse_log": 0.03366213404683146
+          },
+          {
+            "coverage80": 1.0,
+            "horizon_step": 2,
+            "interval_width80": 0.2606661655087315,
+            "mae_log": 0.040143575767517425,
+            "mean_quantile_loss": 0.016729850822373247,
+            "n_obs": 57,
+            "rmse_log": 0.04811075373565566
+          }
+        ],
+        "point_definition": "gaussian_mean",
+        "rmse_log": 0.04195454498695002,
+        "rmse_log_pooled": 0.04145786978354447,
+        "status": "ok"
+      },
+      "spline_target_only": {
+        "chronos_label": null,
+        "covariates_used": null,
+        "coverage80": 0.7816537467700257,
+        "crps_justified": true,
+        "grouping": "STUDYID",
+        "interval_width80": 0.13966385410975457,
+        "legacy_animal_balanced_mae": 0.04343930242637682,
+        "mae_log": 0.046286282755388375,
+        "mae_log_pooled": 0.04371072304482896,
+        "mean_quantile_loss": 0.016618827899219025,
+        "merge": {
+          "duplicate_obs_keys": 0,
+          "duplicate_pred_keys": 0,
+          "grouping_column": "STUDYID",
+          "inflated": false,
+          "n_keys_in_both": 115,
+          "n_matched": 115,
+          "n_obs": 115,
+          "n_obs_key_unique": 115,
+          "n_obs_only": 0,
+          "n_pred": 116,
+          "n_pred_key_unique": 116,
+          "n_pred_only": 1,
+          "one_to_one": true
+        },
+        "n_scored": 115,
+        "n_studies": 2,
+        "per_horizon_day": [
+          {
+            "DAY": 21.0,
+            "coverage80": 0.9655172413793104,
+            "interval_width80": 0.12561907692281962,
+            "mae_log": 0.02659554217893614,
+            "mean_quantile_loss": 0.009564424033920018,
+            "n_obs": 58,
+            "rmse_log": 0.031679701002643695
+          },
+          {
+            "DAY": 28.0,
+            "coverage80": 0.6491228070175439,
+            "interval_width80": 0.15312653479516242,
+            "mae_log": 0.06112617024170235,
+            "mean_quantile_loss": 0.021537830078099805,
+            "n_obs": 57,
+            "rmse_log": 0.07422504485031704
+          }
+        ],
+        "per_horizon_step": [
+          {
+            "coverage80": 0.9655172413793104,
+            "horizon_step": 1,
+            "interval_width80": 0.12561907692281962,
+            "mae_log": 0.02659554217893614,
+            "mean_quantile_loss": 0.009564424033920018,
+            "n_obs": 58,
+            "rmse_log": 0.031679701002643695
+          },
+          {
+            "coverage80": 0.6491228070175439,
+            "horizon_step": 2,
+            "interval_width80": 0.15312653479516242,
+            "mae_log": 0.06112617024170235,
+            "mean_quantile_loss": 0.021537830078099805,
+            "n_obs": 57,
+            "rmse_log": 0.07422504485031704
+          }
+        ],
+        "point_definition": "gaussian_mean",
+        "rmse_log": 0.05879186977035248,
+        "rmse_log_pooled": 0.056893673947917986,
+        "status": "ok"
+      },
+      "tft_pooled": {
+        "chronos_label": null,
+        "covariates_used": null,
+        "coverage80": 0.6708656330749354,
+        "crps_justified": false,
+        "grouping": "STUDYID",
+        "interval_width80": 0.18807849873251997,
+        "legacy_animal_balanced_mae": 0.052807477184243,
+        "mae_log": 0.05257943213856495,
+        "mae_log_pooled": 0.052612179730171495,
+        "mean_quantile_loss": 0.019728218885853972,
+        "merge": {
+          "duplicate_obs_keys": 0,
+          "duplicate_pred_keys": 0,
+          "grouping_column": "STUDYID",
+          "inflated": false,
+          "n_keys_in_both": 115,
+          "n_matched": 115,
+          "n_obs": 115,
+          "n_obs_key_unique": 115,
+          "n_obs_only": 0,
+          "n_pred": 115,
+          "n_pred_key_unique": 115,
+          "n_pred_only": 0,
+          "one_to_one": true
+        },
+        "n_scored": 115,
+        "n_studies": 2,
+        "per_horizon_day": [
+          {
+            "DAY": 21.0,
+            "coverage80": 0.5862068965517241,
+            "interval_width80": 0.1846061821641593,
+            "mae_log": 0.0503891422045874,
+            "mean_quantile_loss": 0.019576655309645037,
+            "n_obs": 58,
+            "rmse_log": 0.06210804334424869
+          },
+          {
+            "DAY": 28.0,
+            "coverage80": 0.6842105263157895,
+            "interval_width80": 0.18863329134489357,
+            "mae_log": 0.05487421791409917,
+            "mean_quantile_loss": 0.02102268003476542,
+            "n_obs": 57,
+            "rmse_log": 0.06821253287330933
+          }
+        ],
+        "per_horizon_step": [
+          {
+            "coverage80": 0.5862068965517241,
+            "horizon_step": 1,
+            "interval_width80": 0.1846061821641593,
+            "mae_log": 0.0503891422045874,
+            "mean_quantile_loss": 0.019576655309645037,
+            "n_obs": 58,
+            "rmse_log": 0.06210804334424869
+          },
+          {
+            "coverage80": 0.6842105263157895,
+            "horizon_step": 2,
+            "interval_width80": 0.18863329134489357,
+            "mae_log": 0.05487421791409917,
+            "mean_quantile_loss": 0.02102268003476542,
+            "n_obs": 57,
+            "rmse_log": 0.06821253287330933
+          }
+        ],
+        "point_definition": "median",
+        "rmse_log": 0.06483274991213397,
+        "rmse_log_pooled": 0.06520521813764958,
+        "status": "ok"
+      },
+      "tft_target_only": {
+        "chronos_label": null,
+        "covariates_used": null,
+        "coverage80": 0.7332041343669251,
+        "crps_justified": false,
+        "grouping": "STUDYID",
+        "interval_width80": 0.12855261471844456,
+        "legacy_animal_balanced_mae": 0.04528301706341664,
+        "mae_log": 0.045522275217933006,
+        "mae_log_pooled": 0.045094840732222384,
+        "mean_quantile_loss": 0.01594368189446814,
+        "merge": {
+          "duplicate_obs_keys": 0,
+          "duplicate_pred_keys": 0,
+          "grouping_column": "STUDYID",
+          "inflated": false,
+          "n_keys_in_both": 115,
+          "n_matched": 115,
+          "n_obs": 115,
+          "n_obs_key_unique": 115,
+          "n_obs_only": 0,
+          "n_pred": 115,
+          "n_pred_key_unique": 115,
+          "n_pred_only": 0,
+          "one_to_one": true
+        },
+        "n_scored": 115,
+        "n_studies": 2,
+        "per_horizon_day": [
+          {
+            "DAY": 21.0,
+            "coverage80": 0.8103448275862069,
+            "interval_width80": 0.1204498636311498,
+            "mae_log": 0.03738755496651246,
+            "mean_quantile_loss": 0.012783794241420822,
+            "n_obs": 58,
+            "rmse_log": 0.046563553570280115
+          },
+          {
+            "DAY": 28.0,
+            "coverage80": 0.6491228070175439,
+            "interval_width80": 0.13646544908222397,
+            "mae_log": 0.052937342037681606,
+            "mean_quantile_loss": 0.018895362766982112,
+            "n_obs": 57,
+            "rmse_log": 0.06713431853413726
+          }
+        ],
+        "per_horizon_step": [
+          {
+            "coverage80": 0.8103448275862069,
+            "horizon_step": 1,
+            "interval_width80": 0.1204498636311498,
+            "mae_log": 0.03738755496651246,
+            "mean_quantile_loss": 0.012783794241420822,
+            "n_obs": 58,
+            "rmse_log": 0.046563553570280115
+          },
+          {
+            "coverage80": 0.6491228070175439,
+            "horizon_step": 2,
+            "interval_width80": 0.13646544908222397,
+            "mae_log": 0.052937342037681606,
+            "mean_quantile_loss": 0.018895362766982112,
+            "n_obs": 57,
+            "rmse_log": 0.06713431853413726
+          }
+        ],
+        "point_definition": "median",
+        "rmse_log": 0.05816230638802029,
+        "rmse_log_pooled": 0.057683807957188506,
+        "status": "ok"
+      },
+      "transformer_pooled": {
+        "chronos_label": null,
+        "covariates_used": null,
+        "coverage80": 0.7842377260981912,
+        "crps_justified": true,
+        "grouping": "STUDYID",
+        "interval_width80": 0.117110487732649,
+        "legacy_animal_balanced_mae": 0.035828679200896184,
+        "mae_log": 0.035522599392165205,
+        "mae_log_pooled": 0.0360741197581556,
+        "mean_quantile_loss": 0.01236552710014258,
+        "merge": {
+          "duplicate_obs_keys": 0,
+          "duplicate_pred_keys": 0,
+          "grouping_column": "STUDYID",
+          "inflated": false,
+          "n_keys_in_both": 115,
+          "n_matched": 115,
+          "n_obs": 115,
+          "n_obs_key_unique": 115,
+          "n_obs_only": 0,
+          "n_pred": 116,
+          "n_pred_key_unique": 116,
+          "n_pred_only": 1,
+          "one_to_one": true
+        },
+        "n_scored": 115,
+        "n_studies": 2,
+        "per_horizon_day": [
+          {
+            "DAY": 21.0,
+            "coverage80": 0.8620689655172413,
+            "interval_width80": 0.10073108563369702,
+            "mae_log": 0.026827882041252537,
+            "mean_quantile_loss": 0.009503746306988721,
+            "n_obs": 58,
+            "rmse_log": 0.03424444763483404
+          },
+          {
+            "DAY": 28.0,
+            "coverage80": 0.7017543859649122,
+            "interval_width80": 0.1335473647747636,
+            "mae_log": 0.04548257217184644,
+            "mean_quantile_loss": 0.015734279318075084,
+            "n_obs": 57,
+            "rmse_log": 0.05615602578653636
+          }
+        ],
+        "per_horizon_step": [
+          {
+            "coverage80": 0.8620689655172413,
+            "horizon_step": 1,
+            "interval_width80": 0.10073108563369702,
+            "mae_log": 0.026827882041252537,
+            "mean_quantile_loss": 0.009503746306988721,
+            "n_obs": 58,
+            "rmse_log": 0.03424444763483404
+          },
+          {
+            "coverage80": 0.7017543859649122,
+            "horizon_step": 2,
+            "interval_width80": 0.1335473647747636,
+            "mae_log": 0.04548257217184644,
+            "mean_quantile_loss": 0.015734279318075084,
+            "n_obs": 57,
+            "rmse_log": 0.05615602578653636
+          }
+        ],
+        "point_definition": "gaussian_mean",
+        "rmse_log": 0.04530355609205898,
+        "rmse_log_pooled": 0.04641635988510736,
+        "status": "ok"
+      },
+      "transformer_target_only": {
+        "chronos_label": null,
+        "covariates_used": null,
+        "coverage80": 0.710109819121447,
+        "crps_justified": true,
+        "grouping": "STUDYID",
+        "interval_width80": 0.10832999600223511,
+        "legacy_animal_balanced_mae": 0.0409328485862416,
+        "mae_log": 0.040535755106582715,
+        "mae_log_pooled": 0.0408924353826237,
+        "mean_quantile_loss": 0.014172849597787463,
+        "merge": {
+          "duplicate_obs_keys": 0,
+          "duplicate_pred_keys": 0,
+          "grouping_column": "STUDYID",
+          "inflated": false,
+          "n_keys_in_both": 115,
+          "n_matched": 115,
+          "n_obs": 115,
+          "n_obs_key_unique": 115,
+          "n_obs_only": 0,
+          "n_pred": 116,
+          "n_pred_key_unique": 116,
+          "n_pred_only": 1,
+          "one_to_one": true
+        },
+        "n_scored": 115,
+        "n_studies": 2,
+        "per_horizon_day": [
+          {
+            "DAY": 21.0,
+            "coverage80": 0.7586206896551724,
+            "interval_width80": 0.09511890222847337,
+            "mae_log": 0.03260180841881068,
+            "mean_quantile_loss": 0.011253570433291577,
+            "n_obs": 58,
+            "rmse_log": 0.04024087154037401
+          },
+          {
+            "DAY": 28.0,
+            "coverage80": 0.631578947368421,
+            "interval_width80": 0.12156997741804099,
+            "mae_log": 0.04932851194229309,
+            "mean_quantile_loss": 0.017325913656991928,
+            "n_obs": 57,
+            "rmse_log": 0.06117223943706833
+          }
+        ],
+        "per_horizon_step": [
+          {
+            "coverage80": 0.7586206896551724,
+            "horizon_step": 1,
+            "interval_width80": 0.09511890222847337,
+            "mae_log": 0.03260180841881068,
+            "mean_quantile_loss": 0.011253570433291577,
+            "n_obs": 58,
+            "rmse_log": 0.04024087154037401
+          },
+          {
+            "coverage80": 0.631578947368421,
+            "horizon_step": 2,
+            "interval_width80": 0.12156997741804099,
+            "mae_log": 0.04932851194229309,
+            "mean_quantile_loss": 0.017325913656991928,
+            "n_obs": 57,
+            "rmse_log": 0.06117223943706833
+          }
+        ],
+        "point_definition": "gaussian_mean",
+        "rmse_log": 0.051287312814853686,
+        "rmse_log_pooled": 0.0516861307682874,
+        "status": "ok"
+      }
+    },
+    "sign_vs_published": {
+      "chronos2_finetune": [
+        {
+          "delta": 0.001611424431936348,
+          "metric": "mae_log",
+          "pooled": 0.12866709216199795,
+          "published_delta": 0.0017175427798567233,
+          "published_sign": "harmful",
+          "sign": "harmful",
+          "sign_changed": false,
+          "target_only": 0.1270556677300616
+        },
+        {
+          "delta": 0.0015451117016521687,
+          "metric": "rmse_log",
+          "pooled": 0.14447782286906424,
+          "published_delta": 0.0017175427798567233,
+          "published_sign": "harmful",
+          "sign": "harmful",
+          "sign_changed": false,
+          "target_only": 0.14293271116741207
+        },
+        {
+          "delta": -4.271812829684252e-05,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.042167473972915176,
+          "published_delta": -6.532480747031832e-05,
+          "published_sign": "helpful",
+          "sign": "helpful",
+          "sign_changed": false,
+          "target_only": 0.04221019210121202
+        }
+      ],
+      "spline": [
+        {
+          "delta": -0.011988452953137399,
+          "metric": "mae_log",
+          "pooled": 0.034297829802250976,
+          "published_delta": -0.009958091034459195,
+          "published_sign": "helpful",
+          "sign": "helpful",
+          "sign_changed": false,
+          "target_only": 0.046286282755388375
+        },
+        {
+          "delta": -0.01683732478340246,
+          "metric": "rmse_log",
+          "pooled": 0.04195454498695002,
+          "published_delta": -0.009958091034459195,
+          "published_sign": "helpful",
+          "sign": "helpful",
+          "sign_changed": false,
+          "target_only": 0.05879186977035248
+        },
+        {
+          "delta": -0.0021793414580607053,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.01443948644115832,
+          "published_delta": -0.0005955476236056082,
+          "published_sign": "helpful",
+          "sign": "helpful",
+          "sign_changed": false,
+          "target_only": 0.016618827899219025
+        }
+      ],
+      "tft": [
+        {
+          "delta": 0.007057156920631941,
+          "metric": "mae_log",
+          "pooled": 0.05257943213856495,
+          "published_delta": 0.0075244601208263595,
+          "published_sign": "harmful",
+          "sign": "harmful",
+          "sign_changed": false,
+          "target_only": 0.045522275217933006
+        },
+        {
+          "delta": 0.006670443524113681,
+          "metric": "rmse_log",
+          "pooled": 0.06483274991213397,
+          "published_delta": 0.0075244601208263595,
+          "published_sign": "harmful",
+          "sign": "harmful",
+          "sign_changed": false,
+          "target_only": 0.05816230638802029
+        },
+        {
+          "delta": 0.0037845369913858326,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.019728218885853972,
+          "published_delta": 0.004519617414092587,
+          "published_sign": "harmful",
+          "sign": "harmful",
+          "sign_changed": false,
+          "target_only": 0.01594368189446814
+        }
+      ],
+      "transformer": [
+        {
+          "delta": -0.00501315571441751,
+          "metric": "mae_log",
+          "pooled": 0.035522599392165205,
+          "published_delta": -0.005104169385345393,
+          "published_sign": "helpful",
+          "sign": "helpful",
+          "sign_changed": false,
+          "target_only": 0.040535755106582715
+        },
+        {
+          "delta": -0.005983756722794706,
+          "metric": "rmse_log",
+          "pooled": 0.04530355609205898,
+          "published_delta": -0.005104169385345393,
+          "published_sign": "helpful",
+          "sign": "helpful",
+          "sign_changed": false,
+          "target_only": 0.051287312814853686
+        },
+        {
+          "delta": -0.0018073224976448837,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.01236552710014258,
+          "published_delta": -0.0017235042719135028,
+          "published_sign": "helpful",
+          "sign": "helpful",
+          "sign_changed": false,
+          "target_only": 0.014172849597787463
+        }
+      ]
+    }
+  },
+  "output_dir": "runs/v3_eval_correct",
+  "predose_evaluated": false,
+  "real_data_accessed": false,
+  "replicates": [
+    {
+      "dataset_index": 0,
+      "eligibility_pooled_train": {
+        "fabricated_history": false,
+        "length_histogram": {
+          "3": 28,
+          "4": 267,
+          "5": 1,
+          "6": 2,
+          "7": 15,
+          "8": 60
+        },
+        "min_past": 2,
+        "n_eligible": 60,
+        "n_ineligible": 313,
+        "n_series": 373,
+        "note": "Chronos-2 fit keeps series with length >= min_past + prediction_length. Ineligible series are reported, not padded.",
+        "prediction_length": 6,
+        "required_observed_visits": 8
+      },
+      "eligibility_target_only_train": {
+        "fabricated_history": false,
+        "length_histogram": {
+          "3": 26,
+          "4": 191,
+          "5": 1,
+          "6": 2,
+          "7": 8,
+          "8": 39
+        },
+        "min_past": 2,
+        "n_eligible": 39,
+        "n_ineligible": 228,
+        "n_series": 267,
+        "note": "Chronos-2 fit keeps series with length >= min_past + prediction_length. Ineligible series are reported, not padded.",
+        "prediction_length": 6,
+        "required_observed_visits": 8
+      },
+      "name": "seq_diag_d0",
+      "paired_transfer": {
+        "chronos2_finetune": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": []
+        },
+        "spline": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.008759131698981876,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.040622177023707365,
+              "target_only": 0.03186304532472549
+            },
+            {
+              "delta_pooled_minus_target": 0.013202369909458153,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.05259861947646188,
+              "target_only": 0.03939624956700373
+            },
+            {
+              "delta_pooled_minus_target": 0.005682895804750057,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.01669190710414514,
+              "target_only": 0.011009011299395082
+            }
+          ]
+        },
+        "tft": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.005665619050166409,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.04051558993752244,
+              "target_only": 0.04618120898768885
+            },
+            {
+              "delta_pooled_minus_target": -0.005733474987888912,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.05077239937407431,
+              "target_only": 0.05650587436196322
+            },
+            {
+              "delta_pooled_minus_target": -0.0023879792587177383,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.01376564844909616,
+              "target_only": 0.016153627707813898
+            }
+          ]
+        },
+        "transformer": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0015447683797997908,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.035733657014941134,
+              "target_only": 0.037278425394740924
+            },
+            {
+              "delta_pooled_minus_target": -9.914491877009018e-05,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.045057869996839195,
+              "target_only": 0.045157014915609285
+            },
+            {
+              "delta_pooled_minus_target": 0.002178538993916023,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.014787004220336492,
+              "target_only": 0.012608465226420468
+            }
+          ]
+        }
+      },
+      "rank_mae": [
+        {
+          "mae_log": 0.03186304532472549,
+          "model": "spline_target_only",
+          "rank": 1
+        },
+        {
+          "mae_log": 0.035733657014941134,
+          "model": "transformer_pooled",
+          "rank": 2
+        },
+        {
+          "mae_log": 0.037278425394740924,
+          "model": "transformer_target_only",
+          "rank": 3
+        },
+        {
+          "mae_log": 0.04051558993752244,
+          "model": "tft_pooled",
+          "rank": 4
+        },
+        {
+          "mae_log": 0.040622177023707365,
+          "model": "spline_pooled",
+          "rank": 5
+        },
+        {
+          "mae_log": 0.04618120898768885,
+          "model": "tft_target_only",
+          "rank": 6
+        },
+        {
+          "mae_log": 0.1162843878846587,
+          "model": "last_value",
+          "rank": 7
+        },
+        {
+          "mae_log": 0.1391429650133065,
+          "model": "chronos2_zero_shot",
+          "rank": 8
+        }
+      ],
+      "rank_rmse": [
+        {
+          "model": "spline_target_only",
+          "rank": 1,
+          "rmse_log": 0.03939624956700373
+        },
+        {
+          "model": "transformer_pooled",
+          "rank": 2,
+          "rmse_log": 0.045057869996839195
+        },
+        {
+          "model": "transformer_target_only",
+          "rank": 3,
+          "rmse_log": 0.045157014915609285
+        },
+        {
+          "model": "tft_pooled",
+          "rank": 4,
+          "rmse_log": 0.05077239937407431
+        },
+        {
+          "model": "spline_pooled",
+          "rank": 5,
+          "rmse_log": 0.05259861947646188
+        },
+        {
+          "model": "tft_target_only",
+          "rank": 6,
+          "rmse_log": 0.05650587436196322
+        },
+        {
+          "model": "last_value",
+          "rank": 7,
+          "rmse_log": 0.13261472204819136
+        },
+        {
+          "model": "chronos2_zero_shot",
+          "rank": 8,
+          "rmse_log": 0.15465793717621812
+        }
+      ],
+      "results": {
+        "chronos2_pooled": {
+          "excluded_from_pooled_finetune": true,
+          "reason": "ValueError: The dataset is empty after filtering based on the length of the time series (length >= min_past + prediction_length). Please provide longer time series or reduce `min_past` or `prediction_length`.",
+          "status": "failed"
+        },
+        "chronos2_target_only": {
+          "excluded_from_pooled_finetune": true,
+          "reason": "ValueError: The dataset is empty after filtering based on the length of the time series (length >= min_past + prediction_length). Please provide longer time series or reduce `min_past` or `prediction_length`.",
+          "status": "failed"
+        },
+        "chronos2_zero_shot": {
+          "chronos_label": "history_only_univariate",
+          "covariates_used": false,
+          "coverage80": 0.9600053504547886,
+          "crps_justified": false,
+          "grouping": "STUDYID",
+          "interval_width80": 0.7474564070877638,
+          "legacy_animal_balanced_mae": 0.13943368416421692,
+          "mae_log": 0.1391429650133065,
+          "mae_log_pooled": 0.13938286777193148,
+          "mean_quantile_loss": 0.045640294795565674,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 173,
+            "n_matched": 173,
+            "n_obs": 173,
+            "n_obs_key_unique": 173,
+            "n_obs_only": 0,
+            "n_pred": 173,
+            "n_pred_key_unique": 173,
+            "n_pred_only": 0,
+            "one_to_one": true
+          },
+          "n_scored": 173,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 21.0,
+              "coverage80": 0.9659090909090909,
+              "interval_width80": 0.6636886867609891,
+              "mae_log": 0.10836654429440769,
+              "mean_quantile_loss": 0.037827472587965684,
+              "n_obs": 88,
+              "rmse_log": 0.11789604943015729
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.9529411764705882,
+              "interval_width80": 0.8346603730145623,
+              "mae_log": 0.1714938850192502,
+              "mean_quantile_loss": 0.05386898892785742,
+              "n_obs": 85,
+              "rmse_log": 0.1861002365795777
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.9662921348314607,
+              "horizon_step": 1,
+              "interval_width80": 0.6688869562041894,
+              "mae_log": 0.11019425497825257,
+              "mean_quantile_loss": 0.038208735671175456,
+              "n_obs": 89,
+              "rmse_log": 0.12070080389962282
+            },
+            {
+              "coverage80": 0.9523809523809523,
+              "horizon_step": 2,
+              "interval_width80": 0.831188059988476,
+              "mae_log": 0.17030889799380555,
+              "mean_quantile_loss": 0.05365600204612196,
+              "n_obs": 84,
+              "rmse_log": 0.18485423983128077
+            }
+          ],
+          "point_definition": "median",
+          "rmse_log": 0.15465793717621812,
+          "rmse_log_pooled": 0.15519863163357892,
+          "status": "ok"
+        },
+        "last_value": {
+          "chronos_label": null,
+          "covariates_used": null,
+          "coverage80": 0.0,
+          "crps_justified": false,
+          "grouping": "STUDYID",
+          "interval_width80": 0.0,
+          "legacy_animal_balanced_mae": 0.11646609157417961,
+          "mae_log": 0.1162843878846587,
+          "mae_log_pooled": 0.11651885207760235,
+          "mean_quantile_loss": 0.05814219394232935,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 173,
+            "n_matched": 173,
+            "n_obs": 173,
+            "n_obs_key_unique": 173,
+            "n_obs_only": 0,
+            "n_pred": 173,
+            "n_pred_key_unique": 173,
+            "n_pred_only": 0,
+            "one_to_one": true
+          },
+          "n_scored": 173,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 21.0,
+              "coverage80": 0.0,
+              "interval_width80": 0.0,
+              "mae_log": 0.0863235431912999,
+              "mean_quantile_loss": 0.04316177159564995,
+              "n_obs": 88,
+              "rmse_log": 0.0967071192120792
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.0,
+              "interval_width80": 0.0,
+              "mae_log": 0.14777987774812723,
+              "mean_quantile_loss": 0.07388993887406362,
+              "n_obs": 85,
+              "rmse_log": 0.1625359266853747
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.0,
+              "horizon_step": 1,
+              "interval_width80": 0.0,
+              "mae_log": 0.0879235489794388,
+              "mean_quantile_loss": 0.0439617744897194,
+              "n_obs": 89,
+              "rmse_log": 0.09917152220223652
+            },
+            {
+              "coverage80": 0.0,
+              "horizon_step": 2,
+              "interval_width80": 0.0,
+              "mae_log": 0.1468162565506566,
+              "mean_quantile_loss": 0.0734081282753283,
+              "n_obs": 84,
+              "rmse_log": 0.16158475365422498
+            }
+          ],
+          "point_definition": "median",
+          "rmse_log": 0.13261472204819136,
+          "rmse_log_pooled": 0.13318081329443213,
+          "status": "ok"
+        },
+        "spline_pooled": {
+          "chronos_label": null,
+          "covariates_used": null,
+          "coverage80": 0.9887640449438202,
+          "crps_justified": true,
+          "grouping": "STUDYID",
+          "interval_width80": 0.246816717026758,
+          "legacy_animal_balanced_mae": 0.04087789850029914,
+          "mae_log": 0.040622177023707365,
+          "mae_log_pooled": 0.040819552945084055,
+          "mean_quantile_loss": 0.01669190710414514,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 173,
+            "n_matched": 173,
+            "n_obs": 173,
+            "n_obs_key_unique": 173,
+            "n_obs_only": 0,
+            "n_pred": 178,
+            "n_pred_key_unique": 178,
+            "n_pred_only": 5,
+            "one_to_one": true
+          },
+          "n_scored": 173,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 21.0,
+              "coverage80": 1.0,
+              "interval_width80": 0.22821417214933912,
+              "mae_log": 0.02936883174902649,
+              "mean_quantile_loss": 0.01395350157345936,
+              "n_obs": 88,
+              "rmse_log": 0.03863122547762779
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.9764705882352941,
+              "interval_width80": 0.267297526350863,
+              "mae_log": 0.05267441724217894,
+              "mean_quantile_loss": 0.019655257548925196,
+              "n_obs": 85,
+              "rmse_log": 0.0658676409724732
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 1.0,
+              "horizon_step": 1,
+              "interval_width80": 0.22920263649410783,
+              "mae_log": 0.0300568547834933,
+              "mean_quantile_loss": 0.014079687257752516,
+              "n_obs": 89,
+              "rmse_log": 0.039595934049712865
+            },
+            {
+              "coverage80": 0.9761904761904762,
+              "horizon_step": 2,
+              "interval_width80": 0.26671550286892387,
+              "mae_log": 0.05222288790200759,
+              "mean_quantile_loss": 0.019589438859322517,
+              "n_obs": 84,
+              "rmse_log": 0.06551694969944218
+            }
+          ],
+          "point_definition": "gaussian_mean",
+          "rmse_log": 0.05259861947646188,
+          "rmse_log_pooled": 0.05376598404766466,
+          "status": "ok"
+        },
+        "spline_target_only": {
+          "chronos_label": null,
+          "covariates_used": null,
+          "coverage80": 0.8410246120920278,
+          "crps_justified": true,
+          "grouping": "STUDYID",
+          "interval_width80": 0.11358665715697366,
+          "legacy_animal_balanced_mae": 0.031750398453740544,
+          "mae_log": 0.03186304532472549,
+          "mae_log_pooled": 0.03202199673398072,
+          "mean_quantile_loss": 0.011009011299395082,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 173,
+            "n_matched": 173,
+            "n_obs": 173,
+            "n_obs_key_unique": 173,
+            "n_obs_only": 0,
+            "n_pred": 178,
+            "n_pred_key_unique": 178,
+            "n_pred_only": 5,
+            "one_to_one": true
+          },
+          "n_scored": 173,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 21.0,
+              "coverage80": 0.8977272727272727,
+              "interval_width80": 0.10396272713899171,
+              "mae_log": 0.025057215065534336,
+              "mean_quantile_loss": 0.008984724365820252,
+              "n_obs": 88,
+              "rmse_log": 0.031880133994812654
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.7764705882352941,
+              "interval_width80": 0.12360578771568215,
+              "mae_log": 0.039232594226019324,
+              "mean_quantile_loss": 0.013212445822972003,
+              "n_obs": 85,
+              "rmse_log": 0.04736925411677873
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.898876404494382,
+              "horizon_step": 1,
+              "interval_width80": 0.10413262876388711,
+              "mae_log": 0.02530040464181521,
+              "mean_quantile_loss": 0.009032741714078172,
+              "n_obs": 89,
+              "rmse_log": 0.032084714164835784
+            },
+            {
+              "coverage80": 0.7738095238095238,
+              "horizon_step": 2,
+              "interval_width80": 0.12365961885807501,
+              "mae_log": 0.039143683593537024,
+              "mean_quantile_loss": 0.013211900316569583,
+              "n_obs": 84,
+              "rmse_log": 0.04737715172449902
+            }
+          ],
+          "point_definition": "gaussian_mean",
+          "rmse_log": 0.03939624956700373,
+          "rmse_log_pooled": 0.04024240919013124,
+          "status": "ok"
+        },
+        "tft_pooled": {
+          "chronos_label": null,
+          "covariates_used": null,
+          "coverage80": 0.8112627073301231,
+          "crps_justified": false,
+          "grouping": "STUDYID",
+          "interval_width80": 0.15565896761359982,
+          "legacy_animal_balanced_mae": 0.04075994808437304,
+          "mae_log": 0.04051558993752244,
+          "mae_log_pooled": 0.04066763160162425,
+          "mean_quantile_loss": 0.01376564844909616,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 173,
+            "n_matched": 173,
+            "n_obs": 173,
+            "n_obs_key_unique": 173,
+            "n_obs_only": 0,
+            "n_pred": 173,
+            "n_pred_key_unique": 173,
+            "n_pred_only": 0,
+            "one_to_one": true
+          },
+          "n_scored": 173,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 21.0,
+              "coverage80": 0.8295454545454546,
+              "interval_width80": 0.14424663240259342,
+              "mae_log": 0.03180754246624622,
+              "mean_quantile_loss": 0.011814518067825438,
+              "n_obs": 88,
+              "rmse_log": 0.04118791483286932
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.788235294117647,
+              "interval_width80": 0.16743062524234545,
+              "mae_log": 0.04984042976530974,
+              "mean_quantile_loss": 0.015878378054701353,
+              "n_obs": 85,
+              "rmse_log": 0.06035918870426953
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.8202247191011236,
+              "horizon_step": 1,
+              "interval_width80": 0.1443175680181953,
+              "mae_log": 0.03311768586805698,
+              "mean_quantile_loss": 0.01231482222574234,
+              "n_obs": 89,
+              "rmse_log": 0.04387324945594576
+            },
+            {
+              "coverage80": 0.7976190476190477,
+              "horizon_step": 2,
+              "interval_width80": 0.16763146718343097,
+              "mae_log": 0.048666978866951476,
+              "mean_quantile_loss": 0.015396673172942682,
+              "n_obs": 84,
+              "rmse_log": 0.05851831952581241
+            }
+          ],
+          "point_definition": "median",
+          "rmse_log": 0.05077239937407431,
+          "rmse_log_pooled": 0.051506876586569585,
+          "status": "ok"
+        },
+        "tft_target_only": {
+          "chronos_label": null,
+          "covariates_used": null,
+          "coverage80": 0.6691412520064206,
+          "crps_justified": false,
+          "grouping": "STUDYID",
+          "interval_width80": 0.11348503486812912,
+          "legacy_animal_balanced_mae": 0.04626636201213349,
+          "mae_log": 0.04618120898768885,
+          "mae_log_pooled": 0.0465260090546914,
+          "mean_quantile_loss": 0.016153627707813898,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 173,
+            "n_matched": 173,
+            "n_obs": 173,
+            "n_obs_key_unique": 173,
+            "n_obs_only": 0,
+            "n_pred": 173,
+            "n_pred_key_unique": 173,
+            "n_pred_only": 0,
+            "one_to_one": true
+          },
+          "n_scored": 173,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 21.0,
+              "coverage80": 0.7159090909090909,
+              "interval_width80": 0.1127578616142273,
+              "mae_log": 0.04193435209124301,
+              "mean_quantile_loss": 0.014299842940805586,
+              "n_obs": 88,
+              "rmse_log": 0.052089551720544296
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.611764705882353,
+              "interval_width80": 0.11404397627886603,
+              "mae_log": 0.05127972449920268,
+              "mean_quantile_loss": 0.018345569551952132,
+              "n_obs": 85,
+              "rmse_log": 0.06449934002490641
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.7078651685393258,
+              "horizon_step": 1,
+              "interval_width80": 0.11289966240357817,
+              "mae_log": 0.042878710713715774,
+              "mean_quantile_loss": 0.014694973141090554,
+              "n_obs": 89,
+              "rmse_log": 0.05348987253609267
+            },
+            {
+              "coverage80": 0.6190476190476191,
+              "horizon_step": 2,
+              "interval_width80": 0.11390904585520427,
+              "mae_log": 0.050390408487391763,
+              "mean_quantile_loss": 0.017975083108925757,
+              "n_obs": 84,
+              "rmse_log": 0.06340933546110002
+            }
+          ],
+          "point_definition": "median",
+          "rmse_log": 0.05650587436196322,
+          "rmse_log_pooled": 0.05851664930181366,
+          "status": "ok"
+        },
+        "transformer_pooled": {
+          "chronos_label": null,
+          "covariates_used": null,
+          "coverage80": 0.9775280898876404,
+          "crps_justified": true,
+          "grouping": "STUDYID",
+          "interval_width80": 0.22380338039421338,
+          "legacy_animal_balanced_mae": 0.036004632604486886,
+          "mae_log": 0.035733657014941134,
+          "mae_log_pooled": 0.03585693491249739,
+          "mean_quantile_loss": 0.014787004220336492,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 173,
+            "n_matched": 173,
+            "n_obs": 173,
+            "n_obs_key_unique": 173,
+            "n_obs_only": 0,
+            "n_pred": 178,
+            "n_pred_key_unique": 178,
+            "n_pred_only": 5,
+            "one_to_one": true
+          },
+          "n_scored": 173,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 21.0,
+              "coverage80": 0.9886363636363636,
+              "interval_width80": 0.20708477683956542,
+              "mae_log": 0.030232737267593922,
+              "mean_quantile_loss": 0.013101442299949957,
+              "n_obs": 88,
+              "rmse_log": 0.037998700508746305
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.9647058823529412,
+              "interval_width80": 0.24111485719912462,
+              "mae_log": 0.04167963365075039,
+              "mean_quantile_loss": 0.016587268902466822,
+              "n_obs": 85,
+              "rmse_log": 0.0524169769226413
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.9887640449438202,
+              "horizon_step": 1,
+              "interval_width80": 0.20746359712643783,
+              "mae_log": 0.030729339107765485,
+              "mean_quantile_loss": 0.013188036809148096,
+              "n_obs": 89,
+              "rmse_log": 0.038599525360129824
+            },
+            {
+              "coverage80": 0.9642857142857143,
+              "horizon_step": 2,
+              "interval_width80": 0.2411186080899331,
+              "mae_log": 0.04128974475322524,
+              "mean_quantile_loss": 0.016537017893941613,
+              "n_obs": 84,
+              "rmse_log": 0.05209891978725584
+            }
+          ],
+          "point_definition": "gaussian_mean",
+          "rmse_log": 0.045057869996839195,
+          "rmse_log_pooled": 0.045655417349852845,
+          "status": "ok"
+        },
+        "transformer_target_only": {
+          "chronos_label": null,
+          "covariates_used": null,
+          "coverage80": 0.7401685393258427,
+          "crps_justified": true,
+          "grouping": "STUDYID",
+          "interval_width80": 0.10486116504845443,
+          "legacy_animal_balanced_mae": 0.03720958569223061,
+          "mae_log": 0.037278425394740924,
+          "mae_log_pooled": 0.0373219463834392,
+          "mean_quantile_loss": 0.012608465226420468,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 173,
+            "n_matched": 173,
+            "n_obs": 173,
+            "n_obs_key_unique": 173,
+            "n_obs_only": 0,
+            "n_pred": 178,
+            "n_pred_key_unique": 178,
+            "n_pred_only": 5,
+            "one_to_one": true
+          },
+          "n_scored": 173,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 21.0,
+              "coverage80": 0.7613636363636364,
+              "interval_width80": 0.09256055610326998,
+              "mae_log": 0.03164041238206114,
+              "mean_quantile_loss": 0.010890188622025374,
+              "n_obs": 88,
+              "rmse_log": 0.03921962960704527
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.7176470588235294,
+              "interval_width80": 0.11759817602448933,
+              "mae_log": 0.04320400511427766,
+              "mean_quantile_loss": 0.01442360774296819,
+              "n_obs": 85,
+              "rmse_log": 0.050752605972079826
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.7640449438202247,
+              "horizon_step": 1,
+              "interval_width80": 0.09283335236470719,
+              "mae_log": 0.03190745040849415,
+              "mean_quantile_loss": 0.010946300618408254,
+              "n_obs": 89,
+              "rmse_log": 0.039438430982989964
+            },
+            {
+              "coverage80": 0.7142857142857143,
+              "horizon_step": 2,
+              "interval_width80": 0.11760720879417155,
+              "mae_log": 0.043058733785464307,
+              "mean_quantile_loss": 0.014406220260145168,
+              "n_obs": 84,
+              "rmse_log": 0.050694625311172234
+            }
+          ],
+          "point_definition": "gaussian_mean",
+          "rmse_log": 0.045157014915609285,
+          "rmse_log_pooled": 0.04525490287969623,
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "dataset_index": 1,
+      "eligibility_pooled_train": {
+        "fabricated_history": false,
+        "length_histogram": {
+          "2": 2,
+          "3": 21,
+          "4": 281,
+          "7": 5,
+          "8": 41
+        },
+        "min_past": 2,
+        "n_eligible": 41,
+        "n_ineligible": 309,
+        "n_series": 350,
+        "note": "Chronos-2 fit keeps series with length >= min_past + prediction_length. Ineligible series are reported, not padded.",
+        "prediction_length": 6,
+        "required_observed_visits": 8
+      },
+      "eligibility_target_only_train": {
+        "fabricated_history": false,
+        "length_histogram": {
+          "2": 2,
+          "3": 11,
+          "4": 185,
+          "7": 5,
+          "8": 41
+        },
+        "min_past": 2,
+        "n_eligible": 41,
+        "n_ineligible": 203,
+        "n_series": 244,
+        "note": "Chronos-2 fit keeps series with length >= min_past + prediction_length. Ineligible series are reported, not padded.",
+        "prediction_length": 6,
+        "required_observed_visits": 8
+      },
+      "name": "seq_diag_d1",
+      "paired_transfer": {
+        "chronos2_finetune": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.00012549702853641154,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.10364124930562957,
+              "target_only": 0.10351575227709316
+            },
+            {
+              "delta_pooled_minus_target": 0.0001238073453664057,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.11852086022940259,
+              "target_only": 0.11839705288403618
+            },
+            {
+              "delta_pooled_minus_target": 3.422949175142104e-05,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.03452067015294236,
+              "target_only": 0.03448644066119094
+            }
+          ]
+        },
+        "spline": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.000875442657766224,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.028869204228532907,
+              "target_only": 0.02974464688629913
+            },
+            {
+              "delta_pooled_minus_target": -0.0014963344538153761,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.037125744737572366,
+              "target_only": 0.03862207919138774
+            },
+            {
+              "delta_pooled_minus_target": 0.0015988612901277083,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.012117501999434281,
+              "target_only": 0.010518640709306573
+            }
+          ]
+        },
+        "tft": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.010222711809902321,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.07361999761191802,
+              "target_only": 0.0633972858020157
+            },
+            {
+              "delta_pooled_minus_target": 0.01138186821092084,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.0854123667940943,
+              "target_only": 0.07403049858317345
+            },
+            {
+              "delta_pooled_minus_target": 0.0007833594830530463,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.024416461673702802,
+              "target_only": 0.023633102190649756
+            }
+          ]
+        },
+        "transformer": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.014461077132052289,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.02892479074798037,
+              "target_only": 0.04338586788003266
+            },
+            {
+              "delta_pooled_minus_target": -0.01940385871452411,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03651748433885445,
+              "target_only": 0.05592134305337856
+            },
+            {
+              "delta_pooled_minus_target": -0.0052490557478466,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.010071169248990944,
+              "target_only": 0.015320224996837543
+            }
+          ]
+        }
+      },
+      "rank_mae": [
+        {
+          "mae_log": 0.028869204228532907,
+          "model": "spline_pooled",
+          "rank": 1
+        },
+        {
+          "mae_log": 0.02892479074798037,
+          "model": "transformer_pooled",
+          "rank": 2
+        },
+        {
+          "mae_log": 0.02974464688629913,
+          "model": "spline_target_only",
+          "rank": 3
+        },
+        {
+          "mae_log": 0.04338586788003266,
+          "model": "transformer_target_only",
+          "rank": 4
+        },
+        {
+          "mae_log": 0.0633972858020157,
+          "model": "tft_target_only",
+          "rank": 5
+        },
+        {
+          "mae_log": 0.07361999761191802,
+          "model": "tft_pooled",
+          "rank": 6
+        },
+        {
+          "mae_log": 0.10320021165077051,
+          "model": "last_value",
+          "rank": 7
+        },
+        {
+          "mae_log": 0.10351575227709316,
+          "model": "chronos2_target_only",
+          "rank": 8
+        },
+        {
+          "mae_log": 0.10364124930562957,
+          "model": "chronos2_pooled",
+          "rank": 9
+        },
+        {
+          "mae_log": 0.11041568131346484,
+          "model": "chronos2_zero_shot",
+          "rank": 10
+        }
+      ],
+      "rank_rmse": [
+        {
+          "model": "transformer_pooled",
+          "rank": 1,
+          "rmse_log": 0.03651748433885445
+        },
+        {
+          "model": "spline_pooled",
+          "rank": 2,
+          "rmse_log": 0.037125744737572366
+        },
+        {
+          "model": "spline_target_only",
+          "rank": 3,
+          "rmse_log": 0.03862207919138774
+        },
+        {
+          "model": "transformer_target_only",
+          "rank": 4,
+          "rmse_log": 0.05592134305337856
+        },
+        {
+          "model": "tft_target_only",
+          "rank": 5,
+          "rmse_log": 0.07403049858317345
+        },
+        {
+          "model": "tft_pooled",
+          "rank": 6,
+          "rmse_log": 0.0854123667940943
+        },
+        {
+          "model": "last_value",
+          "rank": 7,
+          "rmse_log": 0.118189759419502
+        },
+        {
+          "model": "chronos2_target_only",
+          "rank": 8,
+          "rmse_log": 0.11839705288403618
+        },
+        {
+          "model": "chronos2_pooled",
+          "rank": 9,
+          "rmse_log": 0.11852086022940259
+        },
+        {
+          "model": "chronos2_zero_shot",
+          "rank": 10,
+          "rmse_log": 0.12549398615433238
+        }
+      ],
+      "results": {
+        "chronos2_pooled": {
+          "chronos_label": "history_only_univariate",
+          "covariates_used": false,
+          "coverage80": 0.9550820732594809,
+          "crps_justified": false,
+          "grouping": "STUDYID",
+          "interval_width80": 0.532697988479903,
+          "legacy_animal_balanced_mae": 0.10509745117395748,
+          "mae_log": 0.10364124930562957,
+          "mae_log_pooled": 0.0952064647889898,
+          "mean_quantile_loss": 0.03452067015294236,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 232,
+            "n_matched": 232,
+            "n_obs": 232,
+            "n_obs_key_unique": 232,
+            "n_obs_only": 0,
+            "n_pred": 232,
+            "n_pred_key_unique": 232,
+            "n_pred_only": 0,
+            "one_to_one": true
+          },
+          "n_scored": 232,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 17.0,
+              "coverage80": 1.0,
+              "interval_width80": 0.25486999239240377,
+              "mae_log": 0.03310042279611858,
+              "mean_quantile_loss": 0.0149562816834602,
+              "n_obs": 35,
+              "rmse_log": 0.039264674116946764
+            },
+            {
+              "DAY": 21.0,
+              "coverage80": 0.9620253164556962,
+              "interval_width80": 0.4780904009372373,
+              "mae_log": 0.08056804727984879,
+              "mean_quantile_loss": 0.028905377193146155,
+              "n_obs": 79,
+              "rmse_log": 0.09000910127648316
+            },
+            {
+              "DAY": 24.0,
+              "coverage80": 0.8947368421052632,
+              "interval_width80": 0.3862886177866082,
+              "mae_log": 0.08463567002477519,
+              "mean_quantile_loss": 0.02934586952614394,
+              "n_obs": 38,
+              "rmse_log": 0.09636395852379225
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.95,
+              "interval_width80": 0.635459977388382,
+              "mae_log": 0.14185442296414968,
+              "mean_quantile_loss": 0.04396792664386902,
+              "n_obs": 80,
+              "rmse_log": 0.15637301860976333
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.9629629629629629,
+              "horizon_step": 1,
+              "interval_width80": 0.44055732679955756,
+              "mae_log": 0.070307386059954,
+              "mean_quantile_loss": 0.026347638355326455,
+              "n_obs": 81,
+              "rmse_log": 0.08365427196321895
+            },
+            {
+              "coverage80": 0.9625,
+              "horizon_step": 2,
+              "interval_width80": 0.5653007209300995,
+              "mae_log": 0.11462543174496376,
+              "mean_quantile_loss": 0.03686110138384306,
+              "n_obs": 80,
+              "rmse_log": 0.13661924565614078
+            },
+            {
+              "coverage80": 0.9210526315789473,
+              "horizon_step": 3,
+              "interval_width80": 0.39862632751464844,
+              "mae_log": 0.0847588137347664,
+              "mean_quantile_loss": 0.028905276761969436,
+              "n_obs": 38,
+              "rmse_log": 0.09530428333612534
+            },
+            {
+              "coverage80": 0.9393939393939394,
+              "horizon_step": 4,
+              "interval_width80": 0.4893441055760239,
+              "mae_log": 0.12127673026276174,
+              "mean_quantile_loss": 0.038124984734512646,
+              "n_obs": 33,
+              "rmse_log": 0.13460184479342446
+            }
+          ],
+          "point_definition": "median",
+          "rmse_log": 0.11852086022940259,
+          "rmse_log_pooled": 0.11377267848745878,
+          "status": "ok"
+        },
+        "chronos2_target_only": {
+          "chronos_label": "history_only_univariate",
+          "covariates_used": false,
+          "coverage80": 0.9550820732594809,
+          "crps_justified": false,
+          "grouping": "STUDYID",
+          "interval_width80": 0.5320796907945757,
+          "legacy_animal_balanced_mae": 0.10496874165569184,
+          "mae_log": 0.10351575227709316,
+          "mae_log_pooled": 0.0951026892878841,
+          "mean_quantile_loss": 0.03448644066119094,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 232,
+            "n_matched": 232,
+            "n_obs": 232,
+            "n_obs_key_unique": 232,
+            "n_obs_only": 0,
+            "n_pred": 232,
+            "n_pred_key_unique": 232,
+            "n_pred_only": 0,
+            "one_to_one": true
+          },
+          "n_scored": 232,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 17.0,
+              "coverage80": 1.0,
+              "interval_width80": 0.25491184507097514,
+              "mae_log": 0.033073488308639376,
+              "mean_quantile_loss": 0.01495314940828754,
+              "n_obs": 35,
+              "rmse_log": 0.039253003810688726
+            },
+            {
+              "DAY": 21.0,
+              "coverage80": 0.9620253164556962,
+              "interval_width80": 0.47748554809184013,
+              "mae_log": 0.08042443479244211,
+              "mean_quantile_loss": 0.02886985958508302,
+              "n_obs": 79,
+              "rmse_log": 0.08984880940951732
+            },
+            {
+              "DAY": 24.0,
+              "coverage80": 0.8947368421052632,
+              "interval_width80": 0.38623024287976715,
+              "mae_log": 0.08459067346290686,
+              "mean_quantile_loss": 0.029335469135607806,
+              "n_obs": 38,
+              "rmse_log": 0.0962989289188856
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.95,
+              "interval_width80": 0.6347653567790985,
+              "mae_log": 0.14172844854741684,
+              "mean_quantile_loss": 0.04393182792522583,
+              "n_obs": 80,
+              "rmse_log": 0.1562379950363045
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.9629629629629629,
+              "horizon_step": 1,
+              "interval_width80": 0.43994320763481987,
+              "mae_log": 0.07017068096751207,
+              "mean_quantile_loss": 0.02631337348469461,
+              "n_obs": 81,
+              "rmse_log": 0.08349332123208444
+            },
+            {
+              "coverage80": 0.9625,
+              "horizon_step": 2,
+              "interval_width80": 0.5647165477275848,
+              "mae_log": 0.11451754137745578,
+              "mean_quantile_loss": 0.03682879948107205,
+              "n_obs": 80,
+              "rmse_log": 0.13649181287982592
+            },
+            {
+              "coverage80": 0.9210526315789473,
+              "horizon_step": 3,
+              "interval_width80": 0.39856489081131785,
+              "mae_log": 0.08470707871095189,
+              "mean_quantile_loss": 0.028892889591768618,
+              "n_obs": 38,
+              "rmse_log": 0.0952308729599673
+            },
+            {
+              "coverage80": 0.9393939393939394,
+              "horizon_step": 4,
+              "interval_width80": 0.48918367154670483,
+              "mae_log": 0.12120383197600008,
+              "mean_quantile_loss": 0.03811382371059241,
+              "n_obs": 33,
+              "rmse_log": 0.13452667281247196
+            }
+          ],
+          "point_definition": "median",
+          "rmse_log": 0.11839705288403618,
+          "rmse_log_pooled": 0.11365588347542203,
+          "status": "ok"
+        },
+        "chronos2_zero_shot": {
+          "chronos_label": "history_only_univariate",
+          "covariates_used": false,
+          "coverage80": 0.9550820732594809,
+          "crps_justified": false,
+          "grouping": "STUDYID",
+          "interval_width80": 0.5438053213114726,
+          "legacy_animal_balanced_mae": 0.11191793501312342,
+          "mae_log": 0.11041568131346484,
+          "mae_log_pooled": 0.10136836471682711,
+          "mean_quantile_loss": 0.035972927698550365,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 232,
+            "n_matched": 232,
+            "n_obs": 232,
+            "n_obs_key_unique": 232,
+            "n_obs_only": 0,
+            "n_pred": 232,
+            "n_pred_key_unique": 232,
+            "n_pred_only": 0,
+            "one_to_one": true
+          },
+          "n_scored": 232,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 17.0,
+              "coverage80": 1.0,
+              "interval_width80": 0.2611496652875628,
+              "mae_log": 0.03552665141853437,
+              "mean_quantile_loss": 0.015557396560680429,
+              "n_obs": 35,
+              "rmse_log": 0.04160831314439731
+            },
+            {
+              "DAY": 21.0,
+              "coverage80": 0.9620253164556962,
+              "interval_width80": 0.49179684964916376,
+              "mae_log": 0.08727057259009695,
+              "mean_quantile_loss": 0.030139184804911002,
+              "n_obs": 79,
+              "rmse_log": 0.09717662542639863
+            },
+            {
+              "DAY": 24.0,
+              "coverage80": 0.8947368421052632,
+              "interval_width80": 0.3918135166168213,
+              "mae_log": 0.08941457745758596,
+              "mean_quantile_loss": 0.030403837841462576,
+              "n_obs": 38,
+              "rmse_log": 0.1016221375840252
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.95,
+              "interval_width80": 0.6443694353103637,
+              "mae_log": 0.14977373295811575,
+              "mean_quantile_loss": 0.045797421041151413,
+              "n_obs": 80,
+              "rmse_log": 0.16457006067794638
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.9629629629629629,
+              "horizon_step": 1,
+              "interval_width80": 0.4537426807262279,
+              "mae_log": 0.07606259838034346,
+              "mean_quantile_loss": 0.0274525943716979,
+              "n_obs": 81,
+              "rmse_log": 0.0901531932010037
+            },
+            {
+              "coverage80": 0.9625,
+              "horizon_step": 2,
+              "interval_width80": 0.5753794848918915,
+              "mae_log": 0.12146850949037494,
+              "mean_quantile_loss": 0.03849137167547919,
+              "n_obs": 80,
+              "rmse_log": 0.14411152755613482
+            },
+            {
+              "coverage80": 0.9210526315789473,
+              "horizon_step": 3,
+              "interval_width80": 0.4040161935906661,
+              "mae_log": 0.08974977567116862,
+              "mean_quantile_loss": 0.02998066883253227,
+              "n_obs": 38,
+              "rmse_log": 0.10084599880037552
+            },
+            {
+              "coverage80": 0.9393939393939394,
+              "horizon_step": 4,
+              "interval_width80": 0.49377353263623786,
+              "mae_log": 0.1281338760836869,
+              "mean_quantile_loss": 0.03946693050598133,
+              "n_obs": 33,
+              "rmse_log": 0.14136392174551282
+            }
+          ],
+          "point_definition": "median",
+          "rmse_log": 0.12549398615433238,
+          "rmse_log_pooled": 0.12044649087411409,
+          "status": "ok"
+        },
+        "last_value": {
+          "chronos_label": null,
+          "covariates_used": null,
+          "coverage80": 0.0,
+          "crps_justified": false,
+          "grouping": "STUDYID",
+          "interval_width80": 0.0,
+          "legacy_animal_balanced_mae": 0.10421726920014332,
+          "mae_log": 0.10320021165077051,
+          "mae_log_pooled": 0.09870766815931732,
+          "mean_quantile_loss": 0.051600105825385253,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 232,
+            "n_matched": 232,
+            "n_obs": 232,
+            "n_obs_key_unique": 232,
+            "n_obs_only": 0,
+            "n_pred": 232,
+            "n_pred_key_unique": 232,
+            "n_pred_only": 0,
+            "one_to_one": true
+          },
+          "n_scored": 232,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 17.0,
+              "coverage80": 0.0,
+              "interval_width80": 0.0,
+              "mae_log": 0.040222339516037965,
+              "mean_quantile_loss": 0.020111169758018983,
+              "n_obs": 35,
+              "rmse_log": 0.046391486127395874
+            },
+            {
+              "DAY": 21.0,
+              "coverage80": 0.0,
+              "interval_width80": 0.0,
+              "mae_log": 0.0793979284739346,
+              "mean_quantile_loss": 0.0396989642369673,
+              "n_obs": 79,
+              "rmse_log": 0.08708224007599041
+            },
+            {
+              "DAY": 24.0,
+              "coverage80": 0.0,
+              "interval_width80": 0.0,
+              "mae_log": 0.10046911862583906,
+              "mean_quantile_loss": 0.05023455931291953,
+              "n_obs": 38,
+              "rmse_log": 0.11332624505671167
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.0,
+              "interval_width80": 0.0,
+              "mae_log": 0.14252667840846964,
+              "mean_quantile_loss": 0.07126333920423482,
+              "n_obs": 80,
+              "rmse_log": 0.15431701158986863
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.0,
+              "horizon_step": 1,
+              "interval_width80": 0.0,
+              "mae_log": 0.06710856175069606,
+              "mean_quantile_loss": 0.03355428087534803,
+              "n_obs": 81,
+              "rmse_log": 0.07689589468707712
+            },
+            {
+              "coverage80": 0.0,
+              "horizon_step": 2,
+              "interval_width80": 0.0,
+              "mae_log": 0.11303412054672077,
+              "mean_quantile_loss": 0.056517060273360384,
+              "n_obs": 80,
+              "rmse_log": 0.1300620815301704
+            },
+            {
+              "coverage80": 0.0,
+              "horizon_step": 3,
+              "interval_width80": 0.0,
+              "mae_log": 0.10184669754214483,
+              "mean_quantile_loss": 0.050923348771072414,
+              "n_obs": 38,
+              "rmse_log": 0.11381976534904882
+            },
+            {
+              "coverage80": 0.0,
+              "horizon_step": 4,
+              "interval_width80": 0.0,
+              "mae_log": 0.13792367760048702,
+              "mean_quantile_loss": 0.06896183880024351,
+              "n_obs": 33,
+              "rmse_log": 0.1500509453399332
+            }
+          ],
+          "point_definition": "median",
+          "rmse_log": 0.118189759419502,
+          "rmse_log_pooled": 0.11498753677339517,
+          "status": "ok"
+        },
+        "spline_pooled": {
+          "chronos_label": null,
+          "covariates_used": null,
+          "coverage80": 0.9034527371229886,
+          "crps_justified": true,
+          "grouping": "STUDYID",
+          "interval_width80": 0.16364041327880643,
+          "legacy_animal_balanced_mae": 0.029140355262149052,
+          "mae_log": 0.028869204228532907,
+          "mae_log_pooled": 0.028452149035053824,
+          "mean_quantile_loss": 0.012117501999434281,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 232,
+            "n_matched": 232,
+            "n_obs": 232,
+            "n_obs_key_unique": 232,
+            "n_obs_only": 0,
+            "n_pred": 324,
+            "n_pred_key_unique": 324,
+            "n_pred_only": 92,
+            "one_to_one": true
+          },
+          "n_scored": 232,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 17.0,
+              "coverage80": 0.9428571428571428,
+              "interval_width80": 0.0851185116732612,
+              "mae_log": 0.021205564942304557,
+              "mean_quantile_loss": 0.0072002272974164725,
+              "n_obs": 35,
+              "rmse_log": 0.025188357732969034
+            },
+            {
+              "DAY": 21.0,
+              "coverage80": 0.9240506329113924,
+              "interval_width80": 0.1433249488840991,
+              "mae_log": 0.02388170420344485,
+              "mean_quantile_loss": 0.01011602065930404,
+              "n_obs": 79,
+              "rmse_log": 0.029405675270397474
+            },
+            {
+              "DAY": 24.0,
+              "coverage80": 0.868421052631579,
+              "interval_width80": 0.12292993543593565,
+              "mae_log": 0.027110781306764562,
+              "mean_quantile_loss": 0.010122760160024686,
+              "n_obs": 38,
+              "rmse_log": 0.03435354913269311
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.8625,
+              "interval_width80": 0.19505016806724154,
+              "mae_log": 0.03677299351778289,
+              "mean_quantile_loss": 0.015299055225430796,
+              "n_obs": 80,
+              "rmse_log": 0.046834372253821345
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.9506172839506173,
+              "horizon_step": 1,
+              "interval_width80": 0.13737361726579525,
+              "mae_log": 0.022892370224729643,
+              "mean_quantile_loss": 0.009503023165154216,
+              "n_obs": 81,
+              "rmse_log": 0.0273045846839632
+            },
+            {
+              "coverage80": 0.9,
+              "horizon_step": 2,
+              "interval_width80": 0.17758187928749175,
+              "mae_log": 0.03165756126416526,
+              "mean_quantile_loss": 0.013414954016306612,
+              "n_obs": 80,
+              "rmse_log": 0.0410332384602343
+            },
+            {
+              "coverage80": 0.8421052631578947,
+              "horizon_step": 3,
+              "interval_width80": 0.12444350208306917,
+              "mae_log": 0.02726098498943693,
+              "mean_quantile_loss": 0.010474872300749031,
+              "n_obs": 38,
+              "rmse_log": 0.03600921651826268
+            },
+            {
+              "coverage80": 0.8181818181818182,
+              "horizon_step": 4,
+              "interval_width80": 0.13680313459598384,
+              "mae_log": 0.03569982597568371,
+              "mean_quantile_loss": 0.012690198378773153,
+              "n_obs": 33,
+              "rmse_log": 0.04488353537034203
+            }
+          ],
+          "point_definition": "gaussian_mean",
+          "rmse_log": 0.037125744737572366,
+          "rmse_log_pooled": 0.036603635812716064,
+          "status": "ok"
+        },
+        "spline_target_only": {
+          "chronos_label": null,
+          "covariates_used": null,
+          "coverage80": 0.8853804479663621,
+          "crps_justified": true,
+          "grouping": "STUDYID",
+          "interval_width80": 0.1171230878862514,
+          "legacy_animal_balanced_mae": 0.02993331824156639,
+          "mae_log": 0.02974464688629913,
+          "mae_log_pooled": 0.02989240840674671,
+          "mean_quantile_loss": 0.010518640709306573,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 232,
+            "n_matched": 232,
+            "n_obs": 232,
+            "n_obs_key_unique": 232,
+            "n_obs_only": 0,
+            "n_pred": 324,
+            "n_pred_key_unique": 324,
+            "n_pred_only": 92,
+            "one_to_one": true
+          },
+          "n_scored": 232,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 17.0,
+              "coverage80": 0.9428571428571428,
+              "interval_width80": 0.08258039710573237,
+              "mae_log": 0.018753578767601756,
+              "mean_quantile_loss": 0.006601723251297223,
+              "n_obs": 35,
+              "rmse_log": 0.023001015868248882
+            },
+            {
+              "DAY": 21.0,
+              "coverage80": 0.8987341772151899,
+              "interval_width80": 0.1046621847258478,
+              "mae_log": 0.024273204833608696,
+              "mean_quantile_loss": 0.008776508571916064,
+              "n_obs": 79,
+              "rmse_log": 0.030907533900502375
+            },
+            {
+              "DAY": 24.0,
+              "coverage80": 0.8421052631578947,
+              "interval_width80": 0.11739086350054433,
+              "mae_log": 0.03331242080815752,
+              "mean_quantile_loss": 0.012108521306206918,
+              "n_obs": 38,
+              "rmse_log": 0.04404710377926879
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.8625,
+              "interval_width80": 0.14133050846008083,
+              "mae_log": 0.03869010401167629,
+              "mean_quantile_loss": 0.013323494583210593,
+              "n_obs": 80,
+              "rmse_log": 0.04801703820227036
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.9135802469135802,
+              "horizon_step": 1,
+              "interval_width80": 0.0950105167751566,
+              "mae_log": 0.02123091056301856,
+              "mean_quantile_loss": 0.00776378645062707,
+              "n_obs": 81,
+              "rmse_log": 0.027634500896901167
+            },
+            {
+              "coverage80": 0.8875,
+              "horizon_step": 2,
+              "interval_width80": 0.12326242846716895,
+              "mae_log": 0.031331094701841235,
+              "mean_quantile_loss": 0.010815271689117759,
+              "n_obs": 80,
+              "rmse_log": 0.03866089735171273
+            },
+            {
+              "coverage80": 0.8157894736842105,
+              "horizon_step": 3,
+              "interval_width80": 0.1196626586675364,
+              "mae_log": 0.03411771469260464,
+              "mean_quantile_loss": 0.01261469104817736,
+              "n_obs": 38,
+              "rmse_log": 0.045880626144100184
+            },
+            {
+              "coverage80": 0.8787878787878788,
+              "horizon_step": 4,
+              "interval_width80": 0.14611796413158115,
+              "mae_log": 0.04279922000892299,
+              "mean_quantile_loss": 0.014453368782076644,
+              "n_obs": 33,
+              "rmse_log": 0.05243713754310932
+            }
+          ],
+          "point_definition": "gaussian_mean",
+          "rmse_log": 0.03862207919138774,
+          "rmse_log_pooled": 0.0389606282279974,
+          "status": "ok"
+        },
+        "tft_pooled": {
+          "chronos_label": null,
+          "covariates_used": null,
+          "coverage80": 0.5725721678660952,
+          "crps_justified": false,
+          "grouping": "STUDYID",
+          "interval_width80": 0.133319175377364,
+          "legacy_animal_balanced_mae": 0.07452368209134722,
+          "mae_log": 0.07361999761191802,
+          "mae_log_pooled": 0.06834827598919542,
+          "mean_quantile_loss": 0.024416461673702802,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 232,
+            "n_matched": 232,
+            "n_obs": 232,
+            "n_obs_key_unique": 232,
+            "n_obs_only": 0,
+            "n_pred": 232,
+            "n_pred_key_unique": 232,
+            "n_pred_only": 0,
+            "one_to_one": true
+          },
+          "n_scored": 232,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 17.0,
+              "coverage80": 0.6571428571428571,
+              "interval_width80": 0.11610710961478092,
+              "mae_log": 0.05627974366776878,
+              "mean_quantile_loss": 0.017467436690710807,
+              "n_obs": 35,
+              "rmse_log": 0.06701317332632795
+            },
+            {
+              "DAY": 21.0,
+              "coverage80": 0.620253164556962,
+              "interval_width80": 0.12796470183360426,
+              "mae_log": 0.06781288138761496,
+              "mean_quantile_loss": 0.022235022924927243,
+              "n_obs": 79,
+              "rmse_log": 0.08056280578629785
+            },
+            {
+              "DAY": 24.0,
+              "coverage80": 0.7631578947368421,
+              "interval_width80": 0.14390018111781072,
+              "mae_log": 0.055180516933801924,
+              "mean_quantile_loss": 0.01740233387768346,
+              "n_obs": 38,
+              "rmse_log": 0.06290575188400276
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.5125,
+              "interval_width80": 0.14398106336593627,
+              "mae_log": 0.0804116466001922,
+              "mean_quantile_loss": 0.027026499980038265,
+              "n_obs": 80,
+              "rmse_log": 0.09600331152185405
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.5802469135802469,
+              "horizon_step": 1,
+              "interval_width80": 0.12035087891566901,
+              "mae_log": 0.0709361908451424,
+              "mean_quantile_loss": 0.023156865455394204,
+              "n_obs": 81,
+              "rmse_log": 0.0843657658613091
+            },
+            {
+              "coverage80": 0.55,
+              "horizon_step": 2,
+              "interval_width80": 0.135845285654068,
+              "mae_log": 0.07510210981522124,
+              "mean_quantile_loss": 0.02538623261990246,
+              "n_obs": 80,
+              "rmse_log": 0.09175701801207681
+            },
+            {
+              "coverage80": 0.7894736842105263,
+              "horizon_step": 3,
+              "interval_width80": 0.14451457324780917,
+              "mae_log": 0.053758247294515775,
+              "mean_quantile_loss": 0.016997004224924717,
+              "n_obs": 38,
+              "rmse_log": 0.061799839899574445
+            },
+            {
+              "coverage80": 0.6363636363636364,
+              "horizon_step": 4,
+              "interval_width80": 0.1530925577337091,
+              "mae_log": 0.06242382995840926,
+              "mean_quantile_loss": 0.019358936635542286,
+              "n_obs": 33,
+              "rmse_log": 0.07015460113856059
+            }
+          ],
+          "point_definition": "median",
+          "rmse_log": 0.0854123667940943,
+          "rmse_log_pooled": 0.08193820266032426,
+          "status": "ok"
+        },
+        "tft_target_only": {
+          "chronos_label": null,
+          "covariates_used": null,
+          "coverage80": 0.4874666451039055,
+          "crps_justified": false,
+          "grouping": "STUDYID",
+          "interval_width80": 0.12254935686634748,
+          "legacy_animal_balanced_mae": 0.06512699387923736,
+          "mae_log": 0.0633972858020157,
+          "mae_log_pooled": 0.05894768271374922,
+          "mean_quantile_loss": 0.023633102190649756,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 232,
+            "n_matched": 232,
+            "n_obs": 232,
+            "n_obs_key_unique": 232,
+            "n_obs_only": 0,
+            "n_pred": 232,
+            "n_pred_key_unique": 232,
+            "n_pred_only": 0,
+            "one_to_one": true
+          },
+          "n_scored": 232,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 17.0,
+              "coverage80": 0.6571428571428571,
+              "interval_width80": 0.1099755423409598,
+              "mae_log": 0.043815962308242105,
+              "mean_quantile_loss": 0.01482757934007401,
+              "n_obs": 35,
+              "rmse_log": 0.05092244468715283
+            },
+            {
+              "DAY": 21.0,
+              "coverage80": 0.4936708860759494,
+              "interval_width80": 0.1171794360197043,
+              "mae_log": 0.061036521102027785,
+              "mean_quantile_loss": 0.022453920075427954,
+              "n_obs": 79,
+              "rmse_log": 0.07194183671946884
+            },
+            {
+              "DAY": 24.0,
+              "coverage80": 0.6578947368421053,
+              "interval_width80": 0.12920358306483218,
+              "mae_log": 0.0444050683708698,
+              "mean_quantile_loss": 0.015268363129270143,
+              "n_obs": 38,
+              "rmse_log": 0.05304241461682784
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.45,
+              "interval_width80": 0.1318195521831512,
+              "mae_log": 0.07041282429560122,
+              "mean_quantile_loss": 0.02647200562621276,
+              "n_obs": 80,
+              "rmse_log": 0.0839362485837902
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.49382716049382713,
+              "horizon_step": 1,
+              "interval_width80": 0.11201292791484313,
+              "mae_log": 0.061502537029027776,
+              "mean_quantile_loss": 0.023101754754862126,
+              "n_obs": 81,
+              "rmse_log": 0.07485589322040284
+            },
+            {
+              "coverage80": 0.475,
+              "horizon_step": 2,
+              "interval_width80": 0.1247752547264099,
+              "mae_log": 0.06483628476115824,
+              "mean_quantile_loss": 0.02386621227429257,
+              "n_obs": 80,
+              "rmse_log": 0.07703521300963893
+            },
+            {
+              "coverage80": 0.6578947368421053,
+              "horizon_step": 3,
+              "interval_width80": 0.1310453540400455,
+              "mae_log": 0.04696928879227447,
+              "mean_quantile_loss": 0.01604801462772382,
+              "n_obs": 38,
+              "rmse_log": 0.05598674564785043
+            },
+            {
+              "coverage80": 0.6060606060606061,
+              "horizon_step": 4,
+              "interval_width80": 0.1371766292687618,
+              "mae_log": 0.05219457985574179,
+              "mean_quantile_loss": 0.018194531482725502,
+              "n_obs": 33,
+              "rmse_log": 0.06090928575455501
+            }
+          ],
+          "point_definition": "median",
+          "rmse_log": 0.07403049858317345,
+          "rmse_log_pooled": 0.07101995106923358,
+          "status": "ok"
+        },
+        "transformer_pooled": {
+          "chronos_label": null,
+          "covariates_used": null,
+          "coverage80": 0.8457993046009542,
+          "crps_justified": true,
+          "grouping": "STUDYID",
+          "interval_width80": 0.10587101966302663,
+          "legacy_animal_balanced_mae": 0.02917191530954339,
+          "mae_log": 0.02892479074798037,
+          "mae_log_pooled": 0.028796175947930196,
+          "mean_quantile_loss": 0.010071169248990944,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 232,
+            "n_matched": 232,
+            "n_obs": 232,
+            "n_obs_key_unique": 232,
+            "n_obs_only": 0,
+            "n_pred": 324,
+            "n_pred_key_unique": 324,
+            "n_pred_only": 92,
+            "one_to_one": true
+          },
+          "n_scored": 232,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 17.0,
+              "coverage80": 0.8285714285714286,
+              "interval_width80": 0.06875979799679054,
+              "mae_log": 0.01954383628820247,
+              "mean_quantile_loss": 0.006558895500615406,
+              "n_obs": 35,
+              "rmse_log": 0.023496198311673985
+            },
+            {
+              "DAY": 21.0,
+              "coverage80": 0.8481012658227848,
+              "interval_width80": 0.09481954166162797,
+              "mae_log": 0.025467333959734138,
+              "mean_quantile_loss": 0.008993660505342988,
+              "n_obs": 79,
+              "rmse_log": 0.03229637614574083
+            },
+            {
+              "DAY": 24.0,
+              "coverage80": 0.8157894736842105,
+              "interval_width80": 0.10754182275866041,
+              "mae_log": 0.03236351935070597,
+              "mean_quantile_loss": 0.011371462944845461,
+              "n_obs": 38,
+              "rmse_log": 0.040866946161993344
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.8375,
+              "interval_width80": 0.1266937105415316,
+              "mae_log": 0.03443681789608619,
+              "mean_quantile_loss": 0.011966880074600058,
+              "n_obs": 80,
+              "rmse_log": 0.04259099075379292
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.8518518518518519,
+              "horizon_step": 1,
+              "interval_width80": 0.08468451052464326,
+              "mae_log": 0.02411417265067962,
+              "mean_quantile_loss": 0.008203818297974437,
+              "n_obs": 81,
+              "rmse_log": 0.03016029160698889
+            },
+            {
+              "coverage80": 0.85,
+              "horizon_step": 2,
+              "interval_width80": 0.11248713006441458,
+              "mae_log": 0.027890461489704144,
+              "mean_quantile_loss": 0.009855451473788258,
+              "n_obs": 80,
+              "rmse_log": 0.03485314663093907
+            },
+            {
+              "coverage80": 0.7894736842105263,
+              "horizon_step": 3,
+              "interval_width80": 0.10932035227026926,
+              "mae_log": 0.033756761517624995,
+              "mean_quantile_loss": 0.01193605464050994,
+              "n_obs": 38,
+              "rmse_log": 0.04295428850470784
+            },
+            {
+              "coverage80": 0.8181818181818182,
+              "horizon_step": 4,
+              "interval_width80": 0.12444950561783036,
+              "mae_log": 0.03677184782935379,
+              "mean_quantile_loss": 0.012818516482951505,
+              "n_obs": 33,
+              "rmse_log": 0.04583708013631835
+            }
+          ],
+          "point_definition": "gaussian_mean",
+          "rmse_log": 0.03651748433885445,
+          "rmse_log_pooled": 0.03657228259794931,
+          "status": "ok"
+        },
+        "transformer_target_only": {
+          "chronos_label": null,
+          "covariates_used": null,
+          "coverage80": 0.6802377294412549,
+          "crps_justified": true,
+          "grouping": "STUDYID",
+          "interval_width80": 0.10662341940056552,
+          "legacy_animal_balanced_mae": 0.04299838374858905,
+          "mae_log": 0.04338586788003266,
+          "mae_log_pooled": 0.043736809095032435,
+          "mean_quantile_loss": 0.015320224996837543,
+          "merge": {
+            "duplicate_obs_keys": 0,
+            "duplicate_pred_keys": 0,
+            "grouping_column": "STUDYID",
+            "inflated": false,
+            "n_keys_in_both": 232,
+            "n_matched": 232,
+            "n_obs": 232,
+            "n_obs_key_unique": 232,
+            "n_obs_only": 0,
+            "n_pred": 324,
+            "n_pred_key_unique": 324,
+            "n_pred_only": 92,
+            "one_to_one": true
+          },
+          "n_scored": 232,
+          "n_studies": 2,
+          "per_horizon_day": [
+            {
+              "DAY": 17.0,
+              "coverage80": 0.7714285714285715,
+              "interval_width80": 0.07012701108174417,
+              "mae_log": 0.022637211239565858,
+              "mean_quantile_loss": 0.007743053809613925,
+              "n_obs": 35,
+              "rmse_log": 0.027664721901185043
+            },
+            {
+              "DAY": 21.0,
+              "coverage80": 0.7848101265822784,
+              "interval_width80": 0.09633963992284712,
+              "mae_log": 0.030770456950907677,
+              "mean_quantile_loss": 0.01074231135250837,
+              "n_obs": 79,
+              "rmse_log": 0.03845760420392981
+            },
+            {
+              "DAY": 24.0,
+              "coverage80": 0.5789473684210527,
+              "interval_width80": 0.10885713806394488,
+              "mae_log": 0.05141403708771287,
+              "mean_quantile_loss": 0.018335768710479046,
+              "n_obs": 38,
+              "rmse_log": 0.06293451139200767
+            },
+            {
+              "DAY": 28.0,
+              "coverage80": 0.55,
+              "interval_width80": 0.1264783177322008,
+              "mae_log": 0.062125472602599055,
+              "mean_quantile_loss": 0.02209578091224107,
+              "n_obs": 80,
+              "rmse_log": 0.07435845032056286
+            }
+          ],
+          "per_horizon_step": [
+            {
+              "coverage80": 0.8518518518518519,
+              "horizon_step": 1,
+              "interval_width80": 0.08602175309226569,
+              "mae_log": 0.02329949850090349,
+              "mean_quantile_loss": 0.008156754646663406,
+              "n_obs": 81,
+              "rmse_log": 0.028832810477570397
+            },
+            {
+              "coverage80": 0.575,
+              "horizon_step": 2,
+              "interval_width80": 0.11299071479679754,
+              "mae_log": 0.050740135393975795,
+              "mean_quantile_loss": 0.017750783591378255,
+              "n_obs": 80,
+              "rmse_log": 0.06123093897368354
+            },
+            {
+              "coverage80": 0.5526315789473685,
+              "horizon_step": 3,
+              "interval_width80": 0.11051805402062048,
+              "mae_log": 0.0539913846551582,
+              "mean_quantile_loss": 0.019122962975644073,
+              "n_obs": 38,
+              "rmse_log": 0.06495806660625292
+            },
+            {
+              "coverage80": 0.5757575757575758,
+              "horizon_step": 4,
+              "interval_width80": 0.12464873847791025,
+              "mae_log": 0.06511505706243233,
+              "mean_quantile_loss": 0.023534507799929296,
+              "n_obs": 33,
+              "rmse_log": 0.07955382536778123
+            }
+          ],
+          "point_definition": "gaussian_mean",
+          "rmse_log": 0.05592134305337856,
+          "rmse_log_pooled": 0.05634215523587387,
+          "status": "ok"
+        }
+      }
+    }
+  ],
+  "superseded": {
+    "docs/v3/official_seq_RESULTS.md": "tables preserved; banner marks superseded",
+    "docs/v3/seq_diag_RESULTS.md": "tables preserved; banner marks superseded",
+    "runs/v3_official_seq": "rmse_log was |error|; grouping often USUBJID after STUDYID merge collision",
+    "runs/v3_seq_diag": "same metric name; Chronos LoRA pooled as if both datasets completed"
+  },
+  "training_run": false
+}

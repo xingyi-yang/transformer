@@ -1,0 +1,226 @@
+{
+  "coverage50": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.43478260869565216,
+    "study_balanced": 0.44089147286821706,
+    "weight_mean": 0.9999999999999999
+  },
+  "coverage80": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.6956521739130435,
+    "study_balanced": 0.710109819121447,
+    "weight_mean": 0.9999999999999999
+  },
+  "crps_justified": true,
+  "crps_log": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.02898809216382503,
+    "study_balanced": 0.02878903211603623,
+    "weight_mean": 0.9999999999999999
+  },
+  "crps_note": "Gaussian CRPS from the hierarchical residual layer.",
+  "grouping": "STUDYID",
+  "horizon_units": {
+    "calendar_day": "DAY of the scored visit",
+    "fabricated_calendar_steps": false,
+    "visit_step": "1-based rank among observed future visits for that animal"
+  },
+  "interval_width50": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.05696192540342,
+    "study_balanced": 0.05701485129959575,
+    "weight_mean": 0.9999999999999999
+  },
+  "interval_width80": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.10822943514851993,
+    "study_balanced": 0.10832999600223511,
+    "weight_mean": 0.9999999999999999
+  },
+  "legacy_animal_balanced_mae": {
+    "n_obs": 115,
+    "n_studies": 58,
+    "pooled": 0.0408924353826237,
+    "study_balanced": 0.0409328485862416,
+    "weight_mean": 1.0
+  },
+  "mae_log": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.0408924353826237,
+    "study_balanced": 0.040535755106582715,
+    "weight_mean": 0.9999999999999999
+  },
+  "mean_quantile_loss": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.014263340552864797,
+    "study_balanced": 0.014172849597787463,
+    "weight_mean": 0.9999999999999999
+  },
+  "merge": {
+    "duplicate_obs_keys": 0,
+    "duplicate_pred_keys": 0,
+    "grouping_column": "STUDYID",
+    "inflated": false,
+    "n_keys_in_both": 115,
+    "n_matched": 115,
+    "n_obs": 115,
+    "n_obs_key_unique": 115,
+    "n_obs_only": 0,
+    "n_pred": 116,
+    "n_pred_key_unique": 116,
+    "n_pred_only": 1,
+    "one_to_one": true
+  },
+  "n_obs_available": 115,
+  "n_pred_rows": 116,
+  "n_scored": 115,
+  "per_horizon": [
+    {
+      "DAY": 21.0,
+      "coverage80": 0.7586206896551724,
+      "interval_width80": 0.09511890222847337,
+      "mae_log": 0.03260180841881068,
+      "mean_quantile_loss": 0.011253570433291577,
+      "n_obs": 58,
+      "rmse_log": 0.04024087154037401
+    },
+    {
+      "DAY": 28.0,
+      "coverage80": 0.631578947368421,
+      "interval_width80": 0.12156997741804099,
+      "mae_log": 0.04932851194229309,
+      "mean_quantile_loss": 0.017325913656991928,
+      "n_obs": 57,
+      "rmse_log": 0.06117223943706833
+    }
+  ],
+  "per_horizon_day": [
+    {
+      "DAY": 21.0,
+      "coverage80": 0.7586206896551724,
+      "interval_width80": 0.09511890222847337,
+      "mae_log": 0.03260180841881068,
+      "mean_quantile_loss": 0.011253570433291577,
+      "n_obs": 58,
+      "rmse_log": 0.04024087154037401
+    },
+    {
+      "DAY": 28.0,
+      "coverage80": 0.631578947368421,
+      "interval_width80": 0.12156997741804099,
+      "mae_log": 0.04932851194229309,
+      "mean_quantile_loss": 0.017325913656991928,
+      "n_obs": 57,
+      "rmse_log": 0.06117223943706833
+    }
+  ],
+  "per_horizon_step": [
+    {
+      "coverage80": 0.7586206896551724,
+      "horizon_step": 1,
+      "interval_width80": 0.09511890222847337,
+      "mae_log": 0.03260180841881068,
+      "mean_quantile_loss": 0.011253570433291577,
+      "n_obs": 58,
+      "rmse_log": 0.04024087154037401
+    },
+    {
+      "coverage80": 0.631578947368421,
+      "horizon_step": 2,
+      "interval_width80": 0.12156997741804099,
+      "mae_log": 0.04932851194229309,
+      "mean_quantile_loss": 0.017325913656991928,
+      "n_obs": 57,
+      "rmse_log": 0.06117223943706833
+    }
+  ],
+  "per_study": [
+    {
+      "STUDYID": "SYNA-010",
+      "coverage80": 0.7674418604651163,
+      "interval_width80": 0.10872877180145046,
+      "mae_log": 0.03912133332228226,
+      "mean_quantile_loss": 0.013814006155239417,
+      "n_obs": 43,
+      "rmse_log": 0.049786699977219434
+    },
+    {
+      "STUDYID": "SYNA-011",
+      "coverage80": 0.6527777777777778,
+      "interval_width80": 0.10793122020301975,
+      "mae_log": 0.04195017689088317,
+      "mean_quantile_loss": 0.014531693040335504,
+      "n_obs": 72,
+      "rmse_log": 0.05278792565248793
+    }
+  ],
+  "point_definition": {
+    "column": "MEAN",
+    "legacy_rmse_log": "official_seq/seq_diag rmse_log was |error|, often grouped by USUBJID",
+    "mae_log": "study-balanced mean of |point - LOGW|",
+    "point": "gaussian_mean",
+    "rmse_log": "true RMSE: per-study sqrt(mean (point-LOGW)^2), then mean of studies. Not |error|. Chronos-2 official mean is the median."
+  },
+  "quantile_loss": {
+    "0.1": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.008609973205628969,
+      "study_balanced": 0.008584853464790834,
+      "weight_mean": 0.9999999999999999
+    },
+    "0.25": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.015939728975886157,
+      "study_balanced": 0.015808032240340858,
+      "weight_mean": 0.9999999999999999
+    },
+    "0.5": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.02044621769131185,
+      "study_balanced": 0.020267877553291357,
+      "weight_mean": 0.9999999999999999
+    },
+    "0.75": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.01681901950179383,
+      "study_balanced": 0.016793821455713044,
+      "weight_mean": 0.9999999999999999
+    },
+    "0.9": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.009501763389703169,
+      "study_balanced": 0.009409663274801219,
+      "weight_mean": 0.9999999999999999
+    }
+  },
+  "quantiles": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "representation": "gaussian",
+  "rmse_log": {
+    "definition": "per-study sqrt(mean e^2), then mean of studies; pooled=sqrt(mean e^2)",
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.0516861307682874,
+    "study_balanced": 0.051287312814853686
+  },
+  "status": "ok",
+  "task": "early_history",
+  "trajectory_simulator": false
+}
