@@ -5,8 +5,9 @@
 
 Accept PR #12 as the reported evaluation correction. Prior run directories stay
 frozen. This milestone traces the MAE/RMSE and grouping defects, reconciles the
-dataset-0 Chronos empty-dataset failure, and executes one fresh frozen
-matched-information comparison.
+**seq-diag dataset-0** Chronos empty-dataset failure, and executes **one**
+fresh frozen matched-information comparison (`n_datasets=1`, `n_train_seeds=1`).
+It is not a replicated confirmation and does not add a new model family.
 
 ## Defects (do not assume every run is affected)
 
@@ -21,10 +22,12 @@ matched-information comparison.
 
 Raw train visit counts (39 series ≥ 8) are not the Chronos filter. Chronos
 keeps `context.shape[-1] >= min_past + prediction_length` after official
-preprocess. Dataset-0 **train** survives; **validation** does not (all series
-length 2–4). `pipeline.fit(..., validation_inputs=...)` then raises empty
-dataset. Preflight records both splits. History is not padded. Empty
-validation skips `eval_loss` selection instead of fabricating visits.
+preprocess. On **seq-diag dataset 0**, train survives and **validation** does
+not (all series length 2–4), so `pipeline.fit(..., validation_inputs=...)`
+raises. That failure is not this comparison’s Chronos run (validation here
+kept 31 series). Preflight records both splits. History is not padded. If
+validation is empty, `eval_loss` selection is skipped instead of fabricating
+visits.
 
 ## Covariates
 

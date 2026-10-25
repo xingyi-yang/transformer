@@ -4,6 +4,8 @@
 
 PR #12 evaluation correction is the scoring baseline. Prior artifacts are preserved. Chronos-2 history-only remains the comparator. Covariates are origin-only (SEX, STRAIN, SPECIES, ROUTE, PLANNED_DOSE, DAY).
 
+**Narrative correction (numbers below are unchanged).** This is **one** frozen dataset (`generate_seed=73001`, `train_seed=83001`) and two target test studies, not a replicated confirmation. Covariate-aware Chronos-2 is the same `Chronos2Pipeline` with origin covariates, not a new architecture. On this draw, covariate-aware Chronos (TO MAE 0.1159, pooled 0.1195) is **lower** than last-value (0.1282); history-only Chronos (TO 0.1422, ZS 0.1525) is **higher** than last-value. All Chronos variants remain worse than spline, transformer, and TFT. Spline transfer is mixed (MAE/pinball harmful, RMSE helpful). Seq-diag dataset-0 empty validation is a **prior** artifact; this run’s Chronos validation was usable (31 series kept) and fine-tunes completed.
+
 ## Defect trace
 
 - Affected published metrics: `['runs/v3_official_seq', 'runs/v3_seq_diag']`
