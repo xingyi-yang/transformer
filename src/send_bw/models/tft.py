@@ -406,7 +406,7 @@ class TFTEarlyHistoryModel(ResponseModel):
             raise ValueError(f"species {sorted(bad)} not supported (trained on {sorted(allowed)})")
 
     def _predict_chunk(self, context: pd.DataFrame, times: np.ndarray, hist: pd.DataFrame,
-                       *, as_marginals: bool) -> pd.DataFrame:
+                       *, as_marginals: bool, decoder_logw: float | None = None) -> pd.DataFrame:
         TimeSeriesDataSet, _, _ = _pf()
         ctx = context.reset_index(drop=True)
         rows = []
@@ -415,8 +415,10 @@ class TFTEarlyHistoryModel(ResponseModel):
             hh = hist.loc[hist["USUBJID"] == u].sort_values("DAY")
             if hh.empty:
                 continue  # no observed encoder window: do not fabricate
+            last = float(hh["LOGW"].to_numpy(float)[-1])
+            fill = last if decoder_logw is None else float(decoder_logw)
             enc = self._animal_rows(animal, hh["DAY"].to_numpy(float), hh["LOGW"].to_numpy(float))
-            dec = self._animal_rows(animal, times, np.repeat(hh["LOGW"].to_numpy(float)[-1], len(times)))
+            dec = self._animal_rows(animal, times, np.repeat(fill, len(times)))
             both = pd.concat([enc, dec], ignore_index=True)
             both["time_idx"] = np.arange(len(both), dtype=int)
             rows.append(both)
