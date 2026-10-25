@@ -7,13 +7,17 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
+from send_bw.data.features import FeatureSpec
 from send_bw.models.tft import count_completed_epochs
 from send_bw.tft_audit import (
     CONFIRM_FORBIDDEN_PLACED_IN_TRAIN,
     confirm_34011_erratum,
+    cqr_calibration_units,
     cqr_metric_policy,
     epoch_budget_versus_logged,
+    quantile_loss_scale_note,
     series_versus_animals,
+    tft_feature_applicability,
 )
 from send_bw.tft_early_hist_extend import load_yaml
 from send_bw.tft_intervals import apply_cqr_margin, score_raw_and_calibrated
@@ -153,3 +157,40 @@ def test_consistency_requires_majority_of_studies_and_folds():
     assert rec["previous_finetune_default_failed_confirmation"] is True
     assert rec["any_consistent_improvement"] is False
     assert rec["variants"]["tft_finetune"]["n_studies_beats_reference"] == 0
+
+
+def test_audit_notes_distinguish_cqr_and_quantile_scales():
+    pol = cqr_metric_policy()
+    assert "validation" in pol["calibration_data"].lower()
+    assert "pair-level" in pol["calibration_data"]
+    units = cqr_calibration_units()
+    assert units["study_balanced"] is False
+    assert units["unit"].startswith("aligned")
+    scale = quantile_loss_scale_note()
+    assert scale["not_comparable_without_rescaling"] is True
+    assert "2 * pinball" in scale["training"]
+
+
+def test_tft_applicability_is_recorded_not_enforced():
+    spec = FeatureSpec(
+        species="RAT", strains=["SPRAGUE-DAWLEY"], routes=["ORAL GAVAGE"],
+        sexes=["M", "F"], zb_mean={"M": 5.5, "F": 5.2}, max_dose=300.0,
+        max_day=28.0, intervals=[1.0], compound_ids=["CMP03"],
+        descriptor_ranges={"D1": [-1.0, 1.0], "D2": [-1.0, 1.0], "D3": [-1.0, 1.0]},
+        animal_cols=["SEX_M", "ZB_C", "IS_CONTROL", "LD"],
+        time_cols=["TAU", "EXPO", "OFF", "LCUM"],
+    )
+    animals = pd.DataFrame({
+        "USUBJID": ["u1"], "STUDYID": ["SYNA-010"], "SEX": ["M"],
+        "STRAIN": ["SPRAGUE-DAWLEY"], "ROUTE": ["ORAL GAVAGE"],
+        "SPECIES": ["RAT"], "COMPOUND_ID": ["CMP03"], "IS_CONTROL": [False],
+        "PLANNED_DOSE": [1000.0], "INTERVAL_DAYS": [7.0],
+        "START_DAY": [0.0], "END_DAY": [27.0], "BASELINE_LOGW": [5.6],
+    })
+    cref = pd.DataFrame({"COMPOUND_ID": ["CMP03"], "D1": [0.0], "D2": [0.0], "D3": [0.0]})
+    rec = tft_feature_applicability(animals, spec, cref)
+    assert rec["enforced_by_tft_scoring"] is False
+    assert rec["n_problems"] >= 2
+    joined = " ".join(rec["problems"])
+    assert "1000" in joined or "dose" in joined
+    assert "7" in joined or "interval" in joined

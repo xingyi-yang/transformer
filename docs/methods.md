@@ -79,10 +79,20 @@ only looks up group scales through `group_ids`, so mixed-species fits use
 target species via `from_parameters` so donor SPECIES classes are kept.
 An 80% Winkler interval score is reported alongside pinball and coverage.
 CQR (experimental) adds a single margin to `q0.1`/`q0.9` and leaves `q0.5`
-unchanged. The margin is fit on a **calibration** split, not validation and
-not test. Pinball computed on CQR endpoints is not the TFT QuantileLoss;
-raw and calibrated tables are stored separately. Target-only is the
-development reference; fine-tune and CQR are not a new default.
+unchanged (Romano-style residual `max(q0.1−y, y−q0.9)`, finite-sample
+`ceil((n+1)(1−α))/n` with `method=higher`). The margin is pair-level
+`(USUBJID, DAY)`, not study-balanced. Study-held-out CV fits it on a
+**calibration** split. The earlier stability run fit it on official
+**validation**. Neither uses test outcomes. Pinball computed on CQR
+endpoints is not the TFT QuantileLoss; raw and calibrated tables are
+stored separately. PF training `QuantileLoss` is `2 × pinball` on the
+normalized target; reported `mean_quantile_loss` is unscaled pinball on
+raw `LOGW`. `FeatureSpec.check_context` is not enforced at TFT score
+time (official target-only train never saw interval 7 or dose 1000;
+validation SYNA-005 and eight SYNA-010 test animals still score).
+Target-only is the development reference; fine-tune and CQR are not a
+new default. Fine-tune keeps the pooled `FeatureSpec` and categorical
+classes via `from_parameters`.
 Confirmation split 34011 is not an untouched holdout: SYNA-007/010/011 were
 in its training set. Lightning `epochs_run` in older histories is
 `current_epoch + 1` (a 16-epoch budget was stored as 17). TFT series counts

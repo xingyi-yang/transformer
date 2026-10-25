@@ -2,7 +2,8 @@
 
 Winkler interval score at alpha=0.2 is a proper score for the (q0.1, q0.9)
 interval. Conformalized quantile regression (CQR) adds a single margin to both
-ends. The margin is fit on calibration/validation pairs only.
+ends. The margin is fit on the caller-supplied pairs only (calibration in
+study-held-out CV; official validation in the stability run), never test.
 
 Synthetic diagnostic. Not design qualification. No real-data validation.
 No operational recommendation.
@@ -78,7 +79,9 @@ def fit_cqr_margin(fut: pd.DataFrame, pred: pd.DataFrame, *,
         "quantile_rule": "ceil((n+1)(1-alpha))/n, method=higher",
         "test_outcomes_used": False,
         "merge": card,
-        "note": ("Margin is fit on calibration/validation pairs only. "
+        "note": ("Margin is fit on the caller-supplied pairs only "
+                 "(calibration in study-held-out CV; official validation in "
+                 "the stability run). Pairs are (USUBJID, DAY), not studies. "
                  "q0.5 is not moved. Inner quantiles are not rearranged."),
     }
 

@@ -95,8 +95,9 @@ experimental. Study-held-out evaluation:
 ```
 
 That command writes `runs/tft_study_cv/` only. Folds, seeds, and the
-calibration split are predeclared. CQR margins are fit on calibration
-studies, not validation or test. Raw and CQR metrics are stored separately.
+calibration split are predeclared. CQR margins in that run are fit on
+calibration studies, not validation or test. The earlier stability run
+fit CQR on official validation. Raw and CQR metrics are stored separately.
 
 Configs: `configs/smoke.yaml`, `configs/bayesian_smoke.yaml` (executed); `configs/research.yaml` and
 `configs/bayesian_research.yaml` (larger; **not executed**); `configs/real_local.example.yaml` and

@@ -17,14 +17,21 @@ Panel construction passes **observed rows only**. ``allow_missing_timesteps`` is
 enabled so an irregular calendar ``DAY`` is acceptable, but this adapter never
 inserts unobserved target rows and never fills ``LOGW`` with 0. The PF
 ``time_idx`` is a dense per-animal visit rank so missing calendar days do not
-become fabricated encoder history. Decoder target placeholders are not
-observations. Lightning validation keeps only windows whose last encoder
-``DAY`` is at the configured cutoff and whose decoder starts after it.
+become fabricated encoder history (a skipped weigh-in is a jump in ``DAY``/``TAU``,
+not a hole in ``time_idx``). Decoder target placeholders repeat the last
+encoder ``LOGW`` and are not observations. Lightning validation keeps only
+windows whose last encoder ``DAY`` is at the configured cutoff and whose
+decoder starts after it.
 Training still uses sliding observed windows (DAY/TAU are known) so the
 model can learn early-to-late dynamics; those windows are not the scored
 task. Predict re-clips history to the cutoff, refuses unseen species, and
 chunks horizons to the trained ``max_prediction_length``.
+``FeatureSpec.check_context`` is not called at predict time (unseen dosing
+intervals or doses above ``max_dose`` are still scored).
 
+The fitted target is ``LOGW = ln(WEIGHT_G)``, not the spline/transformer ``Y``
+change-from-baseline. PF ``QuantileLoss`` is ``2 * pinball`` on the
+**normalized** target; reported pinball is unscaled on raw ``LOGW``.
 Variance is a quantile-spread approximation from QuantileLoss, not a learned
 Gaussian covariance. Installing the extra is required; the default environment
 must stay ``not_run``.
