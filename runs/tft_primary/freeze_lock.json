@@ -1,0 +1,80 @@
+{
+  "chunk_long_horizons": false,
+  "config_hash": "d76be33f87914f09",
+  "config_path": "configs/tft_forecast.yaml",
+  "data_source": "existing_official_seq_cells_read_only",
+  "design": false,
+  "encoder_window_day": 14.0,
+  "extra_split_seed": 33001,
+  "generate_seed": 71001,
+  "git_revision": "9c27cae4498ad2b77697606241da0e41b147368f",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "max_encoder_length": 8,
+  "max_prediction_length": 6,
+  "official_holdout_test_used_for_search": false,
+  "pooled_cell": "runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_pooled",
+  "preserved": [
+    "runs/v3_eval",
+    "runs/v3_pilot_k0k1",
+    "runs/v3_repl",
+    "runs/v3_research",
+    "runs/v3_closeout",
+    "runs/v3_audit",
+    "runs/v3_increment",
+    "runs/v3_phaseb",
+    "runs/v3_limitations",
+    "runs/v3_objective",
+    "runs/v3_official_seq",
+    "runs/v3_seq_diag",
+    "runs/v3_eval_correct",
+    "runs/v3_cov_chronos",
+    "runs/v3_share_repl",
+    "runs/v3_share_abstain",
+    "runs/v3_share_abstain_run",
+    "runs/v3_donor_rank",
+    "runs/tft_early_hist_bench",
+    "runs/tft_early_hist_extend"
+  ],
+  "real_data": false,
+  "search_order": [
+    {
+      "key": "lr",
+      "values": [
+        0.001,
+        0.003,
+        0.01
+      ]
+    },
+    {
+      "key": "hidden_size",
+      "values": [
+        16,
+        32
+      ]
+    },
+    {
+      "key": "dropout",
+      "values": [
+        0.1,
+        0.2
+      ]
+    }
+  ],
+  "stability_seeds": [
+    82001,
+    82021,
+    82031
+  ],
+  "target_normalizer": "species_or_global",
+  "target_only_cell": "runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_target_only",
+  "train_seed": 82001,
+  "window_balance": "study",
+  "writes_extend": false,
+  "writes_pilot": false,
+  "writes_v3_locks": false
+}
