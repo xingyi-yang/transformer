@@ -1,0 +1,202 @@
+{
+  "duration": {
+    "base": 16,
+    "decision": {
+      "available": true,
+      "best_epoch": 13,
+      "best_value": 0.02522016502916813,
+      "key": "val_loss",
+      "last_epoch": 15,
+      "last_is_best": false,
+      "last_value": 0.02542283944785595,
+      "n_logged": 16,
+      "note": "Validation only. Test errors are not used.",
+      "still_improving": false
+    },
+    "extended": null,
+    "reason": "validation no longer improving; keep base duration"
+  },
+  "locked_config": {
+    "batch_size": 32,
+    "dropout": 0.1,
+    "hidden_size": 16,
+    "lr": 0.01,
+    "max_epochs": 16,
+    "patience": 6,
+    "target_normalizer": "species_or_global",
+    "window_balance": "study"
+  },
+  "note": "Selection used validation loss only. Official holdout test was not read.",
+  "seed": 82001,
+  "stages": [
+    {
+      "candidates": [
+        {
+          "best_val_loss": 0.03686067461967468,
+          "curve": {
+            "available": true,
+            "best_epoch": 7,
+            "best_value": 0.03686067461967468,
+            "key": "val_loss",
+            "last_epoch": 13,
+            "last_is_best": false,
+            "last_value": 0.07554592937231064,
+            "n_logged": 14,
+            "note": "Validation only. Test errors are not used.",
+            "still_improving": false
+          },
+          "epochs_run": 15,
+          "key": "lr",
+          "path": "runs/tft_primary/search/lr_0p001",
+          "seconds": 17.57856059074402,
+          "test_scores_examined": false,
+          "value": 0.001
+        },
+        {
+          "best_val_loss": 0.03579442575573921,
+          "curve": {
+            "available": true,
+            "best_epoch": 5,
+            "best_value": 0.03579442575573921,
+            "key": "val_loss",
+            "last_epoch": 11,
+            "last_is_best": false,
+            "last_value": 0.05107387900352478,
+            "n_logged": 12,
+            "note": "Validation only. Test errors are not used.",
+            "still_improving": false
+          },
+          "epochs_run": 13,
+          "key": "lr",
+          "path": "runs/tft_primary/search/lr_0p003",
+          "seconds": 15.095924139022827,
+          "test_scores_examined": false,
+          "value": 0.003
+        },
+        {
+          "best_val_loss": 0.02522016502916813,
+          "curve": {
+            "available": true,
+            "best_epoch": 13,
+            "best_value": 0.02522016502916813,
+            "key": "val_loss",
+            "last_epoch": 15,
+            "last_is_best": false,
+            "last_value": 0.02542283944785595,
+            "n_logged": 16,
+            "note": "Validation only. Test errors are not used.",
+            "still_improving": false
+          },
+          "epochs_run": 17,
+          "key": "lr",
+          "path": "runs/tft_primary/search/lr_0p01",
+          "seconds": 19.795814990997314,
+          "test_scores_examined": false,
+          "value": 0.01
+        }
+      ],
+      "key": "lr",
+      "selected": 0.01,
+      "selected_val_loss": 0.02522016502916813
+    },
+    {
+      "candidates": [
+        {
+          "best_val_loss": 0.02522016502916813,
+          "curve": {
+            "available": true,
+            "best_epoch": 13,
+            "best_value": 0.02522016502916813,
+            "key": "val_loss",
+            "last_epoch": 15,
+            "last_is_best": false,
+            "last_value": 0.02542283944785595,
+            "n_logged": 16,
+            "note": "Validation only. Test errors are not used.",
+            "still_improving": false
+          },
+          "epochs_run": 17,
+          "key": "hidden_size",
+          "path": "runs/tft_primary/search/hidden_size_16",
+          "seconds": 20.099749088287354,
+          "test_scores_examined": false,
+          "value": 16
+        },
+        {
+          "best_val_loss": 0.025443967431783676,
+          "curve": {
+            "available": true,
+            "best_epoch": 15,
+            "best_value": 0.025443967431783676,
+            "key": "val_loss",
+            "last_epoch": 15,
+            "last_is_best": true,
+            "last_value": 0.025443967431783676,
+            "n_logged": 16,
+            "note": "Validation only. Test errors are not used.",
+            "still_improving": true
+          },
+          "epochs_run": 17,
+          "key": "hidden_size",
+          "path": "runs/tft_primary/search/hidden_size_32",
+          "seconds": 20.634680032730103,
+          "test_scores_examined": false,
+          "value": 32
+        }
+      ],
+      "key": "hidden_size",
+      "selected": 16,
+      "selected_val_loss": 0.02522016502916813
+    },
+    {
+      "candidates": [
+        {
+          "best_val_loss": 0.02522016502916813,
+          "curve": {
+            "available": true,
+            "best_epoch": 13,
+            "best_value": 0.02522016502916813,
+            "key": "val_loss",
+            "last_epoch": 15,
+            "last_is_best": false,
+            "last_value": 0.02542283944785595,
+            "n_logged": 16,
+            "note": "Validation only. Test errors are not used.",
+            "still_improving": false
+          },
+          "epochs_run": 17,
+          "key": "dropout",
+          "path": "runs/tft_primary/search/dropout_0p1",
+          "seconds": 19.632977962493896,
+          "test_scores_examined": false,
+          "value": 0.1
+        },
+        {
+          "best_val_loss": 0.03147144615650177,
+          "curve": {
+            "available": true,
+            "best_epoch": 10,
+            "best_value": 0.03147144615650177,
+            "key": "val_loss",
+            "last_epoch": 15,
+            "last_is_best": false,
+            "last_value": 0.05093677341938019,
+            "n_logged": 16,
+            "note": "Validation only. Test errors are not used.",
+            "still_improving": false
+          },
+          "epochs_run": 17,
+          "key": "dropout",
+          "path": "runs/tft_primary/search/dropout_0p2",
+          "seconds": 20.007219552993774,
+          "test_scores_examined": false,
+          "value": 0.2
+        }
+      ],
+      "key": "dropout",
+      "selected": 0.1,
+      "selected_val_loss": 0.02522016502916813
+    }
+  ],
+  "test_scores_examined": false
+}

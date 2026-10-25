@@ -218,7 +218,8 @@ def _plot_trajectories(parent: Path, pack: dict[str, Any], hist: pd.DataFrame, f
                   "reference_tft_target_only": "#1f77b4",
                   "reference_tft_pooled": "#d62728",
                   "spline_gamm": "#9467bd", "catboost_quantile": "#ff7f0e",
-                  "tft_target_only_balanced": "#17becf", "tft_pooled_balanced": "#e377c2"}
+                  "tft_target_only_balanced": "#17becf", "tft_pooled_balanced": "#e377c2",
+                  "tft_finetune": "#8c564b"}
         for name, pred in preds.items():
             pg = pred.loc[pred["USUBJID"].astype(str) == u].sort_values("DAY")
             if pg.empty or "q0.5" not in pg.columns:

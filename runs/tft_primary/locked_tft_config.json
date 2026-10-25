@@ -1,0 +1,28 @@
+{
+  "attention_head_size": 2,
+  "batch_size": 32,
+  "dropout": 0.1,
+  "enabled": true,
+  "encoder_window_day": 14,
+  "hidden_continuous_size": 8,
+  "hidden_size": 16,
+  "lr": 0.01,
+  "lstm_layers": 1,
+  "max_encoder_length": 8,
+  "max_epochs": 16,
+  "max_prediction_length": 6,
+  "min_encoder_length": 1,
+  "optimizer": "adamw",
+  "patience": 6,
+  "quantiles": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "seed": 82001,
+  "target_normalizer": "species_or_global",
+  "torch_threads": 2,
+  "window_balance": "study"
+}

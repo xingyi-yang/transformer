@@ -1,0 +1,134 @@
+{
+  "by_control": {
+    "mean_mae_control": 1.6270121195597191,
+    "mean_mae_treated": 0.04130967379948225,
+    "n_control": 14,
+    "n_flagged_control": 6,
+    "n_flagged_treated": 0,
+    "n_treated": 30
+  },
+  "confirmed": [
+    {
+      "claim": "global_group_normalizer_mixed_species",
+      "supported": true
+    },
+    {
+      "claim": "predict_time_nan_compound_token",
+      "supported": true
+    },
+    {
+      "claim": "failures_are_control_rats_on_dog_scale",
+      "supported": true
+    }
+  ],
+  "flagged_animals": [
+    {
+      "COMPOUND_ID": NaN,
+      "IS_CONTROL": true,
+      "SEX": "M",
+      "SPECIES": "RAT",
+      "STRAIN": "WISTAR HAN",
+      "USUBJID": "SYNA-007-0001",
+      "mae": 3.18187250060117,
+      "n": 2,
+      "q50_mean": 9.174365520477295,
+      "true_mean": 5.992493019876125
+    },
+    {
+      "COMPOUND_ID": NaN,
+      "IS_CONTROL": true,
+      "SEX": "M",
+      "SPECIES": "RAT",
+      "STRAIN": "WISTAR HAN",
+      "USUBJID": "SYNA-007-0002",
+      "mae": 3.2127984116412454,
+      "n": 2,
+      "q50_mean": 9.216238975524902,
+      "true_mean": 6.003440563883657
+    },
+    {
+      "COMPOUND_ID": NaN,
+      "IS_CONTROL": true,
+      "SEX": "M",
+      "SPECIES": "RAT",
+      "STRAIN": "WISTAR HAN",
+      "USUBJID": "SYNA-007-0003",
+      "mae": 3.196753492735456,
+      "n": 2,
+      "q50_mean": 9.154254913330078,
+      "true_mean": 5.957501420594622
+    },
+    {
+      "COMPOUND_ID": NaN,
+      "IS_CONTROL": true,
+      "SEX": "M",
+      "SPECIES": "RAT",
+      "STRAIN": "WISTAR HAN",
+      "USUBJID": "SYNA-007-0004",
+      "mae": 2.0298434308437274,
+      "n": 2,
+      "q50_mean": 7.920040845870972,
+      "true_mean": 5.890197415027245
+    },
+    {
+      "COMPOUND_ID": NaN,
+      "IS_CONTROL": true,
+      "SEX": "M",
+      "SPECIES": "RAT",
+      "STRAIN": "WISTAR HAN",
+      "USUBJID": "SYNA-010-0001",
+      "mae": 3.3034337614704814,
+      "n": 2,
+      "q50_mean": 9.168423175811768,
+      "true_mean": 5.864989414341287
+    },
+    {
+      "COMPOUND_ID": NaN,
+      "IS_CONTROL": true,
+      "SEX": "M",
+      "SPECIES": "RAT",
+      "STRAIN": "WISTAR HAN",
+      "USUBJID": "SYNA-010-0002",
+      "mae": 3.221269800037855,
+      "n": 2,
+      "q50_mean": 9.200522422790527,
+      "true_mean": 5.979252622752672
+    }
+  ],
+  "hypotheses": [
+    "Unknown COMPOUND_ID embedding plus the control flag failed to apply a RAT offset in globally normalized LOGW, so outputs sat near dog-typical inverse scale (~9.1).",
+    "Extra-split vs official robustness difference is unexplained: official pooled used the same global normalizer and nan token but did not collapse to MAE 0.55."
+  ],
+  "locked_target_normalizer": {
+    "center": true,
+    "class": "GroupNormalizer",
+    "groups": null,
+    "method": "standard",
+    "norm_": {
+      "center": 6.64822616705204,
+      "scale": 1.592797905728607
+    },
+    "scale_by_group": false,
+    "transformation": "relu"
+  },
+  "mean_q50": 6.178673974398909,
+  "mean_true": 5.654529366088112,
+  "n_animals": 44,
+  "n_flagged_animals": 6,
+  "n_pairs": 87,
+  "not_confirmed": [
+    "Checkpoint selection (last vs best) as the cause: extra-split val_loss was healthy.",
+    "SPECIES encoder mis-mapping: locked encoder classes were DOG=1, RAT=2."
+  ],
+  "note": "Diagnosis reads locked artifacts only. It does not rewrite them.",
+  "pooled_mae": 0.5512503448551945,
+  "read_only": true,
+  "source": "runs/tft_early_hist_extend/banks/split_33001/extra_split_tft_pooled.csv",
+  "status": "ok",
+  "study_balanced_mae": 0.5501027819408786,
+  "token_demo": {
+    "confirmed_mismatch": true,
+    "missing_compound_cat_label": "UNK",
+    "missing_compound_legacy_astype_str": "nan"
+  }
+}

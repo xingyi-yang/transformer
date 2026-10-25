@@ -15,6 +15,8 @@ from send_bw.models.tft import (
     STATIC_CATS,
     TFTEarlyHistoryModel,
     build_observed_panel,
+    cat_label,
+    categorical_encoder_classes,
     chunk_forecast_times,
     clip_encoder_history,
     early_history_window_mask,
@@ -234,3 +236,44 @@ def test_tft_fit_and_early_history_when_extra_present(trained, tmp_path):
     r = evaluate_early_history(m, trained["data"]["test"], 14.0)
     assert r["pre_study"]["status"] == "not_supported"
     assert r["status"] in {"ok", "failed", "not_run"}
+    assert hist["target_normalizer"]["transformation"] is None
+    assert hist["target_normalizer"]["class"] == "GroupNormalizer"
+    assert hist["cat_label"] == "UNK_not_nan"
+
+
+@pytest.mark.skipif(not PF_INSTALLED, reason="pytorch_forecasting extra not installed")
+def test_animal_rows_use_unk_not_nan_string(trained):
+    m = TFTEarlyHistoryModel()
+    m.fit(trained["data"]["train"], trained["data"]["validation"],
+          {"max_epochs": 1, "hidden_size": 8, "attention_head_size": 1, "batch_size": 16,
+           "patience": 1, "max_encoder_length": 4, "max_prediction_length": 3, "seed": 0})
+    animal = trained["data"]["test"].animals.iloc[0].copy()
+    animal["COMPOUND_ID"] = np.nan
+    rows = m._animal_rows(animal, np.array([7.0, 14.0]), np.array([5.0, 5.1]))
+    assert list(rows["COMPOUND_ID"]) == ["UNK", "UNK"]
+    assert "nan" not in set(rows["COMPOUND_ID"].astype(str).str.lower())
+    assert cat_label(animal["COMPOUND_ID"]) == "UNK"
+
+
+@pytest.mark.skipif(not PF_INSTALLED, reason="pytorch_forecasting extra not installed")
+def test_finetune_keeps_species_classes(trained, tmp_path):
+    train = trained["data"]["train"]
+    if "SPECIES" not in train.animals.columns:
+        pytest.skip("fixture has no SPECIES")
+    # Fit on the available species, then fine-tune on the same panel. The
+    # from_parameters path must not rebuild categorical classes.
+    m = TFTEarlyHistoryModel()
+    m.fit(train, trained["data"]["validation"],
+          {"max_epochs": 1, "hidden_size": 8, "attention_head_size": 1, "batch_size": 16,
+           "patience": 1, "max_encoder_length": 4, "max_prediction_length": 3, "seed": 1,
+           "target_normalizer": "species_or_global"})
+    before = categorical_encoder_classes(m.dataset_parameters).get("SPECIES") or []
+    m.save(tmp_path / "pooled")
+    loaded = TFTEarlyHistoryModel.load(tmp_path / "pooled")
+    hist = loaded.finetune(train, trained["data"]["validation"],
+                           {"finetune_max_epochs": 1, "finetune_patience": 1, "batch_size": 16,
+                            "seed": 2, "window_balance": "study"})
+    after = categorical_encoder_classes(loaded.dataset_parameters).get("SPECIES") or []
+    assert set(before) <= set(after)
+    assert hist["finetune_from_parameters"] is True
+    assert hist.get("finetune_species_classes_kept") is not None

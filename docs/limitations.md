@@ -28,11 +28,15 @@
   (predicted/observed ratio ≈ 1.47 in the smoke run) because it shares the spline covariance.
 - Early-history conditioning for the required benchmarks is implemented only for the Gaussian-layer
   models (spline, transformer). The Bayesian model reports `not_run`.
-- TFT is an optional early-history-only PyTorch Forecasting adapter. It stays `not_run` unless
+- TFT is the documented early-history forecasting adapter and remains optional relative to the
+  required spline / custom transformer / Bayesian models. It stays `not_run` unless
   `send-bw[tft]` is installed and the installed API verifies. It refuses baseline-only / pre-study
   prediction and design simulation. Quantile-spread variance is an approximation, not a fitted
-  residual covariance. It is not the required custom transformer and is not a final analysis.
-  Chronos-2 and DeepAR remain unimplemented (`not_run`).
+  residual covariance. A global PF `GroupNormalizer` on mixed RAT+DOG `LOGW`, plus a train/predict
+  `UNK` vs `"nan"` compound-token mismatch, produced a dog-scale collapse (MAE ≈ 0.55) on one
+  extra split; the adapter now uses a species-or-global normalizer without `relu`. That repair
+  is a synthetic diagnostic, not real-data qualification. Chronos-2 and DeepAR remain
+  unimplemented (`not_run`).
 
 ## Statistical assumptions not validated
 - A common treatment effect across sexes (pooled analysis).
