@@ -154,6 +154,67 @@ def coverage_slices(fut: pd.DataFrame, pred: pd.DataFrame, *,
     }
 
 
+def compact_interval_metrics(block: dict[str, Any]) -> dict[str, Any]:
+    """Study-balanced MAE, pinball, interval score, coverage, width, crossings."""
+    def _sb(key: str):
+        v = block.get(key)
+        if isinstance(v, dict):
+            x = v.get("study_balanced")
+            return None if x is None else float(x)
+        return None if v is None else float(v)
+
+    cr = block.get("crossing_rate")
+    crossing = (cr or {}).get("pooled") if isinstance(cr, dict) else cr
+    return {
+        "mae_log": _sb("mae_log"),
+        "mean_quantile_loss": _sb("mean_quantile_loss"),
+        "interval_score80": _sb("interval_score80"),
+        "coverage80": _sb("coverage80"),
+        "interval_width80": _sb("interval_width80"),
+        "crossing": None if crossing is None else float(crossing),
+        "n_scored": block.get("n_scored"),
+        "status": block.get("status"),
+        "per_study": block.get("per_study"),
+    }
+
+
+def score_raw_and_calibrated(fut: pd.DataFrame, raw_pred: pd.DataFrame,
+                             cal_pred: pd.DataFrame | None = None,
+                             *, representation: str = "tft_quantiles") -> dict[str, Any]:
+    """Score original quantiles and CQR endpoints as separate blocks.
+
+    Calibrated pinball uses the shifted q0.1/q0.9. It is not the TFT training
+    quantile loss. MAE (q0.5) must match the raw table.
+    """
+    from send_bw.tft_examples import score_aligned_quantiles
+
+    raw_block = score_aligned_quantiles(fut, raw_pred, representation=representation)
+    raw = compact_interval_metrics(raw_block)
+    out: dict[str, Any] = {
+        "raw": raw,
+        "cqr": None,
+        "pinball_note": cqr_pinball_note(),
+        "test_outcomes_used": False,
+    }
+    if cal_pred is None:
+        return out
+    cal_block = score_aligned_quantiles(fut, cal_pred, representation=representation)
+    cal = compact_interval_metrics(cal_block)
+    cal["mean_quantile_loss_name"] = "pinball_on_cqr_shifted_endpoints"
+    cal["q0_5_unchanged"] = True
+    out["cqr"] = cal
+    return out
+
+
+def cqr_pinball_note() -> str:
+    return (
+        "Raw pinball is the mean QuantileLoss on the original head. "
+        "CQR pinball uses the shifted 10% and 90% endpoints and is not "
+        "the training objective. Report both; do not treat CQR pinball as "
+        "an improvement of the TFT quantile fit."
+    )
+
+
 def attach_interval_score(block: dict[str, Any], fut: pd.DataFrame, pred: pd.DataFrame) -> dict[str, Any]:
     """Add Winkler 80% scores to an existing quantile score block."""
     mm, _card = align_prediction_table(fut, pred)
