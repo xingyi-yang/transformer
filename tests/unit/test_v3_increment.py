@@ -59,7 +59,8 @@ def test_simulated_draw_is_one_study_and_does_not_mix_draws():
 
 def test_unequal_spacing_keeps_between_draw_sd_separate():
     times = np.array([0.0, 2.0, 20.0])
-    y = np.vstack([np.linspace(0.0, 0.1, 3), np.linspace(0.0, 0.12, 3)])
+    y = np.array([[0.0, 0.05, 0.08],
+                  [0.0, 0.02, 0.11]])
     mask = np.ones_like(y, dtype=bool)
     slope = np.array([0.0, 0.5])[:, None, None] * (times / 20.0)
     zs = y[None, :, :] + slope
@@ -102,14 +103,15 @@ def test_discover_authorization_rejects_unsigned_example_and_creates_nothing():
 
 def test_phase_b_without_ticket_is_access_blocker(tmp_path, monkeypatch):
     monkeypatch.delenv("SEND_BW_AUTHORIZATION", raising=False)
-    out = execute_historical_audit(ROOT / "configs" / "v3_historical_audit.yaml", phase="B")
+    out = execute_historical_audit(ROOT / "configs" / "v3_historical_audit.yaml",
+                                   phase="B", output_dir=tmp_path / "phaseb")
     assert out["status"] == "ACCESS_BLOCKER"
     assert out["real_data_accessed"] is False
     assert out["source_opened"] is False
     assert out["endpoint_values_inspected"] is False
     assert out["models_trained"] is False
     assert out["design_recommendations"] is False
-    assert Path("docs/v3/phase_b_access.md").exists() or (Path("runs/v3_phaseb") / "ACCESS_BLOCKER.json").exists()
+    assert (tmp_path / "phaseb" / "ACCESS_BLOCKER.json").exists()
 
 
 def test_phase_b_metadata_inventory_ignores_bw_values(tmp_path):
@@ -185,7 +187,8 @@ def test_phase_b_ticket_without_root_does_not_open_config_source(tmp_path):
         encoding="utf-8",
     )
     out = execute_historical_audit(ROOT / "configs" / "v3_historical_audit.yaml",
-                                   phase="B", authorization_path=ticket)
+                                   phase="B", authorization_path=ticket,
+                                   output_dir=tmp_path / "phaseb")
     assert out["status"] == "EXTRACT_BLOCKER"
     assert out["source_opened"] is False
     assert out["real_data_accessed"] is False

@@ -164,7 +164,8 @@ def phase_a_inventory(cfg: dict[str, Any]) -> dict[str, Any]:
 
 
 def execute_historical_audit(config_path: str | Path, phase: str = "A",
-                             authorization_path: str | Path | None = None) -> dict[str, Any]:
+                             authorization_path: str | Path | None = None,
+                             output_dir: str | Path | None = None) -> dict[str, Any]:
     cfg = load_yaml(config_path)
     phase = str(phase).upper()
     if (cfg.get("design") or {}).get("request"):
@@ -172,7 +173,7 @@ def execute_historical_audit(config_path: str | Path, phase: str = "A",
     if cfg.get("synthetic", {}).get("enabled"):
         raise AuditGateError("historical-data audit is not a synthetic generate run")
     if phase == "A":
-        out_dir = Path(cfg.get("output_dir") or "runs/v3_audit")
+        out_dir = Path(output_dir or cfg.get("output_dir") or "runs/v3_audit")
         out_dir.mkdir(parents=True, exist_ok=True)
         refuse_real_access(cfg, None, "A")
         result = phase_a_inventory(cfg)
@@ -185,7 +186,7 @@ def execute_historical_audit(config_path: str | Path, phase: str = "A",
     if phase == "C":
         discovery = discover_authorization(authorization_path)
         if not discovery["authorized"]:
-            return write_access_blocker(PHASE_B_DEFAULT_OUT, discovery, phase="C")
+            return write_access_blocker(output_dir or PHASE_B_DEFAULT_OUT, discovery, phase="C")
         validate_authorization(discovery["auth"], "C")
         refuse_real_access(cfg, discovery["auth"], "C")
         raise AuditGateError(
@@ -193,7 +194,7 @@ def execute_historical_audit(config_path: str | Path, phase: str = "A",
         )
     if phase != "B":
         raise AuditGateError(f"unknown audit phase {phase}")
-    return execute_phase_b(cfg, authorization_path)
+    return execute_phase_b(cfg, authorization_path, out_dir=output_dir)
 
 
 def _write_phase_a_md(parent: Path, result: dict[str, Any]) -> None:

@@ -1,0 +1,47 @@
+{
+  "cells": [
+    {
+      "counted_as_successful_benchmark": false,
+      "divergences": 0,
+      "ess_bulk_min": 115.20329044339839,
+      "ess_tail_min": 141.61118747376793,
+      "failure_class": "mean_identifiability",
+      "name": "d0_t0_matched_context_specific_k0_full",
+      "reason": "Bayesian inference remains explicitly unreliable until the unchanged diagnostics pass.",
+      "reliable": false,
+      "rhat_max": 1.0146408051222628,
+      "scored": false,
+      "thresholds": {
+        "ess_bulk_min": 400,
+        "ess_tail_min": 400,
+        "rhat_max": 1.01
+      }
+    },
+    {
+      "counted_as_successful_benchmark": false,
+      "divergences": 0,
+      "ess_bulk_min": 115.20329044339839,
+      "ess_tail_min": 141.61118747376793,
+      "failure_class": "mean_identifiability",
+      "name": "d0_t0_both_context_specific_k0_full",
+      "reason": "Bayesian inference remains explicitly unreliable until the unchanged diagnostics pass.",
+      "reliable": false,
+      "rhat_max": 1.0146408051222628,
+      "scored": false,
+      "thresholds": {
+        "ess_bulk_min": 400,
+        "ess_tail_min": 400,
+        "rhat_max": 1.01
+      }
+    }
+  ],
+  "explicitly_unreliable": true,
+  "n_cells": 2,
+  "note": "Unchanged gate: rhat\u22641.01, ESS\u2265400, divergences==0. Failed runs are preserved. Bayesian increment is not counted until those pass.",
+  "scored": false,
+  "thresholds_unchanged": {
+    "ess_bulk_min": 400,
+    "ess_tail_min": 400,
+    "rhat_max": 1.01
+  }
+}

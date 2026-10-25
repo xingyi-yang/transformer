@@ -1,0 +1,37 @@
+{
+  "blocker": "No genuine signed authorization was found. Phase B stops before opening any source. A steward must place a signed ticket (not the in-repo example) on SEND_BW_AUTHORIZATION or --authorization.",
+  "created_ticket": false,
+  "design_recommendations": false,
+  "discovery": {
+    "authorized": false,
+    "candidates_checked": [],
+    "created_ticket": false,
+    "note": "No ticket was created, signed, or self-approved. The in-repo example remains unsigned. Documentation text that mentions written_authorization: true is not a steward ticket.",
+    "search": {
+      "approved_dirs": [
+        "/approved/tickets"
+      ],
+      "env": "SEND_BW_AUTHORIZATION",
+      "explicit": null,
+      "repo_scan": false
+    },
+    "self_approved": false,
+    "ticket_path": null,
+    "unsigned_example": "/workspace/configs/historical_authorization.example.yaml"
+  },
+  "endpoint_values_inspected": false,
+  "git_revision": "e62f9aec163085d79eec1fc78b1ec34c47020e68",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "models_trained": false,
+  "next": "Copy configs/historical_authorization.example.yaml outside the repo, complete it, and set written_authorization: true only after a steward signs. This agent will not create or sign that ticket.",
+  "phase": "B",
+  "real_data_accessed": false,
+  "self_approved": false,
+  "source_opened": false,
+  "status": "ACCESS_BLOCKER"
+}
