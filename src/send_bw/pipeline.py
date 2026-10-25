@@ -201,17 +201,32 @@ class Run:
         scfg = dict(self.cfg.get("splits", {}))
         comp = (t["arm_regimen"].dropna(subset=["COMPOUND_ID"]).groupby("STUDYID")["COMPOUND_ID"].first().to_dict())
         scfg["_study_compound"] = comp
-        if scfg.get("compound_holdout_auto"):
-            req_comp = set()
-            if self.cfg.get("design", {}).get("request"):
-                with open(self.cfg["design"]["request"], encoding="utf-8") as f:
-                    req_comp = {g.get("compound_id") for g in yaml.safe_load(f)["groups"]}
-            counts = pd.Series({s: c for s, c in comp.items() if s in set(in_scope["STUDYID"])}).value_counts()
-            counts = counts[~counts.index.isin(req_comp)]
-            scfg["compound_holdout"] = list(counts.sort_values(kind="stable").index[: int(scfg["compound_holdout_auto"])])
-        splits_target = make_study_splits(in_scope, scfg, self.seed)
-        freeze_splits(splits_target, self.p("splits", "target_splits"))
-        tman = freeze_target_manifests(splits_target, self.p("splits", "target_manifest.json"))
+        reuse = scfg.get("reuse_target_from")
+        if reuse:
+            src = Path(str(reuse))
+            splits_target = load_frozen_splits(src / "target_splits")
+            missing = sorted(set(splits_target["STUDYID"].astype(str)) - set(in_scope["STUDYID"].astype(str)))
+            if missing:
+                raise ValueError(f"reused target studies missing from current cohort: {missing}")
+            freeze_splits(splits_target, self.p("splits", "target_splits"))
+            tman = freeze_target_manifests(splits_target, self.p("splits", "target_manifest.json"))
+            src_man = read_json(src / "target_manifest.json")
+            for name in ("validation", "test", "all_target"):
+                if tman[name]["hash"] != src_man[name]["hash"]:
+                    raise ValueError(f"reused target splits changed {name} hash")
+        else:
+            if scfg.get("compound_holdout_auto"):
+                req_comp = set()
+                if self.cfg.get("design", {}).get("request"):
+                    with open(self.cfg["design"]["request"], encoding="utf-8") as f:
+                        req_comp = {g.get("compound_id") for g in yaml.safe_load(f)["groups"]}
+                counts = pd.Series({s: c for s, c in comp.items() if s in set(in_scope["STUDYID"])}).value_counts()
+                counts = counts[~counts.index.isin(req_comp)]
+                scfg["compound_holdout"] = list(
+                    counts.sort_values(kind="stable").index[: int(scfg["compound_holdout_auto"])])
+            splits_target = make_study_splits(in_scope, scfg, self.seed)
+            freeze_splits(splits_target, self.p("splits", "target_splits"))
+            tman = freeze_target_manifests(splits_target, self.p("splits", "target_manifest.json"))
         sparse_n = scfg.get("sparse_target_train_n")
         sparse_meta = None
         if sparse_n is not None:
@@ -331,11 +346,16 @@ class Run:
                 if name != "bayesian":
                     raise
                 reason = f"Bayesian inference failed: {type(e).__name__}: {e}"
+                from send_bw.evaluation.uncertainty import sampling_diagnosis
+
+                diag = sampling_diagnosis({}, compile_error=reason, status="failed")
                 self.manifest.record_stage("train_bayesian", key=None, status="failed", reason=reason,
-                                           counted_as_successful_benchmark=False)
+                                           counted_as_successful_benchmark=False,
+                                           sampling_diagnosis=diag)
                 write_json(self.p("evaluation", "bayesian_gate.json"),
                            {"status": "failed", "reliable": False,
                             "counted_as_successful_benchmark": False, "reason": reason})
+                write_json(self.p("evaluation", "sampling_diagnosis.json"), diag)
                 self.log.info(f"[train] bayesian failed: {reason}")
                 continue
             info = {"key": key, "seconds": time.time() - t0, "status": "trained"}
@@ -361,6 +381,10 @@ class Run:
                     "note": "Bayesian uses the same prepared train/validation as spline and transformer.",
                 }
                 write_json(self.p("evaluation", "matched_data.json"), info["matched_data"])
+                from send_bw.evaluation.uncertainty import sampling_diagnosis
+
+                info["sampling_diagnosis"] = sampling_diagnosis(model.diagnostics.get("main") or {})
+                write_json(self.p("evaluation", "sampling_diagnosis.json"), info["sampling_diagnosis"])
             self.manifest.record_stage(f"train_{name}", **info)
             out[name] = info
             self.log.info(f"[train] {name} done in {info['seconds']:.1f}s")

@@ -1,0 +1,90 @@
+{
+  "arch": {
+    "d_model": 32,
+    "dropout": 0.1,
+    "group_dims": {
+      "baseline": 1,
+      "bio": 3,
+      "compound": 4,
+      "regimen": 5,
+      "species": 1
+    },
+    "n_heads": 2,
+    "n_layers": 1,
+    "q_dim": 5,
+    "treat_dev_dim": 0
+  },
+  "best_val_rmse_member0": 0.04604560136795044,
+  "members": [
+    {
+      "best_val_rmse": 0.04604560136795044,
+      "curve": [
+        {
+          "epoch": 0,
+          "train_loss": 1.3229055880498486,
+          "val_rmse": 0.0961993858218193
+        },
+        {
+          "epoch": 1,
+          "train_loss": 0.5163090947796317,
+          "val_rmse": 0.0870550125837326
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.3457340182376509,
+          "val_rmse": 0.07942748814821243
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.231520312924345,
+          "val_rmse": 0.06869833916425705
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.19764964395210521,
+          "val_rmse": 0.06510040163993835
+        },
+        {
+          "epoch": 5,
+          "train_loss": 0.1631421521932137,
+          "val_rmse": 0.05201186612248421
+        },
+        {
+          "epoch": 6,
+          "train_loss": 0.1587438778716977,
+          "val_rmse": 0.05554702505469322
+        },
+        {
+          "epoch": 7,
+          "train_loss": 0.1320973131336084,
+          "val_rmse": 0.05263647437095642
+        },
+        {
+          "epoch": 8,
+          "train_loss": 0.13484526381773107,
+          "val_rmse": 0.04945190250873566
+        },
+        {
+          "epoch": 9,
+          "train_loss": 0.1300532942434319,
+          "val_rmse": 0.04604560136795044
+        },
+        {
+          "epoch": 10,
+          "train_loss": 0.12175179266629099,
+          "val_rmse": 0.04998677223920822
+        },
+        {
+          "epoch": 11,
+          "train_loss": 0.11961748670129214,
+          "val_rmse": 0.04620471969246864
+        }
+      ],
+      "epochs_run": 12,
+      "freeze_groups": [],
+      "member": 0,
+      "seed": 5167
+    }
+  ],
+  "y_scale": 0.1468900889158249
+}

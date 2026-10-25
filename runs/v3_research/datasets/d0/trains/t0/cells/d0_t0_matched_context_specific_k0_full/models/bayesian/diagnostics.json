@@ -1,0 +1,246 @@
+{
+ "main": {
+  "rhat_max": 1.0146408051222628,
+  "ess_bulk_min": 115.20329044339839,
+  "ess_tail_min": 141.61118747376793,
+  "divergences": 0,
+  "maxdepth_hits": 0,
+  "sampler_warnings": [],
+  "thresholds": {
+   "rhat_max": 1.01,
+   "ess_bulk_min": 400,
+   "ess_tail_min": 400
+  },
+  "worst_rhat_params": {
+   "beta[23]": 1.0146408051222628,
+   "theta[23]": 1.0135999159422304,
+   "theta[21]": 1.0103348035803656,
+   "beta[4]": 1.009899409069608,
+   "beta[22]": 1.0095310745064185
+  },
+  "worst_ess_params": {
+   "theta[23]": 115.20329044339839,
+   "theta[21]": 117.65622802332757,
+   "theta[20]": 122.534215735686,
+   "beta[23]": 127.69082107082568,
+   "theta[22]": 129.98437337287223
+  },
+  "family_diagnostics": {
+   "theta": {
+    "n": 44,
+    "rhat_max": 1.0135999159422304,
+    "ess_bulk_min": 115.20329044339839,
+    "ess_tail_min": 141.61118747376793
+   },
+   "beta": {
+    "n": 44,
+    "rhat_max": 1.0146408051222628,
+    "ess_bulk_min": 127.69082107082568,
+    "ess_tail_min": 198.2497815228777
+   },
+   "sd_s": {
+    "n": 2,
+    "rhat_max": 1.005768073664883,
+    "ess_bulk_min": 441.9800895062477,
+    "ess_tail_min": 554.6897899423473
+   },
+   "sd_a": {
+    "n": 2,
+    "rhat_max": 1.0070207269310414,
+    "ess_bulk_min": 255.8910032946083,
+    "ess_tail_min": 394.28268951897263
+   },
+   "sigma_p": {
+    "n": 1,
+    "rhat_max": 1.0018890589479958,
+    "ess_bulk_min": 292.36955119377046,
+    "ess_tail_min": 454.14474455910624
+   },
+   "ell": {
+    "n": 1,
+    "rhat_max": 1.0031975167371288,
+    "ess_bulk_min": 356.0535182048844,
+    "ess_tail_min": 631.4289307919879
+   }
+  },
+  "reliable": false,
+  "draws": 800,
+  "tune": 800,
+  "chains": 2,
+  "seed": 5150,
+  "seconds": 12.825170278549194,
+  "likelihood": "normal",
+  "random_effects": "full",
+  "priors": {
+   "s_beta": 0.35,
+   "s_sd": 0.3,
+   "s_sigma": 0.3,
+   "m_ell": 1.9459101490553132,
+   "s_ell": 0.75
+  },
+  "dropped_nonidentifiable_columns": [
+   44
+  ],
+  "sampling_diagnosis": {
+   "failure_class": "mean_identifiability",
+   "reliable": false,
+   "counted_as_successful_benchmark": false,
+   "thresholds": {
+    "rhat_max": 1.01,
+    "ess_bulk_min": 400,
+    "ess_tail_min": 400
+   },
+   "rhat_max": 1.0146408051222628,
+   "ess_bulk_min": 115.20329044339839,
+   "ess_tail_min": 141.61118747376793,
+   "divergences": 0,
+   "draws": 800,
+   "tune": 800,
+   "chains": 2,
+   "n_posterior_draws": 1600,
+   "dropped_nonidentifiable_columns": [
+    44
+   ],
+   "family_diagnostics": {
+    "theta": {
+     "n": 44,
+     "rhat_max": 1.0135999159422304,
+     "ess_bulk_min": 115.20329044339839,
+     "ess_tail_min": 141.61118747376793
+    },
+    "beta": {
+     "n": 44,
+     "rhat_max": 1.0146408051222628,
+     "ess_bulk_min": 127.69082107082568,
+     "ess_tail_min": 198.2497815228777
+    },
+    "sd_s": {
+     "n": 2,
+     "rhat_max": 1.005768073664883,
+     "ess_bulk_min": 441.9800895062477,
+     "ess_tail_min": 554.6897899423473
+    },
+    "sd_a": {
+     "n": 2,
+     "rhat_max": 1.0070207269310414,
+     "ess_bulk_min": 255.8910032946083,
+     "ess_tail_min": 394.28268951897263
+    },
+    "sigma_p": {
+     "n": 1,
+     "rhat_max": 1.0018890589479958,
+     "ess_bulk_min": 292.36955119377046,
+     "ess_tail_min": 454.14474455910624
+    },
+    "ell": {
+     "n": 1,
+     "rhat_max": 1.0031975167371288,
+     "ess_bulk_min": 356.0535182048844,
+     "ess_tail_min": 631.4289307919879
+    }
+   },
+   "worst_rhat_params": {
+    "beta[23]": 1.0146408051222628,
+    "theta[23]": 1.0135999159422304,
+    "theta[21]": 1.0103348035803656,
+    "beta[4]": 1.009899409069608,
+    "beta[22]": 1.0095310745064185
+   },
+   "worst_ess_params": {
+    "theta[23]": 115.20329044339839,
+    "theta[21]": 117.65622802332757,
+    "theta[20]": 122.534215735686,
+    "beta[23]": 127.69082107082568,
+    "theta[22]": 129.98437337287223
+   },
+   "priors": {
+    "s_beta": 0.35,
+    "s_sd": 0.3,
+    "s_sigma": 0.3,
+    "m_ell": 1.9459101490553132,
+    "s_ell": 0.75
+   },
+   "note": "Reliability thresholds are unchanged (rhat<=1.01, ESS>=400, divergences==0). Compile/backend failures are classified separately from sampling."
+  },
+  "posterior_summary": {
+   "sd_s": [
+    0.06059117312697774,
+    0.4109554725287607
+   ],
+   "sd_a": [
+    0.05719928152214116,
+    0.2754533017799254
+   ],
+   "sigma_p": 0.1964990049735321,
+   "ell": 7.604863246333765,
+   "sd_s_scaled_logw": [
+    0.0078817927940012,
+    0.05345771858954776
+   ],
+   "sd_a_scaled_logw": [
+    0.00744057032826335,
+    0.035831388253583826
+   ],
+   "sigma_p_scaled_logw": 0.025560892148153776
+  },
+  "prior_predictive": {
+   "pct_change_last_obs_q025_q50_q975": [
+    -44.99266919030802,
+    12.996411765204696,
+    125.90972480291393
+   ],
+   "grams_last_obs_q025_q50_q975": [
+    113.92783012021967,
+    246.71575883258038,
+    543.456131237868
+   ],
+   "observed_pct_change_q025_q50_q975": [
+    9.882002557371646,
+    33.4050425614826,
+    73.84490434595399
+   ],
+   "plausible": true,
+   "note": "weakly informative: prior predictive should cover, not match, observed changes"
+  },
+  "posterior_predictive": {
+   "by_time_bin": {
+    "<=7": {
+     "p_mean": 0.5,
+     "p_sd": 0.71125
+    },
+    "8-14": {
+     "p_mean": 0.455,
+     "p_sd": 0.70875
+    },
+    "15-21": {
+     "p_mean": 0.44,
+     "p_sd": 0.374375
+    },
+    "22-28": {
+     "p_mean": 0.514375,
+     "p_sd": 0.555625
+    }
+   },
+   "extreme_bins": [],
+   "note": "one-step conditional replicates (likelihood factorization); full-trajectory new-study checks are in the held-out evaluation"
+  }
+ },
+ "sensitivity_comparison": [
+  {
+   "variant": "main",
+   "mean_pred_change_day28_validation": 0.1972319244065624,
+   "sd_s_logw": [
+    0.0078817927940012,
+    0.05345771858954776
+   ],
+   "sd_a_logw": [
+    0.00744057032826335,
+    0.035831388253583826
+   ],
+   "sigma_p_logw": 0.025560892148153776,
+   "ell": 7.604863246333765,
+   "reliable": false,
+   "rhat_max": 1.0146408051222628
+  }
+ ]
+}

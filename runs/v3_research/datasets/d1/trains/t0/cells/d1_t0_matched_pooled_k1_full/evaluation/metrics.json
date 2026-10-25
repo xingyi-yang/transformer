@@ -1,0 +1,838 @@
+{
+  "spline|test_compound_holdout|pre_study": {
+    "between_animal_var_ratio_pred_over_obs": 1.6354052565119461,
+    "contrast_bias": -0.007274974625533115,
+    "contrast_cov90": 1.0,
+    "contrast_day": 28.0,
+    "contrast_width90": 0.13874563042303653,
+    "correlation_by_gap": [
+      {
+        "corr_obs": 0.8718820703488053,
+        "corr_pred": 0.8302845335993504,
+        "gap_bin": "(4,8]",
+        "n_pairs": 3
+      },
+      {
+        "corr_obs": 0.803683063222592,
+        "corr_pred": 0.7179839539281555,
+        "gap_bin": "(8,15]",
+        "n_pairs": 2
+      },
+      {
+        "corr_obs": 0.830604884668962,
+        "corr_pred": 0.6326650809716718,
+        "gap_bin": "(15,100]",
+        "n_pairs": 1
+      }
+    ],
+    "denominators": {
+      "contrast_bias_study_balanced": -0.007274974625533115,
+      "contrast_bias_weighting": "contrast_row_mean",
+      "contrast_day": 28.0,
+      "coverage_levels": {
+        "contrast": 0.9,
+        "group_mean": 0.9,
+        "individual": [
+          0.8,
+          0.95
+        ]
+      },
+      "n_animals": 28,
+      "n_contrasts": 3,
+      "n_extrema": 28,
+      "n_gap_pairs": 6,
+      "n_group_mean_cells": 32,
+      "n_increments": 28,
+      "n_obs": 110,
+      "n_studies": 1,
+      "n_studies_with_contrast": 1,
+      "rmse_crps_weighting": "study_balanced"
+    },
+    "distributional": {
+      "cov80": 0.9818181818181818,
+      "cov95": 1.0,
+      "crps_log_study_balanced": 0.02403932048468556,
+      "energy_score_mean": 0.0554472812362811,
+      "pit_histogram_10bins": [
+        0,
+        1,
+        7,
+        11,
+        19,
+        24,
+        16,
+        12,
+        17,
+        3
+      ]
+    },
+    "effective_sample_sizes": {
+      "n_animals": 28,
+      "n_obs": 110,
+      "n_studies": 1
+    },
+    "energy_score_mean": 0.0554472812362811,
+    "evaluation_pack": {
+      "contrast": {
+        "bias": -0.007274974625533115,
+        "coverage90": 1.0,
+        "n_contrasts": 3,
+        "study_level": {
+          "bias_study_mean": -0.007274974625533115,
+          "n_studies_with_contrast": 1,
+          "rmse_study_mean": 0.008645272241421996
+        },
+        "width90": 0.13874563042303653
+      },
+      "group_mean": {
+        "between_animal_var_ratio_pred_over_obs": 1.6354052565119461,
+        "coverage90": 1.0
+      },
+      "individual": {
+        "coverage80": 0.9818181818181818,
+        "coverage95": 1.0,
+        "crps_study_balanced": 0.02403932048468556,
+        "effective_sample_sizes": {
+          "n_animals": 28,
+          "n_obs": 110,
+          "n_studies": 1
+        },
+        "rmse_log_study_balanced": 0.04141510159073217,
+        "width80_log": 0.16284169072287133,
+        "width95_log": 0.23658686875728516
+      },
+      "temporal": {
+        "correlation_by_gap": [
+          {
+            "corr_obs": 0.8718820703488053,
+            "corr_pred": 0.8302845335993504,
+            "gap_bin": "(4,8]",
+            "n_pairs": 3
+          },
+          {
+            "corr_obs": 0.803683063222592,
+            "corr_pred": 0.7179839539281555,
+            "gap_bin": "(8,15]",
+            "n_pairs": 2
+          },
+          {
+            "corr_obs": 0.830604884668962,
+            "corr_pred": 0.6326650809716718,
+            "gap_bin": "(15,100]",
+            "n_pairs": 1
+          }
+        ],
+        "distributional": {
+          "cov80": 0.9818181818181818,
+          "cov95": 1.0,
+          "crps_log_study_balanced": 0.02403932048468556,
+          "energy_score_mean": 0.0554472812362811,
+          "pit_histogram_10bins": [
+            0,
+            1,
+            7,
+            11,
+            19,
+            24,
+            16,
+            12,
+            17,
+            3
+          ]
+        },
+        "extrema_max_cov90": 1.0,
+        "increment_sd_ratio_pred_over_obs": 1.546186123698697,
+        "pit_histogram_10bins": [
+          0,
+          1,
+          7,
+          11,
+          19,
+          24,
+          16,
+          12,
+          17,
+          3
+        ]
+      }
+    },
+    "extrema_max_cov90": 1.0,
+    "group_mean_cov90": 1.0,
+    "increment_sd_ratio_pred_over_obs": 1.546186123698697,
+    "model": "spline",
+    "n_contrasts": 3,
+    "observation_weighted": {
+      "cov80": 0.9818181818181818,
+      "cov95": 1.0,
+      "crps_log": 0.02403932048468556,
+      "mae_g": 9.661615392649995,
+      "mae_log": 0.03218859444790162,
+      "rmse_g": 13.041869175875124,
+      "rmse_log": 0.04141510159073217,
+      "width80_log": 0.16284169072287133,
+      "width95_log": 0.23658686875728516
+    },
+    "pit_histogram_10bins": [
+      0,
+      1,
+      7,
+      11,
+      19,
+      24,
+      16,
+      12,
+      17,
+      3
+    ],
+    "split": "test_compound_holdout",
+    "study_balanced": {
+      "cov80": 0.9818181818181818,
+      "cov95": 1.0,
+      "crps": 0.02403932048468556,
+      "mae_log": 0.03218859444790162,
+      "rmse_log": 0.04141510159073217,
+      "width80": 0.16284169072287133,
+      "width95": 0.23658686875728516
+    },
+    "study_level_contrast_error": {
+      "bias_study_mean": -0.007274974625533115,
+      "n_studies_with_contrast": 1,
+      "rmse_study_mean": 0.008645272241421996
+    },
+    "task": "pre_study_new_study",
+    "task_alias": "predose_conditioned"
+  },
+  "spline|test|pre_study": {
+    "between_animal_var_ratio_pred_over_obs": 1.2199005516466646,
+    "contrast_bias": -0.008676264560066668,
+    "contrast_cov90": 1.0,
+    "contrast_day": 28.0,
+    "contrast_width90": 0.12467546733675249,
+    "correlation_by_gap": [
+      {
+        "corr_obs": 0.9285141222354338,
+        "corr_pred": 0.8595955297992643,
+        "gap_bin": "(0,4]",
+        "n_pairs": 14
+      },
+      {
+        "corr_obs": 0.8951045772864615,
+        "corr_pred": 0.8075803306771911,
+        "gap_bin": "(4,8]",
+        "n_pairs": 12
+      },
+      {
+        "corr_obs": 0.8511130716409527,
+        "corr_pred": 0.7174372365174644,
+        "gap_bin": "(8,15]",
+        "n_pairs": 18
+      },
+      {
+        "corr_obs": 0.7709785350478026,
+        "corr_pred": 0.575114915273019,
+        "gap_bin": "(15,100]",
+        "n_pairs": 12
+      }
+    ],
+    "denominators": {
+      "contrast_bias_study_balanced": -0.006103935968611618,
+      "contrast_bias_weighting": "contrast_row_mean",
+      "contrast_day": 28.0,
+      "coverage_levels": {
+        "contrast": 0.9,
+        "group_mean": 0.9,
+        "individual": [
+          0.8,
+          0.95
+        ]
+      },
+      "n_animals": 62,
+      "n_contrasts": 7,
+      "n_extrema": 62,
+      "n_gap_pairs": 56,
+      "n_group_mean_cells": 144,
+      "n_increments": 62,
+      "n_obs": 485,
+      "n_studies": 2,
+      "n_studies_with_contrast": 2,
+      "rmse_crps_weighting": "study_balanced"
+    },
+    "distributional": {
+      "cov80": 0.8649008478733096,
+      "cov95": 0.9717171186321911,
+      "crps_log_study_balanced": 0.03177480871325553,
+      "energy_score_mean": 0.10565776017154677,
+      "pit_histogram_10bins": [
+        21,
+        31,
+        58,
+        32,
+        53,
+        77,
+        51,
+        57,
+        66,
+        39
+      ]
+    },
+    "effective_sample_sizes": {
+      "n_animals": 62,
+      "n_obs": 485,
+      "n_studies": 2
+    },
+    "energy_score_mean": 0.10565776017154677,
+    "evaluation_pack": {
+      "contrast": {
+        "bias": -0.008676264560066668,
+        "coverage90": 1.0,
+        "n_contrasts": 7,
+        "study_level": {
+          "bias_study_mean": -0.006103935968611618,
+          "n_studies_with_contrast": 2,
+          "rmse_study_mean": 0.035607714024414594
+        },
+        "width90": 0.12467546733675249
+      },
+      "group_mean": {
+        "between_animal_var_ratio_pred_over_obs": 1.2199005516466646,
+        "coverage90": 0.9444444444444444
+      },
+      "individual": {
+        "coverage80": 0.8649008478733096,
+        "coverage95": 0.9717171186321911,
+        "crps_study_balanced": 0.03177480871325553,
+        "effective_sample_sizes": {
+          "n_animals": 62,
+          "n_obs": 485,
+          "n_studies": 2
+        },
+        "rmse_log_study_balanced": 0.05685856224131122,
+        "width80_log": 0.16391166548469877,
+        "width95_log": 0.23795066888895577
+      },
+      "temporal": {
+        "correlation_by_gap": [
+          {
+            "corr_obs": 0.9285141222354338,
+            "corr_pred": 0.8595955297992643,
+            "gap_bin": "(0,4]",
+            "n_pairs": 14
+          },
+          {
+            "corr_obs": 0.8951045772864615,
+            "corr_pred": 0.8075803306771911,
+            "gap_bin": "(4,8]",
+            "n_pairs": 12
+          },
+          {
+            "corr_obs": 0.8511130716409527,
+            "corr_pred": 0.7174372365174644,
+            "gap_bin": "(8,15]",
+            "n_pairs": 18
+          },
+          {
+            "corr_obs": 0.7709785350478026,
+            "corr_pred": 0.575114915273019,
+            "gap_bin": "(15,100]",
+            "n_pairs": 12
+          }
+        ],
+        "distributional": {
+          "cov80": 0.8649008478733096,
+          "cov95": 0.9717171186321911,
+          "crps_log_study_balanced": 0.03177480871325553,
+          "energy_score_mean": 0.10565776017154677,
+          "pit_histogram_10bins": [
+            21,
+            31,
+            58,
+            32,
+            53,
+            77,
+            51,
+            57,
+            66,
+            39
+          ]
+        },
+        "extrema_max_cov90": 0.9516129032258065,
+        "increment_sd_ratio_pred_over_obs": 2.081944357227978,
+        "pit_histogram_10bins": [
+          21,
+          31,
+          58,
+          32,
+          53,
+          77,
+          51,
+          57,
+          66,
+          39
+        ]
+      }
+    },
+    "extrema_max_cov90": 0.9516129032258065,
+    "group_mean_cov90": 0.9444444444444444,
+    "increment_sd_ratio_pred_over_obs": 2.081944357227978,
+    "model": "spline",
+    "n_contrasts": 7,
+    "observation_weighted": {
+      "cov80": 0.8639175257731959,
+      "cov95": 0.9711340206185567,
+      "crps_log": 0.03187915241767337,
+      "mae_g": 12.857823482383054,
+      "mae_log": 0.044711563432254256,
+      "rmse_g": 16.666702083033734,
+      "rmse_log": 0.05667362275325636,
+      "width80_log": 0.16464036735346768,
+      "width95_log": 0.23885001432715577
+    },
+    "pit_histogram_10bins": [
+      21,
+      31,
+      58,
+      32,
+      53,
+      77,
+      51,
+      57,
+      66,
+      39
+    ],
+    "split": "test",
+    "study_balanced": {
+      "cov80": 0.8649008478733096,
+      "cov95": 0.9717171186321911,
+      "crps": 0.03177480871325553,
+      "mae_log": 0.0446011802130175,
+      "rmse_log": 0.05685856224131122,
+      "width80": 0.16391166548469877,
+      "width95": 0.23795066888895577
+    },
+    "study_level_contrast_error": {
+      "bias_study_mean": -0.006103935968611618,
+      "n_studies_with_contrast": 2,
+      "rmse_study_mean": 0.035607714024414594
+    },
+    "task": "pre_study_new_study",
+    "task_alias": "predose_conditioned"
+  },
+  "transformer|test_compound_holdout|pre_study": {
+    "between_animal_var_ratio_pred_over_obs": 1.8705642287952546,
+    "contrast_bias": -0.04439256900438238,
+    "contrast_cov90": 0.6666666666666666,
+    "contrast_day": 28.0,
+    "contrast_width90": 0.13403138281855906,
+    "correlation_by_gap": [
+      {
+        "corr_obs": 0.8718820703488053,
+        "corr_pred": 0.8650495341527679,
+        "gap_bin": "(4,8]",
+        "n_pairs": 3
+      },
+      {
+        "corr_obs": 0.803683063222592,
+        "corr_pred": 0.7827547542659629,
+        "gap_bin": "(8,15]",
+        "n_pairs": 2
+      },
+      {
+        "corr_obs": 0.830604884668962,
+        "corr_pred": 0.7191651623247276,
+        "gap_bin": "(15,100]",
+        "n_pairs": 1
+      }
+    ],
+    "denominators": {
+      "contrast_bias_study_balanced": -0.04439256900438238,
+      "contrast_bias_weighting": "contrast_row_mean",
+      "contrast_day": 28.0,
+      "coverage_levels": {
+        "contrast": 0.9,
+        "group_mean": 0.9,
+        "individual": [
+          0.8,
+          0.95
+        ]
+      },
+      "n_animals": 28,
+      "n_contrasts": 3,
+      "n_extrema": 28,
+      "n_gap_pairs": 6,
+      "n_group_mean_cells": 32,
+      "n_increments": 28,
+      "n_obs": 110,
+      "n_studies": 1,
+      "n_studies_with_contrast": 1,
+      "rmse_crps_weighting": "study_balanced"
+    },
+    "distributional": {
+      "cov80": 0.9363636363636364,
+      "cov95": 0.9727272727272728,
+      "crps_log_study_balanced": 0.026342225001011077,
+      "energy_score_mean": 0.06053880142204281,
+      "pit_histogram_10bins": [
+        2,
+        2,
+        7,
+        11,
+        15,
+        23,
+        13,
+        9,
+        23,
+        5
+      ]
+    },
+    "effective_sample_sizes": {
+      "n_animals": 28,
+      "n_obs": 110,
+      "n_studies": 1
+    },
+    "energy_score_mean": 0.06053880142204281,
+    "evaluation_pack": {
+      "contrast": {
+        "bias": -0.04439256900438238,
+        "coverage90": 0.6666666666666666,
+        "n_contrasts": 3,
+        "study_level": {
+          "bias_study_mean": -0.04439256900438238,
+          "n_studies_with_contrast": 1,
+          "rmse_study_mean": 0.05050254567632519
+        },
+        "width90": 0.13403138281855906
+      },
+      "group_mean": {
+        "between_animal_var_ratio_pred_over_obs": 1.8705642287952546,
+        "coverage90": 1.0
+      },
+      "individual": {
+        "coverage80": 0.9363636363636364,
+        "coverage95": 0.9727272727272728,
+        "crps_study_balanced": 0.026342225001011077,
+        "effective_sample_sizes": {
+          "n_animals": 28,
+          "n_obs": 110,
+          "n_studies": 1
+        },
+        "rmse_log_study_balanced": 0.04533677747165249,
+        "width80_log": 0.15867885898576525,
+        "width95_log": 0.23080504448006045
+      },
+      "temporal": {
+        "correlation_by_gap": [
+          {
+            "corr_obs": 0.8718820703488053,
+            "corr_pred": 0.8650495341527679,
+            "gap_bin": "(4,8]",
+            "n_pairs": 3
+          },
+          {
+            "corr_obs": 0.803683063222592,
+            "corr_pred": 0.7827547542659629,
+            "gap_bin": "(8,15]",
+            "n_pairs": 2
+          },
+          {
+            "corr_obs": 0.830604884668962,
+            "corr_pred": 0.7191651623247276,
+            "gap_bin": "(15,100]",
+            "n_pairs": 1
+          }
+        ],
+        "distributional": {
+          "cov80": 0.9363636363636364,
+          "cov95": 0.9727272727272728,
+          "crps_log_study_balanced": 0.026342225001011077,
+          "energy_score_mean": 0.06053880142204281,
+          "pit_histogram_10bins": [
+            2,
+            2,
+            7,
+            11,
+            15,
+            23,
+            13,
+            9,
+            23,
+            5
+          ]
+        },
+        "extrema_max_cov90": 0.8571428571428571,
+        "increment_sd_ratio_pred_over_obs": 1.3659666972033015,
+        "pit_histogram_10bins": [
+          2,
+          2,
+          7,
+          11,
+          15,
+          23,
+          13,
+          9,
+          23,
+          5
+        ]
+      }
+    },
+    "extrema_max_cov90": 0.8571428571428571,
+    "group_mean_cov90": 1.0,
+    "increment_sd_ratio_pred_over_obs": 1.3659666972033015,
+    "model": "transformer",
+    "n_contrasts": 3,
+    "observation_weighted": {
+      "cov80": 0.9363636363636364,
+      "cov95": 0.9727272727272728,
+      "crps_log": 0.026342225001011077,
+      "mae_g": 10.746780268057545,
+      "mae_log": 0.03539041445984845,
+      "rmse_g": 14.577573764062898,
+      "rmse_log": 0.04533677747165249,
+      "width80_log": 0.15867885898576525,
+      "width95_log": 0.23080504448006045
+    },
+    "pit_histogram_10bins": [
+      2,
+      2,
+      7,
+      11,
+      15,
+      23,
+      13,
+      9,
+      23,
+      5
+    ],
+    "split": "test_compound_holdout",
+    "study_balanced": {
+      "cov80": 0.9363636363636364,
+      "cov95": 0.9727272727272728,
+      "crps": 0.026342225001011077,
+      "mae_log": 0.03539041445984845,
+      "rmse_log": 0.04533677747165249,
+      "width80": 0.15867885898576525,
+      "width95": 0.23080504448006045
+    },
+    "study_level_contrast_error": {
+      "bias_study_mean": -0.04439256900438238,
+      "n_studies_with_contrast": 1,
+      "rmse_study_mean": 0.05050254567632519
+    },
+    "task": "pre_study_new_study",
+    "task_alias": "predose_conditioned"
+  },
+  "transformer|test|pre_study": {
+    "between_animal_var_ratio_pred_over_obs": 1.3291102697367267,
+    "contrast_bias": -0.023049484610230004,
+    "contrast_cov90": 0.8571428571428571,
+    "contrast_day": 28.0,
+    "contrast_width90": 0.11117400314407146,
+    "correlation_by_gap": [
+      {
+        "corr_obs": 0.9285141222354338,
+        "corr_pred": 0.8714404693506677,
+        "gap_bin": "(0,4]",
+        "n_pairs": 14
+      },
+      {
+        "corr_obs": 0.8951045772864615,
+        "corr_pred": 0.8153135113386334,
+        "gap_bin": "(4,8]",
+        "n_pairs": 12
+      },
+      {
+        "corr_obs": 0.8511130716409527,
+        "corr_pred": 0.7378685565061612,
+        "gap_bin": "(8,15]",
+        "n_pairs": 18
+      },
+      {
+        "corr_obs": 0.7709785350478026,
+        "corr_pred": 0.6022538599170358,
+        "gap_bin": "(15,100]",
+        "n_pairs": 12
+      }
+    ],
+    "denominators": {
+      "contrast_bias_study_balanced": -0.021914832609039838,
+      "contrast_bias_weighting": "contrast_row_mean",
+      "contrast_day": 28.0,
+      "coverage_levels": {
+        "contrast": 0.9,
+        "group_mean": 0.9,
+        "individual": [
+          0.8,
+          0.95
+        ]
+      },
+      "n_animals": 62,
+      "n_contrasts": 7,
+      "n_extrema": 62,
+      "n_gap_pairs": 56,
+      "n_group_mean_cells": 144,
+      "n_increments": 62,
+      "n_obs": 485,
+      "n_studies": 2,
+      "n_studies_with_contrast": 2,
+      "rmse_crps_weighting": "study_balanced"
+    },
+    "distributional": {
+      "cov80": 0.8832334804848995,
+      "cov95": 0.9638339990189896,
+      "crps_log_study_balanced": 0.02662750318582437,
+      "energy_score_mean": 0.08573666277888556,
+      "pit_histogram_10bins": [
+        32,
+        38,
+        64,
+        44,
+        60,
+        82,
+        60,
+        59,
+        29,
+        17
+      ]
+    },
+    "effective_sample_sizes": {
+      "n_animals": 62,
+      "n_obs": 485,
+      "n_studies": 2
+    },
+    "energy_score_mean": 0.08573666277888556,
+    "evaluation_pack": {
+      "contrast": {
+        "bias": -0.023049484610230004,
+        "coverage90": 0.8571428571428571,
+        "n_contrasts": 7,
+        "study_level": {
+          "bias_study_mean": -0.021914832609039838,
+          "n_studies_with_contrast": 2,
+          "rmse_study_mean": 0.038472603082107065
+        },
+        "width90": 0.11117400314407146
+      },
+      "group_mean": {
+        "between_animal_var_ratio_pred_over_obs": 1.3291102697367267,
+        "coverage90": 0.9305555555555556
+      },
+      "individual": {
+        "coverage80": 0.8832334804848995,
+        "coverage95": 0.9638339990189896,
+        "crps_study_balanced": 0.02662750318582437,
+        "effective_sample_sizes": {
+          "n_animals": 62,
+          "n_obs": 485,
+          "n_studies": 2
+        },
+        "rmse_log_study_balanced": 0.04526577919274123,
+        "width80_log": 0.1560288895296445,
+        "width95_log": 0.22382963664995528
+      },
+      "temporal": {
+        "correlation_by_gap": [
+          {
+            "corr_obs": 0.9285141222354338,
+            "corr_pred": 0.8714404693506677,
+            "gap_bin": "(0,4]",
+            "n_pairs": 14
+          },
+          {
+            "corr_obs": 0.8951045772864615,
+            "corr_pred": 0.8153135113386334,
+            "gap_bin": "(4,8]",
+            "n_pairs": 12
+          },
+          {
+            "corr_obs": 0.8511130716409527,
+            "corr_pred": 0.7378685565061612,
+            "gap_bin": "(8,15]",
+            "n_pairs": 18
+          },
+          {
+            "corr_obs": 0.7709785350478026,
+            "corr_pred": 0.6022538599170358,
+            "gap_bin": "(15,100]",
+            "n_pairs": 12
+          }
+        ],
+        "distributional": {
+          "cov80": 0.8832334804848995,
+          "cov95": 0.9638339990189896,
+          "crps_log_study_balanced": 0.02662750318582437,
+          "energy_score_mean": 0.08573666277888556,
+          "pit_histogram_10bins": [
+            32,
+            38,
+            64,
+            44,
+            60,
+            82,
+            60,
+            59,
+            29,
+            17
+          ]
+        },
+        "extrema_max_cov90": 0.9354838709677419,
+        "increment_sd_ratio_pred_over_obs": 1.4265562267407206,
+        "pit_histogram_10bins": [
+          32,
+          38,
+          64,
+          44,
+          60,
+          82,
+          60,
+          59,
+          29,
+          17
+        ]
+      }
+    },
+    "extrema_max_cov90": 0.9354838709677419,
+    "group_mean_cov90": 0.9305555555555556,
+    "increment_sd_ratio_pred_over_obs": 1.4265562267407206,
+    "model": "transformer",
+    "n_contrasts": 7,
+    "observation_weighted": {
+      "cov80": 0.8845360824742268,
+      "cov95": 0.9670103092783505,
+      "crps_log": 0.026666679939863148,
+      "mae_g": 10.519849009245558,
+      "mae_log": 0.036356051304513984,
+      "rmse_g": 13.581662815354232,
+      "rmse_log": 0.04521077224612054,
+      "width80_log": 0.157130772308009,
+      "width95_log": 0.22512209747692144
+    },
+    "pit_histogram_10bins": [
+      32,
+      38,
+      64,
+      44,
+      60,
+      82,
+      60,
+      59,
+      29,
+      17
+    ],
+    "split": "test",
+    "study_balanced": {
+      "cov80": 0.8832334804848995,
+      "cov95": 0.9638339990189896,
+      "crps": 0.02662750318582437,
+      "mae_log": 0.03635867510330996,
+      "rmse_log": 0.04526577919274123,
+      "width80": 0.1560288895296445,
+      "width95": 0.22382963664995528
+    },
+    "study_level_contrast_error": {
+      "bias_study_mean": -0.021914832609039838,
+      "n_studies_with_contrast": 2,
+      "rmse_study_mean": 0.038472603082107065
+    },
+    "task": "pre_study_new_study",
+    "task_alias": "predose_conditioned"
+  }
+}

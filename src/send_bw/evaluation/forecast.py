@@ -195,6 +195,25 @@ def evaluate_prestudy(model: ResponseModel, data: ModelData, n_draws: int = 200,
         "increment_sd_ratio_pred_over_obs": float(incr["sd_pred"].mean() / incr["sd_obs"].mean()) if len(incr) else None,
         "extrema_max_cov90": float(np.mean(extrema)) if extrema else None,
         "pit_histogram_10bins": pit_hist,
+        "denominators": {
+            "n_studies": int(len(st)),
+            "n_animals": int(st["n_animals"].sum()) if len(st) else 0,
+            "n_obs": int(len(obs_df)),
+            "n_contrasts": int(len(contrasts)),
+            "n_studies_with_contrast": (
+                int(st["n_contrasts"].gt(0).sum()) if "n_contrasts" in st else 0),
+            "n_group_mean_cells": int(len(cells)),
+            "n_gap_pairs": int(len(gaps)),
+            "n_increments": int(len(incr)),
+            "n_extrema": int(len(extrema)),
+            "contrast_day": contrast_day,
+            "coverage_levels": {"individual": [0.8, 0.95], "group_mean": 0.9, "contrast": 0.9},
+            "rmse_crps_weighting": "study_balanced",
+            "contrast_bias_weighting": "contrast_row_mean",
+            "contrast_bias_study_balanced": (
+                float(st["contrast_bias"].mean()) if "contrast_bias" in st and st["contrast_bias"].notna().any()
+                else None),
+        },
     }
     return {"summary": summary, "by_sex_horizon": by, "per_study": st}
 
@@ -241,11 +260,14 @@ def evaluation_pack(result: dict[str, Any]) -> dict[str, Any]:
             "correlation_by_gap": s.get("correlation_by_gap"),
             "distributional": s.get("distributional"),
         },
+        "denominators": s.get("denominators"),
         "uncertainty_limitations": dict(COMPONENTS),
         "note": (
             "Coverage and widths are predictive-interval diagnostics under the fitted "
             "layer. They are not a complete parameter-uncertainty statement except "
-            "when a reliable Bayesian posterior is counted separately."
+            "when a reliable Bayesian posterior is counted separately. "
+            "RMSE/CRPS use study-balanced means. Contrast bias in transfer is the "
+            "contrast-row mean; study-balanced contrast bias is reported in denominators."
         ),
     }
 

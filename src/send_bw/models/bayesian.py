@@ -189,6 +189,9 @@ class BayesianModel(ResponseModel):
             diag.update({"draws": draws, "tune": tune, "chains": chains, "seed": seed, "seconds": elapsed,
                          "likelihood": lik, "random_effects": re, "priors": pri,
                          "dropped_nonidentifiable_columns": self._dropped})
+            from send_bw.evaluation.uncertainty import sampling_diagnosis
+
+            diag["sampling_diagnosis"] = sampling_diagnosis(diag)
             post = {v: idata.posterior[v].values.reshape(-1, *idata.posterior[v].shape[2:]) for v in PARAM_VARS}
             bfull = np.zeros((post["beta"].shape[0], p_full))
             bfull[:, keep] = post["beta"]
@@ -229,7 +232,9 @@ class BayesianModel(ResponseModel):
              "ess_tail_min": float(summ["ess_tail"].min()), "divergences": div,
              "maxdepth_hits": int(np.asarray(maxd.values).sum()) if maxd is not None else None,
              "sampler_warnings": wmsgs[:20], "thresholds": th,
-             "worst_rhat_params": summ["r_hat"].sort_values(ascending=False).head(5).to_dict()}
+             "worst_rhat_params": summ["r_hat"].sort_values(ascending=False).head(5).to_dict(),
+             "worst_ess_params": summ["ess_bulk"].sort_values().head(5).to_dict(),
+             "family_diagnostics": _family_diagnostics(summ)}
         d["reliable"] = bool(d["rhat_max"] <= th["rhat_max"] and d["ess_bulk_min"] >= th["ess_bulk_min"]
                              and d["ess_tail_min"] >= th["ess_tail_min"] and div == 0)
         return d
@@ -354,3 +359,16 @@ class BayesianModel(ResponseModel):
         m.draws = {k: z[k] for k in z.files}
         m.compound_ref = pd.read_csv(path / "compound_reference.csv")
         return m
+
+
+def _family_diagnostics(summ) -> dict[str, Any]:
+    out: dict[str, Any] = {}
+    for name, row in summ.iterrows():
+        fam = str(name).split("[", 1)[0]
+        rec = out.setdefault(fam, {"n": 0, "rhat_max": 0.0, "ess_bulk_min": float("inf"),
+                                   "ess_tail_min": float("inf")})
+        rec["n"] += 1
+        rec["rhat_max"] = max(rec["rhat_max"], float(row["r_hat"]))
+        rec["ess_bulk_min"] = min(rec["ess_bulk_min"], float(row["ess_bulk"]))
+        rec["ess_tail_min"] = min(rec["ess_tail_min"], float(row["ess_tail"]))
+    return out

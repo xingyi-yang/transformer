@@ -1,0 +1,59 @@
+{
+  "alpha": 100.0,
+  "covariance": {
+    "ell": 3.5994384086735303,
+    "fit_info": {
+      "converged": true,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "n_animals": 112,
+      "n_obs": 636,
+      "n_studies": 4,
+      "nll": -1270.9878644199848,
+      "params_at_bound": []
+    },
+    "sd_a0": 0.017783486483098566,
+    "sd_a1": 0.08212935331007691,
+    "sd_s0": 0.013961757408702142,
+    "sd_s1": 0.16233774409218799,
+    "sigma_m": 0.00018679069081834433,
+    "sigma_p": 0.025172295985746728
+  },
+  "covariance_fit_on": "target_species_oof",
+  "lambda_growth": 8.0,
+  "lambda_treatment": 8.0,
+  "n_members": 5,
+  "n_params": 88,
+  "oof_rmse": 0.12669634287807735,
+  "selective_sharing": {
+    "model": "spline",
+    "note": "Selective v1 is retained. This variant adds regularized species-specific deviations in nonlinear growth and treatment response. Deviations shrink toward the shared mean; they are not unpenalized species RE.",
+    "regularization": {
+      "growth": "ridge inflation on SPECIES \u00d7 time-basis coefficients (lambda_growth)",
+      "transformer": "phase1 target fit; phase2 extra L2 of species/growth tokens toward phase1 and treatment-deviation head toward 0",
+      "treatment": "ridge inflation on SPECIES \u00d7 exposure/dose coefficients (lambda_treatment)"
+    },
+    "residual": "target_species_only",
+    "shared": [
+      "compound",
+      "regimen"
+    ],
+    "species_specific": [
+      "growth_deviation",
+      "treatment_deviation"
+    ],
+    "training": "joint ridge with SPECIES\u00d7time (growth) and SPECIES\u00d7exposure (treatment) deviations; inflated ridge on those columns; HierarchicalCovariance on target-species OOF residuals only",
+    "variant": "regularized"
+  },
+  "train_rmse": 0.05292203197868614,
+  "validation_rmse": 0.05431796143412302,
+  "validation_rmse_by_alpha": {
+    "0.1": 0.06279060840728817,
+    "1.0": 0.06110795959916327,
+    "10.0": 0.054319438386246775,
+    "100.0": 0.05431796143412302,
+    "1000.0": 0.07271515842864233,
+    "10000.0": 0.12725568578562263,
+    "300.0": 0.06208020561400339,
+    "3000.0": 0.09148241087371178
+  }
+}

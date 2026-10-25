@@ -1,0 +1,73 @@
+{
+  "banks": [
+    "matched",
+    "both"
+  ],
+  "config_hash": "438cb0640f9f9ff8",
+  "config_path": "configs/v3_research.frozen.yaml",
+  "design": false,
+  "frozen_before": "generate_datasets_train_evaluate",
+  "generate_seed": 20261027,
+  "git_revision": "54095801f1d8d240bbf8b59e5a2506f66ddf5004",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "n_dataset_seeds": 2,
+  "n_train_seeds": 2,
+  "preserved_artifacts": [
+    "runs/v3_eval",
+    "runs/v3_pilot_k0k1",
+    "runs/v3_repl"
+  ],
+  "primary_result": "full_versus_sparse_target_study_training",
+  "real_data": false,
+  "reliability_thresholds": {
+    "ess_bulk_min": 400,
+    "ess_tail_min": 400,
+    "rhat_max": 1.01
+  },
+  "retune_after_test": false,
+  "seed_separation": {
+    "generate_seed": "dataset generation only; dataset i uses generate_seed + i * 1009",
+    "nested": "every dataset seed is crossed with every train seed",
+    "train_seed": "splits and model training only; train j uses train_seed + j * 17"
+  },
+  "selective_regularized": {
+    "note": "Selective v1 is retained. This variant adds regularized species-specific deviations in nonlinear growth and treatment response. Deviations shrink toward the shared mean; they are not unpenalized species RE.",
+    "regularization": {
+      "growth": "ridge inflation on SPECIES \u00d7 time-basis coefficients (lambda_growth)",
+      "transformer": "phase1 target fit; phase2 extra L2 of species/growth tokens toward phase1 and treatment-deviation head toward 0",
+      "treatment": "ridge inflation on SPECIES \u00d7 exposure/dose coefficients (lambda_treatment)"
+    },
+    "residual": "target_species_only",
+    "shared": [
+      "compound",
+      "regimen"
+    ],
+    "species_specific": [
+      "growth_deviation",
+      "treatment_deviation"
+    ],
+    "variant": "regularized"
+  },
+  "selective_sharing": {
+    "note": "Shared: compound descriptors and planned-dose/regimen query features. Species-specific: growth/baseline token groups and residual scale. Not a Bayesian species random-effect variant.",
+    "residual": "target_species_only",
+    "shared": [
+      "compound",
+      "regimen"
+    ],
+    "species_specific": [
+      "bio",
+      "baseline",
+      "species"
+    ],
+    "variant": "v1"
+  },
+  "sharing_not_required_to_improve": true,
+  "target_splits": "frozen once per (dataset, train) pair and reused across sharing and banks",
+  "train_seed": 5150
+}

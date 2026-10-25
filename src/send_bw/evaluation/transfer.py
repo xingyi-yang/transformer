@@ -104,7 +104,8 @@ def transfer_uncertainty(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "labels": list(LABELS),
         }
     df = pd.DataFrame(rows)
-    keys = [c for c in ("model", "sharing", "metric", "task", "split", "sparse_target_train") if c in df.columns]
+    keys = [c for c in ("model", "sharing", "metric", "task", "split", "bank",
+                        "sparse_target_train", "contrast") if c in df.columns]
     groups: list[dict[str, Any]] = []
     if not keys:
         keys = ["metric"] if "metric" in df.columns else []
