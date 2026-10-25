@@ -152,6 +152,67 @@ def cqr_metric_policy() -> dict[str, Any]:
             "as a proper score for the original quantile head."
         ),
         "report": "raw_* from original quantiles; cqr_* from calibrated endpoints",
-        "calibration_data": "separate calibration split; not validation, not test",
+        "calibration_data": (
+            "Study-held-out CV: calibration split only. "
+            "Stability run (PR #22): official validation pairs. "
+            "Neither protocol uses test outcomes. Residuals are pair-level "
+            "(USUBJID, DAY), not study-balanced."
+        ),
         "experimental": True,
+    }
+
+
+def quantile_loss_scale_note() -> dict[str, Any]:
+    """Training QuantileLoss is not the reported pinball number."""
+    return {
+        "training": (
+            "pytorch_forecasting.QuantileLoss is 2 * pinball on the "
+            "normalized target (GroupNormalizer/EncoderNormalizer space). "
+            "At q=0.5 the per-row term equals |error_normalized|."
+        ),
+        "reported_mean_quantile_loss": (
+            "Unscaled pinball on raw LOGW = ln(WEIGHT_G), averaged over "
+            "0.1/0.25/0.5/0.75/0.9, then study-balanced."
+        ),
+        "not_comparable_without_rescaling": True,
+        "predict_outputs": "inverse-transformed to raw LOGW (saved q* columns ~5.5–6.1 for RAT)",
+    }
+
+
+def cqr_calibration_units() -> dict[str, Any]:
+    """CQR is pair-level additive conformalization of the 80% interval."""
+    return {
+        "method_name": "cqr_additive",
+        "name_accuracy": (
+            "Matches Romano, Patterson, Candes CQR residual "
+            "max(q0.1-y, y-q0.9) with a single additive margin on both ends. "
+            "It does not conformalize inner quantiles or the median."
+        ),
+        "unit": "aligned (USUBJID, DAY) pairs",
+        "study_balanced": False,
+        "exchangeability": (
+            "Finite-sample coverage assumes exchangeable pair residuals. "
+            "Visits within an animal and animals within a study are dependent. "
+            "That is an assumption, not a finite-sample guarantee at the study level."
+        ),
+        "q": "ceil((n_pairs+1)(1-alpha))/n_pairs, numpy quantile method=higher",
+        "alpha": 0.2,
+    }
+
+
+def tft_feature_applicability(animals: pd.DataFrame, spec, compound_ref: pd.DataFrame,
+                              *, horizon: float | None = 28.0) -> dict[str, Any]:
+    """Record FeatureSpec gates. TFT scoring does not refuse on these."""
+    problems = spec.check_context(animals, compound_ref, horizon=horizon)
+    return {
+        "n_animals": int(animals["USUBJID"].nunique()) if len(animals) else 0,
+        "n_problems": len(problems),
+        "problems": problems,
+        "enforced_by_tft_scoring": False,
+        "note": (
+            "FeatureSpec.check_context is used by design simulation, not by "
+            "TFT predict/score. Official target-only train intervals=[1.0] and "
+            "max_dose=300; official validation includes SYNA-005 (interval 7) "
+            "and official test includes eight SYNA-010 animals at 1000 mg/kg."
+        ),
     }
