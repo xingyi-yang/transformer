@@ -122,7 +122,8 @@ def main(argv: list[str] | None = None) -> int:
                               "parent": load_yaml(args.config).get("output_dir")}, indent=2, default=str))
             return 0
         if args.cmd == "v3-eval":
-            from send_bw.v3_eval import execute_v3_eval, load_yaml as load_eval_yaml
+            from send_bw.v3_eval import execute_v3_eval
+            from send_bw.v3_eval import load_yaml as load_eval_yaml
 
             out = execute_v3_eval(args.config, force=args.force)
             print(json.dumps({"status": "ok",
