@@ -1,0 +1,220 @@
+{
+  "coverage50": {
+    "n_obs": 173,
+    "n_studies": 2,
+    "pooled": 0.5838150289017341,
+    "study_balanced": 0.5838014981273408,
+    "weight_mean": 1.0
+  },
+  "coverage80": {
+    "n_obs": 173,
+    "n_studies": 2,
+    "pooled": 0.8092485549132948,
+    "study_balanced": 0.8112627073301231,
+    "weight_mean": 1.0
+  },
+  "crps_justified": false,
+  "crps_log": null,
+  "crps_note": "CRPS not reported: predictive representation is a finite quantile set, not samples and not a fitted Gaussian. Marginal quantiles are not a complete trajectory simulator.",
+  "grouping": "STUDYID",
+  "horizon_units": {
+    "calendar_day": "DAY of the scored visit",
+    "fabricated_calendar_steps": false,
+    "visit_step": "1-based rank among observed future visits for that animal"
+  },
+  "interval_width50": {
+    "n_obs": 173,
+    "n_studies": 2,
+    "pooled": 0.07252756019548187,
+    "study_balanced": 0.07254797634815649,
+    "weight_mean": 1.0
+  },
+  "interval_width80": {
+    "n_obs": 173,
+    "n_studies": 2,
+    "pooled": 0.15563761154351205,
+    "study_balanced": 0.15565896761359982,
+    "weight_mean": 1.0
+  },
+  "legacy_animal_balanced_mae": {
+    "n_obs": 173,
+    "n_studies": 89,
+    "pooled": 0.04066763160162425,
+    "study_balanced": 0.04075994808437304,
+    "weight_mean": 1.0
+  },
+  "mae_log": {
+    "n_obs": 173,
+    "n_studies": 2,
+    "pooled": 0.04066763160162425,
+    "study_balanced": 0.04051558993752244,
+    "weight_mean": 1.0
+  },
+  "mean_quantile_loss": {
+    "n_obs": 173,
+    "n_studies": 2,
+    "pooled": 0.013811212281030367,
+    "study_balanced": 0.01376564844909616,
+    "weight_mean": 1.0
+  },
+  "merge": {
+    "duplicate_obs_keys": 0,
+    "duplicate_pred_keys": 0,
+    "grouping_column": "STUDYID",
+    "inflated": false,
+    "n_keys_in_both": 173,
+    "n_matched": 173,
+    "n_obs": 173,
+    "n_obs_key_unique": 173,
+    "n_obs_only": 0,
+    "n_pred": 173,
+    "n_pred_key_unique": 173,
+    "n_pred_only": 0,
+    "one_to_one": true
+  },
+  "n_obs_available": 173,
+  "n_pred_rows": 173,
+  "n_scored": 173,
+  "per_horizon": [
+    {
+      "DAY": 21.0,
+      "coverage80": 0.8295454545454546,
+      "interval_width80": 0.14424663240259342,
+      "mae_log": 0.03180754246624622,
+      "mean_quantile_loss": 0.011814518067825438,
+      "n_obs": 88,
+      "rmse_log": 0.04118791483286932
+    },
+    {
+      "DAY": 28.0,
+      "coverage80": 0.788235294117647,
+      "interval_width80": 0.16743062524234545,
+      "mae_log": 0.04984042976530974,
+      "mean_quantile_loss": 0.015878378054701353,
+      "n_obs": 85,
+      "rmse_log": 0.06035918870426953
+    }
+  ],
+  "per_horizon_day": [
+    {
+      "DAY": 21.0,
+      "coverage80": 0.8295454545454546,
+      "interval_width80": 0.14424663240259342,
+      "mae_log": 0.03180754246624622,
+      "mean_quantile_loss": 0.011814518067825438,
+      "n_obs": 88,
+      "rmse_log": 0.04118791483286932
+    },
+    {
+      "DAY": 28.0,
+      "coverage80": 0.788235294117647,
+      "interval_width80": 0.16743062524234545,
+      "mae_log": 0.04984042976530974,
+      "mean_quantile_loss": 0.015878378054701353,
+      "n_obs": 85,
+      "rmse_log": 0.06035918870426953
+    }
+  ],
+  "per_horizon_step": [
+    {
+      "coverage80": 0.8202247191011236,
+      "horizon_step": 1,
+      "interval_width80": 0.1443175680181953,
+      "mae_log": 0.03311768586805698,
+      "mean_quantile_loss": 0.01231482222574234,
+      "n_obs": 89,
+      "rmse_log": 0.04387324945594576
+    },
+    {
+      "coverage80": 0.7976190476190477,
+      "horizon_step": 2,
+      "interval_width80": 0.16763146718343097,
+      "mae_log": 0.048666978866951476,
+      "mean_quantile_loss": 0.015396673172942682,
+      "n_obs": 84,
+      "rmse_log": 0.05851831952581241
+    }
+  ],
+  "per_study": [
+    {
+      "STUDYID": "SYNA-001",
+      "coverage80": 0.8809523809523809,
+      "interval_width80": 0.156397887638637,
+      "mae_log": 0.03525494835959955,
+      "mean_quantile_loss": 0.01218913986417253,
+      "n_obs": 84,
+      "rmse_log": 0.04344918459819139
+    },
+    {
+      "STUDYID": "SYNA-003",
+      "coverage80": 0.7415730337078652,
+      "interval_width80": 0.15492004758856265,
+      "mae_log": 0.04577623151544532,
+      "mean_quantile_loss": 0.015342157034019789,
+      "n_obs": 89,
+      "rmse_log": 0.05809561414995722
+    }
+  ],
+  "point_definition": {
+    "column": "q0.5",
+    "legacy_rmse_log": "official_seq/seq_diag rmse_log was |error|, often grouped by USUBJID",
+    "mae_log": "study-balanced mean of |point - LOGW|",
+    "point": "median",
+    "rmse_log": "true RMSE: per-study sqrt(mean (point-LOGW)^2), then mean of studies. Not |error|. Chronos-2 official mean is the median."
+  },
+  "quantile_loss": {
+    "0.1": {
+      "n_obs": 173,
+      "n_studies": 2,
+      "pooled": 0.010908695694643675,
+      "study_balanced": 0.010871939168184235,
+      "weight_mean": 1.0
+    },
+    "0.25": {
+      "n_obs": 173,
+      "n_studies": 2,
+      "pooled": 0.014177693967650519,
+      "study_balanced": 0.014128227560559477,
+      "weight_mean": 1.0
+    },
+    "0.5": {
+      "n_obs": 173,
+      "n_studies": 2,
+      "pooled": 0.020333815800812127,
+      "study_balanced": 0.02025779496876122,
+      "weight_mean": 1.0
+    },
+    "0.75": {
+      "n_obs": 173,
+      "n_studies": 2,
+      "pooled": 0.015020412892705278,
+      "study_balanced": 0.014992545913763745,
+      "weight_mean": 1.0
+    },
+    "0.9": {
+      "n_obs": 173,
+      "n_studies": 2,
+      "pooled": 0.008615443049340246,
+      "study_balanced": 0.008577734634212124,
+      "weight_mean": 1.0
+    }
+  },
+  "quantiles": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "representation": "tft_quantiles",
+  "rmse_log": {
+    "definition": "per-study sqrt(mean e^2), then mean of studies; pooled=sqrt(mean e^2)",
+    "n_obs": 173,
+    "n_studies": 2,
+    "pooled": 0.051506876586569585,
+    "study_balanced": 0.05077239937407431
+  },
+  "status": "ok",
+  "task": "early_history",
+  "trajectory_simulator": false
+}

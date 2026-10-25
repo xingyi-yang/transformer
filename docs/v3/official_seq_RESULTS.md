@@ -1,5 +1,10 @@
 # Official TFT and Chronos-2 — executed early-history results
 
+> **SUPERSEDED for the name `rmse_log` and for grouping.** The `rmse_log` column
+> below is `|error|` (MAE), and `n_studies=58` is animal-level after a STUDYID
+> merge collision. Corrected study-balanced MAE and true RMSE:
+> [eval_correct_RESULTS.md](eval_correct_RESULTS.md). These tables are preserved.
+
 > **Synthetic diagnostic. Exploratory. Not design qualification. No real-data validation. No operational recommendation.**
 
 This is **not** a spline or custom-transformer substitute. TFT is `pytorch_forecasting.TemporalFusionTransformer`. Chronos-2 is `chronos.Chronos2Pipeline` from `amazon/chronos-2`.

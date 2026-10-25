@@ -1,0 +1,220 @@
+{
+  "coverage50": {
+    "n_obs": 173,
+    "n_studies": 2,
+    "pooled": 0.45664739884393063,
+    "study_balanced": 0.46020599250936334,
+    "weight_mean": 1.0
+  },
+  "coverage80": {
+    "n_obs": 173,
+    "n_studies": 2,
+    "pooled": 0.6647398843930635,
+    "study_balanced": 0.6691412520064206,
+    "weight_mean": 1.0
+  },
+  "crps_justified": false,
+  "crps_log": null,
+  "crps_note": "CRPS not reported: predictive representation is a finite quantile set, not samples and not a fitted Gaussian. Marginal quantiles are not a complete trajectory simulator.",
+  "grouping": "STUDYID",
+  "horizon_units": {
+    "calendar_day": "DAY of the scored visit",
+    "fabricated_calendar_steps": false,
+    "visit_step": "1-based rank among observed future visits for that animal"
+  },
+  "interval_width50": {
+    "n_obs": 173,
+    "n_studies": 2,
+    "pooled": 0.06412210629854588,
+    "study_balanced": 0.06413624916821638,
+    "weight_mean": 1.0
+  },
+  "interval_width80": {
+    "n_obs": 173,
+    "n_studies": 2,
+    "pooled": 0.11338976766332726,
+    "study_balanced": 0.11348503486812912,
+    "weight_mean": 1.0
+  },
+  "legacy_animal_balanced_mae": {
+    "n_obs": 173,
+    "n_studies": 89,
+    "pooled": 0.0465260090546914,
+    "study_balanced": 0.04626636201213349,
+    "weight_mean": 1.0
+  },
+  "mae_log": {
+    "n_obs": 173,
+    "n_studies": 2,
+    "pooled": 0.0465260090546914,
+    "study_balanced": 0.04618120898768885,
+    "weight_mean": 1.0
+  },
+  "mean_quantile_loss": {
+    "n_obs": 173,
+    "n_studies": 2,
+    "pooled": 0.016287627691946954,
+    "study_balanced": 0.016153627707813898,
+    "weight_mean": 1.0
+  },
+  "merge": {
+    "duplicate_obs_keys": 0,
+    "duplicate_pred_keys": 0,
+    "grouping_column": "STUDYID",
+    "inflated": false,
+    "n_keys_in_both": 173,
+    "n_matched": 173,
+    "n_obs": 173,
+    "n_obs_key_unique": 173,
+    "n_obs_only": 0,
+    "n_pred": 173,
+    "n_pred_key_unique": 173,
+    "n_pred_only": 0,
+    "one_to_one": true
+  },
+  "n_obs_available": 173,
+  "n_pred_rows": 173,
+  "n_scored": 173,
+  "per_horizon": [
+    {
+      "DAY": 21.0,
+      "coverage80": 0.7159090909090909,
+      "interval_width80": 0.1127578616142273,
+      "mae_log": 0.04193435209124301,
+      "mean_quantile_loss": 0.014299842940805586,
+      "n_obs": 88,
+      "rmse_log": 0.052089551720544296
+    },
+    {
+      "DAY": 28.0,
+      "coverage80": 0.611764705882353,
+      "interval_width80": 0.11404397627886603,
+      "mae_log": 0.05127972449920268,
+      "mean_quantile_loss": 0.018345569551952132,
+      "n_obs": 85,
+      "rmse_log": 0.06449934002490641
+    }
+  ],
+  "per_horizon_day": [
+    {
+      "DAY": 21.0,
+      "coverage80": 0.7159090909090909,
+      "interval_width80": 0.1127578616142273,
+      "mae_log": 0.04193435209124301,
+      "mean_quantile_loss": 0.014299842940805586,
+      "n_obs": 88,
+      "rmse_log": 0.052089551720544296
+    },
+    {
+      "DAY": 28.0,
+      "coverage80": 0.611764705882353,
+      "interval_width80": 0.11404397627886603,
+      "mae_log": 0.05127972449920268,
+      "mean_quantile_loss": 0.018345569551952132,
+      "n_obs": 85,
+      "rmse_log": 0.06449934002490641
+    }
+  ],
+  "per_horizon_step": [
+    {
+      "coverage80": 0.7078651685393258,
+      "horizon_step": 1,
+      "interval_width80": 0.11289966240357817,
+      "mae_log": 0.042878710713715774,
+      "mean_quantile_loss": 0.014694973141090554,
+      "n_obs": 89,
+      "rmse_log": 0.05348987253609267
+    },
+    {
+      "coverage80": 0.6190476190476191,
+      "horizon_step": 2,
+      "interval_width80": 0.11390904585520427,
+      "mae_log": 0.050390408487391763,
+      "mean_quantile_loss": 0.017975083108925757,
+      "n_obs": 84,
+      "rmse_log": 0.06340933546110002
+    }
+  ],
+  "per_study": [
+    {
+      "STUDYID": "SYNA-001",
+      "coverage80": 0.8214285714285714,
+      "interval_width80": 0.11678128015427362,
+      "mae_log": 0.034251126669400674,
+      "mean_quantile_loss": 0.011517228256810128,
+      "n_obs": 84,
+      "rmse_log": 0.04284351952954695
+    },
+    {
+      "STUDYID": "SYNA-003",
+      "coverage80": 0.5168539325842697,
+      "interval_width80": 0.11018878958198462,
+      "mae_log": 0.05811129130597703,
+      "mean_quantile_loss": 0.02079002715881767,
+      "n_obs": 89,
+      "rmse_log": 0.0701682291943795
+    }
+  ],
+  "point_definition": {
+    "column": "q0.5",
+    "legacy_rmse_log": "official_seq/seq_diag rmse_log was |error|, often grouped by USUBJID",
+    "mae_log": "study-balanced mean of |point - LOGW|",
+    "point": "median",
+    "rmse_log": "true RMSE: per-study sqrt(mean (point-LOGW)^2), then mean of studies. Not |error|. Chronos-2 official mean is the median."
+  },
+  "quantile_loss": {
+    "0.1": {
+      "n_obs": 173,
+      "n_studies": 2,
+      "pooled": 0.009508845694961309,
+      "study_balanced": 0.009467747175483526,
+      "weight_mean": 1.0
+    },
+    "0.25": {
+      "n_obs": 173,
+      "n_studies": 2,
+      "pooled": 0.017383029624038922,
+      "study_balanced": 0.01727443115701025,
+      "weight_mean": 1.0
+    },
+    "0.5": {
+      "n_obs": 173,
+      "n_studies": 2,
+      "pooled": 0.0232630045273457,
+      "study_balanced": 0.023090604493844424,
+      "weight_mean": 1.0
+    },
+    "0.75": {
+      "n_obs": 173,
+      "n_studies": 2,
+      "pooled": 0.01859290591034814,
+      "study_balanced": 0.018419607125128197,
+      "weight_mean": 1.0
+    },
+    "0.9": {
+      "n_obs": 173,
+      "n_studies": 2,
+      "pooled": 0.012690352703040711,
+      "study_balanced": 0.012515748587603093,
+      "weight_mean": 1.0
+    }
+  },
+  "quantiles": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "representation": "tft_quantiles",
+  "rmse_log": {
+    "definition": "per-study sqrt(mean e^2), then mean of studies; pooled=sqrt(mean e^2)",
+    "n_obs": 173,
+    "n_studies": 2,
+    "pooled": 0.05851664930181366,
+    "study_balanced": 0.05650587436196322
+  },
+  "status": "ok",
+  "task": "early_history",
+  "trajectory_simulator": false
+}
