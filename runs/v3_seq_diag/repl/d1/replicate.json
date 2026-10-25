@@ -1,0 +1,685 @@
+{
+  "dataset_index": 1,
+  "generate_seed": 73010,
+  "paired_transfer": {
+    "chronos2_finetune": {
+      "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+      "rows": [
+        {
+          "delta_pooled_minus_target": 0.00012549702853639766,
+          "harmful_if_positive": true,
+          "metric": "rmse_log",
+          "pooled": 0.1036412493056296,
+          "target_only": 0.1035157522770932
+        },
+        {
+          "delta_pooled_minus_target": 3.422949175142104e-05,
+          "harmful_if_positive": true,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.03452067015294237,
+          "target_only": 0.03448644066119095
+        }
+      ]
+    },
+    "spline": {
+      "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+      "rows": [
+        {
+          "delta_pooled_minus_target": -0.0008754426577662205,
+          "harmful_if_positive": true,
+          "metric": "rmse_log",
+          "pooled": 0.028869204228532886,
+          "target_only": 0.029744646886299107
+        },
+        {
+          "delta_pooled_minus_target": 0.0015988612901277031,
+          "harmful_if_positive": true,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.012117501999434295,
+          "target_only": 0.010518640709306592
+        }
+      ]
+    },
+    "tft": {
+      "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+      "rows": [
+        {
+          "delta_pooled_minus_target": 0.010222711809902335,
+          "harmful_if_positive": true,
+          "metric": "rmse_log",
+          "pooled": 0.07361999761191806,
+          "target_only": 0.06339728580201573
+        },
+        {
+          "delta_pooled_minus_target": 0.0007833594830530498,
+          "harmful_if_positive": true,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.024416461673702813,
+          "target_only": 0.023633102190649763
+        }
+      ]
+    },
+    "transformer": {
+      "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+      "rows": [
+        {
+          "delta_pooled_minus_target": -0.014461077132052271,
+          "harmful_if_positive": true,
+          "metric": "rmse_log",
+          "pooled": 0.028924790747980395,
+          "target_only": 0.043385867880032666
+        },
+        {
+          "delta_pooled_minus_target": -0.005249055747846568,
+          "harmful_if_positive": true,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.010071169248990958,
+          "target_only": 0.015320224996837526
+        }
+      ]
+    }
+  },
+  "predose_evaluated": false,
+  "reload_checks": {
+    "chronos2_pooled": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    },
+    "chronos2_target_only": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    },
+    "chronos2_zero_shot": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    },
+    "tft_pooled": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    },
+    "tft_target_only": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    }
+  },
+  "results": {
+    "chronos2_pooled": {
+      "coverage50": 0.6340260370340423,
+      "coverage80": 0.9550820732594809,
+      "crps_justified": false,
+      "crps_log": null,
+      "interval_width50": 0.20123856437999582,
+      "interval_width80": 0.532697988479903,
+      "mean_quantile_loss": 0.03452067015294237,
+      "mode": "finetune_pooled",
+      "model_class": "chronos.Chronos2Pipeline",
+      "n_scored": 232,
+      "per_horizon": [
+        {
+          "DAY": 17.0,
+          "coverage80": 1.0,
+          "interval_width80": 0.25486999239240377,
+          "mean_quantile_loss": 0.014956281683460193,
+          "n_obs": 35,
+          "rmse_log": 0.03310042279611855
+        },
+        {
+          "DAY": 21.0,
+          "coverage80": 0.9620253164556962,
+          "interval_width80": 0.4780904009372373,
+          "mean_quantile_loss": 0.028905377193146165,
+          "n_obs": 79,
+          "rmse_log": 0.08056804727984881
+        },
+        {
+          "DAY": 24.0,
+          "coverage80": 0.8947368421052632,
+          "interval_width80": 0.3862886177866082,
+          "mean_quantile_loss": 0.02934586952614394,
+          "n_obs": 38,
+          "rmse_log": 0.08463567002477519
+        },
+        {
+          "DAY": 28.0,
+          "coverage80": 0.95,
+          "interval_width80": 0.635459977388382,
+          "mean_quantile_loss": 0.04396792664386902,
+          "n_obs": 80,
+          "rmse_log": 0.14185442296414968
+        }
+      ],
+      "point_definition": {
+        "column": "q0.5",
+        "point": "median",
+        "rmse_log": "study-balanced mean of |point - LOGW|; identical to official_seq. Chronos-2 official mean is the median (forecast_type=QUANTILES)."
+      },
+      "pretrained_id": "amazon/chronos-2",
+      "representation": "chronos2_quantiles",
+      "rmse_log": 0.1036412493056296,
+      "seconds": 9.98754620552063,
+      "status": "ok"
+    },
+    "chronos2_target_only": {
+      "coverage50": 0.6340260370340423,
+      "coverage80": 0.9550820732594809,
+      "crps_justified": false,
+      "crps_log": null,
+      "interval_width50": 0.20105007495434407,
+      "interval_width80": 0.5320796907945757,
+      "mean_quantile_loss": 0.03448644066119095,
+      "mode": "finetune_target_only",
+      "model_class": "chronos.Chronos2Pipeline",
+      "n_scored": 232,
+      "per_horizon": [
+        {
+          "DAY": 17.0,
+          "coverage80": 1.0,
+          "interval_width80": 0.25491184507097514,
+          "mean_quantile_loss": 0.014953149408287552,
+          "n_obs": 35,
+          "rmse_log": 0.03307348830863947
+        },
+        {
+          "DAY": 21.0,
+          "coverage80": 0.9620253164556962,
+          "interval_width80": 0.47748554809184013,
+          "mean_quantile_loss": 0.028869859585083025,
+          "n_obs": 79,
+          "rmse_log": 0.08042443479244214
+        },
+        {
+          "DAY": 24.0,
+          "coverage80": 0.8947368421052632,
+          "interval_width80": 0.38623024287976715,
+          "mean_quantile_loss": 0.029335469135607813,
+          "n_obs": 38,
+          "rmse_log": 0.0845906734629069
+        },
+        {
+          "DAY": 28.0,
+          "coverage80": 0.95,
+          "interval_width80": 0.6347653567790985,
+          "mean_quantile_loss": 0.04393182792522584,
+          "n_obs": 80,
+          "rmse_log": 0.1417284485474169
+        }
+      ],
+      "point_definition": {
+        "column": "q0.5",
+        "point": "median",
+        "rmse_log": "study-balanced mean of |point - LOGW|; identical to official_seq. Chronos-2 official mean is the median (forecast_type=QUANTILES)."
+      },
+      "pretrained_id": "amazon/chronos-2",
+      "representation": "chronos2_quantiles",
+      "rmse_log": 0.1035157522770932,
+      "seconds": 9.99572491645813,
+      "status": "ok"
+    },
+    "chronos2_zero_shot": {
+      "coverage50": 0.5817902482412873,
+      "coverage80": 0.9550820732594809,
+      "crps_justified": false,
+      "crps_log": null,
+      "interval_width50": 0.20200049095419081,
+      "interval_width80": 0.5438053213114726,
+      "mean_quantile_loss": 0.03597292769855037,
+      "mode": "zero_shot",
+      "model_class": "chronos.Chronos2Pipeline",
+      "n_scored": 232,
+      "per_horizon": [
+        {
+          "DAY": 17.0,
+          "coverage80": 1.0,
+          "interval_width80": 0.2611496652875628,
+          "mean_quantile_loss": 0.015557396560680432,
+          "n_obs": 35,
+          "rmse_log": 0.03552665141853435
+        },
+        {
+          "DAY": 21.0,
+          "coverage80": 0.9620253164556962,
+          "interval_width80": 0.49179684964916376,
+          "mean_quantile_loss": 0.030139184804911012,
+          "n_obs": 79,
+          "rmse_log": 0.08727057259009696
+        },
+        {
+          "DAY": 24.0,
+          "coverage80": 0.8947368421052632,
+          "interval_width80": 0.3918135166168213,
+          "mean_quantile_loss": 0.030403837841462576,
+          "n_obs": 38,
+          "rmse_log": 0.08941457745758599
+        },
+        {
+          "DAY": 28.0,
+          "coverage80": 0.95,
+          "interval_width80": 0.6443694353103637,
+          "mean_quantile_loss": 0.04579742104115142,
+          "n_obs": 80,
+          "rmse_log": 0.14977373295811577
+        }
+      ],
+      "point_definition": {
+        "column": "q0.5",
+        "point": "median",
+        "rmse_log": "study-balanced mean of |point - LOGW|; identical to official_seq. Chronos-2 official mean is the median (forecast_type=QUANTILES)."
+      },
+      "pretrained_id": "amazon/chronos-2",
+      "representation": "chronos2_quantiles",
+      "rmse_log": 0.11041568131346485,
+      "seconds": 2.6641149520874023,
+      "status": "ok"
+    },
+    "last_value": {
+      "coverage50": 0.0,
+      "coverage80": 0.0,
+      "crps_justified": false,
+      "crps_log": null,
+      "interval_width50": 0.0,
+      "interval_width80": 0.0,
+      "mean_quantile_loss": 0.051600105825385253,
+      "model_class": "last_value_baseline",
+      "n_scored": 232,
+      "per_horizon": [
+        {
+          "DAY": 17.0,
+          "coverage80": 0.0,
+          "interval_width80": 0.0,
+          "mean_quantile_loss": 0.020111169758018983,
+          "n_obs": 35,
+          "rmse_log": 0.040222339516037965
+        },
+        {
+          "DAY": 21.0,
+          "coverage80": 0.0,
+          "interval_width80": 0.0,
+          "mean_quantile_loss": 0.0396989642369673,
+          "n_obs": 79,
+          "rmse_log": 0.0793979284739346
+        },
+        {
+          "DAY": 24.0,
+          "coverage80": 0.0,
+          "interval_width80": 0.0,
+          "mean_quantile_loss": 0.05023455931291953,
+          "n_obs": 38,
+          "rmse_log": 0.10046911862583906
+        },
+        {
+          "DAY": 28.0,
+          "coverage80": 0.0,
+          "interval_width80": 0.0,
+          "mean_quantile_loss": 0.07126333920423482,
+          "n_obs": 80,
+          "rmse_log": 0.14252667840846964
+        }
+      ],
+      "point_definition": {
+        "column": "last_observed_encoder_LOGW",
+        "point": "last_observed_encoder_LOGW",
+        "rmse_log": "study-balanced mean of |point - LOGW|; identical to official_seq. Chronos-2 official mean is the median (forecast_type=QUANTILES)."
+      },
+      "representation": "last_value",
+      "rmse_log": 0.10320021165077051,
+      "seconds": 0.0,
+      "status": "ok"
+    },
+    "spline_pooled": {
+      "coverage50": 0.6962480795665885,
+      "coverage80": 0.9034527371229886,
+      "crps_justified": true,
+      "crps_log": 0.02387329450342702,
+      "interval_width50": 0.0861251193021662,
+      "interval_width80": 0.1636404132788077,
+      "mean_quantile_loss": 0.012117501999434295,
+      "model_class": "send_bw.models.spline.SplineModel",
+      "n_scored": 232,
+      "per_horizon": [
+        {
+          "DAY": 17.0,
+          "coverage80": 0.9428571428571428,
+          "interval_width80": 0.08511851167326313,
+          "mean_quantile_loss": 0.007200227297416505,
+          "n_obs": 35,
+          "rmse_log": 0.02120556494230461
+        },
+        {
+          "DAY": 21.0,
+          "coverage80": 0.9240506329113924,
+          "interval_width80": 0.1433249488841006,
+          "mean_quantile_loss": 0.01011602065930406,
+          "n_obs": 79,
+          "rmse_log": 0.023881704203444817
+        },
+        {
+          "DAY": 24.0,
+          "coverage80": 0.868421052631579,
+          "interval_width80": 0.12292993543593705,
+          "mean_quantile_loss": 0.010122760160024703,
+          "n_obs": 38,
+          "rmse_log": 0.027110781306764586
+        },
+        {
+          "DAY": 28.0,
+          "coverage80": 0.8625,
+          "interval_width80": 0.19505016806724243,
+          "mean_quantile_loss": 0.015299055225430796,
+          "n_obs": 80,
+          "rmse_log": 0.03677299351778286
+        }
+      ],
+      "point_definition": {
+        "column": "MEAN",
+        "point": "gaussian_mean",
+        "rmse_log": "study-balanced mean of |point - LOGW|; identical to official_seq. Chronos-2 official mean is the median (forecast_type=QUANTILES)."
+      },
+      "representation": "gaussian",
+      "rmse_log": 0.028869204228532886,
+      "seconds": 4.467898607254028,
+      "status": "ok",
+      "training_scope": "pooled"
+    },
+    "spline_target_only": {
+      "coverage50": 0.5965068326999272,
+      "coverage80": 0.8853804479663621,
+      "crps_justified": true,
+      "crps_log": 0.021357366766683983,
+      "interval_width50": 0.06164271841611134,
+      "interval_width80": 0.11712308788625297,
+      "mean_quantile_loss": 0.010518640709306592,
+      "model_class": "send_bw.models.spline.SplineModel",
+      "n_scored": 232,
+      "per_horizon": [
+        {
+          "DAY": 17.0,
+          "coverage80": 0.9428571428571428,
+          "interval_width80": 0.0825803971057349,
+          "mean_quantile_loss": 0.00660172325129727,
+          "n_obs": 35,
+          "rmse_log": 0.018753578767601756
+        },
+        {
+          "DAY": 21.0,
+          "coverage80": 0.8987341772151899,
+          "interval_width80": 0.10466218472584919,
+          "mean_quantile_loss": 0.008776508571916074,
+          "n_obs": 79,
+          "rmse_log": 0.02427320483360865
+        },
+        {
+          "DAY": 24.0,
+          "coverage80": 0.8421052631578947,
+          "interval_width80": 0.11739086350054592,
+          "mean_quantile_loss": 0.012108521306206944,
+          "n_obs": 38,
+          "rmse_log": 0.03331242080815752
+        },
+        {
+          "DAY": 28.0,
+          "coverage80": 0.8625,
+          "interval_width80": 0.14133050846008227,
+          "mean_quantile_loss": 0.013323494583210605,
+          "n_obs": 80,
+          "rmse_log": 0.038690104011676274
+        }
+      ],
+      "point_definition": {
+        "column": "MEAN",
+        "point": "gaussian_mean",
+        "rmse_log": "study-balanced mean of |point - LOGW|; identical to official_seq. Chronos-2 official mean is the median (forecast_type=QUANTILES)."
+      },
+      "representation": "gaussian",
+      "rmse_log": 0.029744646886299107,
+      "seconds": 4.28745436668396,
+      "status": "ok",
+      "training_scope": "target_only"
+    },
+    "tft_pooled": {
+      "coverage50": 0.31511280019406485,
+      "coverage80": 0.5725721678660952,
+      "crps_justified": false,
+      "crps_log": null,
+      "interval_width50": 0.06437476600701879,
+      "interval_width80": 0.13331917537736404,
+      "mean_quantile_loss": 0.024416461673702813,
+      "model_class": "pytorch_forecasting.TemporalFusionTransformer",
+      "n_scored": 232,
+      "per_horizon": [
+        {
+          "DAY": 17.0,
+          "coverage80": 0.6571428571428571,
+          "interval_width80": 0.11610710961478098,
+          "mean_quantile_loss": 0.017467436690710818,
+          "n_obs": 35,
+          "rmse_log": 0.05627974366776878
+        },
+        {
+          "DAY": 21.0,
+          "coverage80": 0.620253164556962,
+          "interval_width80": 0.12796470183360426,
+          "mean_quantile_loss": 0.022235022924927246,
+          "n_obs": 79,
+          "rmse_log": 0.06781288138761501
+        },
+        {
+          "DAY": 24.0,
+          "coverage80": 0.7631578947368421,
+          "interval_width80": 0.1439001811178107,
+          "mean_quantile_loss": 0.017402333877683463,
+          "n_obs": 38,
+          "rmse_log": 0.055180516933801944
+        },
+        {
+          "DAY": 28.0,
+          "coverage80": 0.5125,
+          "interval_width80": 0.14398106336593627,
+          "mean_quantile_loss": 0.027026499980038275,
+          "n_obs": 80,
+          "rmse_log": 0.08041164660019223
+        }
+      ],
+      "point_definition": {
+        "column": "q0.5",
+        "point": "median",
+        "rmse_log": "study-balanced mean of |point - LOGW|; identical to official_seq. Chronos-2 official mean is the median (forecast_type=QUANTILES)."
+      },
+      "representation": "tft_quantiles",
+      "rmse_log": 0.07361999761191806,
+      "seconds": 30.03144335746765,
+      "status": "ok",
+      "training_scope": "pooled"
+    },
+    "tft_target_only": {
+      "coverage50": 0.25745936767203037,
+      "coverage80": 0.4874666451039055,
+      "crps_justified": false,
+      "crps_log": null,
+      "interval_width50": 0.05899864293016169,
+      "interval_width80": 0.12254935686634749,
+      "mean_quantile_loss": 0.023633102190649763,
+      "model_class": "pytorch_forecasting.TemporalFusionTransformer",
+      "n_scored": 232,
+      "per_horizon": [
+        {
+          "DAY": 17.0,
+          "coverage80": 0.6571428571428571,
+          "interval_width80": 0.10997554234095983,
+          "mean_quantile_loss": 0.014827579340074025,
+          "n_obs": 35,
+          "rmse_log": 0.04381596230824218
+        },
+        {
+          "DAY": 21.0,
+          "coverage80": 0.4936708860759494,
+          "interval_width80": 0.1171794360197043,
+          "mean_quantile_loss": 0.022453920075427965,
+          "n_obs": 79,
+          "rmse_log": 0.06103652110202777
+        },
+        {
+          "DAY": 24.0,
+          "coverage80": 0.6578947368421053,
+          "interval_width80": 0.12920358306483218,
+          "mean_quantile_loss": 0.015268363129270143,
+          "n_obs": 38,
+          "rmse_log": 0.0444050683708698
+        },
+        {
+          "DAY": 28.0,
+          "coverage80": 0.45,
+          "interval_width80": 0.13181955218315125,
+          "mean_quantile_loss": 0.02647200562621277,
+          "n_obs": 80,
+          "rmse_log": 0.07041282429560128
+        }
+      ],
+      "point_definition": {
+        "column": "q0.5",
+        "point": "median",
+        "rmse_log": "study-balanced mean of |point - LOGW|; identical to official_seq. Chronos-2 official mean is the median (forecast_type=QUANTILES)."
+      },
+      "representation": "tft_quantiles",
+      "rmse_log": 0.06339728580201573,
+      "seconds": 24.383231163024902,
+      "status": "ok",
+      "training_scope": "target_only"
+    },
+    "transformer_pooled": {
+      "coverage50": 0.5542572976469637,
+      "coverage80": 0.8457993046009542,
+      "crps_justified": true,
+      "crps_log": 0.020473331424521013,
+      "interval_width50": 0.055720674474128276,
+      "interval_width80": 0.10587101966302812,
+      "mean_quantile_loss": 0.010071169248990958,
+      "model_class": "send_bw.models.transformer.TransformerModel",
+      "n_scored": 232,
+      "per_horizon": [
+        {
+          "DAY": 17.0,
+          "coverage80": 0.8285714285714286,
+          "interval_width80": 0.0687597979967916,
+          "mean_quantile_loss": 0.0065588955006154115,
+          "n_obs": 35,
+          "rmse_log": 0.019543836288202523
+        },
+        {
+          "DAY": 21.0,
+          "coverage80": 0.8481012658227848,
+          "interval_width80": 0.09481954166162973,
+          "mean_quantile_loss": 0.008993660505343006,
+          "n_obs": 79,
+          "rmse_log": 0.025467333959734148
+        },
+        {
+          "DAY": 24.0,
+          "coverage80": 0.8157894736842105,
+          "interval_width80": 0.10754182275866214,
+          "mean_quantile_loss": 0.011371462944845456,
+          "n_obs": 38,
+          "rmse_log": 0.03236351935070595
+        },
+        {
+          "DAY": 28.0,
+          "coverage80": 0.8375,
+          "interval_width80": 0.12669371054153297,
+          "mean_quantile_loss": 0.011966880074600075,
+          "n_obs": 80,
+          "rmse_log": 0.03443681789608623
+        }
+      ],
+      "point_definition": {
+        "column": "MEAN",
+        "point": "gaussian_mean",
+        "rmse_log": "study-balanced mean of |point - LOGW|; identical to official_seq. Chronos-2 official mean is the median (forecast_type=QUANTILES)."
+      },
+      "representation": "gaussian",
+      "rmse_log": 0.028924790747980395,
+      "seconds": 1.1344172954559326,
+      "status": "ok",
+      "training_scope": "pooled"
+    },
+    "transformer_target_only": {
+      "coverage50": 0.41881620441497536,
+      "coverage80": 0.6802377294412549,
+      "crps_justified": true,
+      "crps_log": 0.031117986486807282,
+      "interval_width50": 0.05611666783457072,
+      "interval_width80": 0.10662341940056694,
+      "mean_quantile_loss": 0.015320224996837526,
+      "model_class": "send_bw.models.transformer.TransformerModel",
+      "n_scored": 232,
+      "per_horizon": [
+        {
+          "DAY": 17.0,
+          "coverage80": 0.7714285714285715,
+          "interval_width80": 0.07012701108174417,
+          "mean_quantile_loss": 0.007743053809613925,
+          "n_obs": 35,
+          "rmse_log": 0.022637211239565858
+        },
+        {
+          "DAY": 21.0,
+          "coverage80": 0.7848101265822784,
+          "interval_width80": 0.09633963992284868,
+          "mean_quantile_loss": 0.010742311352508385,
+          "n_obs": 79,
+          "rmse_log": 0.030770456950907677
+        },
+        {
+          "DAY": 24.0,
+          "coverage80": 0.5789473684210527,
+          "interval_width80": 0.10885713806394662,
+          "mean_quantile_loss": 0.01833576871047903,
+          "n_obs": 38,
+          "rmse_log": 0.05141403708771294
+        },
+        {
+          "DAY": 28.0,
+          "coverage80": 0.55,
+          "interval_width80": 0.1264783177322023,
+          "mean_quantile_loss": 0.022095780912241014,
+          "n_obs": 80,
+          "rmse_log": 0.06212547260259904
+        }
+      ],
+      "point_definition": {
+        "column": "MEAN",
+        "point": "gaussian_mean",
+        "rmse_log": "study-balanced mean of |point - LOGW|; identical to official_seq. Chronos-2 official mean is the median (forecast_type=QUANTILES)."
+      },
+      "representation": "gaussian",
+      "rmse_log": 0.043385867880032666,
+      "seconds": 1.0748615264892578,
+      "status": "ok",
+      "training_scope": "target_only"
+    }
+  },
+  "target_holdout_hashes": {
+    "pooled": {
+      "all_target": "93442f4925de67c9",
+      "test": "d4b3062a5b14b063",
+      "validation": "5f4c5fe8d108dc8d"
+    },
+    "target_only": {
+      "all_target": "93442f4925de67c9",
+      "test": "d4b3062a5b14b063",
+      "validation": "5f4c5fe8d108dc8d"
+    }
+  },
+  "task": "early_history",
+  "train_seed": 82018,
+  "training_commands": [
+    "send-bw generate --config runs/v3_seq_diag/repl/d1/datasets/d1/banks/matched/effective.yaml",
+    "send-bw train --config runs/v3_seq_diag/repl/d1/datasets/d1/trains/t0/cells/d1_t0_matched_target_only/effective.yaml --models spline transformer",
+    "send-bw train --config runs/v3_seq_diag/repl/d1/datasets/d1/trains/t0/cells/d1_t0_matched_pooled/effective.yaml --models spline transformer",
+    "TFTEarlyHistoryModel.fit training_scope=target_only",
+    "TFTEarlyHistoryModel.fit training_scope=pooled"
+  ]
+}

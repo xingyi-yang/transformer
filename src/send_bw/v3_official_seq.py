@@ -29,7 +29,7 @@ from send_bw.v3_research import _bank_cfg, _cell_cfg, _run_from_cfg, load_yaml
 PRESERVED = (
     "runs/v3_eval", "runs/v3_pilot_k0k1", "runs/v3_repl", "runs/v3_research",
     "runs/v3_closeout", "runs/v3_audit", "runs/v3_increment", "runs/v3_phaseb",
-    "runs/v3_limitations", "runs/v3_objective",
+    "runs/v3_limitations", "runs/v3_objective", "runs/v3_official_seq",
 )
 WINDOW = 14.0
 

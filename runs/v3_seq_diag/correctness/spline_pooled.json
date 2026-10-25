@@ -1,0 +1,145 @@
+{
+  "coverage50": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.8173913043478261,
+    "study_balanced": 0.774547803617571,
+    "weight_mean": 0.9999999999999999
+  },
+  "coverage80": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 1.0,
+    "study_balanced": 1.0,
+    "weight_mean": 0.9999999999999999
+  },
+  "crps_justified": true,
+  "crps_log": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.02904598905741107,
+    "study_balanced": 0.028361214968373162,
+    "weight_mean": 0.9999999999999999
+  },
+  "crps_note": "Gaussian CRPS from the hierarchical residual layer.",
+  "interval_width50": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.12521317512486618,
+    "study_balanced": 0.11752711596213539,
+    "weight_mean": 0.9999999999999999
+  },
+  "interval_width80": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.23790893866279328,
+    "study_balanced": 0.2233051864930938,
+    "weight_mean": 0.9999999999999999
+  },
+  "mean_quantile_loss": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.014920454937058257,
+    "study_balanced": 0.01443948644115832,
+    "weight_mean": 0.9999999999999999
+  },
+  "n_obs_available": 115,
+  "n_pred_rows": 116,
+  "n_scored": 115,
+  "per_horizon": [
+    {
+      "DAY": 21.0,
+      "coverage80": 1.0,
+      "interval_width80": 0.21554407779695745,
+      "mean_quantile_loss": 0.013142255532524561,
+      "n_obs": 58,
+      "rmse_log": 0.02723457683277538
+    },
+    {
+      "DAY": 28.0,
+      "coverage80": 1.0,
+      "interval_width80": 0.2606661655087315,
+      "mean_quantile_loss": 0.016729850822373247,
+      "n_obs": 57,
+      "rmse_log": 0.040143575767517425
+    }
+  ],
+  "per_study": [
+    {
+      "STUDYID": "SYNA-010",
+      "coverage80": 1.0,
+      "interval_width80": 0.16539375547531998,
+      "mean_quantile_loss": 0.012532197578106832,
+      "n_obs": 43,
+      "rmse_log": 0.036934421257747416
+    },
+    {
+      "STUDYID": "SYNA-011",
+      "coverage80": 1.0,
+      "interval_width80": 0.28121661751086763,
+      "mean_quantile_loss": 0.016346775304209804,
+      "n_obs": 72,
+      "rmse_log": 0.03166123834675453
+    }
+  ],
+  "point_definition": {
+    "column": "MEAN",
+    "point": "gaussian_mean",
+    "rmse_log": "study-balanced mean of |point - LOGW|; identical to official_seq. Chronos-2 official mean is the median (forecast_type=QUANTILES)."
+  },
+  "quantile_loss": {
+    "0.1": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.01159496175662383,
+      "study_balanced": 0.010511200239592065,
+      "weight_mean": 0.9999999999999999
+    },
+    "0.25": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.01710535575312455,
+      "study_balanced": 0.015932793188664158,
+      "weight_mean": 0.9999999999999999
+    },
+    "0.5": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.016816475108910718,
+      "study_balanced": 0.017148914901125488,
+      "weight_mean": 0.9999999999999999
+    },
+    "0.75": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.016889549956976696,
+      "study_balanced": 0.01678520546669257,
+      "weight_mean": 0.9999999999999999
+    },
+    "0.9": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.012195932109655496,
+      "study_balanced": 0.011819318409717314,
+      "weight_mean": 0.9999999999999999
+    }
+  },
+  "quantiles": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "representation": "gaussian",
+  "rmse_log": {
+    "n_obs": 115,
+    "n_studies": 2,
+    "pooled": 0.033632950217821436,
+    "study_balanced": 0.034297829802250976,
+    "weight_mean": 0.9999999999999999
+  },
+  "status": "ok",
+  "task": "early_history",
+  "trajectory_simulator": false
+}

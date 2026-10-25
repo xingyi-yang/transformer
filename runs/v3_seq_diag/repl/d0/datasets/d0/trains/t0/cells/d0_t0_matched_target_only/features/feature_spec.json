@@ -1,0 +1,73 @@
+{
+  "animal_cols": [
+    "SEX_M",
+    "ZB_C",
+    "IS_CONTROL",
+    "LD",
+    "INV_INTERVAL",
+    "START",
+    "END",
+    "D1",
+    "D2",
+    "D3",
+    "STRAIN_WISTAR HAN",
+    "ROUTE_ORAL GAVAGE"
+  ],
+  "compound_ids": [
+    "CMP02",
+    "CMP03",
+    "CMP06"
+  ],
+  "declared_species": [],
+  "descriptor_ranges": {
+    "D1": [
+      -2.3173,
+      0.05
+    ],
+    "D2": [
+      -0.209,
+      0.7447
+    ],
+    "D3": [
+      -2.1481,
+      0.8479
+    ]
+  },
+  "fixed_schema": false,
+  "intervals": [
+    1.0,
+    7.0
+  ],
+  "max_day": 28.0,
+  "max_dose": 1000.0,
+  "routes": [
+    "INTRAVENOUS",
+    "ORAL GAVAGE"
+  ],
+  "sexes": [
+    "F",
+    "M"
+  ],
+  "sharing": "context_specific",
+  "species": "RAT",
+  "species_levels": [
+    "RAT"
+  ],
+  "strains": [
+    "SPRAGUE-DAWLEY",
+    "WISTAR HAN"
+  ],
+  "t_ref": 28.0,
+  "time_cols": [
+    "TAU",
+    "EXPO",
+    "OFF",
+    "LCUM"
+  ],
+  "version": "features-v1",
+  "zb_mean": {
+    "F": 5.287988036644072,
+    "M": 5.579659373271437
+  },
+  "zb_mean_by_species": {}
+}

@@ -1,0 +1,16 @@
+{
+  "added_in_this_diagnostic": false,
+  "api_accepts_future_covariates": true,
+  "api_accepts_past_covariates": true,
+  "note": "Chronos-2 can take covariate dicts. PR #10 and this diagnostic do not add them. That is a recorded limitation, not a retune target.",
+  "official_seq_input": "univariate LOGW ndarray",
+  "unused": [
+    "SEX",
+    "STRAIN",
+    "ROUTE",
+    "DOSE",
+    "SPECIES",
+    "DAY",
+    "COMPOUND_ID"
+  ]
+}

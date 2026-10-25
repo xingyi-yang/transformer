@@ -1,0 +1,117 @@
+{
+ "name": "chronos2",
+ "task": "early_history",
+ "official_class": "chronos.Chronos2Pipeline",
+ "pretrained_id": "amazon/chronos-2",
+ "mode": "finetune_target_only",
+ "quantiles": [
+  0.1,
+  0.25,
+  0.5,
+  0.75,
+  0.9
+ ],
+ "encoder_window_day": 14.0,
+ "history": {
+  "name": "chronos2",
+  "task": "early_history",
+  "library": "chronos.Chronos2Pipeline",
+  "pretrained_id": "amazon/chronos-2",
+  "mode": "finetune_target_only",
+  "finetune_mode": "lora",
+  "num_steps": 40,
+  "n_train_series": 242,
+  "n_val_series": 45,
+  "prediction_length": 6,
+  "quantiles": [
+   0.1,
+   0.25,
+   0.5,
+   0.75,
+   0.9
+  ],
+  "device_map": "cpu",
+  "seconds": 7.339762210845947,
+  "checkpoint": "runs/v3_seq_diag/repl/d1/models/chronos2_target_only/finetune/finetuned-ckpt",
+  "observed_rows_only": true,
+  "filled_target_with_zero": false,
+  "not_the_required_transformer": true,
+  "forecast_type": "quantiles",
+  "note": "official Chronos2Pipeline fine-tune; quantile forecasts only; not a trajectory simulator; encoder is observed visits"
+ },
+ "not_the_required_transformer": true,
+ "spec": {
+  "species": "RAT",
+  "strains": [
+   "SPRAGUE-DAWLEY",
+   "WISTAR HAN"
+  ],
+  "routes": [
+   "INTRAVENOUS",
+   "ORAL GAVAGE"
+  ],
+  "sexes": [
+   "F",
+   "M"
+  ],
+  "zb_mean": {
+   "F": 5.236525397514565,
+   "M": 5.531720530814651
+  },
+  "max_dose": 1000.0,
+  "max_day": 28.0,
+  "intervals": [
+   1.0,
+   7.0
+  ],
+  "compound_ids": [
+   "CMP03",
+   "CMP04",
+   "CMP05",
+   "CMP06"
+  ],
+  "descriptor_ranges": {
+   "D1": [
+    -1.3759,
+    0.9679
+   ],
+   "D2": [
+    -0.6918,
+    0.6625
+   ],
+   "D3": [
+    -0.9936,
+    0.7319
+   ]
+  },
+  "t_ref": 28.0,
+  "version": "features-v1",
+  "animal_cols": [
+   "SEX_M",
+   "ZB_C",
+   "IS_CONTROL",
+   "LD",
+   "INV_INTERVAL",
+   "START",
+   "END",
+   "D1",
+   "D2",
+   "D3",
+   "STRAIN_WISTAR HAN",
+   "ROUTE_ORAL GAVAGE"
+  ],
+  "time_cols": [
+   "TAU",
+   "EXPO",
+   "OFF",
+   "LCUM"
+  ],
+  "sharing": "context_specific",
+  "species_levels": [
+   "RAT"
+  ],
+  "zb_mean_by_species": {},
+  "declared_species": [],
+  "fixed_schema": false
+ }
+}

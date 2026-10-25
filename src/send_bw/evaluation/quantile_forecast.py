@@ -40,7 +40,10 @@ def _study_mean(values: np.ndarray, studies: np.ndarray) -> dict[str, float]:
 def score_quantile_table(obs: pd.DataFrame, pred: pd.DataFrame, *, quantiles: list[float],
                          representation: str) -> dict[str, Any]:
     """Score aligned USUBJID/DAY rows. ``pred`` has columns q{level} or MEAN/VAR."""
-    mm = obs.merge(pred, on=["USUBJID", "DAY"], how="inner")
+    pred_use = pred.copy()
+    if "STUDYID" in pred_use.columns and "STUDYID" in obs.columns:
+        pred_use = pred_use.drop(columns=["STUDYID"])
+    mm = obs.merge(pred_use, on=["USUBJID", "DAY"], how="inner")
     if mm.empty:
         return {"status": "not_run", "reason": "no overlapping USUBJID/DAY after encoder filter",
                 "n_obs": 0}
@@ -58,13 +61,21 @@ def score_quantile_table(obs: pd.DataFrame, pred: pd.DataFrame, *, quantiles: li
         else:
             raise ValueError(f"prediction table missing quantile {q} and MEAN/VAR")
     median = qcols[0.5] if 0.5 in qcols else qcols[min(levels, key=lambda x: abs(x - 0.5))]
+    # Same definition as official_seq: study-balanced mean of |point − y|.
     rmse = np.sqrt((median - y) ** 2)
     pinballs = {q: pinball(y, qcols[q], q) for q in levels}
     mean_pinball = np.mean(np.stack(list(pinballs.values()), axis=0), axis=0)
+    point_name = "MEAN" if "MEAN" in mm.columns and representation == "gaussian" else "q0.5"
     out: dict[str, Any] = {
         "status": "ok",
         "representation": representation,
         "quantiles": levels,
+        "point_definition": {
+            "point": "median" if point_name == "q0.5" else "gaussian_mean",
+            "column": point_name,
+            "rmse_log": ("study-balanced mean of |point - LOGW|; identical to official_seq. "
+                         "Chronos-2 official mean is the median (forecast_type=QUANTILES)."),
+        },
         "rmse_log": _study_mean(rmse, studies),
         "quantile_loss": {str(q): _study_mean(pinballs[q], studies) for q in levels},
         "mean_quantile_loss": _study_mean(mean_pinball, studies),
@@ -72,7 +83,10 @@ def score_quantile_table(obs: pd.DataFrame, pred: pd.DataFrame, *, quantiles: li
         "n_obs_available": int(len(obs)),
         "n_pred_rows": int(len(pred)),
         "trajectory_simulator": False,
+        "task": "early_history",
     }
+    out["per_study"] = _breakdown(mm, median, y, mean_pinball, qcols, key="STUDYID")
+    out["per_horizon"] = _breakdown(mm, median, y, mean_pinball, qcols, key="DAY")
     if 0.1 in qcols and 0.9 in qcols:
         lo, hi = qcols[0.1], qcols[0.9]
         out["coverage80"] = _study_mean(((y >= lo) & (y <= hi)).astype(float), studies)
@@ -95,6 +109,85 @@ def score_quantile_table(obs: pd.DataFrame, pred: pd.DataFrame, *, quantiles: li
             "complete trajectory simulator."
         )
     return out
+
+
+def _breakdown(mm: pd.DataFrame, median: np.ndarray, y: np.ndarray,
+               mean_pinball: np.ndarray, qcols: dict[float, np.ndarray],
+               key: str) -> list[dict[str, Any]]:
+    rows = []
+    work = mm.reset_index(drop=True)
+    work["_point"] = median
+    work["_y"] = y
+    work["_pin"] = mean_pinball
+    if 0.1 in qcols and 0.9 in qcols:
+        work["_lo80"] = qcols[0.1]
+        work["_hi80"] = qcols[0.9]
+    for label, g in work.groupby(key, sort=True):
+        rec: dict[str, Any] = {
+            key: float(label) if key == "DAY" else str(label),
+            "n_obs": int(len(g)),
+            "rmse_log": float(np.mean(np.abs(g["_point"] - g["_y"]))),
+            "mean_quantile_loss": float(g["_pin"].mean()),
+        }
+        if "_lo80" in g.columns:
+            rec["coverage80"] = float(((g["_y"] >= g["_lo80"]) & (g["_y"] <= g["_hi80"])).mean())
+            rec["interval_width80"] = float((g["_hi80"] - g["_lo80"]).mean())
+        rows.append(rec)
+    return rows
+
+
+def last_value_predictions(hist: pd.DataFrame, fut: pd.DataFrame,
+                           quantiles: list[float] | None = None) -> pd.DataFrame:
+    """Last observed encoder LOGW, repeated at every future DAY. Degenerate quantiles."""
+    levels = [float(q) for q in (quantiles or QUANTILES)]
+    last = (hist.sort_values(["USUBJID", "DAY"])
+            .groupby("USUBJID", as_index=False)
+            .tail(1)[["USUBJID", "LOGW"]]
+            .rename(columns={"LOGW": "last"}))
+    mm = fut.merge(last, on="USUBJID", how="inner")
+    if mm.empty:
+        return pd.DataFrame(columns=["USUBJID", "STUDYID", "DAY", *[f"q{q}" for q in levels]])
+    out = mm[["USUBJID", "DAY"]].copy()
+    if "STUDYID" in mm.columns:
+        out["STUDYID"] = mm["STUDYID"]
+    val = mm["last"].to_numpy(float)
+    for q in levels:
+        out[f"q{q}"] = val
+    out["point"] = val
+    out["point_definition"] = "last_observed_encoder_LOGW"
+    return out
+
+
+def encoder_time_report(hist: pd.DataFrame, fut: pd.DataFrame) -> dict[str, Any]:
+    """Visit-rank vs calendar-time diagnostic. Chronos receives unit steps, not DAY."""
+    recs = []
+    for u, hg in hist.groupby("USUBJID", sort=False):
+        hg = hg.sort_values("DAY")
+        fg = fut.loc[fut["USUBJID"] == u].sort_values("DAY")
+        days = hg["DAY"].to_numpy(float)
+        gaps = np.diff(days) if len(days) > 1 else np.array([])
+        recs.append({
+            "USUBJID": str(u),
+            "STUDYID": str(hg["STUDYID"].iloc[0]) if "STUDYID" in hg.columns else "",
+            "n_encoder": int(len(hg)),
+            "n_future": int(len(fg)),
+            "encoder_day_min": float(days.min()) if len(days) else None,
+            "encoder_day_max": float(days.max()) if len(days) else None,
+            "future_days": [float(x) for x in fg["DAY"].to_numpy(float)] if len(fg) else [],
+            "median_encoder_gap": float(np.median(gaps)) if len(gaps) else None,
+            "irregular_encoder": bool(len(gaps) > 1 and np.ptp(gaps) > 1e-9),
+        })
+    gaps = [r["median_encoder_gap"] for r in recs if r["median_encoder_gap"] is not None]
+    return {
+        "n_animals": len(recs),
+        "n_irregular_encoder": int(sum(1 for r in recs if r["irregular_encoder"])),
+        "median_encoder_gap": float(np.median(gaps)) if gaps else None,
+        "chronos_time_index": "visit_rank_unit_steps",
+        "calendar_time_passed_to_chronos": False,
+        "note": ("Chronos-2 is given the observed LOGW sequence in visit order. "
+                 "DAY values are used only to align scored rows, not as the time index."),
+        "rows": recs,
+    }
 
 
 def split_encoder_future(data: ModelData, window_day: float) -> tuple[pd.DataFrame, pd.DataFrame]:
