@@ -1,0 +1,98 @@
+# Locked inner-fold donor-ranking proposal. execute is false.
+# Fresh seeds. Separate from the closed prefix-abstention diagnostic.
+# This lock refuses execute:true. Stop before benchmark training.
+# Synthetic diagnostic. Not design qualification. No operational recommendation.
+run_name: v3_donor_rank
+output_dir: runs/v3_donor_rank
+generate_seed: 78001
+train_seed: 86001
+seed: 86001
+donor_rank:
+  execute: false
+  n_dataset_seeds: 2
+  n_train_seeds: 1
+  generate_seed_stride: 1009
+  train_seed_stride: 17
+  n_eligible_donors: 3
+  n_inner_folds: 2
+  k_donors: 1
+  banks: [matched, both]
+  densities: [full]
+  encoder_window_day: 14
+  checkpoint_source: training_validation
+  donor_policy_source: inner_target_train_study_fold_then_outer_validation_abstention
+  retune_after_test: false
+  tft: false
+  chronos: false
+  covariate_chronos: false
+  bayesian: false
+  predose: false
+  compute_cap_seconds: 600
+  estimated_runtime_seconds: {point: 240, lower: 150, upper: 480}
+  estimated_runtime_note: >
+    2 datasets × 1 train seed × 2 banks × 1 density × 2 models × 3
+    eligible donors × 2 inner folds = 48 candidate fits, plus 4 slices ×
+    3 arms × 2 models = 24 final fits (72 total if executed). Abstention
+    reuses target_only and ranked_one. No TFT/Chronos. Point 240s from
+    PR #16 spline/transformer cost scaled to 72 fits with smaller inner
+    folds; cap 600s.
+synthetic:
+  enabled: true
+  out_dir: runs/v3_donor_rank/datasets/d0/banks/matched/synthetic
+  generator: A
+  n_studies: 12
+  n_other_species_studies: 3
+  n_compounds: 6
+  n_per_sex: [3, 4]
+  donor_scenario: matched
+mapping: configs/mappings/example_send.yaml
+source:
+  type: local
+  root: runs/v3_donor_rank/datasets/d0/banks/matched/synthetic/send
+  layout: per_study
+  metadata_dir: runs/v3_donor_rank/datasets/d0/banks/matched/synthetic/metadata
+cohort:
+  species: RAT
+  donor_species: [DOG]
+  sharing: context_specific
+  n_donor_studies: 0
+  study_classes: [REPEAT_DOSE_TOX]
+  max_day: 28
+splits:
+  method: random
+  validation: 0.2
+  test: 0.2
+  compound_holdout_auto: 1
+models:
+  spline:
+    enabled: true
+    n_bootstrap: 4
+    oof_folds: 5
+    seed: 86001
+  transformer:
+    enabled: true
+    n_members: 1
+    max_epochs: 8
+    patience: 4
+    d_model: 32
+    n_heads: 2
+    n_layers: 1
+    seed: 86001
+    torch_threads: 2
+  bayesian:
+    enabled: false
+  optional:
+    tft: {enabled: false}
+    chronos2: {enabled: false}
+    deepar: {enabled: false}
+evaluation:
+  tasks: [early_history]
+  early_history_window_day: 14
+  n_draws: 40
+  contrast_day: 28
+design: {}
+labels:
+  - Synthetic diagnostic.
+  - Not design qualification.
+  - No real-data validation.
+  - No operational recommendation.
