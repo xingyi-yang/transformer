@@ -273,10 +273,12 @@ def _assemble_transfer(records: list[dict[str, Any]]) -> tuple[dict[str, Any], l
                 )
                 for metric in ("rmse_log", "crps", "contrast_bias"):
                     row = paired_transfer_row(s0, sk, metric, int(rec["k"]), model=sk.get("model"))
+                    split = str(mkey).split("|")[1] if "|" in str(mkey) else sk.get("split")
                     row.update({
                         "replicate": int(rep),
                         "bank": bank,
                         "sharing": sharing,
+                        "split": split,
                         "sparse_target_train": "full" if stt is None else stt,
                         "generate_seed": rec.get("generate_seed"),
                         "train_seed": rec.get("train_seed"),
@@ -538,6 +540,8 @@ def _write_results_md(parent: Path, summary: dict[str, Any]) -> None:
     for g in (summary.get("transfer_uncertainty") or {}).get("groups") or []:
         key = g.get("key") or {}
         if key.get("sparse_target_train") != "full":
+            continue
+        if key.get("split") not in (None, "test"):
             continue
         if key.get("metric") not in ("rmse_log", "crps", "contrast_bias"):
             continue

@@ -131,10 +131,10 @@ def test_evaluation_pack_reports_coverage_widths_contrast_temporal():
 def test_transfer_uncertainty_separates_seeds_and_allows_harmful():
     rows = [
         {"model": "spline", "sharing": "pooled", "metric": "rmse_log", "task": "predose_conditioned",
-         "sparse_target_train": "full", "delta": 0.01, "sign": "harmful",
+         "split": "test", "sparse_target_train": "full", "delta": 0.01, "sign": "harmful",
          "generate_seed": 1, "train_seed": 10},
         {"model": "spline", "sharing": "pooled", "metric": "rmse_log", "task": "predose_conditioned",
-         "sparse_target_train": "full", "delta": -0.002, "sign": "helpful",
+         "split": "test", "sparse_target_train": "full", "delta": -0.002, "sign": "helpful",
          "generate_seed": 2, "train_seed": 27},
     ]
     unc = transfer_uncertainty(rows)
