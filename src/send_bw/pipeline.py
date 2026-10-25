@@ -20,6 +20,7 @@ from send_bw.data.qc import CohortConfig, select_cohort
 from send_bw.data.schema import CANONICAL_SCHEMAS, CanonicalTables
 from send_bw.data.sources import build_source
 from send_bw.data.splits import (
+    compose_sparse_target_train,
     compose_train_with_donors,
     donor_study_order,
     freeze_splits,
@@ -102,15 +103,17 @@ class Run:
             self.log.info("[generate] synthetic generation disabled for this config")
             return
         out = Path(syn.get("out_dir", self.dir / "synthetic"))
-        key = cache_key(syn, self.seed)
+        gen_seed = int(self.cfg.get("generate_seed", self.seed))
+        key = cache_key(syn, gen_seed)
         if self._skip("generate", key, force) and out.exists():
             return
         if out.exists():
             safe_rmtree_generated(out)
         t0 = time.time()
-        info = generate_dataset(syn, out, seed=self.seed)
+        info = generate_dataset(syn, out, seed=gen_seed)
         self.manifest.record_stage("generate", key=key, seconds=time.time() - t0, **info,
                                    send_hash=dir_hash(Path(info["send_dir"])),
+                                   generate_seed=gen_seed,
                                    label="SYNTHETIC SEND-like data (not certified SEND-conformant)")
         self.log.info(f"[generate] {info['n_studies']} synthetic studies -> {out}")
 
@@ -209,6 +212,13 @@ class Run:
         splits_target = make_study_splits(in_scope, scfg, self.seed)
         freeze_splits(splits_target, self.p("splits", "target_splits"))
         tman = freeze_target_manifests(splits_target, self.p("splits", "target_manifest.json"))
+        sparse_n = scfg.get("sparse_target_train_n")
+        sparse_meta = None
+        if sparse_n is not None:
+            splits_target, sparse_meta = compose_sparse_target_train(splits_target, int(sparse_n))
+            sparse_meta["target_manifest_validation_hash"] = tman["validation"]["hash"]
+            sparse_meta["target_manifest_test_hash"] = tman["test"]["hash"]
+            write_json(self.p("splits", "sparse_target_train.json"), sparse_meta)
         donor_parts_a, donor_parts_o = [], []
         if donor_mode:
             for ds in ccfg.donor_species:
@@ -263,12 +273,15 @@ class Run:
                                                     "sharing": ccfg.sharing,
                                                     "n_donor_studies_requested": int(ccfg.n_donor_studies),
                                                     "n_donor_studies_selected": k,
-                                                    "donor_studyids_selected": selected})
+                                                    "donor_studyids_selected": selected,
+                                                    "sparse_target_train": sparse_meta})
         self.manifest.record_stage("prepare", key=key, split_hash=h, split_counts=splits["SPLIT"].value_counts().to_dict(),
                                    compound_holdout=scfg.get("compound_holdout", []),
                                    n_eligible_animals=len(animals), seconds=time.time() - t0,
                                    sharing=ccfg.sharing, n_donor_studies=k,
-                                   target_manifest=tman)
+                                   target_manifest=tman,
+                                   sparse_target_train=sparse_meta,
+                                   train_seed=self.seed)
         self.log.info(f"[prepare] splits {splits['SPLIT'].value_counts().to_dict()} (frozen hash {h})")
         return self.load_prepared()
 
@@ -319,11 +332,23 @@ class Run:
                 info["diagnostics_summary"] = {k: model.diagnostics["main"][k] for k in
                                                ["rhat_max", "ess_bulk_min", "ess_tail_min", "divergences"]}
                 info["counted_as_successful_benchmark"] = bool(info["reliable"])
-                if getattr(tr.spec, "sharing", "") == "selective":
-                    from send_bw.sharing import selective_record
+                from send_bw.sharing import is_selective, selective_record
 
-                    hist["selective_sharing"] = selective_record("bayesian")
+                sharing = getattr(tr.spec, "sharing", "context_specific")
+                if is_selective(sharing):
+                    hist["selective_sharing"] = selective_record(
+                        "bayesian", "regularized" if sharing == "selective_regularized" else "v1")
                     write_json(self.p("models", name, "training_history.json"), hist)
+                info["matched_data"] = {
+                    "matched_to": ["spline", "transformer"],
+                    "same_prepare_key": self.manifest.data["stages"].get("prepare", {}).get("key"),
+                    "train_studyids_hash": cache_key(sorted(tr.studies)),
+                    "validation_studyids_hash": cache_key(sorted(va.studies)),
+                    "train_seed": self.seed,
+                    "generate_seed": self.cfg.get("generate_seed"),
+                    "note": "Bayesian uses the same prepared train/validation as spline and transformer.",
+                }
+                write_json(self.p("evaluation", "matched_data.json"), info["matched_data"])
             self.manifest.record_stage(f"train_{name}", **info)
             out[name] = info
             self.log.info(f"[train] {name} done in {info['seconds']:.1f}s")
@@ -394,7 +419,7 @@ class Run:
 
     # ------------------------------------------------------------------ evaluate
     def evaluate(self, force: bool = False) -> dict[str, Any]:
-        from send_bw.evaluation.forecast import evaluate_early_history, evaluate_prestudy
+        from send_bw.evaluation.forecast import evaluate_early_history, evaluate_prestudy, evaluation_pack
 
         prep = self.load_prepared()
         ecfg = self.cfg.get("evaluation", {})
@@ -417,6 +442,11 @@ class Run:
                     r["summary"]["task_alias"] = "predose_conditioned"
                     r["by_sex_horizon"].to_csv(self.p("evaluation", f"{name}_{split}_by_sex_horizon.csv"), index=False)
                     r["per_study"].to_csv(self.p("evaluation", f"{name}_{split}_per_study.csv"), index=False)
+                    pack = evaluation_pack(r)
+                    write_json(self.p("evaluation", f"{name}_{split}_evaluation_pack.json"), pack)
+                    r["summary"]["evaluation_pack"] = {
+                        k: pack[k] for k in ("individual", "group_mean", "contrast", "temporal")
+                    }
                     res[f"{name}|{split}|pre_study"] = r["summary"]
                 if "early_history" in tasks:
                     eh = evaluate_early_history(model, d, float(ecfg.get("early_history_window_day", 14)))

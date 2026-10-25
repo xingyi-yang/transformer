@@ -10,6 +10,8 @@ from __future__ import annotations
 from collections.abc import Iterable
 from typing import Any
 
+import pandas as pd
+
 TASK = "predose_conditioned"
 HARMFUL_ON_INCREASE = ("rmse_log", "mae_log", "crps", "crps_log")
 DEFAULT_METRICS = ("rmse_log", "crps", "contrast_bias")
@@ -82,4 +84,61 @@ def build_transfer_table(s0_summary: dict[str, Any],
         "sharing_regimes": sharing_regimes or ["context_specific (S0)", "pooled (Sk)"],
         "selective_sharing": selective_sharing,
         "rows": rows,
+    }
+
+
+def transfer_uncertainty(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    """Uncertainty around paired transfer differences across replicates.
+
+    Dataset-generation seeds and model-training seeds are recorded separately.
+    Sharing is not required to improve performance. Signs are published.
+    """
+    if not rows:
+        return {
+            "n_rows": 0, "n_groups": 0, "groups": [],
+            "seed_separation": {
+                "generate_seed": "dataset generation only",
+                "train_seed": "splits and model training only",
+            },
+            "note": "no paired transfer rows",
+            "labels": list(LABELS),
+        }
+    df = pd.DataFrame(rows)
+    keys = [c for c in ("model", "sharing", "metric", "task", "sparse_target_train") if c in df.columns]
+    groups: list[dict[str, Any]] = []
+    if not keys:
+        keys = ["metric"] if "metric" in df.columns else []
+    grouped = df.groupby(keys, dropna=False) if keys else [((), df)]
+    for key, g in grouped:
+        key_t = key if isinstance(key, tuple) else (key,)
+        deltas = pd.to_numeric(g["delta"], errors="coerce") if "delta" in g else pd.Series(dtype=float)
+        deltas = deltas.dropna()
+        signs = [str(s) for s in (g["sign"].tolist() if "sign" in g else [])]
+        groups.append({
+            "key": dict(zip(keys, key_t, strict=True)) if keys else {},
+            "n": int(len(g)),
+            "generate_seeds": sorted({int(x) for x in g["generate_seed"].tolist()}) if "generate_seed" in g else [],
+            "train_seeds": sorted({int(x) for x in g["train_seed"].tolist()}) if "train_seed" in g else [],
+            "mean_delta": float(deltas.mean()) if len(deltas) else None,
+            "sd_delta": float(deltas.std(ddof=1)) if len(deltas) > 1 else None,
+            "min_delta": float(deltas.min()) if len(deltas) else None,
+            "max_delta": float(deltas.max()) if len(deltas) else None,
+            "signs": signs,
+            "n_harmful": int(sum(s == "harmful" for s in signs)),
+            "n_helpful": int(sum(s == "helpful" for s in signs)),
+            "note": "Sharing is not required to improve. Signs are published as computed.",
+        })
+    return {
+        "n_rows": int(len(df)),
+        "n_groups": len(groups),
+        "groups": groups,
+        "seed_separation": {
+            "generate_seed": "dataset generation only",
+            "train_seed": "splits and model training only",
+        },
+        "labels": list(LABELS),
+        "note": (
+            "Uncertainty is the replicate-to-replicate spread of paired Δ. "
+            "It is not a license to pick the favorable seed."
+        ),
     }

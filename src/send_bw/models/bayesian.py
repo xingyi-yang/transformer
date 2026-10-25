@@ -129,8 +129,10 @@ class BayesianModel(ResponseModel):
                               train.obs[train.obs["USUBJID"].isin(keep)].reset_index(drop=True),
                               train.compound_ref, train.spec)
         F = train.spec.observation_features(train.obs, train.animals, train.compound_ref)
+        sharing = getattr(train.spec, "sharing", "context_specific")
+        regularized = sharing == "selective_regularized"
         self.design = MeanDesign.from_features(F, config.get("n_time_knots", 3), config.get("n_expo_knots", 2),
-                                               rich=False)
+                                               rich=False, species_treatment=regularized)
         obs, X, s_idx, a_idx, n_s, n_a, prev, dt, first = self._arrays(train, fit_scale=True)
         from scipy.linalg import qr as pivoted_qr
 
@@ -209,7 +211,13 @@ class BayesianModel(ResponseModel):
                             for k, v in results.items()}
         self.diagnostics["sensitivity_comparison"] = self._sensitivity_table(results, validation)
         self.history = {"main": self.diagnostics["main"], "n_obs": len(obs), "n_animals": n_a, "n_studies": n_s,
-                        "n_beta": int(X.shape[1]), "s_y": self.s_y, "reliable": self.diagnostics["main"]["reliable"]}
+                        "n_beta": int(X.shape[1]), "s_y": self.s_y, "reliable": self.diagnostics["main"]["reliable"],
+                        "species_treatment": regularized, "sharing": sharing}
+        from send_bw.sharing import is_selective, selective_record
+
+        if is_selective(sharing):
+            self.history["selective_sharing"] = selective_record(
+                "bayesian", "regularized" if regularized else "v1")
         return self.history
 
     def _diagnostics(self, az, idata, wmsgs, config) -> dict[str, Any]:

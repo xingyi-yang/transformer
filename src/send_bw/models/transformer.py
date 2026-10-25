@@ -49,7 +49,7 @@ QUERY_COLS = ["TAU", "EXPO", "OFF", "LCUM", "SQRT_TAU"]
 
 class BaselineTransformer(nn.Module):
     def __init__(self, group_dims: dict[str, int], q_dim: int, d_model: int = 32, n_heads: int = 2,
-                 n_layers: int = 1, dropout: float = 0.1, ff_mult: int = 2):
+                 n_layers: int = 1, dropout: float = 0.1, ff_mult: int = 2, treat_dev_dim: int = 0):
         super().__init__()
         if d_model % n_heads != 0:
             raise ValueError(f"d_model={d_model} must be divisible by n_heads={n_heads}")
@@ -63,6 +63,7 @@ class BaselineTransformer(nn.Module):
         self.encoder = nn.TransformerEncoder(layer, n_layers, enable_nested_tensor=False)
         self.head = nn.Sequential(nn.LayerNorm(d_model), nn.Linear(d_model, 1))
         self.n_heads = n_heads
+        self.treat_dev = nn.Linear(treat_dev_dim, 1) if treat_dev_dim else None
 
     def forward(self, ctx: dict[str, torch.Tensor], q: torch.Tensor, q_pad: torch.Tensor) -> torch.Tensor:
         B, L, _ = q.shape
@@ -76,7 +77,11 @@ class BaselineTransformer(nn.Module):
         attn_mask = ~allow  # True = attention not allowed
         pad = torch.cat([torch.zeros(B, C, dtype=torch.bool), q_pad], dim=1)
         h = self.encoder(x, mask=attn_mask, src_key_padding_mask=pad)
-        return self.head(h[:, C:, :]).squeeze(-1)
+        out = self.head(h[:, C:, :]).squeeze(-1)
+        if self.treat_dev is not None and "species" in ctx and "regimen" in ctx:
+            td = self.treat_dev(torch.cat([ctx["species"], ctx["regimen"]], dim=-1))
+            out = out + td
+        return out
 
 
 class TransformerModel(GaussianLayerMixin, ResponseModel):
@@ -163,13 +168,21 @@ class TransformerModel(GaussianLayerMixin, ResponseModel):
         c, q, pad, Y, W, sids = self._data(train, fit_norm=True)
         self.y_scale = float(Y[W > 0].std())
         cv, qv, padv, Yv, Wv, _ = self._data(validation)
+        sharing = getattr(self.spec, "sharing", "context_specific")
+        regularized = sharing == "selective_regularized"
+        treat_dim = 0
+        if regularized and "species" in c and "regimen" in c:
+            treat_dim = int(c["species"].shape[1] + c["regimen"].shape[1])
         self.arch = {"group_dims": {g: int(v.shape[1]) for g, v in c.items()}, "q_dim": q.shape[-1],
                      "d_model": int(config.get("d_model", 32)), "n_heads": int(config.get("n_heads", 2)),
-                     "n_layers": int(config.get("n_layers", 1)), "dropout": float(config.get("dropout", 0.1))}
+                     "n_layers": int(config.get("n_layers", 1)), "dropout": float(config.get("dropout", 0.1)),
+                     "treat_dev_dim": treat_dim}
         seed = int(config.get("seed", 0))
         studies = np.unique(sids)
         rng = np.random.default_rng(seed)
-        selective = getattr(self.spec, "sharing", "context_specific") == "selective"
+        from send_bw.sharing import is_selective
+
+        selective = is_selective(sharing)
         tgt_mask = None
         if selective and "SPECIES" in train.animals.columns:
             tgt_mask = (train.animals.reset_index(drop=True)["SPECIES"].astype(str).str.upper()
@@ -189,13 +202,20 @@ class TransformerModel(GaussianLayerMixin, ResponseModel):
                 net, h1 = self._train_one(c1, q[tgt_mask], pad[tgt_mask], Y[tgt_mask], Wm[tgt_mask],
                                           cv, qv, padv, Yv, Wv, cfg1, seed + 1000 * mbr)
                 cfg2 = dict(config)
-                cfg2["freeze_groups"] = ["bio", "baseline", "species"]
                 cfg2["init_state"] = net.state_dict()
+                if regularized:
+                    cfg2["freeze_groups"] = []
+                    cfg2["pull_state"] = copy.deepcopy(net.state_dict())
+                    cfg2["pull_groups"] = ["bio", "baseline", "species"]
+                    cfg2["lambda_growth"] = float(config.get("lambda_growth", 8.0))
+                    cfg2["lambda_treatment"] = float(config.get("lambda_treatment", 8.0))
+                else:
+                    cfg2["freeze_groups"] = ["bio", "baseline", "species"]
                 net, h2 = self._train_one(c, q, pad, Y, Wm, cv, qv, padv, Yv, Wv, cfg2,
                                           seed + 1000 * mbr + 17)
                 h = {"phase1": h1, "phase2": h2, "best_val_rmse": h2["best_val_rmse"],
                      "epochs_run": int(h1["epochs_run"]) + int(h2["epochs_run"]),
-                     "selective_sharing": True}
+                     "selective_sharing": True, "variant": "regularized" if regularized else "v1"}
             else:
                 net, h = self._train_one(c, q, pad, Y, Wm, cv, qv, padv, Yv, Wv, config,
                                          seed + 1000 * mbr)
@@ -204,10 +224,14 @@ class TransformerModel(GaussianLayerMixin, ResponseModel):
             hist.append(h)
         self.history = {"members": hist, "y_scale": self.y_scale, "arch": self.arch,
                         "best_val_rmse_member0": hist[0]["best_val_rmse"]}
+        if regularized:
+            self.history["lambda_growth"] = float(config.get("lambda_growth", 8.0))
+            self.history["lambda_treatment"] = float(config.get("lambda_treatment", 8.0))
         if selective:
             from send_bw.sharing import selective_record
 
-            self.history["selective_sharing"] = selective_record("transformer")
+            self.history["selective_sharing"] = selective_record(
+                "transformer", "regularized" if regularized else "v1")
         return self.history
 
     def _train_one(self, c, q, pad, Y, W, cv, qv, padv, Yv, Wv, cfg, seed):
@@ -241,6 +265,28 @@ class TransformerModel(GaussianLayerMixin, ResponseModel):
                 pred = net({g: v[idx] for g, v in c.items()}, q[idx], pad[idx])
                 w = W[idx]
                 loss = (w * (pred - Y[idx] / self.y_scale) ** 2).sum() / w.sum().clamp_min(1e-8)
+                pull = cfg.get("pull_state")
+                if pull:
+                    extra = torch.zeros((), dtype=loss.dtype)
+                    n_pen = 0
+                    for g in cfg.get("pull_groups") or []:
+                        if g not in net.ctx_proj:
+                            continue
+                        for name, p in net.ctx_proj[g].named_parameters():
+                            key = f"ctx_proj.{g}.{name}"
+                            if key in pull:
+                                extra = extra + ((p - pull[key].to(p.device)) ** 2).sum()
+                                n_pen += int(p.numel())
+                    if n_pen:
+                        loss = loss + float(cfg.get("lambda_growth", 8.0)) * extra / n_pen
+                if net.treat_dev is not None:
+                    extra_t = torch.zeros((), dtype=loss.dtype)
+                    n_t = 0
+                    for p in net.treat_dev.parameters():
+                        extra_t = extra_t + (p ** 2).sum()
+                        n_t += int(p.numel())
+                    if n_t:
+                        loss = loss + float(cfg.get("lambda_treatment", 8.0)) * extra_t / n_t
                 opt.zero_grad()
                 loss.backward()
                 nn.utils.clip_grad_norm_(net.parameters(), 1.0)
@@ -299,7 +345,9 @@ class TransformerModel(GaussianLayerMixin, ResponseModel):
         m.history = d["history"]
         m.compound_ref = pd.read_csv(path / "compound_reference.csv")
         for sd in torch.load(path / "members.pt", weights_only=True):
-            net = BaselineTransformer(**m.arch)
+            arch = dict(m.arch)
+            arch.setdefault("treat_dev_dim", 0)
+            net = BaselineTransformer(**arch)
             net.load_state_dict(sd)
             net.eval()
             m.nets.append(net)
