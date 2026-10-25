@@ -194,8 +194,9 @@ def _record_cell(run: Run, spec: dict[str, Any]) -> dict[str, Any]:
     bayes = None
     train_b = man.get("stages", {}).get("train_bayesian") or {}
     if "bayesian" in (spec.get("models") or []):
-        if train_b.get("status") == "not_run" or not train_b:
-            bayes = bayesian_gate({}, status="not_run", reason=train_b.get("reason") or "Bayesian was not run")
+        if not train_b or train_b.get("status") in ("not_run", "failed"):
+            bayes = bayesian_gate({}, status=train_b.get("status") or "not_run",
+                                  reason=train_b.get("reason") or "Bayesian was not run")
         else:
             bayes = bayesian_gate({
                 "reliable": train_b.get("reliable"),
@@ -290,8 +291,8 @@ def _component_status(records: list[dict[str, Any]], failures: list[str]) -> dic
         g = rec.get("bayesian_gate")
         if not g:
             return "not_run"
-        if g.get("status") == "not_run":
-            return "not_run"
+        if g.get("status") in ("not_run", "failed"):
+            return str(g.get("status"))
         if g.get("reliable"):
             return "completed"
         return "unreliable"
@@ -302,6 +303,8 @@ def _component_status(records: list[dict[str, Any]], failures: list[str]) -> dic
         bayes_overall = "completed"
     elif any(s == "unreliable" for s in bayes_states):
         bayes_overall = "unreliable"
+    elif any(s == "failed" for s in bayes_states):
+        bayes_overall = "failed"
     else:
         bayes_overall = "not_run"
     packs_ok = any((r.get("evaluation_packs") or {}) and not r.get("failed") for r in records)
@@ -509,8 +512,8 @@ def _write_results_md(parent: Path, summary: dict[str, Any]) -> None:
         if rec.get("failed"):
             btxt = f"failed ({rec.get('error')})"
         elif bayes:
-            if bayes.get("status") == "not_run":
-                btxt = f"not_run ({bayes.get('reason')})"
+            if bayes.get("status") in ("not_run", "failed"):
+                btxt = f"{bayes.get('status')} ({bayes.get('reason')})"
             elif bayes.get("reliable"):
                 btxt = "reliable"
             else:

@@ -322,10 +322,22 @@ class Run:
             if name == "transformer":
                 mcfg["shared_covariance"] = model_class("spline").load(self.p("models", "spline")).cov
             t0 = time.time()
-            model = model_class(name)()
-            hist = model.fit(tr, va, mcfg)
-            model.save(self.p("models", name))
-            write_json(self.p("models", name, "training_history.json"), hist)
+            try:
+                model = model_class(name)()
+                hist = model.fit(tr, va, mcfg)
+                model.save(self.p("models", name))
+                write_json(self.p("models", name, "training_history.json"), hist)
+            except Exception as e:  # noqa: BLE001
+                if name != "bayesian":
+                    raise
+                reason = f"Bayesian inference failed: {type(e).__name__}: {e}"
+                self.manifest.record_stage("train_bayesian", key=None, status="failed", reason=reason,
+                                           counted_as_successful_benchmark=False)
+                write_json(self.p("evaluation", "bayesian_gate.json"),
+                           {"status": "failed", "reliable": False,
+                            "counted_as_successful_benchmark": False, "reason": reason})
+                self.log.info(f"[train] bayesian failed: {reason}")
+                continue
             info = {"key": key, "seconds": time.time() - t0, "status": "trained"}
             if name == "bayesian":
                 info["reliable"] = bool(model.diagnostics["main"]["reliable"])
