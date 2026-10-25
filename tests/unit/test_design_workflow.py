@@ -104,10 +104,12 @@ def test_workflow_no_feasible_design_is_a_valid_outcome(trained, tmp_path):
     assert out["proposals"]["spline"]["n_feasible"] == 0
     feas = pd.read_csv(tmp_path / "d" / "proposal_spline_feasibility.csv")
     assert not feas["feasible"].any() and (~feas["pass_power"]).all()
+    assert set(feas["analysis"]) == {"ancova"}
 
 
 def test_workflow_end_to_end_small(trained, tmp_path):
-    path = _write(tmp_path, _request(trained, meaningful_effects_pct={"low": -15.0, "high": -15.0}))
+    path = _write(tmp_path, _request(trained, meaningful_effects_pct={"low": -15.0, "high": -15.0},
+                                    analyses=["ancova", "gls"]))
     models = {"spline": trained["spline"], "transformer": trained["transformer"]}
     out = run_design_workflow(models, {"request": path, "replicates_proposal": 60, "replicates_final": 60,
                                        "n_finalists": 1}, tmp_path / "d", 2, None, LOG)

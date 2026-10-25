@@ -37,7 +37,7 @@ candidate_allocations:
 candidate_schedules:
   endpoint_only: [28]
   weekly: [7, 14, 21, 28]
-analyses: [ancova, gls]
+analyses: [ancova]   # production default after locked A/B/C1 diagnostics; gls and mmrm remain requestable
 gls_variance: model
 missing_data: {p_missed_visit: 0.02, p_dropout: 0.02}
 costs: {per_animal: 1.0, per_measurement: 0.02, per_day: 0.0}

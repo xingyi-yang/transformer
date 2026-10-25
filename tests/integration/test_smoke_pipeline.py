@@ -63,6 +63,9 @@ def test_report_labels_and_honest_status(smoke_run):
     assert "### bayesian: not_run" in md
     opt = json.loads((run / "models" / "optional_models_status.json").read_text(encoding="utf-8"))
     assert all(v["status"] == "not_run" for v in opt.values())
+    assert not (run / "models" / "tft" / "model.json").exists()
+    assert opt["tft"]["name"] == "tft"
+    assert "pytorch_forecasting" in opt["tft"]["reason"]
 
 
 def test_manifest_has_provenance(smoke_run):

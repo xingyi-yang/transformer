@@ -3,7 +3,9 @@
 Primary task (pre-study): predictions use only baseline, biology and planned regimens; the
 model samples complete studies with NEW study and animal effects.
 Secondary task (early history): observations up to the window day condition the prediction of
-later outcomes (Gaussian-layer models only). Metrics for the two tasks are kept separate.
+later outcomes. Gaussian-layer models use joint covariance conditioning. Optional
+early-history-only adapters (TFT) are scored on the conditioned task and do not fabricate
+a baseline-only pre-study comparison. Metrics for the two tasks are kept separate.
 """
 
 from __future__ import annotations
@@ -168,8 +170,33 @@ def evaluate_prestudy(model: ResponseModel, data: ModelData, n_draws: int = 200,
     return {"summary": summary, "by_sex_horizon": by, "per_study": st}
 
 
+def _early_history_only(model: ResponseModel) -> bool:
+    return getattr(model, "task", None) == "early_history" or bool(getattr(model, "supports_early_history", False))
+
+
+def _score_marginals(fut: pd.DataFrame, pred: pd.DataFrame, which: str) -> pd.DataFrame:
+    mm = fut.merge(pred, on=["USUBJID", "DAY"], how="inner")
+    if mm.empty:
+        return pd.DataFrame(columns=["which", "err", "hit90", "crps"])
+    sd = np.sqrt(np.maximum(mm["VAR"].to_numpy(float), 1e-12))
+    z = (mm["LOGW"].to_numpy(float) - mm["MEAN"].to_numpy(float)) / sd
+    return pd.DataFrame({"which": which, "err": mm["MEAN"].to_numpy(float) - mm["LOGW"].to_numpy(float),
+                         "hit90": np.abs(z) <= 1.645,
+                         "crps": crps_gaussian(mm["MEAN"].to_numpy(float), sd, mm["LOGW"].to_numpy(float))})
+
+
+def _summarize_which(df: pd.DataFrame) -> dict[str, Any]:
+    res: dict[str, Any] = {}
+    for w, g in df.groupby("which"):
+        res[str(w)] = {"rmse_log": float(np.sqrt(np.mean(g["err"] ** 2))), "cov90": float(g["hit90"].mean()),
+                       "crps_log": float(g["crps"].mean()), "n_obs": int(len(g))}
+    return res
+
+
 def evaluate_early_history(model: ResponseModel, data: ModelData, window_day: float) -> dict[str, Any]:
     """Secondary task: condition on observations with DAY <= window_day, score later observations."""
+    if _early_history_only(model) and not getattr(model, "supports_pre_study", False):
+        return _evaluate_early_history_task(model, data, window_day)
     if not hasattr(model, "_condition"):
         return {"task": "early_history", "model": model.name, "status": "not_run",
                 "reason": "early-history conditioning not implemented for this model"}
@@ -184,17 +211,46 @@ def evaluate_early_history(model: ResponseModel, data: ModelData, window_day: fl
         times = np.array(sorted(fut["DAY"].unique()), float)
         cond = model.predict_marginals(a, times, history=hist)
         pre = model.predict_marginals(a, times, history=None)
-        for name, pm_ in [("conditioned", cond), ("pre_study", pre)]:
-            mm = fut.merge(pm_, on=["USUBJID", "DAY"], how="left", validate="one_to_one")
-            sd = np.sqrt(mm["VAR"].to_numpy())
-            z = (mm["LOGW"] - mm["MEAN"]) / sd
-            rows.append(pd.DataFrame({"which": name, "err": mm["MEAN"] - mm["LOGW"], "hit90": np.abs(z) <= 1.645,
-                                      "crps": crps_gaussian(mm["MEAN"].to_numpy(), sd, mm["LOGW"].to_numpy())}))
+        rows.append(_score_marginals(fut, cond, "conditioned"))
+        rows.append(_score_marginals(fut, pre, "pre_study"))
+    if not rows:
+        return {"task": "early_history", "model": model.name, "status": "not_run",
+                "reason": "no post-window observations to score", "window_day": window_day}
     df = pd.concat(rows, ignore_index=True)
-    res = {}
-    for w, g in df.groupby("which"):
-        res[w] = {"rmse_log": float(np.sqrt(np.mean(g["err"] ** 2))), "cov90": float(g["hit90"].mean()),
-                  "crps_log": float(g["crps"].mean()), "n_obs": int(len(g))}
     return {"task": "early_history", "model": model.name, "status": "ok", "window_day": window_day,
             "note": "Gaussian marginals; secondary task only. Success here does not establish pre-study skill.",
-            **res}
+            **_summarize_which(df)}
+
+
+def _evaluate_early_history_task(model: ResponseModel, data: ModelData, window_day: float) -> dict[str, Any]:
+    """Score an early-history-only adapter. Pre-study comparison is not fabricated."""
+    rows = []
+    n_skipped = 0
+    for sid in data.studies:
+        a = data.animals[data.animals["STUDYID"] == sid].reset_index(drop=True)
+        o = data.obs[data.obs["STUDYID"] == sid]
+        hist = o[o["DAY"] <= window_day][["USUBJID", "DAY", "LOGW"]]
+        fut = o[o["DAY"] > window_day]
+        if fut.empty:
+            continue
+        times = np.array(sorted(fut["DAY"].unique()), float)
+        try:
+            cond = model.predict_marginals(a, times, history=hist)
+        except Exception as e:  # noqa: BLE001
+            return {"task": "early_history", "model": model.name, "status": "failed",
+                    "reason": f"early-history predict failed: {e}", "window_day": window_day}
+        n_skipped += int((~a["USUBJID"].isin(set(hist["USUBJID"]))).sum())
+        rows.append(_score_marginals(fut, cond, "conditioned"))
+    pre = {"status": "not_supported",
+           "reason": "requires an observed encoder window; baseline-only pre-study is not fabricated"}
+    if not rows:
+        return {"task": "early_history", "model": model.name, "status": "not_run",
+                "reason": "no post-window observations to score", "window_day": window_day,
+                "pre_study": pre}
+    df = pd.concat(rows, ignore_index=True)
+    out = {"task": "early_history", "model": model.name, "status": "ok", "window_day": window_day,
+           "note": ("early-history adapter; conditioned metrics only. Pre-study / baseline-only "
+                    "prediction is not_supported and is not fabricated."),
+           "n_animals_without_encoder": n_skipped,
+           "pre_study": pre, **_summarize_which(df)}
+    return out

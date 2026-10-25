@@ -73,7 +73,10 @@ class Request(BaseModel):
     candidate_n_per_sex: list[int] = Field(default_factory=lambda: [4, 6, 8, 10])
     candidate_allocations: dict[str, dict[str, float]] = Field(default_factory=lambda: {"equal": {}})
     candidate_schedules: dict[str, list[float]]
-    analyses: list[str] = Field(default_factory=lambda: ["ancova", "gls"])
+    # Production default is ANCOVA only. gls and mmrm remain requestable; they
+    # are not defaults after locked A/B/C1 diagnostics (see
+    # docs/remediation/analysis_closeout_20261022/CLOSEOUT.md).
+    analyses: list[str] = Field(default_factory=lambda: ["ancova"])
     gls_variance: str = "model"
     missing_data: dict[str, float] = Field(default_factory=lambda: {"p_missed_visit": 0.02, "p_dropout": 0.02})
     costs: dict[str, float] = Field(default_factory=lambda: {"per_animal": 1.0, "per_measurement": 0.02,
@@ -101,7 +104,7 @@ class Request(BaseModel):
         if self.sex_strategy != "pooled_with_sex_covariate":
             raise ValueError("only pooled_with_sex_covariate is implemented")
         for a in self.analyses:
-            if a not in {"ancova", "gls"}:
+            if a not in {"ancova", "gls", "mmrm"}:
                 raise ValueError(f"unknown analysis {a}")
         if self.secondary_contrast is not None:
             t, w = self.secondary_contrast.get("times", []), self.secondary_contrast.get("weights", [])
@@ -218,8 +221,8 @@ def enumerate_candidates(req: Request) -> list[Candidate]:
             # so it can never appear to benefit from extra visits.
             sched = [req.horizon_day]
             sname = "endpoint_only"
-        if an == "gls" and len(sched) == 1:
-            continue  # single-visit GLS duplicates endpoint ANCOVA
+        if an in {"gls", "mmrm"} and len(sched) == 1:
+            continue  # single-visit repeated measures duplicates endpoint ANCOVA
         per = tuple(int(round(n * alloc.get(nm, 1.0))) for nm in names)
         if min(per) < mn or sum(per) * len(req.sexes) > mx_total:
             continue

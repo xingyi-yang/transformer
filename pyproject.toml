@@ -25,6 +25,7 @@ dependencies = [
 bayesian = ["pymc>=5.16", "arviz>=0.19", "nutpie>=0.13", "numba>=0.60"]
 snowflake = ["snowflake-connector-python>=3.10"]
 xpt = ["pyreadstat>=1.2"]
+tft = ["pytorch-forecasting>=1.0"]
 dev = ["pytest>=8", "ruff>=0.5"]
 
 [project.scripts]
@@ -38,6 +39,7 @@ testpaths = ["tests"]
 markers = [
     "slow: expensive statistical calibration or Bayesian runs (deselect with -m 'not slow')",
     "bayesian: requires the bayesian extra",
+    "tft: requires the tft extra (pytorch-forecasting)",
 ]
 filterwarnings = ["ignore::DeprecationWarning"]
 
