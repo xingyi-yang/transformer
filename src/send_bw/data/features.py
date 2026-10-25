@@ -69,16 +69,21 @@ class FeatureSpec:
     sharing: str = "context_specific"
     species_levels: list[str] = field(default_factory=list)
     zb_mean_by_species: dict[str, dict[str, float]] = field(default_factory=dict)
+    declared_species: list[str] = field(default_factory=list)
+    fixed_schema: bool = False
 
     @staticmethod
     def fit(animals: pd.DataFrame, obs: pd.DataFrame, compound_ref: pd.DataFrame, species: str,
-            sharing: str = "context_specific") -> FeatureSpec:
-        from send_bw.data.qc import parse_sharing
+            sharing: str = "context_specific", declared_species: list[str] | None = None,
+            fixed_schema: bool = False) -> FeatureSpec:
+        from send_bw.sharing import parse_sharing, uses_donors
 
         sharing = parse_sharing(sharing)
         species_u = str(species).upper()
-        if sharing == "pooled" and "SPECIES" in animals.columns:
-            species_levels = sorted({str(s).upper() for s in animals["SPECIES"].dropna()})
+        declared = [str(s).upper() for s in (declared_species or [])]
+        if (uses_donors(sharing) or fixed_schema) and "SPECIES" in animals.columns:
+            observed = {str(s).upper() for s in animals["SPECIES"].dropna()}
+            species_levels = sorted(set(declared) | observed) if (fixed_schema and declared) else sorted(observed)
         else:
             species_levels = [species_u]
         tgt = animals
@@ -88,7 +93,7 @@ class FeatureSpec:
                 tgt = animals.loc[tgt_mask]
         zb_mean = {s: float(g["BASELINE_LOGW"].mean()) for s, g in tgt.groupby("SEX")}
         zb_mean_by_species: dict[str, dict[str, float]] = {}
-        if sharing == "pooled" and len(species_levels) > 1 and "SPECIES" in animals.columns:
+        if (uses_donors(sharing) or fixed_schema) and len(species_levels) > 1 and "SPECIES" in animals.columns:
             sp_key = animals["SPECIES"].astype(str).str.upper()
             for (sp, sx), g in animals.groupby([sp_key, "SEX"]):
                 zb_mean_by_species.setdefault(str(sp), {})[str(sx)] = float(g["BASELINE_LOGW"].mean())
@@ -104,7 +109,8 @@ class FeatureSpec:
             max_dose=float(animals["PLANNED_DOSE"].max()), max_day=float(obs["DAY"].max()),
             intervals=sorted({float(x) for x in animals["INTERVAL_DAYS"].dropna()}),
             compound_ids=cids, descriptor_ranges=rng, sharing=sharing,
-            species_levels=species_levels, zb_mean_by_species=zb_mean_by_species)
+            species_levels=species_levels, zb_mean_by_species=zb_mean_by_species,
+            declared_species=declared, fixed_schema=bool(fixed_schema))
         spec.animal_cols = (["SEX_M", "ZB_C", "IS_CONTROL", "LD", "INV_INTERVAL", "START", "END"] + DESCRIPTORS
                             + [f"STRAIN_{s}" for s in spec.strains[1:]] + [f"ROUTE_{r}" for r in spec.routes[1:]]
                             + [f"SPECIES_{s}" for s in spec.species_levels[1:]])
@@ -121,6 +127,8 @@ class FeatureSpec:
         raw.setdefault("sharing", "context_specific")
         raw.setdefault("species_levels", [])
         raw.setdefault("zb_mean_by_species", {})
+        raw.setdefault("declared_species", [])
+        raw.setdefault("fixed_schema", False)
         return FeatureSpec(**raw)
 
     def _species_series(self, animals: pd.DataFrame) -> pd.Series:

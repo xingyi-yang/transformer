@@ -66,11 +66,18 @@ def test_species_prefix_is_production():
     assert availability("SPECIES_RAT") == "production"
 
 
-def test_selective_sharing_is_deferred():
-    with pytest.raises(ValueError, match="deferred"):
-        CohortConfig.from_dict({"sharing": "selective", "donor_species": ["DOG"]})
+def test_k0k1_prespec_still_records_selective_as_deferred():
+    # Frozen k=0/k=1 protocol. Selective v1 lives in the v3 eval benchmark.
     assert SELECTIVE_SHARING == "required_deferred"
-    assert "deferred" in SELECTIVE_SHARING_DEFERRED
+    assert SELECTIVE_SHARING_DEFERRED
+    from send_bw.pilot_execute import PilotProtocolError, validate_frozen_config
+    import copy
+
+    cfg = yaml.safe_load((ROOT / "configs" / "v3_pilot.k0k1.frozen.yaml").read_text(encoding="utf-8"))
+    bad = copy.deepcopy(cfg)
+    bad["cohort"]["sharing"] = "selective"
+    with pytest.raises(PilotProtocolError, match="deferred"):
+        validate_frozen_config(bad)
 
 
 def test_v2_cohort_still_excludes_donors(multi_tables):

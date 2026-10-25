@@ -64,7 +64,8 @@ def evaluate_prestudy(model: ResponseModel, data: ModelData, n_draws: int = 200,
         per_study.append({"STUDYID": sid, "rmse_log": float(np.sqrt(np.mean((mean - y) ** 2))),
                           "mae_log": float(np.mean(np.abs(mean - y))), "cov80": float(h80.mean()),
                           "cov95": float(h95.mean()), "crps": float(crps.mean()), "n_obs": int(len(y)),
-                          "n_animals": len(a)})
+                          "n_animals": len(a), "contrast_bias": None, "contrast_rmse": None,
+                          "n_contrasts": 0})
         for i in range(len(a)):
             mi = m[i]
             if mi.sum() >= 2:
@@ -129,6 +130,16 @@ def evaluate_prestudy(model: ResponseModel, data: ModelData, n_draws: int = 200,
     st = pd.DataFrame(per_study)
     cells = pd.DataFrame(cells)
     contrasts = pd.DataFrame(contrasts)
+    if len(contrasts):
+        contrasts["error"] = contrasts["pred_mean"] - contrasts["obs"]
+        csum = contrasts.groupby("STUDYID", as_index=False).agg(
+            contrast_bias=("error", "mean"),
+            contrast_rmse=("error", lambda e: float(np.sqrt(np.mean(np.asarray(e, float) ** 2)))),
+            n_contrasts=("error", "size"),
+        )
+        st = st.drop(columns=["contrast_bias", "contrast_rmse", "n_contrasts"], errors="ignore")
+        st = st.merge(csum, on="STUDYID", how="left")
+        st["n_contrasts"] = st["n_contrasts"].fillna(0).astype(int)
     gaps = pd.DataFrame(gaps)
     incr = pd.DataFrame(incr)
     gap_rows = []
@@ -162,6 +173,18 @@ def evaluate_prestudy(model: ResponseModel, data: ModelData, n_draws: int = 200,
         "contrast_bias": float((contrasts["pred_mean"] - contrasts["obs"]).mean()) if len(contrasts) else None,
         "contrast_width90": float(contrasts["width90"].mean()) if len(contrasts) else None,
         "n_contrasts": int(len(contrasts)),
+        "study_level_contrast_error": {
+            "bias_study_mean": float(st["contrast_bias"].mean()) if "contrast_bias" in st and st["contrast_bias"].notna().any() else None,
+            "rmse_study_mean": float(st["contrast_rmse"].mean()) if "contrast_rmse" in st and st["contrast_rmse"].notna().any() else None,
+            "n_studies_with_contrast": int(st["n_contrasts"].gt(0).sum()) if "n_contrasts" in st else 0,
+        },
+        "distributional": {
+            "crps_log_study_balanced": float(st["crps"].mean()) if len(st) else None,
+            "energy_score_mean": float(np.mean(es)) if es else None,
+            "cov80": float(st["cov80"].mean()) if len(st) else None,
+            "cov95": float(st["cov95"].mean()) if len(st) else None,
+            "pit_histogram_10bins": pit_hist,
+        },
         "correlation_by_gap": gap_rows,
         "increment_sd_ratio_pred_over_obs": float(incr["sd_pred"].mean() / incr["sd_obs"].mean()) if len(incr) else None,
         "extrema_max_cov90": float(np.mean(extrema)) if extrema else None,
