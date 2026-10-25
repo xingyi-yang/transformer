@@ -65,13 +65,19 @@ with a new study effect drawn once and new animal effects. A documented simplifi
 
 **Optional (TFT, Chronos-2, DeepAR):** never required, never registered as `transformer`, and never
 used as a design simulator. Chronos-2 and DeepAR still only declare capabilities and stay
-`not_run`. TFT is a verified PyTorch Forecasting adapter (`models/tft.py`) for the
-**secondary early-history task only**. It is built with `TimeSeriesDataSet` (observed rows
-only; `allow_missing_timesteps=True` so irregular calendar days are acceptable, but unobserved
-`LOGW` is never filled with 0) and `TemporalFusionTransformer.from_dataset` on CPU. MEAN is the
-0.5 quantile; VAR is a quantile-spread approximation. Without `send-bw[tft]` it stays `not_run`.
-It refuses baseline-only / pre-study prediction and `sample_study`. Installing the extra is not
-part of the default environment and is not a scientific-readiness claim.
+`not_run`. TFT is the documented early-history forecasting adapter (`models/tft.py`,
+`send-bw tft-forecast`) for the **secondary early-history task only**. It is built with
+`TimeSeriesDataSet` (observed rows only; `allow_missing_timesteps=True` so irregular calendar
+days are acceptable, but unobserved `LOGW` is never filled with 0) and
+`TemporalFusionTransformer.from_dataset` on CPU. Missing static categoricals use the token
+`UNK` at train and predict time (NaN is not the string `"nan"`). The default target scale is
+a SPECIES-grouped `GroupNormalizer` when more than one species is present, otherwise a global
+standardizer; `transformation=None` because `LOGW` is already `ln(grams)`. MEAN is the
+0.5 quantile; VAR is a quantile-spread approximation. Pooled pretraining can continue on the
+target species via `from_parameters` so donor SPECIES classes are kept. Without `send-bw[tft]`
+it stays `not_run`. It refuses baseline-only / pre-study prediction and `sample_study`.
+Installing the extra is not part of the default environment and is not a scientific-readiness
+claim.
 
 ## Validation of predictions
 

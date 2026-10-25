@@ -134,6 +134,120 @@ def _ctrl_label(is_control: pd.Series) -> pd.Series:
     return pd.Series(np.where(is_control.astype(bool), "C", "A"), index=is_control.index)
 
 
+def cat_label(value: Any) -> str:
+    """Stable categorical token. NaN must not become the string 'nan' at predict time."""
+    if value is None:
+        return "UNK"
+    try:
+        if pd.isna(value):
+            return "UNK"
+    except (TypeError, ValueError):
+        pass
+    text = str(value).strip()
+    if text.lower() in {"", "nan", "none", "nat", "<na>", "null"}:
+        return "UNK"
+    return text
+
+
+def _normalize_static_cats(frame: pd.DataFrame) -> pd.DataFrame:
+    out = frame.copy()
+    for c in STATIC_CATS:
+        if c not in out.columns:
+            out[c] = "UNK"
+        out[c] = [cat_label(v) for v in out[c].to_numpy()]
+    return out
+
+
+def build_target_normalizer(panel: pd.DataFrame, config: dict[str, Any] | None = None):
+    """Fit-time target scale. LOGW is already ln(grams); do not apply relu.
+
+    Multi-species panels use a SPECIES-grouped normalizer so RAT (~5.6) and DOG (~9.1)
+    are not forced through one global center/scale. Single-species panels use a
+    global standardizer. Encoder-window scaling is opt-in (short encoders are noisy).
+    """
+    from pytorch_forecasting.data import EncoderNormalizer, GroupNormalizer
+
+    cfg = config or {}
+    kind = str(cfg.get("target_normalizer") or "species_or_global").strip().lower()
+    n_sp = int(panel["SPECIES"].nunique()) if "SPECIES" in panel.columns else 1
+    if kind in {"encoder", "encoder_normalizer"}:
+        return EncoderNormalizer(method="standard", center=True, transformation=None)
+    if kind in {"species", "species_or_global"} and n_sp > 1:
+        return GroupNormalizer(
+            groups=["SPECIES"], method="standard", center=True,
+            scale_by_group=True, transformation=None)
+    return GroupNormalizer(method="standard", center=True, transformation=None)
+
+
+def uses_target_scales(panel: pd.DataFrame, config: dict[str, Any] | None = None) -> bool:
+    """Group/encoder scales are network inputs; a single global standardizer is not."""
+    cfg = config or {}
+    if cfg.get("add_target_scales") is not None:
+        return bool(cfg.get("add_target_scales"))
+    kind = str(cfg.get("target_normalizer") or "species_or_global").strip().lower()
+    if kind in {"encoder", "encoder_normalizer"}:
+        return True
+    n_sp = int(panel["SPECIES"].nunique()) if "SPECIES" in panel.columns else 1
+    return n_sp > 1
+
+
+def normalizer_record(norm: Any) -> dict[str, Any]:
+    """JSON-safe snapshot of a fitted PF target normalizer."""
+    rec: dict[str, Any] = {
+        "class": type(norm).__name__ if norm is not None else None,
+        "transformation": getattr(norm, "transformation", None),
+        "groups": list(getattr(norm, "groups", None) or []) or None,
+        "scale_by_group": getattr(norm, "scale_by_group", None),
+        "method": getattr(norm, "method", None),
+        "center": getattr(norm, "center", None),
+    }
+    for attr in ("center_", "scale_", "norm_"):
+        if hasattr(norm, attr):
+            rec[attr] = _jsonable(getattr(norm, attr))
+    return rec
+
+
+def categorical_encoder_classes(parameters: dict[str, Any] | None) -> dict[str, list[str]]:
+    out: dict[str, list[str]] = {}
+    for name, enc in (parameters or {}).get("categorical_encoders", {}).items():
+        classes = getattr(enc, "classes_", None)
+        if classes is None:
+            classes = getattr(enc, "classes", None)
+        if classes is None:
+            continue
+        if isinstance(classes, dict):
+            out[str(name)] = [str(k) for k in classes]
+        else:
+            out[str(name)] = [str(x) for x in classes]
+    return out
+
+
+def _jsonable(val: Any) -> Any:
+    if val is None or isinstance(val, (str, int, float, bool)):
+        return val
+    if hasattr(val, "detach"):
+        val = val.detach().cpu().numpy()
+    if isinstance(val, np.ndarray):
+        if val.size <= 32:
+            return val.tolist()
+        return {"shape": list(val.shape), "mean": float(np.mean(val))}
+    if isinstance(val, dict):
+        return {str(k): _jsonable(v) for k, v in val.items()}
+    if isinstance(val, (list, tuple)):
+        return [_jsonable(x) for x in val]
+    return str(val)
+
+
+def _set_learning_rate(net: Any, lr: float) -> None:
+    if hasattr(net, "hparams") and hasattr(net.hparams, "learning_rate"):
+        net.hparams.learning_rate = float(lr)
+    if hasattr(net, "learning_rate"):
+        try:
+            net.learning_rate = float(lr)
+        except (TypeError, AttributeError):
+            pass
+
+
 def validate_forecast_times(times: np.ndarray, history: pd.DataFrame) -> np.ndarray:
     """Require finite, unique, strictly increasing times later than supplied history."""
     times = np.asarray(times, float).reshape(-1)
@@ -204,10 +318,7 @@ def build_observed_panel(data: ModelData) -> pd.DataFrame:
     panel["WEIGHT"] = w.to_numpy(float)
     panel = panel.sort_values(["USUBJID", "DAY"], kind="stable").reset_index(drop=True)
     panel["time_idx"] = panel.groupby("USUBJID", sort=False).cumcount().astype(int)
-    for c in STATIC_CATS:
-        if c not in panel.columns:
-            panel[c] = "UNK"
-        panel[c] = panel[c].astype(object).where(pd.notna(panel[c]), "UNK").map(str)
+    panel = _normalize_static_cats(panel)
     for c in STATIC_REALS + KNOWN_REALS + ["WEIGHT"]:
         if c in panel.columns:
             panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0)
@@ -270,6 +381,8 @@ class TFTEarlyHistoryModel(ResponseModel):
         from pytorch_forecasting.data import NaNLabelEncoder
 
         cat_enc = {c: NaNLabelEncoder(add_nan=True) for c in list(GROUP_IDS) + list(STATIC_CATS)}
+        target_normalizer = build_target_normalizer(train_panel, config)
+        add_scales = uses_target_scales(train_panel, config)
         ds_kwargs = dict(
             time_idx="time_idx",
             target=TARGET,
@@ -285,9 +398,10 @@ class TFTEarlyHistoryModel(ResponseModel):
             time_varying_unknown_reals=[TARGET],
             allow_missing_timesteps=True,  # irregular DAY is allowed; we do not insert unobserved Y
             add_relative_time_idx=True,
-            add_target_scales=False,
+            add_target_scales=add_scales,
             add_encoder_length=True,
             categorical_encoders=cat_enc,
+            target_normalizer=target_normalizer,
         )
         training = TimeSeriesDataSet(train_panel, **ds_kwargs)
         validation_ds = _call_dataset_factory(TimeSeriesDataSet.from_dataset, training, val_panel, predict=False)
@@ -300,6 +414,7 @@ class TFTEarlyHistoryModel(ResponseModel):
                 "TFT validation has no windows whose encoder ends at DAY <= "
                 f"{self.encoder_window_day} with later observed targets") from e
         self.dataset_parameters = training.get_parameters()
+        fitted_norm = self.dataset_parameters.get("target_normalizer", target_normalizer)
         batch_size = int(config.get("batch_size", 64))
         if window_balance == "study":
             sampler = _study_window_sampler(training, train_panel)
@@ -376,9 +491,108 @@ class TFTEarlyHistoryModel(ResponseModel):
             "row_weight": 1.0 if window_balance == "study" else "study_balanced_per_obs_row",
             "double_balancing": False,
             "max_epochs": int(config.get("max_epochs", 20)),
+            "target_normalizer": normalizer_record(fitted_norm),
+            "add_target_scales": add_scales,
+            "cat_label": "UNK_not_nan",
+            "categorical_classes": categorical_encoder_classes(self.dataset_parameters),
             "curves": curve.rows,
             "note": ("early-history only; baseline-only pre-study and design simulation are not supported; "
                      "VAR is a quantile-spread approximation"),
+        }
+        return self.history
+
+    def finetune(self, train: ModelData, validation: ModelData, config: dict[str, Any]) -> dict[str, Any]:
+        """Continue a fitted pooled net on target-species data.
+
+        Uses ``TimeSeriesDataSet.from_parameters`` so SPECIES / COMPOUND_ID classes
+        from pretraining (including donor species) are not rebuilt. Feature scaling
+        stays on the pretrained ``FeatureSpec``. Learning rate is lowered.
+        """
+        if self.net is None or self.dataset_parameters is None or self.spec is None:
+            raise RuntimeError("finetune requires a fitted pooled TFT")
+        TimeSeriesDataSet, TemporalFusionTransformer, _QuantileLoss = _pf()
+        _, EarlyStopping, ModelCheckpoint = _trainer_cls()
+        kept_classes = categorical_encoder_classes(self.dataset_parameters)
+        train_md = ModelData(train.animals, train.obs, self.compound_ref, self.spec)
+        val_md = ModelData(validation.animals, validation.obs, self.compound_ref, self.spec)
+        train_panel = _enough_visits(build_observed_panel(train_md), self.min_encoder_length + 1)
+        val_panel = _enough_visits(build_observed_panel(val_md), self.min_encoder_length + 1)
+        if train_panel.empty or val_panel.empty:
+            raise RuntimeError("TFT fine-tune panel is empty after the encoder-length filter")
+        window_balance = str(config.get("window_balance") or "").strip().lower()
+        if window_balance == "study":
+            train_panel = _unit_row_weights(train_panel)
+            val_panel = _unit_row_weights(val_panel)
+        seed = int(config.get("seed", 0))
+        import torch
+
+        torch.set_num_threads(int(config.get("torch_threads", 4)))
+        torch.manual_seed(seed)
+        np.random.seed(seed)
+        training = _call_dataset_factory(
+            TimeSeriesDataSet.from_parameters, self.dataset_parameters, train_panel, predict=False)
+        validation_ds = _call_dataset_factory(
+            TimeSeriesDataSet.from_parameters, self.dataset_parameters, val_panel, predict=False)
+        try:
+            validation_ds = validation_ds.filter(
+                lambda decoded, panel=val_panel, window=self.encoder_window_day:
+                early_history_window_mask(decoded, panel, window))
+        except ValueError as e:
+            raise RuntimeError(
+                "TFT fine-tune validation has no windows whose encoder ends at DAY <= "
+                f"{self.encoder_window_day} with later observed targets") from e
+        after_classes = categorical_encoder_classes(self.dataset_parameters)
+        for name, before in kept_classes.items():
+            after = after_classes.get(name) or []
+            missing = sorted(set(before) - set(after))
+            if missing:
+                raise RuntimeError(f"finetune dropped {name} classes {missing}; from_parameters must keep them")
+        batch_size = int(config.get("batch_size", 64))
+        if window_balance == "study":
+            sampler = _study_window_sampler(training, train_panel)
+            train_dl = training.to_dataloader(
+                train=True, batch_size=batch_size, num_workers=0, sampler=sampler, shuffle=False)
+        else:
+            train_dl = training.to_dataloader(train=True, batch_size=batch_size, num_workers=0)
+        val_dl = validation_ds.to_dataloader(train=False, batch_size=batch_size, num_workers=0)
+        lr = float(config.get("finetune_lr", config.get("lr", 1e-3)))
+        _set_learning_rate(self.net, lr)
+        self.net.train()
+        curve = _loss_callback_cls()()
+        max_epochs = int(config.get("finetune_max_epochs", config.get("max_epochs", 8)))
+        with tempfile.TemporaryDirectory(prefix="send_bw_tft_ft_") as tmp:
+            callbacks = [
+                EarlyStopping(monitor="val_loss", patience=int(config.get("finetune_patience",
+                              config.get("patience", 4))), mode="min"),
+                ModelCheckpoint(dirpath=tmp, filename="best", monitor="val_loss", mode="min", save_top_k=1),
+                curve,
+            ]
+            trainer = _make_trainer(tmp, max_epochs, callbacks)
+            trainer.fit(self.net, train_dl, val_dl)
+            best = callbacks[1].best_model_path
+            if best:
+                self.net = TemporalFusionTransformer.load_from_checkpoint(best)
+            self.net.eval()
+            self._best_checkpoint_bytes = Path(best).read_bytes() if best else None
+            n_updates = int(getattr(trainer, "global_step", 0) or 0)
+            epochs_run = int(getattr(trainer, "current_epoch", 0) or 0) + 1
+        pre = dict(self.history)
+        self.history = {
+            **pre,
+            "finetuned": True,
+            "finetune_lr": lr,
+            "finetune_max_epochs": max_epochs,
+            "finetune_epochs_run": epochs_run,
+            "finetune_n_optimizer_updates": n_updates,
+            "finetune_n_train_series": int(train_panel["USUBJID"].nunique()),
+            "finetune_n_val_series": int(val_panel["USUBJID"].nunique()),
+            "finetune_n_train_obs": int(len(train_panel)),
+            "finetune_n_train_windows": int(len(training)),
+            "finetune_n_val_windows": int(len(validation_ds)),
+            "finetune_from_parameters": True,
+            "finetune_species_classes_kept": after_classes.get("SPECIES"),
+            "finetune_curves": curve.rows,
+            "training_scope": str(config.get("training_scope", "pooled_then_target_finetune")),
         }
         return self.history
 
@@ -516,9 +730,9 @@ class TFTEarlyHistoryModel(ResponseModel):
         })
         for c in STATIC_CATS:
             if c in one.columns:
-                out[c] = one[c].astype(str).to_numpy()
+                out[c] = [cat_label(v) for v in one[c].to_numpy()]
             elif c == "SPECIES" and self.spec is not None:
-                out[c] = np.full(n, str(self.spec.species), dtype=object)
+                out[c] = np.full(n, cat_label(self.spec.species), dtype=object)
             else:
                 out[c] = np.full(n, "UNK", dtype=object)
         for c in STATIC_REALS:

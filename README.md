@@ -36,9 +36,41 @@ compiler, so PyTensor warns "g++ not available" (harmless) and NUTS runs through
 ## Commands
 
 `send-bw <command> --config <yaml>`: `generate`, `inspect-source`, `ingest`, `prepare`, `validate-real`, `train`,
-`evaluate`, `design`, `report`, `run-all`, `validate-request`, `propose-design`.
+`evaluate`, `design`, `report`, `run-all`, `validate-request`, `propose-design`,
+`tft-forecast` (primary early-history TFT workflow), `tft-early-hist-bench`, `tft-early-hist-extend`.
 `validate-request` and `propose-design` also accept `--model <run dir | models dir | model dir>`, for
 inference from serialized artifacts without a training config.
+
+### Primary TFT early-history forecasting
+
+TFT (`pytorch_forecasting.TemporalFusionTransformer`) is the documented forecasting
+adapter for **observed early history**. It is still optional relative to the required
+spline / custom transformer / Bayesian benchmark and is not a design simulator.
+
+Shared knobs (use these unless a locked protocol says otherwise):
+
+| knob | value | meaning |
+|---|---|---|
+| `encoder_window_day` | 14 | keep observed visits with `DAY ≤ 14` |
+| `max_encoder_length` | 8 | cap on observed encoder visits; no invented days |
+| `max_prediction_length` | 6 | multi-horizon from the same observed history |
+| `min_encoder_length` | 1 | refuse animals with no observed encoder |
+| `window_balance` | `study` | equal study probability over PF windows |
+| `target_normalizer` | `species_or_global` | SPECIES-grouped scale when donors are present; no `relu` |
+| `quantiles` | 0.1, 0.25, 0.5, 0.75, 0.9 | QuantileLoss head |
+
+```powershell
+# extra required once; default smoke env stays not_run without it
+.\.venv\Scripts\pip install -e ".[tft]"
+.\.venv\Scripts\send-bw tft-forecast --config configs/tft_forecast.yaml
+# Linux / this environment:
+#   python3 -m pip install -e ".[tft]"
+#   send-bw tft-forecast --config configs/tft_forecast.yaml
+```
+
+The command writes `runs/tft_primary/` only. It does not overwrite `runs/v3_*`,
+`runs/tft_early_hist_bench/`, or `runs/tft_early_hist_extend/`. Official holdout
+test errors are not used to choose learning rate, hidden size, dropout, or duration.
 
 Configs: `configs/smoke.yaml`, `configs/bayesian_smoke.yaml` (executed); `configs/research.yaml` and
 `configs/bayesian_research.yaml` (larger; **not executed**); `configs/real_local.example.yaml` and
