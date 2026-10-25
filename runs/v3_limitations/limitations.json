@@ -1,0 +1,151 @@
+{
+  "adjusted_using_exposed_test": false,
+  "architectures_added": false,
+  "broad_synthetic_development": "stopped",
+  "git_revision": "8d89add894d8ff6dabb9fc4c613a1f9f3ee8c418",
+  "grid_relaunched": false,
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation.",
+    "Exploratory.",
+    "Two independent dataset replicates.",
+    "Broad synthetic development stopped."
+  ],
+  "limitations": [
+    {
+      "adjusted_using_exposed_test": false,
+      "finding": "After matching the animal\u2192study\u2192dataset increment statistic, predicted study-level increment SD still exceeds the observed study-level statistic (ratio > 1 on the mean of two dataset means). Excess increment variability remains an unresolved modeling limitation.",
+      "id": "excess_increment_variability",
+      "matched_ratio_mean_of_dataset_means": 1.4167508176898365,
+      "matched_ratio_sd_of_dataset_means": 0.14423976218157752,
+      "n_cells_scored": 64,
+      "n_datasets": 2,
+      "n_study_rows": 256,
+      "not_done": [
+        "No residual scale was multiplied to match observed increment SD on test.",
+        "No increment-ratio target was used as a tuning objective.",
+        "Covariance bounds (including sigma_m at the optimizer floor) were not moved using exposed test outcomes.",
+        "Predictive widths were not calibrated to test coverage."
+      ],
+      "source": "runs/v3_increment/increment.json",
+      "statistic": {
+        "animal": "SD of consecutive observed-visit log-weight increments (ddof=0)",
+        "not_done": "between-draw study-effect variability is not mixed into the increment SD",
+        "reported_separately": "E[study-level statistic] and between-draw SD of that statistic",
+        "simulated": "each sample_study draw is one realized study; the same animal\u2192study statistic is computed per draw",
+        "study": "unweighted mean of animal increment SDs"
+      },
+      "status": "unresolved"
+    },
+    {
+      "adjusted_using_exposed_test": false,
+      "cells": [
+        {
+          "counted_as_successful_benchmark": false,
+          "divergences": 0,
+          "ess_bulk_min": 115.20329044339839,
+          "ess_tail_min": 141.61118747376793,
+          "failure_class": "mean_identifiability",
+          "name": "d0_t0_matched_context_specific_k0_full",
+          "reason": "Bayesian inference remains explicitly unreliable until the unchanged diagnostics pass.",
+          "reliable": false,
+          "rhat_max": 1.0146408051222628,
+          "scored": false,
+          "thresholds": {
+            "ess_bulk_min": 400,
+            "ess_tail_min": 400,
+            "rhat_max": 1.01
+          }
+        },
+        {
+          "counted_as_successful_benchmark": false,
+          "divergences": 0,
+          "ess_bulk_min": 115.20329044339839,
+          "ess_tail_min": 141.61118747376793,
+          "failure_class": "mean_identifiability",
+          "name": "d0_t0_both_context_specific_k0_full",
+          "reason": "Bayesian inference remains explicitly unreliable until the unchanged diagnostics pass.",
+          "reliable": false,
+          "rhat_max": 1.0146408051222628,
+          "scored": false,
+          "thresholds": {
+            "ess_bulk_min": 400,
+            "ess_tail_min": 400,
+            "rhat_max": 1.01
+          }
+        }
+      ],
+      "counted_as_successful_benchmark": false,
+      "explicitly_unreliable": true,
+      "finding": "Executed Bayesian cells fail the unchanged reliability gate (rhat\u22641.01, ESS\u2265400, divergences==0) on mean-component identifiability. Inference stays explicitly unreliable and is not counted.",
+      "id": "unreliable_bayesian_inference",
+      "n_cells": 2,
+      "not_done": [
+        "Thresholds were not relaxed.",
+        "The mean parameterization was not changed to chase ESS or R-hat.",
+        "Failed runs were not dropped or retuned on test."
+      ],
+      "scored": false,
+      "source": "runs/v3_increment/bayesian.json",
+      "status": "unresolved",
+      "thresholds_unchanged": {
+        "ess_bulk_min": 400,
+        "ess_tail_min": 400,
+        "rhat_max": 1.01
+      }
+    }
+  ],
+  "next_implementation_task": null,
+  "phase_b": {
+    "authorized": false,
+    "blocker": "No genuine signed authorization was found. Phase B remains blocked until approval is supplied through the organization's accepted process. No source was opened. No further synthetic implementation task is generated.",
+    "created_ticket": false,
+    "design_recommendations": false,
+    "discovery": {
+      "authorized": false,
+      "candidates_checked": [],
+      "created_ticket": false,
+      "note": "No ticket was created, signed, or self-approved. The in-repo example remains unsigned. Documentation text that mentions written_authorization: true is not a steward ticket.",
+      "search": {
+        "approved_dirs": [
+          "/approved/tickets"
+        ],
+        "env": "SEND_BW_AUTHORIZATION",
+        "explicit": null,
+        "repo_scan": false
+      },
+      "self_approved": false,
+      "ticket_path": null,
+      "unsigned_example": "/workspace/configs/historical_authorization.example.yaml"
+    },
+    "endpoint_values_inspected": false,
+    "if_authorized": "Metadata-only inspection: biological-support inventory, missingness, provenance, and candidate historical validation cohorts. Endpoint inspection, training, and design recommendations stay off unless separately authorized.",
+    "models_trained": false,
+    "prior_blocker": {
+      "dir": "runs/v3_phaseb",
+      "real_data_accessed": false,
+      "status": "ACCESS_BLOCKER"
+    },
+    "self_approved": false,
+    "source_opened": false,
+    "status": "ACCESS_BLOCKER"
+  },
+  "preserved_pr": 7,
+  "reliability_thresholds": {
+    "ess_bulk_min": 400,
+    "ess_tail_min": 400,
+    "rhat_max": 1.01
+  },
+  "retuned_after_test": false,
+  "source_increment": {
+    "dir": "runs/v3_increment",
+    "research": {
+      "config_hash": "438cb0640f9f9ff8",
+      "dir": "runs/v3_research",
+      "freeze_revision": "54095801f1d8d240bbf8b59e5a2506f66ddf5004"
+    }
+  },
+  "stop_reason": "No genuine signed authorization was found. Phase B remains blocked until approval is supplied through the organization's accepted process. No source was opened. No further synthetic implementation task is generated."
+}

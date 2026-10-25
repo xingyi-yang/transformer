@@ -92,9 +92,10 @@ def main(argv: list[str] | None = None) -> int:
     for name in ["generate", "inspect-source", "ingest", "prepare", "validate-real", "train", "evaluate",
                  "design", "report", "run-all", "validate-request", "propose-design", "v3-pilot",
                  "v3-eval", "v3-repl", "v3-research", "v3-closeout", "v3-increment",
-                 "historical-audit"]:
+                 "v3-limitations", "historical-audit"]:
         s = sub.add_parser(name)
-        artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout", "v3-increment")
+        artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout",
+                                "v3-increment", "v3-limitations")
         s.add_argument("--config", required=not artifact_cmd and name != "v3-closeout")
         s.add_argument("--force", action="store_true")
         if name == "train":
@@ -114,11 +115,15 @@ def main(argv: list[str] | None = None) -> int:
         if name == "v3-increment":
             s.add_argument("--research-dir", default="runs/v3_research")
             s.add_argument("--output-dir", default="runs/v3_increment")
+        if name == "v3-limitations":
+            s.add_argument("--increment-dir", default="runs/v3_increment")
+            s.add_argument("--phaseb-dir", default="runs/v3_phaseb")
+            s.add_argument("--output-dir", default="runs/v3_limitations")
         if name == "historical-audit":
             s.add_argument("--phase", default="A")
             s.add_argument("--authorization", help="signed ticket; required for phases B and C")
     args = p.parse_args(argv)
-    if args.cmd not in ("v3-closeout", "v3-increment") and getattr(args, "model", None) is None and args.config is None:
+    if args.cmd not in ("v3-closeout", "v3-increment", "v3-limitations") and getattr(args, "model", None) is None and args.config is None:
         p.error("--config or --model is required")
     try:
         if args.cmd == "v3-pilot":
@@ -177,6 +182,17 @@ def main(argv: list[str] | None = None) -> int:
                               "n_datasets": out.get("n_datasets"),
                               "n_cells_scored": out.get("n_cells_scored"),
                               "bayesian_unreliable": (out.get("bayesian") or {}).get("explicitly_unreliable"),
+                              "parent": args.output_dir}, indent=2, default=str))
+            return 0
+        if args.cmd == "v3-limitations":
+            from send_bw.v3_limitations import execute_v3_limitations
+
+            out = execute_v3_limitations(args.increment_dir, args.phaseb_dir, args.output_dir)
+            print(json.dumps({"status": "ok",
+                              "broad_synthetic_development": out.get("broad_synthetic_development"),
+                              "next_implementation_task": out.get("next_implementation_task"),
+                              "adjusted_using_exposed_test": out.get("adjusted_using_exposed_test"),
+                              "phase_b": (out.get("phase_b") or {}).get("status"),
                               "parent": args.output_dir}, indent=2, default=str))
             return 0
         if args.cmd == "historical-audit":
