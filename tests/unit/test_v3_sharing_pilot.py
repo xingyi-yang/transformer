@@ -34,6 +34,7 @@ from send_bw.pilot import (
     UNCERTAINTY_SAFEGUARDS,
     as_dict,
 )
+from send_bw.pilot_execute import PilotProtocolError, validate_frozen_config
 from send_bw.pipeline import Run
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -70,7 +71,6 @@ def test_k0k1_prespec_still_records_selective_as_deferred():
     # Frozen k=0/k=1 protocol. Selective v1 lives in the v3 eval benchmark.
     assert SELECTIVE_SHARING == "required_deferred"
     assert SELECTIVE_SHARING_DEFERRED
-    from send_bw.pilot_execute import PilotProtocolError, validate_frozen_config
     import copy
 
     cfg = yaml.safe_load((ROOT / "configs" / "v3_pilot.k0k1.frozen.yaml").read_text(encoding="utf-8"))

@@ -13,7 +13,7 @@ import yaml
 from send_bw.data.features import FeatureSpec
 from send_bw.data.generate import generate_dataset
 from send_bw.data.qc import CohortConfig
-from send_bw.evaluation.sparse import ENCODER_RULES, encoder_history
+from send_bw.evaluation.sparse import encoder_history
 from send_bw.evaluation.transfer import build_transfer_table
 from send_bw.evaluation.uncertainty import bayesian_gate, inspect_covariance
 from send_bw.sharing import SELECTIVE_V1, parse_sharing, resolve_donor_scenario, uses_donors
