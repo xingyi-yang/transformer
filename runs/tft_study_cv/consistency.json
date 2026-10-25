@@ -1,0 +1,932 @@
+{
+  "interval_score80": {
+    "any_consistent_improvement": true,
+    "metric": "interval_score80",
+    "note": "Consistent improvement requires beating target-only on the test interval_score80 in at least 5 folds and 10 studies. Fine-tune and CQR remain experimental.",
+    "previous_finetune_default_failed_confirmation": true,
+    "reference": "tft_target_only",
+    "variants": {
+      "tft_finetune": {
+        "consistent_improvement": true,
+        "fold_rows": [
+          {
+            "beats_reference": true,
+            "delta": -0.025053632163273554,
+            "experimental": 0.1724972474440917,
+            "fold": 0,
+            "reference": 0.19755087960736525
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.025883625216737288,
+            "experimental": 0.18481155548646933,
+            "fold": 1,
+            "reference": 0.2106951807032066
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.0594536080854538,
+            "experimental": 0.22843479568527836,
+            "fold": 2,
+            "reference": 0.28788840377073216
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.08445612616351533,
+            "experimental": 0.21883713401828908,
+            "fold": 3,
+            "reference": 0.3032932601818044
+          },
+          {
+            "beats_reference": false,
+            "delta": 1.8138113983229618,
+            "experimental": 2.034981196587892,
+            "fold": 4,
+            "reference": 0.2211697982649302
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.02853347389671393,
+            "experimental": 0.15852587254873993,
+            "fold": 5,
+            "reference": 0.18705934644545386
+          }
+        ],
+        "metric": "interval_score80",
+        "min_folds": 5,
+        "min_studies": 10,
+        "n_folds_beats_reference": 5,
+        "n_folds_compared": 6,
+        "n_studies_beats_reference": 11,
+        "n_studies_compared": 12,
+        "study_rows": [
+          {
+            "STUDYID": "SYNA-001",
+            "beats_reference": true,
+            "delta": -0.020225840664299305,
+            "experimental": 0.17980882325338857,
+            "fold": 0,
+            "reference": 0.20003466391768787
+          },
+          {
+            "STUDYID": "SYNA-002",
+            "beats_reference": true,
+            "delta": -0.02592095747438422,
+            "experimental": 0.16938644515565268,
+            "fold": 5,
+            "reference": 0.1953074026300369
+          },
+          {
+            "STUDYID": "SYNA-003",
+            "beats_reference": true,
+            "delta": -0.029881423662247802,
+            "experimental": 0.1651856716347948,
+            "fold": 0,
+            "reference": 0.1950670952970426
+          },
+          {
+            "STUDYID": "SYNA-004",
+            "beats_reference": true,
+            "delta": -0.023193424064103296,
+            "experimental": 0.1965922997430458,
+            "fold": 2,
+            "reference": 0.21978572380714909
+          },
+          {
+            "STUDYID": "SYNA-005",
+            "beats_reference": true,
+            "delta": -0.09571379210680431,
+            "experimental": 0.26027729162751095,
+            "fold": 2,
+            "reference": 0.35599108373431526
+          },
+          {
+            "STUDYID": "SYNA-006",
+            "beats_reference": true,
+            "delta": -0.06442026668406281,
+            "experimental": 0.20000757908251288,
+            "fold": 3,
+            "reference": 0.2644278457665757
+          },
+          {
+            "STUDYID": "SYNA-007",
+            "beats_reference": true,
+            "delta": -0.00702188795814343,
+            "experimental": 0.15430056866555006,
+            "fold": 1,
+            "reference": 0.1613224566236935
+          },
+          {
+            "STUDYID": "SYNA-008",
+            "beats_reference": true,
+            "delta": -0.031145990319043637,
+            "experimental": 0.14766529994182712,
+            "fold": 5,
+            "reference": 0.17881129026087075
+          },
+          {
+            "STUDYID": "SYNA-009",
+            "beats_reference": true,
+            "delta": -0.10449198564296783,
+            "experimental": 0.2376666889540653,
+            "fold": 3,
+            "reference": 0.34215867459703314
+          },
+          {
+            "STUDYID": "SYNA-010",
+            "beats_reference": true,
+            "delta": -0.00522434438001787,
+            "experimental": 0.24682197239372808,
+            "fold": 4,
+            "reference": 0.25204631677374595
+          },
+          {
+            "STUDYID": "SYNA-011",
+            "beats_reference": true,
+            "delta": -0.04474536247533109,
+            "experimental": 0.2153225423073886,
+            "fold": 1,
+            "reference": 0.2600679047827197
+          },
+          {
+            "STUDYID": "SYNA-012",
+            "beats_reference": false,
+            "delta": 3.632847141025941,
+            "experimental": 3.8231404207820554,
+            "fold": 4,
+            "reference": 0.19029327975611446
+          }
+        ]
+      },
+      "tft_pooled": {
+        "consistent_improvement": false,
+        "fold_rows": [
+          {
+            "beats_reference": true,
+            "delta": -0.01999618324689509,
+            "experimental": 0.17755469636047017,
+            "fold": 0,
+            "reference": 0.19755087960736525
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.010914910831758162,
+            "experimental": 0.19978026987144845,
+            "fold": 1,
+            "reference": 0.2106951807032066
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.056314007153903334,
+            "experimental": 0.3442024109246355,
+            "fold": 2,
+            "reference": 0.28788840377073216
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.05090937847679178,
+            "experimental": 0.25238388170501264,
+            "fold": 3,
+            "reference": 0.3032932601818044
+          },
+          {
+            "beats_reference": false,
+            "delta": 1.1710101106514534,
+            "experimental": 1.3921799089163835,
+            "fold": 4,
+            "reference": 0.2211697982649302
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.019988821137415264,
+            "experimental": 0.20704816758286912,
+            "fold": 5,
+            "reference": 0.18705934644545386
+          }
+        ],
+        "metric": "interval_score80",
+        "min_folds": 5,
+        "min_studies": 10,
+        "n_folds_beats_reference": 3,
+        "n_folds_compared": 6,
+        "n_studies_beats_reference": 7,
+        "n_studies_compared": 12,
+        "study_rows": [
+          {
+            "STUDYID": "SYNA-001",
+            "beats_reference": true,
+            "delta": -0.019853992811158405,
+            "experimental": 0.18018067110652947,
+            "fold": 0,
+            "reference": 0.20003466391768787
+          },
+          {
+            "STUDYID": "SYNA-002",
+            "beats_reference": false,
+            "delta": 0.035022320590644807,
+            "experimental": 0.2303297232206817,
+            "fold": 5,
+            "reference": 0.1953074026300369
+          },
+          {
+            "STUDYID": "SYNA-003",
+            "beats_reference": true,
+            "delta": -0.02013837368263166,
+            "experimental": 0.17492872161441095,
+            "fold": 0,
+            "reference": 0.1950670952970426
+          },
+          {
+            "STUDYID": "SYNA-004",
+            "beats_reference": false,
+            "delta": 0.03963479777694498,
+            "experimental": 0.25942052158409407,
+            "fold": 2,
+            "reference": 0.21978572380714909
+          },
+          {
+            "STUDYID": "SYNA-005",
+            "beats_reference": false,
+            "delta": 0.07299321653086172,
+            "experimental": 0.428984300265177,
+            "fold": 2,
+            "reference": 0.35599108373431526
+          },
+          {
+            "STUDYID": "SYNA-006",
+            "beats_reference": true,
+            "delta": -0.030424046055385873,
+            "experimental": 0.2340037997111898,
+            "fold": 3,
+            "reference": 0.2644278457665757
+          },
+          {
+            "STUDYID": "SYNA-007",
+            "beats_reference": true,
+            "delta": -0.006586294436244949,
+            "experimental": 0.15473616218744854,
+            "fold": 1,
+            "reference": 0.1613224566236935
+          },
+          {
+            "STUDYID": "SYNA-008",
+            "beats_reference": false,
+            "delta": 0.004955321684185748,
+            "experimental": 0.1837666119450565,
+            "fold": 5,
+            "reference": 0.17881129026087075
+          },
+          {
+            "STUDYID": "SYNA-009",
+            "beats_reference": true,
+            "delta": -0.07139471089819766,
+            "experimental": 0.2707639636988355,
+            "fold": 3,
+            "reference": 0.34215867459703314
+          },
+          {
+            "STUDYID": "SYNA-010",
+            "beats_reference": true,
+            "delta": -0.0030386194630229457,
+            "experimental": 0.249007697310723,
+            "fold": 4,
+            "reference": 0.25204631677374595
+          },
+          {
+            "STUDYID": "SYNA-011",
+            "beats_reference": true,
+            "delta": -0.015243527227271264,
+            "experimental": 0.24482437755544842,
+            "fold": 1,
+            "reference": 0.2600679047827197
+          },
+          {
+            "STUDYID": "SYNA-012",
+            "beats_reference": false,
+            "delta": 2.3450588407659296,
+            "experimental": 2.535352120522044,
+            "fold": 4,
+            "reference": 0.19029327975611446
+          }
+        ]
+      },
+      "tft_target_only_cqr": {
+        "consistent_improvement": false,
+        "fold_rows": [
+          {
+            "beats_reference": true,
+            "delta": -0.0037026131614534274,
+            "experimental": 0.19384826644591183,
+            "fold": 0,
+            "reference": 0.19755087960736525
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.006853607722763888,
+            "experimental": 0.20384157298044273,
+            "fold": 1,
+            "reference": 0.2106951807032066
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.015994449225232188,
+            "experimental": 0.27189395454549997,
+            "fold": 2,
+            "reference": 0.28788840377073216
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.026815065953003425,
+            "experimental": 0.276478194228801,
+            "fold": 3,
+            "reference": 0.3032932601818044
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.0013145435701649166,
+            "experimental": 0.2224843418350951,
+            "fold": 4,
+            "reference": 0.2211697982649302
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.007820083200048872,
+            "experimental": 0.19487942964550273,
+            "fold": 5,
+            "reference": 0.18705934644545386
+          }
+        ],
+        "metric": "interval_score80",
+        "min_folds": 5,
+        "min_studies": 10,
+        "n_folds_beats_reference": 4,
+        "n_folds_compared": 6,
+        "n_studies_beats_reference": 8,
+        "n_studies_compared": 12,
+        "study_rows": [
+          {
+            "STUDYID": "SYNA-001",
+            "beats_reference": true,
+            "delta": -0.005353900500170705,
+            "experimental": 0.19468076341751717,
+            "fold": 0,
+            "reference": 0.20003466391768787
+          },
+          {
+            "STUDYID": "SYNA-002",
+            "beats_reference": false,
+            "delta": 0.010884670333623364,
+            "experimental": 0.20619207296366027,
+            "fold": 5,
+            "reference": 0.1953074026300369
+          },
+          {
+            "STUDYID": "SYNA-003",
+            "beats_reference": true,
+            "delta": -0.002051325822736094,
+            "experimental": 0.19301576947430651,
+            "fold": 0,
+            "reference": 0.1950670952970426
+          },
+          {
+            "STUDYID": "SYNA-004",
+            "beats_reference": true,
+            "delta": -0.005196918241491433,
+            "experimental": 0.21458880556565765,
+            "fold": 2,
+            "reference": 0.21978572380714909
+          },
+          {
+            "STUDYID": "SYNA-005",
+            "beats_reference": true,
+            "delta": -0.026791980208973,
+            "experimental": 0.32919910352534226,
+            "fold": 2,
+            "reference": 0.35599108373431526
+          },
+          {
+            "STUDYID": "SYNA-006",
+            "beats_reference": true,
+            "delta": -0.019873266461017225,
+            "experimental": 0.24455457930555846,
+            "fold": 3,
+            "reference": 0.2644278457665757
+          },
+          {
+            "STUDYID": "SYNA-007",
+            "beats_reference": false,
+            "delta": 0.005879515287133902,
+            "experimental": 0.1672019719108274,
+            "fold": 1,
+            "reference": 0.1613224566236935
+          },
+          {
+            "STUDYID": "SYNA-008",
+            "beats_reference": false,
+            "delta": 0.0047554960664743795,
+            "experimental": 0.18356678632734513,
+            "fold": 5,
+            "reference": 0.17881129026087075
+          },
+          {
+            "STUDYID": "SYNA-009",
+            "beats_reference": true,
+            "delta": -0.03375686544498957,
+            "experimental": 0.30840180915204357,
+            "fold": 3,
+            "reference": 0.34215867459703314
+          },
+          {
+            "STUDYID": "SYNA-010",
+            "beats_reference": true,
+            "delta": -0.010646672568931509,
+            "experimental": 0.24139964420481444,
+            "fold": 4,
+            "reference": 0.25204631677374595
+          },
+          {
+            "STUDYID": "SYNA-011",
+            "beats_reference": true,
+            "delta": -0.019586730732661595,
+            "experimental": 0.2404811740500581,
+            "fold": 1,
+            "reference": 0.2600679047827197
+          },
+          {
+            "STUDYID": "SYNA-012",
+            "beats_reference": false,
+            "delta": 0.013275759709261287,
+            "experimental": 0.20356903946537575,
+            "fold": 4,
+            "reference": 0.19029327975611446
+          }
+        ]
+      }
+    }
+  },
+  "mae_log": {
+    "any_consistent_improvement": true,
+    "metric": "mae_log",
+    "note": "Consistent improvement requires beating target-only on the test mae_log in at least 5 folds and 10 studies. Fine-tune and CQR remain experimental.",
+    "previous_finetune_default_failed_confirmation": true,
+    "reference": "tft_target_only",
+    "variants": {
+      "tft_finetune": {
+        "consistent_improvement": true,
+        "fold_rows": [
+          {
+            "beats_reference": true,
+            "delta": -0.00024279375255763236,
+            "experimental": 0.03995361396219931,
+            "fold": 0,
+            "reference": 0.040196407714756945
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.004166043519056202,
+            "experimental": 0.04264486450148444,
+            "fold": 1,
+            "reference": 0.046810908020540644
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.009704611416261832,
+            "experimental": 0.04598342376854469,
+            "fold": 2,
+            "reference": 0.05568803518480652
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.017264309447569244,
+            "experimental": 0.048309946525199675,
+            "fold": 3,
+            "reference": 0.06557425597276892
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.18881118813166337,
+            "experimental": 0.23458379317887376,
+            "fold": 4,
+            "reference": 0.04577260504721039
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.005328548176958013,
+            "experimental": 0.037078074929986674,
+            "fold": 5,
+            "reference": 0.04240662310694469
+          }
+        ],
+        "metric": "mae_log",
+        "min_folds": 5,
+        "min_studies": 10,
+        "n_folds_beats_reference": 5,
+        "n_folds_compared": 6,
+        "n_studies_beats_reference": 10,
+        "n_studies_compared": 12,
+        "study_rows": [
+          {
+            "STUDYID": "SYNA-001",
+            "beats_reference": true,
+            "delta": -0.0008145437923392576,
+            "experimental": 0.04036688999325732,
+            "fold": 0,
+            "reference": 0.04118143378559658
+          },
+          {
+            "STUDYID": "SYNA-002",
+            "beats_reference": true,
+            "delta": -0.005271115599136844,
+            "experimental": 0.04026179798407523,
+            "fold": 5,
+            "reference": 0.04553291358321208
+          },
+          {
+            "STUDYID": "SYNA-003",
+            "beats_reference": false,
+            "delta": 0.0003289562872240137,
+            "experimental": 0.03954033793114132,
+            "fold": 0,
+            "reference": 0.039211381643917305
+          },
+          {
+            "STUDYID": "SYNA-004",
+            "beats_reference": true,
+            "delta": -0.0047494137136878944,
+            "experimental": 0.041162170318052554,
+            "fold": 2,
+            "reference": 0.04591158403174045
+          },
+          {
+            "STUDYID": "SYNA-005",
+            "beats_reference": true,
+            "delta": -0.014659809118835777,
+            "experimental": 0.050804677219036816,
+            "fold": 2,
+            "reference": 0.0654644863378726
+          },
+          {
+            "STUDYID": "SYNA-006",
+            "beats_reference": true,
+            "delta": -0.01305403125633893,
+            "experimental": 0.04562608150274668,
+            "fold": 3,
+            "reference": 0.05868011275908561
+          },
+          {
+            "STUDYID": "SYNA-007",
+            "beats_reference": true,
+            "delta": -0.0034896485892705956,
+            "experimental": 0.03569060553778494,
+            "fold": 1,
+            "reference": 0.03918025412705554
+          },
+          {
+            "STUDYID": "SYNA-008",
+            "beats_reference": true,
+            "delta": -0.005385980754779196,
+            "experimental": 0.033894351875898114,
+            "fold": 5,
+            "reference": 0.03928033263067731
+          },
+          {
+            "STUDYID": "SYNA-009",
+            "beats_reference": true,
+            "delta": -0.02147458763879955,
+            "experimental": 0.050993811547652666,
+            "fold": 3,
+            "reference": 0.07246839918645222
+          },
+          {
+            "STUDYID": "SYNA-010",
+            "beats_reference": true,
+            "delta": -0.0014301240725995423,
+            "experimental": 0.05065996328807922,
+            "fold": 4,
+            "reference": 0.052090087360678765
+          },
+          {
+            "STUDYID": "SYNA-011",
+            "beats_reference": true,
+            "delta": -0.004842438448841829,
+            "experimental": 0.04959912346518394,
+            "fold": 1,
+            "reference": 0.05444156191402577
+          },
+          {
+            "STUDYID": "SYNA-012",
+            "beats_reference": false,
+            "delta": 0.3790525003359263,
+            "experimental": 0.4185076230696683,
+            "fold": 4,
+            "reference": 0.039455122733742014
+          }
+        ]
+      },
+      "tft_pooled": {
+        "consistent_improvement": false,
+        "fold_rows": [
+          {
+            "beats_reference": false,
+            "delta": 0.0012015148234760797,
+            "experimental": 0.041397922538233024,
+            "fold": 0,
+            "reference": 0.040196407714756945
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.002400829923110706,
+            "experimental": 0.04441007809742994,
+            "fold": 1,
+            "reference": 0.046810908020540644
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.006722117499994726,
+            "experimental": 0.06241015268480125,
+            "fold": 2,
+            "reference": 0.05568803518480652
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.009108248949798864,
+            "experimental": 0.056466007022970055,
+            "fold": 3,
+            "reference": 0.06557425597276892
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.12390452501575164,
+            "experimental": 0.16967713006296203,
+            "fold": 4,
+            "reference": 0.04577260504721039
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.0026619496776224758,
+            "experimental": 0.04506857278456716,
+            "fold": 5,
+            "reference": 0.04240662310694469
+          }
+        ],
+        "metric": "mae_log",
+        "min_folds": 5,
+        "min_studies": 10,
+        "n_folds_beats_reference": 2,
+        "n_folds_compared": 6,
+        "n_studies_beats_reference": 6,
+        "n_studies_compared": 12,
+        "study_rows": [
+          {
+            "STUDYID": "SYNA-001",
+            "beats_reference": true,
+            "delta": -0.0014171440002936977,
+            "experimental": 0.03976428978530288,
+            "fold": 0,
+            "reference": 0.04118143378559658
+          },
+          {
+            "STUDYID": "SYNA-002",
+            "beats_reference": false,
+            "delta": 0.003776341915088341,
+            "experimental": 0.04930925549830042,
+            "fold": 5,
+            "reference": 0.04553291358321208
+          },
+          {
+            "STUDYID": "SYNA-003",
+            "beats_reference": false,
+            "delta": 0.003820173647245871,
+            "experimental": 0.043031555291163176,
+            "fold": 0,
+            "reference": 0.039211381643917305
+          },
+          {
+            "STUDYID": "SYNA-004",
+            "beats_reference": false,
+            "delta": 0.006804233091457633,
+            "experimental": 0.05271581712319808,
+            "fold": 2,
+            "reference": 0.04591158403174045
+          },
+          {
+            "STUDYID": "SYNA-005",
+            "beats_reference": false,
+            "delta": 0.006640001908531826,
+            "experimental": 0.07210448824640442,
+            "fold": 2,
+            "reference": 0.0654644863378726
+          },
+          {
+            "STUDYID": "SYNA-006",
+            "beats_reference": true,
+            "delta": -0.005877300913240444,
+            "experimental": 0.05280281184584517,
+            "fold": 3,
+            "reference": 0.05868011275908561
+          },
+          {
+            "STUDYID": "SYNA-007",
+            "beats_reference": true,
+            "delta": -0.003953853755309544,
+            "experimental": 0.03522640037174599,
+            "fold": 1,
+            "reference": 0.03918025412705554
+          },
+          {
+            "STUDYID": "SYNA-008",
+            "beats_reference": false,
+            "delta": 0.0015475574401566106,
+            "experimental": 0.04082789007083392,
+            "fold": 5,
+            "reference": 0.03928033263067731
+          },
+          {
+            "STUDYID": "SYNA-009",
+            "beats_reference": true,
+            "delta": -0.012339196986357263,
+            "experimental": 0.060129202200094954,
+            "fold": 3,
+            "reference": 0.07246839918645222
+          },
+          {
+            "STUDYID": "SYNA-010",
+            "beats_reference": true,
+            "delta": -0.0016616810948845567,
+            "experimental": 0.05042840626579421,
+            "fold": 4,
+            "reference": 0.052090087360678765
+          },
+          {
+            "STUDYID": "SYNA-011",
+            "beats_reference": true,
+            "delta": -0.0008478060909118748,
+            "experimental": 0.053593755823113896,
+            "fold": 1,
+            "reference": 0.05444156191402577
+          },
+          {
+            "STUDYID": "SYNA-012",
+            "beats_reference": false,
+            "delta": 0.2494707311263878,
+            "experimental": 0.2889258538601298,
+            "fold": 4,
+            "reference": 0.039455122733742014
+          }
+        ]
+      },
+      "tft_target_only_cqr": {
+        "consistent_improvement": false,
+        "fold_rows": [
+          {
+            "beats_reference": false,
+            "delta": 1.3877787807814457e-17,
+            "experimental": 0.04019640771475696,
+            "fold": 0,
+            "reference": 0.040196407714756945
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.0,
+            "experimental": 0.046810908020540644,
+            "fold": 1,
+            "reference": 0.046810908020540644
+          },
+          {
+            "beats_reference": false,
+            "delta": 2.7755575615628914e-17,
+            "experimental": 0.05568803518480655,
+            "fold": 2,
+            "reference": 0.05568803518480652
+          },
+          {
+            "beats_reference": true,
+            "delta": -4.163336342344337e-17,
+            "experimental": 0.06557425597276888,
+            "fold": 3,
+            "reference": 0.06557425597276892
+          },
+          {
+            "beats_reference": false,
+            "delta": 6.938893903907228e-18,
+            "experimental": 0.045772605047210396,
+            "fold": 4,
+            "reference": 0.04577260504721039
+          },
+          {
+            "beats_reference": false,
+            "delta": 2.0816681711721685e-17,
+            "experimental": 0.04240662310694471,
+            "fold": 5,
+            "reference": 0.04240662310694469
+          }
+        ],
+        "metric": "mae_log",
+        "min_folds": 5,
+        "min_studies": 10,
+        "n_folds_beats_reference": 1,
+        "n_folds_compared": 6,
+        "n_studies_beats_reference": 3,
+        "n_studies_compared": 12,
+        "study_rows": [
+          {
+            "STUDYID": "SYNA-001",
+            "beats_reference": false,
+            "delta": 2.7755575615628914e-17,
+            "experimental": 0.041181433785596605,
+            "fold": 0,
+            "reference": 0.04118143378559658
+          },
+          {
+            "STUDYID": "SYNA-002",
+            "beats_reference": false,
+            "delta": 1.3877787807814457e-17,
+            "experimental": 0.04553291358321209,
+            "fold": 5,
+            "reference": 0.04553291358321208
+          },
+          {
+            "STUDYID": "SYNA-003",
+            "beats_reference": false,
+            "delta": 1.3877787807814457e-17,
+            "experimental": 0.03921138164391732,
+            "fold": 0,
+            "reference": 0.039211381643917305
+          },
+          {
+            "STUDYID": "SYNA-004",
+            "beats_reference": false,
+            "delta": 6.938893903907228e-18,
+            "experimental": 0.045911584031740456,
+            "fold": 2,
+            "reference": 0.04591158403174045
+          },
+          {
+            "STUDYID": "SYNA-005",
+            "beats_reference": false,
+            "delta": 2.7755575615628914e-17,
+            "experimental": 0.06546448633787262,
+            "fold": 2,
+            "reference": 0.0654644863378726
+          },
+          {
+            "STUDYID": "SYNA-006",
+            "beats_reference": true,
+            "delta": -4.163336342344337e-17,
+            "experimental": 0.05868011275908557,
+            "fold": 3,
+            "reference": 0.05868011275908561
+          },
+          {
+            "STUDYID": "SYNA-007",
+            "beats_reference": false,
+            "delta": 6.938893903907228e-18,
+            "experimental": 0.039180254127055544,
+            "fold": 1,
+            "reference": 0.03918025412705554
+          },
+          {
+            "STUDYID": "SYNA-008",
+            "beats_reference": false,
+            "delta": 1.3877787807814457e-17,
+            "experimental": 0.039280332630677324,
+            "fold": 5,
+            "reference": 0.03928033263067731
+          },
+          {
+            "STUDYID": "SYNA-009",
+            "beats_reference": true,
+            "delta": -5.551115123125783e-17,
+            "experimental": 0.07246839918645216,
+            "fold": 3,
+            "reference": 0.07246839918645222
+          },
+          {
+            "STUDYID": "SYNA-010",
+            "beats_reference": false,
+            "delta": 6.938893903907228e-18,
+            "experimental": 0.05209008736067877,
+            "fold": 4,
+            "reference": 0.052090087360678765
+          },
+          {
+            "STUDYID": "SYNA-011",
+            "beats_reference": true,
+            "delta": -3.469446951953614e-17,
+            "experimental": 0.054441561914025736,
+            "fold": 1,
+            "reference": 0.05444156191402577
+          },
+          {
+            "STUDYID": "SYNA-012",
+            "beats_reference": false,
+            "delta": 1.3877787807814457e-17,
+            "experimental": 0.03945512273374203,
+            "fold": 4,
+            "reference": 0.039455122733742014
+          }
+        ]
+      }
+    }
+  }
+}

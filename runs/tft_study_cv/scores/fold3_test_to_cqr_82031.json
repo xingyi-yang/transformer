@@ -1,0 +1,66 @@
+{
+  "cqr": {
+    "coverage80": 0.5776754890678941,
+    "crossing": 0.0,
+    "interval_score80": 0.2855629272116259,
+    "interval_width80": 0.13671326495485764,
+    "mae_log": 0.06946435179074781,
+    "mean_quantile_loss": 0.023199126442436685,
+    "mean_quantile_loss_name": "pinball_on_cqr_shifted_endpoints",
+    "n_scored": 134,
+    "per_study": [
+      {
+        "STUDYID": "SYNA-006",
+        "coverage80": 0.6363636363636364,
+        "interval_width80": 0.13705492108333162,
+        "mae_log": 0.06098644981918898,
+        "mean_quantile_loss": 0.020297760329081538,
+        "n_obs": 55,
+        "rmse_log": 0.07291685842223701
+      },
+      {
+        "STUDYID": "SYNA-009",
+        "coverage80": 0.5189873417721519,
+        "interval_width80": 0.1363716088263836,
+        "mae_log": 0.07794225376230664,
+        "mean_quantile_loss": 0.02610049255579184,
+        "n_obs": 79,
+        "rmse_log": 0.08800886214609209
+      }
+    ],
+    "q0_5_unchanged": true,
+    "status": "ok"
+  },
+  "margin": 0.0006461668113635355,
+  "pinball_note": "Raw pinball is the mean QuantileLoss on the original head. CQR pinball uses the shifted 10% and 90% endpoints and is not the training objective. Report both; do not treat CQR pinball as an improvement of the TFT quantile fit.",
+  "raw": {
+    "coverage80": 0.5776754890678941,
+    "crossing": 0.0,
+    "interval_score80": 0.28699951441479543,
+    "interval_width80": 0.13542093133213054,
+    "mae_log": 0.06946435179074781,
+    "mean_quantile_loss": 0.023227858186500076,
+    "n_scored": 134,
+    "per_study": [
+      {
+        "STUDYID": "SYNA-006",
+        "coverage80": 0.6363636363636364,
+        "interval_width80": 0.13576258746060454,
+        "mae_log": 0.06098644981918898,
+        "mean_quantile_loss": 0.020318907606544347,
+        "n_obs": 55,
+        "rmse_log": 0.07291685842223701
+      },
+      {
+        "STUDYID": "SYNA-009",
+        "coverage80": 0.5189873417721519,
+        "interval_width80": 0.13507927520365653,
+        "mae_log": 0.07794225376230664,
+        "mean_quantile_loss": 0.026136808766455816,
+        "n_obs": 79,
+        "rmse_log": 0.08800886214609209
+      }
+    ],
+    "status": "ok"
+  }
+}

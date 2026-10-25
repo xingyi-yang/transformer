@@ -1,0 +1,167 @@
+{
+  "confirm_34011": {
+    "do_not_call_untouched": true,
+    "forbidden_holdouts_in_train": [
+      "SYNA-007",
+      "SYNA-010",
+      "SYNA-011"
+    ],
+    "official_checkpoints": "Official TFT checkpoints were trained on official train (including SYNA-003/004). Confirm 34011 models were fit fresh and did not load those weights. Confirm pooled/fine-tune train sets still contained SYNA-007/010/011.",
+    "previous_finetune_default": "PR #22 selected tft_finetune on official validation interval score. That default failed confirmation: target-only was better and more stable on 34011 test studies. Fine-tune and CQR stay experimental.",
+    "previously_reported_in_validation": [
+      "SYNA-005"
+    ],
+    "roles": {
+      "SYNA-001": [
+        "official_compound_holdout",
+        "confirm_34011_validation"
+      ],
+      "SYNA-002": [
+        "official_train",
+        "confirm_34011_train"
+      ],
+      "SYNA-003": [
+        "official_train",
+        "confirm_34011_test"
+      ],
+      "SYNA-004": [
+        "official_train",
+        "extra_33001_validation",
+        "confirm_34011_test"
+      ],
+      "SYNA-005": [
+        "official_validation",
+        "confirm_34011_validation"
+      ],
+      "SYNA-006": [
+        "official_train",
+        "confirm_34011_train"
+      ],
+      "SYNA-007": [
+        "official_train",
+        "extra_33001_test",
+        "confirm_34011_train"
+      ],
+      "SYNA-008": [
+        "official_compound_holdout",
+        "confirm_34011_train"
+      ],
+      "SYNA-009": [
+        "official_train",
+        "confirm_34011_train"
+      ],
+      "SYNA-010": [
+        "official_test",
+        "extra_33001_test",
+        "confirm_34011_train"
+      ],
+      "SYNA-011": [
+        "official_test",
+        "confirm_34011_train"
+      ],
+      "SYNA-012": [
+        "official_validation",
+        "extra_33001_validation",
+        "confirm_34011_train"
+      ]
+    },
+    "splits": {
+      "test": [
+        "SYNA-003",
+        "SYNA-004"
+      ],
+      "train": [
+        "SYNA-002",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-010",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "validation": [
+        "SYNA-001",
+        "SYNA-005"
+      ]
+    },
+    "status": "erratum",
+    "supported_claim": "SYNA-003 and SYNA-004 had not been reported as test studies before. They were official training studies. Confirmation *test* therefore used new test labels, but confirmation training and validation were not holdout-free.",
+    "unsupported_claim": "Confirmation 34011 was an untouched study holdout. Previously reported test studies were excluded from the confirmation experiment."
+  },
+  "cqr_metric_policy": {
+    "calibration_data": "separate calibration split; not validation, not test",
+    "experimental": true,
+    "mean_quantile_loss_on_calibrated": "Average pinball over 0.1/0.25/0.5/0.75/0.9 after the shift. That is not the training QuantileLoss and is not comparable to raw pinball as a proper score for the original quantile head.",
+    "q0_1_q0_9": "shifted by \u00b1margin; interval score, coverage, and width use these",
+    "q0_5": "unchanged; MAE and median pinball match the raw table",
+    "report": "raw_* from original quantiles; cqr_* from calibrated endpoints"
+  },
+  "development_reference": "tft_target_only",
+  "epoch_counting": {
+    "epochs_completed": 16,
+    "epochs_run_legacy_plus_one": 17,
+    "finetune_max_epochs_budget": 8,
+    "lightning_current_epoch": 16,
+    "max_epochs_budget": 16,
+    "note": "epochs_completed counts callback rows that logged train_loss. Legacy epochs_run was lightning current_epoch + 1.",
+    "official_example": {
+      "budget": 16,
+      "finetune_budget": 8,
+      "lightning_current_epoch_after_fit": 16,
+      "logged_train_epochs": "0..15 (16 steps)",
+      "stored_epochs_run": 17,
+      "stored_finetune_epochs_run": 9
+    },
+    "trained_epoch_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "experimental": [
+    "tft_pooled",
+    "tft_finetune",
+    "tft_target_only_cqr"
+  ],
+  "official_series_counts": {
+    "dropped": [
+      {
+        "STUDYID": "SYNA-004",
+        "USUBJID": "SYNA-004-0029",
+        "n_obs": 1
+      },
+      {
+        "STUDYID": "SYNA-009",
+        "USUBJID": "SYNA-009-0031",
+        "n_obs": 1
+      },
+      {
+        "STUDYID": "SYNA-009",
+        "USUBJID": "SYNA-009-0035",
+        "n_obs": 1
+      }
+    ],
+    "min_encoder_length": 1,
+    "min_visits_required": 2,
+    "n_animals_in_split": 214,
+    "n_dropped_short_series": 3,
+    "n_tft_series": 211,
+    "note": "n_animals_in_split counts unique USUBJID on the split. n_tft_series counts animals with at least min_encoder_length+1 observed visits, the TimeSeriesDataSet filter. Official train is 214 animals / 211 series because three animals have a single DAY=7 visit."
+  },
+  "pinball_note": "Raw pinball is the mean QuantileLoss on the original head. CQR pinball uses the shifted 10% and 90% endpoints and is not the training objective. Report both; do not treat CQR pinball as an improvement of the TFT quantile fit.",
+  "previous_finetune_default_failed_confirmation": true
+}
