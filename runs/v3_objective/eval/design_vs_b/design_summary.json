@@ -1,0 +1,47 @@
+{
+  "labels": [
+    "no candidate met all prespecified criteria under any proposing model; this is a valid outcome, not a failure"
+  ],
+  "monte_carlo_nonconclusive": true,
+  "oracle_contrast_pct_at_T": {
+    "high": -0.77,
+    "low": -0.25
+  },
+  "proposals": {
+    "spline": {
+      "effect_shapes": {
+        "high": {
+          "7.0": -0.117,
+          "14.0": -0.337,
+          "21.0": -0.593,
+          "28.0": 1.0
+        },
+        "low": {
+          "7.0": 0.075,
+          "14.0": 0.061,
+          "21.0": 0.002,
+          "28.0": 1.0
+        }
+      },
+      "finalists": [],
+      "n_candidates": 4,
+      "n_feasible": 0,
+      "predicted_contrast_pct_at_T": {
+        "high": 2.27,
+        "low": 1.66
+      },
+      "seconds": 1.0967493057250977,
+      "shape_notes": [],
+      "status": "no_feasible_design",
+      "unreliable_bayesian": false
+    }
+  },
+  "replicates_final": null,
+  "replicates_proposal": 80,
+  "status": "no_feasible_design",
+  "validation": {
+    "problems": [],
+    "status": "supported",
+    "warnings": []
+  }
+}

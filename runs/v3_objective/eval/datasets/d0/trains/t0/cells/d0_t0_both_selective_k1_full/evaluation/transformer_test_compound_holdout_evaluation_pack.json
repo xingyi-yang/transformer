@@ -1,0 +1,116 @@
+{
+  "contrast": {
+    "bias": -0.011302446717151537,
+    "coverage90": 1.0,
+    "n_contrasts": 4,
+    "study_level": {
+      "bias_study_mean": -0.011302446717151537,
+      "n_studies_with_contrast": 1,
+      "rmse_study_mean": 0.021752768303603166
+    },
+    "width90": 0.10212181703768783
+  },
+  "denominators": {
+    "contrast_bias_study_balanced": -0.011302446717151537,
+    "contrast_bias_weighting": "contrast_row_mean",
+    "contrast_day": 28.0,
+    "coverage_levels": {
+      "contrast": 0.9,
+      "group_mean": 0.9,
+      "individual": [
+        0.8,
+        0.95
+      ]
+    },
+    "n_animals": 38,
+    "n_contrasts": 4,
+    "n_extrema": 38,
+    "n_gap_pairs": 6,
+    "n_group_mean_cells": 48,
+    "n_increments": 38,
+    "n_obs": 145,
+    "n_studies": 1,
+    "n_studies_with_contrast": 1,
+    "rmse_crps_weighting": "study_balanced"
+  },
+  "group_mean": {
+    "between_animal_var_ratio_pred_over_obs": 1.425363478517835,
+    "coverage90": 0.8333333333333334
+  },
+  "individual": {
+    "coverage80": 0.7655172413793103,
+    "coverage95": 0.8689655172413793,
+    "crps_study_balanced": 0.031145451359154062,
+    "effective_sample_sizes": {
+      "n_animals": 38,
+      "n_obs": 145,
+      "n_studies": 1
+    },
+    "rmse_log_study_balanced": 0.053666004893984,
+    "width80_log": 0.13116090733268904,
+    "width95_log": 0.18834253568621254
+  },
+  "model": "transformer",
+  "note": "Coverage and widths are predictive-interval diagnostics under the fitted layer. They are not a complete parameter-uncertainty statement except when a reliable Bayesian posterior is counted separately. RMSE/CRPS use study-balanced means. Contrast bias in transfer is the contrast-row mean; study-balanced contrast bias is reported in denominators.",
+  "split": "test_compound_holdout",
+  "status": "completed",
+  "task": "predose_conditioned",
+  "temporal": {
+    "correlation_by_gap": [
+      {
+        "corr_obs": 0.8873105091149442,
+        "corr_pred": 0.9285317404025856,
+        "gap_bin": "(4,8]",
+        "n_pairs": 3
+      },
+      {
+        "corr_obs": 0.8100756439635155,
+        "corr_pred": 0.8656258762087853,
+        "gap_bin": "(8,15]",
+        "n_pairs": 2
+      },
+      {
+        "corr_obs": 0.7231178278830234,
+        "corr_pred": 0.7723974336232937,
+        "gap_bin": "(15,100]",
+        "n_pairs": 1
+      }
+    ],
+    "distributional": {
+      "cov80": 0.7655172413793103,
+      "cov95": 0.8689655172413793,
+      "crps_log_study_balanced": 0.031145451359154062,
+      "energy_score_mean": 0.06712933403939765,
+      "pit_histogram_10bins": [
+        4,
+        17,
+        19,
+        9,
+        13,
+        17,
+        20,
+        11,
+        13,
+        22
+      ]
+    },
+    "extrema_max_cov90": 0.9473684210526315,
+    "increment_sd_ratio_pred_over_obs": 1.2425707402060069,
+    "pit_histogram_10bins": [
+      4,
+      17,
+      19,
+      9,
+      13,
+      17,
+      20,
+      11,
+      13,
+      22
+    ]
+  },
+  "uncertainty_limitations": {
+    "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+    "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+  }
+}

@@ -1,0 +1,479 @@
+INFO [generate] 13 synthetic studies -> runs/v3_objective/development/datasets/d0/banks/matched/synthetic
+INFO [ingest] 3343 weights, 412 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash d27b6e757a1dfae5)
+INFO [train] spline done in 1.4s
+INFO [train] transformer done in 1.3s
+INFO bayesian: dropping 5 non-identifiable design column(s) [30, 31, 32, 33, 38]
+NUTS[nutpie]: [theta, sd_s, sd_a, z_s, z_a, sigma_p, ell]
+Sampling: [ell, sd_a, sd_s, sigma_p, theta, y, z_a, z_s]
+Sampling: [y]
+INFO bayesian[main] 16s rhat_max=1.006 ess_bulk_min=635 divergences=0
+INFO [train] bayesian done in 17.2s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [evaluate] bayesian/test in 0.1s
+INFO [evaluate] bayesian/test_compound_holdout in 0.0s
+INFO [generate] 13 synthetic studies -> runs/v3_objective/eval/datasets/d0/banks/matched/synthetic
+INFO [generate] 13 synthetic studies -> runs/v3_objective/eval/datasets/d0/banks/growth_shift/synthetic
+INFO [generate] 13 synthetic studies -> runs/v3_objective/eval/datasets/d0/banks/both/synthetic
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 574fc8aac0a1314b)
+INFO [train] spline done in 0.6s
+INFO [train] transformer done in 0.7s
+INFO bayesian: dropping 1 non-identifiable design column(s) [38]
+NUTS[nutpie]: [theta, sd_s, sd_a, z_s, z_a, sigma_p, ell]
+Sampling: [ell, sd_a, sd_s, sigma_p, theta, y, z_a, z_s]
+Sampling: [y]
+INFO bayesian[main] 13s rhat_max=1.008 ess_bulk_min=352 divergences=0
+INFO [train] bayesian done in 13.4s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [evaluate] bayesian/test in 0.1s
+INFO [evaluate] bayesian/test_compound_holdout in 0.0s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 4, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash e7358330d32bf5ff)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 2d8f06368102450c)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 1a62c700b68d635e)
+INFO [train] spline done in 0.6s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 2d8f06368102450c)
+INFO [train] spline done in 0.6s
+/workspace/src/send_bw/models/transformer.py:201: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:213.)
+  c1 = {g: v[tgt_mask] for g, v in c.items()}
+INFO [train] transformer done in 1.0s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 1a62c700b68d635e)
+INFO [train] spline done in 0.6s
+INFO [train] transformer done in 0.9s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 574fc8aac0a1314b)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 4, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash e7358330d32bf5ff)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 2d8f06368102450c)
+INFO [train] spline done in 0.6s
+INFO [train] transformer done in 0.9s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 1a62c700b68d635e)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 2d8f06368102450c)
+INFO [train] spline done in 0.7s
+INFO [train] transformer done in 1.0s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 1a62c700b68d635e)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.9s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 574fc8aac0a1314b)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 4, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash e7358330d32bf5ff)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.3s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 2d8f06368102450c)
+INFO [train] spline done in 0.7s
+INFO [train] transformer done in 0.9s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 1a62c700b68d635e)
+INFO [train] spline done in 0.6s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 2d8f06368102450c)
+INFO [train] spline done in 0.6s
+INFO [train] transformer done in 1.0s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3818 weights, 504 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 1a62c700b68d635e)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.9s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [generate] 13 synthetic studies -> runs/v3_objective/eval/datasets/d1/banks/matched/synthetic
+INFO [generate] 13 synthetic studies -> runs/v3_objective/eval/datasets/d1/banks/growth_shift/synthetic
+INFO [generate] 13 synthetic studies -> runs/v3_objective/eval/datasets/d1/banks/both/synthetic
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 764ca65862024502)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 4, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 114b91ef37cf3eb0)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.6s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 6145f89b439bc0e4)
+INFO [train] spline done in 0.6s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 5fe961cd0210829a)
+INFO [train] spline done in 0.7s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 6145f89b439bc0e4)
+INFO [train] spline done in 0.6s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 5fe961cd0210829a)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 764ca65862024502)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.6s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 4, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 114b91ef37cf3eb0)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.6s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 6145f89b439bc0e4)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 5fe961cd0210829a)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 6145f89b439bc0e4)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 5fe961cd0210829a)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 764ca65862024502)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 4, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 114b91ef37cf3eb0)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.6s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 6145f89b439bc0e4)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 5fe961cd0210829a)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 6145f89b439bc0e4)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3954 weights, 452 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 5fe961cd0210829a)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.2s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [generate] 13 synthetic studies -> runs/v3_objective/eval/datasets/d2/banks/matched/synthetic
+INFO [generate] 13 synthetic studies -> runs/v3_objective/eval/datasets/d2/banks/growth_shift/synthetic
+INFO [generate] 13 synthetic studies -> runs/v3_objective/eval/datasets/d2/banks/both/synthetic
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 764ca65862024502)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.6s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 4, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 114b91ef37cf3eb0)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.5s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 6145f89b439bc0e4)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 5fe961cd0210829a)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.6s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 6145f89b439bc0e4)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 5fe961cd0210829a)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 764ca65862024502)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 4, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 114b91ef37cf3eb0)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.5s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 6145f89b439bc0e4)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 5fe961cd0210829a)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 6145f89b439bc0e4)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.8s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 5fe961cd0210829a)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 764ca65862024502)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.6s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 4, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 114b91ef37cf3eb0)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.5s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 6145f89b439bc0e4)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 5fe961cd0210829a)
+INFO [train] spline done in 0.5s
+INFO [train] transformer done in 0.6s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.2s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 6, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 6145f89b439bc0e4)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.9s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [ingest] 3332 weights, 414 animals, 0 quarantined/flagged records
+INFO [prepare] splits {'train': 5, 'test': 2, 'validation': 2, 'test_compound_holdout': 1} (frozen hash 5fe961cd0210829a)
+INFO [train] spline done in 0.4s
+INFO [train] transformer done in 0.7s
+INFO [evaluate] spline/test in 0.1s
+INFO [evaluate] spline/test_compound_holdout in 0.1s
+INFO [evaluate] transformer/test in 0.2s
+INFO [evaluate] transformer/test_compound_holdout in 0.1s
+INFO [design] proposal spline: 0/4 feasible (1s); finalists []
+{
+  "status": "ok",
+  "retuned_after_test": false,
+  "distributional_pass": true,
+  "n_cells": 54,
+  "design": "no_feasible_design",
+  "real_data_accessed": false,
+  "parent": "runs/v3_objective"
+}
+EXIT:0

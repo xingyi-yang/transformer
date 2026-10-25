@@ -1,0 +1,241 @@
+{
+  "identifiable_mean": true,
+  "main": {
+    "chains": 2,
+    "divergences": 0,
+    "draws": 2000,
+    "dropped_low_variance_columns": [
+      38
+    ],
+    "dropped_nonidentifiable_columns": [
+      38
+    ],
+    "ess_bulk_min": 351.54876971667767,
+    "ess_tail_min": 278.05345570030914,
+    "family_diagnostics": {
+      "beta": {
+        "ess_bulk_min": 731.0038662012782,
+        "ess_tail_min": 1464.2268193063078,
+        "n": 38,
+        "rhat_max": 1.0036695967883724
+      },
+      "ell": {
+        "ess_bulk_min": 890.4463211734555,
+        "ess_tail_min": 1640.803434589231,
+        "n": 1,
+        "rhat_max": 1.002497802424954
+      },
+      "sd_a": {
+        "ess_bulk_min": 744.9704181024417,
+        "ess_tail_min": 1232.3337266899414,
+        "n": 2,
+        "rhat_max": 1.0035363138059694
+      },
+      "sd_s": {
+        "ess_bulk_min": 351.54876971667767,
+        "ess_tail_min": 278.05345570030914,
+        "n": 2,
+        "rhat_max": 1.0083914045957103
+      },
+      "sigma_p": {
+        "ess_bulk_min": 816.9868340102989,
+        "ess_tail_min": 1524.7068628998466,
+        "n": 1,
+        "rhat_max": 1.0012393641993884
+      },
+      "theta": {
+        "ess_bulk_min": 615.5741760313006,
+        "ess_tail_min": 1138.646078171597,
+        "n": 38,
+        "rhat_max": 1.0042915735385376
+      }
+    },
+    "identifiable_mean": true,
+    "likelihood": "normal",
+    "maxdepth_hits": 0,
+    "posterior_predictive": {
+      "by_time_bin": {
+        "15-21": {
+          "p_mean": 0.503,
+          "p_sd": 0.63475
+        },
+        "22-28": {
+          "p_mean": 0.46525,
+          "p_sd": 0.45025
+        },
+        "8-14": {
+          "p_mean": 0.47425,
+          "p_sd": 0.4635
+        },
+        "<=7": {
+          "p_mean": 0.4095,
+          "p_sd": 0.78375
+        }
+      },
+      "extreme_bins": [],
+      "note": "one-step conditional replicates (likelihood factorization); full-trajectory new-study checks are in the held-out evaluation"
+    },
+    "posterior_summary": {
+      "ell": 5.282504849778754,
+      "sd_a": [
+        0.06825747543759306,
+        0.4370177741218251
+      ],
+      "sd_a_scaled_logw": [
+        0.00837730552623276,
+        0.053635611202174326
+      ],
+      "sd_s": [
+        0.0982342627305797,
+        0.28063558376309816
+      ],
+      "sd_s_scaled_logw": [
+        0.012056385425369097,
+        0.03444267476410874
+      ],
+      "sigma_p": 0.21693294661505774,
+      "sigma_p_scaled_logw": 0.026624388916373358
+    },
+    "prior_predictive": {
+      "grams_last_obs_q025_q50_q975": [
+        118.68825043974675,
+        248.30572127777015,
+        557.3161542941397
+      ],
+      "note": "weakly informative: prior predictive should cover, not match, observed changes",
+      "observed_pct_change_q025_q50_q975": [
+        8.335346638655496,
+        34.56392306984084,
+        64.20852059925097
+      ],
+      "pct_change_last_obs_q025_q50_q975": [
+        -42.256602433354836,
+        12.2818355426929,
+        123.17324932024579
+      ],
+      "plausible": true
+    },
+    "priors": {
+      "m_ell": 1.9459101490553132,
+      "s_beta": 0.35,
+      "s_ell": 0.75,
+      "s_sd": 0.3,
+      "s_sigma": 0.3
+    },
+    "random_effects": "full",
+    "reliable": false,
+    "rhat_max": 1.0083914045957103,
+    "sampler_warnings": [],
+    "sampling_diagnosis": {
+      "chains": 2,
+      "counted_as_successful_benchmark": false,
+      "divergences": 0,
+      "draws": 2000,
+      "dropped_nonidentifiable_columns": [
+        38
+      ],
+      "ess_bulk_min": 351.54876971667767,
+      "ess_tail_min": 278.05345570030914,
+      "failure_class": "covariance_mixing",
+      "family_diagnostics": {
+        "beta": {
+          "ess_bulk_min": 731.0038662012782,
+          "ess_tail_min": 1464.2268193063078,
+          "n": 38,
+          "rhat_max": 1.0036695967883724
+        },
+        "ell": {
+          "ess_bulk_min": 890.4463211734555,
+          "ess_tail_min": 1640.803434589231,
+          "n": 1,
+          "rhat_max": 1.002497802424954
+        },
+        "sd_a": {
+          "ess_bulk_min": 744.9704181024417,
+          "ess_tail_min": 1232.3337266899414,
+          "n": 2,
+          "rhat_max": 1.0035363138059694
+        },
+        "sd_s": {
+          "ess_bulk_min": 351.54876971667767,
+          "ess_tail_min": 278.05345570030914,
+          "n": 2,
+          "rhat_max": 1.0083914045957103
+        },
+        "sigma_p": {
+          "ess_bulk_min": 816.9868340102989,
+          "ess_tail_min": 1524.7068628998466,
+          "n": 1,
+          "rhat_max": 1.0012393641993884
+        },
+        "theta": {
+          "ess_bulk_min": 615.5741760313006,
+          "ess_tail_min": 1138.646078171597,
+          "n": 38,
+          "rhat_max": 1.0042915735385376
+        }
+      },
+      "n_posterior_draws": 4000,
+      "note": "Reliability thresholds are unchanged (rhat<=1.01, ESS>=400, divergences==0). Compile/backend failures are classified separately from sampling.",
+      "priors": {
+        "m_ell": 1.9459101490553132,
+        "s_beta": 0.35,
+        "s_ell": 0.75,
+        "s_sd": 0.3,
+        "s_sigma": 0.3
+      },
+      "reliable": false,
+      "rhat_max": 1.0083914045957103,
+      "thresholds": {
+        "ess_bulk_min": 400,
+        "ess_tail_min": 400,
+        "rhat_max": 1.01
+      },
+      "tune": 2000,
+      "worst_ess_params": {
+        "sd_s[1]": 351.54876971667767,
+        "theta[16]": 615.5741760313006,
+        "theta[27]": 627.1517031645395,
+        "theta[29]": 648.0334227945958,
+        "theta[32]": 647.8596759120875
+      },
+      "worst_rhat_params": {
+        "beta[29]": 1.0036695967883724,
+        "sd_a[0]": 1.0035363138059694,
+        "sd_s[1]": 1.0083914045957103,
+        "theta[31]": 1.0042915735385376,
+        "theta[32]": 1.0037565395482047
+      }
+    },
+    "seconds": 12.979566097259521,
+    "seed": 61001,
+    "thresholds": {
+      "ess_bulk_min": 400,
+      "ess_tail_min": 400,
+      "rhat_max": 1.01
+    },
+    "tune": 2000,
+    "worst_ess_params": {
+      "sd_s[1]": 351.54876971667767,
+      "theta[16]": 615.5741760313006,
+      "theta[27]": 627.1517031645395,
+      "theta[29]": 648.0334227945958,
+      "theta[32]": 647.8596759120875
+    },
+    "worst_rhat_params": {
+      "beta[29]": 1.0036695967883724,
+      "sd_a[0]": 1.0035363138059694,
+      "sd_s[1]": 1.0083914045957103,
+      "theta[31]": 1.0042915735385376,
+      "theta[32]": 1.0037565395482047
+    }
+  },
+  "n_animals": 40,
+  "n_beta": 38,
+  "n_obs": 221,
+  "n_studies": 5,
+  "reliable": false,
+  "s_y": 0.12273096056551379,
+  "sharing": "context_specific",
+  "species_treatment": false
+}

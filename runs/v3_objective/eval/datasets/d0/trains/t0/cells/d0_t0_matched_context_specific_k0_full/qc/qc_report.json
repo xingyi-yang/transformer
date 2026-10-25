@@ -1,0 +1,33 @@
+{
+  "checks": {
+    "all_obs_have_animal": true,
+    "arm_keys_resolved": true,
+    "finite_log_weights": true,
+    "n_quarantined_hard": 0,
+    "n_quarantined_soft": 0,
+    "one_baseline_per_animal_max": true,
+    "passed": true,
+    "positive_weights": true,
+    "sex_values": [
+      "F",
+      "M"
+    ],
+    "unique_animal_keys": true,
+    "unique_obs_keys": true
+  },
+  "donor_studyids_selected": [],
+  "exclusion_counts": {
+    "species_out_of_scope": 126
+  },
+  "limitations": [
+    "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+    "28 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+  ],
+  "n_donor_studies_requested": 0,
+  "n_donor_studies_selected": 0,
+  "n_eligible_animals": 378,
+  "n_model_obs": 1863,
+  "n_target_eligible_animals": 378,
+  "sharing": "context_specific",
+  "sparse_target_train": null
+}

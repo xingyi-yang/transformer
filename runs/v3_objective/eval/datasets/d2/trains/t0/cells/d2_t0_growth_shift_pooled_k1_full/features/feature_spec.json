@@ -1,0 +1,90 @@
+{
+  "animal_cols": [
+    "SEX_M",
+    "ZB_C",
+    "IS_CONTROL",
+    "LD",
+    "INV_INTERVAL",
+    "START",
+    "END",
+    "D1",
+    "D2",
+    "D3",
+    "STRAIN_SPRAGUE-DAWLEY",
+    "STRAIN_WISTAR HAN",
+    "ROUTE_ORAL GAVAGE",
+    "SPECIES_RAT"
+  ],
+  "compound_ids": [
+    "CMP01",
+    "CMP02",
+    "CMP04",
+    "CMP06"
+  ],
+  "declared_species": [
+    "RAT",
+    "DOG"
+  ],
+  "descriptor_ranges": {
+    "D1": [
+      -1.5832,
+      1.5667
+    ],
+    "D2": [
+      -0.9253,
+      0.1014
+    ],
+    "D3": [
+      -1.6966,
+      1.016
+    ]
+  },
+  "fixed_schema": false,
+  "intervals": [
+    1.0,
+    7.0
+  ],
+  "max_day": 28.0,
+  "max_dose": 1000.0,
+  "routes": [
+    "INTRAVENOUS",
+    "ORAL GAVAGE"
+  ],
+  "sexes": [
+    "F",
+    "M"
+  ],
+  "sharing": "pooled",
+  "species": "RAT",
+  "species_levels": [
+    "DOG",
+    "RAT"
+  ],
+  "strains": [
+    "BEAGLE",
+    "SPRAGUE-DAWLEY",
+    "WISTAR HAN"
+  ],
+  "t_ref": 28.0,
+  "time_cols": [
+    "TAU",
+    "EXPO",
+    "OFF",
+    "LCUM"
+  ],
+  "version": "features-v1",
+  "zb_mean": {
+    "F": 5.299993762675149,
+    "M": 5.586210052394229
+  },
+  "zb_mean_by_species": {
+    "DOG": {
+      "F": 9.176855876455518,
+      "M": 9.381056353094026
+    },
+    "RAT": {
+      "F": 5.299993762675149,
+      "M": 5.586210052394229
+    }
+  }
+}

@@ -131,20 +131,37 @@ class BayesianModel(ResponseModel):
         F = train.spec.observation_features(train.obs, train.animals, train.compound_ref)
         sharing = getattr(train.spec, "sharing", "context_specific")
         regularized = sharing == "selective_regularized"
+        identifiable = bool(config.get("identifiable_mean"))
         self.design = MeanDesign.from_features(F, config.get("n_time_knots", 3), config.get("n_expo_knots", 2),
                                                rich=False, species_treatment=regularized)
+        if identifiable:
+            # Development identifiability: drop strain×time when few studies identify them.
+            n_train_studies = len(train.studies)
+            if n_train_studies < int(config.get("strain_time_min_studies", 10)):
+                self.design.strain_cols = []
         obs, X, s_idx, a_idx, n_s, n_a, prev, dt, first = self._arrays(train, fit_scale=True)
         from scipy.linalg import qr as pivoted_qr
 
         p_full = X.shape[1]
+        col_sd = X.std(0)
+        keep_var = np.where(col_sd > 1e-10)[0] if identifiable else np.arange(p_full)
+        if identifiable and keep_var.size < p_full:
+            X = X[:, keep_var]
+            var_map = keep_var
+            self._dropped_lowvar = [int(j) for j in np.setdiff1d(np.arange(p_full), keep_var)]
+        else:
+            var_map = np.arange(p_full)
+            self._dropped_lowvar = []
         _, Rp, piv = pivoted_qr(X, mode="economic", pivoting=True)
         d = np.abs(np.diag(Rp))
-        rank = int((d > 1e-8 * d[0]).sum())
-        keep = np.sort(piv[:rank])
+        qr_rel = 1e-6 if identifiable else 1e-8
+        rank = int((d > qr_rel * d[0]).sum())
+        keep_local = np.sort(piv[:rank])
+        keep = np.asarray(var_map)[keep_local]
         self._dropped = [int(j) for j in np.setdiff1d(np.arange(p_full), keep)]
         if self._dropped:
             log.info(f"bayesian: dropping {len(self._dropped)} non-identifiable design column(s) {self._dropped}")
-        X = X[:, keep]
+        X = X[:, keep_local]
         n = X.shape[0]
         Q, R = np.linalg.qr(X)
         Rs = R / np.sqrt(n - 1)
@@ -188,7 +205,9 @@ class BayesianModel(ResponseModel):
             diag = self._diagnostics(az, idata, [str(w.message)[:200] for w in wlist], config)
             diag.update({"draws": draws, "tune": tune, "chains": chains, "seed": seed, "seconds": elapsed,
                          "likelihood": lik, "random_effects": re, "priors": pri,
-                         "dropped_nonidentifiable_columns": self._dropped})
+                         "dropped_nonidentifiable_columns": self._dropped,
+                         "identifiable_mean": identifiable,
+                         "dropped_low_variance_columns": self._dropped_lowvar})
             from send_bw.evaluation.uncertainty import sampling_diagnosis
 
             diag["sampling_diagnosis"] = sampling_diagnosis(diag)
@@ -215,7 +234,8 @@ class BayesianModel(ResponseModel):
         self.diagnostics["sensitivity_comparison"] = self._sensitivity_table(results, validation)
         self.history = {"main": self.diagnostics["main"], "n_obs": len(obs), "n_animals": n_a, "n_studies": n_s,
                         "n_beta": int(X.shape[1]), "s_y": self.s_y, "reliable": self.diagnostics["main"]["reliable"],
-                        "species_treatment": regularized, "sharing": sharing}
+                        "species_treatment": regularized, "sharing": sharing,
+                        "identifiable_mean": identifiable}
         from send_bw.sharing import is_selective, selective_record
 
         if is_selective(sharing):

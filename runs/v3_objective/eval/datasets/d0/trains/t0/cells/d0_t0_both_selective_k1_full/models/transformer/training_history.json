@@ -1,0 +1,144 @@
+{
+  "arch": {
+    "d_model": 32,
+    "dropout": 0.1,
+    "group_dims": {
+      "baseline": 1,
+      "bio": 3,
+      "compound": 4,
+      "regimen": 5,
+      "species": 1
+    },
+    "n_heads": 2,
+    "n_layers": 1,
+    "q_dim": 5,
+    "treat_dev_dim": 0
+  },
+  "best_val_rmse_member0": 0.043469782918691635,
+  "members": [
+    {
+      "best_val_rmse": 0.043469782918691635,
+      "epochs_run": 16,
+      "member": 0,
+      "phase1": {
+        "best_val_rmse": 0.04694468155503273,
+        "curve": [
+          {
+            "epoch": 0,
+            "train_loss": 1.7262483431835367,
+            "val_rmse": 0.1194869875907898
+          },
+          {
+            "epoch": 1,
+            "train_loss": 0.5195002920097775,
+            "val_rmse": 0.10911919921636581
+          },
+          {
+            "epoch": 2,
+            "train_loss": 0.3564276040503473,
+            "val_rmse": 0.07482398301362991
+          },
+          {
+            "epoch": 3,
+            "train_loss": 0.2705601044375487,
+            "val_rmse": 0.06926076859235764
+          },
+          {
+            "epoch": 4,
+            "train_loss": 0.21749567850069565,
+            "val_rmse": 0.06843551248311996
+          },
+          {
+            "epoch": 5,
+            "train_loss": 0.2019464254680306,
+            "val_rmse": 0.05311380699276924
+          },
+          {
+            "epoch": 6,
+            "train_loss": 0.18794624010721842,
+            "val_rmse": 0.05031499266624451
+          },
+          {
+            "epoch": 7,
+            "train_loss": 0.16896211815000783,
+            "val_rmse": 0.04694468155503273
+          }
+        ],
+        "epochs_run": 8,
+        "freeze_groups": [],
+        "seed": 61001
+      },
+      "phase2": {
+        "best_val_rmse": 0.043469782918691635,
+        "curve": [
+          {
+            "epoch": 0,
+            "train_loss": 0.32841876300714784,
+            "val_rmse": 0.05752144381403923
+          },
+          {
+            "epoch": 1,
+            "train_loss": 0.2503108296353938,
+            "val_rmse": 0.046048618853092194
+          },
+          {
+            "epoch": 2,
+            "train_loss": 0.21279620644399674,
+            "val_rmse": 0.0811905637383461
+          },
+          {
+            "epoch": 3,
+            "train_loss": 0.17569312756344424,
+            "val_rmse": 0.04923726245760918
+          },
+          {
+            "epoch": 4,
+            "train_loss": 0.16066339081626826,
+            "val_rmse": 0.057522013783454895
+          },
+          {
+            "epoch": 5,
+            "train_loss": 0.15807518464023784,
+            "val_rmse": 0.043469782918691635
+          },
+          {
+            "epoch": 6,
+            "train_loss": 0.14938012548422408,
+            "val_rmse": 0.06070689111948013
+          },
+          {
+            "epoch": 7,
+            "train_loss": 0.14853187663070225,
+            "val_rmse": 0.04656850919127464
+          }
+        ],
+        "epochs_run": 8,
+        "freeze_groups": [
+          "bio",
+          "baseline",
+          "species"
+        ],
+        "seed": 61018
+      },
+      "selective_sharing": true,
+      "variant": "v1"
+    }
+  ],
+  "selective_sharing": {
+    "model": "transformer",
+    "note": "Shared: compound descriptors and planned-dose/regimen query features. Species-specific: growth/baseline token groups and residual scale. Not a Bayesian species random-effect variant.",
+    "residual": "target_species_only",
+    "shared": [
+      "compound",
+      "regimen"
+    ],
+    "species_specific": [
+      "bio",
+      "baseline",
+      "species"
+    ],
+    "training": "phase1: all token groups on target-species train animals; phase2: freeze bio/baseline/species, train compound/regimen on pooled train",
+    "variant": "v1"
+  },
+  "y_scale": 0.13559068739414215
+}

@@ -1,0 +1,42 @@
+{
+  "banks": [
+    "matched",
+    "growth_shift",
+    "both"
+  ],
+  "config_hash": "1e3b3a47eea0d107",
+  "config_path": "configs/v3_objective.frozen.yaml",
+  "development_then_frozen_eval": true,
+  "generate_seed": 41001,
+  "git_revision": "1241ab67c00b1bda0e2d136cf9a74670b5eb5146",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "mc_plan": {
+    "justification": "Prior matched increment-ratio sd of dataset means was 0.144. SE of the mean \u2264 0.1 requires n \u2265 (0.144/0.1)^2 = 2.07. Use n_datasets=3. Train-seed split reshuffling is a nested nuisance, not the outer DGM replicate.",
+    "n_datasets": 3,
+    "n_train_seeds": 1,
+    "prior_sd_of_dataset_means": 0.144,
+    "target_se_of_mean": 0.1
+  },
+  "mechanisms": {
+    "both": "conflicting",
+    "growth_shift": "partially_shared",
+    "matched": "shared"
+  },
+  "n_dataset_seeds": 3,
+  "n_train_seeds": 1,
+  "real_data": false,
+  "reliability_thresholds": {
+    "ess_bulk_min": 400,
+    "ess_tail_min": 400,
+    "rhat_max": 1.01
+  },
+  "retune_after_test": false,
+  "sharing_required_to_improve": false,
+  "train_seed": 61001,
+  "transformer_required_to_win": false
+}

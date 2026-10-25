@@ -1,0 +1,298 @@
+{
+  "name": "spline",
+  "spec": {
+    "species": "RAT",
+    "strains": [
+      "SPRAGUE-DAWLEY",
+      "WISTAR HAN"
+    ],
+    "routes": [
+      "INTRAVENOUS",
+      "ORAL GAVAGE"
+    ],
+    "sexes": [
+      "F",
+      "M"
+    ],
+    "zb_mean": {
+      "F": 5.293005703704734,
+      "M": 5.5783845259660465
+    },
+    "max_dose": 1000.0,
+    "max_day": 28.0,
+    "intervals": [
+      1.0,
+      7.0
+    ],
+    "compound_ids": [
+      "CMP01",
+      "CMP04",
+      "CMP06"
+    ],
+    "descriptor_ranges": {
+      "D1": [
+        -1.0552,
+        1.5667
+      ],
+      "D2": [
+        -0.9253,
+        -0.3789
+      ],
+      "D3": [
+        0.5989,
+        1.016
+      ]
+    },
+    "t_ref": 28.0,
+    "version": "features-v1",
+    "animal_cols": [
+      "SEX_M",
+      "ZB_C",
+      "IS_CONTROL",
+      "LD",
+      "INV_INTERVAL",
+      "START",
+      "END",
+      "D1",
+      "D2",
+      "D3",
+      "STRAIN_WISTAR HAN",
+      "ROUTE_ORAL GAVAGE"
+    ],
+    "time_cols": [
+      "TAU",
+      "EXPO",
+      "OFF",
+      "LCUM"
+    ],
+    "sharing": "context_specific",
+    "species_levels": [
+      "RAT"
+    ],
+    "zb_mean_by_species": {},
+    "declared_species": [],
+    "fixed_schema": false
+  },
+  "design": {
+    "tau_hi": 1.000001,
+    "expo_hi": 1.000001,
+    "off_hi": 0.001001,
+    "time_knots": [
+      0.25,
+      0.5,
+      0.8571
+    ],
+    "expo_knots": [
+      0.3571,
+      0.75
+    ],
+    "off_knots": [],
+    "strain_cols": [
+      "STRAIN_WISTAR HAN"
+    ],
+    "route_cols": [
+      "ROUTE_ORAL GAVAGE"
+    ],
+    "species_cols": [],
+    "rich": true,
+    "species_treatment": false,
+    "col_names": [
+      "tb[0]",
+      "tb[1]",
+      "tb[2]",
+      "tb[3]",
+      "tb[4]",
+      "tb[5]",
+      "tb[6]",
+      "tb_sex[0]",
+      "tb_sex[1]",
+      "tb_sex[2]",
+      "tb_sex[3]",
+      "tb_sex[4]",
+      "tb_sex[5]",
+      "tb_sex[6]",
+      "tb_zb[0]",
+      "tb_zb[1]",
+      "tb_zb[2]",
+      "tb_zb[3]",
+      "tb_zb[4]",
+      "tb_zb[5]",
+      "tb_zb[6]",
+      "tb_STRAIN_WISTAR HAN[0]",
+      "tb_STRAIN_WISTAR HAN[1]",
+      "tb_STRAIN_WISTAR HAN[2]",
+      "tb_STRAIN_WISTAR HAN[3]",
+      "tb_STRAIN_WISTAR HAN[4]",
+      "tb_STRAIN_WISTAR HAN[5]",
+      "tb_STRAIN_WISTAR HAN[6]",
+      "eb_ld[0]",
+      "eb_ld[1]",
+      "eb_ld[2]",
+      "eb_ld[3]",
+      "eb_ld2[0]",
+      "eb_ld2[1]",
+      "eb_ld2[2]",
+      "eb_ld2[3]",
+      "eb_ld_D1[0]",
+      "eb_ld_D1[1]",
+      "eb_ld_D1[2]",
+      "eb_ld_D1[3]",
+      "eb_ld_D2[0]",
+      "eb_ld_D2[1]",
+      "eb_ld_D2[2]",
+      "eb_ld_D2[3]",
+      "eb_ld_D3[0]",
+      "eb_ld_D3[1]",
+      "eb_ld_D3[2]",
+      "eb_ld_D3[3]",
+      "eb_ld_inv[0]",
+      "eb_ld_inv[1]",
+      "eb_ld_inv[2]",
+      "eb_ld_inv[3]",
+      "eb_ld_ROUTE_ORAL GAVAGE[0]",
+      "eb_ld_ROUTE_ORAL GAVAGE[1]",
+      "eb_ld_ROUTE_ORAL GAVAGE[2]",
+      "eb_ld_ROUTE_ORAL GAVAGE[3]",
+      "eb_ld_sex[0]",
+      "eb_ld_sex[1]",
+      "eb_ld_sex[2]",
+      "eb_ld_sex[3]",
+      "ob_ld[0]",
+      "ob_ld_D1[0]"
+    ],
+    "scale": [
+      0.059787917489829215,
+      0.19583384370825516,
+      0.2325564792925563,
+      0.22465545259289948,
+      0.22006906799467643,
+      0.1632702761502788,
+      0.34585801684972256,
+      0.04385394741332411,
+      0.14936111515669442,
+      0.19492280501827056,
+      0.2006240210997819,
+      0.18038004256328857,
+      0.12058126542264641,
+      0.252192190237708,
+      0.004959238491544573,
+      0.017437640115189463,
+      0.024382064731673127,
+      0.02621824022132894,
+      0.022689652147768375,
+      0.014371064467576742,
+      0.02918688377353035,
+      0.03359039891463511,
+      0.11423220941368795,
+      0.1471095328353693,
+      0.15422235023530656,
+      0.13716206078595108,
+      0.09284766311411104,
+      0.17368621133719198,
+      0.6313405775001221,
+      0.6950011503079375,
+      0.6080879175851194,
+      0.7788413047768408,
+      2.2071719852609917,
+      2.471012233460807,
+      2.0723330309914485,
+      2.776612675044814,
+      0.8136501821340048,
+      0.9318355980495178,
+      0.7709035860484232,
+      0.9464013692281246,
+      0.4439486120392321,
+      0.48964159474754737,
+      0.4350660435814937,
+      0.5054926093661877,
+      0.4978053965071788,
+      0.5466143151388869,
+      0.4846314285536978,
+      0.5890585363699907,
+      0.562255335995993,
+      0.6300266102231816,
+      0.5325555668455952,
+      0.6990880422162352,
+      0.3673555320239403,
+      0.4291793285375061,
+      0.322762491093221,
+      0.5178200300025495,
+      0.4750329016227886,
+      0.5350899006672895,
+      0.4440654658573418,
+      0.5578499867694405,
+      1.0,
+      1.0
+    ]
+  },
+  "cov": {
+    "sd_s0": 0.006807905606867907,
+    "sd_s1": 0.033846116937562766,
+    "sd_a0": 0.007885012144287494,
+    "sd_a1": 0.049960992916866,
+    "sigma_p": 0.02060214017393092,
+    "ell": 5.532556085568443,
+    "sigma_m": 0.0060763137990075804,
+    "fit_info": {
+      "converged": true,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "nll": -1815.447198744777,
+      "n_obs": 835,
+      "n_animals": 118,
+      "n_studies": 4,
+      "params_at_bound": [],
+      "increment_moment_scale": 0.8326738842758286
+    }
+  },
+  "history": {
+    "alpha": 100.0,
+    "validation_rmse_by_alpha": {
+      "0.1": 0.05945239772347103,
+      "1.0": 0.05893196362131139,
+      "10.0": 0.05667759911983017,
+      "100.0": 0.05536459041056724,
+      "300.0": 0.06715195114019937,
+      "1000.0": 0.10685454851215205,
+      "3000.0": 0.15914387497038512,
+      "10000.0": 0.21224569207645186
+    },
+    "train_rmse": 0.04392187855277601,
+    "validation_rmse": 0.05536459041056724,
+    "oof_rmse": 0.05501607092180062,
+    "n_params": 62,
+    "n_members": 5,
+    "covariance": {
+      "sd_s0": 0.006807905606867907,
+      "sd_s1": 0.033846116937562766,
+      "sd_a0": 0.007885012144287494,
+      "sd_a1": 0.049960992916866,
+      "sigma_p": 0.02060214017393092,
+      "ell": 5.532556085568443,
+      "sigma_m": 0.0060763137990075804,
+      "fit_info": {
+        "converged": true,
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "nll": -1815.447198744777,
+        "n_obs": 835,
+        "n_animals": 118,
+        "n_studies": 4,
+        "params_at_bound": [],
+        "increment_moment_scale": 0.8326738842758286
+      }
+    },
+    "covariance_fit_on": "train_oof_all_species",
+    "lambda_growth": null,
+    "lambda_treatment": null,
+    "increment_moment": {
+      "split": "validation",
+      "n_studies": 2,
+      "n_draws": 40,
+      "n_ratios": 2,
+      "ratio_before": 1.2009503586985846,
+      "target_ratio": 1.0,
+      "scale_factor": 0.8326738842758286,
+      "used_test": false,
+      "note": "Development increment moment only. Exposed test outcomes were not used."
+    }
+  }
+}

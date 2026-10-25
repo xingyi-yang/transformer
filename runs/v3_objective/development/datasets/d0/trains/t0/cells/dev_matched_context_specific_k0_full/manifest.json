@@ -1,0 +1,240 @@
+{
+  "config_hash": "cfda1107c033346a",
+  "config_path": "runs/v3_objective/development/datasets/d0/trains/t0/cells/dev_matched_context_specific_k0_full/effective.yaml",
+  "created_utc": "2026-10-25T02:02:19.054434+00:00",
+  "git_revision": "1241ab67c00b1bda0e2d136cf9a74670b5eb5146",
+  "seed": 51001,
+  "software": {
+    "arviz": "1.3.0",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4",
+    "nutpie": "0.16.11",
+    "pandas": "3.1.0",
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "pyarrow": "26.0.0",
+    "pydantic": "2.14.1",
+    "pymc": "6.3.2",
+    "pyreadstat": null,
+    "pytensor": "3.3.4",
+    "python": "3.12.3",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "snowflake-connector-python": null,
+    "torch": "2.14.1"
+  },
+  "stages": {
+    "evaluate": {
+      "completed_utc": "2026-10-25T02:02:40.248836+00:00",
+      "key": null,
+      "n_results": 6,
+      "seconds": 0.6293673515319824
+    },
+    "ingest": {
+      "completed_utc": "2026-10-25T02:02:19.400355+00:00",
+      "key": "ab72ae2d8028a3be",
+      "mapping_version": "example-send-0.1",
+      "n_animals": 412,
+      "n_bw": 3343,
+      "n_quarantine": 0,
+      "seconds": 0.33040881156921387
+    },
+    "optional_models": {
+      "completed_utc": "2026-10-25T02:02:39.603750+00:00",
+      "key": null,
+      "status": {
+        "chronos2": "not_run",
+        "deepar": "not_run",
+        "tft": "not_run"
+      }
+    },
+    "prepare": {
+      "completed_utc": "2026-10-25T02:02:19.504956+00:00",
+      "compound_holdout": [
+        "CMP04"
+      ],
+      "key": "3495f8c3fde15b78",
+      "n_donor_studies": 0,
+      "n_eligible_animals": 317,
+      "seconds": 0.10400772094726562,
+      "sharing": "context_specific",
+      "sparse_target_train": null,
+      "split_counts": {
+        "test": 2,
+        "test_compound_holdout": 1,
+        "train": 5,
+        "validation": 2
+      },
+      "split_hash": "d27b6e757a1dfae5",
+      "target_manifest": {
+        "all_target": {
+          "hash": "f3f21be9519262a3",
+          "n": 9,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-003",
+            "SYNA-004",
+            "SYNA-005",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009",
+            "SYNA-010"
+          ]
+        },
+        "test": {
+          "hash": "4a858a4b533c5f8c",
+          "n": 2,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-006"
+          ]
+        },
+        "train": {
+          "hash": "7226c64f1381b094",
+          "n": 5,
+          "studyids": [
+            "SYNA-003",
+            "SYNA-004",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009"
+          ]
+        },
+        "validation": {
+          "hash": "084c8984b5355ff6",
+          "n": 2,
+          "studyids": [
+            "SYNA-005",
+            "SYNA-010"
+          ]
+        },
+        "version": "target-manifest-v1"
+      },
+      "train_seed": 51001
+    },
+    "train_bayesian": {
+      "completed_utc": "2026-10-25T02:02:39.602377+00:00",
+      "counted_as_successful_benchmark": true,
+      "diagnostics_summary": {
+        "divergences": 0,
+        "ess_bulk_min": 634.7323360975789,
+        "ess_tail_min": 762.6297552948162,
+        "rhat_max": 1.0055666572949002
+      },
+      "key": "b3b56773e0899990",
+      "matched_data": {
+        "generate_seed": 31001,
+        "matched_to": [
+          "spline",
+          "transformer"
+        ],
+        "note": "Bayesian uses the same prepared train/validation as spline and transformer.",
+        "same_prepare_key": "3495f8c3fde15b78",
+        "train_seed": 51001,
+        "train_studyids_hash": "7226c64f1381b094",
+        "validation_studyids_hash": "084c8984b5355ff6"
+      },
+      "reliable": true,
+      "sampling_diagnosis": {
+        "chains": 2,
+        "counted_as_successful_benchmark": true,
+        "divergences": 0,
+        "draws": 2000,
+        "dropped_nonidentifiable_columns": [
+          30,
+          31,
+          32,
+          33,
+          38
+        ],
+        "ess_bulk_min": 634.7323360975789,
+        "ess_tail_min": 762.6297552948162,
+        "failure_class": "reliable",
+        "family_diagnostics": {
+          "beta": {
+            "ess_bulk_min": 734.0517338282848,
+            "ess_tail_min": 1119.033982529042,
+            "n": 34,
+            "rhat_max": 1.0013748063751844
+          },
+          "ell": {
+            "ess_bulk_min": 1013.4477284331302,
+            "ess_tail_min": 1339.5666709253371,
+            "n": 1,
+            "rhat_max": 1.0014692237594423
+          },
+          "sd_a": {
+            "ess_bulk_min": 662.9202075750952,
+            "ess_tail_min": 970.6245827987113,
+            "n": 2,
+            "rhat_max": 1.0054590330415432
+          },
+          "sd_s": {
+            "ess_bulk_min": 634.7323360975789,
+            "ess_tail_min": 762.6297552948162,
+            "n": 2,
+            "rhat_max": 1.0055666572949002
+          },
+          "sigma_p": {
+            "ess_bulk_min": 888.3472560145337,
+            "ess_tail_min": 1323.6071159529663,
+            "n": 1,
+            "rhat_max": 1.0001530290315535
+          },
+          "theta": {
+            "ess_bulk_min": 677.3178528054705,
+            "ess_tail_min": 1048.8445744867545,
+            "n": 34,
+            "rhat_max": 1.0028836495503457
+          }
+        },
+        "n_posterior_draws": 4000,
+        "note": "Reliability thresholds are unchanged (rhat<=1.01, ESS>=400, divergences==0). Compile/backend failures are classified separately from sampling.",
+        "priors": {
+          "m_ell": 1.9459101490553132,
+          "s_beta": 0.35,
+          "s_ell": 0.75,
+          "s_sd": 0.3,
+          "s_sigma": 0.3
+        },
+        "reliable": true,
+        "rhat_max": 1.0055666572949002,
+        "thresholds": {
+          "ess_bulk_min": 400,
+          "ess_tail_min": 400,
+          "rhat_max": 1.01
+        },
+        "tune": 2000,
+        "worst_ess_params": {
+          "sd_a[0]": 662.9202075750952,
+          "sd_s[1]": 634.7323360975789,
+          "theta[15]": 725.6142917309847,
+          "theta[17]": 715.2961730856215,
+          "theta[25]": 677.3178528054705
+        },
+        "worst_rhat_params": {
+          "sd_a[0]": 1.0054590330415432,
+          "sd_a[1]": 1.0045415818724421,
+          "sd_s[1]": 1.0055666572949002,
+          "theta[0]": 1.002632245716385,
+          "theta[4]": 1.0028836495503457
+        }
+      },
+      "seconds": 17.152843236923218,
+      "status": "trained"
+    },
+    "train_spline": {
+      "completed_utc": "2026-10-25T02:02:20.897824+00:00",
+      "key": "17119339d23261cd",
+      "seconds": 1.3639180660247803,
+      "status": "trained"
+    },
+    "train_transformer": {
+      "completed_utc": "2026-10-25T02:02:22.198939+00:00",
+      "key": "20c845247c5df84e",
+      "seconds": 1.2997331619262695,
+      "status": "trained"
+    }
+  },
+  "synthetic_data": false
+}

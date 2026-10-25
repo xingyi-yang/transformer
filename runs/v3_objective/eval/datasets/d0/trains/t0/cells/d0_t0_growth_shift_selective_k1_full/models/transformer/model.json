@@ -1,0 +1,350 @@
+{
+ "name": "transformer",
+ "spec": {
+  "species": "RAT",
+  "strains": [
+   "BEAGLE",
+   "SPRAGUE-DAWLEY",
+   "WISTAR HAN"
+  ],
+  "routes": [
+   "INTRAVENOUS",
+   "ORAL GAVAGE"
+  ],
+  "sexes": [
+   "F",
+   "M"
+  ],
+  "zb_mean": {
+   "F": 5.286231641079423,
+   "M": 5.573644965993817
+  },
+  "max_dose": 300.0,
+  "max_day": 28.0,
+  "intervals": [
+   1.0,
+   7.0
+  ],
+  "compound_ids": [
+   "CMP01",
+   "CMP02",
+   "CMP03",
+   "CMP04"
+  ],
+  "descriptor_ranges": {
+   "D1": [
+    -1.7379,
+    1.2782
+   ],
+   "D2": [
+    -0.2687,
+    1.0495
+   ],
+   "D3": [
+    -2.9158,
+    1.3201
+   ]
+  },
+  "t_ref": 28.0,
+  "version": "features-v1",
+  "animal_cols": [
+   "SEX_M",
+   "ZB_C",
+   "IS_CONTROL",
+   "LD",
+   "INV_INTERVAL",
+   "START",
+   "END",
+   "D1",
+   "D2",
+   "D3",
+   "STRAIN_SPRAGUE-DAWLEY",
+   "STRAIN_WISTAR HAN",
+   "ROUTE_ORAL GAVAGE",
+   "SPECIES_RAT"
+  ],
+  "time_cols": [
+   "TAU",
+   "EXPO",
+   "OFF",
+   "LCUM"
+  ],
+  "sharing": "selective",
+  "species_levels": [
+   "DOG",
+   "RAT"
+  ],
+  "zb_mean_by_species": {
+   "DOG": {
+    "F": 9.222079320680486,
+    "M": 9.381689083017411
+   },
+   "RAT": {
+    "F": 5.286231641079423,
+    "M": 5.573644965993817
+   }
+  },
+  "declared_species": [
+   "RAT",
+   "DOG"
+  ],
+  "fixed_schema": false
+ },
+ "cov": {
+  "sd_s0": 0.009842086944922954,
+  "sd_s1": 0.056826054921253644,
+  "sd_a0": 0.006925011437574884,
+  "sd_a1": 0.057198924289474366,
+  "sigma_p": 0.02067217689910834,
+  "ell": 3.7991366930384,
+  "sigma_m": 0.00016175140614694506,
+  "fit_info": {
+   "converged": true,
+   "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+   "nll": -2037.7724881242743,
+   "n_obs": 1025,
+   "n_animals": 198,
+   "n_studies": 5,
+   "params_at_bound": [],
+   "increment_moment_scale": 0.7828857253778706
+  }
+ },
+ "norm": {
+  "ctx": {
+   "bio": [
+    [
+     0.5,
+     0.635593220338983,
+     0.2033898305084746
+    ],
+    [
+     0.5,
+     0.48126341913561643,
+     0.4025200707470481
+    ]
+   ],
+   "baseline": [
+    [
+     2.559158158457988e-16
+    ],
+    [
+     0.07646742682855563
+    ]
+   ],
+   "compound": [
+    [
+     -0.17372288135593217,
+     0.24880254237288144,
+     -0.19604661016949146,
+     0.2796610169491525
+    ],
+    [
+     1.137840582606191,
+     0.47197448696880706,
+     1.3107108566639116,
+     0.44883263311408006
+    ]
+   ],
+   "regimen": [
+    [
+     1.362496279518905,
+     0.6331719128329298,
+     0.0,
+     0.964285714285714,
+     0.4745762711864407
+    ],
+    [
+     1.235272552296472,
+     0.46884198087400286,
+     1.0,
+     1.0,
+     0.4993532156832622
+    ]
+   ],
+   "species": [
+    [
+     0.8389830508474576
+    ],
+    [
+     0.3675465837661261
+    ]
+   ]
+  },
+  "q": [
+   [
+    0.3677171610169499,
+    0.26082021791767446,
+    0.0,
+    0.8382498323794447,
+    0.4612985872335724
+   ],
+   [
+    0.365023054218591,
+    0.35054697589627043,
+    1.0,
+    1.2961000302195174,
+    0.39359976426982035
+   ]
+  ]
+ },
+ "arch": {
+  "group_dims": {
+   "bio": 3,
+   "baseline": 1,
+   "compound": 4,
+   "regimen": 5,
+   "species": 1
+  },
+  "q_dim": 5,
+  "d_model": 32,
+  "n_heads": 2,
+  "n_layers": 1,
+  "dropout": 0.1,
+  "treat_dev_dim": 0
+ },
+ "y_scale": 0.13515841960906982,
+ "history": {
+  "members": [
+   {
+    "phase1": {
+     "best_val_rmse": 0.0471053384244442,
+     "epochs_run": 8,
+     "curve": [
+      {
+       "epoch": 0,
+       "train_loss": 1.7369156702600344,
+       "val_rmse": 0.11937987059354782
+      },
+      {
+       "epoch": 1,
+       "train_loss": 0.5233603649669223,
+       "val_rmse": 0.10906756669282913
+      },
+      {
+       "epoch": 2,
+       "train_loss": 0.35876762641198706,
+       "val_rmse": 0.07491752505302429
+      },
+      {
+       "epoch": 3,
+       "train_loss": 0.27266376819273436,
+       "val_rmse": 0.06940799951553345
+      },
+      {
+       "epoch": 4,
+       "train_loss": 0.21911838199153091,
+       "val_rmse": 0.06823007762432098
+      },
+      {
+       "epoch": 5,
+       "train_loss": 0.2035040006493077,
+       "val_rmse": 0.05327469855546951
+      },
+      {
+       "epoch": 6,
+       "train_loss": 0.1891225130871089,
+       "val_rmse": 0.05038731172680855
+      },
+      {
+       "epoch": 7,
+       "train_loss": 0.16992387627110336,
+       "val_rmse": 0.0471053384244442
+      }
+     ],
+     "seed": 61001,
+     "freeze_groups": []
+    },
+    "phase2": {
+     "best_val_rmse": 0.04411376267671585,
+     "epochs_run": 8,
+     "curve": [
+      {
+       "epoch": 0,
+       "train_loss": 0.329981486676103,
+       "val_rmse": 0.05636933445930481
+      },
+      {
+       "epoch": 1,
+       "train_loss": 0.25133071764040804,
+       "val_rmse": 0.0462481826543808
+      },
+      {
+       "epoch": 2,
+       "train_loss": 0.21304586656012778,
+       "val_rmse": 0.0783499926328659
+      },
+      {
+       "epoch": 3,
+       "train_loss": 0.17321444997342966,
+       "val_rmse": 0.050351232290267944
+      },
+      {
+       "epoch": 4,
+       "train_loss": 0.15784991721985703,
+       "val_rmse": 0.05505850911140442
+      },
+      {
+       "epoch": 5,
+       "train_loss": 0.15569367373393753,
+       "val_rmse": 0.04411376267671585
+      },
+      {
+       "epoch": 6,
+       "train_loss": 0.14504912003117093,
+       "val_rmse": 0.06186288595199585
+      },
+      {
+       "epoch": 7,
+       "train_loss": 0.15118259267281678,
+       "val_rmse": 0.04666955769062042
+      }
+     ],
+     "seed": 61018,
+     "freeze_groups": [
+      "bio",
+      "baseline",
+      "species"
+     ]
+    },
+    "best_val_rmse": 0.04411376267671585,
+    "epochs_run": 16,
+    "selective_sharing": true,
+    "variant": "v1",
+    "member": 0
+   }
+  ],
+  "y_scale": 0.13515841960906982,
+  "arch": {
+   "group_dims": {
+    "bio": 3,
+    "baseline": 1,
+    "compound": 4,
+    "regimen": 5,
+    "species": 1
+   },
+   "q_dim": 5,
+   "d_model": 32,
+   "n_heads": 2,
+   "n_layers": 1,
+   "dropout": 0.1,
+   "treat_dev_dim": 0
+  },
+  "best_val_rmse_member0": 0.04411376267671585,
+  "selective_sharing": {
+   "variant": "v1",
+   "shared": [
+    "compound",
+    "regimen"
+   ],
+   "species_specific": [
+    "bio",
+    "baseline",
+    "species"
+   ],
+   "residual": "target_species_only",
+   "note": "Shared: compound descriptors and planned-dose/regimen query features. Species-specific: growth/baseline token groups and residual scale. Not a Bayesian species random-effect variant.",
+   "model": "transformer",
+   "training": "phase1: all token groups on target-species train animals; phase2: freeze bio/baseline/species, train compound/regimen on pooled train"
+  }
+ }
+}

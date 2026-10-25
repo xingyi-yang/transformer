@@ -141,6 +141,22 @@ class SplineModel(GaussianLayerMixin, ResponseModel):
             keep = mult > 0
             wb = study_balanced_weights(sid[keep]) * mult[keep]
             self.members.append(ridge(X[keep], y[keep], wb, alpha, pen0))
+        moment_split = str(config.get("increment_moment_split") or "").lower()
+        increment_moment = None
+        if moment_split:
+            from send_bw.evaluation.increment_moment import match_increment_moment
+
+            if moment_split == "validation":
+                moment_data = validation
+            elif moment_split == "train":
+                moment_data = train
+            else:
+                raise ValueError("increment_moment_split must be 'validation' or 'train', not a test split")
+            increment_moment = match_increment_moment(
+                self, moment_data, split_name=moment_split,
+                n_draws=int(config.get("increment_moment_draws", 40)),
+                seed=int(config.get("seed", 0)) + 31,
+            )
         self.history = {"alpha": alpha, "validation_rmse_by_alpha": {str(k): v for k, v in scores.items()},
                         "train_rmse": wrmse(y, X @ beta0, w), "validation_rmse": scores[alpha],
                         "oof_rmse": wrmse(y, y - R, w), "n_params": int(X.shape[1]),
@@ -149,7 +165,8 @@ class SplineModel(GaussianLayerMixin, ResponseModel):
                             "target_species_oof" if selective else "train_oof_all_species"
                         ),
                         "lambda_growth": lam_g if regularized else None,
-                        "lambda_treatment": lam_t if regularized else None}
+                        "lambda_treatment": lam_t if regularized else None,
+                        "increment_moment": increment_moment}
         if selective:
             from send_bw.sharing import selective_record
 
