@@ -37,7 +37,8 @@ compiler, so PyTensor warns "g++ not available" (harmless) and NUTS runs through
 
 `send-bw <command> --config <yaml>`: `generate`, `inspect-source`, `ingest`, `prepare`, `validate-real`, `train`,
 `evaluate`, `design`, `report`, `run-all`, `validate-request`, `propose-design`,
-`tft-forecast` (primary early-history TFT workflow), `tft-early-hist-bench`, `tft-early-hist-extend`.
+`tft-forecast` (primary early-history TFT workflow), `tft-stability`,
+`tft-early-hist-bench`, `tft-early-hist-extend`.
 `validate-request` and `propose-design` also accept `--model <run dir | models dir | model dir>`, for
 inference from serialized artifacts without a training config.
 
@@ -71,6 +72,18 @@ Shared knobs (use these unless a locked protocol says otherwise):
 The command writes `runs/tft_primary/` only. It does not overwrite `runs/v3_*`,
 `runs/tft_early_hist_bench/`, or `runs/tft_early_hist_extend/`. Official holdout
 test errors are not used to choose learning rate, hidden size, dropout, or duration.
+
+Multi-seed interval work uses the same knobs:
+
+```powershell
+.\.venv\Scripts\send-bw tft-stability --config configs/tft_stability.yaml
+#   send-bw tft-stability --config configs/tft_stability.yaml
+```
+
+That command writes `runs/tft_stability/` only. It reuses matching official fits
+from `runs/tft_primary/`. The default training strategy is chosen on official
+validation interval score and confirmed on a predeclared holdout (split seed
+34011) that cannot reuse previously reported test studies.
 
 Configs: `configs/smoke.yaml`, `configs/bayesian_smoke.yaml` (executed); `configs/research.yaml` and
 `configs/bayesian_research.yaml` (larger; **not executed**); `configs/real_local.example.yaml` and

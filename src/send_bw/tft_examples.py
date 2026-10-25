@@ -254,7 +254,17 @@ def score_aligned_quantiles(fut: pd.DataFrame, pred: pd.DataFrame, *, representa
         "quantile_loss": "pinball on LOGW = ln(WEIGHT_G)",
         "quantile_loss_gram": "pinball on grams = exp(quantile)",
         "interval_width80": "q0.9 - q0.1 on LOGW",
+        "interval_score80": "Winkler IS at alpha=0.2 on LOGW",
     }
+    if "q0.1" in mm.columns and "q0.9" in mm.columns:
+        from send_bw.tft_intervals import interval_score80 as _winkler
+
+        extra["interval_score80"] = _study_mean(
+            _winkler(y, mm["q0.1"].to_numpy(float), mm["q0.9"].to_numpy(float)), studies)
+        extra["interval_score80_definition"] = (
+            "Winkler interval score at alpha=0.2 on LOGW: "
+            "(q0.9-q0.1) + 10 * miss distance. Study-balanced mean of studies."
+        )
     base.update(extra)
     return base
 
