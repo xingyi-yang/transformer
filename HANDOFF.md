@@ -167,3 +167,7 @@ to `[ancova]`.
    environment, do not treat a local extra-enabled fit as design qualification, and
    do not implement Chronos-2/DeepAR unless they are named. The analysis chapter
    stays as written.
+6. A **proposed** v3 planning packet (not implemented, v2 untouched) is in
+   `CURSOR_PROJECT_SPEC_v3.md` and `docs/v3/`. The new scientific question is
+   nonlinear multi-species information sharing. Do not enable design
+   recommendations as its acceptance criterion.
