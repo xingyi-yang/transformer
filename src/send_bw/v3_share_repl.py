@@ -448,6 +448,8 @@ def _write_report(parent: Path, out: dict[str, Any]) -> None:
         f"- donor policy (not from test): `{lock.get('donor_policy')}`",
         f"- Chronos: `{lock.get('chronos_mode')}`; "
         f"TFT/Chronos selective: not_implemented",
+        f"- estimated_runtime_seconds: `{lock.get('estimated_runtime_seconds')}`",
+        f"- seconds_total (actual): `{out.get('seconds_total')}`",
         "",
         "## Replicates",
         "",

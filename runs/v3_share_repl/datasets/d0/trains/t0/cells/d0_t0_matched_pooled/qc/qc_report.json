@@ -1,0 +1,37 @@
+{
+  "checks": {
+    "all_obs_have_animal": true,
+    "arm_keys_resolved": true,
+    "finite_log_weights": true,
+    "n_quarantined_hard": 0,
+    "n_quarantined_soft": 0,
+    "one_baseline_per_animal_max": true,
+    "passed": true,
+    "positive_weights": true,
+    "sex_values": [
+      "F",
+      "M"
+    ],
+    "unique_animal_keys": true,
+    "unique_obs_keys": true
+  },
+  "donor_studyids_selected": [
+    "SYNA-D001",
+    "SYNA-D002",
+    "SYNA-D003"
+  ],
+  "exclusion_counts": {
+    "too_few_post_baseline_obs": 1
+  },
+  "limitations": [
+    "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+    "22 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+  ],
+  "n_donor_studies_requested": 3,
+  "n_donor_studies_selected": 3,
+  "n_eligible_animals": 547,
+  "n_model_obs": 3582,
+  "n_target_eligible_animals": 435,
+  "sharing": "pooled",
+  "sparse_target_train": null
+}

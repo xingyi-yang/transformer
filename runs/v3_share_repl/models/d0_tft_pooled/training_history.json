@@ -1,0 +1,27 @@
+{
+  "allow_missing_timesteps": true,
+  "encoder_window_day": 14.0,
+  "filled_target_with_zero": false,
+  "library": "pytorch_forecasting.TemporalFusionTransformer",
+  "max_encoder_length": 8,
+  "max_epochs": 8,
+  "max_prediction_length": 6,
+  "min_encoder_length": 1,
+  "n_train_obs": 2115,
+  "n_train_series": 355,
+  "n_val_series": 94,
+  "name": "tft",
+  "not_the_required_transformer": true,
+  "note": "early-history only; baseline-only pre-study and design simulation are not supported; VAR is a quantile-spread approximation",
+  "observed_rows_only": true,
+  "official_class": "pytorch_forecasting.TemporalFusionTransformer",
+  "quantiles": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "task": "early_history",
+  "training_scope": "pooled"
+}

@@ -1,0 +1,1036 @@
+{
+  "authorization_present": false,
+  "chronos_finetune_pool": {
+    "aggregated_across_incomplete": false,
+    "label": "history_only_univariate",
+    "n_complete": 2,
+    "n_dataset_train_pairs": 2
+  },
+  "design_run": false,
+  "failures": [],
+  "freeze_lock": {
+    "bank": "matched",
+    "checkpoint_source": "training_validation",
+    "chronos_mode": "history_only_univariate",
+    "chronos_selective": "not_implemented",
+    "config_hash": "b77908608df5052a",
+    "config_path": "configs/v3_share_repl.frozen.yaml",
+    "covariate_chronos": false,
+    "design": false,
+    "donor_policy": {
+      "pooled": 3,
+      "selected_from_test": false,
+      "selective": 1,
+      "source": "training_validation_protocol",
+      "target_only": 0
+    },
+    "estimated_runtime_seconds": {
+      "lower": 240,
+      "point": 320,
+      "upper": 720
+    },
+    "fabricate_encoder_history": false,
+    "generate_seed_stride": 1009,
+    "generate_seeds": [
+      74001,
+      75010
+    ],
+    "git_revision": "e6f874a413c87541ed10a9049f24dfcdc0f06ed8",
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "n_cells": 8,
+    "n_dataset_seeds": 2,
+    "n_train_seeds": 1,
+    "new_architectures": false,
+    "predose": false,
+    "preserved": [
+      "runs/v3_eval",
+      "runs/v3_pilot_k0k1",
+      "runs/v3_repl",
+      "runs/v3_research",
+      "runs/v3_closeout",
+      "runs/v3_audit",
+      "runs/v3_increment",
+      "runs/v3_phaseb",
+      "runs/v3_limitations",
+      "runs/v3_objective",
+      "runs/v3_official_seq",
+      "runs/v3_seq_diag",
+      "runs/v3_eval_correct",
+      "runs/v3_cov_chronos"
+    ],
+    "real_data": false,
+    "retune_after_test": false,
+    "selective_regularized": {
+      "note": "Selective v1 is retained. This variant adds regularized species-specific deviations in nonlinear growth and treatment response. Deviations shrink toward the shared mean; they are not unpenalized species RE.",
+      "regularization": {
+        "growth": "ridge inflation on SPECIES \u00d7 time-basis coefficients (lambda_growth)",
+        "transformer": "phase1 target fit; phase2 extra L2 of species/growth tokens toward phase1 and treatment-deviation head toward 0",
+        "treatment": "ridge inflation on SPECIES \u00d7 exposure/dose coefficients (lambda_treatment)"
+      },
+      "residual": "target_species_only",
+      "shared": [
+        "compound",
+        "regimen"
+      ],
+      "species_specific": [
+        "growth_deviation",
+        "treatment_deviation"
+      ],
+      "variant": "regularized"
+    },
+    "selective_v1": {
+      "note": "Shared: compound descriptors and planned-dose/regimen query features. Species-specific: growth/baseline token groups and residual scale. Not a Bayesian species random-effect variant.",
+      "residual": "target_species_only",
+      "shared": [
+        "compound",
+        "regimen"
+      ],
+      "species_specific": [
+        "bio",
+        "baseline",
+        "species"
+      ],
+      "variant": "v1"
+    },
+    "tft_selective": "not_implemented",
+    "train_seed_stride": 17,
+    "train_seeds": [
+      84001
+    ]
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation.",
+    "Sharing replication.",
+    "Corrected MAE and true RMSE.",
+    "Chronos-2 is history-only/univariate."
+  ],
+  "new_architectures": false,
+  "output_dir": "runs/v3_share_repl",
+  "predose_evaluated": false,
+  "real_data_accessed": false,
+  "replicates": [
+    {
+      "dataset_index": 0,
+      "generate_seed": 74001,
+      "paired_transfer": {
+        "chronos2_finetune_history": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0019777644698170116,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.08312810864620904,
+              "sign": "harmful",
+              "target_only": 0.08115034417639203
+            },
+            {
+              "delta_pooled_minus_target": 0.0020204390621099827,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.10297728352298266,
+              "sign": "harmful",
+              "target_only": 0.10095684446087268
+            },
+            {
+              "delta_pooled_minus_target": 0.00021534173472068097,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.02968155582171443,
+              "sign": "harmful",
+              "target_only": 0.02946621408699375
+            }
+          ]
+        },
+        "spline_pooled": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0021636480405713213,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.029581774844958837,
+              "sign": "harmful",
+              "target_only": 0.027418126804387516
+            },
+            {
+              "delta_pooled_minus_target": 0.0022238077092471414,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03846197671025643,
+              "sign": "harmful",
+              "target_only": 0.03623816900100929
+            },
+            {
+              "delta_pooled_minus_target": 0.0011137425244938243,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011138007039942468,
+              "sign": "harmful",
+              "target_only": 0.010024264515448644
+            }
+          ]
+        },
+        "spline_selective": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0006064789774565676,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.02681164782693095,
+              "sign": "helpful",
+              "target_only": 0.027418126804387516
+            },
+            {
+              "delta_pooled_minus_target": -0.0007403849695301612,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03549778403147913,
+              "sign": "helpful",
+              "target_only": 0.03623816900100929
+            },
+            {
+              "delta_pooled_minus_target": -0.0003938743763041777,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.009630390139144466,
+              "sign": "helpful",
+              "target_only": 0.010024264515448644
+            }
+          ]
+        },
+        "spline_selective_regularized": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0006950656252602862,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.02672306117912723,
+              "sign": "helpful",
+              "target_only": 0.027418126804387516
+            },
+            {
+              "delta_pooled_minus_target": -0.0008576468732814924,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.0353805221277278,
+              "sign": "helpful",
+              "target_only": 0.03623816900100929
+            },
+            {
+              "delta_pooled_minus_target": 9.375462403586436e-05,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.010118019139484508,
+              "sign": "harmful",
+              "target_only": 0.010024264515448644
+            }
+          ]
+        },
+        "tft_pooled": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.05292298029958864,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.11553434164428611,
+              "sign": "harmful",
+              "target_only": 0.06261136134469747
+            },
+            {
+              "delta_pooled_minus_target": 0.053176157037925026,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.12816852096952575,
+              "sign": "harmful",
+              "target_only": 0.07499236393160072
+            },
+            {
+              "delta_pooled_minus_target": 0.011481397593548097,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.03463052317086688,
+              "sign": "harmful",
+              "target_only": 0.023149125577318783
+            }
+          ]
+        },
+        "transformer_pooled": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.01598665819391606,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.04473605314911393,
+              "sign": "harmful",
+              "target_only": 0.028749394955197866
+            },
+            {
+              "delta_pooled_minus_target": 0.019010328892023913,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.05722711461503102,
+              "sign": "harmful",
+              "target_only": 0.03821678572300711
+            },
+            {
+              "delta_pooled_minus_target": 0.0056927892119133135,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.015886311433005604,
+              "sign": "harmful",
+              "target_only": 0.01019352222109229
+            }
+          ]
+        },
+        "transformer_selective": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.005241816950712488,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.033991211905910354,
+              "sign": "harmful",
+              "target_only": 0.028749394955197866
+            },
+            {
+              "delta_pooled_minus_target": 0.006169572969608822,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04438635869261593,
+              "sign": "harmful",
+              "target_only": 0.03821678572300711
+            },
+            {
+              "delta_pooled_minus_target": 0.0016467346454242787,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011840256866516569,
+              "sign": "harmful",
+              "target_only": 0.01019352222109229
+            }
+          ]
+        },
+        "transformer_selective_regularized": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0078683410602528,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.036617736015450666,
+              "sign": "harmful",
+              "target_only": 0.028749394955197866
+            },
+            {
+              "delta_pooled_minus_target": 0.011481848137192892,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.0496986338602,
+              "sign": "harmful",
+              "target_only": 0.03821678572300711
+            },
+            {
+              "delta_pooled_minus_target": 0.0030604581928234294,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.01325398041391572,
+              "sign": "harmful",
+              "target_only": 0.01019352222109229
+            }
+          ]
+        }
+      },
+      "results": {
+        "chronos2_pooled_history": {
+          "chronos_label": "history_only_univariate",
+          "grouping": "STUDYID",
+          "mae_log": 0.08312810864620904,
+          "mean_quantile_loss": 0.02968155582171443,
+          "merge_one_to_one": true,
+          "n_scored": 252,
+          "n_studies": 2,
+          "rmse_log": 0.10297728352298266,
+          "seconds": 11.17154049873352,
+          "status": "ok"
+        },
+        "chronos2_selective_history": {
+          "reason": "Chronos-2 has no selective-sharing training path",
+          "status": "not_implemented"
+        },
+        "chronos2_selective_regularized_history": {
+          "reason": "Chronos-2 has no selective-sharing training path",
+          "status": "not_implemented"
+        },
+        "chronos2_target_only_history": {
+          "chronos_label": "history_only_univariate",
+          "grouping": "STUDYID",
+          "mae_log": 0.08115034417639203,
+          "mean_quantile_loss": 0.02946621408699375,
+          "merge_one_to_one": true,
+          "n_scored": 252,
+          "n_studies": 2,
+          "rmse_log": 0.10095684446087268,
+          "seconds": 12.052865028381348,
+          "status": "ok"
+        },
+        "chronos2_zero_shot_history": {
+          "chronos_label": "history_only_univariate",
+          "grouping": "STUDYID",
+          "mae_log": 0.08736961143111806,
+          "mean_quantile_loss": 0.030587650287902064,
+          "merge_one_to_one": true,
+          "n_scored": 252,
+          "n_studies": 2,
+          "rmse_log": 0.1072798895514114,
+          "seconds": 3.8158819675445557,
+          "status": "ok"
+        },
+        "last_value": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.10593385703299205,
+          "mean_quantile_loss": 0.05296692851649602,
+          "merge_one_to_one": true,
+          "n_scored": 252,
+          "n_studies": 2,
+          "rmse_log": 0.12498502464030668,
+          "seconds": 0.043531179428100586,
+          "status": "ok"
+        },
+        "spline_pooled": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.029581774844958837,
+          "mean_quantile_loss": 0.011138007039942468,
+          "merge_one_to_one": true,
+          "n_scored": 252,
+          "n_studies": 2,
+          "rmse_log": 0.03846197671025643,
+          "seconds": 3.863755941390991,
+          "status": "ok"
+        },
+        "spline_selective": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.02681164782693095,
+          "mean_quantile_loss": 0.009630390139144466,
+          "merge_one_to_one": true,
+          "n_scored": 252,
+          "n_studies": 2,
+          "rmse_log": 0.03549778403147913,
+          "seconds": 3.8103044033050537,
+          "status": "ok"
+        },
+        "spline_selective_regularized": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.02672306117912723,
+          "mean_quantile_loss": 0.010118019139484508,
+          "merge_one_to_one": true,
+          "n_scored": 252,
+          "n_studies": 2,
+          "rmse_log": 0.0353805221277278,
+          "seconds": 4.3724822998046875,
+          "status": "ok"
+        },
+        "spline_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.027418126804387516,
+          "mean_quantile_loss": 0.010024264515448644,
+          "merge_one_to_one": true,
+          "n_scored": 252,
+          "n_studies": 2,
+          "rmse_log": 0.03623816900100929,
+          "seconds": 3.7207283973693848,
+          "status": "ok"
+        },
+        "tft_pooled": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.11553434164428611,
+          "mean_quantile_loss": 0.03463052317086688,
+          "merge_one_to_one": true,
+          "n_scored": 252,
+          "n_studies": 2,
+          "rmse_log": 0.12816852096952575,
+          "seconds": 43.44175148010254,
+          "status": "ok"
+        },
+        "tft_selective": {
+          "reason": "TFT has no selective-sharing training path",
+          "status": "not_implemented"
+        },
+        "tft_selective_regularized": {
+          "reason": "TFT has no selective-sharing training path",
+          "status": "not_implemented"
+        },
+        "tft_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.06261136134469747,
+          "mean_quantile_loss": 0.023149125577318783,
+          "merge_one_to_one": true,
+          "n_scored": 252,
+          "n_studies": 2,
+          "rmse_log": 0.07499236393160072,
+          "seconds": 30.720762491226196,
+          "status": "ok"
+        },
+        "transformer_pooled": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.04473605314911393,
+          "mean_quantile_loss": 0.015886311433005604,
+          "merge_one_to_one": true,
+          "n_scored": 252,
+          "n_studies": 2,
+          "rmse_log": 0.05722711461503102,
+          "seconds": 0.9527075290679932,
+          "status": "ok"
+        },
+        "transformer_selective": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.033991211905910354,
+          "mean_quantile_loss": 0.011840256866516569,
+          "merge_one_to_one": true,
+          "n_scored": 252,
+          "n_studies": 2,
+          "rmse_log": 0.04438635869261593,
+          "seconds": 0.997748613357544,
+          "status": "ok"
+        },
+        "transformer_selective_regularized": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.036617736015450666,
+          "mean_quantile_loss": 0.01325398041391572,
+          "merge_one_to_one": true,
+          "n_scored": 252,
+          "n_studies": 2,
+          "rmse_log": 0.0496986338602,
+          "seconds": 1.1919796466827393,
+          "status": "ok"
+        },
+        "transformer_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.028749394955197866,
+          "mean_quantile_loss": 0.01019352222109229,
+          "merge_one_to_one": true,
+          "n_scored": 252,
+          "n_studies": 2,
+          "rmse_log": 0.03821678572300711,
+          "seconds": 0.9349033832550049,
+          "status": "ok"
+        }
+      },
+      "target_holdout_hashes": {
+        "pooled": {
+          "all_target": "b42a27301470dc82",
+          "test": "63af3c1a5fa6c225",
+          "validation": "dd85bf64592b2f0b"
+        },
+        "selective": {
+          "all_target": "b42a27301470dc82",
+          "test": "63af3c1a5fa6c225",
+          "validation": "dd85bf64592b2f0b"
+        },
+        "selective_regularized": {
+          "all_target": "b42a27301470dc82",
+          "test": "63af3c1a5fa6c225",
+          "validation": "dd85bf64592b2f0b"
+        },
+        "target_only": {
+          "all_target": "b42a27301470dc82",
+          "test": "63af3c1a5fa6c225",
+          "validation": "dd85bf64592b2f0b"
+        }
+      },
+      "train_index": 0,
+      "train_seed": 84001
+    },
+    {
+      "dataset_index": 1,
+      "generate_seed": 75010,
+      "paired_transfer": {
+        "chronos2_finetune_history": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0005597389805958308,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.10319112388267877,
+              "sign": "harmful",
+              "target_only": 0.10263138490208294
+            },
+            {
+              "delta_pooled_minus_target": 0.0005680863597213454,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.11966499097110209,
+              "sign": "harmful",
+              "target_only": 0.11909690461138074
+            },
+            {
+              "delta_pooled_minus_target": 0.00011776929400628827,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.03361443337612441,
+              "sign": "harmful",
+              "target_only": 0.03349666408211812
+            }
+          ]
+        },
+        "spline_pooled": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.010316885720690921,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.0402676162850108,
+              "sign": "harmful",
+              "target_only": 0.029950730564319877
+            },
+            {
+              "delta_pooled_minus_target": 0.01243218175675874,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.0503746434786269,
+              "sign": "harmful",
+              "target_only": 0.03794246172186816
+            },
+            {
+              "delta_pooled_minus_target": 0.011529128657016198,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.02229667082085414,
+              "sign": "harmful",
+              "target_only": 0.010767542163837941
+            }
+          ]
+        },
+        "spline_selective": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.003326387471660683,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03327711803598056,
+              "sign": "harmful",
+              "target_only": 0.029950730564319877
+            },
+            {
+              "delta_pooled_minus_target": 0.0037417781569039563,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.041684239878772116,
+              "sign": "harmful",
+              "target_only": 0.03794246172186816
+            },
+            {
+              "delta_pooled_minus_target": 0.0018312209515791364,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.012598763115417078,
+              "sign": "harmful",
+              "target_only": 0.010767542163837941
+            }
+          ]
+        },
+        "spline_selective_regularized": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0010276742789036633,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03097840484322354,
+              "sign": "harmful",
+              "target_only": 0.029950730564319877
+            },
+            {
+              "delta_pooled_minus_target": 0.0010137142429991058,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.038956175964867265,
+              "sign": "harmful",
+              "target_only": 0.03794246172186816
+            },
+            {
+              "delta_pooled_minus_target": 0.0002894412561771434,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011056983420015085,
+              "sign": "harmful",
+              "target_only": 0.010767542163837941
+            }
+          ]
+        },
+        "tft_pooled": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0009905551903183,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.05760632584558068,
+              "sign": "harmful",
+              "target_only": 0.05661577065526238
+            },
+            {
+              "delta_pooled_minus_target": 0.010030212677406447,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.0779689316744977,
+              "sign": "harmful",
+              "target_only": 0.06793871899709125
+            },
+            {
+              "delta_pooled_minus_target": 0.0012489898792079138,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.02140704572366226,
+              "sign": "harmful",
+              "target_only": 0.020158055844454348
+            }
+          ]
+        },
+        "transformer_pooled": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0036715813290797844,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.040795544618533935,
+              "sign": "harmful",
+              "target_only": 0.03712396328945415
+            },
+            {
+              "delta_pooled_minus_target": 0.0022788703325863496,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.05005707533755431,
+              "sign": "harmful",
+              "target_only": 0.04777820500496796
+            },
+            {
+              "delta_pooled_minus_target": 0.0010468835906473385,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.013882306042060321,
+              "sign": "harmful",
+              "target_only": 0.012835422451412982
+            }
+          ]
+        },
+        "transformer_selective": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0019782995858489832,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03514566370360517,
+              "sign": "helpful",
+              "target_only": 0.03712396328945415
+            },
+            {
+              "delta_pooled_minus_target": -0.0038522199465151757,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.043925985058452785,
+              "sign": "helpful",
+              "target_only": 0.04777820500496796
+            },
+            {
+              "delta_pooled_minus_target": -0.0007027206190701636,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.012132701832342819,
+              "sign": "helpful",
+              "target_only": 0.012835422451412982
+            }
+          ]
+        },
+        "transformer_selective_regularized": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.004465137189636398,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03265882609981775,
+              "sign": "helpful",
+              "target_only": 0.03712396328945415
+            },
+            {
+              "delta_pooled_minus_target": -0.006887126009958236,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.040891078995009725,
+              "sign": "helpful",
+              "target_only": 0.04777820500496796
+            },
+            {
+              "delta_pooled_minus_target": -0.0016055089556660605,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011229913495746922,
+              "sign": "helpful",
+              "target_only": 0.012835422451412982
+            }
+          ]
+        }
+      },
+      "results": {
+        "chronos2_pooled_history": {
+          "chronos_label": "history_only_univariate",
+          "grouping": "STUDYID",
+          "mae_log": 0.10319112388267877,
+          "mean_quantile_loss": 0.03361443337612441,
+          "merge_one_to_one": true,
+          "n_scored": 284,
+          "n_studies": 2,
+          "rmse_log": 0.11966499097110209,
+          "seconds": 12.68641710281372,
+          "status": "ok"
+        },
+        "chronos2_selective_history": {
+          "reason": "Chronos-2 has no selective-sharing training path",
+          "status": "not_implemented"
+        },
+        "chronos2_selective_regularized_history": {
+          "reason": "Chronos-2 has no selective-sharing training path",
+          "status": "not_implemented"
+        },
+        "chronos2_target_only_history": {
+          "chronos_label": "history_only_univariate",
+          "grouping": "STUDYID",
+          "mae_log": 0.10263138490208294,
+          "mean_quantile_loss": 0.03349666408211812,
+          "merge_one_to_one": true,
+          "n_scored": 284,
+          "n_studies": 2,
+          "rmse_log": 0.11909690461138074,
+          "seconds": 13.79709506034851,
+          "status": "ok"
+        },
+        "chronos2_zero_shot_history": {
+          "chronos_label": "history_only_univariate",
+          "grouping": "STUDYID",
+          "mae_log": 0.10945143355554868,
+          "mean_quantile_loss": 0.03511555975847931,
+          "merge_one_to_one": true,
+          "n_scored": 284,
+          "n_studies": 2,
+          "rmse_log": 0.12595961648751774,
+          "seconds": 4.2550671100616455,
+          "status": "ok"
+        },
+        "last_value": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.10637670252259208,
+          "mean_quantile_loss": 0.05318835126129604,
+          "merge_one_to_one": true,
+          "n_scored": 284,
+          "n_studies": 2,
+          "rmse_log": 0.12334966098175218,
+          "seconds": 0.03856611251831055,
+          "status": "ok"
+        },
+        "spline_pooled": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.0402676162850108,
+          "mean_quantile_loss": 0.02229667082085414,
+          "merge_one_to_one": true,
+          "n_scored": 284,
+          "n_studies": 2,
+          "rmse_log": 0.0503746434786269,
+          "seconds": 5.598737001419067,
+          "status": "ok"
+        },
+        "spline_selective": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03327711803598056,
+          "mean_quantile_loss": 0.012598763115417078,
+          "merge_one_to_one": true,
+          "n_scored": 284,
+          "n_studies": 2,
+          "rmse_log": 0.041684239878772116,
+          "seconds": 5.710383176803589,
+          "status": "ok"
+        },
+        "spline_selective_regularized": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03097840484322354,
+          "mean_quantile_loss": 0.011056983420015085,
+          "merge_one_to_one": true,
+          "n_scored": 284,
+          "n_studies": 2,
+          "rmse_log": 0.038956175964867265,
+          "seconds": 5.712104320526123,
+          "status": "ok"
+        },
+        "spline_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.029950730564319877,
+          "mean_quantile_loss": 0.010767542163837941,
+          "merge_one_to_one": true,
+          "n_scored": 284,
+          "n_studies": 2,
+          "rmse_log": 0.03794246172186816,
+          "seconds": 5.656313419342041,
+          "status": "ok"
+        },
+        "tft_pooled": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.05760632584558068,
+          "mean_quantile_loss": 0.02140704572366226,
+          "merge_one_to_one": true,
+          "n_scored": 284,
+          "n_studies": 2,
+          "rmse_log": 0.0779689316744977,
+          "seconds": 41.1366069316864,
+          "status": "ok"
+        },
+        "tft_selective": {
+          "reason": "TFT has no selective-sharing training path",
+          "status": "not_implemented"
+        },
+        "tft_selective_regularized": {
+          "reason": "TFT has no selective-sharing training path",
+          "status": "not_implemented"
+        },
+        "tft_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.05661577065526238,
+          "mean_quantile_loss": 0.020158055844454348,
+          "merge_one_to_one": true,
+          "n_scored": 284,
+          "n_studies": 2,
+          "rmse_log": 0.06793871899709125,
+          "seconds": 30.378445863723755,
+          "status": "ok"
+        },
+        "transformer_pooled": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.040795544618533935,
+          "mean_quantile_loss": 0.013882306042060321,
+          "merge_one_to_one": true,
+          "n_scored": 284,
+          "n_studies": 2,
+          "rmse_log": 0.05005707533755431,
+          "seconds": 1.6816179752349854,
+          "status": "ok"
+        },
+        "transformer_selective": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03514566370360517,
+          "mean_quantile_loss": 0.012132701832342819,
+          "merge_one_to_one": true,
+          "n_scored": 284,
+          "n_studies": 2,
+          "rmse_log": 0.043925985058452785,
+          "seconds": 1.414764642715454,
+          "status": "ok"
+        },
+        "transformer_selective_regularized": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03265882609981775,
+          "mean_quantile_loss": 0.011229913495746922,
+          "merge_one_to_one": true,
+          "n_scored": 284,
+          "n_studies": 2,
+          "rmse_log": 0.040891078995009725,
+          "seconds": 1.3975541591644287,
+          "status": "ok"
+        },
+        "transformer_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03712396328945415,
+          "mean_quantile_loss": 0.012835422451412982,
+          "merge_one_to_one": true,
+          "n_scored": 284,
+          "n_studies": 2,
+          "rmse_log": 0.04777820500496796,
+          "seconds": 1.409367561340332,
+          "status": "ok"
+        }
+      },
+      "target_holdout_hashes": {
+        "pooled": {
+          "all_target": "11ccd2a44fb8550f",
+          "test": "dd63ab1b0ac4b709",
+          "validation": "dd85bf64592b2f0b"
+        },
+        "selective": {
+          "all_target": "11ccd2a44fb8550f",
+          "test": "dd63ab1b0ac4b709",
+          "validation": "dd85bf64592b2f0b"
+        },
+        "selective_regularized": {
+          "all_target": "11ccd2a44fb8550f",
+          "test": "dd63ab1b0ac4b709",
+          "validation": "dd85bf64592b2f0b"
+        },
+        "target_only": {
+          "all_target": "11ccd2a44fb8550f",
+          "test": "dd63ab1b0ac4b709",
+          "validation": "dd85bf64592b2f0b"
+        }
+      },
+      "train_index": 0,
+      "train_seed": 84001
+    }
+  ],
+  "seconds_total": 274.0577144622803,
+  "versions": {
+    "chronos2_class": "chronos.chronos2.pipeline.Chronos2Pipeline",
+    "packages": {
+      "accelerate": "1.15.0",
+      "chronos": "2.3.2",
+      "lightning": "2.6.6",
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "peft": "0.21.2",
+      "pytorch_forecasting": "1.8.0",
+      "torch": "2.14.1+cu130",
+      "transformers": "5.20.2"
+    },
+    "python": "3.12.3",
+    "tft_class": "pytorch_forecasting.models.temporal_fusion_transformer._tft.TemporalFusionTransformer",
+    "torch_cuda": false,
+    "torch_device": "cpu"
+  }
+}
