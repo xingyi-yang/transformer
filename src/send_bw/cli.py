@@ -92,7 +92,7 @@ def main(argv: list[str] | None = None) -> int:
     for name in ["generate", "inspect-source", "ingest", "prepare", "validate-real", "train", "evaluate",
                  "design", "report", "run-all", "validate-request", "propose-design", "v3-pilot",
                  "v3-eval", "v3-repl", "v3-research", "v3-closeout", "v3-increment",
-                 "v3-limitations", "v3-objective", "historical-audit"]:
+                 "v3-limitations", "v3-objective", "v3-official-seq", "historical-audit"]:
         s = sub.add_parser(name)
         artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout",
                                 "v3-increment", "v3-limitations")
@@ -194,6 +194,18 @@ def main(argv: list[str] | None = None) -> int:
                               "adjusted_using_exposed_test": out.get("adjusted_using_exposed_test"),
                               "phase_b": (out.get("phase_b") or {}).get("status"),
                               "parent": args.output_dir}, indent=2, default=str))
+            return 0
+        if args.cmd == "v3-official-seq":
+            from send_bw.v3_official_seq import execute_v3_official_seq
+
+            out = execute_v3_official_seq(args.config, force=args.force)
+            print(json.dumps({"status": "ok",
+                              "retuned_after_test": False,
+                              "n_results": len(out.get("results") or {}),
+                              "blockers": len(out.get("blockers") or []),
+                              "real_data_accessed": out.get("real_data_accessed"),
+                              "parent": out.get("output_dir")},
+                             indent=2, default=str))
             return 0
         if args.cmd == "v3-objective":
             from send_bw.v3_objective import execute_v3_objective

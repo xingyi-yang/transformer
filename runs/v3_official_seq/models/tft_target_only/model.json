@@ -1,0 +1,114 @@
+{
+ "name": "tft",
+ "task": "early_history",
+ "spec": {
+  "species": "RAT",
+  "strains": [
+   "SPRAGUE-DAWLEY",
+   "WISTAR HAN"
+  ],
+  "routes": [
+   "ORAL GAVAGE"
+  ],
+  "sexes": [
+   "F",
+   "M"
+  ],
+  "zb_mean": {
+   "F": 5.248262549231282,
+   "M": 5.5348352549960085
+  },
+  "max_dose": 300.0,
+  "max_day": 28.0,
+  "intervals": [
+   1.0
+  ],
+  "compound_ids": [
+   "CMP03",
+   "CMP04",
+   "CMP05",
+   "CMP06"
+  ],
+  "descriptor_ranges": {
+   "D1": [
+    -3.1696,
+    1.4046
+   ],
+   "D2": [
+    -1.3223,
+    0.5543
+   ],
+   "D3": [
+    -0.2109,
+    1.2754
+   ]
+  },
+  "t_ref": 28.0,
+  "version": "features-v1",
+  "animal_cols": [
+   "SEX_M",
+   "ZB_C",
+   "IS_CONTROL",
+   "LD",
+   "INV_INTERVAL",
+   "START",
+   "END",
+   "D1",
+   "D2",
+   "D3",
+   "STRAIN_WISTAR HAN"
+  ],
+  "time_cols": [
+   "TAU",
+   "EXPO",
+   "OFF",
+   "LCUM"
+  ],
+  "sharing": "context_specific",
+  "species_levels": [
+   "RAT"
+  ],
+  "zb_mean_by_species": {},
+  "declared_species": [],
+  "fixed_schema": false
+ },
+ "quantiles": [
+  0.1,
+  0.25,
+  0.5,
+  0.75,
+  0.9
+ ],
+ "encoder_window_day": 14.0,
+ "max_encoder_length": 8,
+ "max_prediction_length": 6,
+ "min_encoder_length": 1,
+ "history": {
+  "name": "tft",
+  "task": "early_history",
+  "library": "pytorch_forecasting.TemporalFusionTransformer",
+  "official_class": "pytorch_forecasting.TemporalFusionTransformer",
+  "training_scope": "target_only",
+  "not_the_required_transformer": true,
+  "n_train_series": 211,
+  "n_val_series": 54,
+  "n_train_obs": 980,
+  "max_encoder_length": 8,
+  "max_prediction_length": 6,
+  "min_encoder_length": 1,
+  "encoder_window_day": 14.0,
+  "quantiles": [
+   0.1,
+   0.25,
+   0.5,
+   0.75,
+   0.9
+  ],
+  "allow_missing_timesteps": true,
+  "observed_rows_only": true,
+  "filled_target_with_zero": false,
+  "max_epochs": 8,
+  "note": "early-history only; baseline-only pre-study and design simulation are not supported; VAR is a quantile-spread approximation"
+ },
+ "not_the_required_transformer": true
+}

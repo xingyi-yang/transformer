@@ -144,6 +144,21 @@ def check_optional(name: str, config: dict[str, Any] | None = None) -> dict[str,
         info.reason = ("pytorch_forecasting API verified; adapter is early-history only "
                        "(no baseline-only pre-study, not a design simulator, not the required transformer)")
         return asdict(info)
+    if name == "chronos2":
+        from send_bw.models.chronos2 import verify_chronos2_api
+
+        verified = verify_chronos2_api()
+        info.extra["verify"] = {k: verified[k] for k in ("ok", "reason", "missing", "class") if k in verified}
+        if not verified["ok"]:
+            info.reason = verified["reason"]
+            return asdict(info)
+        if info.requires_download and not config.get("download_permission", False):
+            info.reason = "pretrained-weight download not authorized (set download_permission: true after approval)"
+            return asdict(info)
+        info.status = "adapter_ready"
+        info.reason = ("chronos.Chronos2Pipeline API verified; zero-shot is separate from fine-tune; "
+                       "early-history only; not the required transformer")
+        return asdict(info)
     if importlib.util.find_spec(info.package) is None:
         info.reason = f"optional dependency '{info.package}' not installed"
         return asdict(info)

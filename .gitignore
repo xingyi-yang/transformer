@@ -15,6 +15,14 @@ runs/*
 !runs/v3_phaseb/
 !runs/v3_limitations/
 !runs/v3_objective/
+!runs/v3_official_seq/
+!runs/v3_official_seq/**/*.parquet
+# Hugging Face cache and the official Chronos-2 full weights (~456M).
+# Zero-shot reload uses amazon/chronos-2; LoRA adapters are committed.
+runs/v3_official_seq/hf_cache/
+runs/v3_official_seq/models/chronos2_zero_shot/pipeline/
+runs/v3_official_seq/models/chronos2_target_only/finetune/checkpoint-40/
+runs/v3_official_seq/models/chronos2_pooled/finetune/checkpoint-40/
 !runs/smoke/**/*.parquet
 !runs/bayesian_smoke/**/*.parquet
 !runs/v3_pilot_k0k1/**/*.parquet
@@ -29,6 +37,7 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .ruff_cache/
+lightning_logs/
 # credentials must never live in files, but guard common names anyway
 .env
 *.pem
