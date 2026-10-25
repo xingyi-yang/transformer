@@ -17,16 +17,26 @@ Phase A (safe; run now):
 python3 -m send_bw.cli historical-audit --config configs/v3_historical_audit.yaml --phase A
 ```
 
-Phase B (blocked until a signed ticket exists):
+Phase B (blocked until a signed ticket exists). The runner is ready; it does
+not create, sign, or self-approve a ticket. Without a genuine ticket it writes
+`ACCESS_BLOCKER` and stops before opening any source.
 
 ```text
 python3 -m send_bw.cli historical-audit --config configs/v3_historical_audit.yaml --phase B \
   --authorization /approved/tickets/metadata_inspect.yaml
 ```
 
+Discovery looks at `--authorization`, `SEND_BW_AUTHORIZATION`, and
+`/approved/tickets/*.yaml` only. It does not scan the repository for
+documentation text. The in-repo example is unsigned and is rejected.
+
+Once a steward-signed metadata-only ticket names `source.root`, Phase B
+returns biological-support inventory, missingness, provenance, and feasible
+candidate validation contexts. It does not inspect BWSTRESN/BWORRES, train
+models, or offer design recommendations.
+
 Copy `configs/historical_authorization.example.yaml` **outside the repo**,
 complete it, and set `written_authorization: true` only after a steward signs.
-The in-repo example is unsigned and is rejected.
 
 ## Gate
 

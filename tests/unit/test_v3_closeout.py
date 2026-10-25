@@ -108,8 +108,12 @@ def test_audit_phase_a_does_not_touch_real_roots():
 
 
 def test_audit_phase_b_refuses_without_ticket():
-    with pytest.raises(AuditGateError, match="authorization"):
-        execute_historical_audit(ROOT / "configs" / "v3_historical_audit.yaml", phase="B")
+    out = execute_historical_audit(ROOT / "configs" / "v3_historical_audit.yaml", phase="B")
+    assert out["status"] == "ACCESS_BLOCKER"
+    assert out["real_data_accessed"] is False
+    assert out["source_opened"] is False
+    assert out["created_ticket"] is False
+    assert out["self_approved"] is False
 
 
 def test_authorization_schema_rejects_training_and_unsigned_example():

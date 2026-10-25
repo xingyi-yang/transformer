@@ -91,9 +91,10 @@ def main(argv: list[str] | None = None) -> int:
     sub = p.add_subparsers(dest="cmd", required=True)
     for name in ["generate", "inspect-source", "ingest", "prepare", "validate-real", "train", "evaluate",
                  "design", "report", "run-all", "validate-request", "propose-design", "v3-pilot",
-                 "v3-eval", "v3-repl", "v3-research", "v3-closeout", "historical-audit"]:
+                 "v3-eval", "v3-repl", "v3-research", "v3-closeout", "v3-increment",
+                 "historical-audit"]:
         s = sub.add_parser(name)
-        artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout")
+        artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout", "v3-increment")
         s.add_argument("--config", required=not artifact_cmd and name != "v3-closeout")
         s.add_argument("--force", action="store_true")
         if name == "train":
@@ -110,11 +111,14 @@ def main(argv: list[str] | None = None) -> int:
         if name == "v3-closeout":
             s.add_argument("--research-dir", default="runs/v3_research")
             s.add_argument("--output-dir", default="runs/v3_closeout")
+        if name == "v3-increment":
+            s.add_argument("--research-dir", default="runs/v3_research")
+            s.add_argument("--output-dir", default="runs/v3_increment")
         if name == "historical-audit":
             s.add_argument("--phase", default="A")
             s.add_argument("--authorization", help="signed ticket; required for phases B and C")
     args = p.parse_args(argv)
-    if args.cmd not in ("v3-closeout",) and getattr(args, "model", None) is None and args.config is None:
+    if args.cmd not in ("v3-closeout", "v3-increment") and getattr(args, "model", None) is None and args.config is None:
         p.error("--config or --model is required")
     try:
         if args.cmd == "v3-pilot":
@@ -162,15 +166,33 @@ def main(argv: list[str] | None = None) -> int:
                               "source": out.get("source_research"),
                               "parent": args.output_dir}, indent=2, default=str))
             return 0
+        if args.cmd == "v3-increment":
+            from send_bw.v3_increment import execute_v3_increment
+
+            out = execute_v3_increment(args.research_dir, args.output_dir)
+            print(json.dumps({"status": "ok",
+                              "retuned_after_test": False,
+                              "grid_relaunched": False,
+                              "exploratory": out.get("exploratory"),
+                              "n_datasets": out.get("n_datasets"),
+                              "n_cells_scored": out.get("n_cells_scored"),
+                              "bayesian_unreliable": (out.get("bayesian") or {}).get("explicitly_unreliable"),
+                              "parent": args.output_dir}, indent=2, default=str))
+            return 0
         if args.cmd == "historical-audit":
             from send_bw.historical_audit import execute_historical_audit
 
             out = execute_historical_audit(args.config, phase=args.phase,
                                            authorization_path=args.authorization)
-            print(json.dumps({"status": "ok", "phase": out.get("phase"),
+            print(json.dumps({"status": out.get("status") or "ok", "phase": out.get("phase"),
                               "real_data_accessed": out.get("real_data_accessed"),
+                              "source_opened": out.get("source_opened"),
+                              "endpoint_values_inspected": out.get("endpoint_values_inspected"),
                               "support_for_synthetic_to_real": out.get("support_for_synthetic_to_real"),
+                              "blocker": out.get("blocker"),
                               "counts": out.get("counts")}, indent=2, default=str))
+            if out.get("status") in {"ACCESS_BLOCKER", "EXTRACT_BLOCKER"}:
+                return 2
             return 0
         if args.cmd == "v3-repl":
             from send_bw.v3_repl import execute_v3_repl
