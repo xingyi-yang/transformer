@@ -91,7 +91,7 @@ def main(argv: list[str] | None = None) -> int:
     sub = p.add_subparsers(dest="cmd", required=True)
     for name in ["generate", "inspect-source", "ingest", "prepare", "validate-real", "train", "evaluate",
                  "design", "report", "run-all", "validate-request", "propose-design", "v3-pilot",
-                 "v3-eval"]:
+                 "v3-eval", "v3-repl"]:
         s = sub.add_parser(name)
         artifact_cmd = name in ("validate-request", "propose-design")
         s.add_argument("--config", required=not artifact_cmd)
@@ -132,6 +132,19 @@ def main(argv: list[str] | None = None) -> int:
                               "retuned_after_test": False,
                               "failures": out.get("failures"),
                               "parent": load_eval_yaml(args.config).get("output_dir")}, indent=2, default=str))
+            return 0
+        if args.cmd == "v3-repl":
+            from send_bw.v3_repl import execute_v3_repl
+            from send_bw.v3_repl import load_yaml as load_repl_yaml
+
+            out = execute_v3_repl(args.config, force=args.force)
+            print(json.dumps({"status": "ok",
+                              "git_revision": (out.get("freeze_lock") or {}).get("git_revision"),
+                              "config_hash": (out.get("freeze_lock") or {}).get("config_hash"),
+                              "retuned_after_test": False,
+                              "component_status": out.get("component_status"),
+                              "failures": out.get("failures"),
+                              "parent": load_repl_yaml(args.config).get("output_dir")}, indent=2, default=str))
             return 0
         if args.cmd == "validate-request":
             return cmd_validate_request(args)

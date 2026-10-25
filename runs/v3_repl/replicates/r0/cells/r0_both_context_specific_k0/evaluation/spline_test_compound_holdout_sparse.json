@@ -1,0 +1,160 @@
+{
+  "encoders": {
+    "W0": {
+      "equals": "predose_conditioned",
+      "n_animals_without_encoder": 0,
+      "note": "predose only; no post-baseline encoder",
+      "rule": "W0",
+      "status": "ok",
+      "summary": {
+        "between_animal_var_ratio_pred_over_obs": 1.254301669784302,
+        "contrast_bias": 0.021231113812280038,
+        "contrast_cov90": 1.0,
+        "contrast_day": 28.0,
+        "contrast_width90": 0.1248783219981858,
+        "correlation_by_gap": [
+          {
+            "corr_obs": 0.9211896869585067,
+            "corr_pred": 0.9328126283527685,
+            "gap_bin": "(0,4]",
+            "n_pairs": 7
+          },
+          {
+            "corr_obs": 0.8780460387721948,
+            "corr_pred": 0.8869732333324509,
+            "gap_bin": "(4,8]",
+            "n_pairs": 6
+          },
+          {
+            "corr_obs": 0.78781863499484,
+            "corr_pred": 0.8137114884058789,
+            "gap_bin": "(8,15]",
+            "n_pairs": 9
+          },
+          {
+            "corr_obs": 0.6437777307529898,
+            "corr_pred": 0.7021499086532056,
+            "gap_bin": "(15,100]",
+            "n_pairs": 6
+          }
+        ],
+        "distributional": {
+          "cov80": 0.8352059925093633,
+          "cov95": 0.9550561797752809,
+          "crps_log_study_balanced": 0.02841098628350819,
+          "energy_score_mean": 0.09209858072157737,
+          "pit_histogram_10bins": [
+            10,
+            20,
+            22,
+            13,
+            26,
+            42,
+            40,
+            24,
+            36,
+            34
+          ]
+        },
+        "effective_sample_sizes": {
+          "n_animals": 34,
+          "n_obs": 267,
+          "n_studies": 1
+        },
+        "energy_score_mean": 0.09209858072157737,
+        "extrema_max_cov90": 0.9117647058823529,
+        "group_mean_cov90": 0.9375,
+        "increment_sd_ratio_pred_over_obs": 1.0146693831145976,
+        "model": "spline",
+        "n_contrasts": 4,
+        "observation_weighted": {
+          "cov80": 0.8352059925093633,
+          "cov95": 0.9550561797752809,
+          "crps_log": 0.02841098628350819,
+          "mae_g": 10.960068311351149,
+          "mae_log": 0.039464730343336245,
+          "rmse_g": 14.960922920330397,
+          "rmse_log": 0.052108221077582305,
+          "width80_log": 0.1362622578277436,
+          "width95_log": 0.2037163855020692
+        },
+        "pit_histogram_10bins": [
+          10,
+          20,
+          22,
+          13,
+          26,
+          42,
+          40,
+          24,
+          36,
+          34
+        ],
+        "study_balanced": {
+          "cov80": 0.8352059925093633,
+          "cov95": 0.9550561797752809,
+          "crps": 0.02841098628350819,
+          "mae_log": 0.039464730343336245,
+          "rmse_log": 0.052108221077582305,
+          "width80": 0.1362622578277436,
+          "width95": 0.2037163855020692
+        },
+        "study_level_contrast_error": {
+          "bias_study_mean": 0.021231113812280038,
+          "n_studies_with_contrast": 1,
+          "rmse_study_mean": 0.040853165661895764
+        },
+        "task": "pre_study_new_study",
+        "task_alias": "predose_conditioned"
+      }
+    },
+    "W1": {
+      "conditioned": {
+        "cov90": 0.9527896995708155,
+        "crps_log": 0.024874443415712825,
+        "n_obs": 233,
+        "rmse_log": 0.04615118634628137
+      },
+      "n_animals_without_encoder": 0,
+      "note": "encoder rows omitted, not filled",
+      "rule": "W1",
+      "status": "ok",
+      "task": "sparse_history"
+    },
+    "Wall14": {
+      "conditioned": {
+        "cov90": 0.9402985074626866,
+        "crps_log": 0.020355466252724542,
+        "n_obs": 134,
+        "rmse_log": 0.03632491313096258
+      },
+      "n_animals_without_encoder": 0,
+      "note": "encoder rows omitted, not filled",
+      "rule": "Wall14",
+      "status": "ok",
+      "task": "sparse_history"
+    },
+    "Wlast14": {
+      "conditioned": {
+        "cov90": 0.9356223175965666,
+        "crps_log": 0.018309847110316087,
+        "n_obs": 233,
+        "rmse_log": 0.03314854139556244
+      },
+      "n_animals_without_encoder": 0,
+      "note": "encoder rows omitted, not filled",
+      "rule": "Wlast14",
+      "status": "ok",
+      "task": "sparse_history"
+    }
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "model": "spline",
+  "split": "test_compound_holdout",
+  "task": "sparse_history"
+}

@@ -102,3 +102,42 @@ def compose_train_with_donors(target_splits: pd.DataFrame, donor_ids: list[str],
     out = out.sort_values("STUDYID").reset_index(drop=True)
     assert_disjoint(out)
     return out
+
+
+SPARSE_TARGET_TRAIN_KIND = "sparse_target_study_training"
+SPARSE_HISTORY_KIND = "sparse_history_encoder"
+
+
+def compose_sparse_target_train(target_splits: pd.DataFrame, n_keep: int) -> tuple[pd.DataFrame, dict[str, Any]]:
+    """Keep the first n_keep target TRAIN studies by STUDYID sort. Val/test stay fixed.
+
+    This is not a sparse observation/history encoder window (W0/W1/Wlast14/Wall14).
+    """
+    splits = target_splits[["STUDYID", "SPLIT"]].astype(str).copy()
+    train_ids = sorted(splits.loc[splits["SPLIT"] == "train", "STUDYID"].tolist())
+    n_keep = int(n_keep)
+    if n_keep < 2:
+        raise ValueError("sparse target-study training requires n_keep >= 2")
+    kept = train_ids[:n_keep]
+    dropped = train_ids[n_keep:]
+    if len(kept) < 2:
+        raise ValueError("sparse target-study training would leave fewer than 2 training studies")
+    out = splits[~splits["STUDYID"].isin(dropped)].reset_index(drop=True)
+    meta: dict[str, Any] = {
+        "kind": SPARSE_TARGET_TRAIN_KIND,
+        "not": SPARSE_HISTORY_KIND,
+        "n_keep": n_keep,
+        "n_train_before": len(train_ids),
+        "n_train_after": len(kept),
+        "kept_train_studyids": kept,
+        "dropped_train_studyids": dropped,
+        "validation_unchanged": True,
+        "test_unchanged": True,
+        "validation_studyids": sorted(splits.loc[splits["SPLIT"] == "validation", "STUDYID"].tolist()),
+        "test_studyids": sorted(splits.loc[splits["SPLIT"] == "test", "STUDYID"].tolist()),
+        "note": (
+            "Drops target TRAIN studies only. Validation and test study sets stay frozen. "
+            "Distinct from sparse observation/history encoder windows."
+        ),
+    }
+    return out, meta

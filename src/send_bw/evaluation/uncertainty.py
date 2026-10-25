@@ -48,16 +48,16 @@ def inspect_covariance(cov: dict[str, Any] | None) -> dict[str, Any]:
 def bayesian_gate(diagnostics: dict[str, Any] | None, status: str | None = None,
                   reason: str | None = None) -> dict[str, Any]:
     d = diagnostics or {}
-    if status == "not_run":
+    if status in ("not_run", "failed"):
         return {
-            "status": "not_run",
+            "status": status,
             "reliable": False,
             "counted_as_successful_benchmark": False,
             "rhat_max": None,
             "ess_bulk_min": None,
             "ess_tail_min": None,
             "divergences": None,
-            "reason": reason or "Bayesian was not run",
+            "reason": reason or ("Bayesian inference failed" if status == "failed" else "Bayesian was not run"),
             "components": dict(COMPONENTS),
         }
     reliable = bool(d.get("reliable"))

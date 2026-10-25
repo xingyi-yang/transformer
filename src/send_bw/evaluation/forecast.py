@@ -16,6 +16,7 @@ import numpy as np
 import pandas as pd
 
 from send_bw.evaluation.calibration import crps_gaussian, crps_samples, energy_score, interval_hits, pit
+from send_bw.evaluation.uncertainty import COMPONENTS
 from send_bw.models.base import ModelData, ResponseModel
 
 GAP_BINS = [(0, 4), (4, 8), (8, 15), (15, 100)]
@@ -59,13 +60,15 @@ def evaluate_prestudy(model: ResponseModel, data: ModelData, n_draws: int = 200,
         df = pd.DataFrame({"STUDYID": sid, "SEX": a["SEX"].to_numpy()[ii], "ARM_KEY": a["ARM_KEY"].to_numpy()[ii],
                            "DAY": times[jj], "err_log": mean - y,
                            "err_g": np.exp(samp).mean(0) - np.exp(y),
-                           "hit80": h80, "hit95": h95, "width95": w95, "crps": crps, "pit": pit(samp, y)})
+                           "hit80": h80, "hit95": h95, "width80": w80, "width95": w95,
+                           "crps": crps, "pit": pit(samp, y)})
         per_obs.append(df)
         per_study.append({"STUDYID": sid, "rmse_log": float(np.sqrt(np.mean((mean - y) ** 2))),
                           "mae_log": float(np.mean(np.abs(mean - y))), "cov80": float(h80.mean()),
-                          "cov95": float(h95.mean()), "crps": float(crps.mean()), "n_obs": int(len(y)),
-                          "n_animals": len(a), "contrast_bias": None, "contrast_rmse": None,
-                          "n_contrasts": 0})
+                          "cov95": float(h95.mean()), "width80": float(w80.mean()),
+                          "width95": float(w95.mean()), "crps": float(crps.mean()),
+                          "n_obs": int(len(y)), "n_animals": len(a), "contrast_bias": None,
+                          "contrast_rmse": None, "n_contrasts": 0})
         for i in range(len(a)):
             mi = m[i]
             if mi.sum() >= 2:
@@ -162,8 +165,11 @@ def evaluate_prestudy(model: ResponseModel, data: ModelData, n_draws: int = 200,
                                  "rmse_g": float(np.sqrt(np.mean(obs_df["err_g"] ** 2))),
                                  "mae_g": float(np.mean(np.abs(obs_df["err_g"]))),
                                  "cov80": float(obs_df["hit80"].mean()), "cov95": float(obs_df["hit95"].mean()),
-                                 "width95_log": float(obs_df["width95"].mean()), "crps_log": float(obs_df["crps"].mean())},
-        "study_balanced": {k: float(st[k].mean()) for k in ["rmse_log", "mae_log", "cov80", "cov95", "crps"]},
+                                 "width80_log": float(obs_df["width80"].mean()),
+                                 "width95_log": float(obs_df["width95"].mean()),
+                                 "crps_log": float(obs_df["crps"].mean())},
+        "study_balanced": {k: float(st[k].mean()) for k in
+                           ["rmse_log", "mae_log", "cov80", "cov95", "width80", "width95", "crps"]},
         "energy_score_mean": float(np.mean(es)) if es else None,
         "group_mean_cov90": float(cells["hit90"].mean()) if len(cells) else None,
         "between_animal_var_ratio_pred_over_obs": float(cells["var_pred"].mean() / cells["var_obs"].mean())
@@ -191,6 +197,57 @@ def evaluate_prestudy(model: ResponseModel, data: ModelData, n_draws: int = 200,
         "pit_histogram_10bins": pit_hist,
     }
     return {"summary": summary, "by_sex_horizon": by, "per_study": st}
+
+
+def evaluation_pack(result: dict[str, Any]) -> dict[str, Any]:
+    """Individual, group-mean, contrast, and temporal-distribution evaluation.
+
+    Reports coverage, widths (including width80), study-level contrast errors,
+    and documented uncertainty limitations. Does not claim complete parameter
+    uncertainty unless a reliable Bayesian posterior is attached elsewhere.
+    """
+    s = result.get("summary") or {}
+    ow = s.get("observation_weighted") or {}
+    sb = s.get("study_balanced") or {}
+    return {
+        "status": "completed",
+        "task": s.get("task_alias") or s.get("task") or "predose_conditioned",
+        "model": s.get("model"),
+        "split": s.get("split"),
+        "individual": {
+            "coverage80": sb.get("cov80", ow.get("cov80")),
+            "coverage95": sb.get("cov95", ow.get("cov95")),
+            "width80_log": sb.get("width80", ow.get("width80_log")),
+            "width95_log": sb.get("width95", ow.get("width95_log")),
+            "rmse_log_study_balanced": sb.get("rmse_log"),
+            "crps_study_balanced": sb.get("crps"),
+            "effective_sample_sizes": s.get("effective_sample_sizes"),
+        },
+        "group_mean": {
+            "coverage90": s.get("group_mean_cov90"),
+            "between_animal_var_ratio_pred_over_obs": s.get("between_animal_var_ratio_pred_over_obs"),
+        },
+        "contrast": {
+            "coverage90": s.get("contrast_cov90"),
+            "width90": s.get("contrast_width90"),
+            "bias": s.get("contrast_bias"),
+            "n_contrasts": s.get("n_contrasts"),
+            "study_level": s.get("study_level_contrast_error"),
+        },
+        "temporal": {
+            "pit_histogram_10bins": s.get("pit_histogram_10bins"),
+            "increment_sd_ratio_pred_over_obs": s.get("increment_sd_ratio_pred_over_obs"),
+            "extrema_max_cov90": s.get("extrema_max_cov90"),
+            "correlation_by_gap": s.get("correlation_by_gap"),
+            "distributional": s.get("distributional"),
+        },
+        "uncertainty_limitations": dict(COMPONENTS),
+        "note": (
+            "Coverage and widths are predictive-interval diagnostics under the fitted "
+            "layer. They are not a complete parameter-uncertainty statement except "
+            "when a reliable Bayesian posterior is counted separately."
+        ),
+    }
 
 
 def _early_history_only(model: ResponseModel) -> bool:

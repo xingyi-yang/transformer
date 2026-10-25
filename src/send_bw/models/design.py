@@ -29,11 +29,13 @@ class MeanDesign:
     route_cols: list[str]
     species_cols: list[str] = field(default_factory=list)
     rich: bool = True
+    species_treatment: bool = False
     col_names: list[str] = field(default_factory=list)
     scale: list[float] = field(default_factory=list)
 
     @staticmethod
-    def from_features(F: pd.DataFrame, n_time_knots: int = 3, n_expo_knots: int = 2, rich: bool = True) -> MeanDesign:
+    def from_features(F: pd.DataFrame, n_time_knots: int = 3, n_expo_knots: int = 2, rich: bool = True,
+                      species_treatment: bool = False) -> MeanDesign:
         tau_hi = float(F["TAU"].max()) + 1e-6
         expo_hi = max(float(F["EXPO"].max()), 1e-3) + 1e-6
         off_hi = max(float(F["OFF"].max()), 1e-3) + 1e-6
@@ -43,7 +45,8 @@ class MeanDesign:
         d = MeanDesign(tau_hi, expo_hi, off_hi, sorted(set(np.round(tk, 4))), sorted(set(np.round(ek, 4))), [],
                        [c for c in F.columns if c.startswith("STRAIN_")],
                        [c for c in F.columns if c.startswith("ROUTE_")],
-                       [c for c in F.columns if c.startswith("SPECIES_")], rich)
+                       [c for c in F.columns if c.startswith("SPECIES_")], rich,
+                       species_treatment)
         return d
 
     def _blocks(self, F: pd.DataFrame) -> list[tuple[str, np.ndarray]]:
@@ -70,6 +73,12 @@ class MeanDesign:
             blocks.append(("ob_ld_D1", OB * ld * F["D1"].to_numpy()[:, None]))
         else:
             blocks.append(("ob_ld", OB * ld))
+        if self.species_treatment:
+            for c in self.species_cols:
+                sp = F[c].to_numpy()[:, None]
+                blocks.append((f"eb_ld_{c}", EB * ld * sp))
+                for dname in ["D1", "D2", "D3"]:
+                    blocks.append((f"eb_ld_{dname}_{c}", EB * ld * F[dname].to_numpy()[:, None] * sp))
         return blocks
 
     def matrix(self, F: pd.DataFrame, fit_scale: bool = False) -> np.ndarray:
@@ -90,4 +99,5 @@ class MeanDesign:
     def from_dict(d: dict) -> MeanDesign:
         raw = dict(d)
         raw.setdefault("species_cols", [])
+        raw.setdefault("species_treatment", False)
         return MeanDesign(**raw)

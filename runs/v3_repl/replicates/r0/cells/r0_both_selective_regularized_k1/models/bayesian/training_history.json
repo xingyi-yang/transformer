@@ -1,0 +1,150 @@
+{
+  "main": {
+    "chains": 2,
+    "divergences": 0,
+    "draws": 400,
+    "dropped_nonidentifiable_columns": [
+      4,
+      24,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      52,
+      54,
+      55,
+      56,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      70
+    ],
+    "ess_bulk_min": 57.94622256614108,
+    "ess_tail_min": 102.28879654372301,
+    "likelihood": "normal",
+    "maxdepth_hits": 0,
+    "posterior_predictive": {
+      "by_time_bin": {
+        "15-21": {
+          "p_mean": 0.52,
+          "p_sd": 0.60625
+        },
+        "22-28": {
+          "p_mean": 0.405,
+          "p_sd": 0.4475
+        },
+        "8-14": {
+          "p_mean": 0.46375,
+          "p_sd": 0.61
+        },
+        "<=7": {
+          "p_mean": 0.49625,
+          "p_sd": 0.64375
+        }
+      },
+      "extreme_bins": [],
+      "note": "one-step conditional replicates (likelihood factorization); full-trajectory new-study checks are in the held-out evaluation"
+    },
+    "posterior_summary": {
+      "ell": 6.597851637673854,
+      "sd_a": [
+        0.13191947646795169,
+        0.39279040686755307
+      ],
+      "sd_a_scaled_logw": [
+        0.01842877277667796,
+        0.05487169408817027
+      ],
+      "sd_s": [
+        0.10693668503707367,
+        0.24926219232100702
+      ],
+      "sd_s_scaled_logw": [
+        0.014938748415349952,
+        0.03482121387296743
+      ],
+      "sigma_p": 0.17651608980808148,
+      "sigma_p_scaled_logw": 0.024658791844819717
+    },
+    "prior_predictive": {
+      "grams_last_obs_q025_q50_q975": [
+        107.3476367837757,
+        260.03471122134886,
+        17984.50200550211
+      ],
+      "note": "weakly informative: prior predictive should cover, not match, observed changes",
+      "observed_pct_change_q025_q50_q975": [
+        -3.2690011087831894,
+        26.78015335422762,
+        66.58873135571048
+      ],
+      "pct_change_last_obs_q025_q50_q975": [
+        -52.652540487716166,
+        10.60297333186595,
+        147.8378509282506
+      ],
+      "plausible": true
+    },
+    "priors": {
+      "m_ell": 1.9459101490553132,
+      "s_beta": 0.35,
+      "s_ell": 0.75,
+      "s_sd": 0.3,
+      "s_sigma": 0.3
+    },
+    "random_effects": "full",
+    "reliable": false,
+    "rhat_max": 1.0367751315780893,
+    "sampler_warnings": [],
+    "seconds": 11.605869054794312,
+    "seed": 4242,
+    "thresholds": {
+      "ess_bulk_min": 400,
+      "ess_tail_min": 400,
+      "rhat_max": 1.01
+    },
+    "tune": 400,
+    "worst_rhat_params": {
+      "beta[18]": 1.0128701687284596,
+      "beta[35]": 1.0135140004695948,
+      "ell": 1.0308645411535848,
+      "sd_a[0]": 1.0266426440189158,
+      "sigma_p": 1.0367751315780893
+    }
+  },
+  "n_animals": 64,
+  "n_beta": 52,
+  "n_obs": 314,
+  "n_studies": 8,
+  "reliable": false,
+  "s_y": 0.13969713396455918,
+  "selective_sharing": {
+    "model": "bayesian",
+    "note": "Selective v1 is retained. This variant adds regularized species-specific deviations in nonlinear growth and treatment response. Deviations shrink toward the shared mean; they are not unpenalized species RE.",
+    "regularization": {
+      "growth": "ridge inflation on SPECIES \u00d7 time-basis coefficients (lambda_growth)",
+      "transformer": "phase1 target fit; phase2 extra L2 of species/growth tokens toward phase1 and treatment-deviation head toward 0",
+      "treatment": "ridge inflation on SPECIES \u00d7 exposure/dose coefficients (lambda_treatment)"
+    },
+    "residual": "target_species_only",
+    "shared": [
+      "compound",
+      "regimen"
+    ],
+    "species_specific": [
+      "growth_deviation",
+      "treatment_deviation"
+    ],
+    "training": "MAIN mean including SPECIES\u00d7growth and SPECIES\u00d7treatment columns; reliability gate applies; unreliable fits are not a successful benchmark",
+    "variant": "regularized"
+  },
+  "sharing": "selective_regularized",
+  "species_treatment": true
+}
