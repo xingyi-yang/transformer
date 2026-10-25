@@ -19,6 +19,7 @@ from scipy.optimize import minimize
 
 T_REF = 28.0
 PARAMS = ["sd_s0", "sd_s1", "sd_a0", "sd_a1", "sigma_p", "ell", "sigma_m"]
+PROCESS_PARAMS = ("sd_s0", "sd_s1", "sd_a0", "sd_a1", "sigma_p", "sigma_m")
 JITTER = 1e-9
 
 
@@ -65,6 +66,16 @@ class HierarchicalCovariance:
         return scale * (study[:, None, :] + animal)
 
     # ---------------------------------------------------------------- likelihood
+    def scale_process(self, factor: float) -> HierarchicalCovariance:
+        """Scale residual-process SDs (not the OU length). Development use only."""
+        factor = float(factor)
+        for p in PROCESS_PARAMS:
+            setattr(self, p, float(getattr(self, p)) * factor)
+        info = dict(self.fit_info or {})
+        info["increment_moment_scale"] = factor
+        self.fit_info = info
+        return self
+
     def to_vector(self) -> np.ndarray:
         return np.log([getattr(self, p) for p in PARAMS])
 
