@@ -1,0 +1,5144 @@
+{
+  "abstention_counts": {
+    "overall": {
+      "n_decisions": 16,
+      "n_share": 7,
+      "n_target_only": 9,
+      "share_over_n": "7/16",
+      "target_only_over_n": "9/16"
+    },
+    "spline": {
+      "n_decisions": 8,
+      "n_share": 4,
+      "n_target_only": 4,
+      "share_over_n": "4/8",
+      "target_only_over_n": "4/8"
+    },
+    "transformer": {
+      "n_decisions": 8,
+      "n_share": 3,
+      "n_target_only": 5,
+      "share_over_n": "3/8",
+      "target_only_over_n": "5/8"
+    }
+  },
+  "aggregated_across_incomplete": false,
+  "compute_cap_hit": false,
+  "compute_cap_seconds": 600.0,
+  "compute_cap_where": null,
+  "confirmatory": false,
+  "design_run": false,
+  "failures": [],
+  "freeze_lock": {
+    "abstention": {
+      "metric": "val_rmse_log",
+      "min_improvement": 0.0,
+      "threshold_from_test": false,
+      "tie": "target_only"
+    },
+    "abstention_reuses": [
+      "target_only",
+      "selected_one"
+    ],
+    "additional_fits_for_abstention": 0,
+    "banks": [
+      "matched",
+      "both"
+    ],
+    "compute_cap_seconds": 600,
+    "config_hash": "1c4af4be93338539",
+    "config_path": "configs/v3_share_abstain.approved.yaml",
+    "confirmatory": false,
+    "dataset_variability_estimated": true,
+    "densities": [
+      "full",
+      "sparse"
+    ],
+    "design": false,
+    "donor_rng_seed": 91001,
+    "encoder_window_day": 14.0,
+    "estimated_runtime_seconds": {
+      "lower": 120,
+      "point": 180,
+      "upper": 480
+    },
+    "execute": true,
+    "fabricate_encoder_history": false,
+    "generate_seeds": [
+      76001,
+      77010
+    ],
+    "git_revision": "d4b9c1ea0f8d52947d3a347ed7710e0db73070bc",
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "n_dataset_seeds": 2,
+    "n_model_fits": 68,
+    "n_train_seeds": 1,
+    "n_trained_cells": 34,
+    "new_architectures": false,
+    "not_sparse_encoder": true,
+    "policy_arms": [
+      "target_only",
+      "random_one",
+      "selected_one",
+      "pooled_all",
+      "selected_abstain",
+      "selected_regularized"
+    ],
+    "prefix_is_learned": false,
+    "prefix_is_similarity_based": false,
+    "prefix_is_validation_ranked": false,
+    "prefix_rule": "studyid_sort_prefix",
+    "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+    "preserved": [
+      "runs/v3_eval",
+      "runs/v3_pilot_k0k1",
+      "runs/v3_repl",
+      "runs/v3_research",
+      "runs/v3_closeout",
+      "runs/v3_audit",
+      "runs/v3_increment",
+      "runs/v3_phaseb",
+      "runs/v3_limitations",
+      "runs/v3_objective",
+      "runs/v3_official_seq",
+      "runs/v3_seq_diag",
+      "runs/v3_eval_correct",
+      "runs/v3_cov_chronos",
+      "runs/v3_share_repl",
+      "runs/v3_share_abstain"
+    ],
+    "proposal": {
+      "config_hash": "9d0152f5a465cfa9",
+      "execute": false,
+      "output_dir": "runs/v3_share_abstain",
+      "path": "configs/v3_share_abstain.frozen.yaml",
+      "relationship": "approved execution of the unexecuted frozen proposal",
+      "science_fingerprint_match": true
+    },
+    "real_data": false,
+    "retune_after_test": false,
+    "science_fingerprint": {
+      "budget": {
+        "additional_fits_for_abstention": 0,
+        "banks": [
+          "matched",
+          "both"
+        ],
+        "compute_cap_seconds": 600,
+        "densities": [
+          "full",
+          "sparse"
+        ],
+        "donor_rng_seed": 91001,
+        "estimated_runtime_seconds": {
+          "lower": 120,
+          "point": 180,
+          "upper": 480
+        },
+        "generate_seeds": [
+          76001,
+          77010
+        ],
+        "n_model_fits": 68,
+        "n_trained_cells": 34,
+        "sparse_target_train_n": 4,
+        "train_seeds": [
+          85001
+        ]
+      },
+      "cohort": {
+        "donor_species": [
+          "DOG"
+        ],
+        "max_day": 28,
+        "species": "RAT",
+        "study_classes": [
+          "REPEAT_DOSE_TOX"
+        ]
+      },
+      "evaluation": {
+        "contrast_day": 28,
+        "early_history_window_day": 14,
+        "n_draws": 40,
+        "tasks": [
+          "early_history"
+        ]
+      },
+      "generate_seed": 76001,
+      "models": {
+        "bayesian_enabled": false,
+        "optional": {
+          "chronos2": {
+            "enabled": false
+          },
+          "deepar": {
+            "enabled": false
+          },
+          "tft": {
+            "enabled": false
+          }
+        },
+        "spline": {
+          "n_bootstrap": 4,
+          "oof_folds": 5
+        },
+        "transformer": {
+          "d_model": 32,
+          "max_epochs": 8,
+          "n_heads": 2,
+          "n_layers": 1,
+          "n_members": 1,
+          "patience": 4
+        }
+      },
+      "share_abstain": {
+        "banks": [
+          "matched",
+          "both"
+        ],
+        "bayesian": false,
+        "checkpoint_source": "training_validation",
+        "chronos": false,
+        "compute_cap_seconds": 600,
+        "covariate_chronos": false,
+        "densities": [
+          "full",
+          "sparse"
+        ],
+        "donor_policy_source": "studyid_sort_prefix_and_validation_abstention",
+        "donor_rng_seed": 91001,
+        "encoder_window_day": 14,
+        "estimated_runtime_note": "2 datasets \u00d7 1 train seed \u00d7 2 banks \u00d7 2 densities \u00d7 4 trained policy arms (target_only, random_one, selected_one, pooled_all) plus selected_regularized on matched/full only = 34 trained cells \u00d7 spline and transformer (68 fits). Abstention reuses target_only and selected_one (0 extra fits). No TFT/Chronos. Point 180s from PR #14 spline/transformer cost; cap 600s.\n",
+        "estimated_runtime_seconds": {
+          "lower": 120,
+          "point": 180,
+          "upper": 480
+        },
+        "generate_seed_stride": 1009,
+        "n_dataset_seeds": 2,
+        "n_train_seeds": 1,
+        "predose": false,
+        "retune_after_test": false,
+        "sparse_target_train_n": 4,
+        "tft": false,
+        "train_seed_stride": 17
+      },
+      "synthetic": {
+        "generator": "A",
+        "n_compounds": 6,
+        "n_other_species_studies": 3,
+        "n_per_sex": [
+          3,
+          4
+        ],
+        "n_studies": 12
+      },
+      "train_seed": 85001
+    },
+    "selector_sees_generator_labels": false,
+    "sparse_kind": "sparse_target_study_training",
+    "sparse_target_train_n": 4,
+    "train_seeds": [
+      85001
+    ],
+    "training_seed_variability_estimated": false
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation.",
+    "Share-or-abstain diagnostic.",
+    "Prefix donor choice is STUDYID sort, not learned ranking.",
+    "Two dataset seeds and one training seed are not confirmatory."
+  ],
+  "new_architectures": false,
+  "output_dir": "runs/v3_share_abstain_run",
+  "predose_evaluated": false,
+  "prefix_versus_random": [
+    {
+      "bank": "matched",
+      "dataset_index": 0,
+      "density": "full",
+      "equal": true,
+      "intersection": [
+        "SYNA-D001"
+      ],
+      "learned": false,
+      "overlap_count": 1,
+      "prefix_ids": [
+        "SYNA-D001"
+      ],
+      "prefix_rule": "studyid_sort_prefix",
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "random_ids": [
+        "SYNA-D001"
+      ],
+      "random_rule": "rng_choice_without_replacement",
+      "similarity_based": false,
+      "validation_ranked": false
+    },
+    {
+      "bank": "matched",
+      "dataset_index": 0,
+      "density": "sparse",
+      "equal": true,
+      "intersection": [
+        "SYNA-D001"
+      ],
+      "learned": false,
+      "overlap_count": 1,
+      "prefix_ids": [
+        "SYNA-D001"
+      ],
+      "prefix_rule": "studyid_sort_prefix",
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "random_ids": [
+        "SYNA-D001"
+      ],
+      "random_rule": "rng_choice_without_replacement",
+      "similarity_based": false,
+      "validation_ranked": false
+    },
+    {
+      "bank": "both",
+      "dataset_index": 0,
+      "density": "full",
+      "equal": true,
+      "intersection": [
+        "SYNA-D001"
+      ],
+      "learned": false,
+      "overlap_count": 1,
+      "prefix_ids": [
+        "SYNA-D001"
+      ],
+      "prefix_rule": "studyid_sort_prefix",
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "random_ids": [
+        "SYNA-D001"
+      ],
+      "random_rule": "rng_choice_without_replacement",
+      "similarity_based": false,
+      "validation_ranked": false
+    },
+    {
+      "bank": "both",
+      "dataset_index": 0,
+      "density": "sparse",
+      "equal": true,
+      "intersection": [
+        "SYNA-D001"
+      ],
+      "learned": false,
+      "overlap_count": 1,
+      "prefix_ids": [
+        "SYNA-D001"
+      ],
+      "prefix_rule": "studyid_sort_prefix",
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "random_ids": [
+        "SYNA-D001"
+      ],
+      "random_rule": "rng_choice_without_replacement",
+      "similarity_based": false,
+      "validation_ranked": false
+    },
+    {
+      "bank": "matched",
+      "dataset_index": 1,
+      "density": "full",
+      "equal": true,
+      "intersection": [
+        "SYNA-D001"
+      ],
+      "learned": false,
+      "overlap_count": 1,
+      "prefix_ids": [
+        "SYNA-D001"
+      ],
+      "prefix_rule": "studyid_sort_prefix",
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "random_ids": [
+        "SYNA-D001"
+      ],
+      "random_rule": "rng_choice_without_replacement",
+      "similarity_based": false,
+      "validation_ranked": false
+    },
+    {
+      "bank": "matched",
+      "dataset_index": 1,
+      "density": "sparse",
+      "equal": true,
+      "intersection": [
+        "SYNA-D001"
+      ],
+      "learned": false,
+      "overlap_count": 1,
+      "prefix_ids": [
+        "SYNA-D001"
+      ],
+      "prefix_rule": "studyid_sort_prefix",
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "random_ids": [
+        "SYNA-D001"
+      ],
+      "random_rule": "rng_choice_without_replacement",
+      "similarity_based": false,
+      "validation_ranked": false
+    },
+    {
+      "bank": "both",
+      "dataset_index": 1,
+      "density": "full",
+      "equal": true,
+      "intersection": [
+        "SYNA-D001"
+      ],
+      "learned": false,
+      "overlap_count": 1,
+      "prefix_ids": [
+        "SYNA-D001"
+      ],
+      "prefix_rule": "studyid_sort_prefix",
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "random_ids": [
+        "SYNA-D001"
+      ],
+      "random_rule": "rng_choice_without_replacement",
+      "similarity_based": false,
+      "validation_ranked": false
+    },
+    {
+      "bank": "both",
+      "dataset_index": 1,
+      "density": "sparse",
+      "equal": true,
+      "intersection": [
+        "SYNA-D001"
+      ],
+      "learned": false,
+      "overlap_count": 1,
+      "prefix_ids": [
+        "SYNA-D001"
+      ],
+      "prefix_rule": "studyid_sort_prefix",
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "random_ids": [
+        "SYNA-D001"
+      ],
+      "random_rule": "rng_choice_without_replacement",
+      "similarity_based": false,
+      "validation_ranked": false
+    }
+  ],
+  "protected": {
+    "changed": [],
+    "unchanged": true
+  },
+  "real_data_accessed": false,
+  "replicates": [
+    {
+      "abstention": {
+        "spline": {
+          "candidate_val": 0.03573120394068861,
+          "chosen_arm": "spline_selected_one",
+          "decision": "share",
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_matched_full/decisions/spline_abstain.json",
+          "delta_candidate_minus_target": -0.011071679547676544,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "validation_improvement",
+          "saved_before_test": true,
+          "target_only_val": 0.04680288348836516,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        },
+        "transformer": {
+          "candidate_val": 0.04211531614287627,
+          "chosen_arm": "transformer_selected_one",
+          "decision": "share",
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_matched_full/decisions/transformer_abstain.json",
+          "delta_candidate_minus_target": -0.004069576787044664,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "validation_improvement",
+          "saved_before_test": true,
+          "target_only_val": 0.04618489292992094,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        }
+      },
+      "bank": "matched",
+      "dataset_index": 0,
+      "density": "full",
+      "donor_records": {
+        "pooled_all": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 3,
+          "rng_seed": null,
+          "rule": "all_eligible",
+          "selected": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "sharing": "pooled",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "random_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": 91001,
+          "rule": "rng_choice_without_replacement",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "selected_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": null,
+          "rule": "studyid_sort_prefix",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "selected_regularized": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": null,
+          "rule": "studyid_sort_prefix",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective_regularized",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "target_only": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 0,
+          "rng_seed": null,
+          "rule": "zero_donors",
+          "selected": [],
+          "sharing": "context_specific",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        }
+      },
+      "generate_seed": 76001,
+      "paired_transfer": {
+        "spline_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.001729462275445532,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.027833359255205702,
+              "sign": "helpful",
+              "target_only": 0.029562821530651234
+            },
+            {
+              "delta_pooled_minus_target": -0.0026190518739412152,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03574811139747462,
+              "sign": "helpful",
+              "target_only": 0.03836716327141584
+            },
+            {
+              "delta_pooled_minus_target": -0.0012358631114658195,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.010231269467729596,
+              "sign": "helpful",
+              "target_only": 0.011467132579195415
+            }
+          ]
+        },
+        "spline_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0015987902944252334,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.027964031236226,
+              "sign": "helpful",
+              "target_only": 0.029562821530651234
+            },
+            {
+              "delta_pooled_minus_target": -0.0029522191763646233,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.035414944095051214,
+              "sign": "helpful",
+              "target_only": 0.03836716327141584
+            },
+            {
+              "delta_pooled_minus_target": -0.001432399835773361,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.010034732743422054,
+              "sign": "helpful",
+              "target_only": 0.011467132579195415
+            }
+          ]
+        },
+        "spline_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0015987902944252334,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.027964031236226,
+              "sign": "helpful",
+              "target_only": 0.029562821530651234
+            },
+            {
+              "delta_pooled_minus_target": -0.0029522191763646233,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.035414944095051214,
+              "sign": "helpful",
+              "target_only": 0.03836716327141584
+            },
+            {
+              "delta_pooled_minus_target": -0.001432399835773361,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.010034732743422054,
+              "sign": "helpful",
+              "target_only": 0.011467132579195415
+            }
+          ]
+        },
+        "spline_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0015987902944252334,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.027964031236226,
+              "sign": "helpful",
+              "target_only": 0.029562821530651234
+            },
+            {
+              "delta_pooled_minus_target": -0.0029522191763646233,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.035414944095051214,
+              "sign": "helpful",
+              "target_only": 0.03836716327141584
+            },
+            {
+              "delta_pooled_minus_target": -0.001432399835773361,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.010034732743422054,
+              "sign": "helpful",
+              "target_only": 0.011467132579195415
+            }
+          ]
+        },
+        "spline_selected_regularized": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0011263716213211067,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.028436449909330128,
+              "sign": "helpful",
+              "target_only": 0.029562821530651234
+            },
+            {
+              "delta_pooled_minus_target": -0.0025232536873597,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03584390958405614,
+              "sign": "helpful",
+              "target_only": 0.03836716327141584
+            },
+            {
+              "delta_pooled_minus_target": -0.001354985981257691,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.010112146597937724,
+              "sign": "helpful",
+              "target_only": 0.011467132579195415
+            }
+          ]
+        },
+        "transformer_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 3.7430255856549244e-05,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.039747219909945716,
+              "sign": "harmful",
+              "target_only": 0.03970978965408917
+            },
+            {
+              "delta_pooled_minus_target": -0.0033011865572796922,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.0482576850038797,
+              "sign": "helpful",
+              "target_only": 0.05155887156115939
+            },
+            {
+              "delta_pooled_minus_target": -0.0010324239846204314,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.013316440545613987,
+              "sign": "helpful",
+              "target_only": 0.014348864530234418
+            }
+          ]
+        },
+        "transformer_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0057194039568450525,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.033990385697244115,
+              "sign": "helpful",
+              "target_only": 0.03970978965408917
+            },
+            {
+              "delta_pooled_minus_target": -0.008866518480175042,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04269235308098435,
+              "sign": "helpful",
+              "target_only": 0.05155887156115939
+            },
+            {
+              "delta_pooled_minus_target": -0.002611476587355969,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011737387942878449,
+              "sign": "helpful",
+              "target_only": 0.014348864530234418
+            }
+          ]
+        },
+        "transformer_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0057194039568450525,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.033990385697244115,
+              "sign": "helpful",
+              "target_only": 0.03970978965408917
+            },
+            {
+              "delta_pooled_minus_target": -0.008866518480175042,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04269235308098435,
+              "sign": "helpful",
+              "target_only": 0.05155887156115939
+            },
+            {
+              "delta_pooled_minus_target": -0.002611476587355969,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011737387942878449,
+              "sign": "helpful",
+              "target_only": 0.014348864530234418
+            }
+          ]
+        },
+        "transformer_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0057194039568450525,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.033990385697244115,
+              "sign": "helpful",
+              "target_only": 0.03970978965408917
+            },
+            {
+              "delta_pooled_minus_target": -0.008866518480175042,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04269235308098435,
+              "sign": "helpful",
+              "target_only": 0.05155887156115939
+            },
+            {
+              "delta_pooled_minus_target": -0.002611476587355969,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011737387942878449,
+              "sign": "helpful",
+              "target_only": 0.014348864530234418
+            }
+          ]
+        },
+        "transformer_selected_regularized": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.004805212590668774,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03490457706342039,
+              "sign": "helpful",
+              "target_only": 0.03970978965408917
+            },
+            {
+              "delta_pooled_minus_target": -0.0077244517191973755,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04383441984196201,
+              "sign": "helpful",
+              "target_only": 0.05155887156115939
+            },
+            {
+              "delta_pooled_minus_target": -0.002420718818576719,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.0119281457116577,
+              "sign": "helpful",
+              "target_only": 0.014348864530234418
+            }
+          ]
+        }
+      },
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "prefix_versus_random": {
+        "equal": true,
+        "intersection": [
+          "SYNA-D001"
+        ],
+        "learned": false,
+        "overlap_count": 1,
+        "prefix_ids": [
+          "SYNA-D001"
+        ],
+        "prefix_rule": "studyid_sort_prefix",
+        "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+        "random_ids": [
+          "SYNA-D001"
+        ],
+        "random_rule": "rng_choice_without_replacement",
+        "similarity_based": false,
+        "validation_ranked": false
+      },
+      "random_selected_equal_k": true,
+      "results": {
+        "spline_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.027833359255205702,
+          "mean_quantile_loss": 0.010231269467729596,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.03574811139747462,
+          "seconds": 4.621963024139404,
+          "status": "ok"
+        },
+        "spline_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.027964031236226,
+          "mean_quantile_loss": 0.010034732743422054,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.035414944095051214,
+          "seconds": 4.383403539657593,
+          "status": "ok"
+        },
+        "spline_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.03573120394068861,
+            "chosen_arm": "spline_selected_one",
+            "decision": "share",
+            "delta_candidate_minus_target": -0.011071679547676544,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "validation_improvement",
+            "target_only_val": 0.04680288348836516,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "spline_selected_one",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_matched_full/decisions/spline_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.027964031236226,
+          "mean_quantile_loss": 0.010034732743422054,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.035414944095051214,
+          "seconds": 4.372909069061279,
+          "status": "ok"
+        },
+        "spline_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.027964031236226,
+          "mean_quantile_loss": 0.010034732743422054,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.035414944095051214,
+          "seconds": 4.372909069061279,
+          "status": "ok"
+        },
+        "spline_selected_regularized": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.028436449909330128,
+          "mean_quantile_loss": 0.010112146597937724,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.03584390958405614,
+          "seconds": 4.392027854919434,
+          "status": "ok"
+        },
+        "spline_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.029562821530651234,
+          "mean_quantile_loss": 0.011467132579195415,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.03836716327141584,
+          "seconds": 5.112402439117432,
+          "status": "ok"
+        },
+        "transformer_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.039747219909945716,
+          "mean_quantile_loss": 0.013316440545613987,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.0482576850038797,
+          "seconds": 1.1503322124481201,
+          "status": "ok"
+        },
+        "transformer_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.033990385697244115,
+          "mean_quantile_loss": 0.011737387942878449,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.04269235308098435,
+          "seconds": 1.0860209465026855,
+          "status": "ok"
+        },
+        "transformer_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.04211531614287627,
+            "chosen_arm": "transformer_selected_one",
+            "decision": "share",
+            "delta_candidate_minus_target": -0.004069576787044664,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "validation_improvement",
+            "target_only_val": 0.04618489292992094,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "transformer_selected_one",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_matched_full/decisions/transformer_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.033990385697244115,
+          "mean_quantile_loss": 0.011737387942878449,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.04269235308098435,
+          "seconds": 1.1033084392547607,
+          "status": "ok"
+        },
+        "transformer_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.033990385697244115,
+          "mean_quantile_loss": 0.011737387942878449,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.04269235308098435,
+          "seconds": 1.1033084392547607,
+          "status": "ok"
+        },
+        "transformer_selected_regularized": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03490457706342039,
+          "mean_quantile_loss": 0.0119281457116577,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.04383441984196201,
+          "seconds": 1.1302554607391357,
+          "status": "ok"
+        },
+        "transformer_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03970978965408917,
+          "mean_quantile_loss": 0.014348864530234418,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.05155887156115939,
+          "seconds": 1.0576276779174805,
+          "status": "ok"
+        }
+      },
+      "sparse_target_train_n": null,
+      "target_holdout_hashes": {
+        "pooled_all": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        },
+        "random_one": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        },
+        "selected_one": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        },
+        "selected_regularized": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        },
+        "target_only": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        }
+      },
+      "train_index": 0,
+      "train_seed": 85001
+    },
+    {
+      "abstention": {
+        "spline": {
+          "candidate_val": 0.038185534292670575,
+          "chosen_arm": "spline_selected_one",
+          "decision": "share",
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_matched_sparse/decisions/spline_abstain.json",
+          "delta_candidate_minus_target": -0.013852045478209389,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "validation_improvement",
+          "saved_before_test": true,
+          "target_only_val": 0.052037579770879965,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        },
+        "transformer": {
+          "candidate_val": 0.059325657090800524,
+          "chosen_arm": "transformer_target_only",
+          "decision": "target_only",
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_matched_sparse/decisions/transformer_abstain.json",
+          "delta_candidate_minus_target": 0.007185873358870581,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "candidate_worse",
+          "saved_before_test": true,
+          "target_only_val": 0.05213978373192994,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        }
+      },
+      "bank": "matched",
+      "dataset_index": 0,
+      "density": "sparse",
+      "donor_records": {
+        "pooled_all": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 3,
+          "rng_seed": null,
+          "rule": "all_eligible",
+          "selected": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "sharing": "pooled",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "random_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": 91001,
+          "rule": "rng_choice_without_replacement",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "selected_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": null,
+          "rule": "studyid_sort_prefix",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "target_only": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 0,
+          "rng_seed": null,
+          "rule": "zero_donors",
+          "selected": [],
+          "sharing": "context_specific",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        }
+      },
+      "generate_seed": 76001,
+      "paired_transfer": {
+        "spline_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0026719932394652438,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03173529662065239,
+              "sign": "helpful",
+              "target_only": 0.03440728986011763
+            },
+            {
+              "delta_pooled_minus_target": -0.002124639833722783,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.040705522928777826,
+              "sign": "helpful",
+              "target_only": 0.04283016276250061
+            },
+            {
+              "delta_pooled_minus_target": -0.0006971199269120397,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011170441918142423,
+              "sign": "helpful",
+              "target_only": 0.011867561845054463
+            }
+          ]
+        },
+        "spline_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0009264724541267685,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03348081740599086,
+              "sign": "helpful",
+              "target_only": 0.03440728986011763
+            },
+            {
+              "delta_pooled_minus_target": -0.0004381386166263934,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.042392024145874216,
+              "sign": "helpful",
+              "target_only": 0.04283016276250061
+            },
+            {
+              "delta_pooled_minus_target": -0.0003557951850527031,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.01151176666000176,
+              "sign": "helpful",
+              "target_only": 0.011867561845054463
+            }
+          ]
+        },
+        "spline_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0009264724541267685,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03348081740599086,
+              "sign": "helpful",
+              "target_only": 0.03440728986011763
+            },
+            {
+              "delta_pooled_minus_target": -0.0004381386166263934,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.042392024145874216,
+              "sign": "helpful",
+              "target_only": 0.04283016276250061
+            },
+            {
+              "delta_pooled_minus_target": -0.0003557951850527031,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.01151176666000176,
+              "sign": "helpful",
+              "target_only": 0.011867561845054463
+            }
+          ]
+        },
+        "spline_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0009264724541267685,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03348081740599086,
+              "sign": "helpful",
+              "target_only": 0.03440728986011763
+            },
+            {
+              "delta_pooled_minus_target": -0.0004381386166263934,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.042392024145874216,
+              "sign": "helpful",
+              "target_only": 0.04283016276250061
+            },
+            {
+              "delta_pooled_minus_target": -0.0003557951850527031,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.01151176666000176,
+              "sign": "helpful",
+              "target_only": 0.011867561845054463
+            }
+          ]
+        },
+        "transformer_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.008269863869421822,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.046756320639068004,
+              "sign": "harmful",
+              "target_only": 0.03848645676964618
+            },
+            {
+              "delta_pooled_minus_target": 0.01242014005208772,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.06274312943603716,
+              "sign": "harmful",
+              "target_only": 0.05032298938394944
+            },
+            {
+              "delta_pooled_minus_target": 0.003086203560601193,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.017279375584245877,
+              "sign": "harmful",
+              "target_only": 0.014193172023644684
+            }
+          ]
+        },
+        "transformer_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.013459856303365728,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.05194631307301191,
+              "sign": "harmful",
+              "target_only": 0.03848645676964618
+            },
+            {
+              "delta_pooled_minus_target": 0.014915456822094442,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.06523844620604388,
+              "sign": "harmful",
+              "target_only": 0.05032298938394944
+            },
+            {
+              "delta_pooled_minus_target": 0.004617824247495555,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.01881099627114024,
+              "sign": "harmful",
+              "target_only": 0.014193172023644684
+            }
+          ]
+        },
+        "transformer_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03848645676964618,
+              "sign": "null",
+              "target_only": 0.03848645676964618
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.05032298938394944,
+              "sign": "null",
+              "target_only": 0.05032298938394944
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.014193172023644684,
+              "sign": "null",
+              "target_only": 0.014193172023644684
+            }
+          ]
+        },
+        "transformer_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.013459856303365728,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.05194631307301191,
+              "sign": "harmful",
+              "target_only": 0.03848645676964618
+            },
+            {
+              "delta_pooled_minus_target": 0.014915456822094442,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.06523844620604388,
+              "sign": "harmful",
+              "target_only": 0.05032298938394944
+            },
+            {
+              "delta_pooled_minus_target": 0.004617824247495555,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.01881099627114024,
+              "sign": "harmful",
+              "target_only": 0.014193172023644684
+            }
+          ]
+        }
+      },
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "prefix_versus_random": {
+        "equal": true,
+        "intersection": [
+          "SYNA-D001"
+        ],
+        "learned": false,
+        "overlap_count": 1,
+        "prefix_ids": [
+          "SYNA-D001"
+        ],
+        "prefix_rule": "studyid_sort_prefix",
+        "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+        "random_ids": [
+          "SYNA-D001"
+        ],
+        "random_rule": "rng_choice_without_replacement",
+        "similarity_based": false,
+        "validation_ranked": false
+      },
+      "random_selected_equal_k": true,
+      "results": {
+        "spline_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03173529662065239,
+          "mean_quantile_loss": 0.011170441918142423,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.040705522928777826,
+          "seconds": 4.093648433685303,
+          "status": "ok"
+        },
+        "spline_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03348081740599086,
+          "mean_quantile_loss": 0.01151176666000176,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.042392024145874216,
+          "seconds": 4.18600606918335,
+          "status": "ok"
+        },
+        "spline_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.038185534292670575,
+            "chosen_arm": "spline_selected_one",
+            "decision": "share",
+            "delta_candidate_minus_target": -0.013852045478209389,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "validation_improvement",
+            "target_only_val": 0.052037579770879965,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "spline_selected_one",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_matched_sparse/decisions/spline_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.03348081740599086,
+          "mean_quantile_loss": 0.01151176666000176,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.042392024145874216,
+          "seconds": 4.077512264251709,
+          "status": "ok"
+        },
+        "spline_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03348081740599086,
+          "mean_quantile_loss": 0.01151176666000176,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.042392024145874216,
+          "seconds": 4.077512264251709,
+          "status": "ok"
+        },
+        "spline_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03440728986011763,
+          "mean_quantile_loss": 0.011867561845054463,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.04283016276250061,
+          "seconds": 4.079725742340088,
+          "status": "ok"
+        },
+        "transformer_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.046756320639068004,
+          "mean_quantile_loss": 0.017279375584245877,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.06274312943603716,
+          "seconds": 1.03959059715271,
+          "status": "ok"
+        },
+        "transformer_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.05194631307301191,
+          "mean_quantile_loss": 0.01881099627114024,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.06523844620604388,
+          "seconds": 1.0215747356414795,
+          "status": "ok"
+        },
+        "transformer_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.059325657090800524,
+            "chosen_arm": "transformer_target_only",
+            "decision": "target_only",
+            "delta_candidate_minus_target": 0.007185873358870581,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "candidate_worse",
+            "target_only_val": 0.05213978373192994,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "transformer_target_only",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_matched_sparse/decisions/transformer_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.03848645676964618,
+          "mean_quantile_loss": 0.014193172023644684,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.05032298938394944,
+          "seconds": 0.9854633808135986,
+          "status": "ok"
+        },
+        "transformer_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.05194631307301191,
+          "mean_quantile_loss": 0.01881099627114024,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.06523844620604388,
+          "seconds": 1.0467746257781982,
+          "status": "ok"
+        },
+        "transformer_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03848645676964618,
+          "mean_quantile_loss": 0.014193172023644684,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.05032298938394944,
+          "seconds": 0.9854633808135986,
+          "status": "ok"
+        }
+      },
+      "sparse_target_train_n": 4,
+      "target_holdout_hashes": {
+        "pooled_all": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        },
+        "random_one": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        },
+        "selected_one": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        },
+        "target_only": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        }
+      },
+      "train_index": 0,
+      "train_seed": 85001
+    },
+    {
+      "abstention": {
+        "spline": {
+          "candidate_val": 0.05634339476670581,
+          "chosen_arm": "spline_target_only",
+          "decision": "target_only",
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_both_full/decisions/spline_abstain.json",
+          "delta_candidate_minus_target": 0.00954051127834065,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "candidate_worse",
+          "saved_before_test": true,
+          "target_only_val": 0.04680288348836516,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        },
+        "transformer": {
+          "candidate_val": 0.047802813522766247,
+          "chosen_arm": "transformer_target_only",
+          "decision": "target_only",
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_both_full/decisions/transformer_abstain.json",
+          "delta_candidate_minus_target": 0.0016179205928453094,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "candidate_worse",
+          "saved_before_test": true,
+          "target_only_val": 0.04618489292992094,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        }
+      },
+      "bank": "both",
+      "dataset_index": 0,
+      "density": "full",
+      "donor_records": {
+        "pooled_all": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 3,
+          "rng_seed": null,
+          "rule": "all_eligible",
+          "selected": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "sharing": "pooled",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "random_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": 91001,
+          "rule": "rng_choice_without_replacement",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "selected_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": null,
+          "rule": "studyid_sort_prefix",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "target_only": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 0,
+          "rng_seed": null,
+          "rule": "zero_donors",
+          "selected": [],
+          "sharing": "context_specific",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        }
+      },
+      "generate_seed": 76001,
+      "paired_transfer": {
+        "spline_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0021172451251062208,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.027445576405545014,
+              "sign": "helpful",
+              "target_only": 0.029562821530651234
+            },
+            {
+              "delta_pooled_minus_target": -0.0029771752691628503,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03538998800225299,
+              "sign": "helpful",
+              "target_only": 0.03836716327141584
+            },
+            {
+              "delta_pooled_minus_target": -0.0005894983800119741,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.010877634199183441,
+              "sign": "helpful",
+              "target_only": 0.011467132579195415
+            }
+          ]
+        },
+        "spline_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0018298618666309982,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.027732959664020236,
+              "sign": "helpful",
+              "target_only": 0.029562821530651234
+            },
+            {
+              "delta_pooled_minus_target": -0.002159074028110962,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.036208089243304875,
+              "sign": "helpful",
+              "target_only": 0.03836716327141584
+            },
+            {
+              "delta_pooled_minus_target": -0.00022653712976829915,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011240595449427116,
+              "sign": "helpful",
+              "target_only": 0.011467132579195415
+            }
+          ]
+        },
+        "spline_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.029562821530651234,
+              "sign": "null",
+              "target_only": 0.029562821530651234
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03836716327141584,
+              "sign": "null",
+              "target_only": 0.03836716327141584
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011467132579195415,
+              "sign": "null",
+              "target_only": 0.011467132579195415
+            }
+          ]
+        },
+        "spline_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0018298618666309982,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.027732959664020236,
+              "sign": "helpful",
+              "target_only": 0.029562821530651234
+            },
+            {
+              "delta_pooled_minus_target": -0.002159074028110962,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.036208089243304875,
+              "sign": "helpful",
+              "target_only": 0.03836716327141584
+            },
+            {
+              "delta_pooled_minus_target": -0.00022653712976829915,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011240595449427116,
+              "sign": "helpful",
+              "target_only": 0.011467132579195415
+            }
+          ]
+        },
+        "transformer_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.00047227641083482513,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.04018206606492399,
+              "sign": "harmful",
+              "target_only": 0.03970978965408917
+            },
+            {
+              "delta_pooled_minus_target": -0.0029253055452010124,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04863356601595838,
+              "sign": "helpful",
+              "target_only": 0.05155887156115939
+            },
+            {
+              "delta_pooled_minus_target": -0.0009989434453074805,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.013349921084926938,
+              "sign": "helpful",
+              "target_only": 0.014348864530234418
+            }
+          ]
+        },
+        "transformer_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0030754550008896472,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03663433465319952,
+              "sign": "helpful",
+              "target_only": 0.03970978965408917
+            },
+            {
+              "delta_pooled_minus_target": -0.005380552513399153,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.046178319047760236,
+              "sign": "helpful",
+              "target_only": 0.05155887156115939
+            },
+            {
+              "delta_pooled_minus_target": -0.0017295775663085638,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.012619286963925854,
+              "sign": "helpful",
+              "target_only": 0.014348864530234418
+            }
+          ]
+        },
+        "transformer_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03970978965408917,
+              "sign": "null",
+              "target_only": 0.03970978965408917
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.05155887156115939,
+              "sign": "null",
+              "target_only": 0.05155887156115939
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.014348864530234418,
+              "sign": "null",
+              "target_only": 0.014348864530234418
+            }
+          ]
+        },
+        "transformer_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0030754550008896472,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03663433465319952,
+              "sign": "helpful",
+              "target_only": 0.03970978965408917
+            },
+            {
+              "delta_pooled_minus_target": -0.005380552513399153,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.046178319047760236,
+              "sign": "helpful",
+              "target_only": 0.05155887156115939
+            },
+            {
+              "delta_pooled_minus_target": -0.0017295775663085638,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.012619286963925854,
+              "sign": "helpful",
+              "target_only": 0.014348864530234418
+            }
+          ]
+        }
+      },
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "prefix_versus_random": {
+        "equal": true,
+        "intersection": [
+          "SYNA-D001"
+        ],
+        "learned": false,
+        "overlap_count": 1,
+        "prefix_ids": [
+          "SYNA-D001"
+        ],
+        "prefix_rule": "studyid_sort_prefix",
+        "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+        "random_ids": [
+          "SYNA-D001"
+        ],
+        "random_rule": "rng_choice_without_replacement",
+        "similarity_based": false,
+        "validation_ranked": false
+      },
+      "random_selected_equal_k": true,
+      "results": {
+        "spline_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.027445576405545014,
+          "mean_quantile_loss": 0.010877634199183441,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.03538998800225299,
+          "seconds": 4.056819200515747,
+          "status": "ok"
+        },
+        "spline_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.027732959664020236,
+          "mean_quantile_loss": 0.011240595449427116,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.036208089243304875,
+          "seconds": 4.037597417831421,
+          "status": "ok"
+        },
+        "spline_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.05634339476670581,
+            "chosen_arm": "spline_target_only",
+            "decision": "target_only",
+            "delta_candidate_minus_target": 0.00954051127834065,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "candidate_worse",
+            "target_only_val": 0.04680288348836516,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "spline_target_only",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_both_full/decisions/spline_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.029562821530651234,
+          "mean_quantile_loss": 0.011467132579195415,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.03836716327141584,
+          "seconds": 3.8761115074157715,
+          "status": "ok"
+        },
+        "spline_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.027732959664020236,
+          "mean_quantile_loss": 0.011240595449427116,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.036208089243304875,
+          "seconds": 4.025886297225952,
+          "status": "ok"
+        },
+        "spline_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.029562821530651234,
+          "mean_quantile_loss": 0.011467132579195415,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.03836716327141584,
+          "seconds": 3.8761115074157715,
+          "status": "ok"
+        },
+        "transformer_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.04018206606492399,
+          "mean_quantile_loss": 0.013349921084926938,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.04863356601595838,
+          "seconds": 1.0301878452301025,
+          "status": "ok"
+        },
+        "transformer_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03663433465319952,
+          "mean_quantile_loss": 0.012619286963925854,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.046178319047760236,
+          "seconds": 1.0415542125701904,
+          "status": "ok"
+        },
+        "transformer_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.047802813522766247,
+            "chosen_arm": "transformer_target_only",
+            "decision": "target_only",
+            "delta_candidate_minus_target": 0.0016179205928453094,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "candidate_worse",
+            "target_only_val": 0.04618489292992094,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "transformer_target_only",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_both_full/decisions/transformer_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.03970978965408917,
+          "mean_quantile_loss": 0.014348864530234418,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.05155887156115939,
+          "seconds": 1.1359257698059082,
+          "status": "ok"
+        },
+        "transformer_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03663433465319952,
+          "mean_quantile_loss": 0.012619286963925854,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.046178319047760236,
+          "seconds": 1.0578539371490479,
+          "status": "ok"
+        },
+        "transformer_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03970978965408917,
+          "mean_quantile_loss": 0.014348864530234418,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.05155887156115939,
+          "seconds": 1.1359257698059082,
+          "status": "ok"
+        }
+      },
+      "sparse_target_train_n": null,
+      "target_holdout_hashes": {
+        "pooled_all": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        },
+        "random_one": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        },
+        "selected_one": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        },
+        "target_only": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        }
+      },
+      "train_index": 0,
+      "train_seed": 85001
+    },
+    {
+      "abstention": {
+        "spline": {
+          "candidate_val": 0.037181427310299574,
+          "chosen_arm": "spline_selected_one",
+          "decision": "share",
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_both_sparse/decisions/spline_abstain.json",
+          "delta_candidate_minus_target": -0.01485615246058039,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "validation_improvement",
+          "saved_before_test": true,
+          "target_only_val": 0.052037579770879965,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        },
+        "transformer": {
+          "candidate_val": 0.06128580462266005,
+          "chosen_arm": "transformer_target_only",
+          "decision": "target_only",
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_both_sparse/decisions/transformer_abstain.json",
+          "delta_candidate_minus_target": 0.009146020890730105,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "candidate_worse",
+          "saved_before_test": true,
+          "target_only_val": 0.05213978373192994,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        }
+      },
+      "bank": "both",
+      "dataset_index": 0,
+      "density": "sparse",
+      "donor_records": {
+        "pooled_all": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 3,
+          "rng_seed": null,
+          "rule": "all_eligible",
+          "selected": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "sharing": "pooled",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "random_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": 91001,
+          "rule": "rng_choice_without_replacement",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "selected_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": null,
+          "rule": "studyid_sort_prefix",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "target_only": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 0,
+          "rng_seed": null,
+          "rule": "zero_donors",
+          "selected": [],
+          "sharing": "context_specific",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        }
+      },
+      "generate_seed": 76001,
+      "paired_transfer": {
+        "spline_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0023447891591700173,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03206250070094761,
+              "sign": "helpful",
+              "target_only": 0.03440728986011763
+            },
+            {
+              "delta_pooled_minus_target": -0.0017384289130913458,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.041091733849409263,
+              "sign": "helpful",
+              "target_only": 0.04283016276250061
+            },
+            {
+              "delta_pooled_minus_target": -0.0001034940749897132,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.01176406777006475,
+              "sign": "helpful",
+              "target_only": 0.011867561845054463
+            }
+          ]
+        },
+        "spline_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0017800109988600349,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.032627278861257596,
+              "sign": "helpful",
+              "target_only": 0.03440728986011763
+            },
+            {
+              "delta_pooled_minus_target": -0.002048743659850666,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04078141910264994,
+              "sign": "helpful",
+              "target_only": 0.04283016276250061
+            },
+            {
+              "delta_pooled_minus_target": -0.000575560091810725,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011292001753243738,
+              "sign": "helpful",
+              "target_only": 0.011867561845054463
+            }
+          ]
+        },
+        "spline_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0017800109988600349,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.032627278861257596,
+              "sign": "helpful",
+              "target_only": 0.03440728986011763
+            },
+            {
+              "delta_pooled_minus_target": -0.002048743659850666,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04078141910264994,
+              "sign": "helpful",
+              "target_only": 0.04283016276250061
+            },
+            {
+              "delta_pooled_minus_target": -0.000575560091810725,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011292001753243738,
+              "sign": "helpful",
+              "target_only": 0.011867561845054463
+            }
+          ]
+        },
+        "spline_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0017800109988600349,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.032627278861257596,
+              "sign": "helpful",
+              "target_only": 0.03440728986011763
+            },
+            {
+              "delta_pooled_minus_target": -0.002048743659850666,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04078141910264994,
+              "sign": "helpful",
+              "target_only": 0.04283016276250061
+            },
+            {
+              "delta_pooled_minus_target": -0.000575560091810725,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011292001753243738,
+              "sign": "helpful",
+              "target_only": 0.011867561845054463
+            }
+          ]
+        },
+        "transformer_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0015850034745781144,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03690145329506807,
+              "sign": "helpful",
+              "target_only": 0.03848645676964618
+            },
+            {
+              "delta_pooled_minus_target": -0.0018037824972852584,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04851920688666418,
+              "sign": "helpful",
+              "target_only": 0.05032298938394944
+            },
+            {
+              "delta_pooled_minus_target": -0.0013665008921489273,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.012826671131495757,
+              "sign": "helpful",
+              "target_only": 0.014193172023644684
+            }
+          ]
+        },
+        "transformer_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.016305712458956137,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.05479216922860232,
+              "sign": "harmful",
+              "target_only": 0.03848645676964618
+            },
+            {
+              "delta_pooled_minus_target": 0.019234791260524575,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.06955778064447402,
+              "sign": "harmful",
+              "target_only": 0.05032298938394944
+            },
+            {
+              "delta_pooled_minus_target": 0.006252733316310554,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.020445905339955238,
+              "sign": "harmful",
+              "target_only": 0.014193172023644684
+            }
+          ]
+        },
+        "transformer_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03848645676964618,
+              "sign": "null",
+              "target_only": 0.03848645676964618
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.05032298938394944,
+              "sign": "null",
+              "target_only": 0.05032298938394944
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.014193172023644684,
+              "sign": "null",
+              "target_only": 0.014193172023644684
+            }
+          ]
+        },
+        "transformer_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.016305712458956137,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.05479216922860232,
+              "sign": "harmful",
+              "target_only": 0.03848645676964618
+            },
+            {
+              "delta_pooled_minus_target": 0.019234791260524575,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.06955778064447402,
+              "sign": "harmful",
+              "target_only": 0.05032298938394944
+            },
+            {
+              "delta_pooled_minus_target": 0.006252733316310554,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.020445905339955238,
+              "sign": "harmful",
+              "target_only": 0.014193172023644684
+            }
+          ]
+        }
+      },
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "prefix_versus_random": {
+        "equal": true,
+        "intersection": [
+          "SYNA-D001"
+        ],
+        "learned": false,
+        "overlap_count": 1,
+        "prefix_ids": [
+          "SYNA-D001"
+        ],
+        "prefix_rule": "studyid_sort_prefix",
+        "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+        "random_ids": [
+          "SYNA-D001"
+        ],
+        "random_rule": "rng_choice_without_replacement",
+        "similarity_based": false,
+        "validation_ranked": false
+      },
+      "random_selected_equal_k": true,
+      "results": {
+        "spline_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03206250070094761,
+          "mean_quantile_loss": 0.01176406777006475,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.041091733849409263,
+          "seconds": 4.057147264480591,
+          "status": "ok"
+        },
+        "spline_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.032627278861257596,
+          "mean_quantile_loss": 0.011292001753243738,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.04078141910264994,
+          "seconds": 4.123060703277588,
+          "status": "ok"
+        },
+        "spline_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.037181427310299574,
+            "chosen_arm": "spline_selected_one",
+            "decision": "share",
+            "delta_candidate_minus_target": -0.01485615246058039,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "validation_improvement",
+            "target_only_val": 0.052037579770879965,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "spline_selected_one",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_both_sparse/decisions/spline_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.032627278861257596,
+          "mean_quantile_loss": 0.011292001753243738,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.04078141910264994,
+          "seconds": 4.067602157592773,
+          "status": "ok"
+        },
+        "spline_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.032627278861257596,
+          "mean_quantile_loss": 0.011292001753243738,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.04078141910264994,
+          "seconds": 4.067602157592773,
+          "status": "ok"
+        },
+        "spline_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03440728986011763,
+          "mean_quantile_loss": 0.011867561845054463,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.04283016276250061,
+          "seconds": 4.049404621124268,
+          "status": "ok"
+        },
+        "transformer_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03690145329506807,
+          "mean_quantile_loss": 0.012826671131495757,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.04851920688666418,
+          "seconds": 1.200655221939087,
+          "status": "ok"
+        },
+        "transformer_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.05479216922860232,
+          "mean_quantile_loss": 0.020445905339955238,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.06955778064447402,
+          "seconds": 1.0316548347473145,
+          "status": "ok"
+        },
+        "transformer_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.06128580462266005,
+            "chosen_arm": "transformer_target_only",
+            "decision": "target_only",
+            "delta_candidate_minus_target": 0.009146020890730105,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "candidate_worse",
+            "target_only_val": 0.05213978373192994,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "transformer_target_only",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d0_t0_both_sparse/decisions/transformer_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.03848645676964618,
+          "mean_quantile_loss": 0.014193172023644684,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.05032298938394944,
+          "seconds": 0.9769577980041504,
+          "status": "ok"
+        },
+        "transformer_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.05479216922860232,
+          "mean_quantile_loss": 0.020445905339955238,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.06955778064447402,
+          "seconds": 1.029914140701294,
+          "status": "ok"
+        },
+        "transformer_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03848645676964618,
+          "mean_quantile_loss": 0.014193172023644684,
+          "merge_one_to_one": true,
+          "n_scored": 279,
+          "n_studies": 2,
+          "rmse_log": 0.05032298938394944,
+          "seconds": 0.9769577980041504,
+          "status": "ok"
+        }
+      },
+      "sparse_target_train_n": 4,
+      "target_holdout_hashes": {
+        "pooled_all": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        },
+        "random_one": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        },
+        "selected_one": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        },
+        "target_only": {
+          "all_target": "9caa839ea3d54c92",
+          "test": "4348a0bfa8a585e3",
+          "validation": "fa7a1e6053ed647c"
+        }
+      },
+      "train_index": 0,
+      "train_seed": 85001
+    },
+    {
+      "abstention": {
+        "spline": {
+          "candidate_val": 0.047886379208912214,
+          "chosen_arm": "spline_target_only",
+          "decision": "target_only",
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_matched_full/decisions/spline_abstain.json",
+          "delta_candidate_minus_target": 0.008666102647484637,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "candidate_worse",
+          "saved_before_test": true,
+          "target_only_val": 0.039220276561427576,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        },
+        "transformer": {
+          "candidate_val": 0.04718931723498474,
+          "chosen_arm": "transformer_selected_one",
+          "decision": "share",
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_matched_full/decisions/transformer_abstain.json",
+          "delta_candidate_minus_target": -0.0023311408206339174,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "validation_improvement",
+          "saved_before_test": true,
+          "target_only_val": 0.04952045805561866,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        }
+      },
+      "bank": "matched",
+      "dataset_index": 1,
+      "density": "full",
+      "donor_records": {
+        "pooled_all": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 3,
+          "rng_seed": null,
+          "rule": "all_eligible",
+          "selected": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "sharing": "pooled",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "random_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": 91001,
+          "rule": "rng_choice_without_replacement",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "selected_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": null,
+          "rule": "studyid_sort_prefix",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "selected_regularized": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": null,
+          "rule": "studyid_sort_prefix",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective_regularized",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "target_only": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 0,
+          "rng_seed": null,
+          "rule": "zero_donors",
+          "selected": [],
+          "sharing": "context_specific",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        }
+      },
+      "generate_seed": 77010,
+      "paired_transfer": {
+        "spline_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0025368171492581477,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.030842647184499326,
+              "sign": "harmful",
+              "target_only": 0.02830583003524118
+            },
+            {
+              "delta_pooled_minus_target": 0.001825169497638432,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03863075854524872,
+              "sign": "harmful",
+              "target_only": 0.03680558904761029
+            },
+            {
+              "delta_pooled_minus_target": 0.0009941823948817208,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011220274678014985,
+              "sign": "harmful",
+              "target_only": 0.010226092283133264
+            }
+          ]
+        },
+        "spline_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0027335467811256155,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.031039376816366794,
+              "sign": "harmful",
+              "target_only": 0.02830583003524118
+            },
+            {
+              "delta_pooled_minus_target": 0.0010810577386845474,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03788664678629484,
+              "sign": "harmful",
+              "target_only": 0.03680558904761029
+            },
+            {
+              "delta_pooled_minus_target": 0.002360815516757644,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.012586907799890908,
+              "sign": "harmful",
+              "target_only": 0.010226092283133264
+            }
+          ]
+        },
+        "spline_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.02830583003524118,
+              "sign": "null",
+              "target_only": 0.02830583003524118
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03680558904761029,
+              "sign": "null",
+              "target_only": 0.03680558904761029
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.010226092283133264,
+              "sign": "null",
+              "target_only": 0.010226092283133264
+            }
+          ]
+        },
+        "spline_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0027335467811256155,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.031039376816366794,
+              "sign": "harmful",
+              "target_only": 0.02830583003524118
+            },
+            {
+              "delta_pooled_minus_target": 0.0010810577386845474,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03788664678629484,
+              "sign": "harmful",
+              "target_only": 0.03680558904761029
+            },
+            {
+              "delta_pooled_minus_target": 0.002360815516757644,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.012586907799890908,
+              "sign": "harmful",
+              "target_only": 0.010226092283133264
+            }
+          ]
+        },
+        "spline_selected_regularized": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0031500846598016934,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03145591469504287,
+              "sign": "harmful",
+              "target_only": 0.02830583003524118
+            },
+            {
+              "delta_pooled_minus_target": 0.0015227354679013955,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.038328324515511686,
+              "sign": "harmful",
+              "target_only": 0.03680558904761029
+            },
+            {
+              "delta_pooled_minus_target": 0.0025147418065263657,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.01274083408965963,
+              "sign": "harmful",
+              "target_only": 0.010226092283133264
+            }
+          ]
+        },
+        "transformer_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.008592326713494067,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.042553729133406534,
+              "sign": "harmful",
+              "target_only": 0.03396140241991247
+            },
+            {
+              "delta_pooled_minus_target": 0.009916384624594266,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.05140884317252324,
+              "sign": "harmful",
+              "target_only": 0.041492458547928976
+            },
+            {
+              "delta_pooled_minus_target": 0.0027317397914062742,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.014350683632935846,
+              "sign": "harmful",
+              "target_only": 0.011618943841529571
+            }
+          ]
+        },
+        "transformer_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.004197407660860637,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.038158810080773105,
+              "sign": "harmful",
+              "target_only": 0.03396140241991247
+            },
+            {
+              "delta_pooled_minus_target": 0.005960297430267991,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04745275597819697,
+              "sign": "harmful",
+              "target_only": 0.041492458547928976
+            },
+            {
+              "delta_pooled_minus_target": 0.002269494091162427,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.013888437932691998,
+              "sign": "harmful",
+              "target_only": 0.011618943841529571
+            }
+          ]
+        },
+        "transformer_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.004197407660860637,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.038158810080773105,
+              "sign": "harmful",
+              "target_only": 0.03396140241991247
+            },
+            {
+              "delta_pooled_minus_target": 0.005960297430267991,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04745275597819697,
+              "sign": "harmful",
+              "target_only": 0.041492458547928976
+            },
+            {
+              "delta_pooled_minus_target": 0.002269494091162427,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.013888437932691998,
+              "sign": "harmful",
+              "target_only": 0.011618943841529571
+            }
+          ]
+        },
+        "transformer_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.004197407660860637,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.038158810080773105,
+              "sign": "harmful",
+              "target_only": 0.03396140241991247
+            },
+            {
+              "delta_pooled_minus_target": 0.005960297430267991,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04745275597819697,
+              "sign": "harmful",
+              "target_only": 0.041492458547928976
+            },
+            {
+              "delta_pooled_minus_target": 0.002269494091162427,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.013888437932691998,
+              "sign": "harmful",
+              "target_only": 0.011618943841529571
+            }
+          ]
+        },
+        "transformer_selected_regularized": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0012575691762292673,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.0327038332436832,
+              "sign": "helpful",
+              "target_only": 0.03396140241991247
+            },
+            {
+              "delta_pooled_minus_target": -0.00029819248530226633,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04119426606262671,
+              "sign": "helpful",
+              "target_only": 0.041492458547928976
+            },
+            {
+              "delta_pooled_minus_target": 0.001124524886225737,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.012743468727755308,
+              "sign": "harmful",
+              "target_only": 0.011618943841529571
+            }
+          ]
+        }
+      },
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "prefix_versus_random": {
+        "equal": true,
+        "intersection": [
+          "SYNA-D001"
+        ],
+        "learned": false,
+        "overlap_count": 1,
+        "prefix_ids": [
+          "SYNA-D001"
+        ],
+        "prefix_rule": "studyid_sort_prefix",
+        "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+        "random_ids": [
+          "SYNA-D001"
+        ],
+        "random_rule": "rng_choice_without_replacement",
+        "similarity_based": false,
+        "validation_ranked": false
+      },
+      "random_selected_equal_k": true,
+      "results": {
+        "spline_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.030842647184499326,
+          "mean_quantile_loss": 0.011220274678014985,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.03863075854524872,
+          "seconds": 3.82216477394104,
+          "status": "ok"
+        },
+        "spline_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.031039376816366794,
+          "mean_quantile_loss": 0.012586907799890908,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.03788664678629484,
+          "seconds": 3.676941394805908,
+          "status": "ok"
+        },
+        "spline_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.047886379208912214,
+            "chosen_arm": "spline_target_only",
+            "decision": "target_only",
+            "delta_candidate_minus_target": 0.008666102647484637,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "candidate_worse",
+            "target_only_val": 0.039220276561427576,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "spline_target_only",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_matched_full/decisions/spline_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.02830583003524118,
+          "mean_quantile_loss": 0.010226092283133264,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.03680558904761029,
+          "seconds": 4.472569704055786,
+          "status": "ok"
+        },
+        "spline_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.031039376816366794,
+          "mean_quantile_loss": 0.012586907799890908,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.03788664678629484,
+          "seconds": 3.6639246940612793,
+          "status": "ok"
+        },
+        "spline_selected_regularized": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03145591469504287,
+          "mean_quantile_loss": 0.01274083408965963,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.038328324515511686,
+          "seconds": 3.688852071762085,
+          "status": "ok"
+        },
+        "spline_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.02830583003524118,
+          "mean_quantile_loss": 0.010226092283133264,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.03680558904761029,
+          "seconds": 4.472569704055786,
+          "status": "ok"
+        },
+        "transformer_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.042553729133406534,
+          "mean_quantile_loss": 0.014350683632935846,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.05140884317252324,
+          "seconds": 0.9267504215240479,
+          "status": "ok"
+        },
+        "transformer_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.038158810080773105,
+          "mean_quantile_loss": 0.013888437932691998,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.04745275597819697,
+          "seconds": 0.9275455474853516,
+          "status": "ok"
+        },
+        "transformer_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.04718931723498474,
+            "chosen_arm": "transformer_selected_one",
+            "decision": "share",
+            "delta_candidate_minus_target": -0.0023311408206339174,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "validation_improvement",
+            "target_only_val": 0.04952045805561866,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "transformer_selected_one",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_matched_full/decisions/transformer_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.038158810080773105,
+          "mean_quantile_loss": 0.013888437932691998,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.04745275597819697,
+          "seconds": 0.9259676933288574,
+          "status": "ok"
+        },
+        "transformer_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.038158810080773105,
+          "mean_quantile_loss": 0.013888437932691998,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.04745275597819697,
+          "seconds": 0.9259676933288574,
+          "status": "ok"
+        },
+        "transformer_selected_regularized": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.0327038332436832,
+          "mean_quantile_loss": 0.012743468727755308,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.04119426606262671,
+          "seconds": 0.9283285140991211,
+          "status": "ok"
+        },
+        "transformer_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03396140241991247,
+          "mean_quantile_loss": 0.011618943841529571,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.041492458547928976,
+          "seconds": 0.888986349105835,
+          "status": "ok"
+        }
+      },
+      "sparse_target_train_n": null,
+      "target_holdout_hashes": {
+        "pooled_all": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        },
+        "random_one": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        },
+        "selected_one": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        },
+        "selected_regularized": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        },
+        "target_only": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        }
+      },
+      "train_index": 0,
+      "train_seed": 85001
+    },
+    {
+      "abstention": {
+        "spline": {
+          "candidate_val": 0.03754727566877343,
+          "chosen_arm": "spline_selected_one",
+          "decision": "share",
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_matched_sparse/decisions/spline_abstain.json",
+          "delta_candidate_minus_target": -0.004308090802396011,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "validation_improvement",
+          "saved_before_test": true,
+          "target_only_val": 0.04185536647116944,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        },
+        "transformer": {
+          "candidate_val": 0.05371753091687874,
+          "chosen_arm": "transformer_target_only",
+          "decision": "target_only",
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_matched_sparse/decisions/transformer_abstain.json",
+          "delta_candidate_minus_target": 0.004274153872747419,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "candidate_worse",
+          "saved_before_test": true,
+          "target_only_val": 0.04944337704413132,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        }
+      },
+      "bank": "matched",
+      "dataset_index": 1,
+      "density": "sparse",
+      "donor_records": {
+        "pooled_all": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 3,
+          "rng_seed": null,
+          "rule": "all_eligible",
+          "selected": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "sharing": "pooled",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "random_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": 91001,
+          "rule": "rng_choice_without_replacement",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "selected_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": null,
+          "rule": "studyid_sort_prefix",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "target_only": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 0,
+          "rng_seed": null,
+          "rule": "zero_donors",
+          "selected": [],
+          "sharing": "context_specific",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        }
+      },
+      "generate_seed": 77010,
+      "paired_transfer": {
+        "spline_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0015124892153793729,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.030780840402464323,
+              "sign": "harmful",
+              "target_only": 0.02926835118708495
+            },
+            {
+              "delta_pooled_minus_target": 0.00017734615621875505,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.038698074744464434,
+              "sign": "harmful",
+              "target_only": 0.03852072858824568
+            },
+            {
+              "delta_pooled_minus_target": 0.0004857992898091197,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011170497167713685,
+              "sign": "harmful",
+              "target_only": 0.010684697877904565
+            }
+          ]
+        },
+        "spline_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0011826625737125784,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.02808568861337237,
+              "sign": "helpful",
+              "target_only": 0.02926835118708495
+            },
+            {
+              "delta_pooled_minus_target": -0.0025711026313233465,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03594962595692233,
+              "sign": "helpful",
+              "target_only": 0.03852072858824568
+            },
+            {
+              "delta_pooled_minus_target": -0.0007185094206997693,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.009966188457204796,
+              "sign": "helpful",
+              "target_only": 0.010684697877904565
+            }
+          ]
+        },
+        "spline_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0011826625737125784,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.02808568861337237,
+              "sign": "helpful",
+              "target_only": 0.02926835118708495
+            },
+            {
+              "delta_pooled_minus_target": -0.0025711026313233465,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03594962595692233,
+              "sign": "helpful",
+              "target_only": 0.03852072858824568
+            },
+            {
+              "delta_pooled_minus_target": -0.0007185094206997693,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.009966188457204796,
+              "sign": "helpful",
+              "target_only": 0.010684697877904565
+            }
+          ]
+        },
+        "spline_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": -0.0011826625737125784,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.02808568861337237,
+              "sign": "helpful",
+              "target_only": 0.02926835118708495
+            },
+            {
+              "delta_pooled_minus_target": -0.0025711026313233465,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03594962595692233,
+              "sign": "helpful",
+              "target_only": 0.03852072858824568
+            },
+            {
+              "delta_pooled_minus_target": -0.0007185094206997693,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.009966188457204796,
+              "sign": "helpful",
+              "target_only": 0.010684697877904565
+            }
+          ]
+        },
+        "transformer_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0031293338038385216,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.037954696857845346,
+              "sign": "harmful",
+              "target_only": 0.034825363054006825
+            },
+            {
+              "delta_pooled_minus_target": 0.0018236799912594859,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04801401039023373,
+              "sign": "harmful",
+              "target_only": 0.046190330398974244
+            },
+            {
+              "delta_pooled_minus_target": 0.00046675210418849894,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.013072572307592845,
+              "sign": "harmful",
+              "target_only": 0.012605820203404346
+            }
+          ]
+        },
+        "transformer_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.015056251021117899,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.049881614075124724,
+              "sign": "harmful",
+              "target_only": 0.034825363054006825
+            },
+            {
+              "delta_pooled_minus_target": 0.015325298138678611,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.061515628537652856,
+              "sign": "harmful",
+              "target_only": 0.046190330398974244
+            },
+            {
+              "delta_pooled_minus_target": 0.005335188588968823,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.01794100879237317,
+              "sign": "harmful",
+              "target_only": 0.012605820203404346
+            }
+          ]
+        },
+        "transformer_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.034825363054006825,
+              "sign": "null",
+              "target_only": 0.034825363054006825
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.046190330398974244,
+              "sign": "null",
+              "target_only": 0.046190330398974244
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.012605820203404346,
+              "sign": "null",
+              "target_only": 0.012605820203404346
+            }
+          ]
+        },
+        "transformer_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.015056251021117899,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.049881614075124724,
+              "sign": "harmful",
+              "target_only": 0.034825363054006825
+            },
+            {
+              "delta_pooled_minus_target": 0.015325298138678611,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.061515628537652856,
+              "sign": "harmful",
+              "target_only": 0.046190330398974244
+            },
+            {
+              "delta_pooled_minus_target": 0.005335188588968823,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.01794100879237317,
+              "sign": "harmful",
+              "target_only": 0.012605820203404346
+            }
+          ]
+        }
+      },
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "prefix_versus_random": {
+        "equal": true,
+        "intersection": [
+          "SYNA-D001"
+        ],
+        "learned": false,
+        "overlap_count": 1,
+        "prefix_ids": [
+          "SYNA-D001"
+        ],
+        "prefix_rule": "studyid_sort_prefix",
+        "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+        "random_ids": [
+          "SYNA-D001"
+        ],
+        "random_rule": "rng_choice_without_replacement",
+        "similarity_based": false,
+        "validation_ranked": false
+      },
+      "random_selected_equal_k": true,
+      "results": {
+        "spline_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.030780840402464323,
+          "mean_quantile_loss": 0.011170497167713685,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.038698074744464434,
+          "seconds": 4.072880029678345,
+          "status": "ok"
+        },
+        "spline_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.02808568861337237,
+          "mean_quantile_loss": 0.009966188457204796,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.03594962595692233,
+          "seconds": 4.0402162075042725,
+          "status": "ok"
+        },
+        "spline_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.03754727566877343,
+            "chosen_arm": "spline_selected_one",
+            "decision": "share",
+            "delta_candidate_minus_target": -0.004308090802396011,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "validation_improvement",
+            "target_only_val": 0.04185536647116944,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "spline_selected_one",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_matched_sparse/decisions/spline_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.02808568861337237,
+          "mean_quantile_loss": 0.009966188457204796,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.03594962595692233,
+          "seconds": 4.249088764190674,
+          "status": "ok"
+        },
+        "spline_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.02808568861337237,
+          "mean_quantile_loss": 0.009966188457204796,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.03594962595692233,
+          "seconds": 4.249088764190674,
+          "status": "ok"
+        },
+        "spline_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.02926835118708495,
+          "mean_quantile_loss": 0.010684697877904565,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.03852072858824568,
+          "seconds": 3.5733513832092285,
+          "status": "ok"
+        },
+        "transformer_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.037954696857845346,
+          "mean_quantile_loss": 0.013072572307592845,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.04801401039023373,
+          "seconds": 0.9917960166931152,
+          "status": "ok"
+        },
+        "transformer_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.049881614075124724,
+          "mean_quantile_loss": 0.01794100879237317,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.061515628537652856,
+          "seconds": 1.137709617614746,
+          "status": "ok"
+        },
+        "transformer_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.05371753091687874,
+            "chosen_arm": "transformer_target_only",
+            "decision": "target_only",
+            "delta_candidate_minus_target": 0.004274153872747419,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "candidate_worse",
+            "target_only_val": 0.04944337704413132,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "transformer_target_only",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_matched_sparse/decisions/transformer_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.034825363054006825,
+          "mean_quantile_loss": 0.012605820203404346,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.046190330398974244,
+          "seconds": 0.8996860980987549,
+          "status": "ok"
+        },
+        "transformer_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.049881614075124724,
+          "mean_quantile_loss": 0.01794100879237317,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.061515628537652856,
+          "seconds": 1.0249509811401367,
+          "status": "ok"
+        },
+        "transformer_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.034825363054006825,
+          "mean_quantile_loss": 0.012605820203404346,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.046190330398974244,
+          "seconds": 0.8996860980987549,
+          "status": "ok"
+        }
+      },
+      "sparse_target_train_n": 4,
+      "target_holdout_hashes": {
+        "pooled_all": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        },
+        "random_one": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        },
+        "selected_one": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        },
+        "target_only": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        }
+      },
+      "train_index": 0,
+      "train_seed": 85001
+    },
+    {
+      "abstention": {
+        "spline": {
+          "candidate_val": 0.04832521856877027,
+          "chosen_arm": "spline_target_only",
+          "decision": "target_only",
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_both_full/decisions/spline_abstain.json",
+          "delta_candidate_minus_target": 0.009104942007342694,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "candidate_worse",
+          "saved_before_test": true,
+          "target_only_val": 0.039220276561427576,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        },
+        "transformer": {
+          "candidate_val": 0.04601483716129534,
+          "chosen_arm": "transformer_selected_one",
+          "decision": "share",
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_both_full/decisions/transformer_abstain.json",
+          "delta_candidate_minus_target": -0.0035056208943233177,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "validation_improvement",
+          "saved_before_test": true,
+          "target_only_val": 0.04952045805561866,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        }
+      },
+      "bank": "both",
+      "dataset_index": 1,
+      "density": "full",
+      "donor_records": {
+        "pooled_all": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 3,
+          "rng_seed": null,
+          "rule": "all_eligible",
+          "selected": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "sharing": "pooled",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "random_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": 91001,
+          "rule": "rng_choice_without_replacement",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "selected_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": null,
+          "rule": "studyid_sort_prefix",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "target_only": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 0,
+          "rng_seed": null,
+          "rule": "zero_donors",
+          "selected": [],
+          "sharing": "context_specific",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        }
+      },
+      "generate_seed": 77010,
+      "paired_transfer": {
+        "spline_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.002109956859014779,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.030415786894255958,
+              "sign": "harmful",
+              "target_only": 0.02830583003524118
+            },
+            {
+              "delta_pooled_minus_target": 0.0013542265480378304,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03815981559564812,
+              "sign": "harmful",
+              "target_only": 0.03680558904761029
+            },
+            {
+              "delta_pooled_minus_target": 0.001128517682398555,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.01135460996553182,
+              "sign": "harmful",
+              "target_only": 0.010226092283133264
+            }
+          ]
+        },
+        "spline_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.002413096966382408,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.030718927001623587,
+              "sign": "harmful",
+              "target_only": 0.02830583003524118
+            },
+            {
+              "delta_pooled_minus_target": 0.0005400355855752631,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.037345624633185553,
+              "sign": "harmful",
+              "target_only": 0.03680558904761029
+            },
+            {
+              "delta_pooled_minus_target": 0.002450644367758388,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.012676736650891652,
+              "sign": "harmful",
+              "target_only": 0.010226092283133264
+            }
+          ]
+        },
+        "spline_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.02830583003524118,
+              "sign": "null",
+              "target_only": 0.02830583003524118
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03680558904761029,
+              "sign": "null",
+              "target_only": 0.03680558904761029
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.010226092283133264,
+              "sign": "null",
+              "target_only": 0.010226092283133264
+            }
+          ]
+        },
+        "spline_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.002413096966382408,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.030718927001623587,
+              "sign": "harmful",
+              "target_only": 0.02830583003524118
+            },
+            {
+              "delta_pooled_minus_target": 0.0005400355855752631,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.037345624633185553,
+              "sign": "harmful",
+              "target_only": 0.03680558904761029
+            },
+            {
+              "delta_pooled_minus_target": 0.002450644367758388,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.012676736650891652,
+              "sign": "harmful",
+              "target_only": 0.010226092283133264
+            }
+          ]
+        },
+        "transformer_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.007114397768477908,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.041075800188390375,
+              "sign": "harmful",
+              "target_only": 0.03396140241991247
+            },
+            {
+              "delta_pooled_minus_target": 0.011647590015231774,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.05314004856316075,
+              "sign": "harmful",
+              "target_only": 0.041492458547928976
+            },
+            {
+              "delta_pooled_minus_target": 0.002993284400741217,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.014612228242270788,
+              "sign": "harmful",
+              "target_only": 0.011618943841529571
+            }
+          ]
+        },
+        "transformer_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0036418969489728156,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03760329936888528,
+              "sign": "harmful",
+              "target_only": 0.03396140241991247
+            },
+            {
+              "delta_pooled_minus_target": 0.006190044286689844,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04768250283461882,
+              "sign": "harmful",
+              "target_only": 0.041492458547928976
+            },
+            {
+              "delta_pooled_minus_target": 0.002422084411201411,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.014041028252730983,
+              "sign": "harmful",
+              "target_only": 0.011618943841529571
+            }
+          ]
+        },
+        "transformer_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0036418969489728156,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03760329936888528,
+              "sign": "harmful",
+              "target_only": 0.03396140241991247
+            },
+            {
+              "delta_pooled_minus_target": 0.006190044286689844,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04768250283461882,
+              "sign": "harmful",
+              "target_only": 0.041492458547928976
+            },
+            {
+              "delta_pooled_minus_target": 0.002422084411201411,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.014041028252730983,
+              "sign": "harmful",
+              "target_only": 0.011618943841529571
+            }
+          ]
+        },
+        "transformer_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0036418969489728156,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.03760329936888528,
+              "sign": "harmful",
+              "target_only": 0.03396140241991247
+            },
+            {
+              "delta_pooled_minus_target": 0.006190044286689844,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04768250283461882,
+              "sign": "harmful",
+              "target_only": 0.041492458547928976
+            },
+            {
+              "delta_pooled_minus_target": 0.002422084411201411,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.014041028252730983,
+              "sign": "harmful",
+              "target_only": 0.011618943841529571
+            }
+          ]
+        }
+      },
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "prefix_versus_random": {
+        "equal": true,
+        "intersection": [
+          "SYNA-D001"
+        ],
+        "learned": false,
+        "overlap_count": 1,
+        "prefix_ids": [
+          "SYNA-D001"
+        ],
+        "prefix_rule": "studyid_sort_prefix",
+        "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+        "random_ids": [
+          "SYNA-D001"
+        ],
+        "random_rule": "rng_choice_without_replacement",
+        "similarity_based": false,
+        "validation_ranked": false
+      },
+      "random_selected_equal_k": true,
+      "results": {
+        "spline_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.030415786894255958,
+          "mean_quantile_loss": 0.01135460996553182,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.03815981559564812,
+          "seconds": 3.6968276500701904,
+          "status": "ok"
+        },
+        "spline_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.030718927001623587,
+          "mean_quantile_loss": 0.012676736650891652,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.037345624633185553,
+          "seconds": 3.668348550796509,
+          "status": "ok"
+        },
+        "spline_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.04832521856877027,
+            "chosen_arm": "spline_target_only",
+            "decision": "target_only",
+            "delta_candidate_minus_target": 0.009104942007342694,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "candidate_worse",
+            "target_only_val": 0.039220276561427576,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "spline_target_only",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_both_full/decisions/spline_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.02830583003524118,
+          "mean_quantile_loss": 0.010226092283133264,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.03680558904761029,
+          "seconds": 3.6943821907043457,
+          "status": "ok"
+        },
+        "spline_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.030718927001623587,
+          "mean_quantile_loss": 0.012676736650891652,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.037345624633185553,
+          "seconds": 3.8926873207092285,
+          "status": "ok"
+        },
+        "spline_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.02830583003524118,
+          "mean_quantile_loss": 0.010226092283133264,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.03680558904761029,
+          "seconds": 3.6943821907043457,
+          "status": "ok"
+        },
+        "transformer_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.041075800188390375,
+          "mean_quantile_loss": 0.014612228242270788,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.05314004856316075,
+          "seconds": 0.9335253238677979,
+          "status": "ok"
+        },
+        "transformer_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03760329936888528,
+          "mean_quantile_loss": 0.014041028252730983,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.04768250283461882,
+          "seconds": 0.9324634075164795,
+          "status": "ok"
+        },
+        "transformer_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.04601483716129534,
+            "chosen_arm": "transformer_selected_one",
+            "decision": "share",
+            "delta_candidate_minus_target": -0.0035056208943233177,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "validation_improvement",
+            "target_only_val": 0.04952045805561866,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "transformer_selected_one",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_both_full/decisions/transformer_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.03760329936888528,
+          "mean_quantile_loss": 0.014041028252730983,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.04768250283461882,
+          "seconds": 0.9313983917236328,
+          "status": "ok"
+        },
+        "transformer_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03760329936888528,
+          "mean_quantile_loss": 0.014041028252730983,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.04768250283461882,
+          "seconds": 0.9313983917236328,
+          "status": "ok"
+        },
+        "transformer_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.03396140241991247,
+          "mean_quantile_loss": 0.011618943841529571,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.041492458547928976,
+          "seconds": 0.8741049766540527,
+          "status": "ok"
+        }
+      },
+      "sparse_target_train_n": null,
+      "target_holdout_hashes": {
+        "pooled_all": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        },
+        "random_one": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        },
+        "selected_one": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        },
+        "target_only": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        }
+      },
+      "train_index": 0,
+      "train_seed": 85001
+    },
+    {
+      "abstention": {
+        "spline": {
+          "candidate_val": 0.047843822016544385,
+          "chosen_arm": "spline_target_only",
+          "decision": "target_only",
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_both_sparse/decisions/spline_abstain.json",
+          "delta_candidate_minus_target": 0.005988455545374943,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "candidate_worse",
+          "saved_before_test": true,
+          "target_only_val": 0.04185536647116944,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        },
+        "transformer": {
+          "candidate_val": 0.057479080836255594,
+          "chosen_arm": "transformer_target_only",
+          "decision": "target_only",
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_both_sparse/decisions/transformer_abstain.json",
+          "delta_candidate_minus_target": 0.008035703792124274,
+          "lower_is_better": true,
+          "metric": "val_rmse_log",
+          "min_improvement": 0.0,
+          "n_val_studies": 2,
+          "reason": "candidate_worse",
+          "saved_before_test": true,
+          "target_only_val": 0.04944337704413132,
+          "test_outcomes_used": false,
+          "threshold_from_test": false,
+          "tie_rule": "target_only"
+        }
+      },
+      "bank": "both",
+      "dataset_index": 1,
+      "density": "sparse",
+      "donor_records": {
+        "pooled_all": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 3,
+          "rng_seed": null,
+          "rule": "all_eligible",
+          "selected": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "sharing": "pooled",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "random_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": 91001,
+          "rule": "rng_choice_without_replacement",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "selected_one": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 1,
+          "rng_seed": null,
+          "rule": "studyid_sort_prefix",
+          "selected": [
+            "SYNA-D001"
+          ],
+          "sharing": "selective",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        },
+        "target_only": {
+          "donor_species": [
+            "DOG"
+          ],
+          "eligible_recorded": true,
+          "k": 0,
+          "rng_seed": null,
+          "rule": "zero_donors",
+          "selected": [],
+          "sharing": "context_specific",
+          "studyids": [
+            "SYNA-D001",
+            "SYNA-D002",
+            "SYNA-D003"
+          ],
+          "test_outcomes_used": false,
+          "validation_outcomes_used": false
+        }
+      },
+      "generate_seed": 77010,
+      "paired_transfer": {
+        "spline_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0025983627293283754,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.031866713916413325,
+              "sign": "harmful",
+              "target_only": 0.02926835118708495
+            },
+            {
+              "delta_pooled_minus_target": 0.0017100954889146397,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04023082407716032,
+              "sign": "harmful",
+              "target_only": 0.03852072858824568
+            },
+            {
+              "delta_pooled_minus_target": 0.001225384135245037,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011910082013149602,
+              "sign": "harmful",
+              "target_only": 0.010684697877904565
+            }
+          ]
+        },
+        "spline_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0023522673218545967,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.031620618508939546,
+              "sign": "harmful",
+              "target_only": 0.02926835118708495
+            },
+            {
+              "delta_pooled_minus_target": 0.0015102947278148732,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04003102331606055,
+              "sign": "harmful",
+              "target_only": 0.03852072858824568
+            },
+            {
+              "delta_pooled_minus_target": 0.0012035447106477186,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011888242588552284,
+              "sign": "harmful",
+              "target_only": 0.010684697877904565
+            }
+          ]
+        },
+        "spline_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.02926835118708495,
+              "sign": "null",
+              "target_only": 0.02926835118708495
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.03852072858824568,
+              "sign": "null",
+              "target_only": 0.03852072858824568
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.010684697877904565,
+              "sign": "null",
+              "target_only": 0.010684697877904565
+            }
+          ]
+        },
+        "spline_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0023522673218545967,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.031620618508939546,
+              "sign": "harmful",
+              "target_only": 0.02926835118708495
+            },
+            {
+              "delta_pooled_minus_target": 0.0015102947278148732,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04003102331606055,
+              "sign": "harmful",
+              "target_only": 0.03852072858824568
+            },
+            {
+              "delta_pooled_minus_target": 0.0012035447106477186,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.011888242588552284,
+              "sign": "harmful",
+              "target_only": 0.010684697877904565
+            }
+          ]
+        },
+        "transformer_pooled_all": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.002926491383070731,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.037751854437077556,
+              "sign": "harmful",
+              "target_only": 0.034825363054006825
+            },
+            {
+              "delta_pooled_minus_target": 0.0020321494232381776,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.04822247982221242,
+              "sign": "harmful",
+              "target_only": 0.046190330398974244
+            },
+            {
+              "delta_pooled_minus_target": 0.000548424321510154,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.0131542445249145,
+              "sign": "harmful",
+              "target_only": 0.012605820203404346
+            }
+          ]
+        },
+        "transformer_random_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.013563352271322389,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.048388715325329214,
+              "sign": "harmful",
+              "target_only": 0.034825363054006825
+            },
+            {
+              "delta_pooled_minus_target": 0.016646557086323066,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.06283688748529731,
+              "sign": "harmful",
+              "target_only": 0.046190330398974244
+            },
+            {
+              "delta_pooled_minus_target": 0.0047235001266459214,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.017329320330050267,
+              "sign": "harmful",
+              "target_only": 0.012605820203404346
+            }
+          ]
+        },
+        "transformer_selected_abstain": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.034825363054006825,
+              "sign": "null",
+              "target_only": 0.034825363054006825
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.046190330398974244,
+              "sign": "null",
+              "target_only": 0.046190330398974244
+            },
+            {
+              "delta_pooled_minus_target": 0.0,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.012605820203404346,
+              "sign": "null",
+              "target_only": 0.012605820203404346
+            }
+          ]
+        },
+        "transformer_selected_one": {
+          "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+          "rows": [
+            {
+              "delta_pooled_minus_target": 0.013563352271322389,
+              "harmful_if_positive": true,
+              "metric": "mae_log",
+              "pooled": 0.048388715325329214,
+              "sign": "harmful",
+              "target_only": 0.034825363054006825
+            },
+            {
+              "delta_pooled_minus_target": 0.016646557086323066,
+              "harmful_if_positive": true,
+              "metric": "rmse_log",
+              "pooled": 0.06283688748529731,
+              "sign": "harmful",
+              "target_only": 0.046190330398974244
+            },
+            {
+              "delta_pooled_minus_target": 0.0047235001266459214,
+              "harmful_if_positive": true,
+              "metric": "mean_quantile_loss",
+              "pooled": 0.017329320330050267,
+              "sign": "harmful",
+              "target_only": 0.012605820203404346
+            }
+          ]
+        }
+      },
+      "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+      "prefix_versus_random": {
+        "equal": true,
+        "intersection": [
+          "SYNA-D001"
+        ],
+        "learned": false,
+        "overlap_count": 1,
+        "prefix_ids": [
+          "SYNA-D001"
+        ],
+        "prefix_rule": "studyid_sort_prefix",
+        "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+        "random_ids": [
+          "SYNA-D001"
+        ],
+        "random_rule": "rng_choice_without_replacement",
+        "similarity_based": false,
+        "validation_ranked": false
+      },
+      "random_selected_equal_k": true,
+      "results": {
+        "spline_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.031866713916413325,
+          "mean_quantile_loss": 0.011910082013149602,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.04023082407716032,
+          "seconds": 3.683150291442871,
+          "status": "ok"
+        },
+        "spline_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.031620618508939546,
+          "mean_quantile_loss": 0.011888242588552284,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.04003102331606055,
+          "seconds": 3.6584503650665283,
+          "status": "ok"
+        },
+        "spline_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.047843822016544385,
+            "chosen_arm": "spline_target_only",
+            "decision": "target_only",
+            "delta_candidate_minus_target": 0.005988455545374943,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "candidate_worse",
+            "target_only_val": 0.04185536647116944,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "spline_target_only",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_both_sparse/decisions/spline_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.02926835118708495,
+          "mean_quantile_loss": 0.010684697877904565,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.03852072858824568,
+          "seconds": 3.5186378955841064,
+          "status": "ok"
+        },
+        "spline_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.031620618508939546,
+          "mean_quantile_loss": 0.011888242588552284,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.04003102331606055,
+          "seconds": 3.7327799797058105,
+          "status": "ok"
+        },
+        "spline_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.02926835118708495,
+          "mean_quantile_loss": 0.010684697877904565,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.03852072858824568,
+          "seconds": 3.5186378955841064,
+          "status": "ok"
+        },
+        "transformer_pooled_all": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.037751854437077556,
+          "mean_quantile_loss": 0.0131542445249145,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.04822247982221242,
+          "seconds": 0.9354357719421387,
+          "status": "ok"
+        },
+        "transformer_random_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.048388715325329214,
+          "mean_quantile_loss": 0.017329320330050267,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.06283688748529731,
+          "seconds": 1.0956408977508545,
+          "status": "ok"
+        },
+        "transformer_selected_abstain": {
+          "abstention": {
+            "candidate_val": 0.057479080836255594,
+            "chosen_arm": "transformer_target_only",
+            "decision": "target_only",
+            "delta_candidate_minus_target": 0.008035703792124274,
+            "lower_is_better": true,
+            "metric": "val_rmse_log",
+            "min_improvement": 0.0,
+            "n_val_studies": 2,
+            "reason": "candidate_worse",
+            "target_only_val": 0.04944337704413132,
+            "test_outcomes_used": false,
+            "threshold_from_test": false,
+            "tie_rule": "target_only"
+          },
+          "chosen_arm": "transformer_target_only",
+          "chronos_label": null,
+          "decision_path": "runs/v3_share_abstain_run/repl/d1_t0_both_sparse/decisions/transformer_abstain.json",
+          "grouping": "STUDYID",
+          "mae_log": 0.034825363054006825,
+          "mean_quantile_loss": 0.012605820203404346,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.046190330398974244,
+          "seconds": 0.8800466060638428,
+          "status": "ok"
+        },
+        "transformer_selected_one": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.048388715325329214,
+          "mean_quantile_loss": 0.017329320330050267,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.06283688748529731,
+          "seconds": 0.937169075012207,
+          "status": "ok"
+        },
+        "transformer_target_only": {
+          "chronos_label": null,
+          "grouping": "STUDYID",
+          "mae_log": 0.034825363054006825,
+          "mean_quantile_loss": 0.012605820203404346,
+          "merge_one_to_one": true,
+          "n_scored": 127,
+          "n_studies": 2,
+          "rmse_log": 0.046190330398974244,
+          "seconds": 0.8800466060638428,
+          "status": "ok"
+        }
+      },
+      "sparse_target_train_n": 4,
+      "target_holdout_hashes": {
+        "pooled_all": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        },
+        "random_one": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        },
+        "selected_one": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        },
+        "target_only": {
+          "all_target": "6246452e1e6e768c",
+          "test": "dbf1e2c7d597db26",
+          "validation": "7b7f4d224ea8042b"
+        }
+      },
+      "train_index": 0,
+      "train_seed": 85001
+    }
+  ],
+  "seconds_total": 326.66133666038513,
+  "status": "executed"
+}

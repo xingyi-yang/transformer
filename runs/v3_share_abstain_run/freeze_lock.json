@@ -1,0 +1,219 @@
+{
+  "abstention": {
+    "metric": "val_rmse_log",
+    "min_improvement": 0.0,
+    "threshold_from_test": false,
+    "tie": "target_only"
+  },
+  "abstention_reuses": [
+    "target_only",
+    "selected_one"
+  ],
+  "additional_fits_for_abstention": 0,
+  "banks": [
+    "matched",
+    "both"
+  ],
+  "compute_cap_seconds": 600,
+  "config_hash": "1c4af4be93338539",
+  "config_path": "configs/v3_share_abstain.approved.yaml",
+  "confirmatory": false,
+  "dataset_variability_estimated": true,
+  "densities": [
+    "full",
+    "sparse"
+  ],
+  "design": false,
+  "donor_rng_seed": 91001,
+  "encoder_window_day": 14.0,
+  "estimated_runtime_seconds": {
+    "lower": 120,
+    "point": 180,
+    "upper": 480
+  },
+  "execute": true,
+  "fabricate_encoder_history": false,
+  "generate_seeds": [
+    76001,
+    77010
+  ],
+  "git_revision": "d4b9c1ea0f8d52947d3a347ed7710e0db73070bc",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "n_dataset_seeds": 2,
+  "n_model_fits": 68,
+  "n_train_seeds": 1,
+  "n_trained_cells": 34,
+  "new_architectures": false,
+  "not_sparse_encoder": true,
+  "policy_arms": [
+    "target_only",
+    "random_one",
+    "selected_one",
+    "pooled_all",
+    "selected_abstain",
+    "selected_regularized"
+  ],
+  "prefix_is_learned": false,
+  "prefix_is_similarity_based": false,
+  "prefix_is_validation_ranked": false,
+  "prefix_rule": "studyid_sort_prefix",
+  "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+  "preserved": [
+    "runs/v3_eval",
+    "runs/v3_pilot_k0k1",
+    "runs/v3_repl",
+    "runs/v3_research",
+    "runs/v3_closeout",
+    "runs/v3_audit",
+    "runs/v3_increment",
+    "runs/v3_phaseb",
+    "runs/v3_limitations",
+    "runs/v3_objective",
+    "runs/v3_official_seq",
+    "runs/v3_seq_diag",
+    "runs/v3_eval_correct",
+    "runs/v3_cov_chronos",
+    "runs/v3_share_repl",
+    "runs/v3_share_abstain"
+  ],
+  "proposal": {
+    "config_hash": "9d0152f5a465cfa9",
+    "execute": false,
+    "output_dir": "runs/v3_share_abstain",
+    "path": "configs/v3_share_abstain.frozen.yaml",
+    "relationship": "approved execution of the unexecuted frozen proposal",
+    "science_fingerprint_match": true
+  },
+  "real_data": false,
+  "retune_after_test": false,
+  "science_fingerprint": {
+    "budget": {
+      "additional_fits_for_abstention": 0,
+      "banks": [
+        "matched",
+        "both"
+      ],
+      "compute_cap_seconds": 600,
+      "densities": [
+        "full",
+        "sparse"
+      ],
+      "donor_rng_seed": 91001,
+      "estimated_runtime_seconds": {
+        "lower": 120,
+        "point": 180,
+        "upper": 480
+      },
+      "generate_seeds": [
+        76001,
+        77010
+      ],
+      "n_model_fits": 68,
+      "n_trained_cells": 34,
+      "sparse_target_train_n": 4,
+      "train_seeds": [
+        85001
+      ]
+    },
+    "cohort": {
+      "donor_species": [
+        "DOG"
+      ],
+      "max_day": 28,
+      "species": "RAT",
+      "study_classes": [
+        "REPEAT_DOSE_TOX"
+      ]
+    },
+    "evaluation": {
+      "contrast_day": 28,
+      "early_history_window_day": 14,
+      "n_draws": 40,
+      "tasks": [
+        "early_history"
+      ]
+    },
+    "generate_seed": 76001,
+    "models": {
+      "bayesian_enabled": false,
+      "optional": {
+        "chronos2": {
+          "enabled": false
+        },
+        "deepar": {
+          "enabled": false
+        },
+        "tft": {
+          "enabled": false
+        }
+      },
+      "spline": {
+        "n_bootstrap": 4,
+        "oof_folds": 5
+      },
+      "transformer": {
+        "d_model": 32,
+        "max_epochs": 8,
+        "n_heads": 2,
+        "n_layers": 1,
+        "n_members": 1,
+        "patience": 4
+      }
+    },
+    "share_abstain": {
+      "banks": [
+        "matched",
+        "both"
+      ],
+      "bayesian": false,
+      "checkpoint_source": "training_validation",
+      "chronos": false,
+      "compute_cap_seconds": 600,
+      "covariate_chronos": false,
+      "densities": [
+        "full",
+        "sparse"
+      ],
+      "donor_policy_source": "studyid_sort_prefix_and_validation_abstention",
+      "donor_rng_seed": 91001,
+      "encoder_window_day": 14,
+      "estimated_runtime_note": "2 datasets \u00d7 1 train seed \u00d7 2 banks \u00d7 2 densities \u00d7 4 trained policy arms (target_only, random_one, selected_one, pooled_all) plus selected_regularized on matched/full only = 34 trained cells \u00d7 spline and transformer (68 fits). Abstention reuses target_only and selected_one (0 extra fits). No TFT/Chronos. Point 180s from PR #14 spline/transformer cost; cap 600s.\n",
+      "estimated_runtime_seconds": {
+        "lower": 120,
+        "point": 180,
+        "upper": 480
+      },
+      "generate_seed_stride": 1009,
+      "n_dataset_seeds": 2,
+      "n_train_seeds": 1,
+      "predose": false,
+      "retune_after_test": false,
+      "sparse_target_train_n": 4,
+      "tft": false,
+      "train_seed_stride": 17
+    },
+    "synthetic": {
+      "generator": "A",
+      "n_compounds": 6,
+      "n_other_species_studies": 3,
+      "n_per_sex": [
+        3,
+        4
+      ],
+      "n_studies": 12
+    },
+    "train_seed": 85001
+  },
+  "selector_sees_generator_labels": false,
+  "sparse_kind": "sparse_target_study_training",
+  "sparse_target_train_n": 4,
+  "train_seeds": [
+    85001
+  ],
+  "training_seed_variability_estimated": false
+}

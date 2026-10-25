@@ -1,0 +1,782 @@
+{
+  "erratum": {
+    "all_supported": true,
+    "claims": [
+      {
+        "dataset_index": 0,
+        "id": "pr14_d0_spline_selective",
+        "numbers": {
+          "selective": {
+            "mae": 0.02681164782693095,
+            "pinball": 0.009630390139144466,
+            "rmse": 0.03549778403147913
+          },
+          "selective_regularized": {
+            "mae": 0.02672306117912723,
+            "pinball": 0.010118019139484508,
+            "rmse": 0.0353805221277278
+          },
+          "target_only": {
+            "mae": 0.027418126804387516,
+            "pinball": 0.010024264515448644,
+            "rmse": 0.03623816900100929
+          }
+        },
+        "statement": "On dataset 0, unregularized spline selective improves MAE, RMSE, and pinball; selective_regularized improves MAE/RMSE but worsens pinball.",
+        "supported": true
+      },
+      {
+        "dataset_index": 1,
+        "id": "pr14_d1_chronos_vs_last_value",
+        "numbers": {
+          "chronos2_pooled_history_mae": 0.10319112388267877,
+          "chronos2_target_only_history_mae": 0.10263138490208294,
+          "chronos2_zero_shot_history_mae": 0.10945143355554868,
+          "chronos2_zero_shot_history_rmse": 0.12595961648751774,
+          "last_value_mae": 0.10637670252259208,
+          "last_value_rmse": 0.12334966098175218
+        },
+        "statement": "On PR #14 dataset 1, history-only Chronos fine-tunes beat last-value; only history-only zero-shot Chronos trails it.",
+        "supported": true
+      }
+    ],
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "source": "runs/v3_share_repl/SUMMARY.json",
+    "status": "ok"
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "mechanism": {
+    "code": [
+      "src/send_bw/data/splits.py:donor_study_order",
+      "src/send_bw/data/splits.py:compose_train_with_donors",
+      "src/send_bw/pipeline.py:Run.prepare",
+      "src/send_bw/sharing.py:SELECTIVE_V1 / SELECTIVE_REGULARIZED",
+      "src/send_bw/models/spline.py:SplineModel.fit",
+      "src/send_bw/models/transformer.py:TransformerModel.fit",
+      "src/send_bw/data/features.py:FeatureSpec.fit"
+    ],
+    "donor_inclusion": "Eligible donor STUDYIDs are donor-species studies that pass cohort QC. Order is sorted unique STUDYID (donor_study_order). Selected = first k. Not metadata similarity, not training/validation scores, not learned weights.",
+    "missing_provenance": [
+      "PR #14 target_only donor_order.studyids is empty: eligible bank was not recorded when sharing=context_specific (donor_mode false).",
+      "No stored similarity scores or learned donor weights exist to reconstruct."
+    ],
+    "regularization_not_inclusion": "selective vs selective_regularized changes feature sharing and ridge/L2, not which donor IDs are chosen. Both used k=1 prefix SYNA-D001 on PR #14.",
+    "selective_regularized": {
+      "note": "Selective v1 is retained. This variant adds regularized species-specific deviations in nonlinear growth and treatment response. Deviations shrink toward the shared mean; they are not unpenalized species RE.",
+      "regularization": {
+        "growth": "ridge inflation on SPECIES \u00d7 time-basis coefficients (lambda_growth)",
+        "transformer": "phase1 target fit; phase2 extra L2 of species/growth tokens toward phase1 and treatment-deviation head toward 0",
+        "treatment": "ridge inflation on SPECIES \u00d7 exposure/dose coefficients (lambda_treatment)"
+      },
+      "residual": "target_species_only",
+      "shared": [
+        "compound",
+        "regimen"
+      ],
+      "species_specific": [
+        "growth_deviation",
+        "treatment_deviation"
+      ],
+      "variant": "regularized"
+    },
+    "selective_v1": {
+      "note": "Shared: compound descriptors and planned-dose/regimen query features. Species-specific: growth/baseline token groups and residual scale. Not a Bayesian species random-effect variant.",
+      "residual": "target_species_only",
+      "shared": [
+        "compound",
+        "regimen"
+      ],
+      "species_specific": [
+        "bio",
+        "baseline",
+        "species"
+      ],
+      "variant": "v1"
+    },
+    "target_only_is_not_single_study": "Target-only trains all target-species TRAIN studies (PR #14 d0: 7 studies). It is not a single-study model.",
+    "test_outcomes_used_for_selection": false,
+    "zero_donors_available": true,
+    "zero_donors_path": "context_specific + n_donor_studies=0"
+  },
+  "no_training": true,
+  "pr14_cells": [
+    {
+      "cell": "runs/v3_share_repl/datasets/d0/trains/t0/cells/d0_t0_matched_pooled",
+      "donor_order": {
+        "donor_species": [
+          "DOG"
+        ],
+        "k": 3,
+        "selected": [
+          "SYNA-D001",
+          "SYNA-D002",
+          "SYNA-D003"
+        ],
+        "sharing": "pooled",
+        "studyids": [
+          "SYNA-D001",
+          "SYNA-D002",
+          "SYNA-D003"
+        ]
+      },
+      "spline_history": {
+        "alpha": 10.0,
+        "covariance_fit_on": "train_oof_all_species",
+        "lambda_growth": null,
+        "lambda_treatment": null,
+        "n_params": 76,
+        "selective_sharing": null,
+        "validation_rmse": 0.05290602229403313
+      },
+      "target_manifest": {
+        "all_target": {
+          "hash": "b42a27301470dc82",
+          "n": 11,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-003",
+            "SYNA-004",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009",
+            "SYNA-010",
+            "SYNA-011",
+            "SYNA-012"
+          ]
+        },
+        "test": {
+          "hash": "63af3c1a5fa6c225",
+          "n": 2,
+          "studyids": [
+            "SYNA-004",
+            "SYNA-008"
+          ]
+        },
+        "train": {
+          "hash": "263b8a0afd005c4a",
+          "n": 7,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-003",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-010",
+            "SYNA-011"
+          ]
+        },
+        "validation": {
+          "hash": "dd85bf64592b2f0b",
+          "n": 2,
+          "studyids": [
+            "SYNA-009",
+            "SYNA-012"
+          ]
+        },
+        "version": "target-manifest-v1"
+      }
+    },
+    {
+      "cell": "runs/v3_share_repl/datasets/d0/trains/t0/cells/d0_t0_matched_selective",
+      "donor_order": {
+        "donor_species": [
+          "DOG"
+        ],
+        "k": 1,
+        "selected": [
+          "SYNA-D001"
+        ],
+        "sharing": "selective",
+        "studyids": [
+          "SYNA-D001",
+          "SYNA-D002",
+          "SYNA-D003"
+        ]
+      },
+      "spline_history": {
+        "alpha": 100.0,
+        "covariance_fit_on": "target_species_oof",
+        "lambda_growth": null,
+        "lambda_treatment": null,
+        "n_params": 76,
+        "selective_sharing": {
+          "model": "spline",
+          "note": "Shared: compound descriptors and planned-dose/regimen query features. Species-specific: growth/baseline token groups and residual scale. Not a Bayesian species random-effect variant.",
+          "residual": "target_species_only",
+          "shared": [
+            "compound",
+            "regimen"
+          ],
+          "species_specific": [
+            "bio",
+            "baseline",
+            "species"
+          ],
+          "training": "joint ridge mean with SPECIES_* time-basis interactions; HierarchicalCovariance fit on target-species OOF residuals only",
+          "variant": "v1"
+        },
+        "validation_rmse": 0.052197445685764385
+      },
+      "target_manifest": {
+        "all_target": {
+          "hash": "b42a27301470dc82",
+          "n": 11,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-003",
+            "SYNA-004",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009",
+            "SYNA-010",
+            "SYNA-011",
+            "SYNA-012"
+          ]
+        },
+        "test": {
+          "hash": "63af3c1a5fa6c225",
+          "n": 2,
+          "studyids": [
+            "SYNA-004",
+            "SYNA-008"
+          ]
+        },
+        "train": {
+          "hash": "263b8a0afd005c4a",
+          "n": 7,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-003",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-010",
+            "SYNA-011"
+          ]
+        },
+        "validation": {
+          "hash": "dd85bf64592b2f0b",
+          "n": 2,
+          "studyids": [
+            "SYNA-009",
+            "SYNA-012"
+          ]
+        },
+        "version": "target-manifest-v1"
+      }
+    },
+    {
+      "cell": "runs/v3_share_repl/datasets/d0/trains/t0/cells/d0_t0_matched_selective_regularized",
+      "donor_order": {
+        "donor_species": [
+          "DOG"
+        ],
+        "k": 1,
+        "selected": [
+          "SYNA-D001"
+        ],
+        "sharing": "selective_regularized",
+        "studyids": [
+          "SYNA-D001",
+          "SYNA-D002",
+          "SYNA-D003"
+        ]
+      },
+      "spline_history": {
+        "alpha": 100.0,
+        "covariance_fit_on": "target_species_oof",
+        "lambda_growth": 8.0,
+        "lambda_treatment": 8.0,
+        "n_params": 92,
+        "selective_sharing": {
+          "model": "spline",
+          "note": "Selective v1 is retained. This variant adds regularized species-specific deviations in nonlinear growth and treatment response. Deviations shrink toward the shared mean; they are not unpenalized species RE.",
+          "regularization": {
+            "growth": "ridge inflation on SPECIES \u00d7 time-basis coefficients (lambda_growth)",
+            "transformer": "phase1 target fit; phase2 extra L2 of species/growth tokens toward phase1 and treatment-deviation head toward 0",
+            "treatment": "ridge inflation on SPECIES \u00d7 exposure/dose coefficients (lambda_treatment)"
+          },
+          "residual": "target_species_only",
+          "shared": [
+            "compound",
+            "regimen"
+          ],
+          "species_specific": [
+            "growth_deviation",
+            "treatment_deviation"
+          ],
+          "training": "joint ridge with SPECIES\u00d7time (growth) and SPECIES\u00d7exposure (treatment) deviations; inflated ridge on those columns; HierarchicalCovariance on target-species OOF residuals only",
+          "variant": "regularized"
+        },
+        "validation_rmse": 0.05591352275944623
+      },
+      "target_manifest": {
+        "all_target": {
+          "hash": "b42a27301470dc82",
+          "n": 11,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-003",
+            "SYNA-004",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009",
+            "SYNA-010",
+            "SYNA-011",
+            "SYNA-012"
+          ]
+        },
+        "test": {
+          "hash": "63af3c1a5fa6c225",
+          "n": 2,
+          "studyids": [
+            "SYNA-004",
+            "SYNA-008"
+          ]
+        },
+        "train": {
+          "hash": "263b8a0afd005c4a",
+          "n": 7,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-003",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-010",
+            "SYNA-011"
+          ]
+        },
+        "validation": {
+          "hash": "dd85bf64592b2f0b",
+          "n": 2,
+          "studyids": [
+            "SYNA-009",
+            "SYNA-012"
+          ]
+        },
+        "version": "target-manifest-v1"
+      }
+    },
+    {
+      "cell": "runs/v3_share_repl/datasets/d0/trains/t0/cells/d0_t0_matched_target_only",
+      "donor_order": {
+        "donor_species": [
+          "DOG"
+        ],
+        "k": 0,
+        "selected": [],
+        "sharing": "context_specific",
+        "studyids": []
+      },
+      "spline_history": {
+        "alpha": 100.0,
+        "covariance_fit_on": "train_oof_all_species",
+        "lambda_growth": null,
+        "lambda_treatment": null,
+        "n_params": 62,
+        "selective_sharing": null,
+        "validation_rmse": 0.04769743667133028
+      },
+      "target_manifest": {
+        "all_target": {
+          "hash": "b42a27301470dc82",
+          "n": 11,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-003",
+            "SYNA-004",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009",
+            "SYNA-010",
+            "SYNA-011",
+            "SYNA-012"
+          ]
+        },
+        "test": {
+          "hash": "63af3c1a5fa6c225",
+          "n": 2,
+          "studyids": [
+            "SYNA-004",
+            "SYNA-008"
+          ]
+        },
+        "train": {
+          "hash": "263b8a0afd005c4a",
+          "n": 7,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-003",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-010",
+            "SYNA-011"
+          ]
+        },
+        "validation": {
+          "hash": "dd85bf64592b2f0b",
+          "n": 2,
+          "studyids": [
+            "SYNA-009",
+            "SYNA-012"
+          ]
+        },
+        "version": "target-manifest-v1"
+      }
+    },
+    {
+      "cell": "runs/v3_share_repl/datasets/d1/trains/t0/cells/d1_t0_matched_pooled",
+      "donor_order": {
+        "donor_species": [
+          "DOG"
+        ],
+        "k": 3,
+        "selected": [
+          "SYNA-D001",
+          "SYNA-D002",
+          "SYNA-D003"
+        ],
+        "sharing": "pooled",
+        "studyids": [
+          "SYNA-D001",
+          "SYNA-D002",
+          "SYNA-D003"
+        ]
+      },
+      "spline_history": {
+        "alpha": 0.1,
+        "covariance_fit_on": "train_oof_all_species",
+        "lambda_growth": null,
+        "lambda_treatment": null,
+        "n_params": 76,
+        "selective_sharing": null,
+        "validation_rmse": 0.0618413636100215
+      },
+      "target_manifest": {
+        "all_target": {
+          "hash": "11ccd2a44fb8550f",
+          "n": 11,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-004",
+            "SYNA-005",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009",
+            "SYNA-010",
+            "SYNA-011",
+            "SYNA-012"
+          ]
+        },
+        "test": {
+          "hash": "dd63ab1b0ac4b709",
+          "n": 2,
+          "studyids": [
+            "SYNA-005",
+            "SYNA-008"
+          ]
+        },
+        "train": {
+          "hash": "c2debbd358bce298",
+          "n": 7,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-004",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-010",
+            "SYNA-011"
+          ]
+        },
+        "validation": {
+          "hash": "dd85bf64592b2f0b",
+          "n": 2,
+          "studyids": [
+            "SYNA-009",
+            "SYNA-012"
+          ]
+        },
+        "version": "target-manifest-v1"
+      }
+    },
+    {
+      "cell": "runs/v3_share_repl/datasets/d1/trains/t0/cells/d1_t0_matched_selective",
+      "donor_order": {
+        "donor_species": [
+          "DOG"
+        ],
+        "k": 1,
+        "selected": [
+          "SYNA-D001"
+        ],
+        "sharing": "selective",
+        "studyids": [
+          "SYNA-D001",
+          "SYNA-D002",
+          "SYNA-D003"
+        ]
+      },
+      "spline_history": {
+        "alpha": 0.1,
+        "covariance_fit_on": "target_species_oof",
+        "lambda_growth": null,
+        "lambda_treatment": null,
+        "n_params": 76,
+        "selective_sharing": {
+          "model": "spline",
+          "note": "Shared: compound descriptors and planned-dose/regimen query features. Species-specific: growth/baseline token groups and residual scale. Not a Bayesian species random-effect variant.",
+          "residual": "target_species_only",
+          "shared": [
+            "compound",
+            "regimen"
+          ],
+          "species_specific": [
+            "bio",
+            "baseline",
+            "species"
+          ],
+          "training": "joint ridge mean with SPECIES_* time-basis interactions; HierarchicalCovariance fit on target-species OOF residuals only",
+          "variant": "v1"
+        },
+        "validation_rmse": 0.05701431378689987
+      },
+      "target_manifest": {
+        "all_target": {
+          "hash": "11ccd2a44fb8550f",
+          "n": 11,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-004",
+            "SYNA-005",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009",
+            "SYNA-010",
+            "SYNA-011",
+            "SYNA-012"
+          ]
+        },
+        "test": {
+          "hash": "dd63ab1b0ac4b709",
+          "n": 2,
+          "studyids": [
+            "SYNA-005",
+            "SYNA-008"
+          ]
+        },
+        "train": {
+          "hash": "c2debbd358bce298",
+          "n": 7,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-004",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-010",
+            "SYNA-011"
+          ]
+        },
+        "validation": {
+          "hash": "dd85bf64592b2f0b",
+          "n": 2,
+          "studyids": [
+            "SYNA-009",
+            "SYNA-012"
+          ]
+        },
+        "version": "target-manifest-v1"
+      }
+    },
+    {
+      "cell": "runs/v3_share_repl/datasets/d1/trains/t0/cells/d1_t0_matched_selective_regularized",
+      "donor_order": {
+        "donor_species": [
+          "DOG"
+        ],
+        "k": 1,
+        "selected": [
+          "SYNA-D001"
+        ],
+        "sharing": "selective_regularized",
+        "studyids": [
+          "SYNA-D001",
+          "SYNA-D002",
+          "SYNA-D003"
+        ]
+      },
+      "spline_history": {
+        "alpha": 10.0,
+        "covariance_fit_on": "target_species_oof",
+        "lambda_growth": 8.0,
+        "lambda_treatment": 8.0,
+        "n_params": 92,
+        "selective_sharing": {
+          "model": "spline",
+          "note": "Selective v1 is retained. This variant adds regularized species-specific deviations in nonlinear growth and treatment response. Deviations shrink toward the shared mean; they are not unpenalized species RE.",
+          "regularization": {
+            "growth": "ridge inflation on SPECIES \u00d7 time-basis coefficients (lambda_growth)",
+            "transformer": "phase1 target fit; phase2 extra L2 of species/growth tokens toward phase1 and treatment-deviation head toward 0",
+            "treatment": "ridge inflation on SPECIES \u00d7 exposure/dose coefficients (lambda_treatment)"
+          },
+          "residual": "target_species_only",
+          "shared": [
+            "compound",
+            "regimen"
+          ],
+          "species_specific": [
+            "growth_deviation",
+            "treatment_deviation"
+          ],
+          "training": "joint ridge with SPECIES\u00d7time (growth) and SPECIES\u00d7exposure (treatment) deviations; inflated ridge on those columns; HierarchicalCovariance on target-species OOF residuals only",
+          "variant": "regularized"
+        },
+        "validation_rmse": 0.05774455859063688
+      },
+      "target_manifest": {
+        "all_target": {
+          "hash": "11ccd2a44fb8550f",
+          "n": 11,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-004",
+            "SYNA-005",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009",
+            "SYNA-010",
+            "SYNA-011",
+            "SYNA-012"
+          ]
+        },
+        "test": {
+          "hash": "dd63ab1b0ac4b709",
+          "n": 2,
+          "studyids": [
+            "SYNA-005",
+            "SYNA-008"
+          ]
+        },
+        "train": {
+          "hash": "c2debbd358bce298",
+          "n": 7,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-004",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-010",
+            "SYNA-011"
+          ]
+        },
+        "validation": {
+          "hash": "dd85bf64592b2f0b",
+          "n": 2,
+          "studyids": [
+            "SYNA-009",
+            "SYNA-012"
+          ]
+        },
+        "version": "target-manifest-v1"
+      }
+    },
+    {
+      "cell": "runs/v3_share_repl/datasets/d1/trains/t0/cells/d1_t0_matched_target_only",
+      "donor_order": {
+        "donor_species": [
+          "DOG"
+        ],
+        "k": 0,
+        "selected": [],
+        "sharing": "context_specific",
+        "studyids": []
+      },
+      "spline_history": {
+        "alpha": 0.1,
+        "covariance_fit_on": "train_oof_all_species",
+        "lambda_growth": null,
+        "lambda_treatment": null,
+        "n_params": 62,
+        "selective_sharing": null,
+        "validation_rmse": 0.05485141550011952
+      },
+      "target_manifest": {
+        "all_target": {
+          "hash": "11ccd2a44fb8550f",
+          "n": 11,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-004",
+            "SYNA-005",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009",
+            "SYNA-010",
+            "SYNA-011",
+            "SYNA-012"
+          ]
+        },
+        "test": {
+          "hash": "dd63ab1b0ac4b709",
+          "n": 2,
+          "studyids": [
+            "SYNA-005",
+            "SYNA-008"
+          ]
+        },
+        "train": {
+          "hash": "c2debbd358bce298",
+          "n": 7,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-004",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-010",
+            "SYNA-011"
+          ]
+        },
+        "validation": {
+          "hash": "dd85bf64592b2f0b",
+          "n": 2,
+          "studyids": [
+            "SYNA-009",
+            "SYNA-012"
+          ]
+        },
+        "version": "target-manifest-v1"
+      }
+    }
+  ]
+}

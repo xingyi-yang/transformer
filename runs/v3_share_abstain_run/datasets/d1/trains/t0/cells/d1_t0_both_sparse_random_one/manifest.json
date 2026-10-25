@@ -1,0 +1,152 @@
+{
+  "config_hash": "17e4d68af547e13d",
+  "config_path": "runs/v3_share_abstain_run/datasets/d1/trains/t0/cells/d1_t0_both_sparse_random_one/effective.yaml",
+  "created_utc": "2026-10-25T17:40:07.191043+00:00",
+  "git_revision": "d4b9c1ea0f8d52947d3a347ed7710e0db73070bc",
+  "seed": 85001,
+  "software": {
+    "arviz": "1.3.0",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4",
+    "nutpie": "0.16.11",
+    "pandas": "3.0.6",
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "pyarrow": "26.0.0",
+    "pydantic": "2.14.1",
+    "pymc": "6.3.2",
+    "pyreadstat": null,
+    "pytensor": "3.3.4",
+    "python": "3.12.3",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "snowflake-connector-python": null,
+    "torch": "2.14.1"
+  },
+  "stages": {
+    "ingest": {
+      "completed_utc": "2026-10-25T17:40:07.597858+00:00",
+      "key": "7c3f1356fc39b949",
+      "mapping_version": "example-send-0.1",
+      "n_animals": 472,
+      "n_bw": 3689,
+      "n_quarantine": 0,
+      "seconds": 0.38838648796081543
+    },
+    "optional_models": {
+      "completed_utc": "2026-10-25T17:40:09.033750+00:00",
+      "key": null,
+      "status": {
+        "chronos2": "not_run",
+        "deepar": "not_run",
+        "tft": "not_run"
+      }
+    },
+    "prepare": {
+      "completed_utc": "2026-10-25T17:40:07.852762+00:00",
+      "compound_holdout": [],
+      "key": "207ff95895aabff2",
+      "n_donor_studies": 1,
+      "n_eligible_animals": 400,
+      "seconds": 0.25424742698669434,
+      "sharing": "selective",
+      "sparse_target_train": {
+        "dropped_train_studyids": [
+          "SYNA-010",
+          "SYNA-011"
+        ],
+        "kept_train_studyids": [
+          "SYNA-004",
+          "SYNA-006",
+          "SYNA-007",
+          "SYNA-009"
+        ],
+        "kind": "sparse_target_study_training",
+        "n_keep": 4,
+        "n_train_after": 4,
+        "n_train_before": 6,
+        "not": "sparse_history_encoder",
+        "note": "Drops target TRAIN studies only. Validation and test study sets stay frozen. Distinct from sparse observation/history encoder windows.",
+        "target_manifest_test_hash": "dbf1e2c7d597db26",
+        "target_manifest_validation_hash": "7b7f4d224ea8042b",
+        "test_studyids": [
+          "SYNA-001",
+          "SYNA-003"
+        ],
+        "test_unchanged": true,
+        "validation_studyids": [
+          "SYNA-008",
+          "SYNA-012"
+        ],
+        "validation_unchanged": true
+      },
+      "split_counts": {
+        "test": 2,
+        "test_compound_holdout": 2,
+        "train": 5,
+        "validation": 2
+      },
+      "split_hash": "7ddb9a3fbf952bdd",
+      "target_manifest": {
+        "all_target": {
+          "hash": "6246452e1e6e768c",
+          "n": 10,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-003",
+            "SYNA-004",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009",
+            "SYNA-010",
+            "SYNA-011",
+            "SYNA-012"
+          ]
+        },
+        "test": {
+          "hash": "dbf1e2c7d597db26",
+          "n": 2,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-003"
+          ]
+        },
+        "train": {
+          "hash": "bb41fe212ec062d9",
+          "n": 6,
+          "studyids": [
+            "SYNA-004",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-009",
+            "SYNA-010",
+            "SYNA-011"
+          ]
+        },
+        "validation": {
+          "hash": "7b7f4d224ea8042b",
+          "n": 2,
+          "studyids": [
+            "SYNA-008",
+            "SYNA-012"
+          ]
+        },
+        "version": "target-manifest-v1"
+      },
+      "train_seed": 85001
+    },
+    "train_spline": {
+      "completed_utc": "2026-10-25T17:40:08.193922+00:00",
+      "key": "0f970ae5edfff3df",
+      "seconds": 0.31211137771606445,
+      "status": "trained"
+    },
+    "train_transformer": {
+      "completed_utc": "2026-10-25T17:40:09.033261+00:00",
+      "key": "bad11367f172945f",
+      "seconds": 0.8378596305847168,
+      "status": "trained"
+    }
+  },
+  "synthetic_data": false
+}

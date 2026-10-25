@@ -1,0 +1,73 @@
+{
+  "candidate_donors": [
+    "SYNA-D001"
+  ],
+  "checkpoint_candidate": {
+    "dir": "runs/v3_share_abstain_run/datasets/d0/trains/t0/cells/d0_t0_both_sparse_selected_one/models/transformer",
+    "ridge_alpha": null,
+    "source": "training_validation",
+    "test_outcomes_used": false,
+    "training_history": "runs/v3_share_abstain_run/datasets/d0/trains/t0/cells/d0_t0_both_sparse_selected_one/models/transformer/training_history.json",
+    "validation_rmse": 0.06804327666759491
+  },
+  "checkpoint_target_only": {
+    "dir": "runs/v3_share_abstain_run/datasets/d0/trains/t0/cells/d0_t0_both_sparse_target_only/models/transformer",
+    "ridge_alpha": null,
+    "source": "training_validation",
+    "test_outcomes_used": false,
+    "training_history": "runs/v3_share_abstain_run/datasets/d0/trains/t0/cells/d0_t0_both_sparse_target_only/models/transformer/training_history.json",
+    "validation_rmse": 0.078623928129673
+  },
+  "decision": {
+    "candidate_val": 0.06128580462266005,
+    "chosen_arm": "transformer_target_only",
+    "decision": "target_only",
+    "delta_candidate_minus_target": 0.009146020890730105,
+    "lower_is_better": true,
+    "metric": "val_rmse_log",
+    "min_improvement": 0.0,
+    "n_val_studies": 2,
+    "reason": "candidate_worse",
+    "target_only_val": 0.05213978373192994,
+    "test_outcomes_used": false,
+    "threshold_from_test": false,
+    "tie_rule": "target_only"
+  },
+  "donor_rule_candidate": "studyid_sort_prefix",
+  "donor_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+  "learned": false,
+  "model": "transformer",
+  "saved_before_test": true,
+  "similarity_based": false,
+  "target_only_donors": [],
+  "test_scored": false,
+  "validation": {
+    "candidate": {
+      "chronos_label": null,
+      "grouping": "STUDYID",
+      "mae_log": 0.0510756920496121,
+      "mean_quantile_loss": 0.018125210159160174,
+      "merge_one_to_one": true,
+      "n_scored": 218,
+      "n_studies": 2,
+      "rmse_log": 0.06128580462266005,
+      "seconds": null,
+      "status": "ok"
+    },
+    "metric": "val_rmse_log",
+    "n_val_studies": 2,
+    "target_only": {
+      "chronos_label": null,
+      "grouping": "STUDYID",
+      "mae_log": 0.043467606750729554,
+      "mean_quantile_loss": 0.015096018407389625,
+      "merge_one_to_one": true,
+      "n_scored": 218,
+      "n_studies": 2,
+      "rmse_log": 0.05213978373192994,
+      "seconds": null,
+      "status": "ok"
+    }
+  },
+  "validation_ranked_donors": false
+}

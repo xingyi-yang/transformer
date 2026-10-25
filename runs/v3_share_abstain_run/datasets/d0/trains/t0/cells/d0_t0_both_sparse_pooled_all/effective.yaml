@@ -1,0 +1,111 @@
+run_name: v3_research_d0_t0_both_sparse_pooled_all
+output_dir: runs/v3_share_abstain_run/datasets/d0/trains/t0/cells/d0_t0_both_sparse_pooled_all
+generate_seed: 76001
+train_seed: 85001
+seed: 85001
+share_abstain:
+  execute: true
+  proposal_config: configs/v3_share_abstain.frozen.yaml
+  n_dataset_seeds: 2
+  n_train_seeds: 1
+  generate_seed_stride: 1009
+  train_seed_stride: 17
+  donor_rng_seed: 91001
+  banks:
+  - matched
+  - both
+  densities:
+  - full
+  - sparse
+  sparse_target_train_n: 4
+  encoder_window_day: 14
+  checkpoint_source: training_validation
+  donor_policy_source: studyid_sort_prefix_and_validation_abstention
+  retune_after_test: false
+  tft: false
+  chronos: false
+  covariate_chronos: false
+  bayesian: false
+  predose: false
+  compute_cap_seconds: 600
+  estimated_runtime_seconds:
+    point: 180
+    lower: 120
+    upper: 480
+  estimated_runtime_note: "2 datasets \xD7 1 train seed \xD7 2 banks \xD7 2 densities\
+    \ \xD7 4 trained policy arms (target_only, random_one, selected_one, pooled_all)\
+    \ plus selected_regularized on matched/full only = 34 trained cells \xD7 spline\
+    \ and transformer (68 fits). Abstention reuses target_only and selected_one (0\
+    \ extra fits). No TFT/Chronos. Point 180s from PR #14 spline/transformer cost;\
+    \ cap 600s.\n"
+synthetic:
+  enabled: false
+  out_dir: runs/v3_share_abstain_run/datasets/d0/banks/both/synthetic
+  generator: A
+  n_studies: 12
+  n_other_species_studies: 3
+  n_compounds: 6
+  n_per_sex:
+  - 3
+  - 4
+  donor_scenario: both
+mapping: configs/mappings/example_send.yaml
+source:
+  type: local
+  root: runs/v3_share_abstain_run/datasets/d0/banks/both/synthetic/send
+  metadata_dir: runs/v3_share_abstain_run/datasets/d0/banks/both/synthetic/metadata
+cohort:
+  species: RAT
+  donor_species:
+  - DOG
+  sharing: pooled
+  n_donor_studies: 99
+  study_classes:
+  - REPEAT_DOSE_TOX
+  max_day: 28
+splits:
+  method: random
+  validation: 0.2
+  test: 0.2
+  compound_holdout_auto: 1
+  sparse_target_train_n: 4
+  reuse_target_from: runs/v3_share_abstain_run/datasets/d0/trains/t0/cells/d0_t0_both_sparse_target_only/splits
+  donor_rule: all
+models:
+  spline:
+    enabled: true
+    n_bootstrap: 4
+    oof_folds: 5
+    seed: 85001
+  transformer:
+    enabled: true
+    n_members: 1
+    max_epochs: 8
+    patience: 4
+    d_model: 32
+    n_heads: 2
+    n_layers: 1
+    seed: 85001
+    torch_threads: 2
+  bayesian:
+    enabled: false
+    seed: 85001
+  optional:
+    tft:
+      enabled: false
+    chronos2:
+      enabled: false
+    deepar:
+      enabled: false
+evaluation:
+  tasks:
+  - early_history
+  early_history_window_day: 14.0
+  n_draws: 40
+  contrast_day: 28
+design: {}
+labels:
+- Synthetic diagnostic.
+- Not design qualification.
+- No real-data validation.
+- No operational recommendation.
