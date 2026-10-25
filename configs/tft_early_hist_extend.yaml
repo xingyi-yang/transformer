@@ -1,0 +1,84 @@
+# Unlocked extension of the synthetic TFT early-history pilot.
+# Reads official_seq cells and the completed pilot; does not write runs/v3_*
+# or overwrite runs/tft_early_hist_bench.
+# Seeds and splits below are predeclared before any new scores are examined.
+# Windows are observed DAY values only. No illustrative calendars.
+# Synthetic diagnostic. Not design qualification. No real-data validation.
+# No operational recommendation.
+run_name: tft_early_hist_extend
+output_dir: runs/tft_early_hist_extend
+pilot_dir: runs/tft_early_hist_bench
+generate_seed: 71001
+train_seed: 82001
+seed: 82001
+benchmark:
+  source_cells:
+    target_only: runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_target_only
+    pooled: runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_pooled
+  encoder_window_day: 14
+  target_species: RAT
+  # Official holdout (generate_seed 71001, test SYNA-010/011) is the reference.
+  # Its reported errors are not used to tune any subsequent model.
+  extra_train_seeds: [82011]
+  extra_split_seed: 33001
+  extra_split_tft_train_seed: 82001
+  extra_split_mean_seed: 81001
+  replay_reference_pooled: true
+models:
+  spline:
+    enabled: true
+    n_bootstrap: 4
+    oof_folds: 5
+    seed: 81001
+  transformer:
+    enabled: true
+    n_members: 1
+    max_epochs: 8
+    patience: 4
+    d_model: 32
+    n_heads: 2
+    n_layers: 1
+    seed: 81001
+    torch_threads: 2
+  catboost:
+    enabled: true
+    iterations: 200
+    depth: 4
+    learning_rate: 0.05
+    l2_leaf_reg: 3.0
+    early_stopping_rounds: 20
+    quantiles: [0.1, 0.5, 0.9]
+    origins: cutoff
+  optional:
+    tft:
+      enabled: true
+      max_epochs: 8
+      patience: 4
+      hidden_size: 16
+      lstm_layers: 1
+      attention_head_size: 2
+      hidden_continuous_size: 8
+      batch_size: 32
+      lr: 0.003
+      dropout: 0.1
+      encoder_window_day: 14
+      max_encoder_length: 8
+      max_prediction_length: 6
+      min_encoder_length: 1
+      torch_threads: 2
+      window_balance: study
+      # If the diagnostic replay's validation loss is still best at the last
+      # epoch, new TFT fits use this longer budget. Decision uses validation
+      # only. Reference 82001 scores stay the 8-epoch official pilot.
+      extended_max_epochs: 16
+      extended_patience: 6
+evaluation:
+  tasks: [early_history]
+  early_history_window_day: 14
+  common_quantiles: [0.1, 0.5, 0.9]
+design: {}
+labels:
+  - Synthetic diagnostic.
+  - Not design qualification.
+  - No real-data validation.
+  - No operational recommendation.

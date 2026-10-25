@@ -95,7 +95,7 @@ def main(argv: list[str] | None = None) -> int:
                  "v3-limitations", "v3-objective", "v3-official-seq", "v3-seq-diag",
                  "v3-eval-correct", "v3-cov-chronos", "v3-share-repl",
                  "v3-share-abstain", "v3-donor-rank", "historical-audit",
-                 "tft-early-hist-bench"]:
+                 "tft-early-hist-bench", "tft-early-hist-extend"]:
         s = sub.add_parser(name)
         artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout",
                                 "v3-increment", "v3-limitations")
@@ -328,6 +328,19 @@ def main(argv: list[str] | None = None) -> int:
             from send_bw.tft_early_hist_bench import execute_tft_early_hist_bench
 
             out = execute_tft_early_hist_bench(args.config, force=args.force)
+            print(json.dumps({"status": "ok",
+                              "eligible": (out.get("example_summary") or {}).get("n_eligible"),
+                              "correctness": (out.get("correctness") or {}).get("ok"),
+                              "n_failures": len(out.get("failures") or []),
+                              "seconds_total": out.get("seconds_total"),
+                              "real_data_accessed": out.get("real_data_accessed"),
+                              "parent": out.get("output_dir")},
+                             indent=2, default=str))
+            return 0
+        if args.cmd == "tft-early-hist-extend":
+            from send_bw.tft_early_hist_extend import execute_tft_early_hist_extend
+
+            out = execute_tft_early_hist_extend(args.config, force=args.force)
             print(json.dumps({"status": "ok",
                               "eligible": (out.get("example_summary") or {}).get("n_eligible"),
                               "correctness": (out.get("correctness") or {}).get("ok"),

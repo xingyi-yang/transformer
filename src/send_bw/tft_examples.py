@@ -229,6 +229,32 @@ def score_aligned_quantiles(fut: pd.DataFrame, pred: pd.DataFrame, *, representa
         extra["crossing_rate"] = {"pooled": None, "n_obs": int(len(mm))}
     if "LEAD_DAYS" in mm.columns:
         extra["per_lead_days"] = _lead_breakdown(mm, q50, y, levels)
+    yg, pg = np.exp(y), np.exp(q50)
+    extra["mae_gram"] = _study_mean(np.abs(pg - yg), studies)
+    extra["mae_gram_definition"] = (
+        "study-balanced mean |exp(point) - exp(LOGW)| in grams; "
+        "exp(LOGW) = WEIGHT_G when LOGW = ln(WEIGHT_G)"
+    )
+    extra["quantile_loss_gram"] = {}
+    gram_pins = []
+    for q in levels:
+        col = f"q{q}"
+        if col not in mm.columns:
+            continue
+        qg = np.exp(mm[col].to_numpy(float))
+        pin_g = np.where(yg - qg >= 0, q * (yg - qg), (q - 1.0) * (yg - qg))
+        extra["quantile_loss_gram"][str(q)] = _study_mean(pin_g, studies)
+        gram_pins.append(pin_g)
+    extra["mean_quantile_loss_gram"] = (
+        _study_mean(np.mean(np.stack(gram_pins, axis=0), axis=0), studies) if gram_pins else None)
+    extra["units"] = {
+        "mae_log": "ln(grams)",
+        "rmse_log": "ln(grams)",
+        "mae_gram": "grams",
+        "quantile_loss": "pinball on LOGW = ln(WEIGHT_G)",
+        "quantile_loss_gram": "pinball on grams = exp(quantile)",
+        "interval_width80": "q0.9 - q0.1 on LOGW",
+    }
     base.update(extra)
     return base
 
@@ -296,6 +322,83 @@ def quantile_table_from_model(model, animals: pd.DataFrame, pack: dict[str, Any]
     if not recs:
         return pd.DataFrame(), failures
     return pd.concat(recs, ignore_index=True), failures
+
+
+def history_lead_report(pack: dict[str, Any]) -> dict[str, Any]:
+    """Configured limits vs lengths actually exercised by observed DAY values."""
+    ex = pack.get("examples")
+    if ex is None or getattr(ex, "empty", True):
+        return {"n_eligible": 0}
+    n_enc = ex["n_encoder_used"].to_numpy(int)
+    n_fut = ex["n_future_used"].to_numpy(int)
+    n_enc_av = ex["n_encoder_available"].to_numpy(int)
+    n_fut_av = ex["n_future_available"].to_numpy(int)
+    leads = []
+    for rec in ex.to_dict("records"):
+        leads.extend(float(x) for x in rec.get("lead_times") or [])
+    return {
+        "configured": {
+            "cutoff": pack.get("cutoff"),
+            "max_encoder_length": pack.get("max_encoder_length"),
+            "max_prediction_length": pack.get("max_prediction_length"),
+        },
+        "exercised": {
+            "n_eligible_animals": int(len(ex)),
+            "encoder_used_min": int(n_enc.min()),
+            "encoder_used_median": float(np.median(n_enc)),
+            "encoder_used_max": int(n_enc.max()),
+            "encoder_available_max": int(n_enc_av.max()),
+            "n_animals_truncated_encoder": int(ex["truncated_encoder"].sum()) if "truncated_encoder" in ex else 0,
+            "future_used_min": int(n_fut.min()),
+            "future_used_median": float(np.median(n_fut)),
+            "future_used_max": int(n_fut.max()),
+            "future_available_max": int(n_fut_av.max()),
+            "n_animals_truncated_future": int(ex["truncated_future"].sum()) if "truncated_future" in ex else 0,
+            "lead_days_min": float(min(leads)) if leads else None,
+            "lead_days_median": float(np.median(leads)) if leads else None,
+            "lead_days_max": float(max(leads)) if leads else None,
+            "lead_days_unique": sorted({round(x, 6) for x in leads}),
+        },
+        "note": (
+            "Lead times are target DAY minus last encoder DAY for that animal. "
+            "Configured caps are not the lengths the data exercised unless they bind."
+        ),
+    }
+
+
+def paired_study_differences(per_a: list[dict[str, Any]], per_b: list[dict[str, Any]],
+                             *, metric: str, name_a: str, name_b: str) -> dict[str, Any]:
+    """Study-level paired deltas. Observations within a study are not replications."""
+    da = {str(r.get("STUDYID")): r for r in per_a if r.get("STUDYID") is not None}
+    db = {str(r.get("STUDYID")): r for r in per_b if r.get("STUDYID") is not None}
+    keys = sorted(set(da) & set(db))
+    rows = []
+    for k in keys:
+        a, b = da[k].get(metric), db[k].get(metric)
+        if a is None or b is None:
+            continue
+        rows.append({
+            "STUDYID": k, "metric": metric, name_a: float(a), name_b: float(b),
+            "delta": float(b) - float(a), "n_obs_a": da[k].get("n_obs"), "n_obs_b": db[k].get("n_obs"),
+        })
+    deltas = [r["delta"] for r in rows]
+    return {
+        "metric": metric, "a": name_a, "b": name_b, "n_studies": len(rows),
+        "rows": rows,
+        "mean_delta": float(np.mean(deltas)) if deltas else None,
+        "sd_delta": float(np.std(deltas, ddof=1)) if len(deltas) > 1 else None,
+        "note": "One row per study. Within-study visits are not treated as independent replications.",
+    }
+
+
+def mark_persistence_intervals_unavailable(block: dict[str, Any]) -> dict[str, Any]:
+    """Last-value quantiles are degenerate. Interval metrics are not a calibrated method."""
+    reason = ("Persistence repeats the last encoder LOGW at every quantile. "
+              "No interval method was defined or calibrated without test outcomes.")
+    for key in ("coverage80", "interval_width80", "coverage50", "interval_width50"):
+        block[key] = {"study_balanced": None, "pooled": None, "unavailable": True, "reason": reason}
+    block["interval_metrics"] = "unavailable"
+    return block
 
 
 def inventory_model_data(data: ModelData) -> dict[str, Any]:

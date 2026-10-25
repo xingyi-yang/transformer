@@ -60,8 +60,8 @@ def _refuse_preserved(parent: Path) -> None:
 def _compact_score(block: dict[str, Any]) -> dict[str, Any]:
     out = {"status": block.get("status"), "representation": block.get("representation"),
            "n_scored": block.get("n_scored"), "n_failures": block.get("n_failures")}
-    for key in ("mae_log", "rmse_log", "mean_quantile_loss", "coverage80", "interval_width80",
-                "relative_abs_log", "relative_abs_gram"):
+    for key in ("mae_log", "rmse_log", "mae_gram", "mean_quantile_loss", "mean_quantile_loss_gram",
+                "coverage80", "interval_width80", "relative_abs_log", "relative_abs_gram"):
         v = block.get(key)
         if isinstance(v, dict):
             out[key] = {k: v.get(k) for k in ("study_balanced", "pooled", "n_obs", "n_studies") if k in v}
@@ -212,7 +212,13 @@ def _plot_trajectories(parent: Path, pack: dict[str, Any], hist: pd.DataFrame, f
         ax.plot(hh["DAY"], hh["LOGW"], "o-", color="0.15", label="permitted history")
         ax.plot(ff["DAY"], ff["LOGW"], "s", color="0.15", label="observed future")
         colors = {"tft_target_only": "#1f77b4", "tft_pooled": "#d62728",
-                  "last_value": "#7f7f7f", "transformer_target_only": "#2ca02c"}
+                  "last_value": "#7f7f7f", "transformer_target_only": "#2ca02c",
+                  "reference_last_value": "#7f7f7f",
+                  "reference_transformer_target_only": "#2ca02c",
+                  "reference_tft_target_only": "#1f77b4",
+                  "reference_tft_pooled": "#d62728",
+                  "spline_gamm": "#9467bd", "catboost_quantile": "#ff7f0e",
+                  "tft_target_only_balanced": "#17becf", "tft_pooled_balanced": "#e377c2"}
         for name, pred in preds.items():
             pg = pred.loc[pred["USUBJID"].astype(str) == u].sort_values("DAY")
             if pg.empty or "q0.5" not in pg.columns:
