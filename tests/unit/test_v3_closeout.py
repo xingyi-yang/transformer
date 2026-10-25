@@ -96,8 +96,9 @@ def test_closeout_from_existing_artifacts(tmp_path):
     assert all(c["failure_class"] == "mean_identifiability" for c in bay["cells"])
 
 
-def test_audit_phase_a_does_not_touch_real_roots():
-    out = execute_historical_audit(ROOT / "configs" / "v3_historical_audit.yaml", phase="A")
+def test_audit_phase_a_does_not_touch_real_roots(tmp_path):
+    out = execute_historical_audit(ROOT / "configs" / "v3_historical_audit.yaml",
+                                   phase="A", output_dir=tmp_path / "audit")
     assert out["real_data_accessed"] is False
     assert out["snowflake_connected"] is False
     assert out["extract_root_opened"] is False
@@ -107,9 +108,14 @@ def test_audit_phase_a_does_not_touch_real_roots():
     assert statuses["snowflake_authorized_flag"] == "refused"
 
 
-def test_audit_phase_b_refuses_without_ticket():
-    with pytest.raises(AuditGateError, match="authorization"):
-        execute_historical_audit(ROOT / "configs" / "v3_historical_audit.yaml", phase="B")
+def test_audit_phase_b_refuses_without_ticket(tmp_path):
+    out = execute_historical_audit(ROOT / "configs" / "v3_historical_audit.yaml",
+                                   phase="B", output_dir=tmp_path / "phaseb")
+    assert out["status"] == "ACCESS_BLOCKER"
+    assert out["real_data_accessed"] is False
+    assert out["source_opened"] is False
+    assert out["created_ticket"] is False
+    assert out["self_approved"] is False
 
 
 def test_authorization_schema_rejects_training_and_unsigned_example():
