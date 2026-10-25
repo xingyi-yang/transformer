@@ -1,0 +1,95 @@
+{
+  "bank": "matched",
+  "checkpoint_source": "training_validation",
+  "chronos_mode": "history_only_univariate",
+  "chronos_selective": "not_implemented",
+  "config_hash": "b77908608df5052a",
+  "config_path": "configs/v3_share_repl.frozen.yaml",
+  "covariate_chronos": false,
+  "design": false,
+  "donor_policy": {
+    "pooled": 3,
+    "selected_from_test": false,
+    "selective": 1,
+    "source": "training_validation_protocol",
+    "target_only": 0
+  },
+  "estimated_runtime_seconds": {
+    "lower": 240,
+    "point": 320,
+    "upper": 720
+  },
+  "fabricate_encoder_history": false,
+  "generate_seed_stride": 1009,
+  "generate_seeds": [
+    74001,
+    75010
+  ],
+  "git_revision": "e6f874a413c87541ed10a9049f24dfcdc0f06ed8",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "n_cells": 8,
+  "n_dataset_seeds": 2,
+  "n_train_seeds": 1,
+  "new_architectures": false,
+  "predose": false,
+  "preserved": [
+    "runs/v3_eval",
+    "runs/v3_pilot_k0k1",
+    "runs/v3_repl",
+    "runs/v3_research",
+    "runs/v3_closeout",
+    "runs/v3_audit",
+    "runs/v3_increment",
+    "runs/v3_phaseb",
+    "runs/v3_limitations",
+    "runs/v3_objective",
+    "runs/v3_official_seq",
+    "runs/v3_seq_diag",
+    "runs/v3_eval_correct",
+    "runs/v3_cov_chronos"
+  ],
+  "real_data": false,
+  "retune_after_test": false,
+  "selective_regularized": {
+    "note": "Selective v1 is retained. This variant adds regularized species-specific deviations in nonlinear growth and treatment response. Deviations shrink toward the shared mean; they are not unpenalized species RE.",
+    "regularization": {
+      "growth": "ridge inflation on SPECIES \u00d7 time-basis coefficients (lambda_growth)",
+      "transformer": "phase1 target fit; phase2 extra L2 of species/growth tokens toward phase1 and treatment-deviation head toward 0",
+      "treatment": "ridge inflation on SPECIES \u00d7 exposure/dose coefficients (lambda_treatment)"
+    },
+    "residual": "target_species_only",
+    "shared": [
+      "compound",
+      "regimen"
+    ],
+    "species_specific": [
+      "growth_deviation",
+      "treatment_deviation"
+    ],
+    "variant": "regularized"
+  },
+  "selective_v1": {
+    "note": "Shared: compound descriptors and planned-dose/regimen query features. Species-specific: growth/baseline token groups and residual scale. Not a Bayesian species random-effect variant.",
+    "residual": "target_species_only",
+    "shared": [
+      "compound",
+      "regimen"
+    ],
+    "species_specific": [
+      "bio",
+      "baseline",
+      "species"
+    ],
+    "variant": "v1"
+  },
+  "tft_selective": "not_implemented",
+  "train_seed_stride": 17,
+  "train_seeds": [
+    84001
+  ]
+}

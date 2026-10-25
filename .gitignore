@@ -26,6 +26,12 @@ runs/*
 runs/v3_cov_chronos/hf_cache/
 runs/v3_cov_chronos/**/chronos2_zero_shot/pipeline/
 runs/v3_cov_chronos/**/finetune/checkpoint-40/
+!runs/v3_share_repl/
+!runs/v3_share_repl/**/*.parquet
+runs/v3_share_repl/hf_cache/
+runs/v3_share_repl/**/chronos2_zero_shot/pipeline/
+runs/v3_share_repl/models/*chronos2_zero_shot/pipeline/
+runs/v3_share_repl/**/finetune/checkpoint-40/
 runs/v3_seq_diag/hf_cache/
 runs/v3_seq_diag/**/chronos2_zero_shot/pipeline/
 runs/v3_seq_diag/**/finetune/checkpoint-40/

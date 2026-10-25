@@ -1,0 +1,56 @@
+{
+  "alpha": 0.1,
+  "covariance": {
+    "ell": 5.88671584286256,
+    "fit_info": {
+      "converged": true,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "n_animals": 236,
+      "n_obs": 1168,
+      "n_studies": 7,
+      "nll": -2171.0358847541547,
+      "params_at_bound": []
+    },
+    "sd_a0": 0.00010204840638240217,
+    "sd_a1": 0.06607220969825184,
+    "sd_s0": 0.03306025169835662,
+    "sd_s1": 0.05924930163094287,
+    "sigma_m": 0.0001112145654029417,
+    "sigma_p": 0.033844220241185045
+  },
+  "covariance_fit_on": "target_species_oof",
+  "increment_moment": null,
+  "lambda_growth": null,
+  "lambda_treatment": null,
+  "n_members": 5,
+  "n_params": 76,
+  "oof_rmse": 0.07119836193301361,
+  "selective_sharing": {
+    "model": "spline",
+    "note": "Shared: compound descriptors and planned-dose/regimen query features. Species-specific: growth/baseline token groups and residual scale. Not a Bayesian species random-effect variant.",
+    "residual": "target_species_only",
+    "shared": [
+      "compound",
+      "regimen"
+    ],
+    "species_specific": [
+      "bio",
+      "baseline",
+      "species"
+    ],
+    "training": "joint ridge mean with SPECIES_* time-basis interactions; HierarchicalCovariance fit on target-species OOF residuals only",
+    "variant": "v1"
+  },
+  "train_rmse": 0.05210007272423142,
+  "validation_rmse": 0.05701431378689987,
+  "validation_rmse_by_alpha": {
+    "0.1": 0.05701431378689987,
+    "1.0": 0.05703468416629411,
+    "10.0": 0.057360738303937085,
+    "100.0": 0.05903764680489824,
+    "1000.0": 0.06554110076936762,
+    "10000.0": 0.12997198986470213,
+    "300.0": 0.06026074215440201,
+    "3000.0": 0.08527674980493279
+  }
+}
