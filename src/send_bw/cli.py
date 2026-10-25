@@ -90,7 +90,7 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="send-bw", description="Body-weight modelling and design simulation")
     sub = p.add_subparsers(dest="cmd", required=True)
     for name in ["generate", "inspect-source", "ingest", "prepare", "validate-real", "train", "evaluate",
-                 "design", "report", "run-all", "validate-request", "propose-design"]:
+                 "design", "report", "run-all", "validate-request", "propose-design", "v3-pilot"]:
         s = sub.add_parser(name)
         artifact_cmd = name in ("validate-request", "propose-design")
         s.add_argument("--config", required=not artifact_cmd)
@@ -110,6 +110,16 @@ def main(argv: list[str] | None = None) -> int:
     if getattr(args, "model", None) is None and args.config is None:
         p.error("--config or --model is required")
     try:
+        if args.cmd == "v3-pilot":
+            from send_bw.pilot_execute import execute_k0k1, load_yaml
+
+            out = execute_k0k1(args.config, force=args.force)
+            print(json.dumps({"status": "ok",
+                              "git_revision": (out.get("freeze_lock") or {}).get("git_revision"),
+                              "config_hash": (out.get("freeze_lock") or {}).get("config_hash"),
+                              "retuned_after_test": False,
+                              "parent": load_yaml(args.config).get("output_dir")}, indent=2, default=str))
+            return 0
         if args.cmd == "validate-request":
             return cmd_validate_request(args)
         if args.cmd == "propose-design":

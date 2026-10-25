@@ -5,8 +5,10 @@ runs/*
 # exception: the two SYNTHETIC smoke runs recorded in README/HANDOFF (no real data)
 !runs/smoke/
 !runs/bayesian_smoke/
+!runs/v3_pilot_k0k1/
 !runs/smoke/**/*.parquet
 !runs/bayesian_smoke/**/*.parquet
+!runs/v3_pilot_k0k1/**/*.parquet
 !runs/pytest_full.txt
 !runs/ruff.txt
 # local environments / caches

@@ -396,3 +396,28 @@ def test_proposed_smoke_config_is_review_only():
     assert cfg["synthetic"]["n_other_species_studies"] >= 3
     assert cfg["models"]["bayesian"]["enabled"] is False
     assert "propose-design" not in yaml.dump(cfg)
+
+
+def test_frozen_k0k1_config_is_protocol_locked():
+    from send_bw.pilot_execute import PilotProtocolError, k_config, validate_frozen_config
+
+    cfg = yaml.safe_load((ROOT / "configs" / "v3_pilot.k0k1.frozen.yaml").read_text(encoding="utf-8"))
+    validate_frozen_config(cfg)
+    assert cfg["pilot"]["k_schedule"] == [0, 1]
+    assert cfg["pilot"]["retune_after_test"] is False
+    assert cfg["models"]["transformer"]["n_members"] == 1
+    assert not cfg.get("design", {}).get("request")
+    bad = dict(cfg)
+    bad["pilot"] = {**cfg["pilot"], "k_schedule": [0, 1, 2]}
+    with pytest.raises(PilotProtocolError, match="k_schedule"):
+        validate_frozen_config(bad)
+    designed = dict(cfg)
+    designed["design"] = {"request": "configs/new_study.smoke.yaml"}
+    with pytest.raises(PilotProtocolError, match="design"):
+        validate_frozen_config(designed)
+    extra = dict(cfg)
+    extra["models"] = {**cfg["models"], "optional": {"tft": {"enabled": True}}}
+    with pytest.raises(PilotProtocolError, match="tft"):
+        validate_frozen_config(extra)
+    with pytest.raises(PilotProtocolError, match="off"):
+        k_config(cfg, 2, Path("/tmp"))
