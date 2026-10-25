@@ -70,17 +70,27 @@ def collect_versions() -> dict[str, Any]:
     return out
 
 
-def _score_gaussian(model, data, window_day: float) -> dict[str, Any]:
+def _write_pred_table(pred: pd.DataFrame, pred_path: Path | None) -> None:
+    if pred_path is None:
+        return
+    pred_path.parent.mkdir(parents=True, exist_ok=True)
+    pred.to_csv(pred_path, index=False)
+
+
+def _score_gaussian(model, data, window_day: float,
+                    pred_path: Path | None = None) -> dict[str, Any]:
     hist, fut = split_encoder_future(data, window_day)
     ctx = data.animals[data.animals["USUBJID"].isin(set(hist["USUBJID"]))]
     times = np.array(sorted(fut["DAY"].unique()), float)
     pred = model.predict_marginals(ctx, times, history=hist)
     if "STUDYID" not in pred.columns:
         pred = pred.merge(fut[["USUBJID", "STUDYID", "DAY"]], on=["USUBJID", "DAY"], how="left")
+    _write_pred_table(pred, pred_path)
     return score_quantile_table(fut, pred, quantiles=QUANTILES, representation="gaussian")
 
 
-def _score_quantiles(model, data, window_day: float, representation: str) -> dict[str, Any]:
+def _score_quantiles(model, data, window_day: float, representation: str,
+                     pred_path: Path | None = None) -> dict[str, Any]:
     hist, fut = split_encoder_future(data, window_day)
     recs = []
     skipped = 0
@@ -102,6 +112,7 @@ def _score_quantiles(model, data, window_day: float, representation: str) -> dic
     pred = pd.concat(recs, ignore_index=True)
     if "STUDYID" not in pred.columns:
         pred = pred.merge(fut[["USUBJID", "STUDYID", "DAY"]], on=["USUBJID", "DAY"], how="left")
+    _write_pred_table(pred, pred_path)
     out = score_quantile_table(fut, pred, quantiles=QUANTILES, representation=representation)
     out["n_skipped_no_encoder"] = skipped
     out["encoder_fabricated"] = False
@@ -218,7 +229,8 @@ def execute_v3_official_seq(config_path: str | Path, force: bool = False) -> dic
             t1 = time.time()
             try:
                 model = model_class(name).load(run.p("models", name))
-                sc = _score_gaussian(model, test, window)
+                sc = _score_gaussian(model, test, window,
+                                     parent / "predictions" / f"{key}.csv")
                 sc["seconds"] = time.time() - t1
                 sc["model_class"] = f"{model.__class__.__module__}.{model.__class__.__name__}"
                 sc["training_scope"] = scope
@@ -245,7 +257,8 @@ def execute_v3_official_seq(config_path: str | Path, force: bool = False) -> dic
             dest = parent / "models" / key
             model.save(dest)
             write_json(dest / "training_history.json", hist)
-            sc = _score_quantiles(model, test, window, "tft_quantiles")
+            sc = _score_quantiles(model, test, window, "tft_quantiles",
+                                 parent / "predictions" / f"{key}.csv")
             sc["seconds"] = time.time() - t1
             sc["model_class"] = "pytorch_forecasting.TemporalFusionTransformer"
             sc["training_scope"] = scope
@@ -288,7 +301,8 @@ def execute_v3_official_seq(config_path: str | Path, force: bool = False) -> dic
             dest = parent / "models" / "chronos2_zero_shot"
             zs.save(dest)
             write_json(dest / "training_history.json", zh)
-            sc = _score_quantiles(zs, test, window, "chronos2_quantiles")
+            sc = _score_quantiles(zs, test, window, "chronos2_quantiles",
+                                 parent / "predictions" / "chronos2_zero_shot.csv")
             sc["seconds"] = time.time() - t1
             sc["model_class"] = "chronos.Chronos2Pipeline"
             sc["mode"] = "zero_shot"
@@ -318,7 +332,8 @@ def execute_v3_official_seq(config_path: str | Path, force: bool = False) -> dic
                 dest = parent / "models" / key
                 model.save(dest)
                 write_json(dest / "training_history.json", hist)
-                sc = _score_quantiles(model, test, window, "chronos2_quantiles")
+                sc = _score_quantiles(model, test, window, "chronos2_quantiles",
+                                     parent / "predictions" / f"{key}.csv")
                 sc["seconds"] = time.time() - t1
                 sc["model_class"] = "chronos.Chronos2Pipeline"
                 sc["mode"] = f"finetune_{scope}"

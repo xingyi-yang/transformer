@@ -1,0 +1,1303 @@
+{
+  "authorization_present": false,
+  "blockers": [],
+  "design_run": false,
+  "encoder_window_day": 14.0,
+  "freeze_lock": {
+    "config_hash": "70599ca7d4bb2025",
+    "config_path": "configs/v3_official_seq.frozen.yaml",
+    "design": false,
+    "encoder_window_day": 14.0,
+    "fabricate_encoder_history": false,
+    "generate_seed": 71001,
+    "git_revision": "7dec702d773982bb502332f57c28cc6a3ae30c93",
+    "identical_information_cutoff": true,
+    "identical_target_holdouts": true,
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "not_a_custom_transformer_substitute": true,
+    "official_chronos2": "chronos.Chronos2Pipeline / amazon/chronos-2",
+    "official_tft": "pytorch_forecasting.TemporalFusionTransformer",
+    "real_data": false,
+    "train_seed": 81001
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation.",
+    "Official TFT and Chronos-2.",
+    "Early-history only."
+  ],
+  "output_dir": "runs/v3_official_seq",
+  "paired_transfer": {
+    "chronos2_finetune": {
+      "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+      "rows": [
+        {
+          "delta_pooled_minus_target": 0.0017175427798567233,
+          "harmful_if_positive": true,
+          "metric": "rmse_log",
+          "pooled": 0.13396545199049495,
+          "target_only": 0.13224790921063823
+        },
+        {
+          "delta_pooled_minus_target": -6.532480747031832e-05,
+          "harmful_if_positive": true,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.04408690100908479,
+          "target_only": 0.04415222581655511
+        }
+      ]
+    },
+    "spline": {
+      "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+      "rows": [
+        {
+          "delta_pooled_minus_target": -0.009958091034459195,
+          "harmful_if_positive": true,
+          "metric": "rmse_log",
+          "pooled": 0.033481211391917634,
+          "target_only": 0.04343930242637683
+        },
+        {
+          "delta_pooled_minus_target": -0.0005955476236056082,
+          "harmful_if_positive": true,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.014863163690000031,
+          "target_only": 0.01545871131360564
+        }
+      ]
+    },
+    "tft": {
+      "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+      "rows": [
+        {
+          "delta_pooled_minus_target": 0.0075244601208263595,
+          "harmful_if_positive": true,
+          "metric": "rmse_log",
+          "pooled": 0.05280747718424303,
+          "target_only": 0.04528301706341667
+        },
+        {
+          "delta_pooled_minus_target": 0.004519617414092587,
+          "harmful_if_positive": true,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.020343781741419313,
+          "target_only": 0.015824164327326726
+        }
+      ]
+    },
+    "transformer": {
+      "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+      "rows": [
+        {
+          "delta_pooled_minus_target": -0.005104169385345393,
+          "harmful_if_positive": true,
+          "metric": "rmse_log",
+          "pooled": 0.03582867920089618,
+          "target_only": 0.04093284858624157
+        },
+        {
+          "delta_pooled_minus_target": -0.0017235042719135028,
+          "harmful_if_positive": true,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.012529612998654528,
+          "target_only": 0.01425311727056803
+        }
+      ]
+    }
+  },
+  "real_data_accessed": false,
+  "reload_checks": {
+    "chronos2_pooled": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    },
+    "chronos2_target_only": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    },
+    "chronos2_zero_shot": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    },
+    "tft_pooled": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    },
+    "tft_target_only": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    }
+  },
+  "results": {
+    "chronos2_pooled": {
+      "checkpoint": "runs/v3_official_seq/models/chronos2_pooled/pipeline",
+      "coverage50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.6695652173913044,
+        "study_balanced": 0.6724137931034483,
+        "weight_mean": 1.0
+      },
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.9652173913043478,
+        "study_balanced": 0.9655172413793104,
+        "weight_mean": 1.0
+      },
+      "crps_justified": false,
+      "crps_log": null,
+      "crps_note": "CRPS not reported: predictive representation is a finite quantile set, not samples and not a fitted Gaussian. Marginal quantiles are not a complete trajectory simulator.",
+      "encoder_fabricated": false,
+      "interval_width50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.2410411254219387,
+        "study_balanced": 0.24178675125385152,
+        "weight_mean": 1.0
+      },
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.7295267478279446,
+        "study_balanced": 0.7306983881983263,
+        "weight_mean": 1.0
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.044089922103581994,
+        "study_balanced": 0.04408690100908479,
+        "weight_mean": 1.0
+      },
+      "mode": "finetune_pooled",
+      "model_class": "chronos.Chronos2Pipeline",
+      "n_obs_available": 115,
+      "n_pred_rows": 115,
+      "n_scored": 115,
+      "n_skipped_no_encoder": 0,
+      "pretrained_id": "amazon/chronos-2",
+      "quantile_loss": {
+        "0.1": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.03921325539659972,
+          "study_balanced": 0.03921660234452995,
+          "weight_mean": 1.0
+        },
+        "0.25": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.05517308559491673,
+          "study_balanced": 0.05516429626370439,
+          "weight_mean": 1.0
+        },
+        "0.5": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.06712805194173352,
+          "study_balanced": 0.06698272599524747,
+          "weight_mean": 1.0
+        },
+        "0.75": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.02410276601186553,
+          "study_balanced": 0.024134034471303512,
+          "weight_mean": 1.0
+        },
+        "0.9": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.03483245157279447,
+          "study_balanced": 0.034936845970638626,
+          "weight_mean": 1.0
+        }
+      },
+      "quantiles": [
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "representation": "chronos2_quantiles",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.13425610388346704,
+        "study_balanced": 0.13396545199049495,
+        "weight_mean": 1.0
+      },
+      "seconds": 9.414591073989868,
+      "status": "ok",
+      "training_history": {
+        "checkpoint": "runs/v3_official_seq/models/chronos2_pooled/finetune/finetuned-ckpt",
+        "device_map": "cpu",
+        "filled_target_with_zero": false,
+        "finetune_mode": "lora",
+        "forecast_type": "quantiles",
+        "library": "chronos.Chronos2Pipeline",
+        "mode": "finetune_pooled",
+        "n_train_series": 309,
+        "n_val_series": 54,
+        "name": "chronos2",
+        "not_the_required_transformer": true,
+        "note": "official Chronos2Pipeline fine-tune; quantile forecasts only; not a trajectory simulator; encoder is observed visits",
+        "num_steps": 40,
+        "observed_rows_only": true,
+        "prediction_length": 6,
+        "pretrained_id": "amazon/chronos-2",
+        "quantiles": [
+          0.1,
+          0.25,
+          0.5,
+          0.75,
+          0.9
+        ],
+        "seconds": 7.442704677581787,
+        "task": "early_history"
+      },
+      "trajectory_simulator": false
+    },
+    "chronos2_target_only": {
+      "checkpoint": "runs/v3_official_seq/models/chronos2_target_only/pipeline",
+      "coverage50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.7130434782608696,
+        "study_balanced": 0.7155172413793104,
+        "weight_mean": 1.0
+      },
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.9652173913043478,
+        "study_balanced": 0.9655172413793104,
+        "weight_mean": 1.0
+      },
+      "crps_justified": false,
+      "crps_log": null,
+      "crps_note": "CRPS not reported: predictive representation is a finite quantile set, not samples and not a fitted Gaussian. Marginal quantiles are not a complete trajectory simulator.",
+      "encoder_fabricated": false,
+      "interval_width50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.2450210073719854,
+        "study_balanced": 0.24577719589759564,
+        "weight_mean": 1.0
+      },
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.7414387122444485,
+        "study_balanced": 0.7426342265359287,
+        "weight_mean": 1.0
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.044153161747979966,
+        "study_balanced": 0.04415222581655511,
+        "weight_mean": 1.0
+      },
+      "mode": "finetune_target_only",
+      "model_class": "chronos.Chronos2Pipeline",
+      "n_obs_available": 115,
+      "n_pred_rows": 115,
+      "n_scored": 115,
+      "n_skipped_no_encoder": 0,
+      "pretrained_id": "amazon/chronos-2",
+      "quantile_loss": {
+        "0.1": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.039143754929548094,
+          "study_balanced": 0.039146540989728376,
+          "weight_mean": 1.0
+        },
+        "0.25": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.05483713826792486,
+          "study_balanced": 0.054826904171953295,
+          "weight_mean": 1.0
+        },
+        "0.5": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.0662726288851725,
+          "study_balanced": 0.06612395460531911,
+          "weight_mean": 1.0
+        },
+        "0.75": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.024450696502810804,
+          "study_balanced": 0.02449452442908373,
+          "weight_mean": 1.0
+        },
+        "0.9": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.03606159015444358,
+          "study_balanced": 0.036169204886691085,
+          "weight_mean": 1.0
+        }
+      },
+      "quantiles": [
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "representation": "chronos2_quantiles",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.132545257770345,
+        "study_balanced": 0.13224790921063823,
+        "weight_mean": 1.0
+      },
+      "seconds": 9.839610815048218,
+      "status": "ok",
+      "training_history": {
+        "checkpoint": "runs/v3_official_seq/models/chronos2_target_only/finetune/finetuned-ckpt",
+        "device_map": "cpu",
+        "filled_target_with_zero": false,
+        "finetune_mode": "lora",
+        "forecast_type": "quantiles",
+        "library": "chronos.Chronos2Pipeline",
+        "mode": "finetune_target_only",
+        "n_train_series": 210,
+        "n_val_series": 54,
+        "name": "chronos2",
+        "not_the_required_transformer": true,
+        "note": "official Chronos2Pipeline fine-tune; quantile forecasts only; not a trajectory simulator; encoder is observed visits",
+        "num_steps": 40,
+        "observed_rows_only": true,
+        "prediction_length": 6,
+        "pretrained_id": "amazon/chronos-2",
+        "quantiles": [
+          0.1,
+          0.25,
+          0.5,
+          0.75,
+          0.9
+        ],
+        "seconds": 7.820172071456909,
+        "task": "early_history"
+      },
+      "trajectory_simulator": false
+    },
+    "chronos2_zero_shot": {
+      "checkpoint": "runs/v3_official_seq/models/chronos2_zero_shot/pipeline",
+      "coverage50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.6347826086956522,
+        "study_balanced": 0.6379310344827587,
+        "weight_mean": 1.0
+      },
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.9652173913043478,
+        "study_balanced": 0.9655172413793104,
+        "weight_mean": 1.0
+      },
+      "crps_justified": false,
+      "crps_log": null,
+      "crps_note": "CRPS not reported: predictive representation is a finite quantile set, not samples and not a fitted Gaussian. Marginal quantiles are not a complete trajectory simulator.",
+      "encoder_fabricated": false,
+      "interval_width50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.24338831279588782,
+        "study_balanced": 0.2441514072747066,
+        "weight_mean": 1.0
+      },
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.7521027772322945,
+        "study_balanced": 0.753390439625444,
+        "weight_mean": 1.0
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.04572692010416407,
+        "study_balanced": 0.045727290992308926,
+        "weight_mean": 1.0
+      },
+      "mode": "zero_shot",
+      "model_class": "chronos.Chronos2Pipeline",
+      "n_obs_available": 115,
+      "n_pred_rows": 115,
+      "n_scored": 115,
+      "n_skipped_no_encoder": 0,
+      "pretrained_id": "amazon/chronos-2",
+      "quantile_loss": {
+        "0.1": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.04117227990884921,
+          "study_balanced": 0.04118398395342719,
+          "weight_mean": 1.0
+        },
+        "0.25": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.05777997610746609,
+          "study_balanced": 0.05778191131398737,
+          "weight_mean": 1.0
+        },
+        "0.5": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.0707528021619908,
+          "study_balanced": 0.07062325848883878,
+          "weight_mean": 1.0
+        },
+        "0.75": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.023793428842786762,
+          "study_balanced": 0.02380359202535569,
+          "weight_mean": 1.0
+        },
+        "0.9": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.03513611349972744,
+          "study_balanced": 0.03524370917993555,
+          "weight_mean": 1.0
+        }
+      },
+      "quantiles": [
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "representation": "chronos2_quantiles",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.1415056043239816,
+        "study_balanced": 0.14124651697767757,
+        "weight_mean": 1.0
+      },
+      "seconds": 3.760669469833374,
+      "status": "ok",
+      "training_history": {
+        "checkpoint_revision": "amazon/chronos-2",
+        "device_map": "cpu",
+        "filled_target_with_zero": false,
+        "forecast_type": "quantiles",
+        "library": "chronos.Chronos2Pipeline",
+        "mode": "zero_shot",
+        "name": "chronos2",
+        "not_the_required_transformer": true,
+        "note": "official Chronos2Pipeline zero-shot; no fine-tune",
+        "observed_rows_only": true,
+        "pretrained_id": "amazon/chronos-2",
+        "quantiles": [
+          0.1,
+          0.25,
+          0.5,
+          0.75,
+          0.9
+        ],
+        "seconds": 1.6087377071380615,
+        "task": "early_history"
+      },
+      "trajectory_simulator": false
+    },
+    "spline_pooled": {
+      "checkpoint": "runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_pooled/models/spline",
+      "coverage50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.8173913043478261,
+        "study_balanced": 0.8189655172413793,
+        "weight_mean": 1.0
+      },
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 1.0,
+        "study_balanced": 1.0,
+        "weight_mean": 1.0
+      },
+      "crps_justified": true,
+      "crps_log": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.029045989057411112,
+        "study_balanced": 0.028924434952157522,
+        "weight_mean": 1.0
+      },
+      "crps_note": "Gaussian CRPS from the hierarchical residual layer.",
+      "interval_width50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.12521317512486657,
+        "study_balanced": 0.12478730707312395,
+        "weight_mean": 1.0
+      },
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.23790893866279403,
+        "study_balanced": 0.2370997760798674,
+        "weight_mean": 1.0
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.014920454937058288,
+        "study_balanced": 0.014863163690000031,
+        "weight_mean": 1.0
+      },
+      "model_class": "send_bw.models.spline.SplineModel",
+      "n_obs_available": 115,
+      "n_pred_rows": 116,
+      "n_scored": 115,
+      "quantile_loss": {
+        "0.1": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.011594961756623867,
+          "study_balanced": 0.011543273976919071,
+          "weight_mean": 1.0
+        },
+        "0.25": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.017105355753124586,
+          "study_balanced": 0.01700504017367606,
+          "weight_mean": 1.0
+        },
+        "0.5": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.01681647510891072,
+          "study_balanced": 0.016740605695958817,
+          "weight_mean": 1.0
+        },
+        "0.75": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.016889549956976734,
+          "study_balanced": 0.016860194972378534,
+          "weight_mean": 1.0
+        },
+        "0.9": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.01219593210965553,
+          "study_balanced": 0.01216670363106767,
+          "weight_mean": 1.0
+        }
+      },
+      "quantiles": [
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "representation": "gaussian",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.03363295021782144,
+        "study_balanced": 0.033481211391917634,
+        "weight_mean": 1.0
+      },
+      "seconds": 3.1625773906707764,
+      "status": "ok",
+      "training_scope": "pooled",
+      "trajectory_simulator": false
+    },
+    "spline_target_only": {
+      "checkpoint": "runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_target_only/models/spline",
+      "coverage50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.4956521739130435,
+        "study_balanced": 0.5,
+        "weight_mean": 1.0
+      },
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.808695652173913,
+        "study_balanced": 0.8103448275862069,
+        "weight_mean": 1.0
+      },
+      "crps_justified": true,
+      "crps_log": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.03131634092876727,
+        "study_balanced": 0.03121555468912519,
+        "weight_mean": 1.0
+      },
+      "crps_note": "Gaussian CRPS from the hierarchical residual layer.",
+      "interval_width50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.07328995894421586,
+        "study_balanced": 0.07359809240987443,
+        "weight_mean": 1.0
+      },
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.13925320821606882,
+        "study_balanced": 0.13983867141279885,
+        "weight_mean": 1.0
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.01549906876886131,
+        "study_balanced": 0.01545871131360564,
+        "weight_mean": 1.0
+      },
+      "model_class": "send_bw.models.spline.SplineModel",
+      "n_obs_available": 115,
+      "n_pred_rows": 116,
+      "n_scored": 115,
+      "quantile_loss": {
+        "0.1": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.012469950059557632,
+          "study_balanced": 0.012441206988539026,
+          "weight_mean": 1.0
+        },
+        "0.25": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.01977673998597575,
+          "study_balanced": 0.019697394790355104,
+          "weight_mean": 1.0
+        },
+        "0.5": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.021855361522414483,
+          "study_balanced": 0.021719651213188414,
+          "weight_mean": 1.0
+        },
+        "0.75": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.015329873932949607,
+          "study_balanced": 0.015341561769270484,
+          "weight_mean": 1.0
+        },
+        "0.9": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.008063418343409082,
+          "study_balanced": 0.008093741806675173,
+          "weight_mean": 1.0
+        }
+      },
+      "quantiles": [
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "representation": "gaussian",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.04371072304482897,
+        "study_balanced": 0.04343930242637683,
+        "weight_mean": 1.0
+      },
+      "seconds": 3.067136764526367,
+      "status": "ok",
+      "training_scope": "target_only",
+      "trajectory_simulator": false
+    },
+    "tft_pooled": {
+      "checkpoint": "runs/v3_official_seq/models/tft_pooled/tft.ckpt",
+      "coverage50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.5391304347826087,
+        "study_balanced": 0.5344827586206896,
+        "weight_mean": 1.0
+      },
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.6347826086956522,
+        "study_balanced": 0.6293103448275862,
+        "weight_mean": 1.0
+      },
+      "crps_justified": false,
+      "crps_log": null,
+      "crps_note": "CRPS not reported: predictive representation is a finite quantile set, not samples and not a fitted Gaussian. Marginal quantiles are not a complete trajectory simulator.",
+      "encoder_fabricated": false,
+      "interval_width50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.1164234617482061,
+        "study_balanced": 0.1164065722761483,
+        "weight_mean": 1.0
+      },
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.18660222758417544,
+        "study_balanced": 0.18684973387882628,
+        "weight_mean": 1.0
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.020293380608182972,
+        "study_balanced": 0.020343781741419313,
+        "weight_mean": 1.0
+      },
+      "model_class": "pytorch_forecasting.TemporalFusionTransformer",
+      "n_obs_available": 115,
+      "n_pred_rows": 115,
+      "n_scored": 115,
+      "n_skipped_no_encoder": 0,
+      "quantile_loss": {
+        "0.1": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.015537499403823075,
+          "study_balanced": 0.015599702687063434,
+          "weight_mean": 1.0
+        },
+        "0.25": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.026227801511433523,
+          "study_balanced": 0.02631455600217363,
+          "weight_mean": 1.0
+        },
+        "0.5": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.02630608986508576,
+          "study_balanced": 0.026403738592121515,
+          "weight_mean": 1.0
+        },
+        "0.75": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.019952163767788456,
+          "study_balanced": 0.01997866024452936,
+          "weight_mean": 1.0
+        },
+        "0.9": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.013443348492784054,
+          "study_balanced": 0.01342225118120865,
+          "weight_mean": 1.0
+        }
+      },
+      "quantiles": [
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "representation": "tft_quantiles",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.05261217973017152,
+        "study_balanced": 0.05280747718424303,
+        "weight_mean": 1.0
+      },
+      "seconds": 27.957898378372192,
+      "status": "ok",
+      "training_history": {
+        "library": "pytorch_forecasting.TemporalFusionTransformer",
+        "max_epochs": 8,
+        "n_train_series": 310,
+        "n_val_series": 54,
+        "official_class": "pytorch_forecasting.TemporalFusionTransformer",
+        "training_scope": "pooled"
+      },
+      "training_scope": "pooled",
+      "trajectory_simulator": false
+    },
+    "tft_target_only": {
+      "checkpoint": "runs/v3_official_seq/models/tft_target_only/tft.ckpt",
+      "coverage50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.46956521739130436,
+        "study_balanced": 0.46551724137931033,
+        "weight_mean": 1.0
+      },
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.7304347826086957,
+        "study_balanced": 0.7327586206896551,
+        "weight_mean": 1.0
+      },
+      "crps_justified": false,
+      "crps_log": null,
+      "crps_note": "CRPS not reported: predictive representation is a finite quantile set, not samples and not a fitted Gaussian. Marginal quantiles are not a complete trajectory simulator.",
+      "encoder_fabricated": false,
+      "interval_width50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.06420723044353982,
+        "study_balanced": 0.06408971753613703,
+        "weight_mean": 1.0
+      },
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.12838802337646485,
+        "study_balanced": 0.12841702740767907,
+        "weight_mean": 1.0
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.015813006467133815,
+        "study_balanced": 0.015824164327326726,
+        "weight_mean": 1.0
+      },
+      "model_class": "pytorch_forecasting.TemporalFusionTransformer",
+      "n_obs_available": 115,
+      "n_pred_rows": 115,
+      "n_scored": 115,
+      "n_skipped_no_encoder": 0,
+      "quantile_loss": {
+        "0.1": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.01032475574417232,
+          "study_balanced": 0.010269482859204902,
+          "weight_mean": 1.0
+        },
+        "0.25": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.018739359424343103,
+          "study_balanced": 0.018747570299626207,
+          "weight_mean": 1.0
+        },
+        "0.5": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.022547420366111206,
+          "study_balanced": 0.022641508531708335,
+          "weight_mean": 1.0
+        },
+        "0.75": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.017999327779696588,
+          "study_balanced": 0.018009746278279077,
+          "weight_mean": 1.0
+        },
+        "0.9": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.009454169021345849,
+          "study_balanced": 0.009452513667815108,
+          "weight_mean": 1.0
+        }
+      },
+      "quantiles": [
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "representation": "tft_quantiles",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.04509484073222241,
+        "study_balanced": 0.04528301706341667,
+        "weight_mean": 1.0
+      },
+      "seconds": 20.96111536026001,
+      "status": "ok",
+      "training_history": {
+        "library": "pytorch_forecasting.TemporalFusionTransformer",
+        "max_epochs": 8,
+        "n_train_series": 211,
+        "n_val_series": 54,
+        "official_class": "pytorch_forecasting.TemporalFusionTransformer",
+        "training_scope": "target_only"
+      },
+      "training_scope": "target_only",
+      "trajectory_simulator": false
+    },
+    "transformer_pooled": {
+      "checkpoint": "runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_pooled/models/transformer",
+      "coverage50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.4782608695652174,
+        "study_balanced": 0.4827586206896552,
+        "weight_mean": 1.0
+      },
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.782608695652174,
+        "study_balanced": 0.7844827586206896,
+        "weight_mean": 1.0
+      },
+      "crps_justified": true,
+      "crps_log": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.025645710790520835,
+        "study_balanced": 0.025507863576312212,
+        "weight_mean": 1.0
+      },
+      "crps_note": "Gaussian CRPS from the hierarchical residual layer.",
+      "interval_width50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.06157611837452563,
+        "study_balanced": 0.061496266135333294,
+        "weight_mean": 1.0
+      },
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.11699654572970453,
+        "study_balanced": 0.11684482398431188,
+        "weight_mean": 1.0
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.012591923538570653,
+        "study_balanced": 0.012529612998654528,
+        "weight_mean": 1.0
+      },
+      "model_class": "send_bw.models.transformer.TransformerModel",
+      "n_obs_available": 115,
+      "n_pred_rows": 116,
+      "n_scored": 115,
+      "quantile_loss": {
+        "0.1": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.007378762794580082,
+          "study_balanced": 0.0073645505521683086,
+          "weight_mean": 1.0
+        },
+        "0.25": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.014041824075552998,
+          "study_balanced": 0.013993531722380494,
+          "weight_mean": 1.0
+        },
+        "0.5": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.018037059879077798,
+          "study_balanced": 0.01791433960044809,
+          "weight_mean": 1.0
+        },
+        "0.75": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.015145106485360162,
+          "study_balanced": 0.015054531460051115,
+          "weight_mean": 1.0
+        },
+        "0.9": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.008356864458282222,
+          "study_balanced": 0.008321111658224627,
+          "weight_mean": 1.0
+        }
+      },
+      "quantiles": [
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "representation": "gaussian",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.036074119758155596,
+        "study_balanced": 0.03582867920089618,
+        "weight_mean": 1.0
+      },
+      "seconds": 0.8024265766143799,
+      "status": "ok",
+      "training_scope": "pooled",
+      "trajectory_simulator": false
+    },
+    "transformer_target_only": {
+      "checkpoint": "runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_target_only/models/transformer",
+      "coverage50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.43478260869565216,
+        "study_balanced": 0.43103448275862066,
+        "weight_mean": 1.0
+      },
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.6956521739130435,
+        "study_balanced": 0.6982758620689655,
+        "weight_mean": 1.0
+      },
+      "crps_justified": true,
+      "crps_log": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.028988092163824995,
+        "study_balanced": 0.028984911121386486,
+        "weight_mean": 1.0
+      },
+      "crps_note": "Gaussian CRPS from the hierarchical residual layer.",
+      "interval_width50": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.05696192540342141,
+        "study_balanced": 0.05689953906154765,
+        "weight_mean": 1.0
+      },
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.10822943514852135,
+        "study_balanced": 0.10811089915286881,
+        "weight_mean": 1.0
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.014263340552864769,
+        "study_balanced": 0.01425311727056803,
+        "weight_mean": 1.0
+      },
+      "model_class": "send_bw.models.transformer.TransformerModel",
+      "n_obs_available": 115,
+      "n_pred_rows": 116,
+      "n_scored": 115,
+      "quantile_loss": {
+        "0.1": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.008609973205628953,
+          "study_balanced": 0.008615766537329319,
+          "weight_mean": 1.0
+        },
+        "0.25": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.015939728975886205,
+          "study_balanced": 0.015954134161170228,
+          "weight_mean": 1.0
+        },
+        "0.5": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.020446217691311837,
+          "study_balanced": 0.020466424293120785,
+          "weight_mean": 1.0
+        },
+        "0.75": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.016819019501793746,
+          "study_balanced": 0.016807979325889927,
+          "weight_mean": 1.0
+        },
+        "0.9": {
+          "n_obs": 115,
+          "n_studies": 58,
+          "pooled": 0.009501763389703105,
+          "study_balanced": 0.009421282035329904,
+          "weight_mean": 1.0
+        }
+      },
+      "quantiles": [
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "representation": "gaussian",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 58,
+        "pooled": 0.040892435382623674,
+        "study_balanced": 0.04093284858624157,
+        "weight_mean": 1.0
+      },
+      "seconds": 0.7572121620178223,
+      "status": "ok",
+      "training_scope": "target_only",
+      "trajectory_simulator": false
+    }
+  },
+  "seconds_total": 85.92211580276489,
+  "target_holdout_hashes": {
+    "pooled": {
+      "all_target": "911476c55c2cf369",
+      "test": "a60851220ed963ad",
+      "validation": "37fb8b3fef2c9ca6"
+    },
+    "target_only": {
+      "all_target": "911476c55c2cf369",
+      "test": "a60851220ed963ad",
+      "validation": "37fb8b3fef2c9ca6"
+    }
+  },
+  "training_commands": [
+    "send-bw generate --config runs/v3_official_seq/datasets/d0/banks/matched/effective.yaml",
+    "send-bw train --config runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_target_only/effective.yaml --models spline transformer",
+    "send-bw train --config runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_pooled/effective.yaml --models spline transformer",
+    "TFTEarlyHistoryModel.fit training_scope=target_only TemporalFusionTransformer.from_dataset",
+    "TFTEarlyHistoryModel.fit training_scope=pooled TemporalFusionTransformer.from_dataset",
+    "Chronos2Pipeline.from_pretrained('amazon/chronos-2')  # zero-shot",
+    "Chronos2Pipeline.from_pretrained('amazon/chronos-2').fit finetune_mode=lora scope=target_only",
+    "Chronos2Pipeline.from_pretrained('amazon/chronos-2').fit finetune_mode=lora scope=pooled"
+  ],
+  "unsupported": {
+    "crps_for_quantile_models": "CRPS reported only for Gaussian spline/transformer",
+    "design_simulation": "marginal quantiles are not complete trajectory simulators",
+    "pre_study_baseline_only": "TFT and Chronos-2 refuse fabricated encoder history"
+  },
+  "versions": {
+    "chronos2_class": "chronos.chronos2.pipeline.Chronos2Pipeline",
+    "packages": {
+      "accelerate": "1.15.0",
+      "chronos": "2.3.2",
+      "lightning": "2.6.6",
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "peft": "0.21.2",
+      "pytorch_forecasting": "1.8.0",
+      "torch": "2.14.1+cu130",
+      "transformers": "5.20.2"
+    },
+    "python": "3.12.3",
+    "tft_class": "pytorch_forecasting.models.temporal_fusion_transformer._tft.TemporalFusionTransformer",
+    "torch_cuda": false,
+    "torch_device": "cpu"
+  },
+  "prediction_files": {
+    "spline_target_only": {
+      "n_scored": 115,
+      "status": "ok",
+      "rmse": 0.04343930242637683,
+      "path": "runs/v3_official_seq/predictions/spline_target_only.csv",
+      "sha256_16": "5db9812ac2c73385",
+      "n_rows": 116
+    },
+    "transformer_target_only": {
+      "n_scored": 115,
+      "status": "ok",
+      "rmse": 0.04093284858624157,
+      "path": "runs/v3_official_seq/predictions/transformer_target_only.csv",
+      "sha256_16": "1b99cf3c08f46982",
+      "n_rows": 116
+    },
+    "spline_pooled": {
+      "n_scored": 115,
+      "status": "ok",
+      "rmse": 0.033481211391917634,
+      "path": "runs/v3_official_seq/predictions/spline_pooled.csv",
+      "sha256_16": "561bf3c084e41d2c",
+      "n_rows": 116
+    },
+    "transformer_pooled": {
+      "n_scored": 115,
+      "status": "ok",
+      "rmse": 0.03582867920089618,
+      "path": "runs/v3_official_seq/predictions/transformer_pooled.csv",
+      "sha256_16": "b2127105b1b9bed8",
+      "n_rows": 116
+    },
+    "tft_target_only": {
+      "n_scored": 115,
+      "status": "ok",
+      "rmse": 0.04528301706341667,
+      "path": "runs/v3_official_seq/predictions/tft_target_only.csv",
+      "sha256_16": "544bdb675a563f3c",
+      "n_rows": 115
+    },
+    "tft_pooled": {
+      "n_scored": 115,
+      "status": "ok",
+      "rmse": 0.05280747718424303,
+      "path": "runs/v3_official_seq/predictions/tft_pooled.csv",
+      "sha256_16": "055fb3748728d3e3",
+      "n_rows": 115
+    },
+    "chronos2_zero_shot": {
+      "n_scored": 115,
+      "status": "ok",
+      "rmse": 0.14124651697767757,
+      "path": "runs/v3_official_seq/predictions/chronos2_zero_shot.csv",
+      "sha256_16": "e0c2080cf82d70c9",
+      "n_rows": 115
+    },
+    "chronos2_target_only": {
+      "n_scored": 115,
+      "status": "ok",
+      "rmse": 0.13224790921063823,
+      "path": "runs/v3_official_seq/predictions/chronos2_target_only.csv",
+      "sha256_16": "9746ea22a74b473e",
+      "n_rows": 115
+    },
+    "chronos2_pooled": {
+      "n_scored": 115,
+      "status": "ok",
+      "rmse": 0.13396544376916464,
+      "path": "runs/v3_official_seq/predictions/chronos2_pooled.csv",
+      "sha256_16": "8fd24599f4132393",
+      "n_rows": 115
+    }
+  }
+}

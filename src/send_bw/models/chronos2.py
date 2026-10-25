@@ -275,5 +275,11 @@ class Chronos2EarlyHistoryModel(ResponseModel):
             m.spec = FeatureSpec.from_dict(d["spec"])
         if (path / "compound_reference.csv").exists():
             m.compound_ref = pd.read_csv(path / "compound_reference.csv")
-        m.pipeline = Chronos2Pipeline.from_pretrained(str(path / "pipeline"), device_map="cpu")
+        pipe_dir = path / "pipeline"
+        if pipe_dir.exists() and any(pipe_dir.iterdir()):
+            m.pipeline = Chronos2Pipeline.from_pretrained(str(pipe_dir), device_map="cpu")
+        else:
+            # Zero-shot full weights are not committed; reload the official id.
+            m.pipeline = Chronos2Pipeline.from_pretrained(
+                m.pretrained_id or OFFICIAL_ID, device_map="cpu")
         return m

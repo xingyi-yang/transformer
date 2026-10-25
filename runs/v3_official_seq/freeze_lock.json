@@ -1,0 +1,22 @@
+{
+  "config_hash": "70599ca7d4bb2025",
+  "config_path": "configs/v3_official_seq.frozen.yaml",
+  "design": false,
+  "encoder_window_day": 14.0,
+  "fabricate_encoder_history": false,
+  "generate_seed": 71001,
+  "git_revision": "7dec702d773982bb502332f57c28cc6a3ae30c93",
+  "identical_information_cutoff": true,
+  "identical_target_holdouts": true,
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "not_a_custom_transformer_substitute": true,
+  "official_chronos2": "chronos.Chronos2Pipeline / amazon/chronos-2",
+  "official_tft": "pytorch_forecasting.TemporalFusionTransformer",
+  "real_data": false,
+  "train_seed": 81001
+}
