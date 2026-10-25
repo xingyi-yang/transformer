@@ -1,0 +1,42 @@
+{
+  "alpha": 1000.0,
+  "covariance": {
+    "ell": 2.414013640422945,
+    "fit_info": {
+      "converged": true,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "n_animals": 235,
+      "n_obs": 1484,
+      "n_studies": 7,
+      "nll": -2941.509787241365,
+      "params_at_bound": [
+        "sigma_m"
+      ]
+    },
+    "sd_a0": 0.020302104623775664,
+    "sd_a1": 0.08935361708323414,
+    "sd_s0": 0.006884038686507375,
+    "sd_s1": 0.1814612065510451,
+    "sigma_m": 0.00010000000000000009,
+    "sigma_p": 0.024788741953929574
+  },
+  "covariance_fit_on": "train_oof_all_species",
+  "increment_moment": null,
+  "lambda_growth": null,
+  "lambda_treatment": null,
+  "n_members": 5,
+  "n_params": 76,
+  "oof_rmse": 0.13788017873970954,
+  "train_rmse": 0.06964447871242725,
+  "validation_rmse": 0.0759536269313195,
+  "validation_rmse_by_alpha": {
+    "0.1": 0.10075370813938923,
+    "1.0": 0.10047531389350314,
+    "10.0": 0.09810438548644707,
+    "100.0": 0.0881104631057836,
+    "1000.0": 0.0759536269313195,
+    "10000.0": 0.14337062855182606,
+    "300.0": 0.08111679312386784,
+    "3000.0": 0.09211900306683353
+  }
+}
