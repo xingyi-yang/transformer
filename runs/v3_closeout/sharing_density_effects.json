@@ -1,0 +1,3462 @@
+{
+  "groups": [
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "key": {
+        "bank": "both",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "context_specific"
+      },
+      "sharing_full": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sharing_sparse": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.010002432042107882,
+          "1": 0.004920295211398959
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.00746136362675342,
+        "mean_within_dataset_sd": 0.002175744497616008,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.00746136362675342,
+        "pooled_sd": 0.003569638095530837,
+        "sd_of_dataset_means": 0.003593613415912188,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "key": {
+        "bank": "both",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "context_specific"
+      },
+      "sharing_full": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sharing_sparse": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.0159124855384735,
+          "1": 0.008691263724205426
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.012301874631339462,
+        "mean_within_dataset_sd": 0.004045183403255326,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.012301874631339462,
+        "pooled_sd": 0.005440156318663999,
+        "sd_of_dataset_means": 0.005106174913321178,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "context_specific"
+      },
+      "sharing_full": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sharing_sparse": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.010002432042107882,
+          "1": 0.004920295211398959
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.00746136362675342,
+        "mean_within_dataset_sd": 0.002175744497616008,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.00746136362675342,
+        "pooled_sd": 0.003569638095530837,
+        "sd_of_dataset_means": 0.003593613415912188,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "context_specific"
+      },
+      "sharing_full": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sharing_sparse": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.0159124855384735,
+          "1": 0.008691263724205426
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.012301874631339462,
+        "mean_within_dataset_sd": 0.004045183403255326,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.012301874631339462,
+        "pooled_sd": 0.005440156318663999,
+        "sd_of_dataset_means": 0.005106174913321178,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": -0.0044015062668461245,
+          "1": -0.005284528231745489
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.004843017249295807,
+        "mean_within_dataset_sd": 0.004509514643789632,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.004843017249295807,
+        "pooled_sd": 0.00371792362346852,
+        "sd_of_dataset_means": 0.0006243908193170103,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "both",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": 0.008992202246685798,
+          "1": 0.0033828280483438142
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.006187515147514806,
+        "mean_within_dataset_sd": 0.002324780184761785,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.006187515147514806,
+        "pooled_sd": 0.003781667530072309,
+        "sd_of_dataset_means": 0.003966426533860471,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.0045906959798396735,
+          "1": -0.001901700183401675
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.0013444978982189992,
+        "mean_within_dataset_sd": 0.0021847344590278472,
+        "n_datasets": 2,
+        "n_harmful": 3,
+        "n_helpful": 1,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.0013444978982189992,
+        "pooled_sd": 0.004185480334041069,
+        "sd_of_dataset_means": 0.004590817353177481,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.005600925775261757,
+          "1": -0.0003642330203465303
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.0026183463774576135,
+        "mean_within_dataset_sd": 0.003298914504326925,
+        "n_datasets": 2,
+        "n_harmful": 3,
+        "n_helpful": 1,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.0026183463774576135,
+        "pooled_sd": 0.004690969596036268,
+        "sd_of_dataset_means": 0.004218004235229199,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": -0.01942015485588449,
+          "1": -0.011919116728704066
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.01566963579229428,
+        "mean_within_dataset_sd": 0.006548761600908027,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.01566963579229428,
+        "pooled_sd": 0.006930317797390042,
+        "sd_of_dataset_means": 0.0053040349256681186,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "both",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": 0.016348886639878546,
+          "1": 0.005582105440168433
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.01096549604002349,
+        "mean_within_dataset_sd": 0.005279038268339441,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.01096549604002349,
+        "pooled_sd": 0.007721444463581604,
+        "sd_of_dataset_means": 0.007613263997866852,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": -0.0030712682160059443,
+          "1": -0.006337011288535633
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.004704139752270789,
+        "mean_within_dataset_sd": 0.002910005782258515,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.004704139752270789,
+        "pooled_sd": 0.003205502550504356,
+        "sd_of_dataset_means": 0.002309229072198734,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": -0.0035076693174109913,
+          "1": -0.0032278530044986403
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.003367761160954816,
+        "mean_within_dataset_sd": 0.0025035781976527017,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.003367761160954816,
+        "pooled_sd": 0.0020746597661602363,
+        "sd_of_dataset_means": 0.0001978600123469403,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": -0.004020425995234573,
+          "1": -0.00555748175965768
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.0047889538774461265,
+        "mean_within_dataset_sd": 0.002891562599842708,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.0047889538774461265,
+        "pooled_sd": 0.002707201578557797,
+        "sd_of_dataset_means": 0.0010868625540854516,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": 0.007696778745518055,
+          "1": 0.0036081084634792017
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.005652443604498628,
+        "mean_within_dataset_sd": 0.0024080499641423317,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.005652443604498628,
+        "pooled_sd": 0.003226167224603606,
+        "sd_of_dataset_means": 0.002891126482465587,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.003676352750283482,
+          "1": -0.0019493732961784783
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.0008634897270525018,
+        "mean_within_dataset_sd": 0.0024107759163982815,
+        "n_datasets": 2,
+        "n_harmful": 3,
+        "n_helpful": 1,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.0008634897270525018,
+        "pooled_sd": 0.0038183785182446368,
+        "sd_of_dataset_means": 0.003977989036551039,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.005982006046873309,
+          "1": -0.0006371865482587211
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.002672409749307294,
+        "mean_within_dataset_sd": 0.0016809624603800007,
+        "n_datasets": 2,
+        "n_harmful": 2,
+        "n_helpful": 2,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.002672409749307294,
+        "pooled_sd": 0.004137282209712354,
+        "sd_of_dataset_means": 0.004680475969997639,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": -0.014961715136238146,
+          "1": -0.013651930790754118
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.014306822963496132,
+        "mean_within_dataset_sd": 0.005853570976266527,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.014306822963496132,
+        "pooled_sd": 0.005381429033837321,
+        "sd_of_dataset_means": 0.00092615739258374,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": 0.014681081247813345,
+          "1": 0.006043789152611129
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.010362435200212237,
+        "mean_within_dataset_sd": 0.005548570967803363,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.010362435200212237,
+        "pooled_sd": 0.007117214609861057,
+        "sd_of_dataset_means": 0.00610748781160645,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": -0.00028063388842480136,
+          "1": -0.007608141638142989
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.003944387763283895,
+        "mean_within_dataset_sd": 0.008663209485142327,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.003944387763283895,
+        "pooled_sd": 0.008524364392581639,
+        "sd_of_dataset_means": 0.005181330419022709,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.0009507704022353528,
+          "1": -0.004960667066548692
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.0020049483321566697,
+        "mean_within_dataset_sd": 0.004454850079930571,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.0020049483321566697,
+        "pooled_sd": 0.005077172560691917,
+        "sd_of_dataset_means": 0.004180017520737438,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": -0.00512024049142927,
+          "1": -0.005988197436373407
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.005554218963901339,
+        "mean_within_dataset_sd": 0.004252528734325245,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.005554218963901339,
+        "pooled_sd": 0.0035095951231213247,
+        "sd_of_dataset_means": 0.0006137382415479577,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "both",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": 0.008020890163581464,
+          "1": 0.0030041103694494094
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.0055125002665154365,
+        "mean_within_dataset_sd": 0.002356178021260945,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.0055125002665154365,
+        "pooled_sd": 0.003521271736871491,
+        "sd_of_dataset_means": 0.0035473990121504275,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.002900649672152193,
+          "1": -0.0029840870669239974
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -4.1718697385902115e-05,
+        "mean_within_dataset_sd": 0.0018963507130643005,
+        "n_datasets": 2,
+        "n_harmful": 2,
+        "n_helpful": 2,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -4.1718697385902115e-05,
+        "pooled_sd": 0.0037910208690401037,
+        "sd_of_dataset_means": 0.004161137253698386,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.004882191550678611,
+          "1": -0.0010679022249744478
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.0019071446628520818,
+        "mean_within_dataset_sd": 0.003041928594862538,
+        "n_datasets": 2,
+        "n_harmful": 2,
+        "n_helpful": 2,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.0019071446628520818,
+        "pooled_sd": 0.0045583272186825894,
+        "sd_of_dataset_means": 0.004207351657460146,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": -0.01924517953952573,
+          "1": -0.012232296712117424
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.015738738125821577,
+        "mean_within_dataset_sd": 0.0057459758389047585,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.015738738125821577,
+        "pooled_sd": 0.006263728048698758,
+        "sd_of_dataset_means": 0.004958857002927102,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "both",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": 0.015971717975037714,
+          "1": 0.0055044413008251865
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.01073807963793145,
+        "mean_within_dataset_sd": 0.004426566821891851,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.01073807963793145,
+        "pooled_sd": 0.007106621862550264,
+        "sd_of_dataset_means": 0.00740148231689145,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": -0.003273461564488017,
+          "1": -0.006727855411292238
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.0050006584878901274,
+        "mean_within_dataset_sd": 0.0022903620075664195,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.0050006584878901274,
+        "pooled_sd": 0.002938595662817879,
+        "sd_of_dataset_means": 0.0024426253139643484,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": -0.003332694001052232,
+          "1": -0.0035410329879119982
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.003436863494482115,
+        "mean_within_dataset_sd": 0.0017007924356494328,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.003436863494482115,
+        "pooled_sd": 0.0014129074690657484,
+        "sd_of_dataset_means": 0.00014731791039407585,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": -0.004622108718928968,
+          "1": -0.006237757894849379
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.005429933306889173,
+        "mean_within_dataset_sd": 0.0028872206567289067,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.005429933306889173,
+        "pooled_sd": 0.002818179783152813,
+        "sd_of_dataset_means": 0.0011424364883117796,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": 0.007002822439603932,
+          "1": 0.00320899376517483
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.005105908102389381,
+        "mean_within_dataset_sd": 0.0026437705891888003,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.005105908102389381,
+        "pooled_sd": 0.003274286956203526,
+        "sd_of_dataset_means": 0.0026826419823487886,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.0023807137206749637,
+          "1": -0.0030287641296745486
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.00032402520449979245,
+        "mean_within_dataset_sd": 0.00288403013903375,
+        "n_datasets": 2,
+        "n_harmful": 2,
+        "n_helpful": 2,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.00032402520449979245,
+        "pooled_sd": 0.003916471463358423,
+        "sd_of_dataset_means": 0.0038250784706605682,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.0053803233231789135,
+          "1": -0.0013174626834504197
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.002031430319864247,
+        "mean_within_dataset_sd": 0.0016766205172661993,
+        "n_datasets": 2,
+        "n_harmful": 2,
+        "n_helpful": 2,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.002031430319864247,
+        "pooled_sd": 0.0041382783569399555,
+        "sd_of_dataset_means": 0.004736049904223968,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": -0.01502302924910455,
+          "1": -0.013882100353655887
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.014452564801380218,
+        "mean_within_dataset_sd": 0.006071485069851765,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.014452564801380218,
+        "pooled_sd": 0.005274750080977074,
+        "sd_of_dataset_means": 0.0008067585588234267,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": 0.014354044718676968,
+          "1": 0.005994847531841728
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.010174446125259348,
+        "mean_within_dataset_sd": 0.004828346242286129,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.010174446125259348,
+        "pooled_sd": 0.006501142048672989,
+        "sd_of_dataset_means": 0.00591084501608671,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": -0.0006689845304275813,
+          "1": -0.00788725282181416
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.00427811867612087,
+        "mean_within_dataset_sd": 0.008340021088067116,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.00427811867612087,
+        "pooled_sd": 0.008298684577253372,
+        "sd_of_dataset_means": 0.0051040864572632835,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.0008894562893689492,
+          "1": -0.005190836629450461
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.002150690170040756,
+        "mean_within_dataset_sd": 0.00467276417351581,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.002150690170040756,
+        "pooled_sd": 0.00543340260171451,
+        "sd_of_dataset_means": 0.004299416354497752,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": -0.0015876216012802383,
+          "1": -0.004409135625231122
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.00299837861325568,
+        "mean_within_dataset_sd": 0.006053106379787154,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.00299837861325568,
+        "pooled_sd": 0.005276122093834171,
+        "sd_of_dataset_means": 0.0019951116995486125,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "both",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": 0.010187394417833315,
+          "1": 0.0064208646113982325
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.008304129514615774,
+        "mean_within_dataset_sd": 0.0036454834818063064,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.008304129514615774,
+        "pooled_sd": 0.004468875535490563,
+        "sd_of_dataset_means": 0.0026633387676715014,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.008599772816553077,
+          "1": 0.0020117289861671106
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.005305750901360094,
+        "mean_within_dataset_sd": 0.002407622897980848,
+        "n_datasets": 2,
+        "n_harmful": 3,
+        "n_helpful": 1,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.005305750901360094,
+        "pooled_sd": 0.004590737989437608,
+        "sd_of_dataset_means": 0.004658450467220114,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.008414810440827643,
+          "1": 0.0005111595861678371
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.00446298501349774,
+        "mean_within_dataset_sd": 0.004842506240324446,
+        "n_datasets": 2,
+        "n_harmful": 3,
+        "n_helpful": 1,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.00446298501349774,
+        "pooled_sd": 0.006592440689907164,
+        "sd_of_dataset_means": 0.005588725115460801,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": -0.020722010741966418,
+          "1": -0.015242628630925844
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.017982319686446133,
+        "mean_within_dataset_sd": 0.007926540077354789,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.017982319686446133,
+        "pooled_sd": 0.007206415534187942,
+        "sd_of_dataset_means": 0.00387450824742905,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "both",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": 0.0215522974287484,
+          "1": 0.012896957631325083
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.017224627530036743,
+        "mean_within_dataset_sd": 0.007385765538923936,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.017224627530036743,
+        "pooled_sd": 0.009410463014411187,
+        "sd_of_dataset_means": 0.006120249464231826,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.0008302866867819815,
+          "1": -0.002345670999600761
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.0007576921564093897,
+        "mean_within_dataset_sd": 0.00662799470138604,
+        "n_datasets": 2,
+        "n_harmful": 2,
+        "n_helpful": 2,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.0007576921564093897,
+        "pooled_sd": 0.005730974581218761,
+        "sd_of_dataset_means": 0.0022457412168027757,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": -0.004809525203492919,
+          "1": -0.006551364906720418
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.0056804450551066685,
+        "mean_within_dataset_sd": 0.0038813566740994623,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.0056804450551066685,
+        "pooled_sd": 0.003457216195784293,
+        "sd_of_dataset_means": 0.001231666665892128,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": -0.0016507852000318575,
+          "1": -0.00420542139583777
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.0029281032979348136,
+        "mean_within_dataset_sd": 0.0043260013391389195,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.0029281032979348136,
+        "pooled_sd": 0.003857764408173516,
+        "sd_of_dataset_means": 0.0018064005775189653,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": 0.01031285915757538,
+          "1": 0.006670560211183462
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.008491709684379421,
+        "mean_within_dataset_sd": 0.004015438288505964,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.008491709684379421,
+        "pooled_sd": 0.0049148022070887865,
+        "sd_of_dataset_means": 0.002575494284102343,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.008662073957543523,
+          "1": 0.0024651388153456924
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.005563606386444608,
+        "mean_within_dataset_sd": 0.004259311985167307,
+        "n_datasets": 2,
+        "n_harmful": 3,
+        "n_helpful": 1,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.005563606386444608,
+        "pooled_sd": 0.004995944393452989,
+        "sd_of_dataset_means": 0.004381894861621308,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.008351646842076024,
+          "1": 0.0007148738155611893
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.004533260328818607,
+        "mean_within_dataset_sd": 0.003115401199676212,
+        "n_datasets": 2,
+        "n_harmful": 3,
+        "n_helpful": 1,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.004533260328818607,
+        "pooled_sd": 0.005252663830436761,
+        "sd_of_dataset_means": 0.005400013993431154,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": -0.015840994288551284,
+          "1": -0.015342763496539711
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.015591878892545498,
+        "mean_within_dataset_sd": 0.007234697495384407,
+        "n_datasets": 2,
+        "n_harmful": 0,
+        "n_helpful": 4,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.015591878892545498,
+        "pooled_sd": 0.005941273023623823,
+        "sd_of_dataset_means": 0.00035230237162732774,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": 0.02150887967985541,
+          "1": 0.01344037931535838
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.017474629497606895,
+        "mean_within_dataset_sd": 0.0072282848421422585,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.017474629497606895,
+        "pooled_sd": 0.00925407602218637,
+        "sd_of_dataset_means": 0.00570529132174198,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.0056678853913041255,
+          "1": -0.0019023841811813304
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.0018827506050613976,
+        "mean_within_dataset_sd": 0.01384215038674271,
+        "n_datasets": 2,
+        "n_harmful": 2,
+        "n_helpful": 2,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.0018827506050613976,
+        "pooled_sd": 0.013239902028818936,
+        "sd_of_dataset_means": 0.005352988950114652,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 7.149124992221478e-05,
+          "1": -0.006651499772334285
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.003290004261206035,
+        "mean_within_dataset_sd": 0.005835976599048452,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.003290004261206035,
+        "pooled_sd": 0.00672711844940465,
+        "sd_of_dataset_means": 0.0047538725416938505,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "key": {
+        "bank": "both",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "context_specific"
+      },
+      "sharing_full": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sharing_sparse": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.004232887592806517,
+          "1": -0.000358290641640965
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.001937298475582776,
+        "mean_within_dataset_sd": 0.004397017977744783,
+        "n_datasets": 2,
+        "n_harmful": 2,
+        "n_helpful": 2,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.001937298475582776,
+        "pooled_sd": 0.00476272792038725,
+        "sd_of_dataset_means": 0.003246453263213895,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "key": {
+        "bank": "both",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "context_specific"
+      },
+      "sharing_full": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sharing_sparse": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.00856740067530113,
+          "1": -0.002816072252505103
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.0028756642113980137,
+        "mean_within_dataset_sd": 0.006732559808004537,
+        "n_datasets": 2,
+        "n_harmful": 3,
+        "n_helpful": 1,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.0028756642113980137,
+        "pooled_sd": 0.00857652892192706,
+        "sd_of_dataset_means": 0.00804933090070527,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "context_specific"
+      },
+      "sharing_full": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sharing_sparse": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.004232887592806517,
+          "1": -0.000358290641640965
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.001937298475582776,
+        "mean_within_dataset_sd": 0.004397017977744783,
+        "n_datasets": 2,
+        "n_harmful": 2,
+        "n_helpful": 2,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.001937298475582776,
+        "pooled_sd": 0.00476272792038725,
+        "sd_of_dataset_means": 0.003246453263213895,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "context_specific"
+      },
+      "sharing_full": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sharing_sparse": {
+        "dataset_means": {},
+        "mean_of_dataset_means": null,
+        "mean_within_dataset_sd": null,
+        "n_datasets": 0,
+        "n_pairs_pooled": 0,
+        "n_train_per_dataset": 0,
+        "note": "no rows",
+        "pooled_mean": null,
+        "pooled_sd": null,
+        "sd_of_dataset_means": null
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.00856740067530113,
+          "1": -0.002816072252505103
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.0028756642113980137,
+        "mean_within_dataset_sd": 0.006732559808004537,
+        "n_datasets": 2,
+        "n_harmful": 3,
+        "n_helpful": 1,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.0028756642113980137,
+        "pooled_sd": 0.00857652892192706,
+        "sd_of_dataset_means": 0.00804933090070527,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": 0.028015358604477673,
+          "1": 0.0066956180049363035
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.017355488304706988,
+        "mean_within_dataset_sd": 0.006966167270124026,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.017355488304706988,
+        "pooled_sd": 0.014201183711894789,
+        "sd_of_dataset_means": 0.015075333151073853,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "both",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": -0.006411395554663326,
+          "1": -0.002350688313499296
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.004381041934081311,
+        "mean_within_dataset_sd": 0.004580131363399782,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.004381041934081311,
+        "pooled_sd": 0.004438824609691451,
+        "sd_of_dataset_means": 0.002871353626640403,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.021603963049814347,
+          "1": 0.0043449296914370075
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.012974446370625677,
+        "mean_within_dataset_sd": 0.009749006693417446,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.012974446370625678,
+        "pooled_sd": 0.013779375419494675,
+        "sd_of_dataset_means": 0.01220397952443345,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.03224824619728419,
+          "1": 0.0063373273632953385
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.019292786780289763,
+        "mean_within_dataset_sd": 0.003131195281871878,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.019292786780289763,
+        "pooled_sd": 0.015320852225872393,
+        "sd_of_dataset_means": 0.018321786414287746,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": 0.04815681509028333,
+          "1": 0.014344956133079567
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.03125088561168145,
+        "mean_within_dataset_sd": 0.010869552504439484,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.03125088561168145,
+        "pooled_sd": 0.021795222890331263,
+        "sd_of_dataset_means": 0.02390859475316189,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "both",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": -0.012183283252650792,
+          "1": -0.005957055194000065
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.009070169223325429,
+        "mean_within_dataset_sd": 0.009966480924162914,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.009070169223325429,
+        "pooled_sd": 0.008926124084319392,
+        "sd_of_dataset_means": 0.004402608081485882,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.035973531837632536,
+          "1": 0.008387900939079502
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.022180716388356017,
+        "mean_within_dataset_sd": 0.014739272197740991,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.022180716388356017,
+        "pooled_sd": 0.02155975581062371,
+        "sd_of_dataset_means": 0.019505986671676006,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.05672421576558446,
+          "1": 0.011528883880574464
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.03412654982307946,
+        "mean_within_dataset_sd": 0.00430783643107158,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.03412654982307946,
+        "pooled_sd": 0.02654532194047662,
+        "sd_of_dataset_means": 0.03195792565386715,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": 0.02567707920973843,
+          "1": 0.00664512226963947
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.01616110073968895,
+        "mean_within_dataset_sd": 0.0024880313910056397,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.01616110073968895,
+        "pooled_sd": 0.011176228893500551,
+        "sd_of_dataset_means": 0.01345762581159435,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": -0.0064837860468741695,
+          "1": -0.0020452541473696562
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.004264520097121913,
+        "mean_within_dataset_sd": 0.0038984268077085545,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.004264520097121913,
+        "pooled_sd": 0.0043623666078416974,
+        "sd_of_dataset_means": 0.003138516004652449,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.01919329316286426,
+          "1": 0.004599868122269814
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.011896580642567038,
+        "mean_within_dataset_sd": 0.003645156729817589,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.011896580642567036,
+        "pooled_sd": 0.008949972406079549,
+        "sd_of_dataset_means": 0.0103191098069419,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.029909966802544947,
+          "1": 0.006286831627998505
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.018098399215271725,
+        "mean_within_dataset_sd": 0.002290950126036752,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.018098399215271725,
+        "pooled_sd": 0.013854456322925713,
+        "sd_of_dataset_means": 0.016704079074808243,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": 0.04378665853245314,
+          "1": 0.013822098329371063
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.028804378430912103,
+        "mean_within_dataset_sd": 0.0035483735637096606,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.028804378430912103,
+        "pooled_sd": 0.017642822000876475,
+        "sd_of_dataset_means": 0.02118814371487189,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": -0.01189633403335836,
+          "1": -0.005700234383525616
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.008798284208441988,
+        "mean_within_dataset_sd": 0.008098357299984402,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.008798284208441988,
+        "pooled_sd": 0.007919150754068785,
+        "sd_of_dataset_means": 0.004381304079304325,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.031890324499094784,
+          "1": 0.008121863945845447
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.020006094222470114,
+        "mean_within_dataset_sd": 0.005779874347228927,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.020006094222470114,
+        "pooled_sd": 0.01451728155677018,
+        "sd_of_dataset_means": 0.016806839635567564,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.052354059207754274,
+          "1": 0.01100602607686596
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.03168004264231011,
+        "mean_within_dataset_sd": 0.003184186244294877,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.03168004264231011,
+        "pooled_sd": 0.02412075855489027,
+        "sd_of_dataset_means": 0.02923747461557716,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": 0.018828276272161694,
+          "1": 0.004509053007028073
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.011668664639594883,
+        "mean_within_dataset_sd": 0.005245095201059545,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.011668664639594884,
+        "pooled_sd": 0.009659200979233357,
+        "sd_of_dataset_means": 0.01012521987210016,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "both",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": -0.0031257132766061672,
+          "1": -0.0006569664054602957
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.0018913398410332315,
+        "mean_within_dataset_sd": 0.004028885837372819,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.0018913398410332315,
+        "pooled_sd": 0.0038421314952564955,
+        "sd_of_dataset_means": 0.0017456676536203176,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.015702562995555527,
+          "1": 0.0038520866015677776
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.009777324798561651,
+        "mean_within_dataset_sd": 0.004841709882532053,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.009777324798561653,
+        "pooled_sd": 0.007964011350450571,
+        "sd_of_dataset_means": 0.008379552218479842,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.02306116386496821,
+          "1": 0.004150762365387108
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.01360596311517766,
+        "mean_within_dataset_sd": 0.0011117872416167413,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.01360596311517766,
+        "pooled_sd": 0.010977460188495535,
+        "sd_of_dataset_means": 0.013371673135314054,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": 0.029541988108790655,
+          "1": 0.00973727776986423
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.019639632939327443,
+        "mean_within_dataset_sd": 0.010559206060152922,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.019639632939327446,
+        "pooled_sd": 0.014901685621175767,
+        "sd_of_dataset_means": 0.014004044980090204,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "both",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": -0.003947941156130119,
+          "1": -0.0015946724958724179
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.0027713068260012685,
+        "mean_within_dataset_sd": 0.008045989275840947,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.0027713068260012685,
+        "pooled_sd": 0.007201000315040466,
+        "sd_of_dataset_means": 0.0016640122276220023,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.025594046952660536,
+          "1": 0.008142605273991813
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.016868326113326174,
+        "mean_within_dataset_sd": 0.008253217551876472,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.016868326113326174,
+        "pooled_sd": 0.012293853935891089,
+        "sd_of_dataset_means": 0.012340032752468201,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.038109388784091786,
+          "1": 0.0069212055173591275
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.022515297150725457,
+        "mean_within_dataset_sd": 0.004582841023351696,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.022515297150725457,
+        "pooled_sd": 0.018654705235302757,
+        "sd_of_dataset_means": 0.02205337588079547,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": 0.021842890913880864,
+          "1": 0.0049560165526828775
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.013399453733281871,
+        "mean_within_dataset_sd": 0.0023964795583806273,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.01339945373328187,
+        "pooled_sd": 0.009948794512812881,
+        "sd_of_dataset_means": 0.011940823373848344,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": -0.006316341571534555,
+          "1": -0.0007589257654855887
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.003537633668510072,
+        "mean_within_dataset_sd": 0.0032521117741867544,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.003537633668510072,
+        "pooled_sd": 0.004827185976601603,
+        "sd_of_dataset_means": 0.003929686402330527,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.015526549342346308,
+          "1": 0.004197090787197289
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.0098618200647718,
+        "mean_within_dataset_sd": 0.002612946151820887,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.0098618200647718,
+        "pooled_sd": 0.006915581906461212,
+        "sd_of_dataset_means": 0.008011136971517816,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.02607577850668738,
+          "1": 0.0045977259110419125
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.015336752208864646,
+        "mean_within_dataset_sd": 0.004434159606526414,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.015336752208864646,
+        "pooled_sd": 0.01332875501485606,
+        "sd_of_dataset_means": 0.01518727663706224,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": 0.03248161893015943,
+          "1": 0.010255864042334646
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.02136874148624704,
+        "mean_within_dataset_sd": 0.003807608139581733,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.02136874148624704,
+        "pooled_sd": 0.013346245516072015,
+        "sd_of_dataset_means": 0.01571598199817096,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": -0.009386380848573794,
+          "1": -0.0020915983036073685
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.005738989576090581,
+        "mean_within_dataset_sd": 0.006002392987217855,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.005738989576090581,
+        "pooled_sd": 0.008106193572844018,
+        "sd_of_dataset_means": 0.005158190204827021,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.023095238081585638,
+          "1": 0.008164265738727278
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.015629751910156458,
+        "mean_within_dataset_sd": 0.003608064805725638,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.015629751910156458,
+        "pooled_sd": 0.00928447376793931,
+        "sd_of_dataset_means": 0.01055779179334394,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.04104901960546056,
+          "1": 0.007439791789829543
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.024244405697645053,
+        "mean_within_dataset_sd": 0.0029249516684228044,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.02424440569764505,
+        "pooled_sd": 0.019688810806980338,
+        "sd_of_dataset_means": 0.02376531289887623,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": 0.03212070380855975,
+          "1": 0.008998320241534493
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.02055951202504712,
+        "mean_within_dataset_sd": 0.0038135434389608303,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.02055951202504712,
+        "pooled_sd": 0.013950068935896778,
+        "sd_of_dataset_means": 0.01634999421743995,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "both",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": -0.0017616220698662387,
+          "1": -0.0019265971050158003
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.0018441095874410195,
+        "mean_within_dataset_sd": 0.004558060369700666,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.0018441095874410195,
+        "pooled_sd": 0.004323600010189678,
+        "sd_of_dataset_means": 0.00011665496608074403,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.03035908173869351,
+          "1": 0.007071723136518692
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.0187154024376061,
+        "mean_within_dataset_sd": 0.0007445169307398357,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.018715402437606103,
+        "pooled_sd": 0.013464310315369163,
+        "sd_of_dataset_means": 0.01646664918352069,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.036353591401366264,
+          "1": 0.008640029599893528
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.022496810500629898,
+        "mean_within_dataset_sd": 0.005851223487106617,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.022496810500629898,
+        "pooled_sd": 0.016728540914760778,
+        "sd_of_dataset_means": 0.019596447480653843,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": 0.04875203064433665,
+          "1": 0.017392982310928423
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.03307250647763253,
+        "mean_within_dataset_sd": 0.010180397435740132,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.03307250647763253,
+        "pooled_sd": 0.020337506853387803,
+        "sd_of_dataset_means": 0.022174195728109657,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "both",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": -0.0026027779404430157,
+          "1": -0.004539062480766649
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.003570920210604832,
+        "mean_within_dataset_sd": 0.007206446968869643,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.003570920210604832,
+        "pooled_sd": 0.007838323341873513,
+        "sd_of_dataset_means": 0.001369159928769518,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.04614925270389363,
+          "1": 0.012853919830161775
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.029501586267027702,
+        "mean_within_dataset_sd": 0.003987539259424442,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.029501586267027702,
+        "pooled_sd": 0.01957925268503702,
+        "sd_of_dataset_means": 0.023543355656879175,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.05731943131963778,
+          "1": 0.01457691005842332
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.03594817068903055,
+        "mean_within_dataset_sd": 0.005473530426367941,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.035948170689030556,
+        "pooled_sd": 0.02523633203033925,
+        "sd_of_dataset_means": 0.030223526628814928,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": 0.030681614357084667,
+          "1": 0.007980248947959635
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.01933093165252215,
+        "mean_within_dataset_sd": 0.0034272438828183024,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.01933093165252215,
+        "pooled_sd": 0.013446608674465078,
+        "sd_of_dataset_means": 0.016052289422986032,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": -0.007204619879233265,
+          "1": -0.001978606311371804
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.0045916130953025346,
+        "mean_within_dataset_sd": 0.005862559406873079,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.0045916130953025346,
+        "pooled_sd": 0.005784420013934078,
+        "sd_of_dataset_means": 0.0036953496324077426,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.023476994477851402,
+          "1": 0.006001642636587831
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.014739318557219615,
+        "mean_within_dataset_sd": 0.002435315524054777,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.014739318557219617,
+        "pooled_sd": 0.010284031919153266,
+        "sd_of_dataset_means": 0.012356939790578291,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.03491450194989118,
+          "1": 0.00762195830631867
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.021268230128104925,
+        "mean_within_dataset_sd": 0.005464923930964088,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.02126823012810493,
+        "pooled_sd": 0.01656610492104259,
+        "sd_of_dataset_means": 0.019298742686199924,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    },
+    {
+      "interaction_sparse_minus_full_sharing": {
+        "dataset_means": {
+          "0": 0.0470285530646908,
+          "1": 0.014477752697272153
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.030753152880981478,
+        "mean_within_dataset_sd": 0.0059458491399206675,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.030753152880981478,
+        "pooled_sd": 0.01980714309876828,
+        "sd_of_dataset_means": 0.02301689167285129,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "key": {
+        "bank": "matched",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized"
+      },
+      "sharing_full": {
+        "dataset_means": {
+          "0": -0.012514558403497002,
+          "1": -0.004248361966778649
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": -0.008381460185137826,
+        "mean_within_dataset_sd": 0.01076818105431673,
+        "n_datasets": 2,
+        "n_harmful": 1,
+        "n_helpful": 3,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": -0.008381460185137826,
+        "pooled_sd": 0.010197455020147352,
+        "sd_of_dataset_means": 0.005845083555023623,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sharing_sparse": {
+        "dataset_means": {
+          "0": 0.0345139946611938,
+          "1": 0.010229390730493504
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.022371692695843652,
+        "mean_within_dataset_sd": 0.005935588341480342,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.022371692695843652,
+        "pooled_sd": 0.01511122340956915,
+        "sd_of_dataset_means": 0.017171808117827665,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      },
+      "sparse_vs_full": {
+        "dataset_means": {
+          "0": 0.05559595373999193,
+          "1": 0.01166168044476705
+        },
+        "generate_seeds": [
+          20261027,
+          20262036
+        ],
+        "mean_of_dataset_means": 0.03362881709237949,
+        "mean_within_dataset_sd": 0.005297547555342888,
+        "n_datasets": 2,
+        "n_harmful": 4,
+        "n_helpful": 0,
+        "n_pairs_pooled": 4,
+        "n_train_per_dataset": {
+          "0": 2,
+          "1": 2
+        },
+        "note": "n_datasets is the outer replication count. Train seeds are nested: they also change target splits. pooled_sd treats the 2\u00d72 crossing as iid and is not the dataset-level standard error.",
+        "pooled_mean": 0.0336288170923795,
+        "pooled_sd": 0.025739633625547865,
+        "sd_of_dataset_means": 0.031066222573556557,
+        "train_seeds": [
+          5150,
+          5167
+        ]
+      }
+    }
+  ],
+  "interaction_definition": "interaction = (S_sparse,k \u2212 S_sparse,0) \u2212 (S_full,k \u2212 S_full,0). Positive means sharing is more harmful (or less helpful) under sparse target-study training than under full target-study training.",
+  "n_groups": 32
+}

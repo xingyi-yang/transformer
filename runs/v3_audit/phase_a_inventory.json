@@ -1,0 +1,99 @@
+{
+  "counts": {
+    "available": 4,
+    "refused": 2,
+    "unknown": 9
+  },
+  "extract_root_opened": false,
+  "git_revision": "5f5a669e81b500a7070d8996d547c36f1432778f",
+  "inventory": [
+    {
+      "evidence": "docs/real_data_qualification.md stage 1 only; no real records committed",
+      "item": "real_SEND_in_repo",
+      "status": "refused"
+    },
+    {
+      "evidence": "none in repository; required before phase B",
+      "item": "written_authorization",
+      "status": "unknown"
+    },
+    {
+      "evidence": "not present",
+      "item": "named_steward",
+      "status": "unknown"
+    },
+    {
+      "evidence": "src/send_bw/data/sources.py; authorized defaults false",
+      "item": "snowflake_adapter",
+      "status": "available"
+    },
+    {
+      "evidence": "configs/real_snowflake.example.yaml authorized=False",
+      "item": "snowflake_authorized_flag",
+      "status": "refused"
+    },
+    {
+      "evidence": "configs/real_local.example.yaml placeholder D:/approved_storage paths; not opened",
+      "item": "local_real_template",
+      "status": "available"
+    },
+    {
+      "evidence": "phase A does not stat placeholder extract roots",
+      "item": "local_real_extract_present",
+      "status": "unknown"
+    },
+    {
+      "evidence": "not implemented",
+      "item": "define.xml",
+      "status": "unknown"
+    },
+    {
+      "evidence": "configs/mappings/example_send.yaml",
+      "item": "mapping_profile",
+      "status": "available"
+    },
+    {
+      "evidence": "templates only",
+      "item": "curated_arm_regimen_real",
+      "status": "unknown"
+    },
+    {
+      "evidence": "templates only",
+      "item": "curated_compound_reference_real",
+      "status": "unknown"
+    },
+    {
+      "evidence": "do not infer from synthetic DOG",
+      "item": "donor_species_in_library",
+      "status": "unknown"
+    },
+    {
+      "evidence": "requires phase B metadata",
+      "item": "target_holdout_of_two_studies",
+      "status": "unknown"
+    },
+    {
+      "evidence": "requires phase B metadata",
+      "item": "horizon_overlap_day_28",
+      "status": "unknown"
+    },
+    {
+      "evidence": "docs/real_data_qualification.md",
+      "item": "qualification_doc",
+      "status": "available"
+    }
+  ],
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "local_template_output_dir": "D:/approved_storage/send_bw_runs/real_local",
+  "next": "Phase B needs a signed authorization file naming steward, purpose, allows_metadata_only: true, allowed_phases: [B], and forbids_design_recommendations. Do not set Snowflake authorized: true on the same ticket as training.",
+  "note": "Placeholder paths were not opened. Synthetic DOG is not historical support.",
+  "phase": "A",
+  "real_data_accessed": false,
+  "snowflake_connected": false,
+  "support_for_synthetic_to_real": "not_claimed"
+}

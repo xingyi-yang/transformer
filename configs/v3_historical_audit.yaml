@@ -1,0 +1,26 @@
+# Ready-to-execute historical-data audit. Phase A is paper inventory only.
+# Do not set authorized: true. Do not point source.root at a real extract for phase A.
+# Synthetic diagnostic. Not design qualification. No real-data validation.
+# No operational recommendation.
+run_name: v3_historical_audit
+output_dir: runs/v3_audit
+synthetic: {enabled: false}
+source:
+  type: local
+  root: configs/mappings
+  layout: per_study
+  metadata_dir: configs/mappings
+  snowflake:
+    authorized: false
+mapping: configs/mappings/example_send.yaml
+cohort: {species: RAT, donor_species: [DOG], study_classes: [REPEAT_DOSE_TOX], max_day: 28}
+models:
+  spline: {enabled: false}
+  transformer: {enabled: false}
+  bayesian: {enabled: false}
+design: {}
+labels:
+  - Synthetic diagnostic.
+  - Not design qualification.
+  - No real-data validation.
+  - No operational recommendation.

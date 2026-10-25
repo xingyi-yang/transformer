@@ -91,10 +91,10 @@ def main(argv: list[str] | None = None) -> int:
     sub = p.add_subparsers(dest="cmd", required=True)
     for name in ["generate", "inspect-source", "ingest", "prepare", "validate-real", "train", "evaluate",
                  "design", "report", "run-all", "validate-request", "propose-design", "v3-pilot",
-                 "v3-eval", "v3-repl", "v3-research"]:
+                 "v3-eval", "v3-repl", "v3-research", "v3-closeout", "historical-audit"]:
         s = sub.add_parser(name)
-        artifact_cmd = name in ("validate-request", "propose-design")
-        s.add_argument("--config", required=not artifact_cmd)
+        artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout")
+        s.add_argument("--config", required=not artifact_cmd and name != "v3-closeout")
         s.add_argument("--force", action="store_true")
         if name == "train":
             s.add_argument("--models", nargs="*")
@@ -107,8 +107,14 @@ def main(argv: list[str] | None = None) -> int:
             s.add_argument("--replicates", type=int, nargs=2, metavar=("PROPOSAL", "FINAL"))
             s.add_argument("--with-oracle", action="store_true",
                            help="synthetic runs only (needs --config): include the oracle reference")
+        if name == "v3-closeout":
+            s.add_argument("--research-dir", default="runs/v3_research")
+            s.add_argument("--output-dir", default="runs/v3_closeout")
+        if name == "historical-audit":
+            s.add_argument("--phase", default="A")
+            s.add_argument("--authorization", help="signed ticket; required for phases B and C")
     args = p.parse_args(argv)
-    if getattr(args, "model", None) is None and args.config is None:
+    if args.cmd not in ("v3-closeout",) and getattr(args, "model", None) is None and args.config is None:
         p.error("--config or --model is required")
     try:
         if args.cmd == "v3-pilot":
@@ -145,6 +151,26 @@ def main(argv: list[str] | None = None) -> int:
                               "component_status": out.get("component_status"),
                               "failures": out.get("failures"),
                               "parent": load_research_yaml(args.config).get("output_dir")}, indent=2, default=str))
+            return 0
+        if args.cmd == "v3-closeout":
+            from send_bw.v3_closeout import execute_v3_closeout
+
+            out = execute_v3_closeout(args.research_dir, args.output_dir)
+            print(json.dumps({"status": "ok",
+                              "retuned_after_test": False,
+                              "grid_relaunched": False,
+                              "source": out.get("source_research"),
+                              "parent": args.output_dir}, indent=2, default=str))
+            return 0
+        if args.cmd == "historical-audit":
+            from send_bw.historical_audit import execute_historical_audit
+
+            out = execute_historical_audit(args.config, phase=args.phase,
+                                           authorization_path=args.authorization)
+            print(json.dumps({"status": "ok", "phase": out.get("phase"),
+                              "real_data_accessed": out.get("real_data_accessed"),
+                              "support_for_synthetic_to_real": out.get("support_for_synthetic_to_real"),
+                              "counts": out.get("counts")}, indent=2, default=str))
             return 0
         if args.cmd == "v3-repl":
             from send_bw.v3_repl import execute_v3_repl
