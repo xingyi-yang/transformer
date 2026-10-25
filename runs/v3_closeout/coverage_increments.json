@@ -1,0 +1,147 @@
+{
+  "by_model": {
+    "spline": {
+      "cov80": {
+        "max": 1.0,
+        "mean": 0.8914157363193876,
+        "min": 0.6658859588248901,
+        "n": 64
+      },
+      "cov95": {
+        "max": 1.0,
+        "mean": 0.969818220366428,
+        "min": 0.8862479759426324,
+        "n": 64
+      },
+      "extrema_max_cov90": {
+        "max": 1.0,
+        "mean": 0.9419035695437207,
+        "min": 0.6615384615384615,
+        "n": 64
+      },
+      "increment_sd_ratio": {
+        "max": 2.3362821585467732,
+        "mean": 1.4435687963319346,
+        "min": 1.0166112983060718,
+        "n": 64
+      },
+      "n": 64,
+      "n_increment_gt_1": 64,
+      "n_over_cov80": 55,
+      "n_over_cov95": 52,
+      "width80": {
+        "max": 0.4385341028729066,
+        "mean": 0.224358456422977,
+        "min": 0.1377490692613839,
+        "n": 64
+      },
+      "width95": {
+        "max": 0.5964012169987769,
+        "mean": 0.31779711457524806,
+        "min": 0.19956122432156914,
+        "n": 64
+      }
+    },
+    "transformer": {
+      "cov80": {
+        "max": 0.9388874265157497,
+        "mean": 0.8340177422579118,
+        "min": 0.7040538977561879,
+        "n": 64
+      },
+      "cov95": {
+        "max": 0.9897431854810455,
+        "mean": 0.9431941202057379,
+        "min": 0.8473282442748091,
+        "n": 64
+      },
+      "extrema_max_cov90": {
+        "max": 1.0,
+        "mean": 0.9228484717166561,
+        "min": 0.7910447761194029,
+        "n": 64
+      },
+      "increment_sd_ratio": {
+        "max": 1.9398168600258754,
+        "mean": 1.3286468947206886,
+        "min": 1.0612502468643055,
+        "n": 64
+      },
+      "n": 64,
+      "n_increment_gt_1": 64,
+      "n_over_cov80": 45,
+      "n_over_cov95": 34,
+      "width80": {
+        "max": 0.3686202231574709,
+        "mean": 0.20187413578933863,
+        "min": 0.13423278993769583,
+        "n": 64
+      },
+      "width95": {
+        "max": 0.5107525055063484,
+        "mean": 0.2889204020731544,
+        "min": 0.1936827756615309,
+        "n": 64
+      }
+    }
+  },
+  "covariance_bounds": {
+    "n_inspections": 64,
+    "n_with_boundary": 12,
+    "param_counts": {
+      "sd_a0": 2,
+      "sd_s0": 1,
+      "sigma_m": 9
+    }
+  },
+  "denominators_note": "Coverage uses study-balanced means unless noted. Increment n is per-animal consecutive-visit series.",
+  "mechanism": "New-study draws add a shared study intercept/slope plus animal and OU terms. Increment SD is the mean, over draws, of per-animal consecutive-visit SDs; that includes the new study slope, so pred increment SD can exceed the observed within-animal increment SD. HierarchicalCovariance often parks sigma_m at its optimizer floor (train OOF, not a test-calibrated nugget). Wide predictive intervals then overcover. Widths were not shrunk to match exposed test coverage.",
+  "n_cells": 128,
+  "not_done": [
+    "No residual scale was multiplied to hit nominal 80/95 coverage on test.",
+    "No increment-ratio target was used as a tuning objective.",
+    "Validation pre-study packs were not written by the research executor; compound-holdout coverage is a second exposed split and was not used to calibrate."
+  ],
+  "overall": {
+    "cov80": {
+      "max": 1.0,
+      "mean": 0.8627167392886497,
+      "min": 0.6658859588248901,
+      "n": 128
+    },
+    "cov95": {
+      "max": 1.0,
+      "mean": 0.9565061702860829,
+      "min": 0.8473282442748091,
+      "n": 128
+    },
+    "extrema_max_cov90": {
+      "max": 1.0,
+      "mean": 0.9323760206301883,
+      "min": 0.6615384615384615,
+      "n": 128
+    },
+    "increment_sd_ratio": {
+      "max": 2.3362821585467732,
+      "mean": 1.3861078455263116,
+      "min": 1.0166112983060718,
+      "n": 128
+    },
+    "n": 128,
+    "n_increment_gt_1": 128,
+    "n_over_cov80": 100,
+    "n_over_cov95": 86,
+    "width80": {
+      "max": 0.4385341028729066,
+      "mean": 0.21311629610615782,
+      "min": 0.13423278993769583,
+      "n": 128
+    },
+    "width95": {
+      "max": 0.5964012169987769,
+      "mean": 0.3033587583242012,
+      "min": 0.1936827756615309,
+      "n": 128
+    }
+  }
+}
