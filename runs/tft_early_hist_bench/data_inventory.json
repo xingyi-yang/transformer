@@ -1,0 +1,878 @@
+{
+  "pooled": {
+    "test": {
+      "columns_animals": [
+        "STUDYID",
+        "USUBJID",
+        "SUBJID",
+        "SEX",
+        "SPECIES",
+        "STRAIN",
+        "ARMCD",
+        "ARM",
+        "ARM_KEY",
+        "COHORT",
+        "REF_DATE",
+        "BASELINE_DAY",
+        "BASELINE_G",
+        "BASELINE_LOGW",
+        "ELIGIBLE",
+        "EXCLUSION_REASON",
+        "COMPOUND_ID",
+        "IS_CONTROL",
+        "PLANNED_DOSE",
+        "ROUTE",
+        "INTERVAL_DAYS",
+        "START_DAY",
+        "END_DAY",
+        "DISPOSITION",
+        "DISPOSITION_DAY"
+      ],
+      "columns_obs": [
+        "STUDYID",
+        "USUBJID",
+        "BWSEQ",
+        "DAY",
+        "SOURCE_DY",
+        "PHASE",
+        "WEIGHT_G",
+        "LOGW",
+        "ORIG_VALUE",
+        "ORIG_UNIT",
+        "STD_VALUE",
+        "STD_UNIT",
+        "DATE_UNCERTAIN",
+        "FASTING",
+        "IS_BASELINE",
+        "QC_FLAGS",
+        "SRC_FILE",
+        "SRC_ROW",
+        "MAPPING_VERSION",
+        "BASELINE_LOGW",
+        "BASELINE_DAY",
+        "Y"
+      ],
+      "n_animals": 58,
+      "n_obs": 228,
+      "n_studies": 2,
+      "species": {
+        "RAT": 58
+      },
+      "studyids": [
+        "SYNA-010",
+        "SYNA-011"
+      ]
+    },
+    "test_compound_holdout": {
+      "columns_animals": [
+        "STUDYID",
+        "USUBJID",
+        "SUBJID",
+        "SEX",
+        "SPECIES",
+        "STRAIN",
+        "ARMCD",
+        "ARM",
+        "ARM_KEY",
+        "COHORT",
+        "REF_DATE",
+        "BASELINE_DAY",
+        "BASELINE_G",
+        "BASELINE_LOGW",
+        "ELIGIBLE",
+        "EXCLUSION_REASON",
+        "COMPOUND_ID",
+        "IS_CONTROL",
+        "PLANNED_DOSE",
+        "ROUTE",
+        "INTERVAL_DAYS",
+        "START_DAY",
+        "END_DAY",
+        "DISPOSITION",
+        "DISPOSITION_DAY"
+      ],
+      "columns_obs": [
+        "STUDYID",
+        "USUBJID",
+        "BWSEQ",
+        "DAY",
+        "SOURCE_DY",
+        "PHASE",
+        "WEIGHT_G",
+        "LOGW",
+        "ORIG_VALUE",
+        "ORIG_UNIT",
+        "STD_VALUE",
+        "STD_UNIT",
+        "DATE_UNCERTAIN",
+        "FASTING",
+        "IS_BASELINE",
+        "QC_FLAGS",
+        "SRC_FILE",
+        "SRC_ROW",
+        "MAPPING_VERSION",
+        "BASELINE_LOGW",
+        "BASELINE_DAY",
+        "Y"
+      ],
+      "n_animals": 64,
+      "n_obs": 248,
+      "n_studies": 2,
+      "species": {
+        "RAT": 64
+      },
+      "studyids": [
+        "SYNA-001",
+        "SYNA-008"
+      ]
+    },
+    "train": {
+      "columns_animals": [
+        "STUDYID",
+        "USUBJID",
+        "SUBJID",
+        "SEX",
+        "SPECIES",
+        "STRAIN",
+        "ARMCD",
+        "ARM",
+        "ARM_KEY",
+        "COHORT",
+        "REF_DATE",
+        "BASELINE_DAY",
+        "BASELINE_G",
+        "BASELINE_LOGW",
+        "ELIGIBLE",
+        "EXCLUSION_REASON",
+        "COMPOUND_ID",
+        "IS_CONTROL",
+        "PLANNED_DOSE",
+        "ROUTE",
+        "INTERVAL_DAYS",
+        "START_DAY",
+        "END_DAY",
+        "DISPOSITION",
+        "DISPOSITION_DAY"
+      ],
+      "columns_obs": [
+        "STUDYID",
+        "USUBJID",
+        "BWSEQ",
+        "DAY",
+        "SOURCE_DY",
+        "PHASE",
+        "WEIGHT_G",
+        "LOGW",
+        "ORIG_VALUE",
+        "ORIG_UNIT",
+        "STD_VALUE",
+        "STD_UNIT",
+        "DATE_UNCERTAIN",
+        "FASTING",
+        "IS_BASELINE",
+        "QC_FLAGS",
+        "SRC_FILE",
+        "SRC_ROW",
+        "MAPPING_VERSION",
+        "BASELINE_LOGW",
+        "BASELINE_DAY",
+        "Y"
+      ],
+      "n_animals": 313,
+      "n_obs": 1551,
+      "n_studies": 9,
+      "species": {
+        "DOG": 99,
+        "RAT": 214
+      },
+      "studyids": [
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-D001",
+        "SYNA-D002",
+        "SYNA-D003"
+      ]
+    },
+    "validation": {
+      "columns_animals": [
+        "STUDYID",
+        "USUBJID",
+        "SUBJID",
+        "SEX",
+        "SPECIES",
+        "STRAIN",
+        "ARMCD",
+        "ARM",
+        "ARM_KEY",
+        "COHORT",
+        "REF_DATE",
+        "BASELINE_DAY",
+        "BASELINE_G",
+        "BASELINE_LOGW",
+        "ELIGIBLE",
+        "EXCLUSION_REASON",
+        "COMPOUND_ID",
+        "IS_CONTROL",
+        "PLANNED_DOSE",
+        "ROUTE",
+        "INTERVAL_DAYS",
+        "START_DAY",
+        "END_DAY",
+        "DISPOSITION",
+        "DISPOSITION_DAY"
+      ],
+      "columns_obs": [
+        "STUDYID",
+        "USUBJID",
+        "BWSEQ",
+        "DAY",
+        "SOURCE_DY",
+        "PHASE",
+        "WEIGHT_G",
+        "LOGW",
+        "ORIG_VALUE",
+        "ORIG_UNIT",
+        "STD_VALUE",
+        "STD_UNIT",
+        "DATE_UNCERTAIN",
+        "FASTING",
+        "IS_BASELINE",
+        "QC_FLAGS",
+        "SRC_FILE",
+        "SRC_ROW",
+        "MAPPING_VERSION",
+        "BASELINE_LOGW",
+        "BASELINE_DAY",
+        "Y"
+      ],
+      "n_animals": 54,
+      "n_obs": 425,
+      "n_studies": 2,
+      "species": {
+        "RAT": 54
+      },
+      "studyids": [
+        "SYNA-005",
+        "SYNA-012"
+      ]
+    }
+  },
+  "schedules_pooled_train": {
+    "by_study": [
+      {
+        "STUDYID": "SYNA-002",
+        "max_visits": 4,
+        "median_gap_days": 7.0,
+        "median_visits_per_animal": 4.0,
+        "min_visits": 3,
+        "n_animals": 32,
+        "n_animals_irregular_gaps": 1,
+        "n_obs": 126,
+        "unique_days": [
+          7.0,
+          14.0,
+          21.0,
+          28.0
+        ]
+      },
+      {
+        "STUDYID": "SYNA-003",
+        "max_visits": 8,
+        "median_gap_days": 4.0,
+        "median_visits_per_animal": 8.0,
+        "min_visits": 5,
+        "n_animals": 40,
+        "n_animals_irregular_gaps": 40,
+        "n_obs": 311,
+        "unique_days": [
+          3.0,
+          7.0,
+          10.0,
+          14.0,
+          17.0,
+          21.0,
+          24.0,
+          28.0
+        ]
+      },
+      {
+        "STUDYID": "SYNA-004",
+        "max_visits": 4,
+        "median_gap_days": 7.0,
+        "median_visits_per_animal": 4.0,
+        "min_visits": 1,
+        "n_animals": 48,
+        "n_animals_irregular_gaps": 3,
+        "n_obs": 183,
+        "unique_days": [
+          7.0,
+          14.0,
+          21.0,
+          28.0
+        ]
+      },
+      {
+        "STUDYID": "SYNA-006",
+        "max_visits": 4,
+        "median_gap_days": 7.0,
+        "median_visits_per_animal": 4.0,
+        "min_visits": 3,
+        "n_animals": 28,
+        "n_animals_irregular_gaps": 1,
+        "n_obs": 111,
+        "unique_days": [
+          7.0,
+          14.0,
+          21.0,
+          28.0
+        ]
+      },
+      {
+        "STUDYID": "SYNA-007",
+        "max_visits": 4,
+        "median_gap_days": 7.0,
+        "median_visits_per_animal": 4.0,
+        "min_visits": 3,
+        "n_animals": 22,
+        "n_animals_irregular_gaps": 0,
+        "n_obs": 87,
+        "unique_days": [
+          7.0,
+          14.0,
+          21.0,
+          28.0
+        ]
+      },
+      {
+        "STUDYID": "SYNA-009",
+        "max_visits": 4,
+        "median_gap_days": 7.0,
+        "median_visits_per_animal": 4.0,
+        "min_visits": 1,
+        "n_animals": 44,
+        "n_animals_irregular_gaps": 1,
+        "n_obs": 165,
+        "unique_days": [
+          7.0,
+          14.0,
+          21.0,
+          28.0
+        ]
+      },
+      {
+        "STUDYID": "SYNA-D001",
+        "max_visits": 8,
+        "median_gap_days": 4.0,
+        "median_visits_per_animal": 8.0,
+        "min_visits": 5,
+        "n_animals": 48,
+        "n_animals_irregular_gaps": 48,
+        "n_obs": 370,
+        "unique_days": [
+          3.0,
+          7.0,
+          10.0,
+          14.0,
+          17.0,
+          21.0,
+          24.0,
+          28.0
+        ]
+      },
+      {
+        "STUDYID": "SYNA-D002",
+        "max_visits": 4,
+        "median_gap_days": 7.0,
+        "median_visits_per_animal": 4.0,
+        "min_visits": 3,
+        "n_animals": 23,
+        "n_animals_irregular_gaps": 1,
+        "n_obs": 90,
+        "unique_days": [
+          7.0,
+          14.0,
+          21.0,
+          28.0
+        ]
+      },
+      {
+        "STUDYID": "SYNA-D003",
+        "max_visits": 4,
+        "median_gap_days": 7.0,
+        "median_visits_per_animal": 4.0,
+        "min_visits": 3,
+        "n_animals": 28,
+        "n_animals_irregular_gaps": 2,
+        "n_obs": 108,
+        "unique_days": [
+          7.0,
+          14.0,
+          21.0,
+          28.0
+        ]
+      }
+    ],
+    "day_max": 28.0,
+    "day_min": 3.0,
+    "fabricated_days": false,
+    "interpolated": false,
+    "n_animals": 313,
+    "n_obs": 1551,
+    "n_studies": 9,
+    "species_n_animals": {
+      "DOG": 99,
+      "RAT": 214
+    },
+    "unique_days_all": [
+      3.0,
+      7.0,
+      10.0,
+      14.0,
+      17.0,
+      21.0,
+      24.0,
+      28.0
+    ],
+    "weight_unit": "gram (WEIGHT_G); LOGW = ln(WEIGHT_G)"
+  },
+  "schedules_target_train": {
+    "by_study": [
+      {
+        "STUDYID": "SYNA-002",
+        "max_visits": 4,
+        "median_gap_days": 7.0,
+        "median_visits_per_animal": 4.0,
+        "min_visits": 3,
+        "n_animals": 32,
+        "n_animals_irregular_gaps": 1,
+        "n_obs": 126,
+        "unique_days": [
+          7.0,
+          14.0,
+          21.0,
+          28.0
+        ]
+      },
+      {
+        "STUDYID": "SYNA-003",
+        "max_visits": 8,
+        "median_gap_days": 4.0,
+        "median_visits_per_animal": 8.0,
+        "min_visits": 5,
+        "n_animals": 40,
+        "n_animals_irregular_gaps": 40,
+        "n_obs": 311,
+        "unique_days": [
+          3.0,
+          7.0,
+          10.0,
+          14.0,
+          17.0,
+          21.0,
+          24.0,
+          28.0
+        ]
+      },
+      {
+        "STUDYID": "SYNA-004",
+        "max_visits": 4,
+        "median_gap_days": 7.0,
+        "median_visits_per_animal": 4.0,
+        "min_visits": 1,
+        "n_animals": 48,
+        "n_animals_irregular_gaps": 3,
+        "n_obs": 183,
+        "unique_days": [
+          7.0,
+          14.0,
+          21.0,
+          28.0
+        ]
+      },
+      {
+        "STUDYID": "SYNA-006",
+        "max_visits": 4,
+        "median_gap_days": 7.0,
+        "median_visits_per_animal": 4.0,
+        "min_visits": 3,
+        "n_animals": 28,
+        "n_animals_irregular_gaps": 1,
+        "n_obs": 111,
+        "unique_days": [
+          7.0,
+          14.0,
+          21.0,
+          28.0
+        ]
+      },
+      {
+        "STUDYID": "SYNA-007",
+        "max_visits": 4,
+        "median_gap_days": 7.0,
+        "median_visits_per_animal": 4.0,
+        "min_visits": 3,
+        "n_animals": 22,
+        "n_animals_irregular_gaps": 0,
+        "n_obs": 87,
+        "unique_days": [
+          7.0,
+          14.0,
+          21.0,
+          28.0
+        ]
+      },
+      {
+        "STUDYID": "SYNA-009",
+        "max_visits": 4,
+        "median_gap_days": 7.0,
+        "median_visits_per_animal": 4.0,
+        "min_visits": 1,
+        "n_animals": 44,
+        "n_animals_irregular_gaps": 1,
+        "n_obs": 165,
+        "unique_days": [
+          7.0,
+          14.0,
+          21.0,
+          28.0
+        ]
+      }
+    ],
+    "day_max": 28.0,
+    "day_min": 3.0,
+    "fabricated_days": false,
+    "interpolated": false,
+    "n_animals": 214,
+    "n_obs": 983,
+    "n_studies": 6,
+    "species_n_animals": {
+      "RAT": 214
+    },
+    "unique_days_all": [
+      3.0,
+      7.0,
+      10.0,
+      14.0,
+      17.0,
+      21.0,
+      24.0,
+      28.0
+    ],
+    "weight_unit": "gram (WEIGHT_G); LOGW = ln(WEIGHT_G)"
+  },
+  "schedules_test": {
+    "by_study": [
+      {
+        "STUDYID": "SYNA-010",
+        "max_visits": 4,
+        "median_gap_days": 7.0,
+        "median_visits_per_animal": 4.0,
+        "min_visits": 3,
+        "n_animals": 22,
+        "n_animals_irregular_gaps": 1,
+        "n_obs": 86,
+        "unique_days": [
+          7.0,
+          14.0,
+          21.0,
+          28.0
+        ]
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "max_visits": 4,
+        "median_gap_days": 7.0,
+        "median_visits_per_animal": 4.0,
+        "min_visits": 3,
+        "n_animals": 36,
+        "n_animals_irregular_gaps": 1,
+        "n_obs": 142,
+        "unique_days": [
+          7.0,
+          14.0,
+          21.0,
+          28.0
+        ]
+      }
+    ],
+    "day_max": 28.0,
+    "day_min": 7.0,
+    "fabricated_days": false,
+    "interpolated": false,
+    "n_animals": 58,
+    "n_obs": 228,
+    "n_studies": 2,
+    "species_n_animals": {
+      "RAT": 58
+    },
+    "unique_days_all": [
+      7.0,
+      14.0,
+      21.0,
+      28.0
+    ],
+    "weight_unit": "gram (WEIGHT_G); LOGW = ln(WEIGHT_G)"
+  },
+  "target_only": {
+    "test": {
+      "columns_animals": [
+        "STUDYID",
+        "USUBJID",
+        "SUBJID",
+        "SEX",
+        "SPECIES",
+        "STRAIN",
+        "ARMCD",
+        "ARM",
+        "ARM_KEY",
+        "COHORT",
+        "REF_DATE",
+        "BASELINE_DAY",
+        "BASELINE_G",
+        "BASELINE_LOGW",
+        "ELIGIBLE",
+        "EXCLUSION_REASON",
+        "COMPOUND_ID",
+        "IS_CONTROL",
+        "PLANNED_DOSE",
+        "ROUTE",
+        "INTERVAL_DAYS",
+        "START_DAY",
+        "END_DAY",
+        "DISPOSITION",
+        "DISPOSITION_DAY"
+      ],
+      "columns_obs": [
+        "STUDYID",
+        "USUBJID",
+        "BWSEQ",
+        "DAY",
+        "SOURCE_DY",
+        "PHASE",
+        "WEIGHT_G",
+        "LOGW",
+        "ORIG_VALUE",
+        "ORIG_UNIT",
+        "STD_VALUE",
+        "STD_UNIT",
+        "DATE_UNCERTAIN",
+        "FASTING",
+        "IS_BASELINE",
+        "QC_FLAGS",
+        "SRC_FILE",
+        "SRC_ROW",
+        "MAPPING_VERSION",
+        "BASELINE_LOGW",
+        "BASELINE_DAY",
+        "Y"
+      ],
+      "n_animals": 58,
+      "n_obs": 228,
+      "n_studies": 2,
+      "species": {
+        "RAT": 58
+      },
+      "studyids": [
+        "SYNA-010",
+        "SYNA-011"
+      ]
+    },
+    "test_compound_holdout": {
+      "columns_animals": [
+        "STUDYID",
+        "USUBJID",
+        "SUBJID",
+        "SEX",
+        "SPECIES",
+        "STRAIN",
+        "ARMCD",
+        "ARM",
+        "ARM_KEY",
+        "COHORT",
+        "REF_DATE",
+        "BASELINE_DAY",
+        "BASELINE_G",
+        "BASELINE_LOGW",
+        "ELIGIBLE",
+        "EXCLUSION_REASON",
+        "COMPOUND_ID",
+        "IS_CONTROL",
+        "PLANNED_DOSE",
+        "ROUTE",
+        "INTERVAL_DAYS",
+        "START_DAY",
+        "END_DAY",
+        "DISPOSITION",
+        "DISPOSITION_DAY"
+      ],
+      "columns_obs": [
+        "STUDYID",
+        "USUBJID",
+        "BWSEQ",
+        "DAY",
+        "SOURCE_DY",
+        "PHASE",
+        "WEIGHT_G",
+        "LOGW",
+        "ORIG_VALUE",
+        "ORIG_UNIT",
+        "STD_VALUE",
+        "STD_UNIT",
+        "DATE_UNCERTAIN",
+        "FASTING",
+        "IS_BASELINE",
+        "QC_FLAGS",
+        "SRC_FILE",
+        "SRC_ROW",
+        "MAPPING_VERSION",
+        "BASELINE_LOGW",
+        "BASELINE_DAY",
+        "Y"
+      ],
+      "n_animals": 64,
+      "n_obs": 248,
+      "n_studies": 2,
+      "species": {
+        "RAT": 64
+      },
+      "studyids": [
+        "SYNA-001",
+        "SYNA-008"
+      ]
+    },
+    "train": {
+      "columns_animals": [
+        "STUDYID",
+        "USUBJID",
+        "SUBJID",
+        "SEX",
+        "SPECIES",
+        "STRAIN",
+        "ARMCD",
+        "ARM",
+        "ARM_KEY",
+        "COHORT",
+        "REF_DATE",
+        "BASELINE_DAY",
+        "BASELINE_G",
+        "BASELINE_LOGW",
+        "ELIGIBLE",
+        "EXCLUSION_REASON",
+        "COMPOUND_ID",
+        "IS_CONTROL",
+        "PLANNED_DOSE",
+        "ROUTE",
+        "INTERVAL_DAYS",
+        "START_DAY",
+        "END_DAY",
+        "DISPOSITION",
+        "DISPOSITION_DAY"
+      ],
+      "columns_obs": [
+        "STUDYID",
+        "USUBJID",
+        "BWSEQ",
+        "DAY",
+        "SOURCE_DY",
+        "PHASE",
+        "WEIGHT_G",
+        "LOGW",
+        "ORIG_VALUE",
+        "ORIG_UNIT",
+        "STD_VALUE",
+        "STD_UNIT",
+        "DATE_UNCERTAIN",
+        "FASTING",
+        "IS_BASELINE",
+        "QC_FLAGS",
+        "SRC_FILE",
+        "SRC_ROW",
+        "MAPPING_VERSION",
+        "BASELINE_LOGW",
+        "BASELINE_DAY",
+        "Y"
+      ],
+      "n_animals": 214,
+      "n_obs": 983,
+      "n_studies": 6,
+      "species": {
+        "RAT": 214
+      },
+      "studyids": [
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009"
+      ]
+    },
+    "validation": {
+      "columns_animals": [
+        "STUDYID",
+        "USUBJID",
+        "SUBJID",
+        "SEX",
+        "SPECIES",
+        "STRAIN",
+        "ARMCD",
+        "ARM",
+        "ARM_KEY",
+        "COHORT",
+        "REF_DATE",
+        "BASELINE_DAY",
+        "BASELINE_G",
+        "BASELINE_LOGW",
+        "ELIGIBLE",
+        "EXCLUSION_REASON",
+        "COMPOUND_ID",
+        "IS_CONTROL",
+        "PLANNED_DOSE",
+        "ROUTE",
+        "INTERVAL_DAYS",
+        "START_DAY",
+        "END_DAY",
+        "DISPOSITION",
+        "DISPOSITION_DAY"
+      ],
+      "columns_obs": [
+        "STUDYID",
+        "USUBJID",
+        "BWSEQ",
+        "DAY",
+        "SOURCE_DY",
+        "PHASE",
+        "WEIGHT_G",
+        "LOGW",
+        "ORIG_VALUE",
+        "ORIG_UNIT",
+        "STD_VALUE",
+        "STD_UNIT",
+        "DATE_UNCERTAIN",
+        "FASTING",
+        "IS_BASELINE",
+        "QC_FLAGS",
+        "SRC_FILE",
+        "SRC_ROW",
+        "MAPPING_VERSION",
+        "BASELINE_LOGW",
+        "BASELINE_DAY",
+        "Y"
+      ],
+      "n_animals": 54,
+      "n_obs": 425,
+      "n_studies": 2,
+      "species": {
+        "RAT": 54
+      },
+      "studyids": [
+        "SYNA-005",
+        "SYNA-012"
+      ]
+    }
+  }
+}

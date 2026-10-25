@@ -1,0 +1,596 @@
+{
+  "correctness": {
+    "history_not_updated_with_predictions": true,
+    "n_checked": 4,
+    "ok": true,
+    "rows": [
+      {
+        "USUBJID": "SYNA-010-0018",
+        "days_match": true,
+        "derived_encoder_days": [
+          7.0,
+          14.0
+        ],
+        "derived_target_days": [
+          21.0
+        ],
+        "dummy_decoder_fill_invariant": true,
+        "logw_is_ln_weight_g": true,
+        "n_targets": 1,
+        "pred_days": [
+          21.0
+        ],
+        "quantiles_ordered": true,
+        "single_horizon_matches_first_multi": true,
+        "usubjid_match": true
+      },
+      {
+        "USUBJID": "SYNA-010-0001",
+        "days_match": true,
+        "derived_encoder_days": [
+          7.0,
+          14.0
+        ],
+        "derived_target_days": [
+          21.0,
+          28.0
+        ],
+        "dummy_decoder_fill_invariant": true,
+        "logw_is_ln_weight_g": true,
+        "n_targets": 2,
+        "pred_days": [
+          21.0,
+          28.0
+        ],
+        "quantiles_ordered": true,
+        "single_horizon_matches_first_multi": true,
+        "usubjid_match": true
+      },
+      {
+        "USUBJID": "SYNA-011-0001",
+        "days_match": true,
+        "derived_encoder_days": [
+          7.0,
+          14.0
+        ],
+        "derived_target_days": [
+          21.0,
+          28.0
+        ],
+        "dummy_decoder_fill_invariant": true,
+        "logw_is_ln_weight_g": true,
+        "n_targets": 2,
+        "pred_days": [
+          21.0,
+          28.0
+        ],
+        "quantiles_ordered": true,
+        "single_horizon_matches_first_multi": true,
+        "usubjid_match": true
+      },
+      {
+        "USUBJID": "SYNA-010-0002",
+        "days_match": true,
+        "derived_encoder_days": [
+          7.0,
+          14.0
+        ],
+        "derived_target_days": [
+          21.0,
+          28.0
+        ],
+        "dummy_decoder_fill_invariant": true,
+        "logw_is_ln_weight_g": true,
+        "n_targets": 2,
+        "pred_days": [
+          21.0,
+          28.0
+        ],
+        "quantiles_ordered": true,
+        "single_horizon_matches_first_multi": true,
+        "usubjid_match": true
+      }
+    ],
+    "scored_pairs_are_example_targets": true,
+    "units": "predictions are LOGW = ln(WEIGHT_G in grams); grams = exp(q0.5)"
+  },
+  "design_run": false,
+  "example_summary": {
+    "cutoff": 14.0,
+    "exclude_counts": {},
+    "max_encoder_length": 8,
+    "max_prediction_length": 6,
+    "n_eligible": 58,
+    "n_excluded": 0,
+    "note": "Encoder = last <=max_encoder_length observed visits with DAY<=cutoff. Targets = first <=max_prediction_length observed visits with DAY>cutoff. No long-horizon chunking. No unmeasured target days."
+  },
+  "failures": [],
+  "freeze_lock": {
+    "chunk_long_horizons": false,
+    "config_hash": "cdbc0a238e3cd595",
+    "config_path": "configs/tft_early_hist_bench.yaml",
+    "data_source": "existing_official_seq_cells_read_only",
+    "design": false,
+    "encoder_window_day": 14.0,
+    "generate_seed": 71001,
+    "git_revision": "7f5931b2296d4371aba042582ee4d8d5187917a3",
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "max_encoder_length": 8,
+    "max_prediction_length": 6,
+    "pooled_cell": "runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_pooled",
+    "preserved": [
+      "runs/v3_eval",
+      "runs/v3_pilot_k0k1",
+      "runs/v3_repl",
+      "runs/v3_research",
+      "runs/v3_closeout",
+      "runs/v3_audit",
+      "runs/v3_increment",
+      "runs/v3_phaseb",
+      "runs/v3_limitations",
+      "runs/v3_objective",
+      "runs/v3_official_seq",
+      "runs/v3_seq_diag",
+      "runs/v3_eval_correct",
+      "runs/v3_cov_chronos",
+      "runs/v3_share_repl",
+      "runs/v3_share_abstain",
+      "runs/v3_share_abstain_run",
+      "runs/v3_donor_rank"
+    ],
+    "real_data": false,
+    "target_only_cell": "runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_target_only",
+    "train_seed": 82001,
+    "writes_v3_locks": false
+  },
+  "inventory": {
+    "pooled_train_studies": [
+      "SYNA-002",
+      "SYNA-003",
+      "SYNA-004",
+      "SYNA-006",
+      "SYNA-007",
+      "SYNA-009",
+      "SYNA-D001",
+      "SYNA-D002",
+      "SYNA-D003"
+    ],
+    "target_train_studies": [
+      "SYNA-002",
+      "SYNA-003",
+      "SYNA-004",
+      "SYNA-006",
+      "SYNA-007",
+      "SYNA-009"
+    ],
+    "test_studies": [
+      "SYNA-010",
+      "SYNA-011"
+    ],
+    "test_unique_days": [
+      7.0,
+      14.0,
+      21.0,
+      28.0
+    ]
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation.",
+    "Optional TFT early-history benchmark.",
+    "Synthetic generator only."
+  ],
+  "output_dir": "runs/tft_early_hist_bench",
+  "plots": [
+    "runs/tft_early_hist_bench/plots/SYNA-010-0018.png",
+    "runs/tft_early_hist_bench/plots/SYNA-010-0001.png",
+    "runs/tft_early_hist_bench/plots/SYNA-011-0001.png",
+    "runs/tft_early_hist_bench/plots/SYNA-010-0002.png",
+    "runs/tft_early_hist_bench/plots/SYNA-010-0003.png",
+    "runs/tft_early_hist_bench/plots/SYNA-010-0004.png"
+  ],
+  "real_data_accessed": false,
+  "results": {
+    "last_value": {
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.0,
+        "study_balanced": 0.0
+      },
+      "crossing_rate": 0.0,
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.0,
+        "study_balanced": 0.0
+      },
+      "label": "last observed encoder LOGW; degenerate quantiles; no covariates",
+      "mae_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.11876327761791937,
+        "study_balanced": 0.11404581646847428
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.059381638808959684,
+        "study_balanced": 0.05702290823423714
+      },
+      "n_failures": 0,
+      "n_scored": 115,
+      "relative_abs_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.10986629544312783,
+        "study_balanced": 0.10580284815517334
+      },
+      "relative_abs_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.020603678478613198,
+        "study_balanced": 0.019830647533646148
+      },
+      "representation": "last_value",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.13784783308321508,
+        "study_balanced": 0.13073640885243382
+      },
+      "seconds": 0.04373574256896973,
+      "status": "ok",
+      "uses_early_history": true
+    },
+    "tft_pooled": {
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.6956521739130435,
+        "study_balanced": 0.6773255813953488
+      },
+      "crossing_rate": 0.33043478260869563,
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.14094815876172936,
+        "study_balanced": 0.14338968351521847
+      },
+      "label": "TFT fit on target + donor train studies; SPECIES is a static categorical",
+      "mae_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.059370650796392276,
+        "study_balanced": 0.058283224968367256
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.01929716506099833,
+        "study_balanced": 0.019274275225624624
+      },
+      "n_failures": 0,
+      "n_scored": 115,
+      "relative_abs_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.05831542810640069,
+        "study_balanced": 0.05755913409508383
+      },
+      "relative_abs_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.010482101481573332,
+        "study_balanced": 0.01032328276027891
+      },
+      "representation": "tft_quantiles",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.06845828682623079,
+        "study_balanced": 0.06736132497480324
+      },
+      "seconds": 26.486442804336548,
+      "status": "ok",
+      "uses_early_history": true
+    },
+    "tft_target_only": {
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.7739130434782608,
+        "study_balanced": 0.772609819121447
+      },
+      "crossing_rate": 0.0,
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.14877302335656206,
+        "study_balanced": 0.15021366620248602
+      },
+      "label": "TFT fit on target-species train studies only; SPECIES constant",
+      "mae_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.05053967490547346,
+        "study_balanced": 0.048896899949811855
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.017783527408989724,
+        "study_balanced": 0.017430746397644324
+      },
+      "n_failures": 0,
+      "n_scored": 115,
+      "relative_abs_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.04983495114956081,
+        "study_balanced": 0.04840182970066677
+      },
+      "relative_abs_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.008916916005772156,
+        "study_balanced": 0.00864342920510596
+      },
+      "representation": "tft_quantiles",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.06378984367033318,
+        "study_balanced": 0.061025957835096456
+      },
+      "seconds": 21.127052783966064,
+      "status": "ok",
+      "uses_early_history": true
+    },
+    "transformer_target_only": {
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.6782608695652174,
+        "study_balanced": 0.6868540051679586
+      },
+      "crossing_rate": 0.0,
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.11320418099950676,
+        "study_balanced": 0.11323976955197718
+      },
+      "label": "custom transformer + Gaussian residual conditioning on the same observed encoder; not a quantile head; not TFT",
+      "mae_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.044565564028757304,
+        "study_balanced": 0.04378096065648276
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.015600674359864402,
+        "study_balanced": 0.015334088180691388
+      },
+      "n_failures": 0,
+      "n_scored": 115,
+      "relative_abs_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.043473764117015194,
+        "study_balanced": 0.04271785313068604
+      },
+      "relative_abs_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.00774540675492069,
+        "study_balanced": 0.00763175299544076
+      },
+      "representation": "gaussian",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.056778353711226255,
+        "study_balanced": 0.05565363487852855
+      },
+      "seconds": 1.5294435024261475,
+      "status": "ok",
+      "uses_early_history": true
+    }
+  },
+  "seconds_total": 52.35309958457947,
+  "training": {
+    "tft_pooled": {
+      "allow_missing_timesteps": true,
+      "encoder_window_day": 14.0,
+      "filled_target_with_zero": false,
+      "library": "pytorch_forecasting.TemporalFusionTransformer",
+      "max_encoder_length": 8,
+      "max_epochs": 8,
+      "max_prediction_length": 6,
+      "min_encoder_length": 1,
+      "n_train_obs": 1548,
+      "n_train_series": 310,
+      "n_val_series": 54,
+      "name": "tft",
+      "not_the_required_transformer": true,
+      "note": "early-history only; baseline-only pre-study and design simulation are not supported; VAR is a quantile-spread approximation",
+      "observed_rows_only": true,
+      "official_class": "pytorch_forecasting.TemporalFusionTransformer",
+      "quantiles": [
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "task": "early_history",
+      "training_scope": "pooled",
+      "training_windows": "sliding_observed_visits",
+      "validation_windows": "early_history_encoder_day"
+    },
+    "tft_pooled_windows": {
+      "intended_row_weights": {
+        "SYNA-002": 1.0764163868720538,
+        "SYNA-003": 0.4361043882504141,
+        "SYNA-004": 0.7452113447575758,
+        "SYNA-006": 1.2218780607736828,
+        "SYNA-007": 1.5589478706422848,
+        "SYNA-009": 0.8320764708336121,
+        "SYNA-D001": 0.3665634182321048,
+        "SYNA-D002": 1.5069829416208755,
+        "SYNA-D003": 1.255819118017396
+      },
+      "max_minus_min_window_share": 0.2253000923361034,
+      "n_studies": 9,
+      "n_windows": 2166,
+      "note": "Row-level study-balanced WEIGHT does not equalize window counts. Studies with more visits contribute more PF sliding windows.",
+      "obs_rows_per_study": {
+        "SYNA-002": 126,
+        "SYNA-003": 311,
+        "SYNA-004": 182,
+        "SYNA-006": 111,
+        "SYNA-007": 87,
+        "SYNA-009": 163,
+        "SYNA-D001": 370,
+        "SYNA-D002": 90,
+        "SYNA-D003": 108
+      },
+      "row_share": {
+        "SYNA-002": 0.08139534883720931,
+        "SYNA-003": 0.2009043927648579,
+        "SYNA-004": 0.11757105943152454,
+        "SYNA-006": 0.07170542635658915,
+        "SYNA-007": 0.0562015503875969,
+        "SYNA-009": 0.10529715762273902,
+        "SYNA-D001": 0.23901808785529716,
+        "SYNA-D002": 0.05813953488372093,
+        "SYNA-D003": 0.06976744186046512
+      },
+      "window_share": {
+        "SYNA-002": 0.07202216066481995,
+        "SYNA-003": 0.23176361957525393,
+        "SYNA-004": 0.10295475530932595,
+        "SYNA-006": 0.06371191135734072,
+        "SYNA-007": 0.04986149584487535,
+        "SYNA-009": 0.09233610341643583,
+        "SYNA-D001": 0.27516158818097874,
+        "SYNA-D002": 0.05124653739612189,
+        "SYNA-D003": 0.060941828254847646
+      },
+      "windows_per_study": {
+        "SYNA-002": 156,
+        "SYNA-003": 502,
+        "SYNA-004": 223,
+        "SYNA-006": 138,
+        "SYNA-007": 108,
+        "SYNA-009": 200,
+        "SYNA-D001": 596,
+        "SYNA-D002": 111,
+        "SYNA-D003": 132
+      }
+    },
+    "tft_target_only": {
+      "allow_missing_timesteps": true,
+      "encoder_window_day": 14.0,
+      "filled_target_with_zero": false,
+      "library": "pytorch_forecasting.TemporalFusionTransformer",
+      "max_encoder_length": 8,
+      "max_epochs": 8,
+      "max_prediction_length": 6,
+      "min_encoder_length": 1,
+      "n_train_obs": 980,
+      "n_train_series": 211,
+      "n_val_series": 54,
+      "name": "tft",
+      "not_the_required_transformer": true,
+      "note": "early-history only; baseline-only pre-study and design simulation are not supported; VAR is a quantile-spread approximation",
+      "observed_rows_only": true,
+      "official_class": "pytorch_forecasting.TemporalFusionTransformer",
+      "quantiles": [
+        0.1,
+        0.25,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "task": "early_history",
+      "training_scope": "target_only",
+      "training_windows": "sliding_observed_visits",
+      "validation_windows": "early_history_encoder_day"
+    },
+    "tft_target_only_windows": {
+      "intended_row_weights": {
+        "SYNA-002": 1.1001363305596217,
+        "SYNA-003": 0.4457143975900719,
+        "SYNA-004": 0.7616328442335843,
+        "SYNA-006": 1.2488034022568681,
+        "SYNA-007": 1.5933008925346246,
+        "SYNA-009": 0.8504121328252292
+      },
+      "max_minus_min_window_share": 0.2969103240391861,
+      "n_studies": 6,
+      "n_windows": 1327,
+      "note": "Row-level study-balanced WEIGHT does not equalize window counts. Studies with more visits contribute more PF sliding windows.",
+      "obs_rows_per_study": {
+        "SYNA-002": 126,
+        "SYNA-003": 311,
+        "SYNA-004": 182,
+        "SYNA-006": 111,
+        "SYNA-007": 87,
+        "SYNA-009": 163
+      },
+      "row_share": {
+        "SYNA-002": 0.12857142857142856,
+        "SYNA-003": 0.3173469387755102,
+        "SYNA-004": 0.18571428571428572,
+        "SYNA-006": 0.11326530612244898,
+        "SYNA-007": 0.08877551020408163,
+        "SYNA-009": 0.1663265306122449
+      },
+      "window_share": {
+        "SYNA-002": 0.1175584024114544,
+        "SYNA-003": 0.37829691032403917,
+        "SYNA-004": 0.1680482290881688,
+        "SYNA-006": 0.1039939713639789,
+        "SYNA-007": 0.08138658628485305,
+        "SYNA-009": 0.15071590052750566
+      },
+      "windows_per_study": {
+        "SYNA-002": 156,
+        "SYNA-003": 502,
+        "SYNA-004": 223,
+        "SYNA-006": 138,
+        "SYNA-007": 108,
+        "SYNA-009": 200
+      }
+    }
+  },
+  "versions": {
+    "chronos2_class": "chronos.chronos2.pipeline.Chronos2Pipeline",
+    "packages": {
+      "accelerate": "1.15.0",
+      "chronos": "2.3.2",
+      "lightning": "2.6.6",
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "peft": "0.21.2",
+      "pytorch_forecasting": "1.8.0",
+      "torch": "2.14.1+cu130",
+      "transformers": "5.20.2"
+    },
+    "python": "3.12.3",
+    "tft_class": "pytorch_forecasting.models.temporal_fusion_transformer._tft.TemporalFusionTransformer",
+    "torch_cuda": false,
+    "torch_device": "cpu"
+  }
+}

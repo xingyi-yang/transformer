@@ -1,0 +1,9 @@
+{
+  "cutoff": 14.0,
+  "exclude_counts": {},
+  "max_encoder_length": 8,
+  "max_prediction_length": 6,
+  "n_eligible": 58,
+  "n_excluded": 0,
+  "note": "Encoder = last <=max_encoder_length observed visits with DAY<=cutoff. Targets = first <=max_prediction_length observed visits with DAY>cutoff. No long-horizon chunking. No unmeasured target days."
+}
