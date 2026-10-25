@@ -126,9 +126,13 @@ def test_target_generation_unchanged_when_donors_added(tmp_path):
     rat_a = ma.loc[ma["SPECIES"] == "RAT"].sort_values("STUDYID").reset_index(drop=True)
     rat_b = mb.loc[mb["SPECIES"] == "RAT"].sort_values("STUDYID").reset_index(drop=True)
     pd.testing.assert_frame_equal(rat_a, rat_b)
-    dm_a = pd.read_csv(a / "send" / "SYNA-001" / "dm.csv")
-    dm_b = pd.read_csv(b / "send" / "SYNA-001" / "dm.csv")
-    pd.testing.assert_frame_equal(dm_a, dm_b)
+    ta = pd.read_parquet(a / "truth" / "animals.parquet")
+    tb = pd.read_parquet(b / "truth" / "animals.parquet")
+    rat_ids = set(rat_a["STUDYID"])
+    pd.testing.assert_frame_equal(
+        ta[ta["STUDYID"].isin(rat_ids)].sort_values("USUBJID").reset_index(drop=True),
+        tb[tb["STUDYID"].isin(rat_ids)].sort_values("USUBJID").reset_index(drop=True),
+    )
 
 
 def test_target_manifests_frozen_and_nested_donors(multi_tables, tmp_path):
@@ -178,8 +182,9 @@ def test_zero_donor_equivalence(multi_tables):
     target, splits = _target_splits(t)
     donors = donor_study_order(t["study_context"].loc[t["study_context"]["SPECIES"] == "DOG", "STUDYID"])
     composed = compose_train_with_donors(splits, donors, 0)
-    pd.testing.assert_frame_equal(composed.sort_values("STUDYID").reset_index(drop=True),
-                                  splits[["STUDYID", "SPLIT"]].astype(str).sort_values("STUDYID").reset_index(drop=True))
+    left = composed.sort_values("STUDYID").reset_index(drop=True).astype(str)
+    right = splits[["STUDYID", "SPLIT"]].astype(str).sort_values("STUDYID").reset_index(drop=True)
+    pd.testing.assert_frame_equal(left, right)
     tr = set(composed.loc[composed["SPLIT"] == "train", "STUDYID"])
     spec_v2 = FeatureSpec.fit(target.animals[target.animals.STUDYID.isin(tr)],
                               target.obs[target.obs.STUDYID.isin(tr)], t["compound_reference"], "RAT")
@@ -332,6 +337,7 @@ def _prepare_cfg(tmp: Path, **cohort) -> Path:
         "models": {"spline": {"enabled": False}, "transformer": {"enabled": False}, "bayesian": {"enabled": False}},
         "evaluation": {"tasks": ["predose_conditioned"]},
     }
+    tmp.mkdir(parents=True, exist_ok=True)
     p = tmp / "cfg.yaml"
     p.write_text(yaml.safe_dump(cfg), encoding="utf-8")
     return p

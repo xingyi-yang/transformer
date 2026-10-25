@@ -43,8 +43,10 @@ Real-data qualification stage: **1** (implemented and mock-tested only).
 
 ## 2. Executed and tested (exact results)
 
-`pytest -q tests`: **106 passed** in 43 s. This includes the mock-Snowflake equivalence, messy-fixture, leakage, GLS
-null-calibration (slow), integration CLI smoke and Bayesian smoke tests. `ruff check src tests`: clean.
+`pytest -q tests`: **141 passed**, 2 skipped (this environment). This includes the mock-Snowflake
+equivalence, messy-fixture, leakage, v3 stages 1–2 freeze/donor/species/transfer tests,
+integration CLI smoke, and skipped Bayesian/TFT extras. `ruff check src tests`: clean.
+The v3 pilot training wave was **not** launched.
 
 **Smoke run** (`configs/smoke.yaml`, seed 20261017):
 - **Data**:
