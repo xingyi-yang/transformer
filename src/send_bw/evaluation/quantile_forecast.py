@@ -97,7 +97,7 @@ def align_prediction_table(obs: pd.DataFrame, pred: pd.DataFrame,
 
 
 def score_quantile_table(obs: pd.DataFrame, pred: pd.DataFrame, *, quantiles: list[float],
-                         representation: str) -> dict[str, Any]:
+                         representation: str, chronos_label: str | None = None) -> dict[str, Any]:
     """Score aligned USUBJID/DAY rows. ``pred`` has columns q{level} or MEAN/VAR.
 
     ``mae_log`` is study-balanced mean |point − LOGW|.
@@ -169,8 +169,9 @@ def score_quantile_table(obs: pd.DataFrame, pred: pd.DataFrame, *, quantiles: li
         "task": "early_history",
     }
     if representation.startswith("chronos"):
-        out["chronos_label"] = "history_only_univariate"
-        out["covariates_used"] = False
+        label = chronos_label or "history_only_univariate"
+        out["chronos_label"] = label
+        out["covariates_used"] = "covariate" in label
     out["per_study"] = _breakdown(mm, qcols, key="STUDYID")
     out["per_horizon_day"] = _breakdown(mm, qcols, key="DAY")
     out["per_horizon_step"] = _breakdown(mm, qcols, key="_HORIZON_STEP")

@@ -90,7 +90,8 @@ def _score_gaussian(model, data, window_day: float,
 
 
 def _score_quantiles(model, data, window_day: float, representation: str,
-                     pred_path: Path | None = None) -> dict[str, Any]:
+                     pred_path: Path | None = None,
+                     chronos_label: str | None = None) -> dict[str, Any]:
     hist, fut = split_encoder_future(data, window_day)
     recs = []
     skipped = 0
@@ -113,7 +114,8 @@ def _score_quantiles(model, data, window_day: float, representation: str,
     if "STUDYID" not in pred.columns:
         pred = pred.merge(fut[["USUBJID", "STUDYID", "DAY"]], on=["USUBJID", "DAY"], how="left")
     _write_pred_table(pred, pred_path)
-    out = score_quantile_table(fut, pred, quantiles=QUANTILES, representation=representation)
+    out = score_quantile_table(fut, pred, quantiles=QUANTILES, representation=representation,
+                               chronos_label=chronos_label)
     out["n_skipped_no_encoder"] = skipped
     out["encoder_fabricated"] = False
     return out
