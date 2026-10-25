@@ -11,7 +11,16 @@ import pytest
 import yaml
 
 from send_bw.models.optional_adapters import CATALOG, check_optional, optional_status, verify_tft_api
-from send_bw.models.tft import TFTEarlyHistoryModel, build_observed_panel, quantiles_to_mean_var
+from send_bw.models.tft import (
+    STATIC_CATS,
+    TFTEarlyHistoryModel,
+    build_observed_panel,
+    chunk_forecast_times,
+    clip_encoder_history,
+    early_history_window_mask,
+    quantiles_to_mean_var,
+    validate_forecast_times,
+)
 from send_bw.pipeline import Run, model_class
 
 PF_INSTALLED = importlib.util.find_spec("pytorch_forecasting") is not None
@@ -130,9 +139,71 @@ def test_observed_panel_does_not_fill_or_zero_target(trained):
     assert len(panel) == len(data.obs)
     assert panel["LOGW"].notna().all()
     assert not (panel["LOGW"] == 0).all()
+    assert "SPECIES" in STATIC_CATS
+    if "SPECIES" in data.animals.columns:
+        assert "SPECIES" in panel.columns
+        assert panel["SPECIES"].isin(set(data.animals["SPECIES"].astype(str))).all()
     for _, g in panel.groupby("USUBJID"):
         assert (g["time_idx"].to_numpy() == np.arange(len(g))).all()
         assert g["DAY"].is_monotonic_increasing
+
+
+def test_forecast_times_must_be_sorted_unique_and_after_history():
+    hist = pd.DataFrame({"USUBJID": ["a", "a"], "DAY": [7.0, 14.0], "LOGW": [5.0, 5.1]})
+    times = validate_forecast_times(np.array([21.0, 28.0]), hist)
+    assert list(times) == [21.0, 28.0]
+    with pytest.raises(ValueError, match="unique"):
+        validate_forecast_times(np.array([21.0, 21.0]), hist)
+    with pytest.raises(ValueError, match="strictly increasing"):
+        validate_forecast_times(np.array([28.0, 21.0]), hist)
+    with pytest.raises(ValueError, match="later than the supplied history"):
+        validate_forecast_times(np.array([14.0, 21.0]), hist)
+    with pytest.raises(ValueError, match="empty"):
+        validate_forecast_times(np.array([]), hist)
+
+
+def test_clip_encoder_history_stops_at_window():
+    hist = pd.DataFrame({"USUBJID": ["a"] * 4, "DAY": [7.0, 14.0, 21.0, 28.0],
+                         "LOGW": [5.0, 5.1, 5.2, 5.3]})
+    clipped = clip_encoder_history(hist, 14.0)
+    assert list(clipped["DAY"]) == [7.0, 14.0]
+    assert list(clipped["LOGW"]) == [5.0, 5.1]
+
+
+def test_chunk_forecast_times_keeps_trained_horizon():
+    chunks = chunk_forecast_times(np.array([17.0, 21.0, 24.0, 28.0, 35.0, 42.0, 43.0]), 6)
+    assert len(chunks) == 2
+    assert list(chunks[0]) == [17.0, 21.0, 24.0, 28.0, 35.0, 42.0]
+    assert list(chunks[1]) == [43.0]
+
+
+def test_early_history_window_mask_keeps_cutoff_windows():
+    panel = pd.DataFrame({
+        "USUBJID": ["a"] * 4,
+        "time_idx": [0, 1, 2, 3],
+        "DAY": [7.0, 14.0, 21.0, 28.0],
+    })
+    decoded = pd.DataFrame({
+        "USUBJID": ["a", "a", "a"],
+        "time_idx_first_prediction": [1, 2, 3],
+    })
+    keep = early_history_window_mask(decoded, panel, 14.0)
+    # encoder ends at DAY 7 / 14 / 21; only the DAY<=14 encoder with decoder DAY>14 is kept
+    assert list(keep) == [False, True, False]
+
+
+def test_unseen_species_are_refused_not_mapped():
+    from send_bw.data.features import FeatureSpec
+
+    m = TFTEarlyHistoryModel()
+    m.spec = FeatureSpec(
+        species="RAT", strains=["SD"], routes=["ORAL GAVAGE"], sexes=["M"],
+        zb_mean={"M": 5.0}, max_dose=0.0, max_day=28.0, intervals=[1.0],
+        compound_ids=["C1"], descriptor_ranges={"D1": [0.0, 0.0], "D2": [0.0, 0.0], "D3": [0.0, 0.0]},
+        species_levels=["RAT"],
+    )
+    with pytest.raises(ValueError, match="species .*DOG.*not supported"):
+        m._refuse_unseen_species(pd.DataFrame({"USUBJID": ["d1"], "SPECIES": ["DOG"]}))
 
 
 def test_quantiles_to_mean_var_uses_median_and_spread():
@@ -153,6 +224,7 @@ def test_tft_fit_and_early_history_when_extra_present(trained, tmp_path):
                   "patience": 1, "max_encoder_length": 4, "max_prediction_length": 3, "seed": 0})
     assert hist["name"] == "tft"
     assert hist["filled_target_with_zero"] is False
+    assert hist["validation_windows"] == "early_history_encoder_day"
     m.save(tmp_path / "tft")
     loaded = json.loads((tmp_path / "tft" / "model.json").read_text(encoding="utf-8"))
     assert loaded["name"] == "tft"

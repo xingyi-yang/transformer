@@ -18,7 +18,12 @@ enabled so an irregular calendar ``DAY`` is acceptable, but this adapter never
 inserts unobserved target rows and never fills ``LOGW`` with 0. The PF
 ``time_idx`` is a dense per-animal visit rank so missing calendar days do not
 become fabricated encoder history. Decoder target placeholders are not
-observations.
+observations. Lightning validation keeps only windows whose last encoder
+``DAY`` is at the configured cutoff and whose decoder starts after it.
+Training still uses sliding observed windows (DAY/TAU are known) so the
+model can learn early-to-late dynamics; those windows are not the scored
+task. Predict re-clips history to the cutoff, refuses unseen species, and
+chunks horizons to the trained ``max_prediction_length``.
 
 Variance is a quantile-spread approximation from QuantileLoss, not a learned
 Gaussian covariance. Installing the extra is required; the default environment
@@ -44,7 +49,7 @@ from send_bw.models.optional_adapters import BASELINE_ONLY_REASON, DESIGN_REASON
 NAME = "tft"
 TARGET = "LOGW"
 GROUP_IDS = ["USUBJID"]
-STATIC_CATS = ["SEX", "STRAIN", "ROUTE", "COMPOUND_ID", "CTRL"]
+STATIC_CATS = ["SEX", "STRAIN", "SPECIES", "ROUTE", "COMPOUND_ID", "CTRL"]
 STATIC_REALS = ["ZB_C", "LD", "INV_INTERVAL", "START", "END", "D1", "D2", "D3"]
 KNOWN_REALS = ["DAY", "TAU", "EXPO", "OFF", "LCUM"]
 QUANTILES = [0.1, 0.25, 0.5, 0.75, 0.9]
@@ -129,6 +134,53 @@ def _ctrl_label(is_control: pd.Series) -> pd.Series:
     return pd.Series(np.where(is_control.astype(bool), "C", "A"), index=is_control.index)
 
 
+def validate_forecast_times(times: np.ndarray, history: pd.DataFrame) -> np.ndarray:
+    """Require finite, unique, strictly increasing times later than supplied history."""
+    times = np.asarray(times, float).reshape(-1)
+    if times.size == 0:
+        raise ValueError("prediction times are empty")
+    if not np.isfinite(times).all():
+        raise ValueError("prediction times must be finite")
+    if times.size != len(np.unique(times)):
+        raise ValueError("prediction times must be unique")
+    if times.size > 1 and np.any(np.diff(times) <= 0):
+        raise ValueError("prediction times must be strictly increasing")
+    if len(history) and float(times.min()) <= float(np.asarray(history["DAY"], float).max()):
+        raise ValueError("prediction times must be later than the supplied history")
+    return times
+
+
+def clip_encoder_history(history: pd.DataFrame, window_day: float) -> pd.DataFrame:
+    """Keep observed encoder rows with DAY <= window. Does not invent visits."""
+    if "DAY" not in history.columns:
+        raise ValueError("early-history encoder requires DAY")
+    return history.loc[history["DAY"].to_numpy(float) <= float(window_day)].copy()
+
+
+def chunk_forecast_times(times: np.ndarray, max_len: int) -> list[np.ndarray]:
+    """Split a horizon into trained-length decoder chunks. Encoder is not rolled."""
+    times = np.asarray(times, float).reshape(-1)
+    max_len = max(1, int(max_len))
+    return [times[i:i + max_len] for i in range(0, len(times), max_len)]
+
+
+def early_history_window_mask(decoded: pd.DataFrame, panel: pd.DataFrame,
+                              window_day: float) -> np.ndarray:
+    """Keep PF windows whose last encoder DAY is at the cutoff and decoder starts after it."""
+    key = panel[["USUBJID", "time_idx", "DAY"]].drop_duplicates()
+    key = key.assign(USUBJID=key["USUBJID"].astype(str), time_idx=key["time_idx"].astype(int))
+    d = decoded[["USUBJID", "time_idx_first_prediction"]].copy()
+    d["USUBJID"] = d["USUBJID"].astype(str)
+    d["enc_idx"] = d["time_idx_first_prediction"].astype(int) - 1
+    d["dec_idx"] = d["time_idx_first_prediction"].astype(int)
+    enc = d.merge(key, left_on=["USUBJID", "enc_idx"], right_on=["USUBJID", "time_idx"],
+                  how="left", sort=False)
+    dec = d.merge(key, left_on=["USUBJID", "dec_idx"], right_on=["USUBJID", "time_idx"],
+                  how="left", sort=False)
+    return ((enc["DAY"].to_numpy(float) <= float(window_day))
+            & (dec["DAY"].to_numpy(float) > float(window_day)))
+
+
 def build_observed_panel(data: ModelData) -> pd.DataFrame:
     """One row per **observed** post-baseline weight; no filled calendar days."""
     if data.obs.empty:
@@ -137,7 +189,10 @@ def build_observed_panel(data: ModelData) -> pd.DataFrame:
     af = data.spec.animal_features(animals, data.compound_ref)
     af = af.reset_index(drop=True)
     af["USUBJID"] = animals["USUBJID"].to_numpy()
-    static = animals[["USUBJID", "STUDYID", "SEX", "STRAIN", "ROUTE", "COMPOUND_ID", "IS_CONTROL"]].copy()
+    static_cols = ["USUBJID", "STUDYID", "SEX", "STRAIN", "ROUTE", "COMPOUND_ID", "IS_CONTROL"]
+    if "SPECIES" in animals.columns:
+        static_cols.append("SPECIES")
+    static = animals[static_cols].copy()
     static["CTRL"] = _ctrl_label(static["IS_CONTROL"])
     static = static.merge(af[["USUBJID", *STATIC_REALS]], on="USUBJID", how="left", validate="one_to_one")
     obs = data.obs[["USUBJID", "STUDYID", "DAY", "LOGW"]].copy()
@@ -231,6 +286,14 @@ class TFTEarlyHistoryModel(ResponseModel):
         )
         training = TimeSeriesDataSet(train_panel, **ds_kwargs)
         validation_ds = _call_dataset_factory(TimeSeriesDataSet.from_dataset, training, val_panel, predict=False)
+        try:
+            validation_ds = validation_ds.filter(
+                lambda decoded, panel=val_panel, window=self.encoder_window_day:
+                early_history_window_mask(decoded, panel, window))
+        except ValueError as e:
+            raise RuntimeError(
+                "TFT validation has no windows whose encoder ends at DAY <= "
+                f"{self.encoder_window_day} with later observed targets") from e
         self.dataset_parameters = training.get_parameters()
         train_dl = training.to_dataloader(
             train=True, batch_size=int(config.get("batch_size", 64)), num_workers=0)
@@ -286,6 +349,8 @@ class TFTEarlyHistoryModel(ResponseModel):
             "allow_missing_timesteps": True,
             "observed_rows_only": True,
             "filled_target_with_zero": False,
+            "validation_windows": "early_history_encoder_day",
+            "training_windows": "sliding_observed_visits",
             "max_epochs": int(config.get("max_epochs", 20)),
             "note": ("early-history only; baseline-only pre-study and design simulation are not supported; "
                      "VAR is a quantile-spread approximation"),
@@ -301,16 +366,49 @@ class TFTEarlyHistoryModel(ResponseModel):
 
     def predict_marginals(self, context: pd.DataFrame, times: np.ndarray,
                           history: pd.DataFrame | None = None) -> pd.DataFrame:
+        return self._run_predict(context, times, history, as_marginals=True)
+
+    def predict_quantiles(self, context: pd.DataFrame, times: np.ndarray,
+                          history: pd.DataFrame | None = None) -> pd.DataFrame:
+        """Official TFT quantile forecasts. Not a trajectory simulator."""
+        return self._run_predict(context, times, history, as_marginals=False)
+
+    def _run_predict(self, context: pd.DataFrame, times: np.ndarray,
+                     history: pd.DataFrame | None, *, as_marginals: bool) -> pd.DataFrame:
         if history is None or not len(history):
             raise ValueError(BASELINE_ONLY_REASON)
         if self.net is None or self.dataset_parameters is None or self.spec is None:
             raise RuntimeError("TFT adapter is not fitted")
-        TimeSeriesDataSet, _, _ = _pf()
-        times = np.asarray(times, float)
-        ctx = context.reset_index(drop=True)
-        hist = history.copy()
-        if "LOGW" not in hist.columns:
+        if "LOGW" not in history.columns:
             raise ValueError("early-history encoder requires LOGW")
+        hist = clip_encoder_history(history, self.encoder_window_day)
+        if hist.empty:
+            raise ValueError(BASELINE_ONLY_REASON)
+        times = validate_forecast_times(times, hist)
+        self._refuse_unseen_species(context)
+        parts = [self._predict_chunk(context, chunk, hist, as_marginals=as_marginals)
+                 for chunk in chunk_forecast_times(times, self.max_prediction_length)]
+        parts = [p for p in parts if p is not None and len(p)]
+        if not parts:
+            cols = ["USUBJID", "DAY"] + [f"q{q}" for q in self.quantiles]
+            if as_marginals:
+                cols += ["MEAN", "VAR"]
+            return pd.DataFrame(columns=cols)
+        return pd.concat(parts, ignore_index=True)
+
+    def _refuse_unseen_species(self, context: pd.DataFrame) -> None:
+        if self.spec is None or "SPECIES" not in context.columns:
+            return
+        allowed = {str(s).upper() for s in self.spec.allowed_species()}
+        seen = {str(s).upper() for s in context["SPECIES"].dropna()}
+        bad = seen - allowed
+        if bad:
+            raise ValueError(f"species {sorted(bad)} not supported (trained on {sorted(allowed)})")
+
+    def _predict_chunk(self, context: pd.DataFrame, times: np.ndarray, hist: pd.DataFrame,
+                       *, as_marginals: bool) -> pd.DataFrame:
+        TimeSeriesDataSet, _, _ = _pf()
+        ctx = context.reset_index(drop=True)
         rows = []
         for _, animal in ctx.iterrows():
             u = animal["USUBJID"]
@@ -323,54 +421,19 @@ class TFTEarlyHistoryModel(ResponseModel):
             both["time_idx"] = np.arange(len(both), dtype=int)
             rows.append(both)
         if not rows:
-            return pd.DataFrame(columns=["USUBJID", "DAY", "MEAN", "VAR"])
-        panel = pd.concat(rows, ignore_index=True)
-        n_dec = int(len(times))
-        enc_cap = max(self.max_encoder_length, int(panel.groupby("USUBJID").size().max() - n_dec))
-        pred_ds = _call_dataset_factory(
-            TimeSeriesDataSet.from_parameters, self.dataset_parameters, panel, predict=True,
-            min_prediction_length=n_dec, max_prediction_length=n_dec,
-            min_encoder_length=self.min_encoder_length, max_encoder_length=enc_cap)
-        raw = self.net.predict(pred_ds, mode="quantiles", return_index=True)
-        q, index = _unpack_predict(raw, pred_ds)
-        return self._align_quantiles(q, index, panel, times, as_marginals=True)
-
-    def predict_quantiles(self, context: pd.DataFrame, times: np.ndarray,
-                          history: pd.DataFrame | None = None) -> pd.DataFrame:
-        """Official TFT quantile forecasts. Not a trajectory simulator."""
-        if history is None or not len(history):
-            raise ValueError(BASELINE_ONLY_REASON)
-        if self.net is None or self.dataset_parameters is None or self.spec is None:
-            raise RuntimeError("TFT adapter is not fitted")
-        TimeSeriesDataSet, _, _ = _pf()
-        times = np.asarray(times, float)
-        ctx = context.reset_index(drop=True)
-        hist = history.copy()
-        if "LOGW" not in hist.columns:
-            raise ValueError("early-history encoder requires LOGW")
-        rows = []
-        for _, animal in ctx.iterrows():
-            u = animal["USUBJID"]
-            hh = hist.loc[hist["USUBJID"] == u].sort_values("DAY")
-            if hh.empty:
-                continue
-            enc = self._animal_rows(animal, hh["DAY"].to_numpy(float), hh["LOGW"].to_numpy(float))
-            dec = self._animal_rows(animal, times, np.repeat(hh["LOGW"].to_numpy(float)[-1], len(times)))
-            both = pd.concat([enc, dec], ignore_index=True)
-            both["time_idx"] = np.arange(len(both), dtype=int)
-            rows.append(both)
-        if not rows:
             return pd.DataFrame()
         panel = pd.concat(rows, ignore_index=True)
         n_dec = int(len(times))
-        enc_cap = max(self.max_encoder_length, int(panel.groupby("USUBJID").size().max() - n_dec))
+        # Keep the trained encoder cap. PF predict_mode uses the last max_encoder_length
+        # observed visits; expanding the cap would be an untrained sequence length.
         pred_ds = _call_dataset_factory(
             TimeSeriesDataSet.from_parameters, self.dataset_parameters, panel, predict=True,
             min_prediction_length=n_dec, max_prediction_length=n_dec,
-            min_encoder_length=self.min_encoder_length, max_encoder_length=enc_cap)
+            min_encoder_length=self.min_encoder_length,
+            max_encoder_length=self.max_encoder_length)
         raw = self.net.predict(pred_ds, mode="quantiles", return_index=True)
         q, index = _unpack_predict(raw, pred_ds)
-        return self._align_quantiles(q, index, panel, times, as_marginals=False)
+        return self._align_quantiles(q, index, panel, times, as_marginals=as_marginals)
 
     def _align_quantiles(self, q: np.ndarray, index: pd.DataFrame | None, panel: pd.DataFrame,
                          times: np.ndarray, *, as_marginals: bool) -> pd.DataFrame:
@@ -425,7 +488,12 @@ class TFTEarlyHistoryModel(ResponseModel):
             "WEIGHT": np.ones(n, float),
         })
         for c in STATIC_CATS:
-            out[c] = one[c].astype(str).to_numpy()
+            if c in one.columns:
+                out[c] = one[c].astype(str).to_numpy()
+            elif c == "SPECIES" and self.spec is not None:
+                out[c] = np.full(n, str(self.spec.species), dtype=object)
+            else:
+                out[c] = np.full(n, "UNK", dtype=object)
         for c in STATIC_REALS:
             out[c] = af[c].to_numpy(float)
         for c in KNOWN_REALS:
