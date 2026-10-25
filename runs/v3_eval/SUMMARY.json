@@ -1,0 +1,1519 @@
+{
+  "bank_manifest": {
+    "both": {
+      "donor_deviations": {
+        "baseline_shift": 0.2,
+        "effect_scale": 2.0,
+        "gmax_scale": 1.6
+      },
+      "donor_scenario": "both",
+      "seed": 20261025,
+      "synthetic_dir": "runs/v3_eval/banks/both/synthetic"
+    },
+    "matched": {
+      "donor_deviations": {
+        "baseline_shift": 0.0,
+        "effect_scale": 1.0,
+        "gmax_scale": 1.0
+      },
+      "donor_scenario": "matched",
+      "seed": 20261025,
+      "synthetic_dir": "runs/v3_eval/banks/matched/synthetic"
+    }
+  },
+  "cells": [
+    {
+      "bank": "both",
+      "bayesian_gate": {
+        "status": "not_run",
+        "reliable": false,
+        "counted_as_successful_benchmark": false,
+        "rhat_max": null,
+        "ess_bulk_min": null,
+        "ess_tail_min": null,
+        "divergences": null,
+        "reason": "bayesian extra not installed",
+        "components": {
+          "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer.",
+          "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark."
+        }
+      },
+      "budget": "primary",
+      "covariance": {
+        "boundary_flag": false,
+        "components": {
+          "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+          "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+        },
+        "converged": true,
+        "covariance_parameters_bootstrapped": false,
+        "layer": "HierarchicalCovariance",
+        "n_animals": 274,
+        "n_obs": 1899,
+        "n_params_at_bound": 0,
+        "n_studies": 7,
+        "nll": -4027.4133209086917,
+        "note": "A parameter at bound is an incompletely estimated covariance component. Do not treat predictive intervals as complete parameter-uncertainty intervals.",
+        "params_at_bound": []
+      },
+      "dir": "runs/v3_eval/cells/both_context_specific_k0_var_primary",
+      "fixed_schema": false,
+      "k": 0,
+      "metrics_keys": [
+        "spline|test_compound_holdout|pre_study",
+        "spline|test_compound_holdout|sparse_history",
+        "spline|test|pre_study",
+        "spline|test|sparse_history",
+        "transformer|test_compound_holdout|pre_study",
+        "transformer|test_compound_holdout|sparse_history",
+        "transformer|test|pre_study",
+        "transformer|test|sparse_history"
+      ],
+      "models": [
+        "spline",
+        "transformer",
+        "bayesian"
+      ],
+      "selective_sharing": null,
+      "sharing": "context_specific",
+      "sparse": true,
+      "target_manifest": {
+        "all_target": "76d8ec6b17dae51a",
+        "test": "840a846f9dc59781",
+        "train": "340dc8e79c1238b4",
+        "validation": "4f8d1a95c3c18638"
+      },
+      "warnings": [
+        "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+        "29 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+      ]
+    },
+    {
+      "bank": "both",
+      "bayesian_gate": {
+        "status": "not_run",
+        "reliable": false,
+        "counted_as_successful_benchmark": false,
+        "rhat_max": null,
+        "ess_bulk_min": null,
+        "ess_tail_min": null,
+        "divergences": null,
+        "reason": "bayesian extra not installed",
+        "components": {
+          "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer.",
+          "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark."
+        }
+      },
+      "budget": "primary",
+      "covariance": {
+        "boundary_flag": false,
+        "components": {
+          "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+          "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+        },
+        "converged": true,
+        "covariance_parameters_bootstrapped": false,
+        "layer": "HierarchicalCovariance",
+        "n_animals": 301,
+        "n_obs": 2108,
+        "n_params_at_bound": 0,
+        "n_studies": 8,
+        "nll": -4198.620806879624,
+        "note": "A parameter at bound is an incompletely estimated covariance component. Do not treat predictive intervals as complete parameter-uncertainty intervals.",
+        "params_at_bound": []
+      },
+      "dir": "runs/v3_eval/cells/both_pooled_k1_var_primary",
+      "fixed_schema": false,
+      "k": 1,
+      "metrics_keys": [
+        "spline|test_compound_holdout|pre_study",
+        "spline|test_compound_holdout|sparse_history",
+        "spline|test|pre_study",
+        "spline|test|sparse_history",
+        "transformer|test_compound_holdout|pre_study",
+        "transformer|test_compound_holdout|sparse_history",
+        "transformer|test|pre_study",
+        "transformer|test|sparse_history"
+      ],
+      "models": [
+        "spline",
+        "transformer",
+        "bayesian"
+      ],
+      "selective_sharing": null,
+      "sharing": "pooled",
+      "sparse": true,
+      "target_manifest": {
+        "all_target": "76d8ec6b17dae51a",
+        "test": "840a846f9dc59781",
+        "train": "340dc8e79c1238b4",
+        "validation": "4f8d1a95c3c18638"
+      },
+      "warnings": [
+        "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+        "29 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+      ]
+    },
+    {
+      "bank": "both",
+      "bayesian_gate": {
+        "status": "not_run",
+        "reliable": false,
+        "counted_as_successful_benchmark": false,
+        "rhat_max": null,
+        "ess_bulk_min": null,
+        "ess_tail_min": null,
+        "divergences": null,
+        "reason": "bayesian extra not installed",
+        "components": {
+          "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer.",
+          "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark."
+        }
+      },
+      "budget": "primary",
+      "covariance": {
+        "boundary_flag": false,
+        "components": {
+          "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+          "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+        },
+        "converged": true,
+        "covariance_parameters_bootstrapped": false,
+        "layer": "HierarchicalCovariance",
+        "n_animals": 274,
+        "n_obs": 1899,
+        "n_params_at_bound": 0,
+        "n_studies": 7,
+        "nll": -3838.082687245001,
+        "note": "A parameter at bound is an incompletely estimated covariance component. Do not treat predictive intervals as complete parameter-uncertainty intervals.",
+        "params_at_bound": []
+      },
+      "dir": "runs/v3_eval/cells/both_selective_k1_var_primary",
+      "fixed_schema": false,
+      "k": 1,
+      "metrics_keys": [
+        "spline|test_compound_holdout|pre_study",
+        "spline|test_compound_holdout|sparse_history",
+        "spline|test|pre_study",
+        "spline|test|sparse_history",
+        "transformer|test_compound_holdout|pre_study",
+        "transformer|test_compound_holdout|sparse_history",
+        "transformer|test|pre_study",
+        "transformer|test|sparse_history"
+      ],
+      "models": [
+        "spline",
+        "transformer",
+        "bayesian"
+      ],
+      "selective_sharing": {
+        "model": "spline",
+        "note": "Shared: compound descriptors and planned-dose/regimen query features. Species-specific: growth/baseline token groups and residual scale. Not a Bayesian species random-effect variant.",
+        "residual": "target_species_only",
+        "shared": [
+          "compound",
+          "regimen"
+        ],
+        "species_specific": [
+          "bio",
+          "baseline",
+          "species"
+        ],
+        "training": "joint ridge mean with SPECIES_* time-basis interactions; HierarchicalCovariance fit on target-species OOF residuals only",
+        "variant": "v1"
+      },
+      "sharing": "selective",
+      "sparse": true,
+      "target_manifest": {
+        "all_target": "76d8ec6b17dae51a",
+        "test": "840a846f9dc59781",
+        "train": "340dc8e79c1238b4",
+        "validation": "4f8d1a95c3c18638"
+      },
+      "warnings": [
+        "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+        "29 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+      ]
+    },
+    {
+      "bank": "both",
+      "bayesian_gate": null,
+      "budget": "primary",
+      "covariance": {
+        "boundary_flag": false,
+        "components": {
+          "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+          "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+        },
+        "converged": true,
+        "covariance_parameters_bootstrapped": false,
+        "layer": "HierarchicalCovariance",
+        "n_animals": 274,
+        "n_obs": 1899,
+        "n_params_at_bound": 0,
+        "n_studies": 7,
+        "nll": -4068.600326092679,
+        "note": "A parameter at bound is an incompletely estimated covariance component. Do not treat predictive intervals as complete parameter-uncertainty intervals.",
+        "params_at_bound": []
+      },
+      "dir": "runs/v3_eval/cells/both_context_specific_k0_fix_primary",
+      "fixed_schema": true,
+      "k": 0,
+      "metrics_keys": [
+        "spline|test_compound_holdout|pre_study",
+        "spline|test|pre_study"
+      ],
+      "models": [
+        "spline"
+      ],
+      "selective_sharing": null,
+      "sharing": "context_specific",
+      "sparse": false,
+      "target_manifest": {
+        "all_target": "76d8ec6b17dae51a",
+        "test": "840a846f9dc59781",
+        "train": "340dc8e79c1238b4",
+        "validation": "4f8d1a95c3c18638"
+      },
+      "warnings": [
+        "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+        "29 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+      ]
+    },
+    {
+      "bank": "both",
+      "bayesian_gate": null,
+      "budget": "primary",
+      "covariance": {
+        "boundary_flag": false,
+        "components": {
+          "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+          "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+        },
+        "converged": true,
+        "covariance_parameters_bootstrapped": false,
+        "layer": "HierarchicalCovariance",
+        "n_animals": 301,
+        "n_obs": 2108,
+        "n_params_at_bound": 0,
+        "n_studies": 8,
+        "nll": -4198.620806879624,
+        "note": "A parameter at bound is an incompletely estimated covariance component. Do not treat predictive intervals as complete parameter-uncertainty intervals.",
+        "params_at_bound": []
+      },
+      "dir": "runs/v3_eval/cells/both_pooled_k1_fix_primary",
+      "fixed_schema": true,
+      "k": 1,
+      "metrics_keys": [
+        "spline|test_compound_holdout|pre_study",
+        "spline|test|pre_study"
+      ],
+      "models": [
+        "spline"
+      ],
+      "selective_sharing": null,
+      "sharing": "pooled",
+      "sparse": false,
+      "target_manifest": {
+        "all_target": "76d8ec6b17dae51a",
+        "test": "840a846f9dc59781",
+        "train": "340dc8e79c1238b4",
+        "validation": "4f8d1a95c3c18638"
+      },
+      "warnings": [
+        "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+        "29 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+      ]
+    },
+    {
+      "bank": "both",
+      "bayesian_gate": null,
+      "budget": "tight",
+      "covariance": {
+        "boundary_flag": false,
+        "components": {
+          "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+          "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+        },
+        "converged": true,
+        "covariance_parameters_bootstrapped": false,
+        "layer": "HierarchicalCovariance",
+        "n_animals": 274,
+        "n_obs": 1899,
+        "n_params_at_bound": 0,
+        "n_studies": 7,
+        "nll": -4019.58364410565,
+        "note": "A parameter at bound is an incompletely estimated covariance component. Do not treat predictive intervals as complete parameter-uncertainty intervals.",
+        "params_at_bound": []
+      },
+      "dir": "runs/v3_eval/cells/both_context_specific_k0_var_tight",
+      "fixed_schema": false,
+      "k": 0,
+      "metrics_keys": [
+        "spline|test_compound_holdout|pre_study",
+        "spline|test|pre_study",
+        "transformer|test_compound_holdout|pre_study",
+        "transformer|test|pre_study"
+      ],
+      "models": [
+        "spline",
+        "transformer"
+      ],
+      "selective_sharing": null,
+      "sharing": "context_specific",
+      "sparse": false,
+      "target_manifest": {
+        "all_target": "76d8ec6b17dae51a",
+        "test": "840a846f9dc59781",
+        "train": "340dc8e79c1238b4",
+        "validation": "4f8d1a95c3c18638"
+      },
+      "warnings": [
+        "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+        "29 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+      ]
+    },
+    {
+      "bank": "both",
+      "bayesian_gate": null,
+      "budget": "tight",
+      "covariance": {
+        "boundary_flag": false,
+        "components": {
+          "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+          "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+        },
+        "converged": true,
+        "covariance_parameters_bootstrapped": false,
+        "layer": "HierarchicalCovariance",
+        "n_animals": 301,
+        "n_obs": 2108,
+        "n_params_at_bound": 0,
+        "n_studies": 8,
+        "nll": -4193.63911348785,
+        "note": "A parameter at bound is an incompletely estimated covariance component. Do not treat predictive intervals as complete parameter-uncertainty intervals.",
+        "params_at_bound": []
+      },
+      "dir": "runs/v3_eval/cells/both_pooled_k1_var_tight",
+      "fixed_schema": false,
+      "k": 1,
+      "metrics_keys": [
+        "spline|test_compound_holdout|pre_study",
+        "spline|test|pre_study",
+        "transformer|test_compound_holdout|pre_study",
+        "transformer|test|pre_study"
+      ],
+      "models": [
+        "spline",
+        "transformer"
+      ],
+      "selective_sharing": null,
+      "sharing": "pooled",
+      "sparse": false,
+      "target_manifest": {
+        "all_target": "76d8ec6b17dae51a",
+        "test": "840a846f9dc59781",
+        "train": "340dc8e79c1238b4",
+        "validation": "4f8d1a95c3c18638"
+      },
+      "warnings": [
+        "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+        "29 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+      ]
+    },
+    {
+      "bank": "matched",
+      "bayesian_gate": null,
+      "budget": "primary",
+      "covariance": {
+        "boundary_flag": false,
+        "components": {
+          "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+          "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+        },
+        "converged": true,
+        "covariance_parameters_bootstrapped": false,
+        "layer": "HierarchicalCovariance",
+        "n_animals": 301,
+        "n_obs": 2108,
+        "n_params_at_bound": 0,
+        "n_studies": 8,
+        "nll": -4431.202927579559,
+        "note": "A parameter at bound is an incompletely estimated covariance component. Do not treat predictive intervals as complete parameter-uncertainty intervals.",
+        "params_at_bound": []
+      },
+      "dir": "runs/v3_eval/cells/matched_pooled_k1_var_primary",
+      "fixed_schema": false,
+      "k": 1,
+      "metrics_keys": [
+        "spline|test_compound_holdout|pre_study",
+        "spline|test|pre_study",
+        "transformer|test_compound_holdout|pre_study",
+        "transformer|test|pre_study"
+      ],
+      "models": [
+        "spline",
+        "transformer"
+      ],
+      "selective_sharing": null,
+      "sharing": "pooled",
+      "sparse": false,
+      "target_manifest": {
+        "all_target": "76d8ec6b17dae51a",
+        "test": "840a846f9dc59781",
+        "train": "340dc8e79c1238b4",
+        "validation": "4f8d1a95c3c18638"
+      },
+      "warnings": [
+        "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+        "29 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+      ]
+    },
+    {
+      "bank": "matched",
+      "bayesian_gate": null,
+      "budget": "primary",
+      "covariance": {
+        "boundary_flag": false,
+        "components": {
+          "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+          "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+        },
+        "converged": true,
+        "covariance_parameters_bootstrapped": false,
+        "layer": "HierarchicalCovariance",
+        "n_animals": 274,
+        "n_obs": 1899,
+        "n_params_at_bound": 0,
+        "n_studies": 7,
+        "nll": -4027.4133209086917,
+        "note": "A parameter at bound is an incompletely estimated covariance component. Do not treat predictive intervals as complete parameter-uncertainty intervals.",
+        "params_at_bound": []
+      },
+      "dir": "runs/v3_eval/cells/matched_context_specific_k0_var_primary",
+      "fixed_schema": false,
+      "k": 0,
+      "metrics_keys": [
+        "spline|test_compound_holdout|pre_study",
+        "spline|test|pre_study",
+        "transformer|test_compound_holdout|pre_study",
+        "transformer|test|pre_study"
+      ],
+      "models": [
+        "spline",
+        "transformer"
+      ],
+      "selective_sharing": null,
+      "sharing": "context_specific",
+      "sparse": false,
+      "target_manifest": {
+        "all_target": "76d8ec6b17dae51a",
+        "test": "840a846f9dc59781",
+        "train": "340dc8e79c1238b4",
+        "validation": "4f8d1a95c3c18638"
+      },
+      "warnings": [
+        "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+        "29 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+      ]
+    }
+  ],
+  "failures": [],
+  "freeze_lock": {
+    "config_hash": "fbf4c58c2e5715ae",
+    "config_path": "configs/v3_eval.frozen.yaml",
+    "design": false,
+    "frozen_before": "generate_banks_train_evaluate",
+    "git_revision": "68b9144a94bc4ca13b8609348ca1c052b961293d",
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "real_data": false,
+    "retune_after_test": false,
+    "selective_sharing": {
+      "note": "Shared: compound descriptors and planned-dose/regimen query features. Species-specific: growth/baseline token groups and residual scale. Not a Bayesian species random-effect variant.",
+      "residual": "target_species_only",
+      "shared": [
+        "compound",
+        "regimen"
+      ],
+      "species_specific": [
+        "bio",
+        "baseline",
+        "species"
+      ],
+      "variant": "v1"
+    },
+    "uncertainty": {
+      "parameter_uncertainty": "Incompletely estimated except for a reliable Bayesian posterior. Spline bootstraps the mean only; covariance is not bootstrapped; transformer n_members=1 has no bootstrap spread.",
+      "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study."
+    }
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "retuned_after_test": false,
+  "seconds_total": 81.56161403656006,
+  "transfer_table": {
+    "both|fix|primary|pooled|spline|test_compound_holdout|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "spline",
+      "rows": [
+        {
+          "S0": 0.05264499081122549,
+          "Sk": 0.08442548227024083,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.031780491459015334,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.030927902160109513,
+          "Sk": 0.04776868727180505,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.016840785111695535,
+          "k": 1,
+          "metric": "crps",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.05635998852732042,
+          "Sk": -0.09262936905926722,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": 0.036269380531946796,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "not_this_row",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "both|fix|primary|pooled|spline|test|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "spline",
+      "rows": [
+        {
+          "S0": 0.04334337933424674,
+          "Sk": 0.04886048916272816,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.005517109828481415,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.026039688897486184,
+          "Sk": 0.03130899109944836,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.005269302201962176,
+          "k": 1,
+          "metric": "crps",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.021373815609509253,
+          "Sk": -0.010245873162694423,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": -0.01112794244681483,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "helpful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "not_this_row",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "both|var|primary|pooled|spline|test_compound_holdout|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "spline",
+      "rows": [
+        {
+          "S0": 0.04711933490367955,
+          "Sk": 0.08442548227024083,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.03730614736656128,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.02874126315439209,
+          "Sk": 0.04776868727180505,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.01902742411741296,
+          "k": 1,
+          "metric": "crps",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.021990490379103177,
+          "Sk": -0.09262936905926722,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": 0.07063887868016404,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "not_this_row",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "both|var|primary|pooled|spline|test|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "spline",
+      "rows": [
+        {
+          "S0": 0.04221239918094281,
+          "Sk": 0.04886048916272816,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.00664808998178535,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.02592468047255086,
+          "Sk": 0.03130899109944836,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.005384310626897499,
+          "k": 1,
+          "metric": "crps",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.010618336697088698,
+          "Sk": -0.010245873162694423,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": -0.0003724635343942753,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "helpful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "not_this_row",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "both|var|primary|pooled|transformer|test_compound_holdout|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "transformer",
+      "rows": [
+        {
+          "S0": 0.047926026131722615,
+          "Sk": 0.059699213102242084,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.011773186970519468,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.028967565624924318,
+          "Sk": 0.03741613718883709,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.008448571563912769,
+          "k": 1,
+          "metric": "crps",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.06380436433298094,
+          "Sk": 0.054870733494124316,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": -0.008933630838856621,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "helpful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "not_this_row",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "both|var|primary|pooled|transformer|test|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "transformer",
+      "rows": [
+        {
+          "S0": 0.04048220984972474,
+          "Sk": 0.04184951582573417,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.0013673059760094322,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.025145477706380398,
+          "Sk": 0.02902314481010016,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.0038776671037197633,
+          "k": 1,
+          "metric": "crps",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": -0.0029571728084294042,
+          "Sk": 0.005269598335082967,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": 0.0023124255266535627,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "not_this_row",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "both|var|primary|selective|spline|test_compound_holdout|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "spline",
+      "rows": [
+        {
+          "S0": 0.04711933490367955,
+          "Sk": 0.08395833368002828,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.03683899877634873,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "spline",
+          "sharing": "selective",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.02874126315439209,
+          "Sk": 0.048052341902783104,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.019311078748391015,
+          "k": 1,
+          "metric": "crps",
+          "model": "spline",
+          "sharing": "selective",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.021990490379103177,
+          "Sk": -0.09274365239713966,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": 0.07075316201803648,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "spline",
+          "sharing": "selective",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "v1",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "selective (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "both|var|primary|selective|spline|test|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "spline",
+      "rows": [
+        {
+          "S0": 0.04221239918094281,
+          "Sk": 0.048458055869726305,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.006245656688783498,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "spline",
+          "sharing": "selective",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.02592468047255086,
+          "Sk": 0.02919539689183353,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.0032707164192826675,
+          "k": 1,
+          "metric": "crps",
+          "model": "spline",
+          "sharing": "selective",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.010618336697088698,
+          "Sk": -0.0104709071590313,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": -0.00014742953805739825,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "spline",
+          "sharing": "selective",
+          "sign": "helpful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "v1",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "selective (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "both|var|primary|selective|transformer|test_compound_holdout|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "transformer",
+      "rows": [
+        {
+          "S0": 0.047926026131722615,
+          "Sk": 0.16685809999637582,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.11893207386465321,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "transformer",
+          "sharing": "selective",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.028967565624924318,
+          "Sk": 0.10717331016782082,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.0782057445428965,
+          "k": 1,
+          "metric": "crps",
+          "model": "transformer",
+          "sharing": "selective",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.06380436433298094,
+          "Sk": -0.11883587708273223,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": 0.055031512749751293,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "transformer",
+          "sharing": "selective",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "v1",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "selective (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "both|var|primary|selective|transformer|test|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "transformer",
+      "rows": [
+        {
+          "S0": 0.04048220984972474,
+          "Sk": 0.04036798254119747,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": -0.0001142273085272677,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "transformer",
+          "sharing": "selective",
+          "sign": "helpful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.025145477706380398,
+          "Sk": 0.026179990261481087,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.001034512555100689,
+          "k": 1,
+          "metric": "crps",
+          "model": "transformer",
+          "sharing": "selective",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": -0.0029571728084294042,
+          "Sk": 0.010586089706962062,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": 0.0076289168985326575,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "transformer",
+          "sharing": "selective",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "v1",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "selective (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "both|var|tight|pooled|spline|test_compound_holdout|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "spline",
+      "rows": [
+        {
+          "S0": 0.046795094218656116,
+          "Sk": 0.08671938722068079,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.03992429300202467,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.028356596233470636,
+          "Sk": 0.04895412902650348,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.020597532793032843,
+          "k": 1,
+          "metric": "crps",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.013989704033985039,
+          "Sk": -0.09483288446040772,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": 0.08084318042642268,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "not_this_row",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "both|var|tight|pooled|spline|test|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "spline",
+      "rows": [
+        {
+          "S0": 0.04143563821529969,
+          "Sk": 0.04909749889774141,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.007661860682441721,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.025612393633502817,
+          "Sk": 0.03157961724320296,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.005967223609700145,
+          "k": 1,
+          "metric": "crps",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.00818560280004891,
+          "Sk": -0.007478666977829274,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": -0.0007069358222196349,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "helpful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "not_this_row",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "both|var|tight|pooled|transformer|test_compound_holdout|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "transformer",
+      "rows": [
+        {
+          "S0": 0.04903501993347049,
+          "Sk": 0.051662873219731995,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.002627853286261507,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.029649984433834067,
+          "Sk": 0.033366439031373776,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.0037164545975397097,
+          "k": 1,
+          "metric": "crps",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.04823474955247353,
+          "Sk": 0.07120425553965813,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": 0.0229695059871846,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "not_this_row",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "both|var|tight|pooled|transformer|test|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "transformer",
+      "rows": [
+        {
+          "S0": 0.04610392394880446,
+          "Sk": 0.05211851871430449,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.0060145947655000365,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.027429433234060562,
+          "Sk": 0.03260311737065409,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.0051736841365935295,
+          "k": 1,
+          "metric": "crps",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": -0.019383583935746962,
+          "Sk": 0.029315759058499837,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": 0.009932175122752875,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "not_this_row",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "matched|var|primary|pooled|spline|test_compound_holdout|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "spline",
+      "rows": [
+        {
+          "S0": 0.04711933490367955,
+          "Sk": 0.05113284993033951,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.004013515026659961,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.02874126315439209,
+          "Sk": 0.029351495821956265,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.0006102326675641763,
+          "k": 1,
+          "metric": "crps",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.021990490379103177,
+          "Sk": -0.006805650760445373,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": -0.015184839618657804,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "helpful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "not_this_row",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "matched|var|primary|pooled|spline|test|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "spline",
+      "rows": [
+        {
+          "S0": 0.04221239918094281,
+          "Sk": 0.04538221398427724,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.0031698148033344337,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.02592468047255086,
+          "Sk": 0.027584072338849675,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.0016593918662988136,
+          "k": 1,
+          "metric": "crps",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.010618336697088698,
+          "Sk": 0.009697545292732045,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": -0.000920791404356653,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "spline",
+          "sharing": "pooled",
+          "sign": "helpful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "not_this_row",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "matched|var|primary|pooled|transformer|test_compound_holdout|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "transformer",
+      "rows": [
+        {
+          "S0": 0.047926026131722615,
+          "Sk": 0.05354944288635857,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.005623416754635957,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.028967565624924318,
+          "Sk": 0.03206032341269272,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.003092757787768404,
+          "k": 1,
+          "metric": "crps",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.06380436433298094,
+          "Sk": 0.048515406424081746,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": -0.015288957908899191,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "helpful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "not_this_row",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "matched|var|primary|pooled|transformer|test|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "transformer",
+      "rows": [
+        {
+          "S0": 0.04048220984972474,
+          "Sk": 0.047521633598166496,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.007039423748441756,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.025145477706380398,
+          "Sk": 0.028312428971978627,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.0031669512655982286,
+          "k": 1,
+          "metric": "crps",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": -0.0029571728084294042,
+          "Sk": -0.005083726441182258,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": 0.0021265536327528534,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "transformer",
+          "sharing": "pooled",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "not_this_row",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    }
+  }
+}

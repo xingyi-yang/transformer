@@ -1,0 +1,151 @@
+{
+  "encoders": {
+    "W0": {
+      "equals": "predose_conditioned",
+      "n_animals_without_encoder": 0,
+      "note": "predose only; no post-baseline encoder",
+      "rule": "W0",
+      "status": "ok",
+      "summary": {
+        "between_animal_var_ratio_pred_over_obs": 1.3171378871540047,
+        "contrast_bias": 0.054870733494124316,
+        "contrast_cov90": 0.75,
+        "contrast_day": 28.0,
+        "contrast_width90": 0.1513317286705543,
+        "correlation_by_gap": [
+          {
+            "corr_obs": 0.8889606002262981,
+            "corr_pred": 0.8169097566330107,
+            "gap_bin": "(4,8]",
+            "n_pairs": 3
+          },
+          {
+            "corr_obs": 0.8159117629170034,
+            "corr_pred": 0.6836696592081585,
+            "gap_bin": "(8,15]",
+            "n_pairs": 2
+          },
+          {
+            "corr_obs": 0.78048676437327,
+            "corr_pred": 0.45361268158140633,
+            "gap_bin": "(15,100]",
+            "n_pairs": 1
+          }
+        ],
+        "distributional": {
+          "cov80": 0.8787878787878788,
+          "cov95": 0.9621212121212122,
+          "crps_log_study_balanced": 0.03741613718883709,
+          "energy_score_mean": 0.08272609219984087,
+          "pit_histogram_10bins": [
+            0,
+            8,
+            16,
+            16,
+            14,
+            24,
+            16,
+            11,
+            13,
+            14
+          ]
+        },
+        "effective_sample_sizes": {
+          "n_animals": 34,
+          "n_obs": 132,
+          "n_studies": 1
+        },
+        "energy_score_mean": 0.08272609219984087,
+        "extrema_max_cov90": 1.0,
+        "group_mean_cov90": 0.925,
+        "increment_sd_ratio_pred_over_obs": 1.5051764954535611,
+        "model": "transformer",
+        "n_contrasts": 4,
+        "observation_weighted": {
+          "cov80": 0.8787878787878788,
+          "cov95": 0.9621212121212122,
+          "crps_log": 0.03741613718883709,
+          "mae_g": 12.778077173880929,
+          "mae_log": 0.04860192493478497,
+          "rmse_g": 16.321240397098922,
+          "rmse_log": 0.059699213102242084,
+          "width95_log": 0.31566909212275707
+        },
+        "pit_histogram_10bins": [
+          0,
+          8,
+          16,
+          16,
+          14,
+          24,
+          16,
+          11,
+          13,
+          14
+        ],
+        "study_balanced": {
+          "cov80": 0.8787878787878788,
+          "cov95": 0.9621212121212122,
+          "crps": 0.03741613718883709,
+          "mae_log": 0.04860192493478497,
+          "rmse_log": 0.059699213102242084
+        },
+        "study_level_contrast_error": {
+          "bias_study_mean": 0.054870733494124316,
+          "n_studies_with_contrast": 1,
+          "rmse_study_mean": 0.05785003652862421
+        },
+        "task": "pre_study_new_study",
+        "task_alias": "predose_conditioned"
+      }
+    },
+    "W1": {
+      "conditioned": {
+        "cov90": 0.7653061224489796,
+        "crps_log": 0.05117542922799412,
+        "n_obs": 98,
+        "rmse_log": 0.08988307751281158
+      },
+      "n_animals_without_encoder": 0,
+      "note": "encoder rows omitted, not filled",
+      "rule": "W1",
+      "status": "ok",
+      "task": "sparse_history"
+    },
+    "Wall14": {
+      "conditioned": {
+        "cov90": 0.803030303030303,
+        "crps_log": 0.0370567075436068,
+        "n_obs": 66,
+        "rmse_log": 0.06422284154737186
+      },
+      "n_animals_without_encoder": 0,
+      "note": "encoder rows omitted, not filled",
+      "rule": "Wall14",
+      "status": "ok",
+      "task": "sparse_history"
+    },
+    "Wlast14": {
+      "conditioned": {
+        "cov90": 0.7653061224489796,
+        "crps_log": 0.03589917300336041,
+        "n_obs": 98,
+        "rmse_log": 0.06544804571888052
+      },
+      "n_animals_without_encoder": 0,
+      "note": "encoder rows omitted, not filled",
+      "rule": "Wlast14",
+      "status": "ok",
+      "task": "sparse_history"
+    }
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "model": "transformer",
+  "split": "test_compound_holdout",
+  "task": "sparse_history"
+}

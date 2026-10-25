@@ -2,12 +2,12 @@
 
 ## Nonlinear multi-species information sharing for body-weight prediction
 
-**Status: proposed scientific text.** Stages 1–2 infrastructure is now in
-the repository (frozen target manifests, nested donor train additions,
-explicit `SPECIES_*`, sign-defined transfer table). The model-training
-wave has **not** been launched. This file does not replace
-`CURSOR_PROJECT_SPEC_v2.md`. Runtime defaults, shipped v2 configs, and the
-analysis close-out stay on v2.
+**Status: proposed scientific text plus executed synthetic method checks.**
+Stages 1–2 infrastructure and the frozen k=0/k=1 predose pilot are in the
+repository. The v3 evaluation benchmark (selective v1, sparse history,
+donor heterogeneity) has been executed under `runs/v3_eval/`. This file
+does not replace `CURSOR_PROJECT_SPEC_v2.md`. Runtime defaults, shipped v2
+configs, and the analysis close-out stay on v2.
 
 **Do not** launch large training runs from this spec, add Chronos-2 / DeepAR,
 or enable design recommendations as an acceptance criterion.

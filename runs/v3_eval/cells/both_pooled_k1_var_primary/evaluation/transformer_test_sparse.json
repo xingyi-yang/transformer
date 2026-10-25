@@ -1,0 +1,157 @@
+{
+  "encoders": {
+    "W0": {
+      "equals": "predose_conditioned",
+      "n_animals_without_encoder": 0,
+      "note": "predose only; no post-baseline encoder",
+      "rule": "W0",
+      "status": "ok",
+      "summary": {
+        "between_animal_var_ratio_pred_over_obs": 1.7822203290088365,
+        "contrast_bias": 0.005269598335082967,
+        "contrast_cov90": 1.0,
+        "contrast_day": 28.0,
+        "contrast_width90": 0.1285804846458764,
+        "correlation_by_gap": [
+          {
+            "corr_obs": 0.8953280406953975,
+            "corr_pred": 0.8948059398077034,
+            "gap_bin": "(0,4]",
+            "n_pairs": 7
+          },
+          {
+            "corr_obs": 0.8488421568462249,
+            "corr_pred": 0.8548911841763303,
+            "gap_bin": "(4,8]",
+            "n_pairs": 9
+          },
+          {
+            "corr_obs": 0.7922044935869728,
+            "corr_pred": 0.7490734069705194,
+            "gap_bin": "(8,15]",
+            "n_pairs": 11
+          },
+          {
+            "corr_obs": 0.7177194928011794,
+            "corr_pred": 0.6057376593462876,
+            "gap_bin": "(15,100]",
+            "n_pairs": 7
+          }
+        ],
+        "distributional": {
+          "cov80": 0.9824561403508771,
+          "cov95": 1.0,
+          "crps_log_study_balanced": 0.02902314481010016,
+          "energy_score_mean": 0.07527214190703914,
+          "pit_histogram_10bins": [
+            0,
+            13,
+            72,
+            57,
+            99,
+            75,
+            47,
+            20,
+            18,
+            5
+          ]
+        },
+        "effective_sample_sizes": {
+          "n_animals": 74,
+          "n_obs": 406,
+          "n_studies": 2
+        },
+        "energy_score_mean": 0.07527214190703914,
+        "extrema_max_cov90": 1.0,
+        "group_mean_cov90": 1.0,
+        "increment_sd_ratio_pred_over_obs": 1.1667033623863867,
+        "model": "transformer",
+        "n_contrasts": 8,
+        "observation_weighted": {
+          "cov80": 0.9852216748768473,
+          "cov95": 1.0,
+          "crps_log": 0.029147264336057323,
+          "mae_g": 10.187394331389727,
+          "mae_log": 0.034057967980114616,
+          "rmse_g": 13.030686693961187,
+          "rmse_log": 0.042049650486802946,
+          "width95_log": 0.3205689657992325
+        },
+        "pit_histogram_10bins": [
+          0,
+          13,
+          72,
+          57,
+          99,
+          75,
+          47,
+          20,
+          18,
+          5
+        ],
+        "study_balanced": {
+          "cov80": 0.9824561403508771,
+          "cov95": 1.0,
+          "crps": 0.02902314481010016,
+          "mae_log": 0.0337520351795469,
+          "rmse_log": 0.04184951582573417
+        },
+        "study_level_contrast_error": {
+          "bias_study_mean": 0.0013521998376297695,
+          "n_studies_with_contrast": 2,
+          "rmse_study_mean": 0.023528082372639432
+        },
+        "task": "pre_study_new_study",
+        "task_alias": "predose_conditioned"
+      }
+    },
+    "W1": {
+      "conditioned": {
+        "cov90": 0.9668674698795181,
+        "crps_log": 0.026517269650910346,
+        "n_obs": 332,
+        "rmse_log": 0.04551116033448978
+      },
+      "n_animals_without_encoder": 0,
+      "note": "encoder rows omitted, not filled",
+      "rule": "W1",
+      "status": "ok",
+      "task": "sparse_history"
+    },
+    "Wall14": {
+      "conditioned": {
+        "cov90": 0.9754901960784313,
+        "crps_log": 0.020552385257983502,
+        "n_obs": 204,
+        "rmse_log": 0.036445705577422
+      },
+      "n_animals_without_encoder": 0,
+      "note": "encoder rows omitted, not filled",
+      "rule": "Wall14",
+      "status": "ok",
+      "task": "sparse_history"
+    },
+    "Wlast14": {
+      "conditioned": {
+        "cov90": 0.9789156626506024,
+        "crps_log": 0.01928752158815859,
+        "n_obs": 332,
+        "rmse_log": 0.03454111540682299
+      },
+      "n_animals_without_encoder": 0,
+      "note": "encoder rows omitted, not filled",
+      "rule": "Wlast14",
+      "status": "ok",
+      "task": "sparse_history"
+    }
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "model": "transformer",
+  "split": "test",
+  "task": "sparse_history"
+}

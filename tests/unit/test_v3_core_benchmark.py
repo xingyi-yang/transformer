@@ -118,6 +118,10 @@ def test_inspect_covariance_and_bayesian_gate():
     assert "predictive_variability" in insp["components"]
     gate = bayesian_gate({"reliable": False, "rhat_max": 1.2, "divergences": 3})
     assert gate["counted_as_successful_benchmark"] is False
+    assert gate["status"] == "trained"
+    skipped = bayesian_gate({}, status="not_run", reason="bayesian extra not installed")
+    assert skipped["status"] == "not_run"
+    assert skipped["counted_as_successful_benchmark"] is False
     ok = bayesian_gate({"reliable": True, "rhat_max": 1.0, "divergences": 0,
                         "ess_bulk_min": 500, "ess_tail_min": 500})
     assert ok["counted_as_successful_benchmark"] is True

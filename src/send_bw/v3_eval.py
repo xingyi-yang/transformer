@@ -145,10 +145,13 @@ def _record_cell(run: Run, spec: dict[str, Any]) -> dict[str, Any]:
     bayes = None
     train_b = man.get("stages", {}).get("train_bayesian") or {}
     if train_b:
-        bayes = bayesian_gate({
-            "reliable": train_b.get("reliable"),
-            **(train_b.get("diagnostics_summary") or {}),
-        })
+        if train_b.get("status") == "not_run":
+            bayes = bayesian_gate({}, status="not_run", reason=train_b.get("reason"))
+        else:
+            bayes = bayesian_gate({
+                "reliable": train_b.get("reliable"),
+                **(train_b.get("diagnostics_summary") or {}),
+            }, status="trained")
         write_json(run.p("evaluation", "bayesian_gate.json"), bayes)
     tman = read_json(run.p("splits", "target_manifest.json")) if run.p("splits", "target_manifest.json").exists() else {}
     metrics = read_json(run.p("evaluation", "metrics.json")) if run.p("evaluation", "metrics.json").exists() else {}
@@ -331,7 +334,12 @@ def _write_results_md(parent: Path, summary: dict[str, Any]) -> None:
         bayes = rec.get("bayesian_gate")
         btxt = "n/a"
         if bayes:
-            btxt = "reliable" if bayes.get("reliable") else "unreliable/not counted"
+            if bayes.get("status") == "not_run":
+                btxt = f"not_run ({bayes.get('reason')})"
+            elif bayes.get("reliable"):
+                btxt = "reliable"
+            else:
+                btxt = "unreliable/not counted"
         lines.append(
             f"| {rec.get('bank')} | {rec.get('sharing')} | {rec.get('k')} | "
             f"{'fixed' if rec.get('fixed_schema') else 'variable'} | {rec.get('budget')} | "
