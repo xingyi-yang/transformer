@@ -1,0 +1,81 @@
+{
+  "chains": 2,
+  "counted_as_successful_benchmark": false,
+  "divergences": 0,
+  "draws": 800,
+  "dropped_nonidentifiable_columns": [
+    44
+  ],
+  "ess_bulk_min": 115.20329044339839,
+  "ess_tail_min": 141.61118747376793,
+  "failure_class": "mean_identifiability",
+  "family_diagnostics": {
+    "beta": {
+      "ess_bulk_min": 127.69082107082568,
+      "ess_tail_min": 198.2497815228777,
+      "n": 44,
+      "rhat_max": 1.0146408051222628
+    },
+    "ell": {
+      "ess_bulk_min": 356.0535182048844,
+      "ess_tail_min": 631.4289307919879,
+      "n": 1,
+      "rhat_max": 1.0031975167371288
+    },
+    "sd_a": {
+      "ess_bulk_min": 255.8910032946083,
+      "ess_tail_min": 394.28268951897263,
+      "n": 2,
+      "rhat_max": 1.0070207269310414
+    },
+    "sd_s": {
+      "ess_bulk_min": 441.9800895062477,
+      "ess_tail_min": 554.6897899423473,
+      "n": 2,
+      "rhat_max": 1.005768073664883
+    },
+    "sigma_p": {
+      "ess_bulk_min": 292.36955119377046,
+      "ess_tail_min": 454.14474455910624,
+      "n": 1,
+      "rhat_max": 1.0018890589479958
+    },
+    "theta": {
+      "ess_bulk_min": 115.20329044339839,
+      "ess_tail_min": 141.61118747376793,
+      "n": 44,
+      "rhat_max": 1.0135999159422304
+    }
+  },
+  "n_posterior_draws": 1600,
+  "note": "Reliability thresholds are unchanged (rhat<=1.01, ESS>=400, divergences==0). Compile/backend failures are classified separately from sampling.",
+  "priors": {
+    "m_ell": 1.9459101490553132,
+    "s_beta": 0.35,
+    "s_ell": 0.75,
+    "s_sd": 0.3,
+    "s_sigma": 0.3
+  },
+  "reliable": false,
+  "rhat_max": 1.0146408051222628,
+  "thresholds": {
+    "ess_bulk_min": 400,
+    "ess_tail_min": 400,
+    "rhat_max": 1.01
+  },
+  "tune": 800,
+  "worst_ess_params": {
+    "beta[23]": 127.69082107082568,
+    "theta[20]": 122.534215735686,
+    "theta[21]": 117.65622802332757,
+    "theta[22]": 129.98437337287223,
+    "theta[23]": 115.20329044339839
+  },
+  "worst_rhat_params": {
+    "beta[22]": 1.0095310745064185,
+    "beta[23]": 1.0146408051222628,
+    "beta[4]": 1.009899409069608,
+    "theta[21]": 1.0103348035803656,
+    "theta[23]": 1.0135999159422304
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "boundary_flag": false,
+  "components": {
+    "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+    "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+  },
+  "converged": true,
+  "covariance_parameters_bootstrapped": false,
+  "layer": "HierarchicalCovariance",
+  "n_animals": 204,
+  "n_obs": 992,
+  "n_params_at_bound": 0,
+  "n_studies": 7,
+  "nll": -1994.79749298573,
+  "note": "A parameter at bound is an incompletely estimated covariance component. Do not treat predictive intervals as complete parameter-uncertainty intervals.",
+  "params_at_bound": []
+}

@@ -225,7 +225,7 @@ def _record_cell(run: Run, spec: dict[str, Any]) -> dict[str, Any]:
         "evaluation_packs": {
             k: {"status": v.get("status"), "individual": v.get("individual"),
                 "group_mean": v.get("group_mean"), "contrast": v.get("contrast"),
-                "denominators": v.get("denominators")}
+                "temporal": v.get("temporal"), "denominators": v.get("denominators")}
             for k, v in packs.items()},
     }
 

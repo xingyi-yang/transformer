@@ -1,0 +1,5090 @@
+{
+  "d0|t0|both|stt4|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.060751638011789816,
+        "Sk": 0.05652051495254684,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.004231123059242975,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03803451778928825,
+        "Sk": 0.043707074939843535,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.005672557150555285,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0662043310615379,
+        "Sk": 0.02678899775646601,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.039415333305071895,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|both|stt4|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.08334352151090674,
+        "Sk": 0.10184127077043827,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.01849774925953153,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04908499239106467,
+        "Sk": 0.05927726241170837,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.010192270020643705,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0067455637640102565,
+        "Sk": -0.12346439092065524,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.11671882715664499,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|both|stt4|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.060751638011789816,
+        "Sk": 0.0572776100427707,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0034740279690191125,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03803451778928825,
+        "Sk": 0.046902424677358404,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.008867906888070154,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0662043310615379,
+        "Sk": 0.02312883418686143,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.043075496874676475,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|both|stt4|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.08334352151090674,
+        "Sk": 0.1251190284036986,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.04177550689279186,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04908499239106467,
+        "Sk": 0.07858099257353998,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.029496000182475314,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0067455637640102565,
+        "Sk": -0.15976628042658753,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.15302071666257727,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|both|stt4|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.060751638011789816,
+        "Sk": 0.05679160900346805,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.003960029008321764,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03803451778928825,
+        "Sk": 0.04170751732323767,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0036729995339494226,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0662043310615379,
+        "Sk": 0.026038382260676063,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.04016594880086184,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|both|stt4|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.08334352151090674,
+        "Sk": 0.10132454973524874,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.017981028224342,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04908499239106467,
+        "Sk": 0.0605039596077384,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.01141896721667373,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0067455637640102565,
+        "Sk": -0.06274904824118993,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.05600348447717968,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|both|sttNone|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.046710484058114954,
+        "Sk": 0.05798469551154023,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.011274211453425276,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02734962562670623,
+        "Sk": 0.034301493391929255,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.006951867765223024,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.012044239853731625,
+        "Sk": -0.013355596364960873,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.0013113565112292478,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|both|sttNone|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.06968670941853973,
+        "Sk": 0.05108845094687535,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.01859825847166438,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04030208618926324,
+        "Sk": 0.031059768517977093,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.009242317671286145,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.01844296525229655,
+        "Sk": 0.009605618573660553,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.008837346678635997,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|both|sttNone|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.046710484058114954,
+        "Sk": 0.05852205810402362,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.011811574045908664,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02734962562670623,
+        "Sk": 0.03277142688194942,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0054218012552431916,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.012044239853731625,
+        "Sk": -0.014963345120032431,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.002919105266300806,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|both|sttNone|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.06968670941853973,
+        "Sk": 0.06636721596954713,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0033194934489926,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04030208618926324,
+        "Sk": 0.03722147085181994,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0030806153374432974,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.01844296525229655,
+        "Sk": -0.041670873157612774,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.023227907905316224,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|both|sttNone|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.046710484058114954,
+        "Sk": 0.058721581407865445,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.01201109734975049,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02734962562670623,
+        "Sk": 0.033223085061930786,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.005873459435224555,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.012044239853731625,
+        "Sk": -0.014407320788473357,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.002363080934741732,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|both|sttNone|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.06968670941853973,
+        "Sk": 0.06916156642996504,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0005251429885746867,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04030208618926324,
+        "Sk": 0.038828629196129796,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0014734569931334415,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.01844296525229655,
+        "Sk": -0.03993971630278379,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.02149675105048724,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|matched|stt4|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.060751638011789816,
+        "Sk": 0.052461072257965286,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.00829056575382453,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03803451778928825,
+        "Sk": 0.04034808960465841,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0023135718153701607,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0662043310615379,
+        "Sk": 0.04501345744804703,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.021190873613490875,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|matched|stt4|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.08334352151090674,
+        "Sk": 0.11079302882725711,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.027449507316350374,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04908499239106467,
+        "Sk": 0.06526384127740296,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.016178848886338297,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0067455637640102565,
+        "Sk": -0.09662378071946572,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.08987821695545546,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|matched|stt4|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.060751638011789816,
+        "Sk": 0.05201196478385116,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.008739673227938657,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03803451778928825,
+        "Sk": 0.04390440459801938,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0058698868087311284,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0662043310615379,
+        "Sk": 0.04142737455258449,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.024776956508953417,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|matched|stt4|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.08334352151090674,
+        "Sk": 0.11116829315781922,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.02782477164691248,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04908499239106467,
+        "Sk": 0.07093281907696317,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0218478266858985,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0067455637640102565,
+        "Sk": -0.08203276793114522,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.07528720416713497,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|matched|stt4|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.060751638011789816,
+        "Sk": 0.05222391469431606,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.008527723317473757,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03803451778928825,
+        "Sk": 0.038548059435144,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0005135416458557501,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0662043310615379,
+        "Sk": 0.044366229839419506,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.0218381012221184,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|matched|stt4|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.08334352151090674,
+        "Sk": 0.10543941975041224,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0220958982395055,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04908499239106467,
+        "Sk": 0.06585415033424064,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.016769157943175968,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0067455637640102565,
+        "Sk": -0.07758215857724561,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.07083659481323536,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|matched|sttNone|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.046710484058114954,
+        "Sk": 0.0554814187063908,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.008770934648275844,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02734962562670623,
+        "Sk": 0.032490744582980444,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.005141118956274213,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.012044239853731625,
+        "Sk": -0.01185001810043664,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.00019422175329498505,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|matched|sttNone|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.06968670941853973,
+        "Sk": 0.05421922219356033,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.015467487224979398,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04030208618926324,
+        "Sk": 0.032384070744699844,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.007918015444563394,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.01844296525229655,
+        "Sk": -0.004371078786115922,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.014071886466180628,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|matched|sttNone|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.046710484058114954,
+        "Sk": 0.058436019763893524,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.01172553570577857,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02734962562670623,
+        "Sk": 0.03222737481431362,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.004877749187607389,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.012044239853731625,
+        "Sk": -0.014712905100286064,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.002668665246554439,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|matched|sttNone|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.06968670941853973,
+        "Sk": 0.05127011916955221,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.01841659024898752,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04030208618926324,
+        "Sk": 0.029992217662735417,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.010309868526527821,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.01844296525229655,
+        "Sk": 0.02216303038730798,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.0037200651350114307,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|matched|sttNone|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.046710484058114954,
+        "Sk": 0.05604627520510881,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.009335791146993858,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02734962562670623,
+        "Sk": 0.03150953608907511,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.004159910462368882,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.012044239853731625,
+        "Sk": -0.012665003838651412,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.0006207639849197862,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t0|matched|sttNone|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.06968670941853973,
+        "Sk": 0.06030615256028994,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.009380556858249789,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04030208618926324,
+        "Sk": 0.03379967277779472,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0065024134114685175,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.01844296525229655,
+        "Sk": -0.033108043424399485,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.014665078172102934,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|both|stt4|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.08634528736177523,
+        "Sk": 0.08443387398900631,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0019114133727689137,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04754048482457397,
+        "Sk": 0.051049319633698034,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0035088348091240618,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03340394481618714,
+        "Sk": -0.03450782670050184,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.0011038818843147058,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|both|stt4|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.07991430563092496,
+        "Sk": 0.1333636200466585,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.05344931441573354,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.043361025450126156,
+        "Sk": 0.07637668152911115,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.03301565607898499,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03769249879816382,
+        "Sk": -0.11001953125512075,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.07232703245695693,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|both|stt4|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.08634528736177523,
+        "Sk": 0.0914798887043583,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0051346013425830755,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04754048482457397,
+        "Sk": 0.05587212356960997,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.008331638745036,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03340394481618714,
+        "Sk": -0.032721534931714556,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.0006824098844725804,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|both|stt4|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.07991430563092496,
+        "Sk": 0.13043730414592036,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.05052299851499541,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.043361025450126156,
+        "Sk": 0.07458318874503786,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.031222163294911703,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03769249879816382,
+        "Sk": -0.08226171532151562,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.0445692165233518,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|both|stt4|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.08634528736177523,
+        "Sk": 0.08375839324112096,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0025868941206542706,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04754048482457397,
+        "Sk": 0.049668784634928936,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.002128299810354964,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03340394481618714,
+        "Sk": -0.03344493898465939,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 4.099416847225257e-05,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|both|stt4|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.07991430563092496,
+        "Sk": 0.11312137131190403,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.03320706568097907,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.043361025450126156,
+        "Sk": 0.06334718422456348,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.019986158774437324,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03769249879816382,
+        "Sk": -0.061929935035900885,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.024237436237737067,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|both|sttNone|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.06856147023850309,
+        "Sk": 0.08998503206483491,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.021423561826331816,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03822051290294023,
+        "Sk": 0.0492530496310888,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.011032536728148572,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.044106683311451775,
+        "Sk": -0.016722481824027458,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.027384201487424317,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|both|sttNone|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.0764363163726897,
+        "Sk": 0.0706680083390525,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.005768308033637204,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04367815646631455,
+        "Sk": 0.040097683028274045,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0035804734380405073,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.011563686512323848,
+        "Sk": -0.0005712883661647257,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.010992398146159123,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|both|sttNone|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.06856147023850309,
+        "Sk": 0.09985449105009123,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.031293020811588135,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03822051290294023,
+        "Sk": 0.05317350048336367,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.01495298758042344,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.044106683311451775,
+        "Sk": -0.013510979226671443,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.03059570408478033,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|both|sttNone|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.0764363163726897,
+        "Sk": 0.07455025394079627,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0018860624318934316,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04367815646631455,
+        "Sk": 0.04323552766402537,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.00044262880228918,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.011563686512323848,
+        "Sk": 0.01483595315480723,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.003272266642483382,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|both|sttNone|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.06856147023850309,
+        "Sk": 0.08849380883882803,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.019932338600324936,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03822051290294023,
+        "Sk": 0.0483888337948786,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.010168320891938372,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.044106683311451775,
+        "Sk": -0.015625431569833977,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.028481251741617798,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|both|sttNone|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.0764363163726897,
+        "Sk": 0.06906557704900415,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.007370739323685552,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04367815646631455,
+        "Sk": 0.03890018690623566,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.004777969560078893,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.011563686512323848,
+        "Sk": 0.0136803599768999,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.0021166734645760524,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|matched|stt4|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.08634528736177523,
+        "Sk": 0.09407458533875016,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.007729297976974928,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04754048482457397,
+        "Sk": 0.052579618509770776,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.005039133685196803,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03340394481618714,
+        "Sk": -0.041777273470401534,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.008373328654214397,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|matched|stt4|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.07991430563092496,
+        "Sk": 0.11624544731276415,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.036331141681839194,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.043361025450126156,
+        "Sk": 0.06556876288951638,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.022207737439390224,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03769249879816382,
+        "Sk": -0.09835715865233284,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.06066465985416902,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|matched|stt4|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.08634528736177523,
+        "Sk": 0.10642073137232214,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.02007544401054691,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04754048482457397,
+        "Sk": 0.05899474593092989,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.011454261106355917,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03340394481618714,
+        "Sk": -0.04459427762701521,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.011190332810828076,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|matched|stt4|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.07991430563092496,
+        "Sk": 0.12111752330640008,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.04120321767547512,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.043361025450126156,
+        "Sk": 0.06846718771993046,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.025106162269804305,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03769249879816382,
+        "Sk": -0.07186567565840148,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.03417317686023766,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|matched|stt4|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.08634528736177523,
+        "Sk": 0.09353504161839382,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.007189754256618594,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04754048482457397,
+        "Sk": 0.05178837062006815,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.004247885795494177,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03340394481618714,
+        "Sk": -0.04082761305179572,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.007423668235608583,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|matched|stt4|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.07991430563092496,
+        "Sk": 0.10400888355459073,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.024094577923665775,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.043361025450126156,
+        "Sk": 0.057644966191642805,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.014283940741516649,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03769249879816382,
+        "Sk": -0.051550400040715004,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.013857901242551186,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|matched|sttNone|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.06856147023850309,
+        "Sk": 0.08915269808585394,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.020591227847350846,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03822051290294023,
+        "Sk": 0.048472951437702125,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.010252438534761897,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.044106683311451775,
+        "Sk": -0.005410158576448372,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.0386965247350034,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|matched|sttNone|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.0764363163726897,
+        "Sk": 0.06811113553095238,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.00832518084173732,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04367815646631455,
+        "Sk": 0.03862859981712961,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.005049556649184946,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.011563686512323848,
+        "Sk": 0.007395690560115417,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.004167995952208432,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|matched|sttNone|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.06856147023850309,
+        "Sk": 0.09985369389243534,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.03129222365393225,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03822051290294023,
+        "Sk": 0.0539684820304836,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.015747969127543372,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.044106683311451775,
+        "Sk": -0.002543106856052903,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.04156357645539887,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|matched|sttNone|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.0764363163726897,
+        "Sk": 0.06982378981468322,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.006612526558006482,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04367815646631455,
+        "Sk": 0.03957878523437584,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.004099371231938709,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.011563686512323848,
+        "Sk": 0.014541224442966374,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.0029775379306425254,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|matched|sttNone|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.06856147023850309,
+        "Sk": 0.08793376852886317,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.01937229829036008,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03822051290294023,
+        "Sk": 0.04806624731977921,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.009845734416838982,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.044106683311451775,
+        "Sk": -0.004441021705857329,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.03966566160559445,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d0|t1|matched|sttNone|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.0764363163726897,
+        "Sk": 0.0670441115337919,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0093922048388978,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.04367815646631455,
+        "Sk": 0.03754788673471396,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.006130269731600593,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.011563686512323848,
+        "Sk": 0.01566611537419905,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.004102428861875203,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|both|stt4|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.06141874074435749,
+        "Sk": 0.05212621465520477,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.009292526089152722,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03463166558857006,
+        "Sk": 0.030722145473742968,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.003909520114827092,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.0024371996766493586,
+        "Sk": 0.0016361575048486174,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.0008010421718007412,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|both|stt4|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.051599728885819665,
+        "Sk": 0.056618933761446166,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.005019204875626501,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.030725141508114045,
+        "Sk": 0.03269458674322466,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0019694452351106152,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.00286769466282382,
+        "Sk": -0.01618801464220086,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.013320319979377038,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|both|stt4|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.06141874074435749,
+        "Sk": 0.054003984402520674,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.007414756341836817,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03463166558857006,
+        "Sk": 0.03350663569084972,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0011250298977203421,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.0024371996766493586,
+        "Sk": -0.0010522625222740614,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.0013849371543752972,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|both|stt4|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.051599728885819665,
+        "Sk": 0.06571913500605288,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.014119406120233213,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.030725141508114045,
+        "Sk": 0.037607040259982266,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.006881898751868221,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.00286769466282382,
+        "Sk": -0.013098793876441491,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.010231099213617671,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|both|stt4|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.06141874074435749,
+        "Sk": 0.0521383917630545,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.009280348981302991,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03463166558857006,
+        "Sk": 0.029738083486011868,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.004893582102558192,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.0024371996766493586,
+        "Sk": 0.0021215218191555636,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.00031567785749379504,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|both|stt4|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.051599728885819665,
+        "Sk": 0.055683540693050634,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.004083811807230969,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.030725141508114045,
+        "Sk": 0.032013612107610945,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0012884705994969,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.00286769466282382,
+        "Sk": -0.02237508909949596,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.01950739443667214,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|both|sttNone|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.04887805537378047,
+        "Sk": 0.05685117314286785,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.007973117769087379,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.027316863120858043,
+        "Sk": 0.03194709235456543,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.004630229233707386,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0018909391101460684,
+        "Sk": -0.008982088822341836,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.007091149712195767,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|both|sttNone|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.05884766711122691,
+        "Sk": 0.0452108546441565,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.013636812467070408,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03275173599888509,
+        "Sk": 0.026754685910438267,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.005997050088446823,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03722230853349691,
+        "Sk": -0.02214057627250061,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.015081732260996298,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|both|sttNone|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.04887805537378047,
+        "Sk": 0.06247933941591988,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.013601284042139408,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.027316863120858043,
+        "Sk": 0.03412762675104372,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.006810763630185679,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0018909391101460684,
+        "Sk": -0.005258875251953365,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.0033679361418072966,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|both|sttNone|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.05884766711122691,
+        "Sk": 0.044833865099111914,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.014013802012114995,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03275173599888509,
+        "Sk": 0.025698061368500343,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.007053674630384747,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03722230853349691,
+        "Sk": -0.011549409461620629,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.02567289907187628,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|both|sttNone|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.04887805537378047,
+        "Sk": 0.05668198688358866,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.007803931509808189,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.027316863120858043,
+        "Sk": 0.031505681674983174,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.004188818554125132,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0018909391101460684,
+        "Sk": -0.00846918723151115,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.006578248121365081,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|both|sttNone|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.05884766711122691,
+        "Sk": 0.04929704562630718,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.009550621484919732,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03275173599888509,
+        "Sk": 0.028049320884431996,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.004702415114453094,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03722230853349691,
+        "Sk": -0.004874394595548222,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.03234791393794869,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|matched|stt4|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.06141874074435749,
+        "Sk": 0.049568902624046715,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.011849838120310777,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03463166558857006,
+        "Sk": 0.030635721230492026,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.003995944358078034,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.0024371996766493586,
+        "Sk": -0.0019590455570565324,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.00047815411959282626,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|matched|stt4|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.051599728885819665,
+        "Sk": 0.055988433323746034,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.004388704437926369,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.030725141508114045,
+        "Sk": 0.03318442382262623,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.002459282314512184,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.00286769466282382,
+        "Sk": -0.015549704957137866,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.012682010294314046,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|matched|stt4|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.06141874074435749,
+        "Sk": 0.05434815837307942,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.00707058237127807,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03463166558857006,
+        "Sk": 0.03386541477692627,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0007662508116437899,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.0024371996766493586,
+        "Sk": -0.0008841290745475634,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.0015530706021017952,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|matched|stt4|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.051599728885819665,
+        "Sk": 0.060124153097409365,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0085244242115897,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.030725141508114045,
+        "Sk": 0.03491189569387877,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.004186754185764727,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.00286769466282382,
+        "Sk": -0.01157521868061176,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.008707524017787939,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|matched|stt4|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.06141874074435749,
+        "Sk": 0.049595655776367376,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.011823084967990116,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03463166558857006,
+        "Sk": 0.029391438996800433,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.005240226591769627,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.0024371996766493586,
+        "Sk": -0.0013993164979079144,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.0010378831787414442,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|matched|stt4|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.051599728885819665,
+        "Sk": 0.055660760284448836,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.004061031398629171,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.030725141508114045,
+        "Sk": 0.03246957701048531,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0017444355023712617,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.00286769466282382,
+        "Sk": -0.020172936408943114,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.017305241746119294,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|matched|sttNone|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.04887805537378047,
+        "Sk": 0.05685856224131122,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.007980506867530754,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.027316863120858043,
+        "Sk": 0.03177480871325553,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.00445794559239749,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0018909391101460684,
+        "Sk": -0.008676264560066668,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.006785325449920599,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|matched|sttNone|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.05884766711122691,
+        "Sk": 0.04526577919274123,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.013581887918485677,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03275173599888509,
+        "Sk": 0.02662750318582437,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.00612423281306072,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03722230853349691,
+        "Sk": -0.023049484610230004,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.014172823923266905,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|matched|sttNone|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.04887805537378047,
+        "Sk": 0.06275742917151546,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.01387937379773499,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.027316863120858043,
+        "Sk": 0.034231000648550856,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.006914137527692814,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0018909391101460684,
+        "Sk": -0.005296448571168665,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.0034055094610225965,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|matched|sttNone|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.05884766711122691,
+        "Sk": 0.045272829300835045,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.013574837810391864,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03275173599888509,
+        "Sk": 0.025587467311389965,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.007164268687495125,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03722230853349691,
+        "Sk": -0.009542612029989827,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.02767969650350708,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|matched|sttNone|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.04887805537378047,
+        "Sk": 0.0566829620736133,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.007804906699832831,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.027316863120858043,
+        "Sk": 0.03142180113183173,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.00410493801097369,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.0018909391101460684,
+        "Sk": -0.00815039313111189,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.0062594540209658205,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t0|matched|sttNone|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.05884766711122691,
+        "Sk": 0.0482732272287269,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.010574439882500009,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03275173599888509,
+        "Sk": 0.027579701495925327,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.005172034502959763,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.03722230853349691,
+        "Sk": -0.0022755214533514375,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.034946787080145474,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|both|stt4|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.05700196273640743,
+        "Sk": 0.05362046624848889,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0033814964879185436,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03124235538908296,
+        "Sk": 0.0313484751371067,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.00010611974802374191,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.015110235301877424,
+        "Sk": -0.018251986351056463,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.0031417510491790392,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|both|stt4|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.049976591067041935,
+        "Sk": 0.06173318806957444,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.011756597002532503,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02842778796192095,
+        "Sk": 0.03514820210968435,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0067204141477634,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.01226817084726269,
+        "Sk": -0.00025496913588461727,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.012013201711378074,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|both|stt4|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.05700196273640743,
+        "Sk": 0.05972537707904273,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0027234143426352955,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03124235538908296,
+        "Sk": 0.03639084325913752,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.005148487870054563,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.015110235301877424,
+        "Sk": -0.019964613621155307,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.004854378319277883,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|both|stt4|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.049976591067041935,
+        "Sk": 0.06156502460713227,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.011588433540090336,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02842778796192095,
+        "Sk": 0.03568933548309011,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0072615475211691635,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.01226817084726269,
+        "Sk": 0.020335668252428583,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.008067497405165892,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|both|stt4|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.05700196273640743,
+        "Sk": 0.05282660089512595,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.004175361841281484,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03124235538908296,
+        "Sk": 0.030167763357793156,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0010745920312898033,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.015110235301877424,
+        "Sk": -0.01776382631887969,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.002653591017002266,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|both|stt4|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.049976591067041935,
+        "Sk": 0.06217798980779459,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.012201398740752656,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02842778796192095,
+        "Sk": 0.034843490565559604,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.006415702603638655,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.01226817084726269,
+        "Sk": 0.02048207536278483,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.008213904515522138,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|both|sttNone|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.0521601206585736,
+        "Sk": 0.05535121376982309,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.003191093111249488,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02871656743399706,
+        "Sk": 0.0308519942969773,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.002135426862980242,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.01462517914061503,
+        "Sk": -0.0058373610102517865,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.008787818130363244,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|both|sttNone|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.0483607973466449,
+        "Sk": 0.050083499425715175,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0017227020790702777,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.027117774754431834,
+        "Sk": 0.028413448215880065,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.001295673461448231,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.025479267781280908,
+        "Sk": -0.014870753965528406,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.010608513815752502,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|both|sttNone|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.0521601206585736,
+        "Sk": 0.06435275187908436,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.012192631220510758,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02871656743399706,
+        "Sk": 0.034747533026607845,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.006030965592610786,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.01462517914061503,
+        "Sk": -0.014768072450846848,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.0001428933102318175,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|both|sttNone|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.0483607973466449,
+        "Sk": 0.053296474397226595,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.004935677050581698,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.027117774754431834,
+        "Sk": 0.03031825517478498,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0032004804203531467,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.025479267781280908,
+        "Sk": -0.009812614765807467,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.01566665301547344,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|both|sttNone|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.0521601206585736,
+        "Sk": 0.05536507175041579,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.003204951091842184,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02871656743399706,
+        "Sk": 0.030535969618770746,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0018194021847736871,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.01462517914061503,
+        "Sk": -0.005371837401580309,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.00925334173903472,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|both|sttNone|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.0483607973466449,
+        "Sk": 0.05472207383981979,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.006361276493174896,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.027117774754431834,
+        "Sk": 0.030506257057964337,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.003388482303532503,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.025479267781280908,
+        "Sk": -0.007150842515770665,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.01832842526551024,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|matched|stt4|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.05700196273640743,
+        "Sk": 0.05363551758043223,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0033664451559752007,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03124235538908296,
+        "Sk": 0.03133955315480404,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 9.719776572107708e-05,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.015110235301877424,
+        "Sk": -0.01846031593286317,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.0033500806309857464,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|matched|stt4|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.049976591067041935,
+        "Sk": 0.06183161452080646,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.011855023453764525,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02842778796192095,
+        "Sk": 0.03516824189194839,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.006740453930027444,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.01226817084726269,
+        "Sk": -0.0014261905400565222,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.010841980307206168,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|matched|stt4|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.05700196273640743,
+        "Sk": 0.06026777674532284,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.003265814008915409,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03124235538908296,
+        "Sk": 0.036938883831418134,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.005696528442335175,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.015110235301877424,
+        "Sk": -0.020052742366703215,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.004942507064825791,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|matched|stt4|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.049976591067041935,
+        "Sk": 0.06191094831643924,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.011934357249397308,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02842778796192095,
+        "Sk": 0.03624431904933188,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.007816531087410934,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.01226817084726269,
+        "Sk": 0.022169689336172145,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.009901518488909454,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|matched|stt4|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.05700196273640743,
+        "Sk": 0.05305054206076923,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.003951420675638202,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.03124235538908296,
+        "Sk": 0.03042505372150349,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": -0.0008173016675794703,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.015110235301877424,
+        "Sk": -0.01796267815981758,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.002852442857940155,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|matched|stt4|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.049976591067041935,
+        "Sk": 0.06224409114586732,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.012267500078825384,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02842778796192095,
+        "Sk": 0.035077534033944265,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.006649746072023316,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.01226817084726269,
+        "Sk": 0.02282789624956975,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.01055972540230706,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|matched|sttNone|pooled|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.0521601206585736,
+        "Sk": 0.05626719209626511,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.004107071437691505,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02871656743399706,
+        "Sk": 0.03147483876855797,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0027582713345609133,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.01462517914061503,
+        "Sk": -0.013841671539151409,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.0007835076014636212,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|matched|sttNone|pooled|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.0483607973466449,
+        "Sk": 0.05054221649807934,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0021814191514344453,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.027117774754431834,
+        "Sk": 0.02915149927275324,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0020337245183214073,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.025479267781280908,
+        "Sk": -0.014359696124322951,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.011119571656957957,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "not_this_row",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "pooled (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|matched|sttNone|selective_regularized|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.0521601206585736,
+        "Sk": 0.06516150549155537,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.013001384832981772,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02871656743399706,
+        "Sk": 0.03514355032867117,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.00642698289467411,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.01462517914061503,
+        "Sk": -0.01496148074902695,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": 0.00033630160841192046,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|matched|sttNone|selective_regularized|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.0483607973466449,
+        "Sk": 0.05343891122347946,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0050781138768345654,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.027117774754431834,
+        "Sk": 0.03032483081918335,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0032070560647515164,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.025479267781280908,
+        "Sk": -0.009137032775247937,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.01634223500603297,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "regularized",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective_regularized (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|matched|sttNone|selective|spline|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "spline",
+    "rows": [
+      {
+        "S0": 0.0521601206585736,
+        "Sk": 0.05634490902242423,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.004184788363850625,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.02871656743399706,
+        "Sk": 0.03102961695337303,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0023130495193759704,
+        "k": 1,
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.01462517914061503,
+        "Sk": -0.01324933597757903,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.0013758431630359995,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  },
+  "d1|t1|matched|sttNone|selective|transformer|test": {
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "model": "transformer",
+    "rows": [
+      {
+        "S0": 0.0483607973466449,
+        "Sk": 0.05475204062193017,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.006391243275285272,
+        "k": 1,
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": 0.027117774754431834,
+        "Sk": 0.03077195772642042,
+        "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+        "delta": 0.0036541829719885857,
+        "k": 1,
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "harmful",
+        "task": "predose_conditioned"
+      },
+      {
+        "S0": -0.025479267781280908,
+        "Sk": -0.008628374191149346,
+        "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+        "delta": -0.01685089359013156,
+        "k": 1,
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sign": "helpful",
+        "task": "predose_conditioned"
+      }
+    ],
+    "selective_sharing": "v1",
+    "sharing_regimes": [
+      "context_specific (S0)",
+      "selective (Sk)"
+    ],
+    "task": "predose_conditioned"
+  }
+}

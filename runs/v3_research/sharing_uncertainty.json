@@ -1,0 +1,2465 @@
+{
+  "groups": [
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.0031417510491790392,
+      "mean_delta": -0.008992685635844723,
+      "min_delta": -0.039415333305071895,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.02034556252355729,
+      "signs": [
+        "helpful",
+        "harmful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.007091149712195767,
+      "mean_delta": -0.006942378348590636,
+      "min_delta": -0.027384201487424317,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.015125451290199468,
+      "signs": [
+        "harmful",
+        "helpful",
+        "harmful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.008373328654214397,
+      "mean_delta": -0.0024864046119708895,
+      "min_delta": -0.021190873613490875,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.012985743429788695,
+      "signs": [
+        "helpful",
+        "harmful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "pooled",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.006785325449920599,
+      "mean_delta": -0.00822223215996035,
+      "min_delta": -0.0386965247350034,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.020604957878383942,
+      "signs": [
+        "helpful",
+        "helpful",
+        "harmful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.005672557150555285,
+      "mean_delta": 0.0013444978982189992,
+      "min_delta": -0.003909520114827092,
+      "n": 4,
+      "n_harmful": 3,
+      "n_helpful": 1,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.004185480334041069,
+      "signs": [
+        "harmful",
+        "harmful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.011032536728148572,
+      "mean_delta": 0.006187515147514806,
+      "min_delta": 0.002135426862980242,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.003781667530072309,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.005039133685196803,
+      "mean_delta": 0.0008634897270525018,
+      "min_delta": -0.003995944358078034,
+      "n": 4,
+      "n_harmful": 3,
+      "n_helpful": 1,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.0038183785182446368,
+      "signs": [
+        "harmful",
+        "harmful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "pooled",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.010252438534761897,
+      "mean_delta": 0.005652443604498628,
+      "min_delta": 0.0027582713345609133,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.003226167224603606,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": -0.0019114133727689137,
+      "mean_delta": -0.004704139752270789,
+      "min_delta": -0.009292526089152722,
+      "n": 4,
+      "n_harmful": 0,
+      "n_helpful": 4,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.003205502550504356,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.021423561826331816,
+      "mean_delta": 0.01096549604002349,
+      "min_delta": 0.003191093111249488,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.007721444463581604,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.007729297976974928,
+      "mean_delta": -0.003944387763283895,
+      "min_delta": -0.011849838120310777,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.008524364392581639,
+      "signs": [
+        "helpful",
+        "harmful",
+        "helpful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "pooled",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.020591227847350846,
+      "mean_delta": 0.010362435200212237,
+      "min_delta": 0.004107071437691505,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.007117214609861057,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.002653591017002266,
+      "mean_delta": -0.009446760368220281,
+      "min_delta": -0.04016594880086184,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.02052219282932683,
+      "signs": [
+        "helpful",
+        "harmful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.006578248121365081,
+      "mean_delta": -0.007198316106136426,
+      "min_delta": -0.028481251741617798,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.01568864254701151,
+      "signs": [
+        "harmful",
+        "helpful",
+        "harmful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.007423668235608583,
+      "mean_delta": -0.0031499683268277766,
+      "min_delta": -0.0218381012221184,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.012929784027202832,
+      "signs": [
+        "helpful",
+        "harmful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.0062594540209658205,
+      "mean_delta": -0.00854032169068621,
+      "min_delta": -0.03966566160559445,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.021000598318958594,
+      "signs": [
+        "harmful",
+        "helpful",
+        "harmful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.0036729995339494226,
+      "mean_delta": -4.1718697385902115e-05,
+      "min_delta": -0.004893582102558192,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.0037910208690401037,
+      "signs": [
+        "harmful",
+        "harmful",
+        "helpful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.010168320891938372,
+      "mean_delta": 0.0055125002665154365,
+      "min_delta": 0.0018194021847736871,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.003521271736871491,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.004247885795494177,
+      "mean_delta": -0.00032402520449979245,
+      "min_delta": -0.005240226591769627,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.003916471463358423,
+      "signs": [
+        "harmful",
+        "harmful",
+        "helpful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.009845734416838982,
+      "mean_delta": 0.005105908102389381,
+      "min_delta": 0.0023130495193759704,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.003274286956203526,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": -0.0025868941206542706,
+      "mean_delta": -0.0050006584878901274,
+      "min_delta": -0.009280348981302991,
+      "n": 4,
+      "n_harmful": 0,
+      "n_helpful": 4,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.002938595662817879,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.019932338600324936,
+      "mean_delta": 0.01073807963793145,
+      "min_delta": 0.003204951091842184,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.007106621862550264,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.007189754256618594,
+      "mean_delta": -0.00427811867612087,
+      "min_delta": -0.011823084967990116,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.008298684577253372,
+      "signs": [
+        "helpful",
+        "harmful",
+        "helpful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.01937229829036008,
+      "mean_delta": 0.010174446125259348,
+      "min_delta": 0.004184788363850625,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.006501142048672989,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.004854378319277883,
+      "mean_delta": -0.010072116398561618,
+      "min_delta": -0.043075496874676475,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.02217849588418353,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.0033679361418072966,
+      "mean_delta": -0.006041442341610102,
+      "min_delta": -0.03059570408478033,
+      "n": 4,
+      "n_harmful": 3,
+      "n_helpful": 1,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.01643153060515658,
+      "signs": [
+        "harmful",
+        "helpful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.011190332810828076,
+      "mean_delta": -0.0025492968088503365,
+      "min_delta": -0.024776956508953417,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.01570526312807453,
+      "signs": [
+        "helpful",
+        "harmful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.0034055094610225965,
+      "mean_delta": -0.008788275034852478,
+      "min_delta": -0.04156357645539887,
+      "n": 4,
+      "n_harmful": 3,
+      "n_helpful": 1,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.02188932877812112,
+      "signs": [
+        "harmful",
+        "helpful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.008867906888070154,
+      "mean_delta": 0.005305750901360094,
+      "min_delta": -0.0011250298977203421,
+      "n": 4,
+      "n_harmful": 3,
+      "n_helpful": 1,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.004590737989437608,
+      "signs": [
+        "harmful",
+        "harmful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.01495298758042344,
+      "mean_delta": 0.008304129514615774,
+      "min_delta": 0.0054218012552431916,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.004468875535490563,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.011454261106355917,
+      "mean_delta": 0.005563606386444608,
+      "min_delta": -0.0007662508116437899,
+      "n": 4,
+      "n_harmful": 3,
+      "n_helpful": 1,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.004995944393452989,
+      "signs": [
+        "harmful",
+        "harmful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.015747969127543372,
+      "mean_delta": 0.008491709684379421,
+      "min_delta": 0.004877749187607389,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.0049148022070887865,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.0051346013425830755,
+      "mean_delta": -0.0007576921564093897,
+      "min_delta": -0.007414756341836817,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.005730974581218761,
+      "signs": [
+        "helpful",
+        "harmful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.031293020811588135,
+      "mean_delta": 0.017224627530036743,
+      "min_delta": 0.011811574045908664,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.009410463014411187,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.02007544401054691,
+      "mean_delta": 0.0018827506050613976,
+      "min_delta": -0.008739673227938657,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.013239902028818936,
+      "signs": [
+        "helpful",
+        "harmful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "spline",
+        "sharing": "selective_regularized",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.03129222365393225,
+      "mean_delta": 0.017474629497606895,
+      "min_delta": 0.01172553570577857,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.00925407602218637,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.11671882715664499,
+      "mean_delta": 0.04758824447040023,
+      "min_delta": -0.012013201711378074,
+      "n": 4,
+      "n_harmful": 3,
+      "n_helpful": 1,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.05807371215235974,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": -0.008837346678635997,
+      "mean_delta": -0.01137999772538598,
+      "min_delta": -0.015081732260996298,
+      "n": 4,
+      "n_harmful": 0,
+      "n_helpful": 4,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.002640286207611409,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.08987821695545546,
+      "mean_delta": 0.03809572669918308,
+      "min_delta": -0.010841980307206168,
+      "n": 4,
+      "n_harmful": 3,
+      "n_helpful": 1,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.04557608725872767,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": -0.004167995952208432,
+      "mean_delta": -0.01088306949965348,
+      "min_delta": -0.014172823923266905,
+      "n": 4,
+      "n_harmful": 0,
+      "n_helpful": 4,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.004695358837252711,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.03301565607898499,
+      "mean_delta": 0.012974446370625678,
+      "min_delta": 0.0019694452351106152,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.013779375419494675,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.001295673461448231,
+      "mean_delta": -0.004381041934081311,
+      "min_delta": -0.009242317671286145,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.004438824609691451,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.022207737439390224,
+      "mean_delta": 0.011896580642567036,
+      "min_delta": 0.002459282314512184,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.008949972406079549,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.0020337245183214073,
+      "mean_delta": -0.004264520097121913,
+      "min_delta": -0.007918015444563394,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.0043623666078416974,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.05344931441573354,
+      "mean_delta": 0.022180716388356017,
+      "min_delta": 0.005019204875626501,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.02155975581062371,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.0017227020790702777,
+      "mean_delta": -0.009070169223325429,
+      "min_delta": -0.01859825847166438,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.008926124084319392,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.036331141681839194,
+      "mean_delta": 0.020006094222470114,
+      "min_delta": 0.004388704437926369,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.01451728155677018,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "pooled",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.0021814191514344453,
+      "mean_delta": -0.008798284208441988,
+      "min_delta": -0.015467487224979398,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.007919150754068785,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.05600348447717968,
+      "mean_delta": 0.026990554916777754,
+      "min_delta": 0.008213904515522138,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.020476735052246602,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.02149675105048724,
+      "mean_delta": -0.00676572867209891,
+      "min_delta": -0.03234791393794869,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.023564160521681712,
+      "signs": [
+        "harmful",
+        "harmful",
+        "helpful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.07083659481323536,
+      "mean_delta": 0.028139865801053224,
+      "min_delta": 0.01055972540230706,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.02859741010908391,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.014665078172102934,
+      "mean_delta": -0.008257543409074725,
+      "min_delta": -0.034946787080145474,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.022093565351029115,
+      "signs": [
+        "harmful",
+        "harmful",
+        "helpful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.019986158774437324,
+      "mean_delta": 0.009777324798561653,
+      "min_delta": 0.0012884705994969,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.007964011350450571,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.003388482303532503,
+      "mean_delta": -0.0018913398410332315,
+      "min_delta": -0.004777969560078893,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.0038421314952564955,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.016769157943175968,
+      "mean_delta": 0.0098618200647718,
+      "min_delta": 0.0017444355023712617,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.006915581906461212,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.0036541829719885857,
+      "mean_delta": -0.003537633668510072,
+      "min_delta": -0.0065024134114685175,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.004827185976601603,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.03320706568097907,
+      "mean_delta": 0.016868326113326174,
+      "min_delta": 0.004083811807230969,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.012293853935891089,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.006361276493174896,
+      "mean_delta": -0.0027713068260012685,
+      "min_delta": -0.009550621484919732,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.007201000315040466,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.024094577923665775,
+      "mean_delta": 0.015629751910156458,
+      "min_delta": 0.004061031398629171,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.00928447376793931,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.006391243275285272,
+      "mean_delta": -0.005738989576090581,
+      "min_delta": -0.010574439882500009,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.008106193572844018,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.15302071666257727,
+      "mean_delta": 0.053972132451178156,
+      "min_delta": 0.008067497405165892,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.06811644532129114,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.023227907905316224,
+      "mean_delta": -0.0037098443848875293,
+      "min_delta": -0.02567289907187628,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.02160041216164655,
+      "signs": [
+        "harmful",
+        "harmful",
+        "helpful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.07528720416713497,
+      "mean_delta": 0.032017355883517506,
+      "min_delta": 0.008707524017787939,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.031141536356043116,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "contrast_bias",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.0037200651350114307,
+      "mean_delta": -0.009331082110971523,
+      "min_delta": -0.02767969650350708,
+      "n": 4,
+      "n_harmful": 2,
+      "n_helpful": 2,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.015358629353005897,
+      "signs": [
+        "harmful",
+        "harmful",
+        "helpful",
+        "helpful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.031222163294911703,
+      "mean_delta": 0.018715402437606103,
+      "min_delta": 0.006881898751868221,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.013464310315369163,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.0032004804203531467,
+      "mean_delta": -0.0018441095874410195,
+      "min_delta": -0.007053674630384747,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.004323600010189678,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.025106162269804305,
+      "mean_delta": 0.014739318557219617,
+      "min_delta": 0.004186754185764727,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.010284031919153266,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "crps",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.0032070560647515164,
+      "mean_delta": -0.0045916130953025346,
+      "min_delta": -0.010309868526527821,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.005784420013934078,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.05052299851499541,
+      "mean_delta": 0.029501586267027702,
+      "min_delta": 0.011588433540090336,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.01957925268503702,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "both",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.004935677050581698,
+      "mean_delta": -0.003570920210604832,
+      "min_delta": -0.014013802012114995,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.007838323341873513,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sparse_target_train": 4,
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.04120321767547512,
+      "mean_delta": 0.022371692695843652,
+      "min_delta": 0.0085244242115897,
+      "n": 4,
+      "n_harmful": 4,
+      "n_helpful": 0,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.01511122340956915,
+      "signs": [
+        "harmful",
+        "harmful",
+        "harmful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    },
+    {
+      "generate_seeds": [
+        20261027,
+        20262036
+      ],
+      "key": {
+        "bank": "matched",
+        "contrast": "sharing",
+        "metric": "rmse_log",
+        "model": "transformer",
+        "sharing": "selective_regularized",
+        "sparse_target_train": "full",
+        "split": "test",
+        "task": "predose_conditioned"
+      },
+      "max_delta": 0.0050781138768345654,
+      "mean_delta": -0.008381460185137826,
+      "min_delta": -0.01841659024898752,
+      "n": 4,
+      "n_harmful": 1,
+      "n_helpful": 3,
+      "note": "Sharing is not required to improve. Signs are published as computed.",
+      "sd_delta": 0.010197455020147352,
+      "signs": [
+        "helpful",
+        "helpful",
+        "helpful",
+        "harmful"
+      ],
+      "train_seeds": [
+        5150,
+        5167
+      ]
+    }
+  ],
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "n_groups": 72,
+  "n_rows": 288,
+  "note": "Uncertainty is the replicate-to-replicate spread of paired \u0394. It is not a license to pick the favorable seed.",
+  "seed_separation": {
+    "generate_seed": "dataset generation only",
+    "train_seed": "splits and model training only"
+  }
+}

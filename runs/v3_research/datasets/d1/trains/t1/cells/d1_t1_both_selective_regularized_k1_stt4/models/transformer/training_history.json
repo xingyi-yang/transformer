@@ -1,0 +1,156 @@
+{
+  "arch": {
+    "d_model": 32,
+    "dropout": 0.1,
+    "group_dims": {
+      "baseline": 1,
+      "bio": 3,
+      "compound": 4,
+      "regimen": 5,
+      "species": 1
+    },
+    "n_heads": 2,
+    "n_layers": 1,
+    "q_dim": 5,
+    "treat_dev_dim": 6
+  },
+  "best_val_rmse_member0": 0.07314671576023102,
+  "lambda_growth": 8.0,
+  "lambda_treatment": 8.0,
+  "members": [
+    {
+      "best_val_rmse": 0.07314671576023102,
+      "epochs_run": 18,
+      "member": 0,
+      "phase1": {
+        "best_val_rmse": 0.06832591444253922,
+        "curve": [
+          {
+            "epoch": 0,
+            "train_loss": 2.0080617968241374,
+            "val_rmse": 0.12035591900348663
+          },
+          {
+            "epoch": 1,
+            "train_loss": 0.8855851705869039,
+            "val_rmse": 0.11275076866149902
+          },
+          {
+            "epoch": 2,
+            "train_loss": 0.7053006736437479,
+            "val_rmse": 0.10335245728492737
+          },
+          {
+            "epoch": 3,
+            "train_loss": 0.5954966449737549,
+            "val_rmse": 0.0961066335439682
+          },
+          {
+            "epoch": 4,
+            "train_loss": 0.4887074522177378,
+            "val_rmse": 0.08931276202201843
+          },
+          {
+            "epoch": 5,
+            "train_loss": 0.4352938743432363,
+            "val_rmse": 0.07522916793823242
+          },
+          {
+            "epoch": 6,
+            "train_loss": 0.3981122668584188,
+            "val_rmse": 0.07155053317546844
+          },
+          {
+            "epoch": 7,
+            "train_loss": 0.35253418525060015,
+            "val_rmse": 0.07438211888074875
+          },
+          {
+            "epoch": 8,
+            "train_loss": 0.33893754919370017,
+            "val_rmse": 0.07855921983718872
+          },
+          {
+            "epoch": 9,
+            "train_loss": 0.30204033573468525,
+            "val_rmse": 0.07288044691085815
+          },
+          {
+            "epoch": 10,
+            "train_loss": 0.27411076744397483,
+            "val_rmse": 0.06938568502664566
+          },
+          {
+            "epoch": 11,
+            "train_loss": 0.25698134740193684,
+            "val_rmse": 0.06832591444253922
+          }
+        ],
+        "epochs_run": 12,
+        "freeze_groups": [],
+        "seed": 5167
+      },
+      "phase2": {
+        "best_val_rmse": 0.07314671576023102,
+        "curve": [
+          {
+            "epoch": 0,
+            "train_loss": 0.4192556625320798,
+            "val_rmse": 0.07314671576023102
+          },
+          {
+            "epoch": 1,
+            "train_loss": 0.29300928115844727,
+            "val_rmse": 0.08181822299957275
+          },
+          {
+            "epoch": 2,
+            "train_loss": 0.2565534100646064,
+            "val_rmse": 0.08310636878013611
+          },
+          {
+            "epoch": 3,
+            "train_loss": 0.21554340918858847,
+            "val_rmse": 0.07948633283376694
+          },
+          {
+            "epoch": 4,
+            "train_loss": 0.20308670685404823,
+            "val_rmse": 0.08256786316633224
+          },
+          {
+            "epoch": 5,
+            "train_loss": 0.1926165670156479,
+            "val_rmse": 0.0813126340508461
+          }
+        ],
+        "epochs_run": 6,
+        "freeze_groups": [],
+        "seed": 5184
+      },
+      "selective_sharing": true,
+      "variant": "regularized"
+    }
+  ],
+  "selective_sharing": {
+    "model": "transformer",
+    "note": "Selective v1 is retained. This variant adds regularized species-specific deviations in nonlinear growth and treatment response. Deviations shrink toward the shared mean; they are not unpenalized species RE.",
+    "regularization": {
+      "growth": "ridge inflation on SPECIES \u00d7 time-basis coefficients (lambda_growth)",
+      "transformer": "phase1 target fit; phase2 extra L2 of species/growth tokens toward phase1 and treatment-deviation head toward 0",
+      "treatment": "ridge inflation on SPECIES \u00d7 exposure/dose coefficients (lambda_treatment)"
+    },
+    "residual": "target_species_only",
+    "shared": [
+      "compound",
+      "regimen"
+    ],
+    "species_specific": [
+      "growth_deviation",
+      "treatment_deviation"
+    ],
+    "training": "phase1: all token groups on target-species train animals; phase2: extra L2 of bio/baseline/species toward phase1 (growth deviations) and treatment-deviation head toward 0",
+    "variant": "regularized"
+  },
+  "y_scale": 0.13349652290344238
+}

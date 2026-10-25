@@ -1,0 +1,142 @@
+run_name: v3_research_d1_t0_matched_pooled_k1_stt4
+output_dir: runs/v3_research/datasets/d1/trains/t0/cells/d1_t0_matched_pooled_k1_stt4
+generate_seed: 20262036
+train_seed: 5150
+seed: 5150
+research:
+  n_dataset_seeds: 2
+  n_train_seeds: 2
+  banks:
+  - matched
+  - both
+  retune_after_test: false
+  design: false
+  real_data: false
+  extra_families: false
+  sparse_target_train_n: 4
+  bayesian_on:
+    dataset_index: 0
+    train_index: 0
+    banks:
+    - matched
+    - both
+    sharings:
+    - context_specific
+  budgets:
+    primary:
+      spline:
+        n_bootstrap: 4
+        oof_folds: 5
+        n_time_knots: 3
+        n_expo_knots: 2
+        lambda_growth: 8.0
+        lambda_treatment: 8.0
+      transformer:
+        n_members: 1
+        max_epochs: 12
+        patience: 5
+        d_model: 32
+        n_heads: 2
+        n_layers: 1
+        lambda_growth: 8.0
+        lambda_treatment: 8.0
+      bayesian:
+        draws: 800
+        tune: 800
+        chains: 2
+        target_accept: 0.9
+        max_animals_per_study: 8
+        sensitivity: &id001
+          enabled: false
+synthetic:
+  enabled: false
+  out_dir: runs/v3_research/datasets/d1/banks/matched/synthetic
+  generator: A
+  n_studies: 12
+  n_other_species_studies: 3
+  n_compounds: 6
+  n_per_sex:
+  - 3
+  - 4
+  donor_scenario: matched
+mapping: configs/mappings/example_send.yaml
+source:
+  type: local
+  root: runs/v3_research/datasets/d1/banks/matched/synthetic/send
+  metadata_dir: runs/v3_research/datasets/d1/banks/matched/synthetic/metadata
+cohort:
+  species: RAT
+  donor_species:
+  - DOG
+  sharing: pooled
+  n_donor_studies: 1
+  study_classes:
+  - REPEAT_DOSE_TOX
+  max_day: 28
+splits:
+  method: random
+  validation: 0.2
+  test: 0.2
+  compound_holdout_auto: 1
+  sparse_target_train_n: 4
+  reuse_target_from: runs/v3_research/datasets/d1/trains/t0/cells/d1_t0_matched_context_specific_k0_full/splits
+models:
+  spline:
+    enabled: true
+    n_bootstrap: 4
+    oof_folds: 5
+    n_time_knots: 3
+    n_expo_knots: 2
+    ridge_alphas:
+    - 0.1
+    - 1.0
+    - 10.0
+    - 100.0
+    - 300.0
+    - 1000.0
+    - 3000.0
+    - 10000.0
+    lambda_growth: 8.0
+    lambda_treatment: 8.0
+    seed: 5150
+  transformer:
+    enabled: true
+    n_members: 1
+    max_epochs: 12
+    patience: 5
+    d_model: 32
+    n_heads: 2
+    n_layers: 1
+    batch_size: 64
+    lambda_growth: 8.0
+    lambda_treatment: 8.0
+    seed: 5150
+    torch_threads: 4
+  bayesian:
+    enabled: false
+    draws: 800
+    tune: 800
+    chains: 2
+    sampler: nutpie
+    target_accept: 0.9
+    max_animals_per_study: 8
+    seed: 5150
+    sensitivity: *id001
+  optional:
+    tft:
+      enabled: false
+    chronos2:
+      enabled: false
+    deepar:
+      enabled: false
+evaluation:
+  tasks:
+  - predose_conditioned
+  n_draws: 40
+  contrast_day: 28
+design: {}
+labels:
+- Synthetic diagnostic.
+- Not design qualification.
+- No real-data validation.
+- No operational recommendation.

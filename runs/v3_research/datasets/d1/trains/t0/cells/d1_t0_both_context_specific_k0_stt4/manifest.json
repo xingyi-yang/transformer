@@ -1,0 +1,161 @@
+{
+  "config_hash": "ebf1c14ca7c08da2",
+  "config_path": "runs/v3_research/datasets/d1/trains/t0/cells/d1_t0_both_context_specific_k0_stt4/effective.yaml",
+  "created_utc": "2026-10-25T01:20:57.860439+00:00",
+  "git_revision": "54095801f1d8d240bbf8b59e5a2506f66ddf5004",
+  "seed": 5150,
+  "software": {
+    "arviz": "1.3.0",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4",
+    "nutpie": "0.16.11",
+    "pandas": "3.1.0",
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "pyarrow": "26.0.0",
+    "pydantic": "2.14.1",
+    "pymc": "6.3.2",
+    "pyreadstat": null,
+    "pytensor": "3.3.4",
+    "python": "3.12.3",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "snowflake-connector-python": null,
+    "torch": "2.14.1"
+  },
+  "stages": {
+    "evaluate": {
+      "completed_utc": "2026-10-25T01:20:59.745921+00:00",
+      "key": null,
+      "n_results": 4,
+      "seconds": 0.48641061782836914
+    },
+    "ingest": {
+      "completed_utc": "2026-10-25T01:20:58.247887+00:00",
+      "key": "bccfbfe0409998d7",
+      "mapping_version": "example-send-0.1",
+      "n_animals": 500,
+      "n_bw": 4182,
+      "n_quarantine": 0,
+      "seconds": 0.3711538314819336
+    },
+    "optional_models": {
+      "completed_utc": "2026-10-25T01:20:59.244531+00:00",
+      "key": null,
+      "status": {
+        "chronos2": "not_run",
+        "deepar": "not_run",
+        "tft": "not_run"
+      }
+    },
+    "prepare": {
+      "completed_utc": "2026-10-25T01:20:58.355686+00:00",
+      "compound_holdout": [],
+      "key": "c29bfdb0ea8ac322",
+      "n_donor_studies": 0,
+      "n_eligible_animals": 410,
+      "seconds": 0.10713601112365723,
+      "sharing": "context_specific",
+      "sparse_target_train": {
+        "dropped_train_studyids": [
+          "SYNA-009",
+          "SYNA-010",
+          "SYNA-012"
+        ],
+        "kept_train_studyids": [
+          "SYNA-001",
+          "SYNA-003",
+          "SYNA-005",
+          "SYNA-006"
+        ],
+        "kind": "sparse_target_study_training",
+        "n_keep": 4,
+        "n_train_after": 4,
+        "n_train_before": 7,
+        "not": "sparse_history_encoder",
+        "note": "Drops target TRAIN studies only. Validation and test study sets stay frozen. Distinct from sparse observation/history encoder windows.",
+        "target_manifest_test_hash": "c638b57becb930c6",
+        "target_manifest_validation_hash": "51c7ec66a9c61a35",
+        "test_studyids": [
+          "SYNA-002",
+          "SYNA-007"
+        ],
+        "test_unchanged": true,
+        "validation_studyids": [
+          "SYNA-008",
+          "SYNA-011"
+        ],
+        "validation_unchanged": true
+      },
+      "split_counts": {
+        "test": 2,
+        "test_compound_holdout": 1,
+        "train": 4,
+        "validation": 2
+      },
+      "split_hash": "7e2e037e2a2c3eba",
+      "target_manifest": {
+        "all_target": {
+          "hash": "9caa839ea3d54c92",
+          "n": 11,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-002",
+            "SYNA-003",
+            "SYNA-005",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009",
+            "SYNA-010",
+            "SYNA-011",
+            "SYNA-012"
+          ]
+        },
+        "test": {
+          "hash": "c638b57becb930c6",
+          "n": 2,
+          "studyids": [
+            "SYNA-002",
+            "SYNA-007"
+          ]
+        },
+        "train": {
+          "hash": "98e1cf094547c911",
+          "n": 7,
+          "studyids": [
+            "SYNA-001",
+            "SYNA-003",
+            "SYNA-005",
+            "SYNA-006",
+            "SYNA-009",
+            "SYNA-010",
+            "SYNA-012"
+          ]
+        },
+        "validation": {
+          "hash": "51c7ec66a9c61a35",
+          "n": 2,
+          "studyids": [
+            "SYNA-008",
+            "SYNA-011"
+          ]
+        },
+        "version": "target-manifest-v1"
+      },
+      "train_seed": 5150
+    },
+    "train_spline": {
+      "completed_utc": "2026-10-25T01:20:58.619522+00:00",
+      "key": "c00c0e301024439d",
+      "seconds": 0.23583984375,
+      "status": "trained"
+    },
+    "train_transformer": {
+      "completed_utc": "2026-10-25T01:20:59.244113+00:00",
+      "key": "3be0844e1dc3a6e1",
+      "seconds": 0.6234290599822998,
+      "status": "trained"
+    }
+  },
+  "synthetic_data": false
+}

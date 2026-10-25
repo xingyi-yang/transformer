@@ -1,0 +1,213 @@
+{
+ "name": "bayesian",
+ "spec": {
+  "species": "RAT",
+  "strains": [
+   "SPRAGUE-DAWLEY",
+   "WISTAR HAN"
+  ],
+  "routes": [
+   "INTRAVENOUS",
+   "ORAL GAVAGE"
+  ],
+  "sexes": [
+   "F",
+   "M"
+  ],
+  "zb_mean": {
+   "F": 5.26088263660915,
+   "M": 5.537623475607896
+  },
+  "max_dose": 1000.0,
+  "max_day": 28.0,
+  "intervals": [
+   1.0,
+   7.0
+  ],
+  "compound_ids": [
+   "CMP01",
+   "CMP02",
+   "CMP04",
+   "CMP05"
+  ],
+  "descriptor_ranges": {
+   "D1": [
+    -1.2585,
+    1.008
+   ],
+   "D2": [
+    -0.7795,
+    1.9537
+   ],
+   "D3": [
+    -0.8186,
+    0.5175
+   ]
+  },
+  "t_ref": 28.0,
+  "version": "features-v1",
+  "animal_cols": [
+   "SEX_M",
+   "ZB_C",
+   "IS_CONTROL",
+   "LD",
+   "INV_INTERVAL",
+   "START",
+   "END",
+   "D1",
+   "D2",
+   "D3",
+   "STRAIN_WISTAR HAN",
+   "ROUTE_ORAL GAVAGE"
+  ],
+  "time_cols": [
+   "TAU",
+   "EXPO",
+   "OFF",
+   "LCUM"
+  ],
+  "sharing": "context_specific",
+  "species_levels": [
+   "RAT"
+  ],
+  "zb_mean_by_species": {},
+  "declared_species": [],
+  "fixed_schema": false
+ },
+ "design": {
+  "tau_hi": 1.000001,
+  "expo_hi": 1.000001,
+  "off_hi": 0.001001,
+  "time_knots": [
+   0.3571,
+   0.5536,
+   0.75
+  ],
+  "expo_knots": [
+   0.5,
+   0.75
+  ],
+  "off_knots": [],
+  "strain_cols": [
+   "STRAIN_WISTAR HAN"
+  ],
+  "route_cols": [
+   "ROUTE_ORAL GAVAGE"
+  ],
+  "species_cols": [],
+  "rich": false,
+  "species_treatment": false,
+  "col_names": [
+   "tb[0]",
+   "tb[1]",
+   "tb[2]",
+   "tb[3]",
+   "tb[4]",
+   "tb[5]",
+   "tb_sex[0]",
+   "tb_sex[1]",
+   "tb_sex[2]",
+   "tb_sex[3]",
+   "tb_sex[4]",
+   "tb_sex[5]",
+   "tb_zb[0]",
+   "tb_zb[1]",
+   "tb_zb[2]",
+   "tb_zb[3]",
+   "tb_zb[4]",
+   "tb_zb[5]",
+   "tb_STRAIN_WISTAR HAN[0]",
+   "tb_STRAIN_WISTAR HAN[1]",
+   "tb_STRAIN_WISTAR HAN[2]",
+   "tb_STRAIN_WISTAR HAN[3]",
+   "tb_STRAIN_WISTAR HAN[4]",
+   "tb_STRAIN_WISTAR HAN[5]",
+   "eb_ld[0]",
+   "eb_ld[1]",
+   "eb_ld[2]",
+   "eb_ld[3]",
+   "eb_ld2[0]",
+   "eb_ld2[1]",
+   "eb_ld2[2]",
+   "eb_ld2[3]",
+   "eb_ld_D1[0]",
+   "eb_ld_D1[1]",
+   "eb_ld_D1[2]",
+   "eb_ld_D1[3]",
+   "eb_ld_D2[0]",
+   "eb_ld_D2[1]",
+   "eb_ld_D2[2]",
+   "eb_ld_D2[3]",
+   "eb_ld_D3[0]",
+   "eb_ld_D3[1]",
+   "eb_ld_D3[2]",
+   "eb_ld_D3[3]",
+   "ob_ld[0]"
+  ],
+  "scale": [
+   0.11429688467508926,
+   0.24299075766679476,
+   0.2845824080500841,
+   0.24536448658924784,
+   0.21304571153924506,
+   0.3896708031781328,
+   0.08368083544289663,
+   0.18552332266817606,
+   0.23285332843087259,
+   0.1997191708654514,
+   0.15990074590870032,
+   0.27823270906416436,
+   0.008334474638959505,
+   0.024884184051501997,
+   0.03284600227818658,
+   0.027260811760915594,
+   0.02018498801922281,
+   0.038600735762335456,
+   0.08410487196454494,
+   0.19701942409996878,
+   0.24748627812805302,
+   0.2102128205175406,
+   0.16874136965634462,
+   0.31581031724110353,
+   0.5706471022964758,
+   0.6926833330422576,
+   0.46173958557381023,
+   0.8757581195827774,
+   2.1159211560305735,
+   2.606402117264362,
+   1.6369841787579982,
+   3.204649682033384,
+   0.674769307150469,
+   0.8576859453777413,
+   0.5124582180449079,
+   0.9496782815869688,
+   0.8704360639518424,
+   1.0887823071506448,
+   0.6644300095296012,
+   1.2470700572771143,
+   0.2741836605429728,
+   0.34788207024213536,
+   0.21866397508607038,
+   0.37469868497083675,
+   1.0
+  ]
+ },
+ "s_y": 0.1300815347721316,
+ "priors": {
+  "s_beta": 0.35,
+  "s_sd": 0.3,
+  "s_sigma": 0.3,
+  "m_ell": 1.9459101490553132,
+  "s_ell": 0.75
+ },
+ "history": {
+  "n_obs": 284,
+  "n_animals": 56,
+  "n_studies": 7,
+  "n_beta": 44,
+  "s_y": 0.1300815347721316,
+  "reliable": false,
+  "species_treatment": false,
+  "sharing": "context_specific"
+ }
+}
