@@ -36,7 +36,8 @@ class OptionalModelInfo:
 CATALOG = {
     "tft": OptionalModelInfo(
         "tft", "pytorch_forecasting", "secondary (early-history forecasting)",
-        ["static covariates (sex, strain, compound descriptors)", "known future inputs (planned dose features)",
+        ["static covariates (sex, strain, species, compound descriptors)",
+         "known future inputs (planned dose features)",
          "observed past targets (early history)"],
         ["requires an observed encoder window: no genuine baseline-only pre-study support",
          "not interchangeable with the custom baseline-conditioned transformer",
