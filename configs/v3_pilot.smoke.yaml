@@ -1,0 +1,77 @@
+# PROPOSED v3 stages-1–2 smoke configuration for review.
+# Do not launch this run. Not design qualification. Synthetic diagnostic only.
+# Selective sharing is required in the eventual benchmark and is not implemented here.
+run_name: v3_pilot_smoke
+output_dir: runs/v3_pilot_smoke
+seed: 20261024
+synthetic:
+  enabled: true
+  out_dir: runs/v3_pilot_smoke/synthetic
+  generator: A
+  n_studies: 16
+  n_other_species_studies: 3
+  n_compounds: 7
+  n_per_sex: [4, 6]
+mapping: configs/mappings/example_send.yaml
+source:
+  type: local
+  root: runs/v3_pilot_smoke/synthetic/send
+  layout: per_study
+  metadata_dir: runs/v3_pilot_smoke/synthetic/metadata
+cohort:
+  species: RAT
+  donor_species: [DOG]
+  sharing: pooled
+  n_donor_studies: 3
+  study_classes: [REPEAT_DOSE_TOX]
+  max_day: 28
+splits:
+  method: random
+  validation: 0.2
+  test: 0.2
+  compound_holdout_auto: 1
+models:
+  spline:
+    enabled: true
+    n_bootstrap: 6
+    oof_folds: 5
+    n_time_knots: 3
+    n_expo_knots: 2
+    ridge_alphas: [0.1, 1.0, 10.0, 100.0, 300.0, 1000.0, 3000.0, 10000.0]
+    seed: 20261024
+  transformer:
+    enabled: true
+    n_members: 1
+    max_epochs: 20
+    patience: 6
+    d_model: 32
+    n_heads: 2
+    n_layers: 1
+    seed: 20261024
+  bayesian: {enabled: false}
+  optional:
+    tft: {enabled: false}
+    chronos2: {enabled: false}
+    deepar: {enabled: false}
+evaluation:
+  tasks: [predose_conditioned]
+  n_draws: 80
+  contrast_day: 28
+# Design engine off. Do not add a request.
+design: {}
+labels:
+  - Synthetic diagnostic.
+  - Not design qualification.
+  - No real-data validation.
+  - No operational recommendation.
+prespec:
+  task: predose_conditioned
+  study_weighting: study_balanced
+  donor_order: STUDYID sort
+  donor_schedule_k: [0, 1, 2, 3]
+  selective_sharing: required_deferred
+  uncertainty:
+    covariance: HierarchicalCovariance on study-level OOF residuals; not bootstrapped
+    parameter: study-bootstrap of the mean only
+    transformer_covariance: shared with the spline; required
+    no_fabricated_baseline_only: true

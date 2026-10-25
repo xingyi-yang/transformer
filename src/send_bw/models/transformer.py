@@ -32,12 +32,16 @@ from send_bw.models.gaussian_layer import GaussianLayerMixin
 
 
 def token_groups(spec: FeatureSpec) -> dict[str, list[str]]:
-    return {
+    groups = {
         "bio": ["SEX_M"] + [c for c in spec.animal_cols if c.startswith("STRAIN_")],
         "baseline": ["ZB_C"],
         "compound": ["D1", "D2", "D3", "IS_CONTROL"],
         "regimen": ["LD", "INV_INTERVAL", "START", "END"] + [c for c in spec.animal_cols if c.startswith("ROUTE_")],
     }
+    species_cols = [c for c in spec.animal_cols if c.startswith("SPECIES_")]
+    if species_cols:
+        groups["species"] = species_cols
+    return groups
 
 
 QUERY_COLS = ["TAU", "EXPO", "OFF", "LCUM", "SQRT_TAU"]

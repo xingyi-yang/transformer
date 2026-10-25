@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import time
+from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
@@ -18,7 +19,14 @@ from send_bw.data.metadata import load_mapping
 from send_bw.data.qc import CohortConfig, select_cohort
 from send_bw.data.schema import CANONICAL_SCHEMAS, CanonicalTables
 from send_bw.data.sources import build_source
-from send_bw.data.splits import freeze_splits, load_frozen_splits, make_study_splits
+from send_bw.data.splits import (
+    compose_train_with_donors,
+    donor_study_order,
+    freeze_splits,
+    freeze_target_manifests,
+    load_frozen_splits,
+    make_study_splits,
+)
 from send_bw.models.base import ModelData
 from send_bw.utils.artifacts import (
     Manifest,
@@ -174,18 +182,16 @@ class Run:
         t0 = time.time()
         t = self.load_canonical()
         ccfg = CohortConfig.from_dict(self.cfg.get("cohort"))
-        cohort = select_cohort(t, ccfg)
-        cohort.exclusions.to_csv(self.p("qc", "exclusions.csv"), index=False)
-        cohort.completeness.to_csv(self.p("qc", "completeness.csv"), index=False)
-        excl = (cohort.exclusions.assign(REASON=cohort.exclusions["EXCLUSION_REASON"].str.split(";"))
-                .explode("REASON").groupby("REASON").size().to_dict()) if len(cohort.exclusions) else {}
-        write_json(self.p("qc", "qc_report.json"), {"checks": cohort.qc_checks, "limitations": cohort.limitations,
-                                                    "exclusion_counts": excl,
-                                                    "n_eligible_animals": len(cohort.animals),
-                                                    "n_model_obs": len(cohort.obs)})
+        target_cfg = ccfg.target_only()
+        target_cohort = select_cohort(t, target_cfg)
+        qc_cohort = select_cohort(t, ccfg) if ccfg.sharing == "pooled" and ccfg.donor_species else target_cohort
+        qc_cohort.exclusions.to_csv(self.p("qc", "exclusions.csv"), index=False)
+        qc_cohort.completeness.to_csv(self.p("qc", "completeness.csv"), index=False)
+        excl = (qc_cohort.exclusions.assign(REASON=qc_cohort.exclusions["EXCLUSION_REASON"].str.split(";"))
+                .explode("REASON").groupby("REASON").size().to_dict()) if len(qc_cohort.exclusions) else {}
         sc = t["study_context"]
         in_scope = sc[(sc["SPECIES"] == ccfg.species.upper()) & sc["STUDY_CLASS"].isin(ccfg.study_classes)]
-        in_scope = in_scope[in_scope["STUDYID"].isin(set(cohort.animals["STUDYID"]))]
+        in_scope = in_scope[in_scope["STUDYID"].isin(set(target_cohort.animals["STUDYID"]))]
         scfg = dict(self.cfg.get("splits", {}))
         comp = (t["arm_regimen"].dropna(subset=["COMPOUND_ID"]).groupby("STUDYID")["COMPOUND_ID"].first().to_dict())
         scfg["_study_compound"] = comp
@@ -197,17 +203,60 @@ class Run:
             counts = pd.Series({s: c for s, c in comp.items() if s in set(in_scope["STUDYID"])}).value_counts()
             counts = counts[~counts.index.isin(req_comp)]
             scfg["compound_holdout"] = list(counts.sort_values(kind="stable").index[: int(scfg["compound_holdout_auto"])])
-        splits = make_study_splits(in_scope, scfg, self.seed)
+        splits_target = make_study_splits(in_scope, scfg, self.seed)
+        freeze_splits(splits_target, self.p("splits", "target_splits"))
+        tman = freeze_target_manifests(splits_target, self.p("splits", "target_manifest.json"))
+        donor_parts_a, donor_parts_o = [], []
+        if ccfg.sharing == "pooled" and ccfg.donor_species:
+            for ds in ccfg.donor_species:
+                dc = select_cohort(t, replace(target_cfg, species=str(ds).upper()))
+                if len(dc.animals):
+                    donor_parts_a.append(dc.animals)
+                    donor_parts_o.append(dc.obs)
+        if donor_parts_a:
+            donor_animals = pd.concat(donor_parts_a, ignore_index=True)
+            donor_obs = pd.concat(donor_parts_o, ignore_index=True)
+            donor_ids_all = donor_study_order(donor_animals["STUDYID"])
+        else:
+            donor_animals = target_cohort.animals.iloc[0:0]
+            donor_obs = target_cohort.obs.iloc[0:0]
+            donor_ids_all = []
+        k = min(int(ccfg.n_donor_studies) if ccfg.sharing == "pooled" else 0, len(donor_ids_all))
+        selected = donor_ids_all[:k]
+        write_json(self.p("splits", "donor_order.json"), {
+            "studyids": donor_ids_all, "k": k, "selected": selected,
+            "sharing": ccfg.sharing, "donor_species": list(ccfg.donor_species),
+        })
+        splits = compose_train_with_donors(splits_target, donor_ids_all, k)
         h = freeze_splits(splits, self.p("splits", "splits"))
-        tr = set(splits.loc[splits["SPLIT"] == "train", "STUDYID"])
-        spec = FeatureSpec.fit(cohort.animals[cohort.animals["STUDYID"].isin(tr)],
-                               cohort.obs[cohort.obs["STUDYID"].isin(tr)], t["compound_reference"], ccfg.species.upper())
+        animals = target_cohort.animals.copy()
+        obs = target_cohort.obs.copy()
+        if selected:
+            animals = pd.concat([animals, donor_animals[donor_animals["STUDYID"].isin(selected)]],
+                                ignore_index=True)
+            obs = pd.concat([obs, donor_obs[donor_obs["STUDYID"].isin(selected)]], ignore_index=True)
+        tr = set(splits.loc[splits["SPLIT"] == "train", "STUDYID"].astype(str))
+        sharing_for_spec = "pooled" if (ccfg.sharing == "pooled" and selected) else "context_specific"
+        spec = FeatureSpec.fit(animals[animals["STUDYID"].astype(str).isin(tr)],
+                               obs[obs["STUDYID"].astype(str).isin(tr)], t["compound_reference"],
+                               ccfg.species.upper(), sharing=sharing_for_spec)
         write_json(self.p("features", "feature_spec.json"), spec.to_dict())
-        write_parquet(self.p("cohort", "animals.parquet"), cohort.animals)
-        write_parquet(self.p("cohort", "obs.parquet"), cohort.obs)
+        write_parquet(self.p("cohort", "animals.parquet"), animals)
+        write_parquet(self.p("cohort", "obs.parquet"), obs)
+        write_json(self.p("qc", "qc_report.json"), {"checks": qc_cohort.qc_checks, "limitations": qc_cohort.limitations,
+                                                    "exclusion_counts": excl,
+                                                    "n_eligible_animals": len(animals),
+                                                    "n_model_obs": len(obs),
+                                                    "n_target_eligible_animals": len(target_cohort.animals),
+                                                    "sharing": ccfg.sharing,
+                                                    "n_donor_studies_requested": int(ccfg.n_donor_studies),
+                                                    "n_donor_studies_selected": k,
+                                                    "donor_studyids_selected": selected})
         self.manifest.record_stage("prepare", key=key, split_hash=h, split_counts=splits["SPLIT"].value_counts().to_dict(),
                                    compound_holdout=scfg.get("compound_holdout", []),
-                                   n_eligible_animals=len(cohort.animals), seconds=time.time() - t0)
+                                   n_eligible_animals=len(animals), seconds=time.time() - t0,
+                                   sharing=ccfg.sharing, n_donor_studies=k,
+                                   target_manifest=tman)
         self.log.info(f"[prepare] splits {splits['SPLIT'].value_counts().to_dict()} (frozen hash {h})")
         return self.load_prepared()
 
@@ -331,6 +380,9 @@ class Run:
 
         prep = self.load_prepared()
         ecfg = self.cfg.get("evaluation", {})
+        tasks = set(ecfg.get("tasks") or ["pre_study", "early_history"])
+        if "predose_conditioned" in tasks:
+            tasks.add("pre_study")
         res: dict[str, Any] = {}
         t_start = time.time()
         for name in self.available_models():
@@ -340,28 +392,48 @@ class Run:
                 if not len(d.obs):
                     continue
                 t0 = time.time()
-                r = evaluate_prestudy(model, d, int(ecfg.get("n_draws", 200)), self.seed + 17,
-                                      float(ecfg.get("contrast_day", 28)))
-                r["summary"]["split"] = split
-                r["by_sex_horizon"].to_csv(self.p("evaluation", f"{name}_{split}_by_sex_horizon.csv"), index=False)
-                r["per_study"].to_csv(self.p("evaluation", f"{name}_{split}_per_study.csv"), index=False)
-                res[f"{name}|{split}|pre_study"] = r["summary"]
-                eh = evaluate_early_history(model, d, float(ecfg.get("early_history_window_day", 14)))
-                eh["split"] = split
-                res[f"{name}|{split}|early_history"] = eh
+                if "pre_study" in tasks:
+                    r = evaluate_prestudy(model, d, int(ecfg.get("n_draws", 200)), self.seed + 17,
+                                          float(ecfg.get("contrast_day", 28)))
+                    r["summary"]["split"] = split
+                    r["summary"]["task_alias"] = "predose_conditioned"
+                    r["by_sex_horizon"].to_csv(self.p("evaluation", f"{name}_{split}_by_sex_horizon.csv"), index=False)
+                    r["per_study"].to_csv(self.p("evaluation", f"{name}_{split}_per_study.csv"), index=False)
+                    res[f"{name}|{split}|pre_study"] = r["summary"]
+                if "early_history" in tasks:
+                    eh = evaluate_early_history(model, d, float(ecfg.get("early_history_window_day", 14)))
+                    eh["split"] = split
+                    res[f"{name}|{split}|early_history"] = eh
                 self.log.info(f"[evaluate] {name}/{split} in {time.time() - t0:.1f}s")
-        for name in self.optional_trained():
-            model = self.load_optional_model(name)
-            for split in [s for s in ("test", "test_compound_holdout") if s in prep["data"]]:
-                d = prep["data"][split]
-                if not len(d.obs):
-                    continue
-                t0 = time.time()
-                eh = evaluate_early_history(model, d, float(ecfg.get("early_history_window_day", 14)))
-                eh["split"] = split
-                res[f"{name}|{split}|early_history"] = eh
-                self.log.info(f"[evaluate] {name}/{split} early-history only in {time.time() - t0:.1f}s")
+        if "early_history" in tasks:
+            for name in self.optional_trained():
+                model = self.load_optional_model(name)
+                for split in [s for s in ("test", "test_compound_holdout") if s in prep["data"]]:
+                    d = prep["data"][split]
+                    if not len(d.obs):
+                        continue
+                    t0 = time.time()
+                    eh = evaluate_early_history(model, d, float(ecfg.get("early_history_window_day", 14)))
+                    eh["split"] = split
+                    res[f"{name}|{split}|early_history"] = eh
+                    self.log.info(f"[evaluate] {name}/{split} early-history only in {time.time() - t0:.1f}s")
         write_json(self.p("evaluation", "metrics.json"), res)
+        s0_path = ecfg.get("context_specific_metrics")
+        if s0_path and Path(s0_path).exists():
+            from send_bw.evaluation.transfer import build_transfer_table
+
+            s0_all = read_json(s0_path)
+            k = int((self.cfg.get("cohort") or {}).get("n_donor_studies") or 0)
+            tables = {}
+            for key, sk in res.items():
+                if not key.endswith("pre_study"):
+                    continue
+                s0 = s0_all.get(key)
+                if not s0:
+                    continue
+                tables[key] = build_transfer_table(s0, [(k, sk)], model=sk.get("model"))
+            if tables:
+                write_json(self.p("evaluation", "transfer_table.json"), tables)
         self.manifest.record_stage("evaluate", key=None, n_results=len(res), seconds=time.time() - t_start)
         return res
 

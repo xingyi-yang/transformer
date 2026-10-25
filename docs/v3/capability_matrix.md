@@ -28,7 +28,7 @@ software checks, not scientific readiness.
 | Feature availability registry / leakage gate | implemented | `src/send_bw/data/features.py` `FEATURE_REGISTRY`; `tests/unit/test_generator_splits_leakage.py` |
 | Species stored on canonical tables | implemented | `schema.py` requires `SPECIES` on `study_context` and `animal_context`; generator writes RAT + DOG |
 | Cohort **excludes** non-target species | implemented | `src/send_bw/data/qc.py` `species_out_of_scope`; `pipeline.py` filters `SPECIES == ccfg.species`; smoke report 50 DOG animals excluded (`runs/smoke/report/report.md`) |
-| Species as a model **feature** (pooling) | missing | `FeatureSpec.animal_cols` has sex/strain/route, not species. `check_context` refuses unseen species (`features.py`) |
+| Species as a model **feature** (pooling) | implemented | `SPECIES_*` in `FeatureSpec` when `sharing: pooled` and >1 training species; `MeanDesign` time-basis interactions; transformer `species` token only if those columns exist. Context-specific runs have no `SPECIES_*`. Unseen species still refused |
 | Request refuses other species | implemented | `simulation/designs.py` `validate_request`; `tests/unit/test_design_workflow.py` DOG → `not_supported`; integration smoke same |
 
 ## B. Synthetic generators
@@ -39,7 +39,7 @@ software checks, not scientific readiness.
 | Independent generator B | implemented | `GeneratorB`; used in design finalist evaluation (`simulation/workflow.py`) |
 | Hidden truth isolated from models | implemented | Truth under `synthetic/truth/`; `simulation/truth.py` is the only reader; leakage tests |
 | Other-species studies generated | implemented | `n_other_species_studies` default 1; `species = "DOG"` after RAT studies; species-specific `baseline` / `gmax` / `STRAINS` |
-| Other-species used in **fitting** | missing | Default cohort `species: RAT` drops DOG before splits (`qc.py`, all shipped configs) |
+| Other-species used in **fitting** | partial | Default v2 configs still drop DOG. Pooled cohort + nested donor-only train additions are implemented (`qc.py`, `splits.py`, `pipeline.prepare`). No training wave has been run |
 | Biologically validated multi-species DGM | missing | Generators are labeled illustrative (`generate.py` docstring; `docs/limitations.md`) |
 | Informative termination estimand | missing | MAR missed visits + non-informative dropout only; limitations document this |
 
@@ -51,7 +51,7 @@ software checks, not scientific readiness.
 | Compound holdout | implemented | `make_study_splits` + `compound_holdout_auto` in `pipeline.py`; `test_compound_holdout_split` |
 | Chronological split | partial | `method: chronological` implemented in `splits.py`; example configs set it (`real_local.example.yaml`). **No unit test** named chronological |
 | Complete-study holdout (study as atom) | implemented | Splits assign whole `STUDYID`s; `assert_disjoint` |
-| Leave-one-species / cross-species holdout | missing | No split type for `test_species_holdout`; in-scope filter is single-species |
+| Leave-one-species / cross-species holdout | partial | Frozen target train/validation/test manifests; donors may enter train only. No `test_species_holdout` split type |
 | Sparse-history experimental protocol | missing | Early-history window is a single eval knob (`early_history_window_day: 14`). No encoder-sparsity design |
 
 ## D. Required models (v2)
@@ -105,17 +105,17 @@ v3 does **not** add these families. TFT remains optional and early-history only.
 | Capability | Status | Evidence |
 |---|---|---|
 | Context-specific (target-species-only) fit | implemented | Current default: RAT-only cohort |
-| Pooled multi-species fit | missing | Species gate + no species feature |
-| Selective-sharing (share some layers, not others) | missing | No component-wise sharing API |
-| Harmful-transfer assessment | missing | No metric that target-species holdout degrades when other-species data are added |
-| Nonlinear multi-species sharing as **primary** objective | missing | v2 §1: one species; additional species exploratory |
-| Pilot: fix target train set, add other-species studies | missing | Protocol proposed in `pilot_protocol.md` only |
+| Pooled multi-species fit | partial | Species feature + nested donor train composition implemented. No pooled model has been trained |
+| Selective-sharing (share some layers, not others) | missing | **Required in the eventual benchmark. Deferred.** `sharing: selective` raises |
+| Harmful-transfer assessment | implemented (table only) | `evaluation/transfer.py` sign-defined \(\Delta_k = S_k - S_0\); RMSE/CRPS \(\Delta>0\) harmful; contrast uses \(\|S_k\|-\|S_0\|\). No trained scores yet |
+| Nonlinear multi-species sharing as **primary** objective | partial | v2 runtime still one-species default. v3 pilot infrastructure exists; training wave not launched |
+| Pilot: fix target train set, add other-species studies | implemented (software) | Frozen target manifests + nested \(k\) donors. Proposed review-only config `configs/v3_pilot.smoke.yaml` is **not executed** |
 
 ## Count (this matrix)
 
 | Status | Rows |
 |---|---|
-| implemented | 28 |
-| partial | 5 |
+| implemented | 30 |
+| partial | 8 |
 | unverified | 5 |
-| missing | 16 |
+| missing | 14 |

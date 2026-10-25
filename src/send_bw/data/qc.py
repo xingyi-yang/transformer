@@ -2,13 +2,27 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Any
 
 import numpy as np
 import pandas as pd
 
 from send_bw.data.schema import CanonicalTables
+
+SHARING_REGIMES = ("context_specific", "pooled")
+SELECTIVE_SHARING_DEFERRED = (
+    "selective sharing is required in the eventual v3 benchmark but is not implemented (deferred)"
+)
+
+
+def parse_sharing(value: str | None) -> str:
+    v = (value or "context_specific").strip().lower()
+    if v == "selective":
+        raise ValueError(SELECTIVE_SHARING_DEFERRED)
+    if v not in SHARING_REGIMES:
+        raise ValueError(f"unknown sharing regime {value!r}; expected {SHARING_REGIMES}")
+    return v
 
 
 @dataclass
@@ -21,10 +35,26 @@ class CohortConfig:
     min_post_baseline_obs: int = 1
     max_day: float | None = None  # restrict modeled outcomes to DAY <= max_day (e.g. analysis horizon)
     exclude_uncertain_dates: bool = False
+    donor_species: list[str] = field(default_factory=list)
+    sharing: str = "context_specific"
+    n_donor_studies: int = 0
 
     @staticmethod
     def from_dict(d: dict[str, Any] | None) -> CohortConfig:
-        return CohortConfig(**(d or {}))
+        raw = dict(d or {})
+        raw["sharing"] = parse_sharing(raw.get("sharing"))
+        raw["donor_species"] = [str(s).upper() for s in (raw.get("donor_species") or [])]
+        raw["n_donor_studies"] = int(raw.get("n_donor_studies") or 0)
+        return CohortConfig(**raw)
+
+    def allowed_species(self) -> set[str]:
+        out = {self.species.upper()}
+        if self.sharing == "pooled":
+            out.update(s.upper() for s in self.donor_species)
+        return out
+
+    def target_only(self) -> CohortConfig:
+        return replace(self, sharing="context_specific", donor_species=[], n_donor_studies=0)
 
 
 @dataclass
@@ -50,7 +80,7 @@ def select_cohort(t: CanonicalTables, cfg: CohortConfig) -> Cohort:
         u = r["USUBJID"]
         reasons[u] = [x for x in ";".join(reasons[u]).split(";") if x]
         st = studies.loc[r["STUDYID"]] if r["STUDYID"] in studies.index else None
-        if st is None or str(st["SPECIES"]).upper() != cfg.species.upper():
+        if st is None or str(st["SPECIES"]).upper() not in cfg.allowed_species():
             reasons[u].append("species_out_of_scope")
         if st is None or st["STUDY_CLASS"] not in cfg.study_classes:
             reasons[u].append("study_class_out_of_scope")

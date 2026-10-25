@@ -2,10 +2,12 @@
 
 ## Nonlinear multi-species information sharing for body-weight prediction
 
-**Status: proposed text only.** This file does not replace
-`CURSOR_PROJECT_SPEC_v2.md`. Runtime defaults, shipped configs, and the
-analysis close-out stay on v2. Nothing in this document is implemented unless
-`docs/v3/capability_matrix.md` marks it as repository evidence.
+**Status: proposed scientific text.** Stages 1–2 infrastructure is now in
+the repository (frozen target manifests, nested donor train additions,
+explicit `SPECIES_*`, sign-defined transfer table). The model-training
+wave has **not** been launched. This file does not replace
+`CURSOR_PROJECT_SPEC_v2.md`. Runtime defaults, shipped v2 configs, and the
+analysis close-out stay on v2.
 
 **Do not** launch large training runs from this spec, add Chronos-2 / DeepAR,
 or enable design recommendations as an acceptance criterion.
@@ -70,6 +72,8 @@ Every experiment reports all three, or records `not_run` with a reason:
    refused, not mapped.
 3. **Selective-sharing.** A named subset of structure is shared (see §5).
    The shared subset is a factor in the report, not a hidden default.
+   **Required in the eventual benchmark. Deferred in stages 1–2**
+   (`sharing: selective` raises).
 
 ### 1.3 Prediction stages (required comparison)
 
@@ -165,11 +169,11 @@ The model draws or predicts paths **without** the holdout animals’ observed
 predose weights. This is the hardest stage and the closest to “we have not
 enrolled animals yet.”
 
-### 4.2 Predose-conditioned
+### 4.2 Predose-conditioned (first pilot task)
 
 Input: design-stage context plus each holdout animal’s observed baseline log
-weight. This is today’s `evaluate_prestudy`. Rename in reports so it is not
-confused with design-stage.
+weight. This is today’s `evaluate_prestudy`. It is the **first** scored
+pilot task. Rename in reports so it is not confused with design-stage.
 
 ### 4.3 Early-history and sparse-history
 
@@ -193,8 +197,8 @@ Do **not** add optional families.
 
 | Role | Model | Sharing variant |
 |---|---|---|
-| Linear / additive comparator | v2 spline | Context-specific; pooled only if species main-effect + interactions are explicit |
-| Nonlinear mean | v2 custom transformer | Context-specific control; pooled = add species context token; selective = freeze/share named token groups |
+| Hierarchical spline mean | v2 spline (ridge on a B-spline time/exposure basis with sex, baseline, strain, dose, compound, interval, route, recovery interactions; **not** linear-in-time) | Context-specific; pooled adds explicit `SPECIES_*` time-basis interactions |
+| Neural mean | v2 custom transformer | Context-specific control; pooled = add species context token when `SPECIES_*` exist; selective = freeze/share named token groups (**required later, deferred**) |
 | Hierarchical generator | v2 Bayesian | Context-specific default. Any species random effect is a **new labeled variant**, not the MAIN v2 model |
 
 TFT remains optional, early-history only, not a sharing vehicle, not a design

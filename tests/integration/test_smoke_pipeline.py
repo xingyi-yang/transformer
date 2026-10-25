@@ -26,7 +26,9 @@ def _config(tmp: Path, **models) -> Path:
         "splits": {"validation": 0.2, "test": 0.2, "compound_holdout_auto": 1},
         "models": {"spline": {"enabled": True, "n_bootstrap": 2},
                    "transformer": {"enabled": True, "n_members": 1, "max_epochs": 8, "patience": 3},
-                   "bayesian": {"enabled": False}, **models},
+                   "bayesian": {"enabled": False},
+                   "optional": {"tft": {"enabled": True}, "chronos2": {"enabled": True},
+                                "deepar": {"enabled": True}}, **models},
         "evaluation": {"n_draws": 40},
         "design": {"request": str(ROOT / "configs" / "new_study.smoke.yaml"), "proposal_models": ["spline"],
                    "replicates_proposal": 30, "replicates_final": 30, "n_finalists": 1},
@@ -48,7 +50,9 @@ def test_artifacts_written(smoke_run):
     _, _, run = smoke_run
     for rel in ["manifest.json", "canonical/bw_obs.parquet", "canonical/provenance.json", "qc/data_dictionary.md",
                 "qc/mapping_report.json", "qc/quarantine.csv", "qc/exclusions.csv", "qc/completeness.csv",
-                "splits/splits.csv", "splits/splits.json", "features/feature_spec.json", "cohort/obs.parquet",
+                "splits/splits.csv", "splits/splits.json", "splits/target_splits.csv",
+                "splits/target_manifest.json", "splits/donor_order.json",
+                "features/feature_spec.json", "cohort/obs.parquet",
                 "models/spline/model.json", "models/transformer/members.pt", "models/spline/training_history.json",
                 "models/optional_models_status.json", "evaluation/metrics.json", "design/design_summary.json",
                 "design/request_validation.json", "report/report.md", "report/report.html"]:

@@ -20,7 +20,8 @@ cohort selection.
 | [../CURSOR_PROJECT_SPEC_v3.md](../../CURSOR_PROJECT_SPEC_v3.md) | Proposed v3 specification |
 | [historical_data_audit.md](historical_data_audit.md) | Authorization-first audit plan; unknowns marked |
 | [pilot_protocol.md](pilot_protocol.md) | Fixed target-species train set; add other-species studies |
-| [implementation_plan.md](implementation_plan.md) | Staged work that keeps v2 infrastructure |
+| [pilot_prespec.md](pilot_prespec.md) | Weighting, budgets, tuning, seeds (declared; wave not launched) |
+| [implementation_plan.md](implementation_plan.md) | Stages 1–2 software landed; training wave not launched |
 
 **Evidence vs proposed.** Rows and claims that cite `src/`, `tests/`,
 `configs/`, `runs/`, or `docs/` (other than this packet) are **repository

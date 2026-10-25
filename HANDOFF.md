@@ -43,8 +43,13 @@ Real-data qualification stage: **1** (implemented and mock-tested only).
 
 ## 2. Executed and tested (exact results)
 
-`pytest -q tests`: **106 passed** in 43 s. This includes the mock-Snowflake equivalence, messy-fixture, leakage, GLS
-null-calibration (slow), integration CLI smoke and Bayesian smoke tests. `ruff check src tests`: clean.
+`pytest -q tests`: **141 passed**, 2 skipped (this environment). This includes the mock-Snowflake
+equivalence, messy-fixture, leakage, v3 stages 1–2 freeze/donor/species/transfer tests,
+integration CLI smoke, and skipped Bayesian/TFT extras. `ruff check src tests`: clean.
+The approved synthetic **k=0 then k=1** wave was executed from freeze commit
+`9f1da17` / config hash `4112f7ae47000c25` and stopped after k=1. Signs were
+published as computed (transformer transfer on the frozen target test was
+harmful). The protocol was not retuned. See `docs/v3/k0k1_RESULTS.md`.
 
 **Smoke run** (`configs/smoke.yaml`, seed 20261017):
 - **Data**:
@@ -167,7 +172,10 @@ to `[ancova]`.
    environment, do not treat a local extra-enabled fit as design qualification, and
    do not implement Chronos-2/DeepAR unless they are named. The analysis chapter
    stays as written.
-6. A **proposed** v3 planning packet (not implemented, v2 untouched) is in
-   `CURSOR_PROJECT_SPEC_v3.md` and `docs/v3/`. The new scientific question is
-   nonlinear multi-species information sharing. Do not enable design
-   recommendations as its acceptance criterion.
+6. The approved synthetic pilot **k=0 then k=1** was executed from freeze
+   commit `9f1da17` / config hash `4112f7ae47000c25`. Predose-conditioned
+   spline + one-member transformer only. Target manifests held. Transformer
+   transfer on the frozen target test was **harmful** (RMSE/CRPS/contrast);
+   spline was slightly helpful. Signs were published; the protocol was not
+   retuned. Design, extra families, real data, and k=2,3 stayed off.
+   Artifacts: `runs/v3_pilot_k0k1/` and `docs/v3/k0k1_RESULTS.md`.

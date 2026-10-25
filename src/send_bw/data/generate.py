@@ -323,10 +323,25 @@ def generate_dataset(cfg: dict[str, Any], out_dir: str | Path, seed: int) -> dic
     compound_ref = pd.DataFrame(compounds)
 
     study_rows, arm_rows, truth_animals, latent_rows, study_truth = [], [], [], [], []
-    for s in range(n_studies + n_other_species):
-        rng = ss.rng("study", s)
-        species = "DOG" if s >= n_studies else "RAT"
-        studyid = f"SYN{gen.name}-{s + 1:03d}"
+    for idx in range(n_studies + n_other_species):
+        is_donor = idx >= n_studies
+        if is_donor:
+            d = idx - n_studies
+            rng = ss.rng("donor", d)
+            species = "DOG"
+            studyid = f"SYN{gen.name}-D{d + 1:03d}"
+            style_index = d
+            kg_flag = False
+            lower_flag = False
+            partial_n = 0
+        else:
+            rng = ss.rng("study", idx)
+            species = "RAT"
+            studyid = f"SYN{gen.name}-{idx + 1:03d}"
+            style_index = idx
+            kg_flag = idx < kg_studies
+            lower_flag = kg_studies <= idx < kg_studies + lowercase_studies
+            partial_n = n_partial_dates if idx == n_studies - 1 else 0
         strain = str(rng.choice(STRAINS[species]))
         T = float(rng.choice(durations))
         n_active = int(rng.integers(2, 5))
@@ -338,8 +353,8 @@ def generate_dataset(cfg: dict[str, Any], out_dir: str | Path, seed: int) -> dic
         interval = float(rng.choice([1.0, 1.0, 1.0, 7.0]))
         route = str(rng.choice(ROUTES, p=[0.8, 0.2]))
         twice_weekly = bool(rng.random() < 0.35)
-        style = ARMCD_STYLES[s % len(ARMCD_STYLES)]
-        codes = style(s, n_arms)
+        style = ARMCD_STYLES[style_index % len(ARMCD_STYLES)]
+        codes = style(style_index, n_arms)
         has_recovery = bool(rng.random() < 0.5)
         start_date = dt.date(2014, 1, 6) + dt.timedelta(days=int(rng.integers(0, 3650)))
         fasted_terminal = bool(rng.random() < 0.5)
@@ -453,9 +468,8 @@ def generate_dataset(cfg: dict[str, Any], out_dir: str | Path, seed: int) -> dic
         tx = [{"STUDYID": studyid, "DOMAIN": "TX", "SETCD": a["ARMCD"], "SET": a["ARM"], "TXSEQ": j + 1,
                "TXPARMCD": "TRTDOS", "TXVAL": str(a["PLANNED_DOSE"])} for j, a in enumerate(arms)]
         frames = {"dm": dm, "bw": bw, "ex": ex, "ds": ds, "ts": ts, "tx": tx, "suppbw": supp}
-        _write_study(send_dir / studyid, frames, s, kg=s < kg_studies, lower=(kg_studies <= s < kg_studies +
-                     lowercase_studies), parquet=rng.random() < parquet_fraction,
-                     partial=n_partial_dates if s == n_studies - 1 else 0, rng=rng)
+        _write_study(send_dir / studyid, frames, style_index, kg=kg_flag, lower=lower_flag,
+                     parquet=rng.random() < parquet_fraction, partial=partial_n, rng=rng)
 
     pd.DataFrame(study_rows).to_csv(meta_dir / "study_metadata.csv", index=False)
     pd.DataFrame(arm_rows).to_csv(meta_dir / "arm_regimen.csv", index=False)

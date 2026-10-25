@@ -107,10 +107,15 @@ Gaps for a transformer sharing experiment:
   pooled residual that is not species-scaled is a new risk; treat covariance
   sharing as its own factor
 
-The spline is linear-in-features (ridge on a spline basis). It is the
-**linear / additive** comparator, not the nonlinear sharer. Bayesian remains
-a hierarchical generator; any species hierarchy is a new model, not a
-default.
+The implemented spline mean (`models/spline.py`, `models/design.py`) is
+ridge-penalized and expanded on a B-spline time basis (degree 3 when
+`rich`) interacted with sex, centered baseline, and strain, plus
+planned-exposure and recovery bases interacted with log-dose, descriptors,
+interval, route, and sex. After that expansion it is linear in
+coefficients. It is **not** a linear-in-time model. Do not use it as a
+stand-in for “the linear model.” The custom transformer is the neural
+mean. Bayesian remains a hierarchical generator; any species hierarchy is a
+new model, not a default.
 
 ## 6. Synthetic DGM vs real transfer
 

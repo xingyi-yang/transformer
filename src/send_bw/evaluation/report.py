@@ -80,6 +80,13 @@ def build_report(run) -> Path:
     pr = st.get("prepare", {})
     L += [f"Frozen study-level splits: {pr.get('split_counts')} (hash `{pr.get('split_hash')}`); "
           f"compound holdout: {pr.get('compound_holdout')}", ""]
+    tm = _r(d / "splits" / "target_manifest.json")
+    if tm:
+        L += [f"Target-species manifests (frozen before donors): train n={tm.get('train', {}).get('n')} "
+              f"hash `{tm.get('train', {}).get('hash')}`; validation n={tm.get('validation', {}).get('n')} "
+              f"hash `{tm.get('validation', {}).get('hash')}`; test n={tm.get('test', {}).get('n')} "
+              f"hash `{tm.get('test', {}).get('hash')}`. Sharing: {pr.get('sharing', 'context_specific')}; "
+              f"donors selected: {pr.get('n_donor_studies', 0)}.", ""]
 
     # ---------------- models
     L += ["## Models", ""]
@@ -182,6 +189,15 @@ def build_report(run) -> Path:
                 eh.append({"model": v["model"], "split": v["split"], "status": "pre_study", **pre})
     L += _table(eh, ["model", "split", "status", "rmse_log", "cov90", "crps_log", "n_obs", "note"])
     L += ["Success on the secondary task does not establish success on the primary task.", ""]
+    tr = _r(d / "evaluation" / "transfer_table.json")
+    if tr:
+        L += ["### Predose-conditioned paired transfer (sign-defined)", "",
+              "Δ_k = S_k − S_0 on the frozen target holdout. On RMSE/CRPS, Δ>0 is harmful. "
+              "On contrast bias, Δ = |S_k| − |S_0|. Selective sharing is required later and is not run.", ""]
+        rows = []
+        for block in tr.values() if isinstance(tr, dict) and "rows" not in tr else [tr]:
+            rows.extend(block.get("rows") or [])
+        L += _table(rows, ["task", "model", "k", "metric", "S0", "Sk", "delta", "sign"])
     _plot_eval(run, plots)
     if (plots / "trajectories.png").exists():
         L += ["![trajectories](plots/trajectories.png)", ""]
