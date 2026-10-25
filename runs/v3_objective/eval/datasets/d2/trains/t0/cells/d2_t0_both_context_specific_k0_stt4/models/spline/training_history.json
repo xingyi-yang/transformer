@@ -1,0 +1,51 @@
+{
+  "alpha": 100.0,
+  "covariance": {
+    "ell": 5.532556085568443,
+    "fit_info": {
+      "converged": true,
+      "increment_moment_scale": 0.8326738842758286,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "n_animals": 118,
+      "n_obs": 835,
+      "n_studies": 4,
+      "nll": -1815.447198744777,
+      "params_at_bound": []
+    },
+    "sd_a0": 0.007885012144287494,
+    "sd_a1": 0.049960992916866,
+    "sd_s0": 0.006807905606867907,
+    "sd_s1": 0.033846116937562766,
+    "sigma_m": 0.0060763137990075804,
+    "sigma_p": 0.02060214017393092
+  },
+  "covariance_fit_on": "train_oof_all_species",
+  "increment_moment": {
+    "n_draws": 40,
+    "n_ratios": 2,
+    "n_studies": 2,
+    "note": "Development increment moment only. Exposed test outcomes were not used.",
+    "ratio_before": 1.2009503586985846,
+    "scale_factor": 0.8326738842758286,
+    "split": "validation",
+    "target_ratio": 1.0,
+    "used_test": false
+  },
+  "lambda_growth": null,
+  "lambda_treatment": null,
+  "n_members": 5,
+  "n_params": 62,
+  "oof_rmse": 0.05501607092180062,
+  "train_rmse": 0.04392187855277601,
+  "validation_rmse": 0.05536459041056724,
+  "validation_rmse_by_alpha": {
+    "0.1": 0.05945239772347103,
+    "1.0": 0.05893196362131139,
+    "10.0": 0.05667759911983017,
+    "100.0": 0.05536459041056724,
+    "1000.0": 0.10685454851215205,
+    "10000.0": 0.21224569207645186,
+    "300.0": 0.06715195114019937,
+    "3000.0": 0.15914387497038512
+  }
+}

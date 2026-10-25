@@ -1,0 +1,258 @@
+{
+ "main": {
+  "rhat_max": 1.0055666572949002,
+  "ess_bulk_min": 634.7323360975789,
+  "ess_tail_min": 762.6297552948162,
+  "divergences": 0,
+  "maxdepth_hits": 0,
+  "sampler_warnings": [],
+  "thresholds": {
+   "rhat_max": 1.01,
+   "ess_bulk_min": 400,
+   "ess_tail_min": 400
+  },
+  "worst_rhat_params": {
+   "sd_s[1]": 1.0055666572949002,
+   "sd_a[0]": 1.0054590330415432,
+   "sd_a[1]": 1.0045415818724421,
+   "theta[4]": 1.0028836495503457,
+   "theta[0]": 1.002632245716385
+  },
+  "worst_ess_params": {
+   "sd_s[1]": 634.7323360975789,
+   "sd_a[0]": 662.9202075750952,
+   "theta[25]": 677.3178528054705,
+   "theta[17]": 715.2961730856215,
+   "theta[15]": 725.6142917309847
+  },
+  "family_diagnostics": {
+   "theta": {
+    "n": 34,
+    "rhat_max": 1.0028836495503457,
+    "ess_bulk_min": 677.3178528054705,
+    "ess_tail_min": 1048.8445744867545
+   },
+   "beta": {
+    "n": 34,
+    "rhat_max": 1.0013748063751844,
+    "ess_bulk_min": 734.0517338282848,
+    "ess_tail_min": 1119.033982529042
+   },
+   "sd_s": {
+    "n": 2,
+    "rhat_max": 1.0055666572949002,
+    "ess_bulk_min": 634.7323360975789,
+    "ess_tail_min": 762.6297552948162
+   },
+   "sd_a": {
+    "n": 2,
+    "rhat_max": 1.0054590330415432,
+    "ess_bulk_min": 662.9202075750952,
+    "ess_tail_min": 970.6245827987113
+   },
+   "sigma_p": {
+    "n": 1,
+    "rhat_max": 1.0001530290315535,
+    "ess_bulk_min": 888.3472560145337,
+    "ess_tail_min": 1323.6071159529663
+   },
+   "ell": {
+    "n": 1,
+    "rhat_max": 1.0014692237594423,
+    "ess_bulk_min": 1013.4477284331302,
+    "ess_tail_min": 1339.5666709253371
+   }
+  },
+  "reliable": true,
+  "draws": 2000,
+  "tune": 2000,
+  "chains": 2,
+  "seed": 51001,
+  "seconds": 16.373416662216187,
+  "likelihood": "normal",
+  "random_effects": "full",
+  "priors": {
+   "s_beta": 0.35,
+   "s_sd": 0.3,
+   "s_sigma": 0.3,
+   "m_ell": 1.9459101490553132,
+   "s_ell": 0.75
+  },
+  "dropped_nonidentifiable_columns": [
+   30,
+   31,
+   32,
+   33,
+   38
+  ],
+  "identifiable_mean": true,
+  "dropped_low_variance_columns": [
+   38
+  ],
+  "sampling_diagnosis": {
+   "failure_class": "reliable",
+   "reliable": true,
+   "counted_as_successful_benchmark": true,
+   "thresholds": {
+    "rhat_max": 1.01,
+    "ess_bulk_min": 400,
+    "ess_tail_min": 400
+   },
+   "rhat_max": 1.0055666572949002,
+   "ess_bulk_min": 634.7323360975789,
+   "ess_tail_min": 762.6297552948162,
+   "divergences": 0,
+   "draws": 2000,
+   "tune": 2000,
+   "chains": 2,
+   "n_posterior_draws": 4000,
+   "dropped_nonidentifiable_columns": [
+    30,
+    31,
+    32,
+    33,
+    38
+   ],
+   "family_diagnostics": {
+    "theta": {
+     "n": 34,
+     "rhat_max": 1.0028836495503457,
+     "ess_bulk_min": 677.3178528054705,
+     "ess_tail_min": 1048.8445744867545
+    },
+    "beta": {
+     "n": 34,
+     "rhat_max": 1.0013748063751844,
+     "ess_bulk_min": 734.0517338282848,
+     "ess_tail_min": 1119.033982529042
+    },
+    "sd_s": {
+     "n": 2,
+     "rhat_max": 1.0055666572949002,
+     "ess_bulk_min": 634.7323360975789,
+     "ess_tail_min": 762.6297552948162
+    },
+    "sd_a": {
+     "n": 2,
+     "rhat_max": 1.0054590330415432,
+     "ess_bulk_min": 662.9202075750952,
+     "ess_tail_min": 970.6245827987113
+    },
+    "sigma_p": {
+     "n": 1,
+     "rhat_max": 1.0001530290315535,
+     "ess_bulk_min": 888.3472560145337,
+     "ess_tail_min": 1323.6071159529663
+    },
+    "ell": {
+     "n": 1,
+     "rhat_max": 1.0014692237594423,
+     "ess_bulk_min": 1013.4477284331302,
+     "ess_tail_min": 1339.5666709253371
+    }
+   },
+   "worst_rhat_params": {
+    "sd_s[1]": 1.0055666572949002,
+    "sd_a[0]": 1.0054590330415432,
+    "sd_a[1]": 1.0045415818724421,
+    "theta[4]": 1.0028836495503457,
+    "theta[0]": 1.002632245716385
+   },
+   "worst_ess_params": {
+    "sd_s[1]": 634.7323360975789,
+    "sd_a[0]": 662.9202075750952,
+    "theta[25]": 677.3178528054705,
+    "theta[17]": 715.2961730856215,
+    "theta[15]": 725.6142917309847
+   },
+   "priors": {
+    "s_beta": 0.35,
+    "s_sd": 0.3,
+    "s_sigma": 0.3,
+    "m_ell": 1.9459101490553132,
+    "s_ell": 0.75
+   },
+   "note": "Reliability thresholds are unchanged (rhat<=1.01, ESS>=400, divergences==0). Compile/backend failures are classified separately from sampling."
+  },
+  "posterior_summary": {
+   "sd_s": [
+    0.06857096990785386,
+    0.22270870790133732
+   ],
+   "sd_a": [
+    0.07099098345606589,
+    0.46534898017518456
+   ],
+   "sigma_p": 0.19302922751186702,
+   "ell": 5.296645734394354,
+   "sd_s_scaled_logw": [
+    0.00815470011356841,
+    0.026485300237931997
+   ],
+   "sd_a_scaled_logw": [
+    0.008442496607958982,
+    0.05534093198015101
+   ],
+   "sigma_p_scaled_logw": 0.022955712390073015
+  },
+  "prior_predictive": {
+   "pct_change_last_obs_q025_q50_q975": [
+    -39.516752776148145,
+    12.712254776393529,
+    115.10397712502004
+   ],
+   "grams_last_obs_q025_q50_q975": [
+    121.20960388355292,
+    251.47005202868627,
+    534.2641093591885
+   ],
+   "observed_pct_change_q025_q50_q975": [
+    6.942172442845361,
+    35.8817361318454,
+    62.51482780169324
+   ],
+   "plausible": true,
+   "note": "weakly informative: prior predictive should cover, not match, observed changes"
+  },
+  "posterior_predictive": {
+   "by_time_bin": {
+    "<=7": {
+     "p_mean": 0.484,
+     "p_sd": 0.72125
+    },
+    "8-14": {
+     "p_mean": 0.5125,
+     "p_sd": 0.568
+    },
+    "15-21": {
+     "p_mean": 0.426,
+     "p_sd": 0.4895
+    },
+    "22-28": {
+     "p_mean": 0.41925,
+     "p_sd": 0.6885
+    }
+   },
+   "extreme_bins": [],
+   "note": "one-step conditional replicates (likelihood factorization); full-trajectory new-study checks are in the held-out evaluation"
+  }
+ },
+ "sensitivity_comparison": [
+  {
+   "variant": "main",
+   "mean_pred_change_day28_validation": 0.2815863243036106,
+   "sd_s_logw": [
+    0.00815470011356841,
+    0.026485300237931997
+   ],
+   "sd_a_logw": [
+    0.008442496607958982,
+    0.05534093198015101
+   ],
+   "sigma_p_logw": 0.022955712390073015,
+   "ell": 5.296645734394354,
+   "reliable": true,
+   "rhat_max": 1.0055666572949002
+  }
+ ]
+}

@@ -1,0 +1,61 @@
+{
+  "checks": {
+    "all_obs_have_animal": true,
+    "arm_keys_resolved": true,
+    "finite_log_weights": true,
+    "n_quarantined_hard": 0,
+    "n_quarantined_soft": 0,
+    "one_baseline_per_animal_max": true,
+    "passed": true,
+    "positive_weights": true,
+    "sex_values": [
+      "F",
+      "M"
+    ],
+    "unique_animal_keys": true,
+    "unique_obs_keys": true
+  },
+  "donor_studyids_selected": [],
+  "exclusion_counts": {
+    "species_out_of_scope": 126
+  },
+  "limitations": [
+    "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+    "28 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+  ],
+  "n_donor_studies_requested": 0,
+  "n_donor_studies_selected": 0,
+  "n_eligible_animals": 378,
+  "n_model_obs": 1863,
+  "n_target_eligible_animals": 378,
+  "sharing": "context_specific",
+  "sparse_target_train": {
+    "dropped_train_studyids": [
+      "SYNA-008"
+    ],
+    "kept_train_studyids": [
+      "SYNA-002",
+      "SYNA-004",
+      "SYNA-005",
+      "SYNA-006"
+    ],
+    "kind": "sparse_target_study_training",
+    "n_keep": 4,
+    "n_train_after": 4,
+    "n_train_before": 5,
+    "not": "sparse_history_encoder",
+    "note": "Drops target TRAIN studies only. Validation and test study sets stay frozen. Distinct from sparse observation/history encoder windows.",
+    "target_manifest_test_hash": "3918720b76d617f8",
+    "target_manifest_validation_hash": "3f2f9ff31cd7a6f3",
+    "test_studyids": [
+      "SYNA-001",
+      "SYNA-007"
+    ],
+    "test_unchanged": true,
+    "validation_studyids": [
+      "SYNA-009",
+      "SYNA-010"
+    ],
+    "validation_unchanged": true
+  }
+}

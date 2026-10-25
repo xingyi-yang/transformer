@@ -1,0 +1,249 @@
+{
+  "identifiable_mean": true,
+  "main": {
+    "chains": 2,
+    "divergences": 0,
+    "draws": 2000,
+    "dropped_low_variance_columns": [
+      38
+    ],
+    "dropped_nonidentifiable_columns": [
+      30,
+      31,
+      32,
+      33,
+      38
+    ],
+    "ess_bulk_min": 634.7323360975789,
+    "ess_tail_min": 762.6297552948162,
+    "family_diagnostics": {
+      "beta": {
+        "ess_bulk_min": 734.0517338282848,
+        "ess_tail_min": 1119.033982529042,
+        "n": 34,
+        "rhat_max": 1.0013748063751844
+      },
+      "ell": {
+        "ess_bulk_min": 1013.4477284331302,
+        "ess_tail_min": 1339.5666709253371,
+        "n": 1,
+        "rhat_max": 1.0014692237594423
+      },
+      "sd_a": {
+        "ess_bulk_min": 662.9202075750952,
+        "ess_tail_min": 970.6245827987113,
+        "n": 2,
+        "rhat_max": 1.0054590330415432
+      },
+      "sd_s": {
+        "ess_bulk_min": 634.7323360975789,
+        "ess_tail_min": 762.6297552948162,
+        "n": 2,
+        "rhat_max": 1.0055666572949002
+      },
+      "sigma_p": {
+        "ess_bulk_min": 888.3472560145337,
+        "ess_tail_min": 1323.6071159529663,
+        "n": 1,
+        "rhat_max": 1.0001530290315535
+      },
+      "theta": {
+        "ess_bulk_min": 677.3178528054705,
+        "ess_tail_min": 1048.8445744867545,
+        "n": 34,
+        "rhat_max": 1.0028836495503457
+      }
+    },
+    "identifiable_mean": true,
+    "likelihood": "normal",
+    "maxdepth_hits": 0,
+    "posterior_predictive": {
+      "by_time_bin": {
+        "15-21": {
+          "p_mean": 0.426,
+          "p_sd": 0.4895
+        },
+        "22-28": {
+          "p_mean": 0.41925,
+          "p_sd": 0.6885
+        },
+        "8-14": {
+          "p_mean": 0.5125,
+          "p_sd": 0.568
+        },
+        "<=7": {
+          "p_mean": 0.484,
+          "p_sd": 0.72125
+        }
+      },
+      "extreme_bins": [],
+      "note": "one-step conditional replicates (likelihood factorization); full-trajectory new-study checks are in the held-out evaluation"
+    },
+    "posterior_summary": {
+      "ell": 5.296645734394354,
+      "sd_a": [
+        0.07099098345606589,
+        0.46534898017518456
+      ],
+      "sd_a_scaled_logw": [
+        0.008442496607958982,
+        0.05534093198015101
+      ],
+      "sd_s": [
+        0.06857096990785386,
+        0.22270870790133732
+      ],
+      "sd_s_scaled_logw": [
+        0.00815470011356841,
+        0.026485300237931997
+      ],
+      "sigma_p": 0.19302922751186702,
+      "sigma_p_scaled_logw": 0.022955712390073015
+    },
+    "prior_predictive": {
+      "grams_last_obs_q025_q50_q975": [
+        121.20960388355292,
+        251.47005202868627,
+        534.2641093591885
+      ],
+      "note": "weakly informative: prior predictive should cover, not match, observed changes",
+      "observed_pct_change_q025_q50_q975": [
+        6.942172442845361,
+        35.8817361318454,
+        62.51482780169324
+      ],
+      "pct_change_last_obs_q025_q50_q975": [
+        -39.516752776148145,
+        12.712254776393529,
+        115.10397712502004
+      ],
+      "plausible": true
+    },
+    "priors": {
+      "m_ell": 1.9459101490553132,
+      "s_beta": 0.35,
+      "s_ell": 0.75,
+      "s_sd": 0.3,
+      "s_sigma": 0.3
+    },
+    "random_effects": "full",
+    "reliable": true,
+    "rhat_max": 1.0055666572949002,
+    "sampler_warnings": [],
+    "sampling_diagnosis": {
+      "chains": 2,
+      "counted_as_successful_benchmark": true,
+      "divergences": 0,
+      "draws": 2000,
+      "dropped_nonidentifiable_columns": [
+        30,
+        31,
+        32,
+        33,
+        38
+      ],
+      "ess_bulk_min": 634.7323360975789,
+      "ess_tail_min": 762.6297552948162,
+      "failure_class": "reliable",
+      "family_diagnostics": {
+        "beta": {
+          "ess_bulk_min": 734.0517338282848,
+          "ess_tail_min": 1119.033982529042,
+          "n": 34,
+          "rhat_max": 1.0013748063751844
+        },
+        "ell": {
+          "ess_bulk_min": 1013.4477284331302,
+          "ess_tail_min": 1339.5666709253371,
+          "n": 1,
+          "rhat_max": 1.0014692237594423
+        },
+        "sd_a": {
+          "ess_bulk_min": 662.9202075750952,
+          "ess_tail_min": 970.6245827987113,
+          "n": 2,
+          "rhat_max": 1.0054590330415432
+        },
+        "sd_s": {
+          "ess_bulk_min": 634.7323360975789,
+          "ess_tail_min": 762.6297552948162,
+          "n": 2,
+          "rhat_max": 1.0055666572949002
+        },
+        "sigma_p": {
+          "ess_bulk_min": 888.3472560145337,
+          "ess_tail_min": 1323.6071159529663,
+          "n": 1,
+          "rhat_max": 1.0001530290315535
+        },
+        "theta": {
+          "ess_bulk_min": 677.3178528054705,
+          "ess_tail_min": 1048.8445744867545,
+          "n": 34,
+          "rhat_max": 1.0028836495503457
+        }
+      },
+      "n_posterior_draws": 4000,
+      "note": "Reliability thresholds are unchanged (rhat<=1.01, ESS>=400, divergences==0). Compile/backend failures are classified separately from sampling.",
+      "priors": {
+        "m_ell": 1.9459101490553132,
+        "s_beta": 0.35,
+        "s_ell": 0.75,
+        "s_sd": 0.3,
+        "s_sigma": 0.3
+      },
+      "reliable": true,
+      "rhat_max": 1.0055666572949002,
+      "thresholds": {
+        "ess_bulk_min": 400,
+        "ess_tail_min": 400,
+        "rhat_max": 1.01
+      },
+      "tune": 2000,
+      "worst_ess_params": {
+        "sd_a[0]": 662.9202075750952,
+        "sd_s[1]": 634.7323360975789,
+        "theta[15]": 725.6142917309847,
+        "theta[17]": 715.2961730856215,
+        "theta[25]": 677.3178528054705
+      },
+      "worst_rhat_params": {
+        "sd_a[0]": 1.0054590330415432,
+        "sd_a[1]": 1.0045415818724421,
+        "sd_s[1]": 1.0055666572949002,
+        "theta[0]": 1.002632245716385,
+        "theta[4]": 1.0028836495503457
+      }
+    },
+    "seconds": 16.373416662216187,
+    "seed": 51001,
+    "thresholds": {
+      "ess_bulk_min": 400,
+      "ess_tail_min": 400,
+      "rhat_max": 1.01
+    },
+    "tune": 2000,
+    "worst_ess_params": {
+      "sd_a[0]": 662.9202075750952,
+      "sd_s[1]": 634.7323360975789,
+      "theta[15]": 725.6142917309847,
+      "theta[17]": 715.2961730856215,
+      "theta[25]": 677.3178528054705
+    },
+    "worst_rhat_params": {
+      "sd_a[0]": 1.0054590330415432,
+      "sd_a[1]": 1.0045415818724421,
+      "sd_s[1]": 1.0055666572949002,
+      "theta[0]": 1.002632245716385,
+      "theta[4]": 1.0028836495503457
+    }
+  },
+  "n_animals": 40,
+  "n_beta": 34,
+  "n_obs": 254,
+  "n_studies": 5,
+  "reliable": true,
+  "s_y": 0.11892350545029119,
+  "sharing": "context_specific",
+  "species_treatment": false
+}

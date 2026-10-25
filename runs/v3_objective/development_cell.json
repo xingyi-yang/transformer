@@ -1,0 +1,265 @@
+{
+  "bayesian_gate": {
+    "components": {
+      "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+      "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+    },
+    "counted_as_successful_benchmark": true,
+    "divergences": 0,
+    "ess_bulk_min": 634.7323360975789,
+    "ess_tail_min": 762.6297552948162,
+    "reason": null,
+    "reliable": true,
+    "rhat_max": 1.0055666572949002,
+    "status": "trained"
+  },
+  "increment_moment": {
+    "n_draws": 40,
+    "n_ratios": 2,
+    "n_studies": 2,
+    "note": "Development increment moment only. Exposed test outcomes were not used.",
+    "ratio_before": 1.384549548130392,
+    "scale_factor": 0.7222565644908386,
+    "split": "validation",
+    "target_ratio": 1.0,
+    "used_test": false
+  },
+  "record": {
+    "bank": "matched",
+    "bayesian_gate": {
+      "components": {
+        "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+        "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+      },
+      "counted_as_successful_benchmark": true,
+      "divergences": 0,
+      "ess_bulk_min": 634.7323360975789,
+      "ess_tail_min": 762.6297552948162,
+      "reason": null,
+      "reliable": true,
+      "rhat_max": 1.0055666572949002,
+      "status": "trained"
+    },
+    "covariance": {
+      "boundary_flag": false,
+      "components": {
+        "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark.",
+        "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer."
+      },
+      "converged": true,
+      "covariance_parameters_bootstrapped": false,
+      "layer": "HierarchicalCovariance",
+      "n_animals": 155,
+      "n_obs": 951,
+      "n_params_at_bound": 0,
+      "n_studies": 5,
+      "nll": -1941.3971110260568,
+      "note": "A parameter at bound is an incompletely estimated covariance component. Do not treat predictive intervals as complete parameter-uncertainty intervals.",
+      "params_at_bound": []
+    },
+    "dataset_index": 0,
+    "dir": "runs/v3_objective/development/datasets/d0/trains/t0/cells/dev_matched_context_specific_k0_full",
+    "generate_seed": 31001,
+    "k": 0,
+    "matched_data": {
+      "generate_seed": 31001,
+      "matched_to": [
+        "spline",
+        "transformer"
+      ],
+      "note": "Bayesian uses the same prepared train/validation as spline and transformer.",
+      "same_prepare_key": "3495f8c3fde15b78",
+      "train_seed": 51001,
+      "train_studyids_hash": "7226c64f1381b094",
+      "validation_studyids_hash": "084c8984b5355ff6"
+    },
+    "models": [
+      "spline",
+      "transformer",
+      "bayesian"
+    ],
+    "name": "dev_matched_context_specific_k0_full",
+    "sampling_diagnosis": {
+      "chains": 2,
+      "counted_as_successful_benchmark": true,
+      "divergences": 0,
+      "draws": 2000,
+      "dropped_nonidentifiable_columns": [
+        30,
+        31,
+        32,
+        33,
+        38
+      ],
+      "ess_bulk_min": 634.7323360975789,
+      "ess_tail_min": 762.6297552948162,
+      "failure_class": "reliable",
+      "family_diagnostics": {
+        "beta": {
+          "ess_bulk_min": 734.0517338282848,
+          "ess_tail_min": 1119.033982529042,
+          "n": 34,
+          "rhat_max": 1.0013748063751844
+        },
+        "ell": {
+          "ess_bulk_min": 1013.4477284331302,
+          "ess_tail_min": 1339.5666709253371,
+          "n": 1,
+          "rhat_max": 1.0014692237594423
+        },
+        "sd_a": {
+          "ess_bulk_min": 662.9202075750952,
+          "ess_tail_min": 970.6245827987113,
+          "n": 2,
+          "rhat_max": 1.0054590330415432
+        },
+        "sd_s": {
+          "ess_bulk_min": 634.7323360975789,
+          "ess_tail_min": 762.6297552948162,
+          "n": 2,
+          "rhat_max": 1.0055666572949002
+        },
+        "sigma_p": {
+          "ess_bulk_min": 888.3472560145337,
+          "ess_tail_min": 1323.6071159529663,
+          "n": 1,
+          "rhat_max": 1.0001530290315535
+        },
+        "theta": {
+          "ess_bulk_min": 677.3178528054705,
+          "ess_tail_min": 1048.8445744867545,
+          "n": 34,
+          "rhat_max": 1.0028836495503457
+        }
+      },
+      "n_posterior_draws": 4000,
+      "note": "Reliability thresholds are unchanged (rhat<=1.01, ESS>=400, divergences==0). Compile/backend failures are classified separately from sampling.",
+      "priors": {
+        "m_ell": 1.9459101490553132,
+        "s_beta": 0.35,
+        "s_ell": 0.75,
+        "s_sd": 0.3,
+        "s_sigma": 0.3
+      },
+      "reliable": true,
+      "rhat_max": 1.0055666572949002,
+      "thresholds": {
+        "ess_bulk_min": 400,
+        "ess_tail_min": 400,
+        "rhat_max": 1.01
+      },
+      "tune": 2000,
+      "worst_ess_params": {
+        "sd_a[0]": 662.9202075750952,
+        "sd_s[1]": 634.7323360975789,
+        "theta[15]": 725.6142917309847,
+        "theta[17]": 715.2961730856215,
+        "theta[25]": 677.3178528054705
+      },
+      "worst_rhat_params": {
+        "sd_a[0]": 1.0054590330415432,
+        "sd_a[1]": 1.0045415818724421,
+        "sd_s[1]": 1.0055666572949002,
+        "theta[0]": 1.002632245716385,
+        "theta[4]": 1.0028836495503457
+      }
+    },
+    "selective_sharing": null,
+    "sharing": "context_specific",
+    "sparse_target_train": null,
+    "sparse_target_train_n": null,
+    "target_manifest": {
+      "all_target": "f3f21be9519262a3",
+      "test": "4a858a4b533c5f8c",
+      "train": "7226c64f1381b094",
+      "validation": "084c8984b5355ff6"
+    },
+    "train_index": 0,
+    "train_seed": 51001
+  },
+  "sampling_diagnosis": {
+    "chains": 2,
+    "counted_as_successful_benchmark": true,
+    "divergences": 0,
+    "draws": 2000,
+    "dropped_nonidentifiable_columns": [
+      30,
+      31,
+      32,
+      33,
+      38
+    ],
+    "ess_bulk_min": 634.7323360975789,
+    "ess_tail_min": 762.6297552948162,
+    "failure_class": "reliable",
+    "family_diagnostics": {
+      "beta": {
+        "ess_bulk_min": 734.0517338282848,
+        "ess_tail_min": 1119.033982529042,
+        "n": 34,
+        "rhat_max": 1.0013748063751844
+      },
+      "ell": {
+        "ess_bulk_min": 1013.4477284331302,
+        "ess_tail_min": 1339.5666709253371,
+        "n": 1,
+        "rhat_max": 1.0014692237594423
+      },
+      "sd_a": {
+        "ess_bulk_min": 662.9202075750952,
+        "ess_tail_min": 970.6245827987113,
+        "n": 2,
+        "rhat_max": 1.0054590330415432
+      },
+      "sd_s": {
+        "ess_bulk_min": 634.7323360975789,
+        "ess_tail_min": 762.6297552948162,
+        "n": 2,
+        "rhat_max": 1.0055666572949002
+      },
+      "sigma_p": {
+        "ess_bulk_min": 888.3472560145337,
+        "ess_tail_min": 1323.6071159529663,
+        "n": 1,
+        "rhat_max": 1.0001530290315535
+      },
+      "theta": {
+        "ess_bulk_min": 677.3178528054705,
+        "ess_tail_min": 1048.8445744867545,
+        "n": 34,
+        "rhat_max": 1.0028836495503457
+      }
+    },
+    "n_posterior_draws": 4000,
+    "note": "Reliability thresholds are unchanged (rhat<=1.01, ESS>=400, divergences==0). Compile/backend failures are classified separately from sampling.",
+    "priors": {
+      "m_ell": 1.9459101490553132,
+      "s_beta": 0.35,
+      "s_ell": 0.75,
+      "s_sd": 0.3,
+      "s_sigma": 0.3
+    },
+    "reliable": true,
+    "rhat_max": 1.0055666572949002,
+    "thresholds": {
+      "ess_bulk_min": 400,
+      "ess_tail_min": 400,
+      "rhat_max": 1.01
+    },
+    "tune": 2000,
+    "worst_ess_params": {
+      "sd_a[0]": 662.9202075750952,
+      "sd_s[1]": 634.7323360975789,
+      "theta[15]": 725.6142917309847,
+      "theta[17]": 715.2961730856215,
+      "theta[25]": 677.3178528054705
+    },
+    "worst_rhat_params": {
+      "sd_a[0]": 1.0054590330415432,
+      "sd_a[1]": 1.0045415818724421,
+      "sd_s[1]": 1.0055666572949002,
+      "theta[0]": 1.002632245716385,
+      "theta[4]": 1.0028836495503457
+    }
+  }
+}

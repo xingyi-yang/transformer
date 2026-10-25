@@ -55,4 +55,5 @@ Verdicts: `achieved` | `partial` | `failed` | `not evaluated`.
 
 The focused synthetic evaluation that follows uses **development**
 simulations for any model change and **fresh frozen** datasets for scoring.
-Sharing and the transformer are not required to win.
+Sharing and the transformer are not required to win. Executed performance
+labels are in `docs/v3/objective_verdict.md`.

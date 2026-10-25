@@ -1,0 +1,67 @@
+{
+  "alpha": 300.0,
+  "covariance": {
+    "ell": 3.795979664364244,
+    "fit_info": {
+      "converged": true,
+      "increment_moment_scale": 0.7817431212395344,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "n_animals": 198,
+      "n_obs": 1025,
+      "n_studies": 5,
+      "nll": -2036.6119226128365,
+      "params_at_bound": []
+    },
+    "sd_a0": 0.006823791022399756,
+    "sd_a1": 0.05738506881448378,
+    "sd_s0": 0.009903571694216969,
+    "sd_s1": 0.05697582083836896,
+    "sigma_m": 7.866988638688083e-05,
+    "sigma_p": 0.02065294334407621
+  },
+  "covariance_fit_on": "target_species_oof",
+  "increment_moment": {
+    "n_draws": 40,
+    "n_ratios": 2,
+    "n_studies": 2,
+    "note": "Development increment moment only. Exposed test outcomes were not used.",
+    "ratio_before": 1.27919257980089,
+    "scale_factor": 0.7817431212395344,
+    "split": "validation",
+    "target_ratio": 1.0,
+    "used_test": false
+  },
+  "lambda_growth": null,
+  "lambda_treatment": null,
+  "n_members": 5,
+  "n_params": 76,
+  "oof_rmse": 0.07822153222622258,
+  "selective_sharing": {
+    "model": "spline",
+    "note": "Shared: compound descriptors and planned-dose/regimen query features. Species-specific: growth/baseline token groups and residual scale. Not a Bayesian species random-effect variant.",
+    "residual": "target_species_only",
+    "shared": [
+      "compound",
+      "regimen"
+    ],
+    "species_specific": [
+      "bio",
+      "baseline",
+      "species"
+    ],
+    "training": "joint ridge mean with SPECIES_* time-basis interactions; HierarchicalCovariance fit on target-species OOF residuals only",
+    "variant": "v1"
+  },
+  "train_rmse": 0.05803664015778064,
+  "validation_rmse": 0.04163826270549379,
+  "validation_rmse_by_alpha": {
+    "0.1": 0.04607448222665904,
+    "1.0": 0.04596961052175009,
+    "10.0": 0.04523759051783817,
+    "100.0": 0.04268117778735969,
+    "1000.0": 0.046276759777985406,
+    "10000.0": 0.1144912180246623,
+    "300.0": 0.04163826270549379,
+    "3000.0": 0.06996504744908257
+  }
+}

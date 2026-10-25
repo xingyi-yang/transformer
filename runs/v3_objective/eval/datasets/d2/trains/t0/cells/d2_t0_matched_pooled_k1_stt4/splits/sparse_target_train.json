@@ -1,0 +1,29 @@
+{
+  "dropped_train_studyids": [
+    "SYNA-008"
+  ],
+  "kept_train_studyids": [
+    "SYNA-002",
+    "SYNA-003",
+    "SYNA-005",
+    "SYNA-006"
+  ],
+  "kind": "sparse_target_study_training",
+  "n_keep": 4,
+  "n_train_after": 4,
+  "n_train_before": 5,
+  "not": "sparse_history_encoder",
+  "note": "Drops target TRAIN studies only. Validation and test study sets stay frozen. Distinct from sparse observation/history encoder windows.",
+  "target_manifest_test_hash": "3918720b76d617f8",
+  "target_manifest_validation_hash": "3f2f9ff31cd7a6f3",
+  "test_studyids": [
+    "SYNA-001",
+    "SYNA-007"
+  ],
+  "test_unchanged": true,
+  "validation_studyids": [
+    "SYNA-009",
+    "SYNA-010"
+  ],
+  "validation_unchanged": true
+}

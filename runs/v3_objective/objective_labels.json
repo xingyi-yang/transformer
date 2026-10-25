@@ -1,0 +1,17 @@
+{
+  "O1": {"functionality": "achieved", "performance": "partial", "evidence": "54/54 cells on 3 frozen datasets. Scores exist. Still synthetic / exploratory."},
+  "O2": {"functionality": "achieved", "performance": "partial", "evidence": "Paired holdouts. Spline RMSE Δ ≈ 0. Transformer mixed. Sharing not required to win and did not win."},
+  "O3": {"functionality": "achieved", "performance": "achieved", "evidence": "Harmful-transfer signs published; not clipped."},
+  "O4": {"functionality": "achieved", "performance": "partial", "evidence": "Contrast packs scored. Not a design-feasibility claim."},
+  "O5": {"functionality": "achieved", "performance": "partial", "evidence": "matched / growth_shift / both all scored."},
+  "O6": {"functionality": "achieved", "performance": "partial", "evidence": "Full vs n_keep=4. Spline sparse slightly harmful. Density not required to win."},
+  "O7": {"functionality": "achieved", "performance": "not evaluated", "evidence": "Encoder grid not re-run."},
+  "O8": {"functionality": "achieved (engine)", "performance": "not evaluated", "evidence": "No design-stage vs predose table."},
+  "O9": {"functionality": "partial", "performance": "not evaluated", "evidence": "Not the primary frozen task."},
+  "O10": {"functionality": "achieved", "performance": "achieved", "evidence": "n_datasets=3 from SE≤0.10 plan; observed SE 0.034."},
+  "O11": {"functionality": "achieved", "performance": "partial", "evidence": "Spline primary 1.099 in [0.80, 1.20] (gate pass). Transformer 1.23–1.34. Coverage/PIT not re-qualified."},
+  "O12": {"functionality": "partial", "performance": "failed", "evidence": "Frozen eval ESS 352/278 < 400; covariance_mixing on sd_s[1]. Thresholds unchanged. Not counted."},
+  "O13": {"functionality": "achieved (engine)", "performance": "partial", "evidence": "0/4 proposal feasible (FWER). Generator B not reached. B<2000 nonconclusive. Not an operational recommendation."},
+  "O14": {"functionality": "achieved", "performance": "partial", "evidence": "Both trained. Neither required to win. Transformer increment still high."},
+  "O15": {"functionality": "gated", "performance": "not evaluated", "evidence": "No real data. Phase B ACCESS_BLOCKER."}
+}

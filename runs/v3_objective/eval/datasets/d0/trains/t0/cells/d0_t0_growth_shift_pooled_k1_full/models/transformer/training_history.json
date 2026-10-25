@@ -1,0 +1,70 @@
+{
+  "arch": {
+    "d_model": 32,
+    "dropout": 0.1,
+    "group_dims": {
+      "baseline": 1,
+      "bio": 3,
+      "compound": 4,
+      "regimen": 5,
+      "species": 1
+    },
+    "n_heads": 2,
+    "n_layers": 1,
+    "q_dim": 5,
+    "treat_dev_dim": 0
+  },
+  "best_val_rmse_member0": 0.04941194877028465,
+  "members": [
+    {
+      "best_val_rmse": 0.04941194877028465,
+      "curve": [
+        {
+          "epoch": 0,
+          "train_loss": 1.6103486994565543,
+          "val_rmse": 0.0923280343413353
+        },
+        {
+          "epoch": 1,
+          "train_loss": 0.4659475158836882,
+          "val_rmse": 0.09254356473684311
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.32493070222563664,
+          "val_rmse": 0.059125855565071106
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.23983268490282156,
+          "val_rmse": 0.05944453924894333
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.2055788429106696,
+          "val_rmse": 0.06316448003053665
+        },
+        {
+          "epoch": 5,
+          "train_loss": 0.1889700136952481,
+          "val_rmse": 0.05706365406513214
+        },
+        {
+          "epoch": 6,
+          "train_loss": 0.1733611397824045,
+          "val_rmse": 0.04941194877028465
+        },
+        {
+          "epoch": 7,
+          "train_loss": 0.16015324855254867,
+          "val_rmse": 0.053765829652547836
+        }
+      ],
+      "epochs_run": 8,
+      "freeze_groups": [],
+      "member": 0,
+      "seed": 61001
+    }
+  ],
+  "y_scale": 0.13515841960906982
+}
