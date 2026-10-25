@@ -51,7 +51,7 @@ from send_bw.tft_primary import OUTPUT_DEFAULT as PRIMARY_DEFAULT
 from send_bw.tft_primary import _finetune_tft, _fit_tft
 from send_bw.tft_stability import EXTEND_DEFAULT, PILOT_DEFAULT, metric_value
 from send_bw.tft_stability import OUTPUT_DEFAULT as STABILITY_DEFAULT
-from send_bw.utils.artifacts import cache_key, git_revision, write_json
+from send_bw.utils.artifacts import cache_key, git_revision, read_json, write_json
 from send_bw.v3_official_seq import collect_versions
 
 OUTPUT_DEFAULT = "runs/tft_study_cv"
@@ -131,6 +131,28 @@ def verify_fold_membership(fold: dict[str, Any]) -> None:
         if seen & ids:
             raise StudyCVError(f"fold {fold.get('fold')} overlap in {name}: {sorted(seen & ids)}")
         seen |= ids
+
+
+def _load_or_fit(scope: str, prep: dict[str, Any], cfg: dict[str, Any], dest: Path):
+    from send_bw.models.tft import TFTEarlyHistoryModel
+
+    if (dest / "tft.ckpt").exists():
+        model = TFTEarlyHistoryModel.load(dest)
+        hist = read_json(dest / "training_history.json") if (dest / "training_history.json").exists() else (
+            model.history or {})
+        return model, hist
+    return _fit_tft(prep, cfg, dest, scope)
+
+
+def _load_or_finetune(pooled_dir: Path, target_prep: dict[str, Any], cfg: dict[str, Any], dest: Path):
+    from send_bw.models.tft import TFTEarlyHistoryModel
+
+    if (dest / "tft.ckpt").exists():
+        model = TFTEarlyHistoryModel.load(dest)
+        hist = read_json(dest / "training_history.json") if (dest / "training_history.json").exists() else (
+            model.history or {})
+        return model, hist
+    return _finetune_tft(pooled_dir, target_prep, cfg, dest)
 
 
 def _examples(data, cutoff: float, max_enc: int, max_pred: int) -> dict[str, Any]:
@@ -494,7 +516,7 @@ def execute_tft_study_cv(config_path: str | Path, force: bool = False) -> dict[s
             ):
                 try:
                     dest = fdir / "models" / dest_name
-                    model, hist = _fit_tft(prep, {**tft_cfg, "seed": seed}, dest, scope)
+                    model, hist = _load_or_fit(scope, prep, {**tft_cfg, "seed": seed}, dest)
                     models[scope] = model
                     exposures.append(_exposure(hist, prep, scope=f"fold{fold['fold']}_{scope}",
                                                seed=seed, fold=fold["fold"], studies=fold["train"]))
@@ -526,7 +548,7 @@ def execute_tft_study_cv(config_path: str | Path, force: bool = False) -> dict[s
                 ft_locked = dict(tft_cfg)
                 ft_locked["seed"] = seed
                 ft_locked["finetune"] = ft_cfg
-                model, hist = _finetune_tft(pooled_ckpt, extra_to, ft_locked, dest)
+                model, hist = _load_or_finetune(pooled_ckpt, extra_to, ft_locked, dest)
                 models["finetune"] = model
                 exposures.append(_exposure(hist, extra_to, scope=f"fold{fold['fold']}_finetune",
                                            seed=seed, fold=fold["fold"], studies=fold["train"]))
@@ -562,34 +584,42 @@ def execute_tft_study_cv(config_path: str | Path, force: bool = False) -> dict[s
                 rec.update({"seed": seed, "fold": fold["fold"], "source": "calibration",
                             "test_outcomes_used": False, "validation_used_for_margin": False})
                 write_json(fdir / f"cqr_margin_{seed}.json", rec)
-                if rec.get("status") == "ok" and raw_te.is_file():
-                    for bank_name, path in (("validation", raw_val), ("test", raw_te)):
-                        raw = pd.read_csv(path)
-                        cal = apply_cqr_margin(raw, float(rec["margin"]))
-                        pack = score_raw_and_calibrated(banks[bank_name]["fut"], raw, cal)
-                        cal.to_csv(parent / "predictions" /
-                                   f"fold{fold['fold']}_{bank_name}_to_cqr_{seed}.csv", index=False)
-                        write_json(parent / "scores" /
-                                   f"fold{fold['fold']}_{bank_name}_to_cqr_{seed}.json", {
-                                       "raw": pack["raw"], "cqr": pack["cqr"],
-                                       "pinball_note": pack["pinball_note"],
-                                       "margin": rec.get("margin"),
-                                   })
-                        if pack.get("cqr"):
-                            slices = coverage_slices(banks[bank_name]["fut"], cal)
-                            by_is = {str(r["STUDYID"]): r for r in (slices.get("by_study") or [])}
-                            for rec in pack["cqr"].get("per_study") or []:
-                                extra = by_is.get(str(rec.get("STUDYID")))
-                                if extra:
-                                    rec["interval_score80"] = extra.get("interval_score80")
-                            rows.append(_row(bank_name, "tft_target_only_cqr", seed, fold["fold"],
-                                             pack["cqr"], extra={
-                                                 "reused": False,
-                                                 "cqr_margin": rec.get("margin"),
-                                                 "pinball_is_shifted_endpoints": True,
-                                                 "raw_pinball": (pack["raw"] or {}).get("mean_quantile_loss"),
-                                                 "raw_mae": (pack["raw"] or {}).get("mae_log"),
-                                             }))
+                try:
+                    if rec.get("status") == "ok" and rec.get("margin") is not None and raw_te.is_file():
+                        margin = float(rec["margin"])
+                        for bank_name, path in (("validation", raw_val), ("test", raw_te)):
+                            raw = pd.read_csv(path)
+                            cal = apply_cqr_margin(raw, margin)
+                            pack = score_raw_and_calibrated(banks[bank_name]["fut"], raw, cal)
+                            cal.to_csv(parent / "predictions" /
+                                       f"fold{fold['fold']}_{bank_name}_to_cqr_{seed}.csv", index=False)
+                            write_json(parent / "scores" /
+                                       f"fold{fold['fold']}_{bank_name}_to_cqr_{seed}.json", {
+                                           "raw": pack["raw"], "cqr": pack["cqr"],
+                                           "pinball_note": pack["pinball_note"],
+                                           "margin": margin,
+                                       })
+                            if pack.get("cqr"):
+                                slices = coverage_slices(banks[bank_name]["fut"], cal)
+                                by_is = {str(r["STUDYID"]): r for r in (slices.get("by_study") or [])}
+                                for study_rec in pack["cqr"].get("per_study") or []:
+                                    extra = by_is.get(str(study_rec.get("STUDYID")))
+                                    if extra:
+                                        study_rec["interval_score80"] = extra.get("interval_score80")
+                                rows.append(_row(bank_name, "tft_target_only_cqr", seed, fold["fold"],
+                                                 pack["cqr"], extra={
+                                                     "reused": False,
+                                                     "cqr_margin": margin,
+                                                     "pinball_is_shifted_endpoints": True,
+                                                     "raw_pinball": (pack["raw"] or {}).get("mean_quantile_loss"),
+                                                     "raw_mae": (pack["raw"] or {}).get("mae_log"),
+                                                 }))
+                except Exception as e:  # noqa: BLE001
+                    failures.append({
+                        "model": f"fold{fold['fold']}_cqr_{seed}",
+                        "reason": f"{type(e).__name__}: {e}",
+                        "traceback": traceback.format_exc()[-1500:],
+                    })
 
         # refresh integrity with actual checkpoint train studies
         integrity_logs[-1]["checkpoint_studies"] = {
