@@ -1,0 +1,3185 @@
+{
+  "audit": {
+    "confirm_34011": {
+      "do_not_call_untouched": true,
+      "forbidden_holdouts_in_train": [
+        "SYNA-007",
+        "SYNA-010",
+        "SYNA-011"
+      ],
+      "official_checkpoints": "Official TFT checkpoints were trained on official train (including SYNA-003/004). Confirm 34011 models were fit fresh and did not load those weights. Confirm pooled/fine-tune train sets still contained SYNA-007/010/011.",
+      "previous_finetune_default": "PR #22 selected tft_finetune on official validation interval score. That default failed confirmation: target-only was better and more stable on 34011 test studies. Fine-tune and CQR stay experimental.",
+      "previously_reported_in_validation": [
+        "SYNA-005"
+      ],
+      "roles": {
+        "SYNA-001": [
+          "official_compound_holdout",
+          "confirm_34011_validation"
+        ],
+        "SYNA-002": [
+          "official_train",
+          "confirm_34011_train"
+        ],
+        "SYNA-003": [
+          "official_train",
+          "confirm_34011_test"
+        ],
+        "SYNA-004": [
+          "official_train",
+          "extra_33001_validation",
+          "confirm_34011_test"
+        ],
+        "SYNA-005": [
+          "official_validation",
+          "confirm_34011_validation"
+        ],
+        "SYNA-006": [
+          "official_train",
+          "confirm_34011_train"
+        ],
+        "SYNA-007": [
+          "official_train",
+          "extra_33001_test",
+          "confirm_34011_train"
+        ],
+        "SYNA-008": [
+          "official_compound_holdout",
+          "confirm_34011_train"
+        ],
+        "SYNA-009": [
+          "official_train",
+          "confirm_34011_train"
+        ],
+        "SYNA-010": [
+          "official_test",
+          "extra_33001_test",
+          "confirm_34011_train"
+        ],
+        "SYNA-011": [
+          "official_test",
+          "confirm_34011_train"
+        ],
+        "SYNA-012": [
+          "official_validation",
+          "extra_33001_validation",
+          "confirm_34011_train"
+        ]
+      },
+      "splits": {
+        "test": [
+          "SYNA-003",
+          "SYNA-004"
+        ],
+        "train": [
+          "SYNA-002",
+          "SYNA-006",
+          "SYNA-007",
+          "SYNA-008",
+          "SYNA-009",
+          "SYNA-010",
+          "SYNA-011",
+          "SYNA-012"
+        ],
+        "validation": [
+          "SYNA-001",
+          "SYNA-005"
+        ]
+      },
+      "status": "erratum",
+      "supported_claim": "SYNA-003 and SYNA-004 had not been reported as test studies before. They were official training studies. Confirmation *test* therefore used new test labels, but confirmation training and validation were not holdout-free.",
+      "unsupported_claim": "Confirmation 34011 was an untouched study holdout. Previously reported test studies were excluded from the confirmation experiment."
+    },
+    "cqr_metric_policy": {
+      "calibration_data": "separate calibration split; not validation, not test",
+      "experimental": true,
+      "mean_quantile_loss_on_calibrated": "Average pinball over 0.1/0.25/0.5/0.75/0.9 after the shift. That is not the training QuantileLoss and is not comparable to raw pinball as a proper score for the original quantile head.",
+      "q0_1_q0_9": "shifted by \u00b1margin; interval score, coverage, and width use these",
+      "q0_5": "unchanged; MAE and median pinball match the raw table",
+      "report": "raw_* from original quantiles; cqr_* from calibrated endpoints"
+    },
+    "development_reference": "tft_target_only",
+    "epoch_counting": {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_max_epochs_budget": 8,
+      "lightning_current_epoch": 16,
+      "max_epochs_budget": 16,
+      "note": "epochs_completed counts callback rows that logged train_loss. Legacy epochs_run was lightning current_epoch + 1.",
+      "official_example": {
+        "budget": 16,
+        "finetune_budget": 8,
+        "lightning_current_epoch_after_fit": 16,
+        "logged_train_epochs": "0..15 (16 steps)",
+        "stored_epochs_run": 17,
+        "stored_finetune_epochs_run": 9
+      },
+      "trained_epoch_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    "experimental": [
+      "tft_pooled",
+      "tft_finetune",
+      "tft_target_only_cqr"
+    ],
+    "official_series_counts": {
+      "n_animals_in_split": 214,
+      "n_dropped_short_series": 3,
+      "n_tft_series": 211,
+      "note": "n_animals_in_split counts unique USUBJID on the split. n_tft_series counts animals with at least min_encoder_length+1 observed visits, the TimeSeriesDataSet filter. Official train is 214 animals / 211 series because three animals have a single DAY=7 visit."
+    },
+    "pinball_note": "Raw pinball is the mean QuantileLoss on the original head. CQR pinball uses the shifted 10% and 90% endpoints and is not the training objective. Report both; do not treat CQR pinball as an improvement of the TFT quantile fit.",
+    "previous_finetune_default_failed_confirmation": true
+  },
+  "consistency_interval_score": {
+    "any_consistent_improvement": true,
+    "metric": "interval_score80",
+    "note": "Consistent improvement requires beating target-only on the test interval_score80 in at least 5 folds and 10 studies. Fine-tune and CQR remain experimental.",
+    "previous_finetune_default_failed_confirmation": true,
+    "reference": "tft_target_only",
+    "variants": {
+      "tft_finetune": {
+        "consistent_improvement": true,
+        "fold_rows": [
+          {
+            "beats_reference": true,
+            "delta": -0.025053632163273554,
+            "experimental": 0.1724972474440917,
+            "fold": 0,
+            "reference": 0.19755087960736525
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.025883625216737288,
+            "experimental": 0.18481155548646933,
+            "fold": 1,
+            "reference": 0.2106951807032066
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.0594536080854538,
+            "experimental": 0.22843479568527836,
+            "fold": 2,
+            "reference": 0.28788840377073216
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.08445612616351533,
+            "experimental": 0.21883713401828908,
+            "fold": 3,
+            "reference": 0.3032932601818044
+          },
+          {
+            "beats_reference": false,
+            "delta": 1.8138113983229618,
+            "experimental": 2.034981196587892,
+            "fold": 4,
+            "reference": 0.2211697982649302
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.02853347389671393,
+            "experimental": 0.15852587254873993,
+            "fold": 5,
+            "reference": 0.18705934644545386
+          }
+        ],
+        "metric": "interval_score80",
+        "min_folds": 5,
+        "min_studies": 10,
+        "n_folds_beats_reference": 5,
+        "n_folds_compared": 6,
+        "n_studies_beats_reference": 11,
+        "n_studies_compared": 12
+      },
+      "tft_pooled": {
+        "consistent_improvement": false,
+        "fold_rows": [
+          {
+            "beats_reference": true,
+            "delta": -0.01999618324689509,
+            "experimental": 0.17755469636047017,
+            "fold": 0,
+            "reference": 0.19755087960736525
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.010914910831758162,
+            "experimental": 0.19978026987144845,
+            "fold": 1,
+            "reference": 0.2106951807032066
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.056314007153903334,
+            "experimental": 0.3442024109246355,
+            "fold": 2,
+            "reference": 0.28788840377073216
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.05090937847679178,
+            "experimental": 0.25238388170501264,
+            "fold": 3,
+            "reference": 0.3032932601818044
+          },
+          {
+            "beats_reference": false,
+            "delta": 1.1710101106514534,
+            "experimental": 1.3921799089163835,
+            "fold": 4,
+            "reference": 0.2211697982649302
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.019988821137415264,
+            "experimental": 0.20704816758286912,
+            "fold": 5,
+            "reference": 0.18705934644545386
+          }
+        ],
+        "metric": "interval_score80",
+        "min_folds": 5,
+        "min_studies": 10,
+        "n_folds_beats_reference": 3,
+        "n_folds_compared": 6,
+        "n_studies_beats_reference": 7,
+        "n_studies_compared": 12
+      },
+      "tft_target_only_cqr": {
+        "consistent_improvement": false,
+        "fold_rows": [
+          {
+            "beats_reference": true,
+            "delta": -0.0037026131614534274,
+            "experimental": 0.19384826644591183,
+            "fold": 0,
+            "reference": 0.19755087960736525
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.006853607722763888,
+            "experimental": 0.20384157298044273,
+            "fold": 1,
+            "reference": 0.2106951807032066
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.015994449225232188,
+            "experimental": 0.27189395454549997,
+            "fold": 2,
+            "reference": 0.28788840377073216
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.026815065953003425,
+            "experimental": 0.276478194228801,
+            "fold": 3,
+            "reference": 0.3032932601818044
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.0013145435701649166,
+            "experimental": 0.2224843418350951,
+            "fold": 4,
+            "reference": 0.2211697982649302
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.007820083200048872,
+            "experimental": 0.19487942964550273,
+            "fold": 5,
+            "reference": 0.18705934644545386
+          }
+        ],
+        "metric": "interval_score80",
+        "min_folds": 5,
+        "min_studies": 10,
+        "n_folds_beats_reference": 4,
+        "n_folds_compared": 6,
+        "n_studies_beats_reference": 8,
+        "n_studies_compared": 12
+      }
+    }
+  },
+  "consistency_mae": {
+    "any_consistent_improvement": true,
+    "metric": "mae_log",
+    "note": "Consistent improvement requires beating target-only on the test mae_log in at least 5 folds and 10 studies. Fine-tune and CQR remain experimental.",
+    "previous_finetune_default_failed_confirmation": true,
+    "reference": "tft_target_only",
+    "variants": {
+      "tft_finetune": {
+        "consistent_improvement": true,
+        "fold_rows": [
+          {
+            "beats_reference": true,
+            "delta": -0.00024279375255763236,
+            "experimental": 0.03995361396219931,
+            "fold": 0,
+            "reference": 0.040196407714756945
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.004166043519056202,
+            "experimental": 0.04264486450148444,
+            "fold": 1,
+            "reference": 0.046810908020540644
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.009704611416261832,
+            "experimental": 0.04598342376854469,
+            "fold": 2,
+            "reference": 0.05568803518480652
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.017264309447569244,
+            "experimental": 0.048309946525199675,
+            "fold": 3,
+            "reference": 0.06557425597276892
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.18881118813166337,
+            "experimental": 0.23458379317887376,
+            "fold": 4,
+            "reference": 0.04577260504721039
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.005328548176958013,
+            "experimental": 0.037078074929986674,
+            "fold": 5,
+            "reference": 0.04240662310694469
+          }
+        ],
+        "metric": "mae_log",
+        "min_folds": 5,
+        "min_studies": 10,
+        "n_folds_beats_reference": 5,
+        "n_folds_compared": 6,
+        "n_studies_beats_reference": 10,
+        "n_studies_compared": 12
+      },
+      "tft_pooled": {
+        "consistent_improvement": false,
+        "fold_rows": [
+          {
+            "beats_reference": false,
+            "delta": 0.0012015148234760797,
+            "experimental": 0.041397922538233024,
+            "fold": 0,
+            "reference": 0.040196407714756945
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.002400829923110706,
+            "experimental": 0.04441007809742994,
+            "fold": 1,
+            "reference": 0.046810908020540644
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.006722117499994726,
+            "experimental": 0.06241015268480125,
+            "fold": 2,
+            "reference": 0.05568803518480652
+          },
+          {
+            "beats_reference": true,
+            "delta": -0.009108248949798864,
+            "experimental": 0.056466007022970055,
+            "fold": 3,
+            "reference": 0.06557425597276892
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.12390452501575164,
+            "experimental": 0.16967713006296203,
+            "fold": 4,
+            "reference": 0.04577260504721039
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.0026619496776224758,
+            "experimental": 0.04506857278456716,
+            "fold": 5,
+            "reference": 0.04240662310694469
+          }
+        ],
+        "metric": "mae_log",
+        "min_folds": 5,
+        "min_studies": 10,
+        "n_folds_beats_reference": 2,
+        "n_folds_compared": 6,
+        "n_studies_beats_reference": 6,
+        "n_studies_compared": 12
+      },
+      "tft_target_only_cqr": {
+        "consistent_improvement": false,
+        "fold_rows": [
+          {
+            "beats_reference": false,
+            "delta": 1.3877787807814457e-17,
+            "experimental": 0.04019640771475696,
+            "fold": 0,
+            "reference": 0.040196407714756945
+          },
+          {
+            "beats_reference": false,
+            "delta": 0.0,
+            "experimental": 0.046810908020540644,
+            "fold": 1,
+            "reference": 0.046810908020540644
+          },
+          {
+            "beats_reference": false,
+            "delta": 2.7755575615628914e-17,
+            "experimental": 0.05568803518480655,
+            "fold": 2,
+            "reference": 0.05568803518480652
+          },
+          {
+            "beats_reference": true,
+            "delta": -4.163336342344337e-17,
+            "experimental": 0.06557425597276888,
+            "fold": 3,
+            "reference": 0.06557425597276892
+          },
+          {
+            "beats_reference": false,
+            "delta": 6.938893903907228e-18,
+            "experimental": 0.045772605047210396,
+            "fold": 4,
+            "reference": 0.04577260504721039
+          },
+          {
+            "beats_reference": false,
+            "delta": 2.0816681711721685e-17,
+            "experimental": 0.04240662310694471,
+            "fold": 5,
+            "reference": 0.04240662310694469
+          }
+        ],
+        "metric": "mae_log",
+        "min_folds": 5,
+        "min_studies": 10,
+        "n_folds_beats_reference": 1,
+        "n_folds_compared": 6,
+        "n_studies_beats_reference": 3,
+        "n_studies_compared": 12
+      }
+    }
+  },
+  "design_run": false,
+  "development_reference": "tft_target_only",
+  "failures": [],
+  "folds": [
+    {
+      "calibration": [
+        "SYNA-002",
+        "SYNA-010"
+      ],
+      "fold": 0,
+      "test": [
+        "SYNA-001",
+        "SYNA-003"
+      ],
+      "train": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "validation": [
+        "SYNA-005",
+        "SYNA-007"
+      ]
+    },
+    {
+      "calibration": [
+        "SYNA-006",
+        "SYNA-010"
+      ],
+      "fold": 1,
+      "test": [
+        "SYNA-007",
+        "SYNA-011"
+      ],
+      "train": [
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-012"
+      ],
+      "validation": [
+        "SYNA-001",
+        "SYNA-005"
+      ]
+    },
+    {
+      "calibration": [
+        "SYNA-008",
+        "SYNA-010"
+      ],
+      "fold": 2,
+      "test": [
+        "SYNA-004",
+        "SYNA-005"
+      ],
+      "train": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-006",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "validation": [
+        "SYNA-007",
+        "SYNA-009"
+      ]
+    },
+    {
+      "calibration": [
+        "SYNA-004",
+        "SYNA-012"
+      ],
+      "fold": 3,
+      "test": [
+        "SYNA-006",
+        "SYNA-009"
+      ],
+      "train": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-007",
+        "SYNA-008",
+        "SYNA-010",
+        "SYNA-011"
+      ],
+      "validation": [
+        "SYNA-002",
+        "SYNA-005"
+      ]
+    },
+    {
+      "calibration": [
+        "SYNA-003",
+        "SYNA-005"
+      ],
+      "fold": 4,
+      "test": [
+        "SYNA-010",
+        "SYNA-012"
+      ],
+      "train": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-004",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011"
+      ],
+      "validation": [
+        "SYNA-006",
+        "SYNA-008"
+      ]
+    },
+    {
+      "calibration": [
+        "SYNA-003",
+        "SYNA-010"
+      ],
+      "fold": 5,
+      "test": [
+        "SYNA-002",
+        "SYNA-008"
+      ],
+      "train": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "validation": [
+        "SYNA-001",
+        "SYNA-005"
+      ]
+    }
+  ],
+  "freeze_lock": {
+    "config_hash": "2aa6c5c6204d4e53",
+    "config_path": "configs/tft_study_cv.yaml",
+    "confirm_34011_called_untouched": false,
+    "cv_split_seed": 35021,
+    "design": false,
+    "development_reference": "tft_target_only",
+    "experimental": [
+      "tft_pooled",
+      "tft_finetune",
+      "tft_target_only_cqr"
+    ],
+    "generate_seed": 71001,
+    "git_revision": "78c3ca6370fc81d5326c8fbf558154b004959ad5",
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "n_folds": 6,
+    "official_holdout_test_used_for_search": false,
+    "preserved": [
+      "runs/v3_eval",
+      "runs/v3_pilot_k0k1",
+      "runs/v3_repl",
+      "runs/v3_research",
+      "runs/v3_closeout",
+      "runs/v3_audit",
+      "runs/v3_increment",
+      "runs/v3_phaseb",
+      "runs/v3_limitations",
+      "runs/v3_objective",
+      "runs/v3_official_seq",
+      "runs/v3_seq_diag",
+      "runs/v3_eval_correct",
+      "runs/v3_cov_chronos",
+      "runs/v3_share_repl",
+      "runs/v3_share_abstain",
+      "runs/v3_share_abstain_run",
+      "runs/v3_donor_rank",
+      "runs/tft_early_hist_bench",
+      "runs/tft_early_hist_extend",
+      "runs/tft_primary",
+      "runs/tft_stability"
+    ],
+    "real_data": false,
+    "stability_seeds": [
+      82001,
+      82021,
+      82031
+    ],
+    "writes_primary": false,
+    "writes_stability": false,
+    "writes_v3_locks": false
+  },
+  "integrity": [
+    {
+      "calibration": [
+        "SYNA-002",
+        "SYNA-010"
+      ],
+      "checkpoint_studies": {
+        "fold_fits": [
+          "SYNA-004",
+          "SYNA-006",
+          "SYNA-008",
+          "SYNA-009",
+          "SYNA-011",
+          "SYNA-012"
+        ],
+        "official_not_reused": true
+      },
+      "feature_spec_fit_on": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "fold": 0,
+      "issues": [],
+      "note": "FeatureSpec is fit on train studies only. Calibration is a separate split.",
+      "ok": true,
+      "pooled_train_extra_donors": [
+        "SYNA-D001",
+        "SYNA-D002",
+        "SYNA-D003"
+      ],
+      "target_test": [
+        "SYNA-001",
+        "SYNA-003"
+      ],
+      "target_train": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "target_validation": [
+        "SYNA-005",
+        "SYNA-007"
+      ]
+    },
+    {
+      "calibration": [
+        "SYNA-006",
+        "SYNA-010"
+      ],
+      "checkpoint_studies": {
+        "fold_fits": [
+          "SYNA-002",
+          "SYNA-003",
+          "SYNA-004",
+          "SYNA-008",
+          "SYNA-009",
+          "SYNA-012"
+        ],
+        "official_not_reused": true
+      },
+      "feature_spec_fit_on": [
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-012"
+      ],
+      "fold": 1,
+      "issues": [],
+      "note": "FeatureSpec is fit on train studies only. Calibration is a separate split.",
+      "ok": true,
+      "pooled_train_extra_donors": [
+        "SYNA-D001",
+        "SYNA-D002",
+        "SYNA-D003"
+      ],
+      "target_test": [
+        "SYNA-007",
+        "SYNA-011"
+      ],
+      "target_train": [
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-012"
+      ],
+      "target_validation": [
+        "SYNA-001",
+        "SYNA-005"
+      ]
+    },
+    {
+      "calibration": [
+        "SYNA-008",
+        "SYNA-010"
+      ],
+      "checkpoint_studies": {
+        "fold_fits": [
+          "SYNA-001",
+          "SYNA-002",
+          "SYNA-003",
+          "SYNA-006",
+          "SYNA-011",
+          "SYNA-012"
+        ],
+        "official_not_reused": true
+      },
+      "feature_spec_fit_on": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-006",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "fold": 2,
+      "issues": [],
+      "note": "FeatureSpec is fit on train studies only. Calibration is a separate split.",
+      "ok": true,
+      "pooled_train_extra_donors": [
+        "SYNA-D001",
+        "SYNA-D002",
+        "SYNA-D003"
+      ],
+      "target_test": [
+        "SYNA-004",
+        "SYNA-005"
+      ],
+      "target_train": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-006",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "target_validation": [
+        "SYNA-007",
+        "SYNA-009"
+      ]
+    },
+    {
+      "calibration": [
+        "SYNA-004",
+        "SYNA-012"
+      ],
+      "checkpoint_studies": {
+        "fold_fits": [
+          "SYNA-001",
+          "SYNA-003",
+          "SYNA-007",
+          "SYNA-008",
+          "SYNA-010",
+          "SYNA-011"
+        ],
+        "official_not_reused": true
+      },
+      "feature_spec_fit_on": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-007",
+        "SYNA-008",
+        "SYNA-010",
+        "SYNA-011"
+      ],
+      "fold": 3,
+      "issues": [],
+      "note": "FeatureSpec is fit on train studies only. Calibration is a separate split.",
+      "ok": true,
+      "pooled_train_extra_donors": [
+        "SYNA-D001",
+        "SYNA-D002",
+        "SYNA-D003"
+      ],
+      "target_test": [
+        "SYNA-006",
+        "SYNA-009"
+      ],
+      "target_train": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-007",
+        "SYNA-008",
+        "SYNA-010",
+        "SYNA-011"
+      ],
+      "target_validation": [
+        "SYNA-002",
+        "SYNA-005"
+      ]
+    },
+    {
+      "calibration": [
+        "SYNA-003",
+        "SYNA-005"
+      ],
+      "checkpoint_studies": {
+        "fold_fits": [
+          "SYNA-001",
+          "SYNA-002",
+          "SYNA-004",
+          "SYNA-007",
+          "SYNA-009",
+          "SYNA-011"
+        ],
+        "official_not_reused": true
+      },
+      "feature_spec_fit_on": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-004",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011"
+      ],
+      "fold": 4,
+      "issues": [],
+      "note": "FeatureSpec is fit on train studies only. Calibration is a separate split.",
+      "ok": true,
+      "pooled_train_extra_donors": [
+        "SYNA-D001",
+        "SYNA-D002",
+        "SYNA-D003"
+      ],
+      "target_test": [
+        "SYNA-010",
+        "SYNA-012"
+      ],
+      "target_train": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-004",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011"
+      ],
+      "target_validation": [
+        "SYNA-006",
+        "SYNA-008"
+      ]
+    },
+    {
+      "calibration": [
+        "SYNA-003",
+        "SYNA-010"
+      ],
+      "checkpoint_studies": {
+        "fold_fits": [
+          "SYNA-004",
+          "SYNA-006",
+          "SYNA-007",
+          "SYNA-009",
+          "SYNA-011",
+          "SYNA-012"
+        ],
+        "official_not_reused": true
+      },
+      "feature_spec_fit_on": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "fold": 5,
+      "issues": [],
+      "note": "FeatureSpec is fit on train studies only. Calibration is a separate split.",
+      "ok": true,
+      "pooled_train_extra_donors": [
+        "SYNA-D001",
+        "SYNA-D002",
+        "SYNA-D003"
+      ],
+      "target_test": [
+        "SYNA-002",
+        "SYNA-008"
+      ],
+      "target_train": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "target_validation": [
+        "SYNA-001",
+        "SYNA-005"
+      ]
+    }
+  ],
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation.",
+    "TFT study-held-out diagnostic.",
+    "Synthetic generator only."
+  ],
+  "output_dir": "runs/tft_study_cv",
+  "previous_finetune_default_failed_confirmation": true,
+  "real_data_accessed": false,
+  "seconds_total": 2848.6159081459045,
+  "seed_variability": {
+    "test:fold0:tft_finetune": {
+      "coverage_mean": 0.7031362007168459,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.1724972474440917,
+      "interval_score_sd": 0.02303436410309317,
+      "mae_mean": 0.03995361396219931,
+      "mae_sd": 0.005303775519164746,
+      "n_seeds": 3,
+      "pinball_mean": 0.013710475072712796,
+      "width_mean": 0.10603353338429578
+    },
+    "test:fold0:tft_pooled": {
+      "coverage_mean": 0.8588485663082438,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.17755469636047017,
+      "interval_score_sd": 0.011424335974496037,
+      "mae_mean": 0.041397922538233024,
+      "mae_sd": 0.00746160951722194,
+      "n_seeds": 3,
+      "pinball_mean": 0.014420586100247499,
+      "width_mean": 0.15241884851968415
+    },
+    "test:fold0:tft_target_only": {
+      "coverage_mean": 0.6854390681003584,
+      "crossing_mean": 0.08538587848932677,
+      "interval_score_mean": 0.19755087960736525,
+      "interval_score_sd": 0.030472459786074525,
+      "mae_mean": 0.040196407714756945,
+      "mae_sd": 0.00467433639998538,
+      "n_seeds": 3,
+      "pinball_mean": 0.014525827146417987,
+      "width_mean": 0.11237589089887545
+    },
+    "test:fold0:tft_target_only_cqr": {
+      "coverage_mean": 0.7826836917562724,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.19384826644591183,
+      "interval_score_sd": 0.02325845139803336,
+      "mae_mean": 0.04019640771475696,
+      "mae_sd": 0.004674336399985391,
+      "n_seeds": 3,
+      "pinball_mean": 0.01445177488318892,
+      "width_mean": 0.13704303958884628
+    },
+    "test:fold1:tft_finetune": {
+      "coverage_mean": 0.7640993265993267,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.18481155548646933,
+      "interval_score_sd": 0.029235684643209376,
+      "mae_mean": 0.04264486450148444,
+      "mae_sd": 0.004441869819523527,
+      "n_seeds": 3,
+      "pinball_mean": 0.014716454265512333,
+      "width_mean": 0.1255628699405426
+    },
+    "test:fold1:tft_pooled": {
+      "coverage_mean": 0.7508417508417509,
+      "crossing_mean": 0.09770114942528735,
+      "interval_score_mean": 0.19978026987144845,
+      "interval_score_sd": 0.020420427026476465,
+      "mae_mean": 0.04441007809742994,
+      "mae_sd": 0.006777826776232629,
+      "n_seeds": 3,
+      "pinball_mean": 0.015479397924541468,
+      "width_mean": 0.1250146974618186
+    },
+    "test:fold1:tft_target_only": {
+      "coverage_mean": 0.6872895622895623,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.2106951807032066,
+      "interval_score_sd": 0.044853698372536506,
+      "mae_mean": 0.046810908020540644,
+      "mae_sd": 0.00843208641839588,
+      "n_seeds": 3,
+      "pinball_mean": 0.016407341356655128,
+      "width_mean": 0.12252833395694644
+    },
+    "test:fold1:tft_target_only_cqr": {
+      "coverage_mean": 0.7813552188552189,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.20384157298044273,
+      "interval_score_sd": 0.0385696195576499,
+      "mae_mean": 0.046810908020540644,
+      "mae_sd": 0.008432086418395865,
+      "n_seeds": 3,
+      "pinball_mean": 0.016270269202199848,
+      "width_mean": 0.15055812999438692
+    },
+    "test:fold2:tft_finetune": {
+      "coverage_mean": 0.6750452898550724,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.22843479568527836,
+      "interval_score_sd": 0.01903882422057149,
+      "mae_mean": 0.04598342376854469,
+      "mae_sd": 0.0041749694912283945,
+      "n_seeds": 3,
+      "pinball_mean": 0.016769878517364525,
+      "width_mean": 0.11084260238145571
+    },
+    "test:fold2:tft_pooled": {
+      "coverage_mean": 0.5793138586956522,
+      "crossing_mean": 0.012121212121212121,
+      "interval_score_mean": 0.3442024109246355,
+      "interval_score_sd": 0.18422291571173197,
+      "mae_mean": 0.06241015268480125,
+      "mae_sd": 0.03020434117519772,
+      "n_seeds": 3,
+      "pinball_mean": 0.02354393743007202,
+      "width_mean": 0.11313095065238683
+    },
+    "test:fold2:tft_target_only": {
+      "coverage_mean": 0.636605525362319,
+      "crossing_mean": 0.025757575757575757,
+      "interval_score_mean": 0.28788840377073216,
+      "interval_score_sd": 0.031547144064593885,
+      "mae_mean": 0.05568803518480652,
+      "mae_sd": 0.0027054220045889584,
+      "n_seeds": 3,
+      "pinball_mean": 0.020393497150073568,
+      "width_mean": 0.11976333116383657
+    },
+    "test:fold2:tft_target_only_cqr": {
+      "coverage_mean": 0.7820425724637681,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.27189395454549997,
+      "interval_score_sd": 0.03815336936584635,
+      "mae_mean": 0.05568803518480655,
+      "mae_sd": 0.0027054220045889584,
+      "n_seeds": 3,
+      "pinball_mean": 0.02007360816556893,
+      "width_mean": 0.15977045251539393
+    },
+    "test:fold3:tft_finetune": {
+      "coverage_mean": 0.5903337169159953,
+      "crossing_mean": 0.004975124378109453,
+      "interval_score_mean": 0.21883713401828908,
+      "interval_score_sd": 0.0387969880371103,
+      "mae_mean": 0.048309946525199675,
+      "mae_sd": 0.001801540596733149,
+      "n_seeds": 3,
+      "pinball_mean": 0.01690483557886477,
+      "width_mean": 0.11283128317352635
+    },
+    "test:fold3:tft_pooled": {
+      "coverage_mean": 0.5954737245876487,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.25238388170501264,
+      "interval_score_sd": 0.06505813880468259,
+      "mae_mean": 0.056466007022970055,
+      "mae_sd": 0.01098579857821376,
+      "n_seeds": 3,
+      "pinball_mean": 0.01968555515816231,
+      "width_mean": 0.11849324405993544
+    },
+    "test:fold3:tft_target_only": {
+      "coverage_mean": 0.5573839662447257,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.3032932601818044,
+      "interval_score_sd": 0.03332651322459131,
+      "mae_mean": 0.06557425597276892,
+      "mae_sd": 0.006861725109860962,
+      "n_seeds": 3,
+      "pinball_mean": 0.023104021016823583,
+      "width_mean": 0.12983101673587147
+    },
+    "test:fold3:tft_target_only_cqr": {
+      "coverage_mean": 0.6263137706175681,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.276478194228801,
+      "interval_score_sd": 0.01603182509219302,
+      "mae_mean": 0.06557425597276888,
+      "mae_sd": 0.006861725109860978,
+      "n_seeds": 3,
+      "pinball_mean": 0.022567719697763503,
+      "width_mean": 0.155404999221314
+    },
+    "test:fold4:tft_finetune": {
+      "coverage_mean": 0.6046511627906977,
+      "crossing_mean": 0.1937984496124031,
+      "interval_score_mean": 2.034981196587892,
+      "interval_score_sd": 3.056725107613383,
+      "mae_mean": 0.23458379317887376,
+      "mae_sd": 0.30989963399991627,
+      "n_seeds": 3,
+      "pinball_mean": 0.1091145382937358,
+      "width_mean": 0.11445073379102604
+    },
+    "test:fold4:tft_pooled": {
+      "coverage_mean": 0.6065891472868217,
+      "crossing_mean": 0.19638242894056845,
+      "interval_score_mean": 1.3921799089163835,
+      "interval_score_sd": 1.928831611354401,
+      "mae_mean": 0.16967713006296203,
+      "mae_sd": 0.20094095212299387,
+      "n_seeds": 3,
+      "pinball_mean": 0.07669579539521186,
+      "width_mean": 0.12038503506386926
+    },
+    "test:fold4:tft_target_only": {
+      "coverage_mean": 0.7034883720930232,
+      "crossing_mean": 0.03617571059431524,
+      "interval_score_mean": 0.2211697982649302,
+      "interval_score_sd": 0.03400931156952918,
+      "mae_mean": 0.04577260504721039,
+      "mae_sd": 0.00431961919552321,
+      "n_seeds": 3,
+      "pinball_mean": 0.016393239621621362,
+      "width_mean": 0.13306864472322688
+    },
+    "test:fold4:tft_target_only_cqr": {
+      "coverage_mean": 0.8934108527131782,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.2224843418350951,
+      "interval_score_sd": 0.027302041520125078,
+      "mae_mean": 0.045772605047210396,
+      "mae_sd": 0.004319619195523199,
+      "n_seeds": 3,
+      "pinball_mean": 0.016419530493024664,
+      "width_mean": 0.1935095796803837
+    },
+    "test:fold5:tft_finetune": {
+      "coverage_mean": 0.7717883418222976,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.15852587254873993,
+      "interval_score_sd": 0.023717578892406863,
+      "mae_mean": 0.037078074929986674,
+      "mae_sd": 0.005232652206027936,
+      "n_seeds": 3,
+      "pinball_mean": 0.01263720745680185,
+      "width_mean": 0.10708427503409869
+    },
+    "test:fold5:tft_pooled": {
+      "coverage_mean": 0.7314657611771364,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.20704816758286912,
+      "interval_score_sd": 0.02064848947926154,
+      "mae_mean": 0.04506857278456716,
+      "mae_sd": 0.0013940216511314706,
+      "n_seeds": 3,
+      "pinball_mean": 0.016209805895880555,
+      "width_mean": 0.12970082373287153
+    },
+    "test:fold5:tft_target_only": {
+      "coverage_mean": 0.7557300509337862,
+      "crossing_mean": 0.0024154589371980675,
+      "interval_score_mean": 0.18705934644545386,
+      "interval_score_sd": 0.028120734768005345,
+      "mae_mean": 0.04240662310694469,
+      "mae_sd": 0.005903598772992104,
+      "n_seeds": 3,
+      "pinball_mean": 0.01468371156637565,
+      "width_mean": 0.1225083454153129
+    },
+    "test:fold5:tft_target_only_cqr": {
+      "coverage_mean": 0.816213921901528,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.19487942964550273,
+      "interval_score_sd": 0.016817470909683767,
+      "mae_mean": 0.04240662310694471,
+      "mae_sd": 0.005903598772992094,
+      "n_seeds": 3,
+      "pinball_mean": 0.014840113230376628,
+      "width_mean": 0.14461152418673676
+    },
+    "validation:fold0:tft_finetune": {
+      "coverage_mean": 0.6885653409090909,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.20272697962830466,
+      "interval_score_sd": 0.033292281087103234,
+      "mae_mean": 0.0440474712737783,
+      "mae_sd": 0.004904594455388425,
+      "n_seeds": 3,
+      "pinball_mean": 0.01545100316370667,
+      "width_mean": 0.1112797482108528
+    },
+    "validation:fold0:tft_pooled": {
+      "coverage_mean": 0.8177083333333334,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.21176445836028815,
+      "interval_score_sd": 0.013402375738512095,
+      "mae_mean": 0.048143663767840655,
+      "mae_sd": 0.0036989197247815544,
+      "n_seeds": 3,
+      "pinball_mean": 0.016751946084321876,
+      "width_mean": 0.15688951990821146
+    },
+    "validation:fold0:tft_target_only": {
+      "coverage_mean": 0.6612215909090909,
+      "crossing_mean": 0.0813953488372093,
+      "interval_score_mean": 0.22678431942834265,
+      "interval_score_sd": 0.029326791967367535,
+      "mae_mean": 0.04396450285603942,
+      "mae_sd": 0.0039180718092231975,
+      "n_seeds": 3,
+      "pinball_mean": 0.01617493059343519,
+      "width_mean": 0.11569335283429334
+    },
+    "validation:fold0:tft_target_only_cqr": {
+      "coverage_mean": 0.7573390151515152,
+      "crossing_mean": 0.005813953488372093,
+      "interval_score_mean": 0.21964066289103315,
+      "interval_score_sd": 0.02784164548878495,
+      "mae_mean": 0.0439645028560394,
+      "mae_sd": 0.003918071809223196,
+      "n_seeds": 3,
+      "pinball_mean": 0.016032057462688997,
+      "width_mean": 0.14036050152426421
+    },
+    "validation:fold1:tft_finetune": {
+      "coverage_mean": 0.7743055555555557,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.18356977351786888,
+      "interval_score_sd": 0.03222063158857498,
+      "mae_mean": 0.04147951886995277,
+      "mae_sd": 0.0038369905316496017,
+      "n_seeds": 3,
+      "pinball_mean": 0.014251277515962479,
+      "width_mean": 0.12320737499329777
+    },
+    "validation:fold1:tft_pooled": {
+      "coverage_mean": 0.7478298611111112,
+      "crossing_mean": 0.11174242424242424,
+      "interval_score_mean": 0.1852183824252296,
+      "interval_score_sd": 0.020211404299836613,
+      "mae_mean": 0.04134688335270156,
+      "mae_sd": 0.0007159868712977294,
+      "n_seeds": 3,
+      "pinball_mean": 0.014224171495507643,
+      "width_mean": 0.12230001514156659
+    },
+    "validation:fold1:tft_target_only": {
+      "coverage_mean": 0.7764756944444443,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.18396541666723695,
+      "interval_score_sd": 0.027560933131457004,
+      "mae_mean": 0.04428548769756719,
+      "mae_sd": 0.006292292206299279,
+      "n_seeds": 3,
+      "pinball_mean": 0.015127222579084137,
+      "width_mean": 0.1223008647147152
+    },
+    "validation:fold1:tft_target_only_cqr": {
+      "coverage_mean": 0.845486111111111,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.18962699124614868,
+      "interval_score_sd": 0.037676709865375434,
+      "mae_mean": 0.044285487697567204,
+      "mae_sd": 0.006292292206299257,
+      "n_seeds": 3,
+      "pinball_mean": 0.015240454070662374,
+      "width_mean": 0.15033066075215573
+    },
+    "validation:fold2:tft_finetune": {
+      "coverage_mean": 0.7644322976601456,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.158219353358979,
+      "interval_score_sd": 0.011028961148519563,
+      "mae_mean": 0.03584004159658603,
+      "mae_sd": 0.002124475120322436,
+      "n_seeds": 3,
+      "pinball_mean": 0.012471217979095402,
+      "width_mean": 0.11069528040046384
+    },
+    "validation:fold2:tft_pooled": {
+      "coverage_mean": 0.7459244342155734,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.19403723880150095,
+      "interval_score_sd": 0.059419153192689124,
+      "mae_mean": 0.044388613789565996,
+      "mae_sd": 0.014767375505159245,
+      "n_seeds": 3,
+      "pinball_mean": 0.01508910675308424,
+      "width_mean": 0.11316305200030258
+    },
+    "validation:fold2:tft_target_only": {
+      "coverage_mean": 0.8057633294975067,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.15978688162534585,
+      "interval_score_sd": 0.0016799452057951266,
+      "mae_mean": 0.0357476709899335,
+      "mae_sd": 0.00028692981218221867,
+      "n_seeds": 3,
+      "pinball_mean": 0.012399602270061526,
+      "width_mean": 0.11951476861381605
+    },
+    "validation:fold2:tft_target_only_cqr": {
+      "coverage_mean": 0.9165707710011507,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.1742068179012756,
+      "interval_score_sd": 0.0065660094988124395,
+      "mae_mean": 0.03574767098993349,
+      "mae_sd": 0.00028692981218220534,
+      "n_seeds": 3,
+      "pinball_mean": 0.012688000995580121,
+      "width_mean": 0.15952188996537342
+    },
+    "validation:fold3:tft_finetune": {
+      "coverage_mean": 0.643565188172043,
+      "crossing_mean": 0.042105263157894736,
+      "interval_score_mean": 0.24873836753578563,
+      "interval_score_sd": 0.06972667108850904,
+      "mae_mean": 0.048731955879639334,
+      "mae_sd": 0.00959135334629079,
+      "n_seeds": 3,
+      "pinball_mean": 0.017811832357161595,
+      "width_mean": 0.10929342581620138
+    },
+    "validation:fold3:tft_pooled": {
+      "coverage_mean": 0.6153813844086021,
+      "crossing_mean": 0.03508771929824562,
+      "interval_score_mean": 0.24560983355291607,
+      "interval_score_sd": 0.013638709472510639,
+      "mae_mean": 0.05154708782238529,
+      "mae_sd": 0.00361503047351494,
+      "n_seeds": 3,
+      "pinball_mean": 0.018526529661760466,
+      "width_mean": 0.11667472913220363
+    },
+    "validation:fold3:tft_target_only": {
+      "coverage_mean": 0.6478494623655914,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.248637686774429,
+      "interval_score_sd": 0.03761539817813131,
+      "mae_mean": 0.055000041152583855,
+      "mae_sd": 0.007090364260220816,
+      "n_seeds": 3,
+      "pinball_mean": 0.019441800160739358,
+      "width_mean": 0.12403043209304732
+    },
+    "validation:fold3:tft_target_only_cqr": {
+      "coverage_mean": 0.7390372983870969,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.2318434317891042,
+      "interval_score_sd": 0.029948588528026624,
+      "mae_mean": 0.05500004115258384,
+      "mae_sd": 0.007090364260220833,
+      "n_seeds": 3,
+      "pinball_mean": 0.01910591506103286,
+      "width_mean": 0.14960441457848986
+    },
+    "validation:fold4:tft_finetune": {
+      "coverage_mean": 0.6378389154704944,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.26144549631292857,
+      "interval_score_sd": 0.15053930355626916,
+      "mae_mean": 0.052733608366940465,
+      "mae_sd": 0.020405531009489792,
+      "n_seeds": 3,
+      "pinball_mean": 0.018904767250477694,
+      "width_mean": 0.12419978262324842
+    },
+    "validation:fold4:tft_pooled": {
+      "coverage_mean": 0.6221690590111643,
+      "crossing_mean": 0.007633587786259542,
+      "interval_score_mean": 0.2783827958779585,
+      "interval_score_sd": 0.13329382436646267,
+      "mae_mean": 0.056126530027313104,
+      "mae_sd": 0.020057679647715154,
+      "n_seeds": 3,
+      "pinball_mean": 0.0201210264736314,
+      "width_mean": 0.13087841118351695
+    },
+    "validation:fold4:tft_target_only": {
+      "coverage_mean": 0.839872408293461,
+      "crossing_mean": 0.027989821882951654,
+      "interval_score_mean": 0.1698178477388701,
+      "interval_score_sd": 0.020288200538328995,
+      "mae_mean": 0.034983763661743064,
+      "mae_sd": 0.002220197714948697,
+      "n_seeds": 3,
+      "pinball_mean": 0.012733741672508023,
+      "width_mean": 0.1359879022770141
+    },
+    "validation:fold4:tft_target_only_cqr": {
+      "coverage_mean": 0.9629186602870815,
+      "crossing_mean": 0.0025445292620865138,
+      "interval_score_mean": 0.20200297969829192,
+      "interval_score_sd": 0.023680239329886915,
+      "mae_mean": 0.03498376366174305,
+      "mae_sd": 0.002220197714948714,
+      "n_seeds": 3,
+      "pinball_mean": 0.013377444311696457,
+      "width_mean": 0.19642883723417096
+    },
+    "validation:fold5:tft_finetune": {
+      "coverage_mean": 0.6822916666666666,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.20662692453089235,
+      "interval_score_sd": 0.03258084652917688,
+      "mae_mean": 0.042411774276885784,
+      "mae_sd": 0.002779169251437179,
+      "n_seeds": 3,
+      "pinball_mean": 0.015288167633075478,
+      "width_mean": 0.10662534087896347
+    },
+    "validation:fold5:tft_pooled": {
+      "coverage_mean": 0.80859375,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.181290794728735,
+      "interval_score_sd": 0.014035946669953031,
+      "mae_mean": 0.03989010762330955,
+      "mae_sd": 0.0029570739358062907,
+      "n_seeds": 3,
+      "pinball_mean": 0.014099042264853553,
+      "width_mean": 0.1307205083883471
+    },
+    "validation:fold5:tft_target_only": {
+      "coverage_mean": 0.6310763888888888,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.2729764446452242,
+      "interval_score_sd": 0.08475222370333602,
+      "mae_mean": 0.05102525728520305,
+      "mae_sd": 0.012695158274265017,
+      "n_seeds": 3,
+      "pinball_mean": 0.01932121110516447,
+      "width_mean": 0.11944639310240746
+    },
+    "validation:fold5:tft_target_only_cqr": {
+      "coverage_mean": 0.7256944444444443,
+      "crossing_mean": 0.0,
+      "interval_score_mean": 0.2552874820101643,
+      "interval_score_sd": 0.08011840886940076,
+      "mae_mean": 0.05102525728520307,
+      "mae_sd": 0.012695158274265024,
+      "n_seeds": 3,
+      "pinball_mean": 0.018967431852463273,
+      "width_mean": 0.14154957187383135
+    }
+  },
+  "training_exposure": [
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 0,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 218,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 592,
+      "n_tft_series": 214,
+      "n_train_obs": 921,
+      "n_train_series_logged": 214,
+      "n_train_windows": 1200,
+      "n_val_series": 54,
+      "reused": false,
+      "scope": "fold0_target_only",
+      "seed": 82001,
+      "target_species_n_animals": 218,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 10,
+      "epochs_run_legacy_plus_one": 11,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 0,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 317,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 630,
+      "n_tft_series": 313,
+      "n_train_obs": 1489,
+      "n_train_series_logged": 313,
+      "n_train_windows": 2039,
+      "n_val_series": 54,
+      "reused": false,
+      "scope": "fold0_pooled",
+      "seed": 82001,
+      "target_species_n_animals": 317,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 10,
+      "epochs_run_legacy_plus_one": 11,
+      "finetune_epochs_completed": 8,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 0,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 218,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 630,
+      "n_tft_series": 214,
+      "n_train_obs": 1489,
+      "n_train_series_logged": 313,
+      "n_train_windows": 2039,
+      "n_val_series": 54,
+      "reused": false,
+      "scope": "fold0_finetune",
+      "seed": 82001,
+      "target_species_n_animals": 218,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 0,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 218,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 592,
+      "n_tft_series": 214,
+      "n_train_obs": 921,
+      "n_train_series_logged": 214,
+      "n_train_windows": 1200,
+      "n_val_series": 54,
+      "reused": false,
+      "scope": "fold0_target_only",
+      "seed": 82021,
+      "target_species_n_animals": 218,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 0,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 317,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 1008,
+      "n_tft_series": 313,
+      "n_train_obs": 1489,
+      "n_train_series_logged": 313,
+      "n_train_windows": 2039,
+      "n_val_series": 54,
+      "reused": false,
+      "scope": "fold0_pooled",
+      "seed": 82021,
+      "target_species_n_animals": 317,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": 8,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 0,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 218,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 1008,
+      "n_tft_series": 214,
+      "n_train_obs": 1489,
+      "n_train_series_logged": 313,
+      "n_train_windows": 2039,
+      "n_val_series": 54,
+      "reused": false,
+      "scope": "fold0_finetune",
+      "seed": 82021,
+      "target_species_n_animals": 218,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 0,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 218,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 592,
+      "n_tft_series": 214,
+      "n_train_obs": 921,
+      "n_train_series_logged": 214,
+      "n_train_windows": 1200,
+      "n_val_series": 54,
+      "reused": false,
+      "scope": "fold0_target_only",
+      "seed": 82031,
+      "target_species_n_animals": 218,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 0,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 317,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 1008,
+      "n_tft_series": 313,
+      "n_train_obs": 1489,
+      "n_train_series_logged": 313,
+      "n_train_windows": 2039,
+      "n_val_series": 54,
+      "reused": false,
+      "scope": "fold0_pooled",
+      "seed": 82031,
+      "target_species_n_animals": 317,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": 8,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 0,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 218,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 1008,
+      "n_tft_series": 214,
+      "n_train_obs": 1489,
+      "n_train_series_logged": 313,
+      "n_train_windows": 2039,
+      "n_val_series": 54,
+      "reused": false,
+      "scope": "fold0_finetune",
+      "seed": 82031,
+      "target_species_n_animals": 218,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 1,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 226,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 768,
+      "n_tft_series": 222,
+      "n_train_obs": 1105,
+      "n_train_series_logged": 222,
+      "n_train_windows": 1544,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold1_target_only",
+      "seed": 82001,
+      "target_species_n_animals": 226,
+      "train_studies": [
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 14,
+      "epochs_run_legacy_plus_one": 15,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 1,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 325,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 1036,
+      "n_tft_series": 321,
+      "n_train_obs": 1673,
+      "n_train_series_logged": 321,
+      "n_train_windows": 2383,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold1_pooled",
+      "seed": 82001,
+      "target_species_n_animals": 325,
+      "train_studies": [
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 14,
+      "epochs_run_legacy_plus_one": 15,
+      "finetune_epochs_completed": 8,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 1,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 226,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 1036,
+      "n_tft_series": 222,
+      "n_train_obs": 1673,
+      "n_train_series_logged": 321,
+      "n_train_windows": 2383,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold1_finetune",
+      "seed": 82001,
+      "target_species_n_animals": 226,
+      "train_studies": [
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 1,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 226,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 768,
+      "n_tft_series": 222,
+      "n_train_obs": 1105,
+      "n_train_series_logged": 222,
+      "n_train_windows": 1544,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold1_target_only",
+      "seed": 82021,
+      "target_species_n_animals": 226,
+      "train_studies": [
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 1,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 325,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 1184,
+      "n_tft_series": 321,
+      "n_train_obs": 1673,
+      "n_train_series_logged": 321,
+      "n_train_windows": 2383,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold1_pooled",
+      "seed": 82021,
+      "target_species_n_animals": 325,
+      "train_studies": [
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": 7,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 1,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 226,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 1184,
+      "n_tft_series": 222,
+      "n_train_obs": 1673,
+      "n_train_series_logged": 321,
+      "n_train_windows": 2383,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold1_finetune",
+      "seed": 82021,
+      "target_species_n_animals": 226,
+      "train_studies": [
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 9,
+      "epochs_run_legacy_plus_one": 10,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 1,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 226,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 432,
+      "n_tft_series": 222,
+      "n_train_obs": 1105,
+      "n_train_series_logged": 222,
+      "n_train_windows": 1544,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold1_target_only",
+      "seed": 82031,
+      "target_species_n_animals": 226,
+      "train_studies": [
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 1,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 325,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 1184,
+      "n_tft_series": 321,
+      "n_train_obs": 1673,
+      "n_train_series_logged": 321,
+      "n_train_windows": 2383,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold1_pooled",
+      "seed": 82031,
+      "target_species_n_animals": 325,
+      "train_studies": [
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": 8,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 1,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 226,
+      "n_dropped_short_series": 4,
+      "n_optimizer_updates": 1184,
+      "n_tft_series": 222,
+      "n_train_obs": 1673,
+      "n_train_series_logged": 321,
+      "n_train_windows": 2383,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold1_finetune",
+      "seed": 82031,
+      "target_species_n_animals": 226,
+      "train_studies": [
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-008",
+        "SYNA-009",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 2,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 182,
+      "n_dropped_short_series": 0,
+      "n_optimizer_updates": 672,
+      "n_tft_series": 182,
+      "n_train_obs": 956,
+      "n_train_series_logged": 182,
+      "n_train_windows": 1366,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold2_target_only",
+      "seed": 82001,
+      "target_species_n_animals": 182,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-006",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 2,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 281,
+      "n_dropped_short_series": 0,
+      "n_optimizer_updates": 1088,
+      "n_tft_series": 281,
+      "n_train_obs": 1524,
+      "n_train_series_logged": 281,
+      "n_train_windows": 2205,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold2_pooled",
+      "seed": 82001,
+      "target_species_n_animals": 281,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-006",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": 8,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 2,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 182,
+      "n_dropped_short_series": 0,
+      "n_optimizer_updates": 1088,
+      "n_tft_series": 182,
+      "n_train_obs": 1524,
+      "n_train_series_logged": 281,
+      "n_train_windows": 2205,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold2_finetune",
+      "seed": 82001,
+      "target_species_n_animals": 182,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-006",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 2,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 182,
+      "n_dropped_short_series": 0,
+      "n_optimizer_updates": 672,
+      "n_tft_series": 182,
+      "n_train_obs": 956,
+      "n_train_series_logged": 182,
+      "n_train_windows": 1366,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold2_target_only",
+      "seed": 82021,
+      "target_species_n_animals": 182,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-006",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 2,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 281,
+      "n_dropped_short_series": 0,
+      "n_optimizer_updates": 1088,
+      "n_tft_series": 281,
+      "n_train_obs": 1524,
+      "n_train_series_logged": 281,
+      "n_train_windows": 2205,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold2_pooled",
+      "seed": 82021,
+      "target_species_n_animals": 281,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-006",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": 6,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 2,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 182,
+      "n_dropped_short_series": 0,
+      "n_optimizer_updates": 1088,
+      "n_tft_series": 182,
+      "n_train_obs": 1524,
+      "n_train_series_logged": 281,
+      "n_train_windows": 2205,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold2_finetune",
+      "seed": 82021,
+      "target_species_n_animals": 182,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-006",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 15,
+      "epochs_run_legacy_plus_one": 16,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 2,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 182,
+      "n_dropped_short_series": 0,
+      "n_optimizer_updates": 630,
+      "n_tft_series": 182,
+      "n_train_obs": 956,
+      "n_train_series_logged": 182,
+      "n_train_windows": 1366,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold2_target_only",
+      "seed": 82031,
+      "target_species_n_animals": 182,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-006",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 14,
+      "epochs_run_legacy_plus_one": 15,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 2,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 281,
+      "n_dropped_short_series": 0,
+      "n_optimizer_updates": 952,
+      "n_tft_series": 281,
+      "n_train_obs": 1524,
+      "n_train_series_logged": 281,
+      "n_train_windows": 2205,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold2_pooled",
+      "seed": 82031,
+      "target_species_n_animals": 281,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-006",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 14,
+      "epochs_run_legacy_plus_one": 15,
+      "finetune_epochs_completed": 8,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 2,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 182,
+      "n_dropped_short_series": 0,
+      "n_optimizer_updates": 952,
+      "n_tft_series": 182,
+      "n_train_obs": 1524,
+      "n_train_series_logged": 281,
+      "n_train_windows": 2205,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold2_finetune",
+      "seed": 82031,
+      "target_species_n_animals": 182,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-006",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 15,
+      "epochs_run_legacy_plus_one": 16,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 3,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 184,
+      "n_dropped_short_series": 1,
+      "n_optimizer_updates": 555,
+      "n_tft_series": 183,
+      "n_train_obs": 873,
+      "n_train_series_logged": 183,
+      "n_train_windows": 1197,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold3_target_only",
+      "seed": 82001,
+      "target_species_n_animals": 184,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-007",
+        "SYNA-008",
+        "SYNA-010",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 3,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 283,
+      "n_dropped_short_series": 1,
+      "n_optimizer_updates": 1008,
+      "n_tft_series": 282,
+      "n_train_obs": 1441,
+      "n_train_series_logged": 282,
+      "n_train_windows": 2036,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold3_pooled",
+      "seed": 82001,
+      "target_species_n_animals": 283,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-007",
+        "SYNA-008",
+        "SYNA-010",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": 8,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 3,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 184,
+      "n_dropped_short_series": 1,
+      "n_optimizer_updates": 1008,
+      "n_tft_series": 183,
+      "n_train_obs": 1441,
+      "n_train_series_logged": 282,
+      "n_train_windows": 2036,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold3_finetune",
+      "seed": 82001,
+      "target_species_n_animals": 184,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-007",
+        "SYNA-008",
+        "SYNA-010",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 3,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 184,
+      "n_dropped_short_series": 1,
+      "n_optimizer_updates": 592,
+      "n_tft_series": 183,
+      "n_train_obs": 873,
+      "n_train_series_logged": 183,
+      "n_train_windows": 1197,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold3_target_only",
+      "seed": 82021,
+      "target_species_n_animals": 184,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-007",
+        "SYNA-008",
+        "SYNA-010",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 14,
+      "epochs_run_legacy_plus_one": 15,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 3,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 283,
+      "n_dropped_short_series": 1,
+      "n_optimizer_updates": 882,
+      "n_tft_series": 282,
+      "n_train_obs": 1441,
+      "n_train_series_logged": 282,
+      "n_train_windows": 2036,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold3_pooled",
+      "seed": 82021,
+      "target_species_n_animals": 283,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-007",
+        "SYNA-008",
+        "SYNA-010",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 14,
+      "epochs_run_legacy_plus_one": 15,
+      "finetune_epochs_completed": 8,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 3,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 184,
+      "n_dropped_short_series": 1,
+      "n_optimizer_updates": 882,
+      "n_tft_series": 183,
+      "n_train_obs": 1441,
+      "n_train_series_logged": 282,
+      "n_train_windows": 2036,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold3_finetune",
+      "seed": 82021,
+      "target_species_n_animals": 184,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-007",
+        "SYNA-008",
+        "SYNA-010",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 12,
+      "epochs_run_legacy_plus_one": 13,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 3,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 184,
+      "n_dropped_short_series": 1,
+      "n_optimizer_updates": 444,
+      "n_tft_series": 183,
+      "n_train_obs": 873,
+      "n_train_series_logged": 183,
+      "n_train_windows": 1197,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold3_target_only",
+      "seed": 82031,
+      "target_species_n_animals": 184,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-007",
+        "SYNA-008",
+        "SYNA-010",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 3,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 283,
+      "n_dropped_short_series": 1,
+      "n_optimizer_updates": 1008,
+      "n_tft_series": 282,
+      "n_train_obs": 1441,
+      "n_train_series_logged": 282,
+      "n_train_windows": 2036,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold3_pooled",
+      "seed": 82031,
+      "target_species_n_animals": 283,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-007",
+        "SYNA-008",
+        "SYNA-010",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": 8,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 3,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 184,
+      "n_dropped_short_series": 1,
+      "n_optimizer_updates": 1008,
+      "n_tft_series": 183,
+      "n_train_obs": 1441,
+      "n_train_series_logged": 282,
+      "n_train_windows": 2036,
+      "n_val_series": 64,
+      "reused": false,
+      "scope": "fold3_finetune",
+      "seed": 82031,
+      "target_species_n_animals": 184,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-007",
+        "SYNA-008",
+        "SYNA-010",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 4,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 206,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 480,
+      "n_tft_series": 203,
+      "n_train_obs": 795,
+      "n_train_series_logged": 203,
+      "n_train_windows": 981,
+      "n_val_series": 67,
+      "reused": false,
+      "scope": "fold4_target_only",
+      "seed": 82001,
+      "target_species_n_animals": 206,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-004",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 15,
+      "epochs_run_legacy_plus_one": 16,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 4,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 305,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 840,
+      "n_tft_series": 302,
+      "n_train_obs": 1363,
+      "n_train_series_logged": 302,
+      "n_train_windows": 1820,
+      "n_val_series": 67,
+      "reused": false,
+      "scope": "fold4_pooled",
+      "seed": 82001,
+      "target_species_n_animals": 305,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-004",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 15,
+      "epochs_run_legacy_plus_one": 16,
+      "finetune_epochs_completed": 6,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 4,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 206,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 840,
+      "n_tft_series": 203,
+      "n_train_obs": 1363,
+      "n_train_series_logged": 302,
+      "n_train_windows": 1820,
+      "n_val_series": 67,
+      "reused": false,
+      "scope": "fold4_finetune",
+      "seed": 82001,
+      "target_species_n_animals": 206,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-004",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 15,
+      "epochs_run_legacy_plus_one": 16,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 4,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 206,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 450,
+      "n_tft_series": 203,
+      "n_train_obs": 795,
+      "n_train_series_logged": 203,
+      "n_train_windows": 981,
+      "n_val_series": 67,
+      "reused": false,
+      "scope": "fold4_target_only",
+      "seed": 82021,
+      "target_species_n_animals": 206,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-004",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 10,
+      "epochs_run_legacy_plus_one": 11,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 4,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 305,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 560,
+      "n_tft_series": 302,
+      "n_train_obs": 1363,
+      "n_train_series_logged": 302,
+      "n_train_windows": 1820,
+      "n_val_series": 67,
+      "reused": false,
+      "scope": "fold4_pooled",
+      "seed": 82021,
+      "target_species_n_animals": 305,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-004",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 10,
+      "epochs_run_legacy_plus_one": 11,
+      "finetune_epochs_completed": 8,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 4,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 206,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 560,
+      "n_tft_series": 203,
+      "n_train_obs": 1363,
+      "n_train_series_logged": 302,
+      "n_train_windows": 1820,
+      "n_val_series": 67,
+      "reused": false,
+      "scope": "fold4_finetune",
+      "seed": 82021,
+      "target_species_n_animals": 206,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-004",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 4,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 206,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 480,
+      "n_tft_series": 203,
+      "n_train_obs": 795,
+      "n_train_series_logged": 203,
+      "n_train_windows": 981,
+      "n_val_series": 67,
+      "reused": false,
+      "scope": "fold4_target_only",
+      "seed": 82031,
+      "target_species_n_animals": 206,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-004",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 4,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 305,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 896,
+      "n_tft_series": 302,
+      "n_train_obs": 1363,
+      "n_train_series_logged": 302,
+      "n_train_windows": 1820,
+      "n_val_series": 67,
+      "reused": false,
+      "scope": "fold4_pooled",
+      "seed": 82031,
+      "target_species_n_animals": 305,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-004",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": 5,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 4,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 206,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 896,
+      "n_tft_series": 203,
+      "n_train_obs": 1363,
+      "n_train_series_logged": 302,
+      "n_train_windows": 1820,
+      "n_val_series": 67,
+      "reused": false,
+      "scope": "fold4_finetune",
+      "seed": 82031,
+      "target_species_n_animals": 206,
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-004",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 5,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 200,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 560,
+      "n_tft_series": 197,
+      "n_train_obs": 856,
+      "n_train_series_logged": 197,
+      "n_train_windows": 1121,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold5_target_only",
+      "seed": 82001,
+      "target_species_n_animals": 200,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 5,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 299,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 976,
+      "n_tft_series": 296,
+      "n_train_obs": 1424,
+      "n_train_series_logged": 296,
+      "n_train_windows": 1960,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold5_pooled",
+      "seed": 82001,
+      "target_species_n_animals": 299,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": 6,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 5,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 200,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 976,
+      "n_tft_series": 197,
+      "n_train_obs": 1424,
+      "n_train_series_logged": 296,
+      "n_train_windows": 1960,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold5_finetune",
+      "seed": 82001,
+      "target_species_n_animals": 200,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 5,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 200,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 560,
+      "n_tft_series": 197,
+      "n_train_obs": 856,
+      "n_train_series_logged": 197,
+      "n_train_windows": 1121,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold5_target_only",
+      "seed": 82021,
+      "target_species_n_animals": 200,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 5,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 299,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 976,
+      "n_tft_series": 296,
+      "n_train_obs": 1424,
+      "n_train_series_logged": 296,
+      "n_train_windows": 1960,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold5_pooled",
+      "seed": 82021,
+      "target_species_n_animals": 299,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": 7,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 5,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 200,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 976,
+      "n_tft_series": 197,
+      "n_train_obs": 1424,
+      "n_train_series_logged": 296,
+      "n_train_windows": 1960,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold5_finetune",
+      "seed": 82021,
+      "target_species_n_animals": 200,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 5,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 200,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 560,
+      "n_tft_series": 197,
+      "n_train_obs": 856,
+      "n_train_series_logged": 197,
+      "n_train_windows": 1121,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold5_target_only",
+      "seed": 82031,
+      "target_species_n_animals": 200,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": null,
+      "finetune_max_epochs_budget": null,
+      "finetuned": false,
+      "fold": 5,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 299,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 976,
+      "n_tft_series": 296,
+      "n_train_obs": 1424,
+      "n_train_series_logged": 296,
+      "n_train_windows": 1960,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold5_pooled",
+      "seed": 82031,
+      "target_species_n_animals": 299,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    },
+    {
+      "epochs_completed": 16,
+      "epochs_run_legacy_plus_one": 17,
+      "finetune_epochs_completed": 8,
+      "finetune_max_epochs_budget": 8,
+      "finetuned": true,
+      "fold": 5,
+      "max_epochs_budget": 16,
+      "n_animals_in_split": 200,
+      "n_dropped_short_series": 3,
+      "n_optimizer_updates": 976,
+      "n_tft_series": 197,
+      "n_train_obs": 1424,
+      "n_train_series_logged": 296,
+      "n_train_windows": 1960,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "fold5_finetune",
+      "seed": 82031,
+      "target_species_n_animals": 200,
+      "train_studies": [
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-011",
+        "SYNA-012"
+      ],
+      "window_balance": "study"
+    }
+  ],
+  "validation_selection": {
+    "candidates": [
+      {
+        "mean": 0.2103280994799081,
+        "n": 18,
+        "sd": 0.05579643277178757,
+        "variant": "tft_target_only"
+      },
+      {
+        "mean": 0.2160505839577714,
+        "n": 18,
+        "sd": 0.06268534465004856,
+        "variant": "tft_pooled"
+      },
+      {
+        "mean": 0.21022114914745985,
+        "n": 18,
+        "sd": 0.07049421787427336,
+        "variant": "tft_finetune"
+      }
+    ],
+    "lowest_validation": "tft_finetune",
+    "metric": "interval_score80",
+    "note": "Validation only. Target-only remains the development reference. Fine-tune and pooled stay experimental even if they win validation.",
+    "reference": "tft_target_only",
+    "test_scores_examined": false,
+    "validation_preferred_experimental": "tft_finetune"
+  }
+}

@@ -132,8 +132,9 @@ def confirm_study_splits(target_full, pooled_full, *, seed: int,
         "donor_ids": donor_ids,
         "forbidden_test_studies": sorted(forbidden),
         "test_studies": sorted(test_ids),
-        "note": ("Whole-study split of unused RAT studies. Previously reported test "
-                 "studies are train-only here. Official and extra-split 33001 stay references."),
+        "note": ("Test studies are unused as test. Previously reported holdouts "
+                 "SYNA-007/010/011 were placed in TRAIN. Confirmation training "
+                 "was therefore not holdout-free. Do not call this untouched."),
     }
 
 

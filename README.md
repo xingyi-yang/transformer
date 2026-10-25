@@ -38,7 +38,7 @@ compiler, so PyTensor warns "g++ not available" (harmless) and NUTS runs through
 `send-bw <command> --config <yaml>`: `generate`, `inspect-source`, `ingest`, `prepare`, `validate-real`, `train`,
 `evaluate`, `design`, `report`, `run-all`, `validate-request`, `propose-design`,
 `tft-forecast` (primary early-history TFT workflow), `tft-stability`,
-`tft-early-hist-bench`, `tft-early-hist-extend`.
+`tft-study-cv`, `tft-early-hist-bench`, `tft-early-hist-extend`.
 `validate-request` and `propose-design` also accept `--model <run dir | models dir | model dir>`, for
 inference from serialized artifacts without a training config.
 
@@ -81,9 +81,22 @@ Multi-seed interval work uses the same knobs:
 ```
 
 That command writes `runs/tft_stability/` only. It reuses matching official fits
-from `runs/tft_primary/`. The default training strategy is chosen on official
-validation interval score and confirmed on a predeclared holdout (split seed
-34011) that cannot reuse previously reported test studies.
+from `runs/tft_primary/`. Official validation selected fine-tune; that default
+**failed** a later confirmation. Confirmation split 34011 used new *test*
+studies (SYNA-003/004) but put previously reported holdouts SYNA-007/010/011
+in **train**. Do not call that bank untouched.
+
+Target-only TFT is the development reference. Fine-tune and CQR stay
+experimental. Study-held-out evaluation:
+
+```powershell
+.\.venv\Scripts\send-bw tft-study-cv --config configs/tft_study_cv.yaml
+#   send-bw tft-study-cv --config configs/tft_study_cv.yaml
+```
+
+That command writes `runs/tft_study_cv/` only. Folds, seeds, and the
+calibration split are predeclared. CQR margins are fit on calibration
+studies, not validation or test. Raw and CQR metrics are stored separately.
 
 Configs: `configs/smoke.yaml`, `configs/bayesian_smoke.yaml` (executed); `configs/research.yaml` and
 `configs/bayesian_research.yaml` (larger; **not executed**); `configs/real_local.example.yaml` and

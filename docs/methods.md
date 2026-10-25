@@ -78,9 +78,16 @@ only looks up group scales through `group_ids`, so mixed-species fits use
 0.5 quantile; VAR is a quantile-spread approximation. Pooled pretraining can continue on the
 target species via `from_parameters` so donor SPECIES classes are kept.
 An 80% Winkler interval score is reported alongside pinball and coverage.
-Target-only undercoverage may be corrected by conformalized quantile
-regression (CQR): a single additive margin fit on validation pairs, leaving
-`q0.5` unchanged. The margin is never fit on a holdout test set. Without `send-bw[tft]`
+CQR (experimental) adds a single margin to `q0.1`/`q0.9` and leaves `q0.5`
+unchanged. The margin is fit on a **calibration** split, not validation and
+not test. Pinball computed on CQR endpoints is not the TFT QuantileLoss;
+raw and calibrated tables are stored separately. Target-only is the
+development reference; fine-tune and CQR are not a new default.
+Confirmation split 34011 is not an untouched holdout: SYNA-007/010/011 were
+in its training set. Lightning `epochs_run` in older histories is
+`current_epoch + 1` (a 16-epoch budget was stored as 17). TFT series counts
+exclude animals with fewer than `min_encoder_length + 1` observed visits
+(official train: 214 animals, 211 series). Without `send-bw[tft]`
 it stays `not_run`. It refuses baseline-only / pre-study prediction and `sample_study`.
 Installing the extra is not part of the default environment and is not a scientific-readiness
 claim.

@@ -1,0 +1,32 @@
+{
+  "alpha": 0.2,
+  "cal_coverage80": 0.5757575757575758,
+  "cal_mean_residual": -0.0037234472740119663,
+  "fold": 5,
+  "margin": 0.02537544102455591,
+  "merge": {
+    "duplicate_obs_keys": 0,
+    "duplicate_pred_keys": 0,
+    "grouping_column": "STUDYID",
+    "inflated": false,
+    "n_keys_in_both": 198,
+    "n_matched": 198,
+    "n_obs": 198,
+    "n_obs_key_unique": 198,
+    "n_obs_only": 0,
+    "n_pred": 198,
+    "n_pred_key_unique": 198,
+    "n_pred_only": 0,
+    "one_to_one": true
+  },
+  "method": "cqr_additive",
+  "n_cal": 198,
+  "n_studies": 2,
+  "note": "Margin is fit on calibration/validation pairs only. q0.5 is not moved. Inner quantiles are not rearranged.",
+  "quantile_rule": "ceil((n+1)(1-alpha))/n, method=higher",
+  "seed": 82001,
+  "source": "calibration",
+  "status": "ok",
+  "test_outcomes_used": false,
+  "validation_used_for_margin": false
+}

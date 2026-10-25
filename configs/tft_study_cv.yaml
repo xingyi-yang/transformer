@@ -1,0 +1,83 @@
+# Predeclared study-held-out TFT evaluation (synthetic diagnostic).
+# Target-only is the development reference. Fine-tune and CQR are experimental.
+# Fold membership, seeds, and selection rules are locked before training.
+# Official test errors are not used to choose a configuration.
+# Windows use observed DAY values only. No illustrative calendars.
+# Confirmation 34011 is not treated as untouched.
+# Synthetic diagnostic. Not design qualification. No real-data validation.
+# No operational recommendation.
+run_name: tft_study_cv
+output_dir: runs/tft_study_cv
+primary_dir: runs/tft_primary
+stability_dir: runs/tft_stability
+pilot_dir: runs/tft_early_hist_bench
+extend_dir: runs/tft_early_hist_extend
+generate_seed: 71001
+train_seed: 82001
+seed: 82001
+benchmark:
+  source_cells:
+    target_only: runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_target_only
+    pooled: runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_pooled
+  encoder_window_day: 14
+  target_species: RAT
+  stability_seeds: [82001, 82021, 82031]
+  cv_split_seed: 35021
+  n_folds: 6
+  n_val_studies: 2
+  n_cal_studies: 2
+models:
+  optional:
+    tft:
+      enabled: true
+      hidden_size: 16
+      lstm_layers: 1
+      attention_head_size: 2
+      hidden_continuous_size: 8
+      batch_size: 32
+      lr: 0.01
+      dropout: 0.1
+      max_epochs: 16
+      patience: 6
+      encoder_window_day: 14
+      max_encoder_length: 8
+      max_prediction_length: 6
+      min_encoder_length: 1
+      torch_threads: 2
+      window_balance: study
+      target_normalizer: species_or_global
+      quantiles: [0.1, 0.25, 0.5, 0.75, 0.9]
+      optimizer: adamw
+finetune:
+  lr: 0.001
+  max_epochs: 8
+  patience: 4
+calibration:
+  method: cqr_additive
+  alpha: 0.2
+  apply_to: target_only
+  split: calibration
+  note: CQR margin is fit on the calibration split only. Experimental.
+selection:
+  bank: validation
+  metric: interval_score80
+  aggregate: mean_across_seeds
+  candidates: [tft_target_only, tft_pooled, tft_finetune]
+  development_reference: tft_target_only
+consistency:
+  reference: tft_target_only
+  experimental: [tft_pooled, tft_finetune, tft_target_only_cqr]
+  metric: mae_log
+  min_folds: 5
+  min_studies: 10
+  note: Fine-tune and CQR remain experimental. No new default replaces target-only.
+evaluation:
+  tasks: [early_history]
+  early_history_window_day: 14
+  common_quantiles: [0.1, 0.25, 0.5, 0.75, 0.9]
+design: {}
+labels:
+  - Synthetic diagnostic.
+  - Not design qualification.
+  - No real-data validation.
+  - No operational recommendation.

@@ -96,6 +96,29 @@ def _call_dataset_factory(fn, *args, predict: bool = False, **overrides):
     return fn(*args, **kw)
 
 
+def count_completed_epochs(curve_rows: list[dict[str, Any]] | None,
+                           lightning_current_epoch: int | None = None) -> dict[str, Any]:
+    """Count logged training epochs. Do not add 1 to Lightning ``current_epoch``.
+
+    Lightning's ``current_epoch`` is 0-based and is incremented after an epoch
+    ends, so a finished ``max_epochs=16`` fit often has ``current_epoch==16``.
+    Prior histories stored ``epochs_run = current_epoch + 1`` (16-budget → 17).
+    """
+    trained = sorted({
+        int(r["epoch"]) for r in (curve_rows or [])
+        if r.get("train_loss") is not None
+    })
+    cur = None if lightning_current_epoch is None else int(lightning_current_epoch)
+    return {
+        "epochs_completed": len(trained),
+        "trained_epoch_ids": trained,
+        "lightning_current_epoch": cur,
+        "epochs_run_legacy_plus_one": None if cur is None else cur + 1,
+        "note": ("epochs_completed counts callback rows that logged train_loss. "
+                 "Legacy epochs_run was lightning current_epoch + 1."),
+    }
+
+
 def _make_trainer(tmp: str, max_epochs: int, callbacks: list):
     Trainer, _, _ = _trainer_cls()
     params = inspect.signature(Trainer.__init__).parameters
@@ -474,9 +497,13 @@ class TFTEarlyHistoryModel(ResponseModel):
             self.net.eval()
             self._best_checkpoint_bytes = Path(best).read_bytes() if best else None
             n_updates = int(getattr(trainer, "global_step", 0) or 0)
-            epochs_run = int(getattr(trainer, "current_epoch", 0) or 0) + 1
+            epoch_count = count_completed_epochs(
+                curve.rows, int(getattr(trainer, "current_epoch", 0) or 0))
+            epochs_run = int(epoch_count["epochs_completed"])
 
         n_train_windows = int(len(training))
+        n_animals_split = int(train.animals["USUBJID"].nunique()) if "USUBJID" in train.animals.columns else 0
+        n_train_series = int(train_panel["USUBJID"].nunique())
         self.history = {
             "name": self.name,
             "task": self.task,
@@ -484,13 +511,16 @@ class TFTEarlyHistoryModel(ResponseModel):
             "official_class": "pytorch_forecasting.TemporalFusionTransformer",
             "training_scope": str(config.get("training_scope", "unspecified")),
             "not_the_required_transformer": True,
-            "n_train_series": int(train_panel["USUBJID"].nunique()),
+            "n_animals_in_split": n_animals_split,
+            "n_train_series": n_train_series,
+            "n_dropped_short_series": max(0, n_animals_split - n_train_series),
             "n_val_series": int(val_panel["USUBJID"].nunique()),
             "n_train_obs": int(len(train_panel)),
             "n_train_windows": n_train_windows,
             "n_val_windows": int(len(validation_ds)),
             "n_optimizer_updates": n_updates,
             "epochs_run": epochs_run,
+            "epoch_count": epoch_count,
             "batch_size": batch_size,
             "max_encoder_length": self.max_encoder_length,
             "max_prediction_length": self.max_prediction_length,
@@ -591,7 +621,9 @@ class TFTEarlyHistoryModel(ResponseModel):
             self.net.eval()
             self._best_checkpoint_bytes = Path(best).read_bytes() if best else None
             n_updates = int(getattr(trainer, "global_step", 0) or 0)
-            epochs_run = int(getattr(trainer, "current_epoch", 0) or 0) + 1
+            epoch_count = count_completed_epochs(
+                curve.rows, int(getattr(trainer, "current_epoch", 0) or 0))
+            epochs_run = int(epoch_count["epochs_completed"])
         pre = dict(self.history)
         self.history = {
             **pre,
@@ -599,6 +631,7 @@ class TFTEarlyHistoryModel(ResponseModel):
             "finetune_lr": lr,
             "finetune_max_epochs": max_epochs,
             "finetune_epochs_run": epochs_run,
+            "finetune_epoch_count": epoch_count,
             "finetune_n_optimizer_updates": n_updates,
             "finetune_n_train_series": int(train_panel["USUBJID"].nunique()),
             "finetune_n_val_series": int(val_panel["USUBJID"].nunique()),

@@ -1,0 +1,56 @@
+{
+  "config_hash": "2aa6c5c6204d4e53",
+  "config_path": "configs/tft_study_cv.yaml",
+  "confirm_34011_called_untouched": false,
+  "cv_split_seed": 35021,
+  "design": false,
+  "development_reference": "tft_target_only",
+  "experimental": [
+    "tft_pooled",
+    "tft_finetune",
+    "tft_target_only_cqr"
+  ],
+  "generate_seed": 71001,
+  "git_revision": "78c3ca6370fc81d5326c8fbf558154b004959ad5",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "n_folds": 6,
+  "official_holdout_test_used_for_search": false,
+  "preserved": [
+    "runs/v3_eval",
+    "runs/v3_pilot_k0k1",
+    "runs/v3_repl",
+    "runs/v3_research",
+    "runs/v3_closeout",
+    "runs/v3_audit",
+    "runs/v3_increment",
+    "runs/v3_phaseb",
+    "runs/v3_limitations",
+    "runs/v3_objective",
+    "runs/v3_official_seq",
+    "runs/v3_seq_diag",
+    "runs/v3_eval_correct",
+    "runs/v3_cov_chronos",
+    "runs/v3_share_repl",
+    "runs/v3_share_abstain",
+    "runs/v3_share_abstain_run",
+    "runs/v3_donor_rank",
+    "runs/tft_early_hist_bench",
+    "runs/tft_early_hist_extend",
+    "runs/tft_primary",
+    "runs/tft_stability"
+  ],
+  "real_data": false,
+  "stability_seeds": [
+    82001,
+    82021,
+    82031
+  ],
+  "writes_primary": false,
+  "writes_stability": false,
+  "writes_v3_locks": false
+}

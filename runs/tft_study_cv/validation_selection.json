@@ -1,0 +1,28 @@
+{
+  "candidates": [
+    {
+      "mean": 0.2103280994799081,
+      "n": 18,
+      "sd": 0.05579643277178757,
+      "variant": "tft_target_only"
+    },
+    {
+      "mean": 0.2160505839577714,
+      "n": 18,
+      "sd": 0.06268534465004856,
+      "variant": "tft_pooled"
+    },
+    {
+      "mean": 0.21022114914745985,
+      "n": 18,
+      "sd": 0.07049421787427336,
+      "variant": "tft_finetune"
+    }
+  ],
+  "lowest_validation": "tft_finetune",
+  "metric": "interval_score80",
+  "note": "Validation only. Target-only remains the development reference. Fine-tune and pooled stay experimental even if they win validation.",
+  "reference": "tft_target_only",
+  "test_scores_examined": false,
+  "validation_preferred_experimental": "tft_finetune"
+}
