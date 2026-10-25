@@ -1,9 +1,9 @@
 """Share-or-abstain policy: donor pickers and validation-only abstention.
 
-Existing donor “selection” is the STUDYID-sort prefix already used by
-``donor_study_order`` / ``compose_train_with_donors``. This module does not add
-a learned donor ranker. Abstention compares target-only vs a selected-donor
-candidate on target validation only.
+Existing prefix “selection” is the STUDYID-sort used by
+``donor_study_order`` / ``compose_train_with_donors``. Inner-fold ranking lives
+in ``donor_rank`` and is applied here only as explicit ranked IDs.
+Abstention compares target-only vs a candidate on target validation only.
 
 Synthetic diagnostic. Not design qualification. No operational recommendation.
 """
@@ -21,12 +21,17 @@ RANDOM_RULE = "rng_choice_without_replacement"
 ALL_RULE = "all_eligible"
 ZERO_RULE = "zero_donors"
 EXPLICIT_RULE = "explicit_ids"
+RANKED_RULE = "inner_target_train_study_fold"
 PREFIX_LABEL = (
     "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)"
 )
 RANDOM_LABEL = "prespecified-RNG one-donor draw (not ranked)"
 ALL_LABEL = "all eligible donors"
 ZERO_LABEL = "zero donors"
+RANKED_LABEL = (
+    "inner target-training study-fold rank "
+    "(not test-informed, not generator-scenario-informed)"
+)
 RULE_LABELS = {
     PREFIX_RULE: PREFIX_LABEL,
     "prefix": PREFIX_LABEL,
@@ -38,6 +43,8 @@ RULE_LABELS = {
     ZERO_RULE: ZERO_LABEL,
     "zero": ZERO_LABEL,
     EXPLICIT_RULE: "explicit donor IDs (not a ranker)",
+    RANKED_RULE: RANKED_LABEL,
+    "ranked": RANKED_LABEL,
 }
 
 ABSTAIN_METRIC = "val_rmse_log"
@@ -65,8 +72,18 @@ def resolve_donors(
         if missing:
             raise ValueError(f"requested donors not in eligible bank: {missing}")
         selected = list(dict.fromkeys(wanted))
-        return _donor_record(bank, selected, EXPLICIT_RULE, None)
+        used = RANKED_RULE if str(rule) in {RANKED_RULE, "ranked"} else EXPLICIT_RULE
+        rec = _donor_record(bank, selected, used, None)
+        if used == RANKED_RULE:
+            rec["learned"] = True
+            rec["inner_train_fold_ranked"] = True
+        return rec
     key = str(rule)
+    if key in {"ranked", RANKED_RULE}:
+        raise ValueError(
+            "ranked donors must be supplied as explicit IDs from "
+            "rank_one_donor_candidates; resolve_donors does not rank"
+        )
     if key in {"zero", ZERO_RULE}:
         selected: list[str] = []
         used = ZERO_RULE
@@ -104,6 +121,7 @@ def _donor_record(eligible: list[str], selected: list[str], rule: str,
         "learned": False,
         "similarity_based": False,
         "validation_ranked": False,
+        "inner_train_fold_ranked": False,
         "rng_seed": rng_seed,
         "test_outcomes_used": False,
         "validation_outcomes_used": False,

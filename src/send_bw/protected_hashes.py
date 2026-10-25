@@ -28,6 +28,11 @@ PROTECTED_PATHS = (
     "runs/v3_share_abstain/RESULTS.md",
     "runs/v3_share_abstain/SUMMARY.json",
     "runs/v3_share_abstain/freeze_lock.json",
+    "configs/v3_share_abstain.approved.yaml",
+    "docs/v3/share_abstain_run_RESULTS.md",
+    "runs/v3_share_abstain_run/RESULTS.md",
+    "runs/v3_share_abstain_run/SUMMARY.json",
+    "runs/v3_share_abstain_run/freeze_lock.json",
 )
 
 PROTECTED_DIRS = (
@@ -35,6 +40,7 @@ PROTECTED_DIRS = (
     "runs/v3_cov_chronos",
     "runs/v3_share_repl",
     "runs/v3_share_abstain",
+    "runs/v3_share_abstain_run",
 )
 
 

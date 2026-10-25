@@ -1,0 +1,117 @@
+{
+  "authorization_present": false,
+  "closeout": {
+    "n_groups": 20,
+    "path": "docs/v3/share_abstain_run_CLOSEOUT.md",
+    "retuned": false,
+    "status": "ok"
+  },
+  "design_run": false,
+  "execute_command": "send-bw v3-donor-rank --config configs/v3_donor_rank.frozen.yaml",
+  "execute_requires": "separate approval; this lock refuses execute:true",
+  "freeze_lock": {
+    "additional_fits_for_abstention": 0,
+    "banks": [
+      "matched",
+      "both"
+    ],
+    "candidate_fit_formula": "n_dataset_seeds \u00d7 n_train_seeds \u00d7 n_banks \u00d7 n_densities \u00d7 n_models \u00d7 n_eligible_donors \u00d7 n_inner_folds",
+    "compute_cap_seconds": 600,
+    "config_hash": "b55e598707bd6385",
+    "config_path": "configs/v3_donor_rank.frozen.yaml",
+    "confirmatory": false,
+    "dataset_variability_estimated": true,
+    "densities": [
+      "full"
+    ],
+    "design": false,
+    "encoder_window_day": 14.0,
+    "estimated_runtime_seconds": {
+      "lower": 150,
+      "point": 240,
+      "upper": 480
+    },
+    "execute": false,
+    "fabricate_encoder_history": false,
+    "generate_seeds": [
+      78001,
+      79010
+    ],
+    "git_revision": "6f6780205f9b0810939641a543b2112482f9461e",
+    "k_donors": 1,
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "n_candidate_fits": 48,
+    "n_dataset_seeds": 2,
+    "n_eligible_donors": 3,
+    "n_final_model_fits": 24,
+    "n_inner_folds": 2,
+    "n_model_fits_if_executed": 72,
+    "n_slices": 4,
+    "n_train_seeds": 1,
+    "n_trained_cells": 12,
+    "new_architectures": false,
+    "policy_arms": [
+      "target_only",
+      "prefix_one",
+      "ranked_one",
+      "ranked_abstain"
+    ],
+    "prefix_diagnostic_closed": true,
+    "prefix_diagnostic_retuned": false,
+    "prefix_rule": "studyid_sort_prefix",
+    "prefix_rule_label": "STUDYID-sort prefix (not learned, not similarity-based, not validation-ranked)",
+    "preserved": [
+      "runs/v3_eval",
+      "runs/v3_pilot_k0k1",
+      "runs/v3_repl",
+      "runs/v3_research",
+      "runs/v3_closeout",
+      "runs/v3_audit",
+      "runs/v3_increment",
+      "runs/v3_phaseb",
+      "runs/v3_limitations",
+      "runs/v3_objective",
+      "runs/v3_official_seq",
+      "runs/v3_seq_diag",
+      "runs/v3_eval_correct",
+      "runs/v3_cov_chronos",
+      "runs/v3_share_repl",
+      "runs/v3_share_abstain",
+      "runs/v3_share_abstain_run"
+    ],
+    "rank_metric": "inner_rmse_log",
+    "rank_rule": "inner_target_train_study_fold",
+    "rank_rule_label": "inner target-training study-fold rank (not test-informed, not generator-scenario-informed)",
+    "real_data": false,
+    "retune_after_test": false,
+    "selector_sees_generator_labels": false,
+    "selector_sees_test_outcomes": false,
+    "sparse_target_train_n": null,
+    "train_seeds": [
+      86001
+    ],
+    "training_seed_variability_estimated": false
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "n_candidate_fits": 48,
+  "n_final_model_fits": 24,
+  "n_model_fits_if_executed": 72,
+  "new_architectures": false,
+  "output_dir": "runs/v3_donor_rank",
+  "protected": {
+    "changed": [],
+    "unchanged": true
+  },
+  "real_data_accessed": false,
+  "status": "locked_not_executed"
+}
