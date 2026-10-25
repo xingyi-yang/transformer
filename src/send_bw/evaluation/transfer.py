@@ -1,8 +1,8 @@
-"""Sign-defined paired transfer table for the predose-conditioned pilot task.
+"""Sign-defined paired transfer table.
 
 Δ_k = S_k − S_0 on the frozen target holdout. Signs are published; they are never
-clipped or retuned away. Selective sharing is required in the eventual benchmark
-and is not implemented here.
+clipped or retuned away. Selective sharing v1 is a scored regime in the v3
+evaluation benchmark; the frozen k=0/k=1 executor still omits it.
 """
 
 from __future__ import annotations
@@ -64,17 +64,22 @@ def build_transfer_table(s0_summary: dict[str, Any],
                          sk_by_k: Iterable[tuple[int, dict[str, Any]]],
                          metrics: tuple[str, ...] = DEFAULT_METRICS,
                          model: str | None = None,
-                         task: str = TASK) -> dict[str, Any]:
+                         task: str = TASK,
+                         sharing_regimes: list[str] | None = None,
+                         selective_sharing: str = "required_deferred") -> dict[str, Any]:
     model = model or s0_summary.get("model")
     rows = []
     for k, sk in sk_by_k:
         for metric in metrics:
-            rows.append(paired_transfer_row(s0_summary, sk, metric, k, model, task))
+            row = paired_transfer_row(s0_summary, sk, metric, k, model, task)
+            if isinstance(sk, dict) and sk.get("sharing"):
+                row["sharing"] = sk.get("sharing")
+            rows.append(row)
     return {
         "task": task,
         "model": model,
         "labels": list(LABELS),
-        "sharing_regimes": ["context_specific (S0)", "pooled (Sk)"],
-        "selective_sharing": "required_deferred",
+        "sharing_regimes": sharing_regimes or ["context_specific (S0)", "pooled (Sk)"],
+        "selective_sharing": selective_sharing,
         "rows": rows,
     }

@@ -184,7 +184,10 @@ class Run:
         ccfg = CohortConfig.from_dict(self.cfg.get("cohort"))
         target_cfg = ccfg.target_only()
         target_cohort = select_cohort(t, target_cfg)
-        qc_cohort = select_cohort(t, ccfg) if ccfg.sharing == "pooled" and ccfg.donor_species else target_cohort
+        from send_bw.sharing import uses_donors
+
+        donor_mode = uses_donors(ccfg.sharing) and bool(ccfg.donor_species)
+        qc_cohort = select_cohort(t, ccfg) if donor_mode else target_cohort
         qc_cohort.exclusions.to_csv(self.p("qc", "exclusions.csv"), index=False)
         qc_cohort.completeness.to_csv(self.p("qc", "completeness.csv"), index=False)
         excl = (qc_cohort.exclusions.assign(REASON=qc_cohort.exclusions["EXCLUSION_REASON"].str.split(";"))
@@ -207,7 +210,7 @@ class Run:
         freeze_splits(splits_target, self.p("splits", "target_splits"))
         tman = freeze_target_manifests(splits_target, self.p("splits", "target_manifest.json"))
         donor_parts_a, donor_parts_o = [], []
-        if ccfg.sharing == "pooled" and ccfg.donor_species:
+        if donor_mode:
             for ds in ccfg.donor_species:
                 dc = select_cohort(t, replace(target_cfg, species=str(ds).upper()))
                 if len(dc.animals):
@@ -221,7 +224,7 @@ class Run:
             donor_animals = target_cohort.animals.iloc[0:0]
             donor_obs = target_cohort.obs.iloc[0:0]
             donor_ids_all = []
-        k = min(int(ccfg.n_donor_studies) if ccfg.sharing == "pooled" else 0, len(donor_ids_all))
+        k = min(int(ccfg.n_donor_studies) if donor_mode else 0, len(donor_ids_all))
         selected = donor_ids_all[:k]
         write_json(self.p("splits", "donor_order.json"), {
             "studyids": donor_ids_all, "k": k, "selected": selected,
@@ -236,10 +239,19 @@ class Run:
                                 ignore_index=True)
             obs = pd.concat([obs, donor_obs[donor_obs["STUDYID"].isin(selected)]], ignore_index=True)
         tr = set(splits.loc[splits["SPLIT"] == "train", "STUDYID"].astype(str))
-        sharing_for_spec = "pooled" if (ccfg.sharing == "pooled" and selected) else "context_specific"
+        feat_cfg = self.cfg.get("features") or {}
+        fixed_schema = bool(feat_cfg.get("fixed_schema"))
+        declared = []
+        if fixed_schema or donor_mode:
+            declared = [ccfg.species.upper()] + [str(s).upper() for s in ccfg.donor_species]
+        if selected and donor_mode:
+            sharing_for_spec = ccfg.sharing
+        else:
+            sharing_for_spec = "context_specific"
         spec = FeatureSpec.fit(animals[animals["STUDYID"].astype(str).isin(tr)],
                                obs[obs["STUDYID"].astype(str).isin(tr)], t["compound_reference"],
-                               ccfg.species.upper(), sharing=sharing_for_spec)
+                               ccfg.species.upper(), sharing=sharing_for_spec,
+                               declared_species=declared or None, fixed_schema=fixed_schema)
         write_json(self.p("features", "feature_spec.json"), spec.to_dict())
         write_parquet(self.p("cohort", "animals.parquet"), animals)
         write_parquet(self.p("cohort", "obs.parquet"), obs)
@@ -306,6 +318,12 @@ class Run:
                 info["reliable"] = bool(model.diagnostics["main"]["reliable"])
                 info["diagnostics_summary"] = {k: model.diagnostics["main"][k] for k in
                                                ["rhat_max", "ess_bulk_min", "ess_tail_min", "divergences"]}
+                info["counted_as_successful_benchmark"] = bool(info["reliable"])
+                if getattr(tr.spec, "sharing", "") == "selective":
+                    from send_bw.sharing import selective_record
+
+                    hist["selective_sharing"] = selective_record("bayesian")
+                    write_json(self.p("models", name, "training_history.json"), hist)
             self.manifest.record_stage(f"train_{name}", **info)
             out[name] = info
             self.log.info(f"[train] {name} done in {info['seconds']:.1f}s")
@@ -404,6 +422,23 @@ class Run:
                     eh = evaluate_early_history(model, d, float(ecfg.get("early_history_window_day", 14)))
                     eh["split"] = split
                     res[f"{name}|{split}|early_history"] = eh
+                if "sparse_history" in tasks:
+                    from send_bw.evaluation.sparse import evaluate_sparse_grid
+
+                    encoders = list(ecfg.get("sparse_encoders") or ["W0", "W1", "Wlast14", "Wall14"])
+                    sp = evaluate_sparse_grid(model, d, encoders=encoders,
+                                              n_draws=int(ecfg.get("n_draws", 80)),
+                                              seed=self.seed + 17,
+                                              contrast_day=float(ecfg.get("contrast_day", 28)))
+                    sp["split"] = split
+                    write_json(self.p("evaluation", f"{name}_{split}_sparse.json"), sp)
+                    res[f"{name}|{split}|sparse_history"] = {
+                        "task": "sparse_history", "model": name, "split": split,
+                        "encoders": {k: {kk: vv for kk, vv in v.items() if kk != "summary"}
+                                     | ({"rmse_log": (v.get("summary") or {}).get("study_balanced", {}).get("rmse_log")}
+                                        if v.get("summary") else {})
+                                     for k, v in (sp.get("encoders") or {}).items()},
+                    }
                 self.log.info(f"[evaluate] {name}/{split} in {time.time() - t0:.1f}s")
         if "early_history" in tasks:
             for name in self.optional_trained():

@@ -1,0 +1,33 @@
+{
+  "config_hash": "fbf4c58c2e5715ae",
+  "config_path": "configs/v3_eval.frozen.yaml",
+  "design": false,
+  "frozen_before": "generate_banks_train_evaluate",
+  "git_revision": "68b9144a94bc4ca13b8609348ca1c052b961293d",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "real_data": false,
+  "retune_after_test": false,
+  "selective_sharing": {
+    "note": "Shared: compound descriptors and planned-dose/regimen query features. Species-specific: growth/baseline token groups and residual scale. Not a Bayesian species random-effect variant.",
+    "residual": "target_species_only",
+    "shared": [
+      "compound",
+      "regimen"
+    ],
+    "species_specific": [
+      "bio",
+      "baseline",
+      "species"
+    ],
+    "variant": "v1"
+  },
+  "uncertainty": {
+    "parameter_uncertainty": "Incompletely estimated except for a reliable Bayesian posterior. Spline bootstraps the mean only; covariance is not bootstrapped; transformer n_members=1 has no bootstrap spread.",
+    "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study."
+  }
+}

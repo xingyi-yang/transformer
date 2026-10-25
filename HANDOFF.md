@@ -43,13 +43,19 @@ Real-data qualification stage: **1** (implemented and mock-tested only).
 
 ## 2. Executed and tested (exact results)
 
-`pytest -q tests`: **141 passed**, 2 skipped (this environment). This includes the mock-Snowflake
+`pytest -q tests`: **153 passed**, 2 skipped (this environment). This includes the mock-Snowflake
 equivalence, messy-fixture, leakage, v3 stages 1–2 freeze/donor/species/transfer tests,
-integration CLI smoke, and skipped Bayesian/TFT extras. `ruff check src tests`: clean.
+v3 core selective/sparse/donor-hetero/uncertainty tests, integration CLI smoke,
+and skipped Bayesian/TFT extras. `ruff check src tests`: clean.
 The approved synthetic **k=0 then k=1** wave was executed from freeze commit
 `9f1da17` / config hash `4112f7ae47000c25` and stopped after k=1. Signs were
 published as computed (transformer transfer on the frozen target test was
 harmful). The protocol was not retuned. See `docs/v3/k0k1_RESULTS.md`.
+The v3 **evaluation benchmark** was executed from freeze commit `68b9144` /
+config hash `fbf4c58c2e5715ae` (banks `matched` and `both`; context / pooled /
+selective v1). Primary frozen-test RMSE transfer was harmful for pooled and
+selective spline and for pooled transformer. Bayesian was `not_run` (PyMC
+missing) and was not counted. See `docs/v3/eval_RESULTS.md`.
 
 **Smoke run** (`configs/smoke.yaml`, seed 20261017):
 - **Data**:
@@ -172,10 +178,11 @@ to `[ancova]`.
    environment, do not treat a local extra-enabled fit as design qualification, and
    do not implement Chronos-2/DeepAR unless they are named. The analysis chapter
    stays as written.
-6. The approved synthetic pilot **k=0 then k=1** was executed from freeze
-   commit `9f1da17` / config hash `4112f7ae47000c25`. Predose-conditioned
-   spline + one-member transformer only. Target manifests held. Transformer
-   transfer on the frozen target test was **harmful** (RMSE/CRPS/contrast);
-   spline was slightly helpful. Signs were published; the protocol was not
-   retuned. Design, extra families, real data, and k=2,3 stayed off.
-   Artifacts: `runs/v3_pilot_k0k1/` and `docs/v3/k0k1_RESULTS.md`.
+6. The approved synthetic pilot **k=0 then k=1** remains frozen
+   (`9f1da17` / `4112f7ae47000c25`; `runs/v3_pilot_k0k1/`). It was not
+   retuned. The core v3 evaluation (`68b9144` / `fbf4c58c2e5715ae`) adds
+   selective v1, sparse history, donor heterogeneity, fixed-schema and
+   budget pairs, contrast-error and covariance inspection. Negative
+   transfer is published. Bayesian was not_run without PyMC and is not a
+   successful benchmark. Design and real data stayed off.
+   Artifacts: `runs/v3_eval/` and `docs/v3/eval_RESULTS.md`.

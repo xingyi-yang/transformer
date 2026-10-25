@@ -27,6 +27,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
+from send_bw.sharing import resolve_donor_scenario
 from send_bw.utils.artifacts import mark_generated, write_json, write_parquet
 from send_bw.utils.seeds import SeedStream
 
@@ -306,6 +307,8 @@ def generate_dataset(cfg: dict[str, Any], out_dir: str | Path, seed: int) -> dic
     p_death = float(cfg.get("p_death", 0.015))
     p_dose_deviation = float(cfg.get("p_dose_deviation", 0.04))
     n_other_species = int(cfg.get("n_other_species_studies", 1))
+    donor_scenario = str(cfg.get("donor_scenario", "matched"))
+    donor_dev = resolve_donor_scenario(donor_scenario)
     kg_studies = int(cfg.get("n_kg_unit_studies", 1))
     lowercase_studies = int(cfg.get("n_lowercase_column_studies", 1))
     parquet_fraction = float(cfg.get("parquet_fraction", 0.25))
@@ -396,6 +399,8 @@ def generate_dataset(cfg: dict[str, Any], out_dir: str | Path, seed: int) -> dic
                     subjid = f"{animal_counter:04d}"
                     usubjid = f"{studyid}-{subjid}"
                     mu0, sd0 = gen.p["baseline"][species][sex]
+                    if is_donor:
+                        mu0 = float(mu0) + float(donor_dev["baseline_shift"])
                     z0 = float(rng.normal(mu0 + u_s_base, sd0))
                     reg = Regimen(arm["IS_CONTROL"], arm["COMPOUND_ID"], arm["PLANNED_DOSE"], interval, 0.0,
                                   T - 1.0, route)
@@ -413,7 +418,12 @@ def generate_dataset(cfg: dict[str, Any], out_dir: str | Path, seed: int) -> dic
                         death_day = float(rng.integers(2, int(T)))
                     lat, meas = gen.animal_deviations(rng, grid, 1,
                                                       scale=np.array([gen.variance_multiplier(act)]))
-                    mean = gen.mean_change(grid, species, sex, strain, z0, act, ct)
+                    growth = gen.growth(grid, species, sex, strain, z0)
+                    effect = gen.effect(grid, act, ct)
+                    if is_donor:
+                        growth = growth * float(donor_dev["gmax_scale"])
+                        effect = effect * float(donor_dev["effect_scale"])
+                    mean = growth + effect
                     z_lat = z0 + mean + lat[0] + study_dev
                     z_obs = z_lat + meas[0]
                     truth_animals.append({"STUDYID": studyid, "USUBJID": usubjid, "Z0_TRUE": z0,
@@ -476,7 +486,9 @@ def generate_dataset(cfg: dict[str, Any], out_dir: str | Path, seed: int) -> dic
     compound_ref.to_csv(meta_dir / "compound_reference.csv", index=False)
     # hidden truth (never read by fitting/feature code)
     write_json(truth_dir / "params.json", {"generator": gen.name, "params": gen.p, "compounds": comp_truth,
-                                           "seed": seed, "warning": "TRUTH-ONLY. Not for model fitting."})
+                                           "seed": seed, "donor_scenario": donor_scenario,
+                                           "donor_deviations": donor_dev,
+                                           "warning": "TRUTH-ONLY. Not for model fitting."})
     write_parquet(truth_dir / "animals.parquet", pd.DataFrame(truth_animals))
     write_parquet(truth_dir / "studies.parquet", pd.DataFrame(study_truth))
     write_parquet(truth_dir / "latent_paths.parquet", pd.DataFrame(latent_rows))

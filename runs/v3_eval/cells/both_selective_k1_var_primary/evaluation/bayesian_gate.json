@@ -1,0 +1,14 @@
+{
+  "status": "not_run",
+  "reliable": false,
+  "counted_as_successful_benchmark": false,
+  "rhat_max": null,
+  "ess_bulk_min": null,
+  "ess_tail_min": null,
+  "divergences": null,
+  "reason": "bayesian extra not installed",
+  "components": {
+    "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer.",
+    "parameter_uncertainty": "Spline: study-bootstrap of the mean only. Transformer: members are mean-only (n_members=1 has no bootstrap spread). Covariance parameters are not bootstrapped. Bayesian posterior draws, when reliable, are the only complete parameter+predictive statement; an unreliable Bayesian fit is not counted as a successful benchmark."
+  }
+}

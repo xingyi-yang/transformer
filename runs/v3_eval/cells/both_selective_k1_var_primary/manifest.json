@@ -1,0 +1,137 @@
+{
+  "config_hash": "cfdb07a285412515",
+  "config_path": "runs/v3_eval/cells/both_selective_k1_var_primary/effective.yaml",
+  "created_utc": "2026-10-25T00:40:55.154706+00:00",
+  "git_revision": "68b9144a94bc4ca13b8609348ca1c052b961293d",
+  "seed": 20261025,
+  "software": {
+    "arviz": null,
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4",
+    "nutpie": null,
+    "pandas": "3.1.0",
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "pyarrow": "26.0.0",
+    "pydantic": "2.14.1",
+    "pymc": null,
+    "pyreadstat": null,
+    "pytensor": null,
+    "python": "3.12.3",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "snowflake-connector-python": null,
+    "torch": "2.14.1"
+  },
+  "stages": {
+    "evaluate": {
+      "completed_utc": "2026-10-25T00:41:17.928398+00:00",
+      "key": null,
+      "n_results": 8,
+      "seconds": 20.24866271018982
+    },
+    "ingest": {
+      "completed_utc": "2026-10-25T00:40:55.578625+00:00",
+      "key": "a9921a2efa478cda",
+      "mapping_version": "example-send-0.1",
+      "n_animals": 562,
+      "n_bw": 5141,
+      "n_quarantine": 0,
+      "seconds": 0.40808796882629395
+    },
+    "optional_models": {
+      "completed_utc": "2026-10-25T00:40:57.663803+00:00",
+      "key": null,
+      "status": {
+        "chronos2": "not_run",
+        "deepar": "not_run",
+        "tft": "not_run"
+      }
+    },
+    "prepare": {
+      "completed_utc": "2026-10-25T00:40:55.844543+00:00",
+      "compound_holdout": [
+        "CMP04"
+      ],
+      "key": "06d3b19af8b02419",
+      "n_donor_studies": 1,
+      "n_eligible_animals": 495,
+      "seconds": 0.26528334617614746,
+      "sharing": "selective",
+      "split_counts": {
+        "test": 2,
+        "test_compound_holdout": 1,
+        "train": 8,
+        "validation": 2
+      },
+      "split_hash": "2f769435351d6f71",
+      "target_manifest": {
+        "all_target": {
+          "hash": "76d8ec6b17dae51a",
+          "n": 11,
+          "studyids": [
+            "SYNA-002",
+            "SYNA-003",
+            "SYNA-004",
+            "SYNA-005",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009",
+            "SYNA-010",
+            "SYNA-011",
+            "SYNA-012"
+          ]
+        },
+        "test": {
+          "hash": "840a846f9dc59781",
+          "n": 2,
+          "studyids": [
+            "SYNA-004",
+            "SYNA-005"
+          ]
+        },
+        "train": {
+          "hash": "340dc8e79c1238b4",
+          "n": 7,
+          "studyids": [
+            "SYNA-002",
+            "SYNA-003",
+            "SYNA-006",
+            "SYNA-007",
+            "SYNA-008",
+            "SYNA-009",
+            "SYNA-011"
+          ]
+        },
+        "validation": {
+          "hash": "4f8d1a95c3c18638",
+          "n": 2,
+          "studyids": [
+            "SYNA-010",
+            "SYNA-012"
+          ]
+        },
+        "version": "target-manifest-v1"
+      }
+    },
+    "train_bayesian": {
+      "completed_utc": "2026-10-25T00:40:57.663157+00:00",
+      "key": null,
+      "reason": "bayesian extra not installed",
+      "status": "not_run"
+    },
+    "train_spline": {
+      "completed_utc": "2026-10-25T00:40:56.311146+00:00",
+      "key": "5a1632be7302988f",
+      "seconds": 0.4389982223510742,
+      "status": "trained"
+    },
+    "train_transformer": {
+      "completed_utc": "2026-10-25T00:40:57.662445+00:00",
+      "key": "1af375f52619549e",
+      "seconds": 1.3500683307647705,
+      "status": "trained"
+    }
+  },
+  "synthetic_data": false
+}

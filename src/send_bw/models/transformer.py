@@ -169,6 +169,11 @@ class TransformerModel(GaussianLayerMixin, ResponseModel):
         seed = int(config.get("seed", 0))
         studies = np.unique(sids)
         rng = np.random.default_rng(seed)
+        selective = getattr(self.spec, "sharing", "context_specific") == "selective"
+        tgt_mask = None
+        if selective and "SPECIES" in train.animals.columns:
+            tgt_mask = (train.animals.reset_index(drop=True)["SPECIES"].astype(str).str.upper()
+                        == str(self.spec.species).upper()).to_numpy()
         self.nets, hist = [], []
         for mbr in range(int(config.get("n_members", 3))):
             if mbr == 0:
@@ -176,19 +181,50 @@ class TransformerModel(GaussianLayerMixin, ResponseModel):
             else:
                 pick = pd.Series(rng.choice(studies, size=len(studies), replace=True)).value_counts()
                 mult = pd.Series(sids).map(pick).fillna(0).to_numpy()
-            net, h = self._train_one(c, q, pad, Y, W * torch.tensor(mult, dtype=torch.float32)[:, None],
-                                     cv, qv, padv, Yv, Wv, config, seed + 1000 * mbr)
+            Wm = W * torch.tensor(mult, dtype=torch.float32)[:, None]
+            if selective and tgt_mask is not None and tgt_mask.any():
+                cfg1 = dict(config)
+                cfg1["freeze_groups"] = []
+                c1 = {g: v[tgt_mask] for g, v in c.items()}
+                net, h1 = self._train_one(c1, q[tgt_mask], pad[tgt_mask], Y[tgt_mask], Wm[tgt_mask],
+                                          cv, qv, padv, Yv, Wv, cfg1, seed + 1000 * mbr)
+                cfg2 = dict(config)
+                cfg2["freeze_groups"] = ["bio", "baseline", "species"]
+                cfg2["init_state"] = net.state_dict()
+                net, h2 = self._train_one(c, q, pad, Y, Wm, cv, qv, padv, Yv, Wv, cfg2,
+                                          seed + 1000 * mbr + 17)
+                h = {"phase1": h1, "phase2": h2, "best_val_rmse": h2["best_val_rmse"],
+                     "epochs_run": int(h1["epochs_run"]) + int(h2["epochs_run"]),
+                     "selective_sharing": True}
+            else:
+                net, h = self._train_one(c, q, pad, Y, Wm, cv, qv, padv, Yv, Wv, config,
+                                         seed + 1000 * mbr)
             self.nets.append(net)
             h["member"] = mbr
             hist.append(h)
         self.history = {"members": hist, "y_scale": self.y_scale, "arch": self.arch,
                         "best_val_rmse_member0": hist[0]["best_val_rmse"]}
+        if selective:
+            from send_bw.sharing import selective_record
+
+            self.history["selective_sharing"] = selective_record("transformer")
         return self.history
 
     def _train_one(self, c, q, pad, Y, W, cv, qv, padv, Yv, Wv, cfg, seed):
         torch.manual_seed(seed)
         net = BaselineTransformer(**self.arch)
-        opt = torch.optim.AdamW(net.parameters(), lr=float(cfg.get("lr", 3e-3)),
+        if cfg.get("init_state") is not None:
+            net.load_state_dict(cfg["init_state"])
+        freeze = set(cfg.get("freeze_groups") or [])
+        if freeze:
+            for g, mod in net.ctx_proj.items():
+                if g in freeze:
+                    for p in mod.parameters():
+                        p.requires_grad = False
+        params = [p for p in net.parameters() if p.requires_grad]
+        if not params:
+            raise ValueError("transformer selective training: no unfrozen parameters")
+        opt = torch.optim.AdamW(params, lr=float(cfg.get("lr", 3e-3)),
                                 weight_decay=float(cfg.get("weight_decay", 1e-3)))
         n = Y.shape[0]
         bs = int(cfg.get("batch_size", 64))
@@ -223,7 +259,8 @@ class TransformerModel(GaussianLayerMixin, ResponseModel):
                     break
         net.load_state_dict(best_state)
         net.eval()
-        return net, {"best_val_rmse": best, "epochs_run": len(curve), "curve": curve, "seed": seed}
+        return net, {"best_val_rmse": best, "epochs_run": len(curve), "curve": curve, "seed": seed,
+                     "freeze_groups": list(cfg.get("freeze_groups") or [])}
 
     # ---------------------------------------------------------------- prediction
     def predict_mean(self, context: pd.DataFrame, times: np.ndarray, member: int | None = None) -> np.ndarray:

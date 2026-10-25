@@ -94,7 +94,16 @@ class SplineModel(GaussianLayerMixin, ResponseModel):
             R[te] = y[te] - X[te] @ b
         resid = pd.DataFrame({"STUDYID": sid, "USUBJID": train.obs["USUBJID"].to_numpy(),
                               "DAY": train.obs["DAY"].to_numpy(), "R": R})
-        self.cov = HierarchicalCovariance.fit(resid)
+        cov_resid = resid
+        selective = getattr(train.spec, "sharing", "context_specific") == "selective"
+        if selective and "SPECIES" in train.animals.columns:
+            tgt_ids = set(train.animals.loc[
+                train.animals["SPECIES"].astype(str).str.upper() == str(train.spec.species).upper(),
+                "USUBJID"].astype(str))
+            cov_resid = resid[resid["USUBJID"].astype(str).isin(tgt_ids)]
+            if cov_resid.empty:
+                raise ValueError("selective spline covariance: no target-species residuals")
+        self.cov = HierarchicalCovariance.fit(cov_resid)
         # study bootstrap members (one member is applied to a whole simulated study)
         self.members = [beta0]
         for _ in range(int(config.get("n_bootstrap", 10))):
@@ -107,7 +116,14 @@ class SplineModel(GaussianLayerMixin, ResponseModel):
         self.history = {"alpha": alpha, "validation_rmse_by_alpha": {str(k): v for k, v in scores.items()},
                         "train_rmse": wrmse(y, X @ beta0, w), "validation_rmse": scores[alpha],
                         "oof_rmse": wrmse(y, y - R, w), "n_params": int(X.shape[1]),
-                        "n_members": len(self.members), "covariance": self.cov.to_dict()}
+                        "n_members": len(self.members), "covariance": self.cov.to_dict(),
+                        "covariance_fit_on": (
+                            "target_species_oof" if selective else "train_oof_all_species"
+                        )}
+        if selective:
+            from send_bw.sharing import selective_record
+
+            self.history["selective_sharing"] = selective_record("spline")
         return self.history
 
     def predict_mean(self, context: pd.DataFrame, times: np.ndarray, member: int | None = None) -> np.ndarray:

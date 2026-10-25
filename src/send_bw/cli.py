@@ -90,7 +90,8 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="send-bw", description="Body-weight modelling and design simulation")
     sub = p.add_subparsers(dest="cmd", required=True)
     for name in ["generate", "inspect-source", "ingest", "prepare", "validate-real", "train", "evaluate",
-                 "design", "report", "run-all", "validate-request", "propose-design", "v3-pilot"]:
+                 "design", "report", "run-all", "validate-request", "propose-design", "v3-pilot",
+                 "v3-eval"]:
         s = sub.add_parser(name)
         artifact_cmd = name in ("validate-request", "propose-design")
         s.add_argument("--config", required=not artifact_cmd)
@@ -119,6 +120,18 @@ def main(argv: list[str] | None = None) -> int:
                               "config_hash": (out.get("freeze_lock") or {}).get("config_hash"),
                               "retuned_after_test": False,
                               "parent": load_yaml(args.config).get("output_dir")}, indent=2, default=str))
+            return 0
+        if args.cmd == "v3-eval":
+            from send_bw.v3_eval import execute_v3_eval
+            from send_bw.v3_eval import load_yaml as load_eval_yaml
+
+            out = execute_v3_eval(args.config, force=args.force)
+            print(json.dumps({"status": "ok",
+                              "git_revision": (out.get("freeze_lock") or {}).get("git_revision"),
+                              "config_hash": (out.get("freeze_lock") or {}).get("config_hash"),
+                              "retuned_after_test": False,
+                              "failures": out.get("failures"),
+                              "parent": load_eval_yaml(args.config).get("output_dir")}, indent=2, default=str))
             return 0
         if args.cmd == "validate-request":
             return cmd_validate_request(args)

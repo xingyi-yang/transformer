@@ -9,20 +9,14 @@ import numpy as np
 import pandas as pd
 
 from send_bw.data.schema import CanonicalTables
+from send_bw.sharing import parse_sharing, uses_donors
 
-SHARING_REGIMES = ("context_specific", "pooled")
+# Historical stages 1–2 constant. Selective v1 is implemented; the frozen k=0/k=1
+# executor still refuses it. Do not use this string as a runtime raise.
 SELECTIVE_SHARING_DEFERRED = (
-    "selective sharing is required in the eventual v3 benchmark but is not implemented (deferred)"
+    "selective sharing v1 is implemented in the v3 evaluation benchmark; "
+    "the frozen k=0/k=1 executor still refuses it"
 )
-
-
-def parse_sharing(value: str | None) -> str:
-    v = (value or "context_specific").strip().lower()
-    if v == "selective":
-        raise ValueError(SELECTIVE_SHARING_DEFERRED)
-    if v not in SHARING_REGIMES:
-        raise ValueError(f"unknown sharing regime {value!r}; expected {SHARING_REGIMES}")
-    return v
 
 
 @dataclass
@@ -49,7 +43,7 @@ class CohortConfig:
 
     def allowed_species(self) -> set[str]:
         out = {self.species.upper()}
-        if self.sharing == "pooled":
+        if uses_donors(self.sharing):
             out.update(s.upper() for s in self.donor_species)
         return out
 

@@ -42,8 +42,9 @@ Acceptance (software): unit tests green; no smoke default change; no
 ## Stage 2 — pooled feature + scoring table
 
 **Status: implemented (software).** Predose-conditioned is the first scored
-task. Design-stage and `Wall14` scoring are deferred with Stage 3.
-Selective sharing is required later and is not implemented.
+task. Stage 3–4 software (selective v1, sparse grid, donor heterogeneity,
+distributional / contrast-error, uncertainty inspection) is in the
+evaluation benchmark. The frozen k=0/k=1 artifacts are unchanged.
 
 **Goal.** Pooled spline and pooled transformer can fit with an explicit
 species token/column; a sign-defined paired transfer table can be built
@@ -67,24 +68,21 @@ run the training wave here.
 
 ## Stage 3 — synthetic pilot wave 1
 
-Execute `pilot_protocol.md` at smoke-like size. Record artifacts under a
-new `docs/remediation/` or `runs/` path that is synthetic-labeled.
+The approved k=0 then k=1 predose wave is recorded under `runs/v3_pilot_k0k1/`.
+Do not retune it. Harmful transformer transfer is a published result.
 
-Acceptance: three stages × two regimes × \(k\) levels written; no design
-summary used as a success line; HANDOFF note that this is a method pilot.
+## Stage 4 — sparse-history + selective v1
 
-If \(\Delta_k\) is harmful, **report it**. Do not add selective-sharing to
-chase a win.
+Implemented in `src/send_bw/sharing.py`, `evaluation/sparse.py`, and
+`v3_eval.py`. Frozen evaluation config: `configs/v3_eval.frozen.yaml`.
 
-## Stage 4 — sparse-history + selective v1 (optional)
+- Encoder grid W0 / W1 / Wlast14 / Wall14 (no encoder filling)
+- Selective v1 (shared compound + regimen; species-specific growth/residual)
+- Controlled donor scenarios: matched / growth_shift / treatment_shift / both
+- Bayesian reliability gate: unreliable fits are not a successful benchmark
 
-Only if Stage 3 compiled and the freeze held.
-
-- Encoder grid W0 / W1 / Wlast14 / Wall14
-- Selective v1 (shared compound + dose features; species-specific growth)
-
-Acceptance: same holdout; no encoder filling; selective history file names
-the shared groups.
+Acceptance: same holdout; no encoder filling; selective history names the
+shared groups; design off.
 
 ## Stage 5 — historical audit, then stop or proceed
 
