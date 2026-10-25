@@ -166,9 +166,11 @@ def test_audit_notes_distinguish_cqr_and_quantile_scales():
     units = cqr_calibration_units()
     assert units["study_balanced"] is False
     assert units["unit"].startswith("aligned")
+    assert "one rank" in units["numpy_higher_not_romano"]
     scale = quantile_loss_scale_note()
     assert scale["not_comparable_without_rescaling"] is True
     assert "2 * pinball" in scale["training"]
+    assert scale["loss_scale"] == "raw_LOGW"
 
 
 def test_tft_applicability_is_recorded_not_enforced():

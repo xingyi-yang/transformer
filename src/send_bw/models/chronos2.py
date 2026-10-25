@@ -5,6 +5,13 @@ This is not the custom baseline-conditioned transformer and is not a design simu
 
 Encoder history is observed visits only (DAY-sorted LOGW). Unobserved calendar days
 are not inserted and LOGW is never filled with 0.
+
+Time index vs calendar:
+    The sequence Chronos sees is visit rank (unit steps). Two animals with the
+    same number of weigh-ins but different elapsed-day spacing look identical
+    under HISTORY_ONLY. That is an adapter choice, not a Chronos-2 limitation:
+    COVARIATE_AWARE can pass DAY (and planned statics) as covariates, but the
+    sequence index remains unit steps. Official_seq used HISTORY_ONLY.
 """
 
 from __future__ import annotations

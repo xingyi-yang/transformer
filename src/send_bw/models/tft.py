@@ -30,8 +30,11 @@ chunks horizons to the trained ``max_prediction_length``.
 intervals or doses above ``max_dose`` are still scored).
 
 The fitted target is ``LOGW = ln(WEIGHT_G)``, not the spline/transformer ``Y``
-change-from-baseline. PF ``QuantileLoss`` is ``2 * pinball`` on the
-**normalized** target; reported pinball is unscaled on raw ``LOGW``.
+change-from-baseline. The PF head is standardized by ``GroupNormalizer``
+(official target-only: center ≈ 5.616, scale ≈ 0.245). ``TFT.forward``
+inverse-transforms before the loss, so ``QuantileLoss`` is ``2 * pinball``
+on **raw** ``LOGW``. Reported pinball is the unscaled 1× pinball on raw
+``LOGW``.
 Variance is a quantile-spread approximation from QuantileLoss, not a learned
 Gaussian covariance. Installing the extra is required; the default environment
 must stay ``not_run``.

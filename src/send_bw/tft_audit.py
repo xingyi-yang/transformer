@@ -166,14 +166,18 @@ def quantile_loss_scale_note() -> dict[str, Any]:
     """Training QuantileLoss is not the reported pinball number."""
     return {
         "training": (
-            "pytorch_forecasting.QuantileLoss is 2 * pinball on the "
-            "normalized target (GroupNormalizer/EncoderNormalizer space). "
-            "At q=0.5 the per-row term equals |error_normalized|."
+            "pytorch_forecasting.QuantileLoss is 2 * pinball. "
+            "A locked target-only batch showed decoder y and "
+            "transform_output(pred) both on raw LOGW (~5.8). "
+            "GroupNormalizer (center≈5.616, scale≈0.245) standardizes the "
+            "head; TFT.forward inverse-transforms before the loss. "
+            "At q=0.5 the per-row term equals |error_raw_LOGW|."
         ),
         "reported_mean_quantile_loss": (
-            "Unscaled pinball on raw LOGW = ln(WEIGHT_G), averaged over "
+            "Unscaled (1×) pinball on raw LOGW = ln(WEIGHT_G), averaged over "
             "0.1/0.25/0.5/0.75/0.9, then study-balanced."
         ),
+        "loss_scale": "raw_LOGW",
         "not_comparable_without_rescaling": True,
         "predict_outputs": "inverse-transformed to raw LOGW (saved q* columns ~5.5–6.1 for RAT)",
     }
@@ -195,8 +199,16 @@ def cqr_calibration_units() -> dict[str, Any]:
             "Visits within an animal and animals within a study are dependent. "
             "That is an assumption, not a finite-sample guarantee at the study level."
         ),
-        "q": "ceil((n_pairs+1)(1-alpha))/n_pairs, numpy quantile method=higher",
+        "q": "Romano k=ceil((n_pairs+1)(1-alpha)); Q is the k-th order statistic (max if k=n+1)",
         "alpha": 0.2,
+        "numpy_higher_not_romano": (
+            "The previous conformal_margin used np.quantile(k/n, method='higher'). "
+            "NumPy 'higher' indexes q*(n-1) and returns the next order statistic "
+            "(sorted[k] when q=k/n). That is one rank larger than Romano E_(k). "
+            "method='inverted_cdf' matches Romano. conformal_margin now uses the "
+            "sorted k-th order statistic. Locked CQR files were not rewritten; "
+            "rescored margins live in runs/forecast_method_audit/."
+        ),
     }
 
 

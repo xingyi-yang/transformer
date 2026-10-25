@@ -1,0 +1,209 @@
+[
+  {
+    "bank": "official_test",
+    "cqr": {
+      "coverage80": 0.7776162790697674,
+      "crossing": 0.0,
+      "interval_score80": 0.1970303350125005,
+      "interval_width80": 0.13825326223989653,
+      "mae_log": 0.049927255392452546,
+      "mean_quantile_loss": 0.016583398653801415,
+      "mean_quantile_loss_name": "pinball_on_cqr_shifted_endpoints",
+      "n_scored": 115,
+      "per_study": [
+        {
+          "STUDYID": "SYNA-010",
+          "coverage80": 0.9302325581395349,
+          "interval_width80": 0.13865653463703892,
+          "mae_log": 0.03704286676015763,
+          "mean_quantile_loss": 0.012626129864736027,
+          "n_obs": 43,
+          "rmse_log": 0.04688549067203112
+        },
+        {
+          "STUDYID": "SYNA-011",
+          "coverage80": 0.625,
+          "interval_width80": 0.13784998984275412,
+          "mae_log": 0.06281164402474747,
+          "mean_quantile_loss": 0.020540667442866804,
+          "n_obs": 72,
+          "rmse_log": 0.07270033160413152
+        }
+      ],
+      "q0_5_unchanged": true,
+      "status": "ok"
+    },
+    "locked_scores_not_overwritten": true,
+    "margin": 0.012656276413822276,
+    "raw": {
+      "coverage80": 0.6453488372093024,
+      "crossing": 0.0,
+      "interval_score80": 0.20607438057659344,
+      "interval_width80": 0.11294070941225197,
+      "mae_log": 0.049927255392452546,
+      "mean_quantile_loss": 0.016764279565083275,
+      "n_scored": 115,
+      "per_study": [
+        {
+          "STUDYID": "SYNA-010",
+          "coverage80": 0.7906976744186046,
+          "interval_width80": 0.11334398180939437,
+          "mae_log": 0.03704286676015763,
+          "mean_quantile_loss": 0.012416820886865333,
+          "n_obs": 43,
+          "rmse_log": 0.04688549067203112
+        },
+        {
+          "STUDYID": "SYNA-011",
+          "coverage80": 0.5,
+          "interval_width80": 0.11253743701510957,
+          "mae_log": 0.06281164402474747,
+          "mean_quantile_loss": 0.021111738243301217,
+          "n_obs": 72,
+          "rmse_log": 0.07270033160413152
+        }
+      ],
+      "status": "ok"
+    },
+    "seed": 82001,
+    "source_predictions": "runs/tft_stability/predictions/official_test_to_82001.csv"
+  },
+  {
+    "bank": "official_test",
+    "cqr": {
+      "coverage80": 0.6823320413436693,
+      "crossing": 0.0,
+      "interval_score80": 0.270189925973194,
+      "interval_width80": 0.1586443185176552,
+      "mae_log": 0.06282318970083106,
+      "mean_quantile_loss": 0.021900832405129567,
+      "mean_quantile_loss_name": "pinball_on_cqr_shifted_endpoints",
+      "n_scored": 115,
+      "per_study": [
+        {
+          "STUDYID": "SYNA-010",
+          "coverage80": 0.7674418604651163,
+          "interval_width80": 0.15702006707375282,
+          "mae_log": 0.062340731479566557,
+          "mean_quantile_loss": 0.021340777034047635,
+          "n_obs": 43,
+          "rmse_log": 0.07791494674061594
+        },
+        {
+          "STUDYID": "SYNA-011",
+          "coverage80": 0.5972222222222222,
+          "interval_width80": 0.16026856996155756,
+          "mae_log": 0.06330564792209557,
+          "mean_quantile_loss": 0.0224608877762115,
+          "n_obs": 72,
+          "rmse_log": 0.07555005655596145
+        }
+      ],
+      "q0_5_unchanged": true,
+      "status": "ok"
+    },
+    "locked_scores_not_overwritten": true,
+    "margin": 1.823486985585987e-05,
+    "raw": {
+      "coverage80": 0.6823320413436693,
+      "crossing": 0.0,
+      "interval_score80": 0.2702113825723171,
+      "interval_width80": 0.15860784877794348,
+      "mae_log": 0.06282318970083106,
+      "mean_quantile_loss": 0.021901261537112027,
+      "n_scored": 115,
+      "per_study": [
+        {
+          "STUDYID": "SYNA-010",
+          "coverage80": 0.7674418604651163,
+          "interval_width80": 0.1569835973340411,
+          "mae_log": 0.062340731479566557,
+          "mean_quantile_loss": 0.02134089577273507,
+          "n_obs": 43,
+          "rmse_log": 0.07791494674061594
+        },
+        {
+          "STUDYID": "SYNA-011",
+          "coverage80": 0.5972222222222222,
+          "interval_width80": 0.16023210022184584,
+          "mae_log": 0.06330564792209557,
+          "mean_quantile_loss": 0.022461627301488988,
+          "n_obs": 72,
+          "rmse_log": 0.07555005655596145
+        }
+      ],
+      "status": "ok"
+    },
+    "seed": 82021,
+    "source_predictions": "runs/tft_stability/predictions/official_test_to_82021.csv"
+  },
+  {
+    "bank": "official_test",
+    "cqr": {
+      "coverage80": 0.8260658914728682,
+      "crossing": 0.0,
+      "interval_score80": 0.17693061823548886,
+      "interval_width80": 0.1318693936461141,
+      "mae_log": 0.03878519682870181,
+      "mean_quantile_loss": 0.013615500569174942,
+      "mean_quantile_loss_name": "pinball_on_cqr_shifted_endpoints",
+      "n_scored": 115,
+      "per_study": [
+        {
+          "STUDYID": "SYNA-010",
+          "coverage80": 0.8604651162790697,
+          "interval_width80": 0.1331090524343072,
+          "mae_log": 0.0406901403205123,
+          "mean_quantile_loss": 0.013737242730111307,
+          "n_obs": 43,
+          "rmse_log": 0.054351672615919874
+        },
+        {
+          "STUDYID": "SYNA-011",
+          "coverage80": 0.7916666666666666,
+          "interval_width80": 0.130629734857921,
+          "mae_log": 0.03688025333689133,
+          "mean_quantile_loss": 0.013493758408238575,
+          "n_obs": 72,
+          "rmse_log": 0.046602982497061164
+        }
+      ],
+      "q0_5_unchanged": true,
+      "status": "ok"
+    },
+    "locked_scores_not_overwritten": true,
+    "margin": 0.010303654603185386,
+    "raw": {
+      "coverage80": 0.7448320413436693,
+      "crossing": 0.0,
+      "interval_score80": 0.1791649761122508,
+      "interval_width80": 0.11126208443974334,
+      "mae_log": 0.03878519682870181,
+      "mean_quantile_loss": 0.01366018772671018,
+      "n_scored": 115,
+      "per_study": [
+        {
+          "STUDYID": "SYNA-010",
+          "coverage80": 0.7674418604651163,
+          "interval_width80": 0.11250174322793643,
+          "mae_log": 0.0406901403205123,
+          "mean_quantile_loss": 0.013745132952125656,
+          "n_obs": 43,
+          "rmse_log": 0.054351672615919874
+        },
+        {
+          "STUDYID": "SYNA-011",
+          "coverage80": 0.7222222222222222,
+          "interval_width80": 0.11002242565155024,
+          "mae_log": 0.03688025333689133,
+          "mean_quantile_loss": 0.013575242501294705,
+          "n_obs": 72,
+          "rmse_log": 0.046602982497061164
+        }
+      ],
+      "status": "ok"
+    },
+    "seed": 82031,
+    "source_predictions": "runs/tft_stability/predictions/official_test_to_82031.csv"
+  }
+]

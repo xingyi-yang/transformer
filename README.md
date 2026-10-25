@@ -99,6 +99,12 @@ calibration split are predeclared. CQR margins in that run are fit on
 calibration studies, not validation or test. The earlier stability run
 fit CQR on official validation. Raw and CQR metrics are stored separately.
 
+A follow-up read-only method audit (generator observability, spline /
+transformer / CatBoost information sets, Chronos visit-rank vs elapsed
+day, CQR order statistic, one TFT batch) writes only
+`runs/forecast_method_audit/` and does not retrain or overwrite locked
+dirs. Target-only remains the development reference.
+
 Configs: `configs/smoke.yaml`, `configs/bayesian_smoke.yaml` (executed); `configs/research.yaml` and
 `configs/bayesian_research.yaml` (larger; **not executed**); `configs/real_local.example.yaml` and
 `configs/real_snowflake.example.yaml` (templates; Snowflake is `authorized: false`, and credentials are only `env:` references);
