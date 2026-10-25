@@ -1,0 +1,259 @@
+{
+ "name": "tft",
+ "task": "early_history",
+ "spec": {
+  "species": "RAT",
+  "strains": [
+   "BEAGLE",
+   "SPRAGUE-DAWLEY",
+   "WISTAR HAN"
+  ],
+  "routes": [
+   "ORAL GAVAGE"
+  ],
+  "sexes": [
+   "F",
+   "M"
+  ],
+  "zb_mean": {
+   "F": 5.248262549231282,
+   "M": 5.5348352549960085
+  },
+  "max_dose": 1000.0,
+  "max_day": 28.0,
+  "intervals": [
+   1.0,
+   7.0
+  ],
+  "compound_ids": [
+   "CMP01",
+   "CMP03",
+   "CMP04",
+   "CMP05",
+   "CMP06"
+  ],
+  "descriptor_ranges": {
+   "D1": [
+    -3.1696,
+    1.4046
+   ],
+   "D2": [
+    -1.3223,
+    1.3648
+   ],
+   "D3": [
+    -0.3884,
+    1.2754
+   ]
+  },
+  "t_ref": 28.0,
+  "version": "features-v1",
+  "animal_cols": [
+   "SEX_M",
+   "ZB_C",
+   "IS_CONTROL",
+   "LD",
+   "INV_INTERVAL",
+   "START",
+   "END",
+   "D1",
+   "D2",
+   "D3",
+   "STRAIN_SPRAGUE-DAWLEY",
+   "STRAIN_WISTAR HAN",
+   "SPECIES_RAT"
+  ],
+  "time_cols": [
+   "TAU",
+   "EXPO",
+   "OFF",
+   "LCUM"
+  ],
+  "sharing": "pooled",
+  "species_levels": [
+   "DOG",
+   "RAT"
+  ],
+  "zb_mean_by_species": {
+   "DOG": {
+    "F": 9.021146057140344,
+    "M": 9.180585137183021
+   },
+   "RAT": {
+    "F": 5.248262549231282,
+    "M": 5.5348352549960085
+   }
+  },
+  "declared_species": [
+   "RAT",
+   "DOG"
+  ],
+  "fixed_schema": false
+ },
+ "quantiles": [
+  0.1,
+  0.25,
+  0.5,
+  0.75,
+  0.9
+ ],
+ "encoder_window_day": 14.0,
+ "max_encoder_length": 8,
+ "max_prediction_length": 6,
+ "min_encoder_length": 1,
+ "history": {
+  "name": "tft",
+  "task": "early_history",
+  "library": "pytorch_forecasting.TemporalFusionTransformer",
+  "official_class": "pytorch_forecasting.TemporalFusionTransformer",
+  "training_scope": "pooled",
+  "not_the_required_transformer": true,
+  "n_train_series": 310,
+  "n_val_series": 54,
+  "n_train_obs": 1548,
+  "n_train_windows": 2166,
+  "n_val_windows": 54,
+  "n_optimizer_updates": 1072,
+  "epochs_run": 17,
+  "batch_size": 32,
+  "max_encoder_length": 8,
+  "max_prediction_length": 6,
+  "min_encoder_length": 1,
+  "encoder_window_day": 14.0,
+  "quantiles": [
+   0.1,
+   0.25,
+   0.5,
+   0.75,
+   0.9
+  ],
+  "allow_missing_timesteps": true,
+  "observed_rows_only": true,
+  "filled_target_with_zero": false,
+  "validation_windows": "early_history_encoder_day",
+  "training_windows": "sliding_observed_visits",
+  "window_balance": "study",
+  "row_weight": 1.0,
+  "double_balancing": false,
+  "max_epochs": 16,
+  "curves": [
+   {
+    "epoch": 0,
+    "sanity_check_loss": 1.3022733926773071
+   },
+   {
+    "epoch": 0,
+    "train_loss": 0.13838446140289307,
+    "train_loss_step": 0.13838446140289307,
+    "val_loss": 0.13665181398391724
+   },
+   {
+    "epoch": 1,
+    "train_loss": 0.06804338097572327,
+    "train_loss_step": 0.06804338097572327,
+    "val_loss": 0.05582202970981598,
+    "train_loss_epoch": 0.5348514318466187
+   },
+   {
+    "epoch": 2,
+    "train_loss": 0.05994589999318123,
+    "train_loss_step": 0.05994589999318123,
+    "val_loss": 0.04267756640911102,
+    "train_loss_epoch": 0.10822315514087677
+   },
+   {
+    "epoch": 3,
+    "train_loss": 0.050645146518945694,
+    "train_loss_step": 0.050645146518945694,
+    "val_loss": 0.039632052183151245,
+    "train_loss_epoch": 0.06405842304229736
+   },
+   {
+    "epoch": 4,
+    "train_loss": 0.19293279945850372,
+    "train_loss_step": 0.19293279945850372,
+    "val_loss": 0.036926619708538055,
+    "train_loss_epoch": 0.05507899448275566
+   },
+   {
+    "epoch": 5,
+    "train_loss": 0.03886790573596954,
+    "train_loss_step": 0.03886790573596954,
+    "val_loss": 0.0314677394926548,
+    "train_loss_epoch": 0.055940017104148865
+   },
+   {
+    "epoch": 6,
+    "train_loss": 0.04440204054117203,
+    "train_loss_step": 0.04440204054117203,
+    "val_loss": 0.052675724029541016,
+    "train_loss_epoch": 0.052869413048028946
+   },
+   {
+    "epoch": 7,
+    "train_loss": 0.0430576354265213,
+    "train_loss_step": 0.0430576354265213,
+    "val_loss": 0.025434961542487144,
+    "train_loss_epoch": 0.050515033304691315
+   },
+   {
+    "epoch": 8,
+    "train_loss": 0.04473816603422165,
+    "train_loss_step": 0.04473816603422165,
+    "val_loss": 0.03330627456307411,
+    "train_loss_epoch": 0.04810189828276634
+   },
+   {
+    "epoch": 9,
+    "train_loss": 0.039268504828214645,
+    "train_loss_step": 0.039268504828214645,
+    "val_loss": 0.025794032961130142,
+    "train_loss_epoch": 0.04006288945674896
+   },
+   {
+    "epoch": 10,
+    "train_loss": 0.04098803177475929,
+    "train_loss_step": 0.04098803177475929,
+    "val_loss": 0.02360898070037365,
+    "train_loss_epoch": 0.03829989209771156
+   },
+   {
+    "epoch": 11,
+    "train_loss": 0.035051096230745316,
+    "train_loss_step": 0.035051096230745316,
+    "val_loss": 0.029319170862436295,
+    "train_loss_epoch": 0.03485932946205139
+   },
+   {
+    "epoch": 12,
+    "train_loss": 0.031316015869379044,
+    "train_loss_step": 0.031316015869379044,
+    "val_loss": 0.02901671640574932,
+    "train_loss_epoch": 0.033503565937280655
+   },
+   {
+    "epoch": 13,
+    "train_loss": 0.03181562200188637,
+    "train_loss_step": 0.03181562200188637,
+    "val_loss": 0.028491459786891937,
+    "train_loss_epoch": 0.032558098435401917
+   },
+   {
+    "epoch": 14,
+    "train_loss": 0.034431133419275284,
+    "train_loss_step": 0.034431133419275284,
+    "val_loss": 0.027599282562732697,
+    "train_loss_epoch": 0.03282415121793747
+   },
+   {
+    "epoch": 15,
+    "train_loss": 0.030339429154992104,
+    "train_loss_step": 0.030339429154992104,
+    "val_loss": 0.025864092633128166,
+    "train_loss_epoch": 0.03161422163248062
+   }
+  ],
+  "note": "early-history only; baseline-only pre-study and design simulation are not supported; VAR is a quantile-spread approximation"
+ },
+ "not_the_required_transformer": true
+}

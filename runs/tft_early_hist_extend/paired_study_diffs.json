@@ -1,0 +1,321 @@
+{
+  "catboost_quantile_minus_reference_tft_target_only": {
+    "a": "reference_tft_target_only",
+    "b": "catboost_quantile",
+    "mean_delta": -0.010220250339262549,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "catboost_quantile": 0.0440044816399471,
+        "delta": 0.0016220341005174985,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "reference_tft_target_only": 0.0423824475394296
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "catboost_quantile": 0.0333488175811514,
+        "delta": -0.022062534779042596,
+        "metric": "mae_log",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "reference_tft_target_only": 0.055411352360194
+      }
+    ],
+    "sd_delta": 0.016747519264216814
+  },
+  "extra_split_catboost_minus_extra_split_tft_target_only": {
+    "a": "extra_split_tft_target_only",
+    "b": "extra_split_catboost",
+    "mean_delta": -0.013347339572099753,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-007",
+        "delta": -0.004558875674111201,
+        "extra_split_catboost": 0.0323393395572332,
+        "extra_split_tft_target_only": 0.0368982152313444,
+        "metric": "mae_log",
+        "n_obs_a": 44,
+        "n_obs_b": 44
+      },
+      {
+        "STUDYID": "SYNA-010",
+        "delta": -0.022135803470088304,
+        "extra_split_catboost": 0.0385709816411918,
+        "extra_split_tft_target_only": 0.0607067851112801,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43
+      }
+    ],
+    "sd_delta": 0.012428764836961726
+  },
+  "extra_split_spline_gamm_minus_extra_split_tft_target_only": {
+    "a": "extra_split_tft_target_only",
+    "b": "extra_split_spline_gamm",
+    "mean_delta": -0.019630213224580903,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-007",
+        "delta": -0.0085877558220371,
+        "extra_split_spline_gamm": 0.0283104594093073,
+        "extra_split_tft_target_only": 0.0368982152313444,
+        "metric": "mae_log",
+        "n_obs_a": 44,
+        "n_obs_b": 44
+      },
+      {
+        "STUDYID": "SYNA-010",
+        "delta": -0.030672670627124702,
+        "extra_split_spline_gamm": 0.0300341144841554,
+        "extra_split_tft_target_only": 0.0607067851112801,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43
+      }
+    ],
+    "sd_delta": 0.015616393020604621
+  },
+  "extra_split_tft_target_only_minus_extra_split_tft_pooled": {
+    "a": "extra_split_tft_pooled",
+    "b": "extra_split_tft_target_only",
+    "mean_delta": -0.5013002817695662,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-007",
+        "delta": -0.6130425402550331,
+        "extra_split_tft_pooled": 0.6499407554863775,
+        "extra_split_tft_target_only": 0.0368982152313444,
+        "metric": "mae_log",
+        "n_obs_a": 44,
+        "n_obs_b": 44
+      },
+      {
+        "STUDYID": "SYNA-010",
+        "delta": -0.3895580232840992,
+        "extra_split_tft_pooled": 0.4502648083953793,
+        "extra_split_tft_target_only": 0.0607067851112801,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43
+      }
+    ],
+    "sd_delta": 0.15802741744034743
+  },
+  "reference_last_value_minus_reference_tft_target_only": {
+    "a": "reference_tft_target_only",
+    "b": "reference_last_value",
+    "mean_delta": 0.06514891651866235,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "delta": 0.052956195405383,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "reference_last_value": 0.0953386429448126,
+        "reference_tft_target_only": 0.0423824475394296
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "delta": 0.0773416376319417,
+        "metric": "mae_log",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "reference_last_value": 0.1327529899921357,
+        "reference_tft_target_only": 0.055411352360194
+      }
+    ],
+    "sd_delta": 0.017243111560632435
+  },
+  "reference_tft_target_only_minus_reference_tft_pooled": {
+    "a": "reference_tft_pooled",
+    "b": "reference_tft_target_only",
+    "mean_delta": -0.009386325018555398,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "delta": -0.011588571559183199,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "reference_tft_pooled": 0.0539710190986128,
+        "reference_tft_target_only": 0.0423824475394296
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "delta": -0.007184078477927597,
+        "metric": "mae_log",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "reference_tft_pooled": 0.0625954308381216,
+        "reference_tft_target_only": 0.055411352360194
+      }
+    ],
+    "sd_delta": 0.0031144469254450672
+  },
+  "reference_transformer_target_only_minus_catboost_quantile": {
+    "a": "catboost_quantile",
+    "b": "reference_transformer_target_only",
+    "mean_delta": 0.005104311045933448,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "catboost_quantile": 0.0440044816399471,
+        "delta": -0.0033348791838634026,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "reference_transformer_target_only": 0.0406696024560837
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "catboost_quantile": 0.0333488175811514,
+        "delta": 0.0135435012757303,
+        "metric": "mae_log",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "reference_transformer_target_only": 0.0468923188568817
+      }
+    ],
+    "sd_delta": 0.011934817278425224
+  },
+  "reference_transformer_target_only_minus_reference_tft_target_only": {
+    "a": "reference_tft_target_only",
+    "b": "reference_transformer_target_only",
+    "mean_delta": -0.0051159392933291005,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "delta": -0.0017128450833459041,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "reference_tft_target_only": 0.0423824475394296,
+        "reference_transformer_target_only": 0.0406696024560837
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "delta": -0.008519033503312297,
+        "metric": "mae_log",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "reference_tft_target_only": 0.055411352360194,
+        "reference_transformer_target_only": 0.0468923188568817
+      }
+    ],
+    "sd_delta": 0.00481270198579159
+  },
+  "spline_gamm_minus_catboost_quantile": {
+    "a": "catboost_quantile",
+    "b": "spline_gamm",
+    "mean_delta": 0.006310255247773851,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "catboost_quantile": 0.0440044816399471,
+        "delta": 0.005507210472103799,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "spline_gamm": 0.0495116921120509
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "catboost_quantile": 0.0333488175811514,
+        "delta": 0.0071133000234439026,
+        "metric": "mae_log",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "spline_gamm": 0.0404621176045953
+      }
+    ],
+    "sd_delta": 0.0011356768129454468
+  },
+  "spline_gamm_minus_reference_tft_target_only": {
+    "a": "reference_tft_target_only",
+    "b": "spline_gamm",
+    "mean_delta": -0.003909995091488698,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "delta": 0.0071292445726212975,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "reference_tft_target_only": 0.0423824475394296,
+        "spline_gamm": 0.0495116921120509
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "delta": -0.014949234755598693,
+        "metric": "mae_log",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "reference_tft_target_only": 0.055411352360194,
+        "spline_gamm": 0.0404621176045953
+      }
+    ],
+    "sd_delta": 0.015611842451271367
+  },
+  "tft_target_only_balanced_minus_tft_pooled_balanced": {
+    "a": "tft_pooled_balanced",
+    "b": "tft_target_only_balanced",
+    "mean_delta": -0.015602453156582947,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "delta": -0.021249099631378096,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "tft_pooled_balanced": 0.0700128553484275,
+        "tft_target_only_balanced": 0.0487637557170494
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "delta": -0.009955806681787797,
+        "metric": "mae_log",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "tft_pooled_balanced": 0.0547970884186736,
+        "tft_target_only_balanced": 0.0448412817368858
+      }
+    ],
+    "sd_delta": 0.007985564026581527
+  }
+}

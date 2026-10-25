@@ -1,0 +1,125 @@
+{
+  "note": "Rearrangement is postprocessing. It is not improved training.",
+  "raw": {
+    "any_crossing": 0.33043478260869563,
+    "by_lead_days": [
+      {
+        "any_crossing": 0.2857142857142857,
+        "endpoint_reversed": 0.0,
+        "inner_adjacent": 0.2857142857142857,
+        "lead_days": 7.0,
+        "n_obs": 56
+      },
+      {
+        "any_crossing": 0.3684210526315789,
+        "endpoint_reversed": 0.0,
+        "inner_adjacent": 0.3684210526315789,
+        "lead_days": 14.0,
+        "n_obs": 57
+      },
+      {
+        "any_crossing": 0.5,
+        "endpoint_reversed": 0.0,
+        "inner_adjacent": 0.5,
+        "lead_days": 21.0,
+        "n_obs": 2
+      }
+    ],
+    "by_species": [
+      {
+        "SPECIES": "RAT",
+        "any_crossing": 0.33043478260869563,
+        "endpoint_reversed": 0.0,
+        "inner_adjacent": 0.33043478260869563,
+        "n_obs": 115
+      }
+    ],
+    "endpoint_pair": "q0.1>q0.9",
+    "endpoint_reversed": 0.0,
+    "inner_adjacent_crossing": 0.33043478260869563,
+    "n_obs": 115,
+    "note": "Inner = adjacent quantile inversions (e.g. q0.25>q0.5). Endpoint = q_min > q_max (reversed 80% interval if those are 0.1/0.9). A row may contribute to both.",
+    "pair_rates": {
+      "q0.1>q0.25": 0.33043478260869563,
+      "q0.1>q0.5": 0.0,
+      "q0.1>q0.75": 0.0,
+      "q0.1>q0.9": 0.0,
+      "q0.25>q0.5": 0.0,
+      "q0.25>q0.75": 0.0,
+      "q0.25>q0.9": 0.0,
+      "q0.5>q0.75": 0.0,
+      "q0.5>q0.9": 0.0,
+      "q0.75>q0.9": 0.0
+    },
+    "quantiles": [
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      0.9
+    ],
+    "rearrangement": "not_applied_in_this_block",
+    "status": "ok"
+  },
+  "rearranged": {
+    "any_crossing": 0.0,
+    "by_lead_days": [
+      {
+        "any_crossing": 0.0,
+        "endpoint_reversed": 0.0,
+        "inner_adjacent": 0.0,
+        "lead_days": 7.0,
+        "n_obs": 56
+      },
+      {
+        "any_crossing": 0.0,
+        "endpoint_reversed": 0.0,
+        "inner_adjacent": 0.0,
+        "lead_days": 14.0,
+        "n_obs": 57
+      },
+      {
+        "any_crossing": 0.0,
+        "endpoint_reversed": 0.0,
+        "inner_adjacent": 0.0,
+        "lead_days": 21.0,
+        "n_obs": 2
+      }
+    ],
+    "by_species": [
+      {
+        "SPECIES": "RAT",
+        "any_crossing": 0.0,
+        "endpoint_reversed": 0.0,
+        "inner_adjacent": 0.0,
+        "n_obs": 115
+      }
+    ],
+    "endpoint_pair": "q0.1>q0.9",
+    "endpoint_reversed": 0.0,
+    "inner_adjacent_crossing": 0.0,
+    "n_obs": 115,
+    "note": "Inner = adjacent quantile inversions (e.g. q0.25>q0.5). Endpoint = q_min > q_max (reversed 80% interval if those are 0.1/0.9). A row may contribute to both.",
+    "pair_rates": {
+      "q0.1>q0.25": 0.0,
+      "q0.1>q0.5": 0.0,
+      "q0.1>q0.75": 0.0,
+      "q0.1>q0.9": 0.0,
+      "q0.25>q0.5": 0.0,
+      "q0.25>q0.75": 0.0,
+      "q0.25>q0.9": 0.0,
+      "q0.5>q0.75": 0.0,
+      "q0.5>q0.9": 0.0,
+      "q0.75>q0.9": 0.0
+    },
+    "quantiles": [
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      0.9
+    ],
+    "rearrangement": "not_applied_in_this_block",
+    "status": "ok"
+  }
+}

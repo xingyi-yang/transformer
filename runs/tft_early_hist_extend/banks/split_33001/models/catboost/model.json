@@ -1,0 +1,207 @@
+{
+ "name": "catboost_quantile",
+ "spec": {
+  "species": "RAT",
+  "strains": [
+   "SPRAGUE-DAWLEY",
+   "WISTAR HAN"
+  ],
+  "routes": [
+   "ORAL GAVAGE"
+  ],
+  "sexes": [
+   "F",
+   "M"
+  ],
+  "zb_mean": {
+   "F": 5.259476855198676,
+   "M": 5.5495801108720295
+  },
+  "max_dose": 300.0,
+  "max_day": 28.0,
+  "intervals": [
+   1.0,
+   7.0
+  ],
+  "compound_ids": [
+   "CMP01",
+   "CMP03",
+   "CMP04",
+   "CMP05",
+   "CMP06"
+  ],
+  "descriptor_ranges": {
+   "D1": [
+    -3.1696,
+    1.4046
+   ],
+   "D2": [
+    -1.3223,
+    1.3648
+   ],
+   "D3": [
+    -0.3884,
+    1.2754
+   ]
+  },
+  "t_ref": 28.0,
+  "version": "features-v1",
+  "animal_cols": [
+   "SEX_M",
+   "ZB_C",
+   "IS_CONTROL",
+   "LD",
+   "INV_INTERVAL",
+   "START",
+   "END",
+   "D1",
+   "D2",
+   "D3",
+   "STRAIN_WISTAR HAN"
+  ],
+  "time_cols": [
+   "TAU",
+   "EXPO",
+   "OFF",
+   "LCUM"
+  ],
+  "sharing": "context_specific",
+  "species_levels": [
+   "RAT"
+  ],
+  "zb_mean_by_species": {},
+  "declared_species": [],
+  "fixed_schema": false
+ },
+ "quantiles": [
+  0.1,
+  0.5,
+  0.9
+ ],
+ "cutoff": 14.0,
+ "max_encoder_length": 8,
+ "max_prediction_length": 6,
+ "feature_names": [
+  "SEX",
+  "STRAIN",
+  "SPECIES",
+  "ROUTE",
+  "COMPOUND_ID",
+  "CTRL",
+  "ZB_C",
+  "LD",
+  "INV_INTERVAL",
+  "START",
+  "END",
+  "D1",
+  "D2",
+  "D3",
+  "latest_logw",
+  "latest_weight_g",
+  "logw_std",
+  "n_encoder",
+  "history_span",
+  "recent_trend",
+  "trend_missing",
+  "var_missing",
+  "origin_day",
+  "last_obs_day",
+  "target_day",
+  "elapsed_from_origin",
+  "elapsed_from_last_obs"
+ ],
+ "cat_cols": [
+  "SEX",
+  "STRAIN",
+  "SPECIES",
+  "ROUTE",
+  "COMPOUND_ID",
+  "CTRL"
+ ],
+ "history": {
+  "name": "catboost_quantile",
+  "library": "catboost.CatBoostRegressor",
+  "quantiles": [
+   0.1,
+   0.5,
+   0.9
+  ],
+  "loss": "separate Quantile heads (not MultiQuantile; one model per level)",
+  "train_rows": {
+   "origins": "cutoff",
+   "cutoff": 14.0,
+   "n_rows": 675,
+   "n_animals": 272,
+   "n_studies": 8,
+   "fabricated_days": false,
+   "fabricated_slope": false,
+   "n_trend_missing": 10,
+   "note": "Forecast origin is the configured cutoff. Encoder and targets are that animal's observed DAY values. Trend is missing unless two encoder visits have a positive DAY span."
+  },
+  "val_rows": {
+   "origins": "cutoff",
+   "cutoff": 14.0,
+   "n_rows": 178,
+   "n_animals": 69,
+   "n_studies": 2,
+   "fabricated_days": false,
+   "fabricated_slope": false,
+   "n_trend_missing": 8,
+   "note": "Forecast origin is the configured cutoff. Encoder and targets are that animal's observed DAY values. Trend is missing unless two encoder visits have a positive DAY span."
+  },
+  "curves": {
+   "0.1": {
+    "best_iteration": 127,
+    "tree_count": 128
+   },
+   "0.5": {
+    "best_iteration": 199,
+    "tree_count": 200
+   },
+   "0.9": {
+    "best_iteration": 197,
+    "tree_count": 198
+   }
+  },
+  "features": [
+   "SEX",
+   "STRAIN",
+   "SPECIES",
+   "ROUTE",
+   "COMPOUND_ID",
+   "CTRL",
+   "ZB_C",
+   "LD",
+   "INV_INTERVAL",
+   "START",
+   "END",
+   "D1",
+   "D2",
+   "D3",
+   "latest_logw",
+   "latest_weight_g",
+   "logw_std",
+   "n_encoder",
+   "history_span",
+   "recent_trend",
+   "trend_missing",
+   "var_missing",
+   "origin_day",
+   "last_obs_day",
+   "target_day",
+   "elapsed_from_origin",
+   "elapsed_from_last_obs"
+  ],
+  "cat_features": [
+   "SEX",
+   "STRAIN",
+   "SPECIES",
+   "ROUTE",
+   "COMPOUND_ID",
+   "CTRL"
+  ],
+  "origins": "cutoff",
+  "not_tft": true,
+  "information": "Uses permitted biology, planned regimen, and encoder summaries. Does not see future target weights as features."
+ }
+}

@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from send_bw.tft_baselines import build_catboost_table, history_summaries
+from send_bw.tft_baselines import build_catboost_table, catboost_quantile_loss, history_summaries
 from send_bw.tft_crossings import crossing_audit, curve_still_improving, rearrange_quantiles
 from send_bw.tft_early_hist_extend import OUTPUT_DEFAULT, _refuse_pilot, extra_study_splits, load_yaml
 from send_bw.tft_examples import (
@@ -30,6 +30,11 @@ def test_config_predeclares_seeds_before_results():
     assert cfg["output_dir"] == OUTPUT_DEFAULT
     assert cfg["pilot_dir"] == "runs/tft_early_hist_bench"
     assert cfg["output_dir"] != cfg["pilot_dir"]
+
+
+def test_catboost_quantile_loss_uses_alpha_in_string():
+    assert catboost_quantile_loss(0.1) == "Quantile:alpha=0.1"
+    assert catboost_quantile_loss(0.9) == "Quantile:alpha=0.9"
 
 
 def test_trend_uses_actual_day_diff_and_does_not_invent_slope():

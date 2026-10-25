@@ -1,0 +1,244 @@
+{
+ "name": "transformer",
+ "spec": {
+  "species": "RAT",
+  "strains": [
+   "SPRAGUE-DAWLEY",
+   "WISTAR HAN"
+  ],
+  "routes": [
+   "ORAL GAVAGE"
+  ],
+  "sexes": [
+   "F",
+   "M"
+  ],
+  "zb_mean": {
+   "F": 5.259476855198676,
+   "M": 5.5495801108720295
+  },
+  "max_dose": 300.0,
+  "max_day": 28.0,
+  "intervals": [
+   1.0,
+   7.0
+  ],
+  "compound_ids": [
+   "CMP01",
+   "CMP03",
+   "CMP04",
+   "CMP05",
+   "CMP06"
+  ],
+  "descriptor_ranges": {
+   "D1": [
+    -3.1696,
+    1.4046
+   ],
+   "D2": [
+    -1.3223,
+    1.3648
+   ],
+   "D3": [
+    -0.3884,
+    1.2754
+   ]
+  },
+  "t_ref": 28.0,
+  "version": "features-v1",
+  "animal_cols": [
+   "SEX_M",
+   "ZB_C",
+   "IS_CONTROL",
+   "LD",
+   "INV_INTERVAL",
+   "START",
+   "END",
+   "D1",
+   "D2",
+   "D3",
+   "STRAIN_WISTAR HAN"
+  ],
+  "time_cols": [
+   "TAU",
+   "EXPO",
+   "OFF",
+   "LCUM"
+  ],
+  "sharing": "context_specific",
+  "species_levels": [
+   "RAT"
+  ],
+  "zb_mean_by_species": {},
+  "declared_species": [],
+  "fixed_schema": false
+ },
+ "cov": {
+  "sd_s0": 0.019797577129289833,
+  "sd_s1": 0.058816895492229224,
+  "sd_a0": 0.016986133667342095,
+  "sd_a1": 0.07033066629850873,
+  "sigma_p": 0.02507107875540357,
+  "ell": 6.461700861187141,
+  "sigma_m": 0.013194545521330597,
+  "fit_info": {
+   "converged": true,
+   "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+   "nll": -2623.8439086675426,
+   "n_obs": 1357,
+   "n_animals": 276,
+   "n_studies": 8,
+   "params_at_bound": []
+  }
+ },
+ "norm": {
+  "ctx": {
+   "bio": [
+    [
+     0.5,
+     0.463768115942029
+    ],
+    [
+     0.5,
+     0.49868552272710875
+    ]
+   ],
+   "baseline": [
+    [
+     9.654113257610057e-18
+    ],
+    [
+     0.08503155361942491
+    ]
+   ],
+   "compound": [
+    [
+     -0.2595869565217392,
+     -0.044574637681159456,
+     0.4256623188405797,
+     0.2826086956521739
+    ],
+    [
+     1.507376054934298,
+     0.8922651463064522,
+     0.6355206196500789,
+     0.45026772124365166
+    ]
+   ],
+   "regimen": [
+    [
+     1.1160157923872411,
+     0.6055900621118012,
+     0.0,
+     0.9642857142857142
+    ],
+    [
+     1.1144991349474778,
+     0.47210076546168417,
+     1.0,
+     1.0
+    ]
+   ]
+  },
+  "q": [
+   [
+    0.36472890786749307,
+    0.2530247153209108,
+    0.0,
+    0.6958040387592456,
+    0.4573001436310819
+   ],
+   [
+    0.365258923197216,
+    0.3482169090243458,
+    1.0,
+    1.063085389098706,
+    0.3944686128229798
+   ]
+  ]
+ },
+ "arch": {
+  "group_dims": {
+   "bio": 2,
+   "baseline": 1,
+   "compound": 4,
+   "regimen": 4
+  },
+  "q_dim": 5,
+  "d_model": 32,
+  "n_heads": 2,
+  "n_layers": 1,
+  "dropout": 0.1,
+  "treat_dev_dim": 0
+ },
+ "y_scale": 0.13460618257522583,
+ "history": {
+  "members": [
+   {
+    "best_val_rmse": 0.05417098104953766,
+    "epochs_run": 8,
+    "curve": [
+     {
+      "epoch": 0,
+      "train_loss": 1.018032968044281,
+      "val_rmse": 0.07871995121240616
+     },
+     {
+      "epoch": 1,
+      "train_loss": 0.3719214153462562,
+      "val_rmse": 0.07887358218431473
+     },
+     {
+      "epoch": 2,
+      "train_loss": 0.24396706577660382,
+      "val_rmse": 0.07164763659238815
+     },
+     {
+      "epoch": 3,
+      "train_loss": 0.2146458932455035,
+      "val_rmse": 0.07113470137119293
+     },
+     {
+      "epoch": 4,
+      "train_loss": 0.1787242355985918,
+      "val_rmse": 0.06479800492525101
+     },
+     {
+      "epoch": 5,
+      "train_loss": 0.17544407181549762,
+      "val_rmse": 0.05417098104953766
+     },
+     {
+      "epoch": 6,
+      "train_loss": 0.1555577179659968,
+      "val_rmse": 0.06724570691585541
+     },
+     {
+      "epoch": 7,
+      "train_loss": 0.14810223855834076,
+      "val_rmse": 0.055517103523015976
+     }
+    ],
+    "seed": 81001,
+    "freeze_groups": [],
+    "member": 0
+   }
+  ],
+  "y_scale": 0.13460618257522583,
+  "arch": {
+   "group_dims": {
+    "bio": 2,
+    "baseline": 1,
+    "compound": 4,
+    "regimen": 4
+   },
+   "q_dim": 5,
+   "d_model": 32,
+   "n_heads": 2,
+   "n_layers": 1,
+   "dropout": 0.1,
+   "treat_dev_dim": 0
+  },
+  "best_val_rmse_member0": 0.05417098104953766
+ }
+}

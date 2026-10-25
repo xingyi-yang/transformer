@@ -1,0 +1,19 @@
+{
+  "declared_before_examining_new_scores": true,
+  "extra_split_mean_seed": 81001,
+  "extra_split_seed": 33001,
+  "extra_split_tft_train_seed": 82001,
+  "extra_train_seeds": [
+    82011
+  ],
+  "official_holdout": {
+    "generate_seed": 71001,
+    "role": "reference; reported errors are not used to tune later models",
+    "test_studies_reference": [
+      "SYNA-010",
+      "SYNA-011"
+    ],
+    "tft_train_seed": 82001
+  },
+  "tuning_on_official_test_errors": false
+}

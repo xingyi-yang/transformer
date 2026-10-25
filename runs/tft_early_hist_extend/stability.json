@@ -1,0 +1,58 @@
+{
+  "by_scope": [
+    {
+      "fits": [
+        {
+          "mae_log": 0.04889689994981185,
+          "name": "reference_tft_target_only"
+        },
+        {
+          "mae_log": 0.04680251872696761,
+          "name": "tft_target_only_balanced"
+        },
+        {
+          "mae_log": 0.045012252266485406,
+          "name": "tft_target_only_seed82011"
+        },
+        {
+          "mae_log": 0.0488025001713123,
+          "name": "extra_split_tft_target_only"
+        }
+      ],
+      "mean_mae": 0.04737854277864429,
+      "n_fits": 4,
+      "scope": "target_only",
+      "sd_mae": 0.0018497024671924045
+    },
+    {
+      "fits": [
+        {
+          "mae_log": 0.058283224968367235,
+          "name": "reference_tft_pooled"
+        },
+        {
+          "mae_log": 0.06240497188355055,
+          "name": "tft_pooled_balanced"
+        },
+        {
+          "mae_log": 0.04779564655499221,
+          "name": "tft_pooled_seed82011"
+        },
+        {
+          "mae_log": 0.5501027819408786,
+          "name": "extra_split_tft_pooled"
+        }
+      ],
+      "mean_mae": 0.17964665633694715,
+      "n_fits": 4,
+      "scope": "pooled",
+      "sd_mae": 0.2470473131642485
+    }
+  ],
+  "extra_split_seed": 33001,
+  "extra_train_seeds": [
+    82011
+  ],
+  "note": "Variability is across predeclared seeds/splits, not across animals within a study. Matching train/eval banks only.",
+  "official_holdout_untuned": true
+}

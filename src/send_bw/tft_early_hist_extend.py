@@ -892,3 +892,100 @@ def _write_report(parent: Path, out: dict[str, Any], results: dict[str, Any]) ->
         "",
     ]
     (parent / "RESULTS.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def refill_catboost(config_path: str | Path) -> dict[str, Any]:
+    """Fit CatBoost into an existing extend directory without refitting TFT."""
+    cfg = load_yaml(config_path)
+    parent = Path(cfg.get("output_dir") or OUTPUT_DEFAULT)
+    if not (parent / "SUMMARY.json").exists():
+        raise ExtendError(f"{parent} has no SUMMARY.json")
+    ev = cfg.get("benchmark") or {}
+    cutoff = float(ev.get("encoder_window_day") or 14)
+    tft_src = (cfg.get("models") or {}).get("optional", {}).get("tft") or {}
+    max_enc = int(tft_src.get("max_encoder_length", 8))
+    max_pred = int(tft_src.get("max_prediction_length", 6))
+    cells = ev.get("source_cells") or {}
+    target = load_cell_prepared(Path(cells["target_only"]))
+    test = target["data"]["test"]
+    pack = construct_forecast_examples(
+        test.obs, test.animals, cutoff=cutoff,
+        max_encoder_length=max_enc, max_prediction_length=max_pred)
+    hist, fut = examples_to_tables(pack)
+    cb_cfg = dict((cfg.get("models") or {}).get("catboost") or {})
+    cb_cfg.setdefault("seed", int(ev.get("extra_split_mean_seed") or 81001))
+    cb_cfg.setdefault("encoder_window_day", cutoff)
+    cb_cfg.setdefault("max_encoder_length", max_enc)
+    cb_cfg.setdefault("max_prediction_length", max_pred)
+    out_blocks: dict[str, Any] = {}
+    t1 = time.time()
+    cb = QuantileCatBoostModel()
+    h = cb.fit(target["data"]["train"], target["data"]["validation"], cb_cfg)
+    cb.save(parent / "models" / "catboost_quantile")
+    write_json(parent / "models" / "catboost_quantile" / "training_history.json", h)
+    pred, fail = quantile_table_from_model(cb, test.animals, pack, hist)
+    _save_pred(parent, "catboost_quantile", pred)
+    block = _score(fut, pred, representation="catboost_quantiles", quantiles=COMMON_Q)
+    block.update({
+        "seconds": time.time() - t1, "uses_early_history": True,
+        "label": "quantile CatBoost; cutoff-origin tabular rows; q0.1/0.5/0.9",
+        "n_failures": len(fail), "refit": True,
+    })
+    out_blocks["catboost_quantile"] = block
+
+    extra_seed = int(ev.get("extra_split_seed") or 33001)
+    dest = parent / "banks" / f"split_{extra_seed}"
+    if dest.is_dir() and (dest / "splits_target.csv").exists():
+        tgt_full = load_full_cell(Path(cells["target_only"]))
+        splits = pd.read_csv(dest / "splits_target.csv", dtype=str)
+        extra = prepare_from_splits(
+            tgt_full["full"], splits, species="RAT", sharing="context_specific")
+        etest = extra["data"]["test"]
+        epack = construct_forecast_examples(
+            etest.obs, etest.animals, cutoff=cutoff,
+            max_encoder_length=max_enc, max_prediction_length=max_pred)
+        ehist, efut = examples_to_tables(epack)
+        t1 = time.time()
+        cb2 = QuantileCatBoostModel()
+        h2 = cb2.fit(extra["data"]["train"], extra["data"]["validation"], cb_cfg)
+        cb2.save(dest / "models" / "catboost")
+        write_json(dest / "models" / "catboost" / "training_history.json", h2)
+        pred2, fail2 = quantile_table_from_model(cb2, etest.animals, epack, ehist)
+        pred2.to_csv(dest / "catboost.csv", index=False)
+        block2 = _score(efut, pred2, representation="catboost_quantiles", quantiles=COMMON_Q)
+        block2.update({
+            "seconds": time.time() - t1, "uses_early_history": True,
+            "label": "extra-split quantile CatBoost", "n_failures": len(fail2),
+        })
+        out_blocks["extra_split_catboost"] = block2
+
+    summary = read_json(parent / "SUMMARY.json")
+    results = summary.get("results") or {}
+    for name, block in out_blocks.items():
+        results[name] = _compact_score(block)
+    summary["results"] = results
+    fails = [f for f in (summary.get("failures") or [])
+             if f.get("model") not in {"catboost_quantile", "extra_split_catboost"}]
+    summary["failures"] = fails
+    write_json(parent / "SUMMARY.json", summary)
+
+    full_results = {}
+    cmp_path = parent / "model_comparison.csv"
+    if cmp_path.exists():
+        cmp = pd.read_csv(cmp_path)
+        cmp = cmp[~cmp["model"].isin(out_blocks)]
+        extra_rows = pd.DataFrame([{"model": n, **_compact_score(b)} for n, b in out_blocks.items()])
+        pd.concat([cmp, extra_rows], ignore_index=True).to_csv(cmp_path, index=False)
+    per_path = parent / "per_study_metrics.csv"
+    if per_path.exists():
+        per = pd.read_csv(per_path)
+        per = per[~per["model"].isin(out_blocks)]
+        rows = [{"model": n, **rec} for n, b in out_blocks.items() for rec in (b.get("per_study") or [])]
+        if rows:
+            pd.concat([per, pd.DataFrame(rows)], ignore_index=True).to_csv(per_path, index=False)
+    # rebuild a results dict for the report from SUMMARY compact + new full blocks
+    for name, block in results.items():
+        full_results[name] = out_blocks.get(name, block)
+    _write_report(parent, summary, full_results)
+    write_json(parent / "catboost_refill.json", {k: _compact_score(v) for k, v in out_blocks.items()})
+    return out_blocks

@@ -35,6 +35,11 @@ NUM_COLS = [
 ]
 
 
+def catboost_quantile_loss(q: float) -> str:
+    """CatBoost 1.2 takes the quantile level in the loss string, not quantile_alpha=."""
+    return f"Quantile:alpha={float(q)}"
+
+
 def catboost_status() -> dict[str, Any]:
     if importlib.util.find_spec("catboost") is None:
         return {"ok": False, "reason": "optional dependency 'catboost' is not installed",
@@ -197,7 +202,6 @@ class QuantileCatBoostModel:
             learning_rate=float(config.get("learning_rate", 0.05)),
             l2_leaf_reg=float(config.get("l2_leaf_reg", 3.0)),
             random_seed=seed,
-            loss_function="Quantile",
             verbose=False,
             allow_writing_files=False,
         )
@@ -205,7 +209,7 @@ class QuantileCatBoostModel:
         self.models = {}
         curves = {}
         for q in self.quantiles:
-            m = CatBoostRegressor(**common, quantile_alpha=float(q))
+            m = CatBoostRegressor(**common, loss_function=catboost_quantile_loss(q))
             train_pool = Pool(tr[x_cols], tr["y_logw"].to_numpy(float), cat_features=cat_idx)
             if len(va):
                 val_pool = Pool(va[x_cols], va["y_logw"].to_numpy(float), cat_features=cat_idx)

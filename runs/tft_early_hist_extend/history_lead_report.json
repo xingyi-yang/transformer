@@ -1,0 +1,29 @@
+{
+  "configured": {
+    "cutoff": 14.0,
+    "max_encoder_length": 8,
+    "max_prediction_length": 6
+  },
+  "exercised": {
+    "encoder_available_max": 2,
+    "encoder_used_max": 2,
+    "encoder_used_median": 2.0,
+    "encoder_used_min": 1,
+    "future_available_max": 2,
+    "future_used_max": 2,
+    "future_used_median": 2.0,
+    "future_used_min": 1,
+    "lead_days_max": 21.0,
+    "lead_days_median": 14.0,
+    "lead_days_min": 7.0,
+    "lead_days_unique": [
+      7.0,
+      14.0,
+      21.0
+    ],
+    "n_animals_truncated_encoder": 0,
+    "n_animals_truncated_future": 0,
+    "n_eligible_animals": 58
+  },
+  "note": "Lead times are target DAY minus last encoder DAY for that animal. Configured caps are not the lengths the data exercised unless they bind."
+}
