@@ -1,0 +1,122 @@
+{
+  "confirm_test:tft_finetune": {
+    "coverage_mean": 0.6288218793828891,
+    "coverage_sd": 0.03823628921327662,
+    "interval_score_mean": 0.3374647333847047,
+    "interval_score_sd": 0.20596437486083843,
+    "mae_mean": 0.06092743414324664,
+    "mae_sd": 0.027282122310528817,
+    "n_seeds": 3,
+    "pinball_mean": 0.02346504147274679,
+    "pinball_sd": 0.012660000136180816,
+    "width_mean": 0.10588886323739792
+  },
+  "confirm_test:tft_pooled": {
+    "coverage_mean": 0.6811126694717157,
+    "coverage_sd": 0.04783853137183245,
+    "interval_score_mean": 0.2853092051311045,
+    "interval_score_sd": 0.13694148537405273,
+    "mae_mean": 0.05687956636512134,
+    "mae_sd": 0.021920899171504953,
+    "n_seeds": 3,
+    "pinball_mean": 0.021082442551922986,
+    "pinball_sd": 0.009607664931982288,
+    "width_mean": 0.12549373187880586
+  },
+  "confirm_test:tft_target_only": {
+    "coverage_mean": 0.8077255726975222,
+    "coverage_sd": 0.015991445198304255,
+    "interval_score_mean": 0.17896152137193766,
+    "interval_score_sd": 0.009825742448193692,
+    "mae_mean": 0.040188932334353104,
+    "mae_sd": 0.003791659993770784,
+    "n_seeds": 3,
+    "pinball_mean": 0.014069932180845077,
+    "pinball_sd": 0.0010993994873663424,
+    "width_mean": 0.1411281600852278
+  },
+  "confirm_test:tft_target_only_cqr": {
+    "coverage_mean": 0.841234221598878,
+    "coverage_sd": 0.022623154563091132,
+    "interval_score_mean": 0.1803166667184665,
+    "interval_score_sd": 0.009783516240797561,
+    "mae_mean": 0.040188932334353104,
+    "mae_sd": 0.003791659993770784,
+    "n_seeds": 3,
+    "pinball_mean": 0.014097035087775656,
+    "pinball_sd": 0.001111466066282609,
+    "width_mean": 0.1509806413733232
+  },
+  "confirm_val:tft_target_only": {
+    "coverage_mean": 0.779513888888889,
+    "coverage_sd": 0.04777658229386939,
+    "interval_score_mean": 0.19901030251559504,
+    "interval_score_sd": 0.021116839739028028,
+    "mae_mean": 0.04537433375483674,
+    "mae_sd": 0.00503005062356258,
+    "n_seeds": 3,
+    "pinball_mean": 0.015800636513335298,
+    "pinball_sd": 0.0016155996546943668,
+    "width_mean": 0.13936681155529287
+  },
+  "confirm_val:tft_target_only_cqr": {
+    "coverage_mean": 0.8211805555555557,
+    "coverage_sd": 0.015035163260146547,
+    "interval_score_mean": 0.19838607573911657,
+    "interval_score_sd": 0.02027919922715759,
+    "mae_mean": 0.04537433375483674,
+    "mae_sd": 0.00503005062356258,
+    "n_seeds": 3,
+    "pinball_mean": 0.01578815197780573,
+    "pinball_sd": 0.0015986709806574155,
+    "width_mean": 0.14921929284338828
+  },
+  "official_test_reference:tft_finetune": {
+    "coverage_mean": 0.7635120585701981,
+    "coverage_sd": 0.05556455305923762,
+    "interval_score_mean": 0.21790896635908938,
+    "interval_score_sd": 0.03622161496069387,
+    "mae_mean": 0.047647480439271576,
+    "mae_sd": 0.001906242861933362,
+    "n_seeds": 3,
+    "pinball_mean": 0.016735927608017075,
+    "pinball_sd": 0.0013024074046573473,
+    "width_mean": 0.13377034692390533
+  },
+  "official_test_reference:tft_pooled": {
+    "coverage_mean": 0.7652347114556416,
+    "coverage_sd": 0.060970699727621806,
+    "interval_score_mean": 0.27697785870220276,
+    "interval_score_sd": 0.07316095150089286,
+    "mae_mean": 0.05460837245135506,
+    "mae_sd": 0.004031972085990047,
+    "n_seeds": 3,
+    "pinball_mean": 0.0195289509253868,
+    "pinball_sd": 0.0033336261991461905,
+    "width_mean": 0.1697431253935118
+  },
+  "official_test_reference:tft_target_only": {
+    "coverage_mean": 0.690837639965547,
+    "coverage_sd": 0.050284051966278505,
+    "interval_score_mean": 0.21848357975372037,
+    "interval_score_sd": 0.04677449305429287,
+    "mae_mean": 0.0505118806406618,
+    "mae_sd": 0.012029655661770508,
+    "n_seeds": 3,
+    "pinball_mean": 0.017441909609635164,
+    "pinball_sd": 0.00416211619793133,
+    "width_mean": 0.12760354754331293
+  },
+  "official_test_reference:tft_target_only_cqr": {
+    "coverage_mean": 0.7712639965546941,
+    "coverage_sd": 0.06515513878227784,
+    "interval_score_mean": 0.21403926727210043,
+    "interval_score_sd": 0.04796794581195114,
+    "mae_mean": 0.05051188064066179,
+    "mae_sd": 0.01202965566177049,
+    "n_seeds": 3,
+    "pinball_mean": 0.01735302336000276,
+    "pinball_sd": 0.004176309640460172,
+    "width_mean": 0.1446072276421129
+  }
+}

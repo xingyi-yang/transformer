@@ -1,0 +1,1702 @@
+{
+  "confirm_34011": {
+    "tft_finetune": {
+      "confirm_test": {
+        "coverage_mean": 0.6288218793828891,
+        "crossing_mean": 0.05937921727395412,
+        "interval_score_mean": 0.3374647333847047,
+        "interval_score_sd": 0.20596437486083843,
+        "mae_mean": 0.06092743414324664,
+        "mae_sd": 0.027282122310528817,
+        "n": 3,
+        "pinball_mean": 0.02346504147274679,
+        "seeds": [
+          82001,
+          82021,
+          82031
+        ],
+        "width_mean": 0.10588886323739792
+      }
+    },
+    "tft_pooled": {
+      "confirm_test": {
+        "coverage_mean": 0.6811126694717157,
+        "crossing_mean": 0.058029689608636977,
+        "interval_score_mean": 0.2853092051311045,
+        "interval_score_sd": 0.13694148537405273,
+        "mae_mean": 0.05687956636512134,
+        "mae_sd": 0.021920899171504953,
+        "n": 3,
+        "pinball_mean": 0.021082442551922986,
+        "seeds": [
+          82001,
+          82021,
+          82031
+        ],
+        "width_mean": 0.12549373187880586
+      }
+    },
+    "tft_target_only": {
+      "confirm_test": {
+        "coverage_mean": 0.8077255726975222,
+        "crossing_mean": 0.0,
+        "interval_score_mean": 0.17896152137193766,
+        "interval_score_sd": 0.009825742448193692,
+        "mae_mean": 0.040188932334353104,
+        "mae_sd": 0.003791659993770784,
+        "n": 3,
+        "pinball_mean": 0.014069932180845077,
+        "seeds": [
+          82001,
+          82021,
+          82031
+        ],
+        "width_mean": 0.1411281600852278
+      },
+      "confirm_val": {
+        "coverage_mean": 0.779513888888889,
+        "crossing_mean": 0.0,
+        "interval_score_mean": 0.19901030251559504,
+        "interval_score_sd": 0.021116839739028028,
+        "mae_mean": 0.04537433375483674,
+        "mae_sd": 0.00503005062356258,
+        "n": 3,
+        "pinball_mean": 0.015800636513335298,
+        "seeds": [
+          82001,
+          82021,
+          82031
+        ],
+        "width_mean": 0.13936681155529287
+      }
+    },
+    "tft_target_only_cqr": {
+      "confirm_test": {
+        "coverage_mean": 0.841234221598878,
+        "crossing_mean": 0.0,
+        "interval_score_mean": 0.1803166667184665,
+        "interval_score_sd": 0.009783516240797561,
+        "mae_mean": 0.040188932334353104,
+        "mae_sd": 0.003791659993770784,
+        "n": 3,
+        "pinball_mean": 0.014097035087775656,
+        "seeds": [
+          82001,
+          82021,
+          82031
+        ],
+        "width_mean": 0.1509806413733232
+      },
+      "confirm_val": {
+        "coverage_mean": 0.8211805555555557,
+        "crossing_mean": null,
+        "interval_score_mean": 0.19838607573911657,
+        "interval_score_sd": 0.02027919922715759,
+        "mae_mean": 0.04537433375483674,
+        "mae_sd": 0.00503005062356258,
+        "n": 3,
+        "pinball_mean": 0.01578815197780573,
+        "seeds": [
+          82001,
+          82021,
+          82031
+        ],
+        "width_mean": 0.14921929284338828
+      }
+    }
+  },
+  "confirm_split": {
+    "donor_ids": [
+      "SYNA-D001",
+      "SYNA-D002",
+      "SYNA-D003"
+    ],
+    "forbidden_test_studies": [
+      "SYNA-007",
+      "SYNA-010",
+      "SYNA-011"
+    ],
+    "note": "Whole-study split of unused RAT studies. Previously reported test studies are train-only here. Official and extra-split 33001 stay references.",
+    "seed": 34011,
+    "test_studies": [
+      "SYNA-003",
+      "SYNA-004"
+    ]
+  },
+  "cqr_decision": {
+    "adopted": true,
+    "applied_to": "target_only",
+    "method": "cqr_additive",
+    "reason": "validation interval score decreased",
+    "test_outcomes_used": false,
+    "val_interval_score_cqr_mean": 0.1958979375323354,
+    "val_interval_score_target_only_mean": 0.19734755957785055
+  },
+  "design_run": false,
+  "extra_split_33001_reference": {
+    "tft_finetune": {
+      "coverage80": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.7701149425287356,
+        "study_balanced": 0.7692917547568711
+      },
+      "crossing_rate": 0.0,
+      "interval_score80": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.16236006315249185,
+        "study_balanced": 0.16264259834452585
+      },
+      "interval_width80": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.10945128846442563,
+        "study_balanced": 0.10945586447483893
+      },
+      "label": null,
+      "mae_gram": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 11.789704050018731,
+        "study_balanced": 11.807322235205783
+      },
+      "mae_log": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.038942796916551246,
+        "study_balanced": 0.03902471131306584
+      },
+      "mean_quantile_loss": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.013233731258427698,
+        "study_balanced": 0.013258925931111894
+      },
+      "mean_quantile_loss_gram": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 4.009702781463109,
+        "study_balanced": 4.015579795785124
+      },
+      "n_failures": null,
+      "n_scored": 87,
+      "read_only": true,
+      "relative_abs_gram": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.03903658079631367,
+        "study_balanced": 0.03912399233651147
+      },
+      "relative_abs_log": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.006866718333431741,
+        "study_balanced": 0.006882032495915683
+      },
+      "representation": "tft_quantiles",
+      "rmse_log": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.04805961026069311,
+        "study_balanced": 0.04755742703529334
+      },
+      "seconds": null,
+      "source": "runs/tft_primary/extra_split_33001/tft_finetune.csv",
+      "status": "ok",
+      "uses_early_history": null
+    },
+    "tft_pooled": {
+      "coverage80": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.8045977011494253,
+        "study_balanced": 0.8033826638477801
+      },
+      "crossing_rate": 0.0,
+      "interval_score80": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.17061858588564793,
+        "study_balanced": 0.17104487880266167
+      },
+      "interval_width80": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.11663036784906497,
+        "study_balanced": 0.11664153002281269
+      },
+      "label": null,
+      "mae_gram": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 11.772834893331565,
+        "study_balanced": 11.804618567639128
+      },
+      "mae_log": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.04006987862164394,
+        "study_balanced": 0.040195597223458876
+      },
+      "mean_quantile_loss": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.013720644655275836,
+        "study_balanced": 0.013760831551316473
+      },
+      "mean_quantile_loss_gram": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 4.056388302542137,
+        "study_balanced": 4.067147789495029
+      },
+      "n_failures": null,
+      "n_scored": 87,
+      "read_only": true,
+      "relative_abs_gram": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.04007373899791629,
+        "study_balanced": 0.040201581415158984
+      },
+      "relative_abs_log": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.007098696490056792,
+        "study_balanced": 0.007121515958021943
+      },
+      "representation": "tft_quantiles",
+      "rmse_log": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.051040735941416296,
+        "study_balanced": 0.049679224103241874
+      },
+      "seconds": null,
+      "source": "runs/tft_primary/extra_split_33001/tft_pooled.csv",
+      "status": "ok",
+      "uses_early_history": null
+    },
+    "tft_target_only": {
+      "coverage80": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.7931034482758621,
+        "study_balanced": 0.7928118393234673
+      },
+      "crossing_rate": 0.0,
+      "interval_score80": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.1597986036138269,
+        "study_balanced": 0.1598515462543721
+      },
+      "interval_width80": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.11172988496977708,
+        "study_balanced": 0.11172993679631335
+      },
+      "label": null,
+      "mae_gram": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 10.53548712823326,
+        "study_balanced": 10.538877419434371
+      },
+      "mae_log": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.035561790545915024,
+        "study_balanced": 0.035587907238524924
+      },
+      "mean_quantile_loss": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.01250734330779199,
+        "study_balanced": 0.012515339711103725
+      },
+      "mean_quantile_loss_gram": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 3.6947826468211358,
+        "study_balanced": 3.696079607005434
+      },
+      "n_failures": null,
+      "n_scored": 87,
+      "read_only": true,
+      "relative_abs_gram": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.035703010546550056,
+        "study_balanced": 0.035733252620237105
+      },
+      "relative_abs_log": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.006293535312834334,
+        "study_balanced": 0.006298721269388695
+      },
+      "representation": "tft_quantiles",
+      "rmse_log": {
+        "n_obs": 87,
+        "n_studies": 2,
+        "pooled": 0.045641589722080045,
+        "study_balanced": 0.0455963932580827
+      },
+      "seconds": null,
+      "source": "runs/tft_primary/extra_split_33001/tft_target_only.csv",
+      "status": "ok",
+      "uses_early_history": null
+    }
+  },
+  "failures": [],
+  "freeze_lock": {
+    "calibration": {
+      "alpha": 0.2,
+      "apply_to": "target_only",
+      "method": "cqr_additive",
+      "note": "Adopt CQR for target-only if it lowers validation interval score.",
+      "selection_metric": "interval_score80"
+    },
+    "config_hash": "8c27107311dbeeb8",
+    "config_path": "configs/tft_stability.yaml",
+    "confirm_forbidden_test_studies": [
+      "SYNA-007",
+      "SYNA-010",
+      "SYNA-011"
+    ],
+    "confirm_split_seed": 34011,
+    "design": false,
+    "generate_seed": 71001,
+    "git_revision": "4139c6b228b79f95b53a564999fee024817e0ac2",
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "official_holdout_test_used_for_search": false,
+    "preserved": [
+      "runs/v3_eval",
+      "runs/v3_pilot_k0k1",
+      "runs/v3_repl",
+      "runs/v3_research",
+      "runs/v3_closeout",
+      "runs/v3_audit",
+      "runs/v3_increment",
+      "runs/v3_phaseb",
+      "runs/v3_limitations",
+      "runs/v3_objective",
+      "runs/v3_official_seq",
+      "runs/v3_seq_diag",
+      "runs/v3_eval_correct",
+      "runs/v3_cov_chronos",
+      "runs/v3_share_repl",
+      "runs/v3_share_abstain",
+      "runs/v3_share_abstain_run",
+      "runs/v3_donor_rank",
+      "runs/tft_early_hist_bench",
+      "runs/tft_early_hist_extend",
+      "runs/tft_primary"
+    ],
+    "real_data": false,
+    "reused_from": "runs/tft_primary",
+    "selection": {
+      "aggregate": "mean_across_seeds",
+      "bank": "official_validation",
+      "candidates": [
+        "tft_target_only",
+        "tft_target_only_cqr",
+        "tft_pooled",
+        "tft_finetune"
+      ],
+      "confirm_bank": "confirm_34011",
+      "metric": "interval_score80"
+    },
+    "stability_seeds": [
+      82001,
+      82021,
+      82031
+    ],
+    "writes_primary": false,
+    "writes_v3_locks": false
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation.",
+    "TFT stability and interval diagnostic.",
+    "Synthetic generator only."
+  ],
+  "official_test_reference": {
+    "tft_finetune": {
+      "official_test_reference": {
+        "coverage_mean": 0.7635120585701981,
+        "crossing_mean": 0.0,
+        "interval_score_mean": 0.21790896635908938,
+        "interval_score_sd": 0.03622161496069387,
+        "mae_mean": 0.047647480439271576,
+        "mae_sd": 0.001906242861933362,
+        "n": 3,
+        "pinball_mean": 0.016735927608017075,
+        "seeds": [
+          82001,
+          82021,
+          82031
+        ],
+        "width_mean": 0.13377034692390533
+      }
+    },
+    "tft_pooled": {
+      "official_test_reference": {
+        "coverage_mean": 0.7652347114556416,
+        "crossing_mean": 0.0,
+        "interval_score_mean": 0.27697785870220276,
+        "interval_score_sd": 0.07316095150089286,
+        "mae_mean": 0.05460837245135506,
+        "mae_sd": 0.004031972085990047,
+        "n": 3,
+        "pinball_mean": 0.0195289509253868,
+        "seeds": [
+          82001,
+          82021,
+          82031
+        ],
+        "width_mean": 0.1697431253935118
+      }
+    },
+    "tft_target_only": {
+      "official_test_reference": {
+        "coverage_mean": 0.690837639965547,
+        "crossing_mean": 0.0,
+        "interval_score_mean": 0.21848357975372037,
+        "interval_score_sd": 0.04677449305429287,
+        "mae_mean": 0.0505118806406618,
+        "mae_sd": 0.012029655661770508,
+        "n": 3,
+        "pinball_mean": 0.017441909609635164,
+        "seeds": [
+          82001,
+          82021,
+          82031
+        ],
+        "width_mean": 0.12760354754331293
+      }
+    },
+    "tft_target_only_cqr": {
+      "official_test_reference": {
+        "coverage_mean": 0.7712639965546941,
+        "crossing_mean": 0.0,
+        "interval_score_mean": 0.21403926727210043,
+        "interval_score_sd": 0.04796794581195114,
+        "mae_mean": 0.05051188064066179,
+        "mae_sd": 0.01202965566177049,
+        "n": 3,
+        "pinball_mean": 0.01735302336000276,
+        "seeds": [
+          82001,
+          82021,
+          82031
+        ],
+        "width_mean": 0.1446072276421129
+      }
+    }
+  },
+  "official_validation": {
+    "tft_finetune": {
+      "official_validation": {
+        "coverage_mean": 0.7650799418604652,
+        "crossing_mean": 0.0,
+        "interval_score_mean": 0.17804402298454083,
+        "interval_score_sd": 0.02582943086703795,
+        "mae_mean": 0.038442643731802846,
+        "mae_sd": 0.0045068693386165065,
+        "n": 3,
+        "pinball_mean": 0.013483368122222438,
+        "seeds": [
+          82001,
+          82021,
+          82031
+        ],
+        "width_mean": 0.11601556987725488
+      }
+    },
+    "tft_pooled": {
+      "official_validation": {
+        "coverage_mean": 0.7690467538759691,
+        "crossing_mean": 0.003115264797507788,
+        "interval_score_mean": 0.24016996506815522,
+        "interval_score_sd": 0.07848735665120284,
+        "mae_mean": 0.047806865175611085,
+        "mae_sd": 0.00999284744209698,
+        "n": 3,
+        "pinball_mean": 0.018034676759550113,
+        "seeds": [
+          82001,
+          82021,
+          82031
+        ],
+        "width_mean": 0.1616461074282957
+      }
+    },
+    "tft_target_only": {
+      "official_validation": {
+        "coverage_mean": 0.763687015503876,
+        "crossing_mean": 0.0,
+        "interval_score_mean": 0.19734755957785055,
+        "interval_score_sd": 0.023812477692381026,
+        "mae_mean": 0.04398056038128815,
+        "mae_sd": 0.0021130644422946983,
+        "n": 3,
+        "pinball_mean": 0.015421586281710266,
+        "seeds": [
+          82001,
+          82021,
+          82031
+        ],
+        "width_mean": 0.12086540955848012
+      }
+    },
+    "tft_target_only_cqr": {
+      "official_validation": {
+        "coverage_mean": 0.8175872093023256,
+        "crossing_mean": 0.0,
+        "interval_score_mean": 0.1958979375323354,
+        "interval_score_sd": 0.02424487286908312,
+        "mae_mean": 0.04398056038128815,
+        "mae_sd": 0.0021130644422946857,
+        "n": 3,
+        "pinball_mean": 0.015392593840799962,
+        "seeds": [
+          82001,
+          82021,
+          82031
+        ],
+        "width_mean": 0.13786908965728006
+      }
+    }
+  },
+  "output_dir": "runs/tft_stability",
+  "paired_differences": {
+    "confirm_test:tft_pooled_vs_tft_finetune:coverage80": {
+      "a": "tft_pooled",
+      "b": "tft_finetune",
+      "bank": "confirm_test",
+      "mean_delta": -0.052290790088826644,
+      "metric": "coverage80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.08031370029472172
+    },
+    "confirm_test:tft_pooled_vs_tft_finetune:interval_score80": {
+      "a": "tft_pooled",
+      "b": "tft_finetune",
+      "bank": "confirm_test",
+      "mean_delta": 0.05215552825360009,
+      "metric": "interval_score80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.07249348925786964
+    },
+    "confirm_test:tft_pooled_vs_tft_finetune:mae_log": {
+      "a": "tft_pooled",
+      "b": "tft_finetune",
+      "bank": "confirm_test",
+      "mean_delta": 0.004047867778125294,
+      "metric": "mae_log",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.006563298077871381
+    },
+    "confirm_test:tft_pooled_vs_tft_finetune:mae_log:studies": {
+      "a": "tft_pooled",
+      "b": "tft_finetune",
+      "mean_delta": 0.005396969549664045,
+      "metric": "mae_log",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 0.01085134199415714
+    },
+    "confirm_test:tft_pooled_vs_tft_finetune:mean_quantile_loss": {
+      "a": "tft_pooled",
+      "b": "tft_finetune",
+      "bank": "confirm_test",
+      "mean_delta": 0.002382598920823801,
+      "metric": "mean_quantile_loss",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.0033818722400570885
+    },
+    "confirm_test:tft_pooled_vs_tft_finetune:mean_quantile_loss:studies": {
+      "a": "tft_pooled",
+      "b": "tft_finetune",
+      "mean_delta": 0.0023823131201079484,
+      "metric": "mean_quantile_loss",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 0.003848104312973901
+    },
+    "confirm_test:tft_target_only_vs_tft_finetune:coverage80": {
+      "a": "tft_target_only",
+      "b": "tft_finetune",
+      "bank": "confirm_test",
+      "mean_delta": -0.17890369331463307,
+      "metric": "coverage80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.026893598611551484
+    },
+    "confirm_test:tft_target_only_vs_tft_finetune:interval_score80": {
+      "a": "tft_target_only",
+      "b": "tft_finetune",
+      "bank": "confirm_test",
+      "mean_delta": 0.158503212012767,
+      "metric": "interval_score80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.19613974051573857
+    },
+    "confirm_test:tft_target_only_vs_tft_finetune:mae_log": {
+      "a": "tft_target_only",
+      "b": "tft_finetune",
+      "bank": "confirm_test",
+      "mean_delta": 0.02073850180889353,
+      "metric": "mae_log",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.024188665439186026
+    },
+    "confirm_test:tft_target_only_vs_tft_finetune:mae_log:studies": {
+      "a": "tft_target_only",
+      "b": "tft_finetune",
+      "mean_delta": 0.008639257180008485,
+      "metric": "mae_log",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 0.011771579894539952
+    },
+    "confirm_test:tft_target_only_vs_tft_finetune:mean_quantile_loss": {
+      "a": "tft_target_only",
+      "b": "tft_finetune",
+      "bank": "confirm_test",
+      "mean_delta": 0.009395109291901712,
+      "metric": "mean_quantile_loss",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.011726602913181422
+    },
+    "confirm_test:tft_target_only_vs_tft_finetune:mean_quantile_loss:studies": {
+      "a": "tft_target_only",
+      "b": "tft_finetune",
+      "mean_delta": 0.003733594134270944,
+      "metric": "mean_quantile_loss",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 0.006172376688468784
+    },
+    "confirm_test:tft_target_only_vs_tft_pooled:coverage80": {
+      "a": "tft_target_only",
+      "b": "tft_pooled",
+      "bank": "confirm_test",
+      "mean_delta": -0.12661290322580643,
+      "metric": "coverage80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.05349352305454312
+    },
+    "confirm_test:tft_target_only_vs_tft_pooled:interval_score80": {
+      "a": "tft_target_only",
+      "b": "tft_pooled",
+      "bank": "confirm_test",
+      "mean_delta": 0.10634768375916688,
+      "metric": "interval_score80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.1271885852282922
+    },
+    "confirm_test:tft_target_only_vs_tft_pooled:mae_log": {
+      "a": "tft_target_only",
+      "b": "tft_pooled",
+      "bank": "confirm_test",
+      "mean_delta": 0.016690634030768235,
+      "metric": "mae_log",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.019262573032251897
+    },
+    "confirm_test:tft_target_only_vs_tft_pooled:mae_log:studies": {
+      "a": "tft_target_only",
+      "b": "tft_pooled",
+      "mean_delta": 0.00324228763034444,
+      "metric": "mae_log",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 0.0009202379003828114
+    },
+    "confirm_test:tft_target_only_vs_tft_pooled:mean_quantile_loss": {
+      "a": "tft_target_only",
+      "b": "tft_pooled",
+      "bank": "confirm_test",
+      "mean_delta": 0.00701251037107791,
+      "metric": "mean_quantile_loss",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.008769135036079206
+    },
+    "confirm_test:tft_target_only_vs_tft_pooled:mean_quantile_loss:studies": {
+      "a": "tft_target_only",
+      "b": "tft_pooled",
+      "mean_delta": 0.0013512810141629956,
+      "metric": "mean_quantile_loss",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 0.0023242723754948826
+    },
+    "confirm_test:tft_target_only_vs_tft_target_only_cqr:coverage80": {
+      "a": "tft_target_only",
+      "b": "tft_target_only_cqr",
+      "bank": "confirm_test",
+      "mean_delta": 0.03350864890135582,
+      "metric": "coverage80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.038613648198875875
+    },
+    "confirm_test:tft_target_only_vs_tft_target_only_cqr:interval_score80": {
+      "a": "tft_target_only",
+      "b": "tft_target_only_cqr",
+      "bank": "confirm_test",
+      "mean_delta": 0.0013551453465288448,
+      "metric": "interval_score80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.0013229440918253875
+    },
+    "confirm_test:tft_target_only_vs_tft_target_only_cqr:mae_log": {
+      "a": "tft_target_only",
+      "b": "tft_target_only_cqr",
+      "bank": "confirm_test",
+      "mean_delta": 0.0,
+      "metric": "mae_log",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.0
+    },
+    "confirm_test:tft_target_only_vs_tft_target_only_cqr:mae_log:studies": {
+      "a": "tft_target_only",
+      "b": "tft_target_only_cqr",
+      "mean_delta": 0.0,
+      "metric": "mae_log",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 0.0
+    },
+    "confirm_test:tft_target_only_vs_tft_target_only_cqr:mean_quantile_loss": {
+      "a": "tft_target_only",
+      "b": "tft_target_only_cqr",
+      "bank": "confirm_test",
+      "mean_delta": 2.7102906930576848e-05,
+      "metric": "mean_quantile_loss",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 2.6458881836506225e-05
+    },
+    "confirm_test:tft_target_only_vs_tft_target_only_cqr:mean_quantile_loss:studies": {
+      "a": "tft_target_only",
+      "b": "tft_target_only_cqr",
+      "mean_delta": 5.6168285261365414e-05,
+      "metric": "mean_quantile_loss",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 2.1385817661569433e-05
+    },
+    "official_test_reference:tft_pooled_vs_tft_finetune:coverage80": {
+      "a": "tft_pooled",
+      "b": "tft_finetune",
+      "bank": "official_test_reference",
+      "mean_delta": -0.0017226528854435246,
+      "metric": "coverage80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.02636158273150822
+    },
+    "official_test_reference:tft_pooled_vs_tft_finetune:interval_score80": {
+      "a": "tft_pooled",
+      "b": "tft_finetune",
+      "bank": "official_test_reference",
+      "mean_delta": -0.05906889234311339,
+      "metric": "interval_score80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.06607373528688902
+    },
+    "official_test_reference:tft_pooled_vs_tft_finetune:mae_log": {
+      "a": "tft_pooled",
+      "b": "tft_finetune",
+      "bank": "official_test_reference",
+      "mean_delta": -0.006960892012083495,
+      "metric": "mae_log",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.0030636538194642802
+    },
+    "official_test_reference:tft_pooled_vs_tft_finetune:mae_log:studies": {
+      "a": "tft_pooled",
+      "b": "tft_finetune",
+      "mean_delta": -0.010092248421529431,
+      "metric": "mae_log",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 0.008257630520206376
+    },
+    "official_test_reference:tft_pooled_vs_tft_finetune:mean_quantile_loss": {
+      "a": "tft_pooled",
+      "b": "tft_finetune",
+      "bank": "official_test_reference",
+      "mean_delta": -0.002793023317369725,
+      "metric": "mean_quantile_loss",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.002607784437089425
+    },
+    "official_test_reference:tft_pooled_vs_tft_finetune:mean_quantile_loss:studies": {
+      "a": "tft_pooled",
+      "b": "tft_finetune",
+      "mean_delta": -0.005388351709683412,
+      "metric": "mean_quantile_loss",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 0.006368522749802464
+    },
+    "official_test_reference:tft_target_only_vs_tft_finetune:coverage80": {
+      "a": "tft_target_only",
+      "b": "tft_finetune",
+      "bank": "official_test_reference",
+      "mean_delta": 0.07267441860465114,
+      "metric": "coverage80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.07802844798912262
+    },
+    "official_test_reference:tft_target_only_vs_tft_finetune:interval_score80": {
+      "a": "tft_target_only",
+      "b": "tft_finetune",
+      "bank": "official_test_reference",
+      "mean_delta": -0.0005746133946310239,
+      "metric": "interval_score80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.011062407539492974
+    },
+    "official_test_reference:tft_target_only_vs_tft_finetune:mae_log": {
+      "a": "tft_target_only",
+      "b": "tft_finetune",
+      "bank": "official_test_reference",
+      "mean_delta": -0.002864400201390227,
+      "metric": "mae_log",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.010152676859535536
+    },
+    "official_test_reference:tft_target_only_vs_tft_finetune:mae_log:studies": {
+      "a": "tft_target_only",
+      "b": "tft_finetune",
+      "mean_delta": -0.002723829208349224,
+      "metric": "mae_log",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 0.0184907510920811
+    },
+    "official_test_reference:tft_target_only_vs_tft_finetune:mean_quantile_loss": {
+      "a": "tft_target_only",
+      "b": "tft_finetune",
+      "bank": "official_test_reference",
+      "mean_delta": -0.0007059820016180838,
+      "metric": "mean_quantile_loss",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.0028597327457155625
+    },
+    "official_test_reference:tft_target_only_vs_tft_finetune:mean_quantile_loss:studies": {
+      "a": "tft_target_only",
+      "b": "tft_finetune",
+      "mean_delta": -0.00023290822484253997,
+      "metric": "mean_quantile_loss",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 0.007032032233085957
+    },
+    "official_test_reference:tft_target_only_vs_tft_pooled:coverage80": {
+      "a": "tft_target_only",
+      "b": "tft_pooled",
+      "bank": "official_test_reference",
+      "mean_delta": 0.07439707149009467,
+      "metric": "coverage80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.0967184917299602
+    },
+    "official_test_reference:tft_target_only_vs_tft_pooled:interval_score80": {
+      "a": "tft_target_only",
+      "b": "tft_pooled",
+      "bank": "official_test_reference",
+      "mean_delta": 0.058494278948482366,
+      "metric": "interval_score80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.06391161444979289
+    },
+    "official_test_reference:tft_target_only_vs_tft_pooled:mae_log": {
+      "a": "tft_target_only",
+      "b": "tft_pooled",
+      "bank": "official_test_reference",
+      "mean_delta": 0.004096491810693268,
+      "metric": "mae_log",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.00917500651344651
+    },
+    "official_test_reference:tft_target_only_vs_tft_pooled:mae_log:studies": {
+      "a": "tft_target_only",
+      "b": "tft_pooled",
+      "mean_delta": 0.007368419213180207,
+      "metric": "mae_log",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 0.010233120571874723
+    },
+    "official_test_reference:tft_target_only_vs_tft_pooled:mean_quantile_loss": {
+      "a": "tft_target_only",
+      "b": "tft_pooled",
+      "bank": "official_test_reference",
+      "mean_delta": 0.0020870413157516414,
+      "metric": "mean_quantile_loss",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.003055303613038872
+    },
+    "official_test_reference:tft_target_only_vs_tft_pooled:mean_quantile_loss:studies": {
+      "a": "tft_target_only",
+      "b": "tft_pooled",
+      "mean_delta": 0.005155443484840872,
+      "metric": "mean_quantile_loss",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 0.0006635094832834935
+    },
+    "official_test_reference:tft_target_only_vs_tft_target_only_cqr:coverage80": {
+      "a": "tft_target_only",
+      "b": "tft_target_only_cqr",
+      "bank": "official_test_reference",
+      "mean_delta": 0.08042635658914721,
+      "metric": "coverage80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.056120045818724616
+    },
+    "official_test_reference:tft_target_only_vs_tft_target_only_cqr:interval_score80": {
+      "a": "tft_target_only",
+      "b": "tft_target_only_cqr",
+      "bank": "official_test_reference",
+      "mean_delta": -0.004444312481619962,
+      "metric": "interval_score80",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 0.00407646962889856
+    },
+    "official_test_reference:tft_target_only_vs_tft_target_only_cqr:mae_log": {
+      "a": "tft_target_only",
+      "b": "tft_target_only_cqr",
+      "bank": "official_test_reference",
+      "mean_delta": -4.625929269271485e-18,
+      "metric": "mae_log",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 2.230542315895477e-17
+    },
+    "official_test_reference:tft_target_only_vs_tft_target_only_cqr:mae_log:studies": {
+      "a": "tft_target_only",
+      "b": "tft_target_only_cqr",
+      "mean_delta": -1.734723475976807e-17,
+      "metric": "mae_log",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 4.9065389333867974e-18
+    },
+    "official_test_reference:tft_target_only_vs_tft_target_only_cqr:mean_quantile_loss": {
+      "a": "tft_target_only",
+      "b": "tft_target_only_cqr",
+      "bank": "official_test_reference",
+      "mean_delta": -8.888624963240138e-05,
+      "metric": "mean_quantile_loss",
+      "n": 3,
+      "note": "Paired by seed. Positive delta means b is larger than a.",
+      "sd_delta": 8.152939257797577e-05
+    },
+    "official_test_reference:tft_target_only_vs_tft_target_only_cqr:mean_quantile_loss:studies": {
+      "a": "tft_target_only",
+      "b": "tft_target_only_cqr",
+      "mean_delta": -0.0001830014493409641,
+      "metric": "mean_quantile_loss",
+      "n_studies": 2,
+      "note": "One row per study. Within-study visits are not treated as independent replications.",
+      "sd_delta": 0.0005722588355224615
+    }
+  },
+  "real_data_accessed": false,
+  "seconds_total": 680.7007193565369,
+  "seed_variability": {
+    "confirm_test:tft_finetune": {
+      "coverage_mean": 0.6288218793828891,
+      "coverage_sd": 0.03823628921327662,
+      "interval_score_mean": 0.3374647333847047,
+      "interval_score_sd": 0.20596437486083843,
+      "mae_mean": 0.06092743414324664,
+      "mae_sd": 0.027282122310528817,
+      "n_seeds": 3,
+      "pinball_mean": 0.02346504147274679,
+      "pinball_sd": 0.012660000136180816,
+      "width_mean": 0.10588886323739792
+    },
+    "confirm_test:tft_pooled": {
+      "coverage_mean": 0.6811126694717157,
+      "coverage_sd": 0.04783853137183245,
+      "interval_score_mean": 0.2853092051311045,
+      "interval_score_sd": 0.13694148537405273,
+      "mae_mean": 0.05687956636512134,
+      "mae_sd": 0.021920899171504953,
+      "n_seeds": 3,
+      "pinball_mean": 0.021082442551922986,
+      "pinball_sd": 0.009607664931982288,
+      "width_mean": 0.12549373187880586
+    },
+    "confirm_test:tft_target_only": {
+      "coverage_mean": 0.8077255726975222,
+      "coverage_sd": 0.015991445198304255,
+      "interval_score_mean": 0.17896152137193766,
+      "interval_score_sd": 0.009825742448193692,
+      "mae_mean": 0.040188932334353104,
+      "mae_sd": 0.003791659993770784,
+      "n_seeds": 3,
+      "pinball_mean": 0.014069932180845077,
+      "pinball_sd": 0.0010993994873663424,
+      "width_mean": 0.1411281600852278
+    },
+    "confirm_test:tft_target_only_cqr": {
+      "coverage_mean": 0.841234221598878,
+      "coverage_sd": 0.022623154563091132,
+      "interval_score_mean": 0.1803166667184665,
+      "interval_score_sd": 0.009783516240797561,
+      "mae_mean": 0.040188932334353104,
+      "mae_sd": 0.003791659993770784,
+      "n_seeds": 3,
+      "pinball_mean": 0.014097035087775656,
+      "pinball_sd": 0.001111466066282609,
+      "width_mean": 0.1509806413733232
+    },
+    "confirm_val:tft_target_only": {
+      "coverage_mean": 0.779513888888889,
+      "coverage_sd": 0.04777658229386939,
+      "interval_score_mean": 0.19901030251559504,
+      "interval_score_sd": 0.021116839739028028,
+      "mae_mean": 0.04537433375483674,
+      "mae_sd": 0.00503005062356258,
+      "n_seeds": 3,
+      "pinball_mean": 0.015800636513335298,
+      "pinball_sd": 0.0016155996546943668,
+      "width_mean": 0.13936681155529287
+    },
+    "confirm_val:tft_target_only_cqr": {
+      "coverage_mean": 0.8211805555555557,
+      "coverage_sd": 0.015035163260146547,
+      "interval_score_mean": 0.19838607573911657,
+      "interval_score_sd": 0.02027919922715759,
+      "mae_mean": 0.04537433375483674,
+      "mae_sd": 0.00503005062356258,
+      "n_seeds": 3,
+      "pinball_mean": 0.01578815197780573,
+      "pinball_sd": 0.0015986709806574155,
+      "width_mean": 0.14921929284338828
+    },
+    "official_test_reference:tft_finetune": {
+      "coverage_mean": 0.7635120585701981,
+      "coverage_sd": 0.05556455305923762,
+      "interval_score_mean": 0.21790896635908938,
+      "interval_score_sd": 0.03622161496069387,
+      "mae_mean": 0.047647480439271576,
+      "mae_sd": 0.001906242861933362,
+      "n_seeds": 3,
+      "pinball_mean": 0.016735927608017075,
+      "pinball_sd": 0.0013024074046573473,
+      "width_mean": 0.13377034692390533
+    },
+    "official_test_reference:tft_pooled": {
+      "coverage_mean": 0.7652347114556416,
+      "coverage_sd": 0.060970699727621806,
+      "interval_score_mean": 0.27697785870220276,
+      "interval_score_sd": 0.07316095150089286,
+      "mae_mean": 0.05460837245135506,
+      "mae_sd": 0.004031972085990047,
+      "n_seeds": 3,
+      "pinball_mean": 0.0195289509253868,
+      "pinball_sd": 0.0033336261991461905,
+      "width_mean": 0.1697431253935118
+    },
+    "official_test_reference:tft_target_only": {
+      "coverage_mean": 0.690837639965547,
+      "coverage_sd": 0.050284051966278505,
+      "interval_score_mean": 0.21848357975372037,
+      "interval_score_sd": 0.04677449305429287,
+      "mae_mean": 0.0505118806406618,
+      "mae_sd": 0.012029655661770508,
+      "n_seeds": 3,
+      "pinball_mean": 0.017441909609635164,
+      "pinball_sd": 0.00416211619793133,
+      "width_mean": 0.12760354754331293
+    },
+    "official_test_reference:tft_target_only_cqr": {
+      "coverage_mean": 0.7712639965546941,
+      "coverage_sd": 0.06515513878227784,
+      "interval_score_mean": 0.21403926727210043,
+      "interval_score_sd": 0.04796794581195114,
+      "mae_mean": 0.05051188064066179,
+      "mae_sd": 0.01202965566177049,
+      "n_seeds": 3,
+      "pinball_mean": 0.01735302336000276,
+      "pinball_sd": 0.004176309640460172,
+      "width_mean": 0.1446072276421129
+    }
+  },
+  "strategy_decision": {
+    "candidates": [
+      {
+        "mean": 0.19734755957785055,
+        "n_seeds": 3,
+        "sd": 0.023812477692381026,
+        "values": [
+          0.20709498637032706,
+          0.21473984822607747,
+          0.17020784413714712
+        ],
+        "variant": "tft_target_only"
+      },
+      {
+        "mean": 0.1958979375323354,
+        "n_seeds": 3,
+        "sd": 0.02424487286908312,
+        "values": [
+          0.20399304571809046,
+          0.21505955787616915,
+          0.16864120900274654
+        ],
+        "variant": "tft_target_only_cqr"
+      },
+      {
+        "mean": 0.24016996506815522,
+        "n_seeds": 3,
+        "sd": 0.07848735665120284,
+        "values": [
+          0.3281019511916886,
+          0.17719766998913228,
+          0.21521027402364468
+        ],
+        "variant": "tft_pooled"
+      },
+      {
+        "mean": 0.17804402298454083,
+        "n_seeds": 3,
+        "sd": 0.02582943086703795,
+        "values": [
+          0.19313795132786574,
+          0.14821950297095482,
+          0.19277461465480195
+        ],
+        "variant": "tft_finetune"
+      }
+    ],
+    "metric": "interval_score80",
+    "note": "Official validation only. Official test and the confirm holdout were not used.",
+    "selected": "tft_finetune",
+    "selected_mean": 0.17804402298454083,
+    "test_scores_examined": false
+  },
+  "training_exposure": [
+    {
+      "donor_n_animals": 0,
+      "epochs_run": 17,
+      "finetune_epochs_run": null,
+      "finetune_n_optimizer_updates": null,
+      "finetune_n_train_series": null,
+      "finetuned": false,
+      "max_epochs": 16,
+      "n_optimizer_updates": 656,
+      "n_train_obs": 980,
+      "n_train_series": 211,
+      "n_train_windows": 1327,
+      "n_val_series": 54,
+      "reused": true,
+      "scope": "target_only",
+      "seed": 82001,
+      "species_n_animals": {
+        "RAT": 214
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 214,
+      "target_species_n_studies": 6,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 99,
+      "epochs_run": 10,
+      "finetune_epochs_run": null,
+      "finetune_n_optimizer_updates": null,
+      "finetune_n_train_series": null,
+      "finetuned": false,
+      "max_epochs": 16,
+      "n_optimizer_updates": 603,
+      "n_train_obs": 1548,
+      "n_train_series": 310,
+      "n_train_windows": 2166,
+      "n_val_series": 54,
+      "reused": true,
+      "scope": "pooled",
+      "seed": 82001,
+      "species_n_animals": {
+        "DOG": 99,
+        "RAT": 214
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 214,
+      "target_species_n_studies": 6,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 0,
+      "epochs_run": 10,
+      "finetune_epochs_run": 9,
+      "finetune_n_optimizer_updates": 328,
+      "finetune_n_train_series": 211,
+      "finetuned": true,
+      "max_epochs": 16,
+      "n_optimizer_updates": 603,
+      "n_train_obs": 1548,
+      "n_train_series": 310,
+      "n_train_windows": 2166,
+      "n_val_series": 54,
+      "reused": true,
+      "scope": "finetune",
+      "seed": 82001,
+      "species_n_animals": {
+        "RAT": 214
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 214,
+      "target_species_n_studies": 6,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 0,
+      "epochs_run": 17,
+      "finetune_epochs_run": null,
+      "finetune_n_optimizer_updates": null,
+      "finetune_n_train_series": null,
+      "finetuned": false,
+      "max_epochs": 16,
+      "n_optimizer_updates": 656,
+      "n_train_obs": 980,
+      "n_train_series": 211,
+      "n_train_windows": 1327,
+      "n_val_series": 54,
+      "reused": true,
+      "scope": "target_only",
+      "seed": 82021,
+      "species_n_animals": {
+        "RAT": 214
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 214,
+      "target_species_n_studies": 6,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 99,
+      "epochs_run": 17,
+      "finetune_epochs_run": null,
+      "finetune_n_optimizer_updates": null,
+      "finetune_n_train_series": null,
+      "finetuned": false,
+      "max_epochs": 16,
+      "n_optimizer_updates": 1072,
+      "n_train_obs": 1548,
+      "n_train_series": 310,
+      "n_train_windows": 2166,
+      "n_val_series": 54,
+      "reused": false,
+      "scope": "pooled",
+      "seed": 82021,
+      "species_n_animals": {
+        "DOG": 99,
+        "RAT": 214
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 214,
+      "target_species_n_studies": 6,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 0,
+      "epochs_run": 17,
+      "finetune_epochs_run": 9,
+      "finetune_n_optimizer_updates": 328,
+      "finetune_n_train_series": 211,
+      "finetuned": true,
+      "max_epochs": 16,
+      "n_optimizer_updates": 1072,
+      "n_train_obs": 1548,
+      "n_train_series": 310,
+      "n_train_windows": 2166,
+      "n_val_series": 54,
+      "reused": false,
+      "scope": "finetune",
+      "seed": 82021,
+      "species_n_animals": {
+        "RAT": 214
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 214,
+      "target_species_n_studies": 6,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 0,
+      "epochs_run": 17,
+      "finetune_epochs_run": null,
+      "finetune_n_optimizer_updates": null,
+      "finetune_n_train_series": null,
+      "finetuned": false,
+      "max_epochs": 16,
+      "n_optimizer_updates": 656,
+      "n_train_obs": 980,
+      "n_train_series": 211,
+      "n_train_windows": 1327,
+      "n_val_series": 54,
+      "reused": true,
+      "scope": "target_only",
+      "seed": 82031,
+      "species_n_animals": {
+        "RAT": 214
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 214,
+      "target_species_n_studies": 6,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 99,
+      "epochs_run": 17,
+      "finetune_epochs_run": null,
+      "finetune_n_optimizer_updates": null,
+      "finetune_n_train_series": null,
+      "finetuned": false,
+      "max_epochs": 16,
+      "n_optimizer_updates": 1072,
+      "n_train_obs": 1548,
+      "n_train_series": 310,
+      "n_train_windows": 2166,
+      "n_val_series": 54,
+      "reused": false,
+      "scope": "pooled",
+      "seed": 82031,
+      "species_n_animals": {
+        "DOG": 99,
+        "RAT": 214
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 214,
+      "target_species_n_studies": 6,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 0,
+      "epochs_run": 17,
+      "finetune_epochs_run": 9,
+      "finetune_n_optimizer_updates": 328,
+      "finetune_n_train_series": 211,
+      "finetuned": true,
+      "max_epochs": 16,
+      "n_optimizer_updates": 1072,
+      "n_train_obs": 1548,
+      "n_train_series": 310,
+      "n_train_windows": 2166,
+      "n_val_series": 54,
+      "reused": false,
+      "scope": "finetune",
+      "seed": 82031,
+      "species_n_animals": {
+        "RAT": 214
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 214,
+      "target_species_n_studies": 6,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 0,
+      "epochs_run": 17,
+      "finetune_epochs_run": null,
+      "finetune_n_optimizer_updates": null,
+      "finetune_n_train_series": null,
+      "finetuned": false,
+      "max_epochs": 16,
+      "n_optimizer_updates": 672,
+      "n_train_obs": 1038,
+      "n_train_series": 243,
+      "n_train_windows": 1347,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "confirm_target_only",
+      "seed": 82001,
+      "species_n_animals": {
+        "RAT": 246
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 246,
+      "target_species_n_studies": 8,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 99,
+      "epochs_run": 13,
+      "finetune_epochs_run": null,
+      "finetune_n_optimizer_updates": null,
+      "finetune_n_train_series": null,
+      "finetuned": false,
+      "max_epochs": 16,
+      "n_optimizer_updates": 816,
+      "n_train_obs": 1606,
+      "n_train_series": 342,
+      "n_train_windows": 2186,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "confirm_pooled",
+      "seed": 82001,
+      "species_n_animals": {
+        "DOG": 99,
+        "RAT": 246
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 246,
+      "target_species_n_studies": 8,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 0,
+      "epochs_run": 13,
+      "finetune_epochs_run": 6,
+      "finetune_n_optimizer_updates": 210,
+      "finetune_n_train_series": 243,
+      "finetuned": true,
+      "max_epochs": 16,
+      "n_optimizer_updates": 816,
+      "n_train_obs": 1606,
+      "n_train_series": 342,
+      "n_train_windows": 2186,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "confirm_finetune",
+      "seed": 82001,
+      "species_n_animals": {
+        "RAT": 246
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 246,
+      "target_species_n_studies": 8,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 0,
+      "epochs_run": 17,
+      "finetune_epochs_run": null,
+      "finetune_n_optimizer_updates": null,
+      "finetune_n_train_series": null,
+      "finetuned": false,
+      "max_epochs": 16,
+      "n_optimizer_updates": 672,
+      "n_train_obs": 1038,
+      "n_train_series": 243,
+      "n_train_windows": 1347,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "confirm_target_only",
+      "seed": 82021,
+      "species_n_animals": {
+        "RAT": 246
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 246,
+      "target_species_n_studies": 8,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 99,
+      "epochs_run": 17,
+      "finetune_epochs_run": null,
+      "finetune_n_optimizer_updates": null,
+      "finetune_n_train_series": null,
+      "finetuned": false,
+      "max_epochs": 16,
+      "n_optimizer_updates": 1088,
+      "n_train_obs": 1606,
+      "n_train_series": 342,
+      "n_train_windows": 2186,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "confirm_pooled",
+      "seed": 82021,
+      "species_n_animals": {
+        "DOG": 99,
+        "RAT": 246
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 246,
+      "target_species_n_studies": 8,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 0,
+      "epochs_run": 17,
+      "finetune_epochs_run": 9,
+      "finetune_n_optimizer_updates": 336,
+      "finetune_n_train_series": 243,
+      "finetuned": true,
+      "max_epochs": 16,
+      "n_optimizer_updates": 1088,
+      "n_train_obs": 1606,
+      "n_train_series": 342,
+      "n_train_windows": 2186,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "confirm_finetune",
+      "seed": 82021,
+      "species_n_animals": {
+        "RAT": 246
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 246,
+      "target_species_n_studies": 8,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 0,
+      "epochs_run": 11,
+      "finetune_epochs_run": null,
+      "finetune_n_optimizer_updates": null,
+      "finetune_n_train_series": null,
+      "finetuned": false,
+      "max_epochs": 16,
+      "n_optimizer_updates": 420,
+      "n_train_obs": 1038,
+      "n_train_series": 243,
+      "n_train_windows": 1347,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "confirm_target_only",
+      "seed": 82031,
+      "species_n_animals": {
+        "RAT": 246
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 246,
+      "target_species_n_studies": 8,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 99,
+      "epochs_run": 17,
+      "finetune_epochs_run": null,
+      "finetune_n_optimizer_updates": null,
+      "finetune_n_train_series": null,
+      "finetuned": false,
+      "max_epochs": 16,
+      "n_optimizer_updates": 1088,
+      "n_train_obs": 1606,
+      "n_train_series": 342,
+      "n_train_windows": 2186,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "confirm_pooled",
+      "seed": 82031,
+      "species_n_animals": {
+        "DOG": 99,
+        "RAT": 246
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 246,
+      "target_species_n_studies": 8,
+      "window_balance": "study"
+    },
+    {
+      "donor_n_animals": 0,
+      "epochs_run": 17,
+      "finetune_epochs_run": 9,
+      "finetune_n_optimizer_updates": 336,
+      "finetune_n_train_series": 243,
+      "finetuned": true,
+      "max_epochs": 16,
+      "n_optimizer_updates": 1088,
+      "n_train_obs": 1606,
+      "n_train_series": 342,
+      "n_train_windows": 2186,
+      "n_val_series": 56,
+      "reused": false,
+      "scope": "confirm_finetune",
+      "seed": 82031,
+      "species_n_animals": {
+        "RAT": 246
+      },
+      "target_normalizer": "GroupNormalizer",
+      "target_species": "RAT",
+      "target_species_n_animals": 246,
+      "target_species_n_studies": 8,
+      "window_balance": "study"
+    }
+  ],
+  "versions": {
+    "chronos2_class": "chronos.chronos2.pipeline.Chronos2Pipeline",
+    "packages": {
+      "accelerate": "1.15.0",
+      "chronos": "2.3.2",
+      "lightning": "2.6.6",
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "peft": "0.21.2",
+      "pytorch_forecasting": "1.8.0",
+      "torch": "2.14.1+cu130",
+      "transformers": "5.20.2"
+    },
+    "python": "3.12.3",
+    "tft_class": "pytorch_forecasting.models.temporal_fusion_transformer._tft.TemporalFusionTransformer",
+    "torch_cuda": false,
+    "torch_device": "cpu"
+  }
+}

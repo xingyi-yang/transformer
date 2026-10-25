@@ -1,0 +1,1426 @@
+{
+  "confirm_test:tft_pooled_vs_tft_finetune:coverage80": {
+    "a": "tft_pooled",
+    "b": "tft_finetune",
+    "bank": "confirm_test",
+    "mean_delta": -0.052290790088826644,
+    "metric": "coverage80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.6741584852734923,
+        "b": 0.6033660589060308,
+        "delta": -0.07079242636746153,
+        "seed": 82001
+      },
+      {
+        "a": 0.6371318373071528,
+        "b": 0.6727910238429172,
+        "delta": 0.03565918653576439,
+        "seed": 82021
+      },
+      {
+        "a": 0.7320476858345022,
+        "b": 0.6103085553997194,
+        "delta": -0.1217391304347828,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.08031370029472172
+  },
+  "confirm_test:tft_pooled_vs_tft_finetune:interval_score80": {
+    "a": "tft_pooled",
+    "b": "tft_finetune",
+    "bank": "confirm_test",
+    "mean_delta": 0.05215552825360009,
+    "metric": "interval_score80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.20537398008563407,
+        "b": 0.24530574024852125,
+        "delta": 0.03993176016288719,
+        "seed": 82001
+      },
+      {
+        "a": 0.20712124112801772,
+        "b": 0.19367226335448656,
+        "delta": -0.013448977773531157,
+        "seed": 82021
+      },
+      {
+        "a": 0.44343239417966185,
+        "b": 0.5734161965511061,
+        "delta": 0.12998380237144425,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.07249348925786964
+  },
+  "confirm_test:tft_pooled_vs_tft_finetune:mae_log": {
+    "a": "tft_pooled",
+    "b": "tft_finetune",
+    "bank": "confirm_test",
+    "mean_delta": 0.004047867778125294,
+    "metric": "mae_log",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.0443547319918786,
+        "b": 0.049751701541542646,
+        "delta": 0.005396969549664045,
+        "seed": 82001
+      },
+      {
+        "a": 0.04409277849144126,
+        "b": 0.041007626140507916,
+        "delta": -0.0030851523509333456,
+        "seed": 82021
+      },
+      {
+        "a": 0.08219118861204416,
+        "b": 0.09202297474768935,
+        "delta": 0.009831786135645185,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.006563298077871381
+  },
+  "confirm_test:tft_pooled_vs_tft_finetune:mae_log:studies": {
+    "a": "tft_pooled",
+    "b": "tft_finetune",
+    "mean_delta": 0.005396969549664045,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-003",
+        "delta": 0.013070027058706912,
+        "metric": "mae_log",
+        "n_obs_a": 155,
+        "n_obs_b": 155,
+        "tft_finetune": 0.06014106979521479,
+        "tft_pooled": 0.047071042736507876
+      },
+      {
+        "STUDYID": "SYNA-004",
+        "delta": -0.0022760879593788225,
+        "metric": "mae_log",
+        "n_obs_a": 92,
+        "n_obs_b": 92,
+        "tft_finetune": 0.039362333287870505,
+        "tft_pooled": 0.04163842124724933
+      }
+    ],
+    "sd_delta": 0.01085134199415714
+  },
+  "confirm_test:tft_pooled_vs_tft_finetune:mean_quantile_loss": {
+    "a": "tft_pooled",
+    "b": "tft_finetune",
+    "bank": "confirm_test",
+    "mean_delta": 0.002382598920823801,
+    "metric": "mean_quantile_loss",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.015610452985370817,
+        "b": 0.017992766105478765,
+        "delta": 0.0023823131201079484,
+        "seed": 82001
+      },
+      {
+        "a": 0.01546079274578871,
+        "b": 0.014461662335970689,
+        "delta": -0.0009991304098180206,
+        "seed": 82021
+      },
+      {
+        "a": 0.03217608192460944,
+        "b": 0.037940695976790915,
+        "delta": 0.005764614052181476,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.0033818722400570885
+  },
+  "confirm_test:tft_pooled_vs_tft_finetune:mean_quantile_loss:studies": {
+    "a": "tft_pooled",
+    "b": "tft_finetune",
+    "mean_delta": 0.0023823131201079484,
+    "metric": "mean_quantile_loss",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-003",
+        "delta": 0.005103333774524994,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 155,
+        "n_obs_b": 155,
+        "tft_finetune": 0.02268208227095613,
+        "tft_pooled": 0.017578748496431134
+      },
+      {
+        "STUDYID": "SYNA-004",
+        "delta": -0.00033870753430909756,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 92,
+        "n_obs_b": 92,
+        "tft_finetune": 0.013303449940001402,
+        "tft_pooled": 0.013642157474310499
+      }
+    ],
+    "sd_delta": 0.003848104312973901
+  },
+  "confirm_test:tft_target_only_vs_tft_finetune:coverage80": {
+    "a": "tft_target_only",
+    "b": "tft_finetune",
+    "bank": "confirm_test",
+    "mean_delta": -0.17890369331463307,
+    "metric": "coverage80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.7902875175315568,
+        "b": 0.6033660589060308,
+        "delta": -0.186921458625526,
+        "seed": 82001
+      },
+      {
+        "a": 0.8217040673211782,
+        "b": 0.6727910238429172,
+        "delta": -0.14891304347826095,
+        "seed": 82021
+      },
+      {
+        "a": 0.8111851332398317,
+        "b": 0.6103085553997194,
+        "delta": -0.20087657784011226,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.026893598611551484
+  },
+  "confirm_test:tft_target_only_vs_tft_finetune:interval_score80": {
+    "a": "tft_target_only",
+    "b": "tft_finetune",
+    "bank": "confirm_test",
+    "mean_delta": 0.158503212012767,
+    "metric": "interval_score80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.17441216869505832,
+        "b": 0.24530574024852125,
+        "delta": 0.07089357155346293,
+        "seed": 82001
+      },
+      {
+        "a": 0.17223493350337488,
+        "b": 0.19367226335448656,
+        "delta": 0.021437329851111686,
+        "seed": 82021
+      },
+      {
+        "a": 0.19023746191737978,
+        "b": 0.5734161965511061,
+        "delta": 0.3831787346337263,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.19613974051573857
+  },
+  "confirm_test:tft_target_only_vs_tft_finetune:mae_log": {
+    "a": "tft_target_only",
+    "b": "tft_finetune",
+    "bank": "confirm_test",
+    "mean_delta": 0.02073850180889353,
+    "metric": "mae_log",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.04111244436153416,
+        "b": 0.049751701541542646,
+        "delta": 0.008639257180008485,
+        "seed": 82001
+      },
+      {
+        "a": 0.03602082641012262,
+        "b": 0.041007626140507916,
+        "delta": 0.004986799730385294,
+        "seed": 82021
+      },
+      {
+        "a": 0.043433526231402536,
+        "b": 0.09202297474768935,
+        "delta": 0.04858944851628681,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.024188665439186026
+  },
+  "confirm_test:tft_target_only_vs_tft_finetune:mae_log:studies": {
+    "a": "tft_target_only",
+    "b": "tft_finetune",
+    "mean_delta": 0.008639257180008485,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-003",
+        "delta": 0.01696302114871691,
+        "metric": "mae_log",
+        "n_obs_a": 155,
+        "n_obs_b": 155,
+        "tft_finetune": 0.06014106979521479,
+        "tft_target_only": 0.04317804864649788
+      },
+      {
+        "STUDYID": "SYNA-004",
+        "delta": 0.0003154932113000608,
+        "metric": "mae_log",
+        "n_obs_a": 92,
+        "n_obs_b": 92,
+        "tft_finetune": 0.039362333287870505,
+        "tft_target_only": 0.039046840076570444
+      }
+    ],
+    "sd_delta": 0.011771579894539952
+  },
+  "confirm_test:tft_target_only_vs_tft_finetune:mean_quantile_loss": {
+    "a": "tft_target_only",
+    "b": "tft_finetune",
+    "bank": "confirm_test",
+    "mean_delta": 0.009395109291901712,
+    "metric": "mean_quantile_loss",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.014259171971207824,
+        "b": 0.017992766105478765,
+        "delta": 0.0037335941342709414,
+        "seed": 82001
+      },
+      {
+        "a": 0.012888196625244368,
+        "b": 0.014461662335970689,
+        "delta": 0.0015734657107263211,
+        "seed": 82021
+      },
+      {
+        "a": 0.015062427946083045,
+        "b": 0.037940695976790915,
+        "delta": 0.02287826803070787,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.011726602913181422
+  },
+  "confirm_test:tft_target_only_vs_tft_finetune:mean_quantile_loss:studies": {
+    "a": "tft_target_only",
+    "b": "tft_finetune",
+    "mean_delta": 0.003733594134270944,
+    "metric": "mean_quantile_loss",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-003",
+        "delta": 0.008098123546724987,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 155,
+        "n_obs_b": 155,
+        "tft_finetune": 0.02268208227095613,
+        "tft_target_only": 0.014583958724231141
+      },
+      {
+        "STUDYID": "SYNA-004",
+        "delta": -0.000630935278183099,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 92,
+        "n_obs_b": 92,
+        "tft_finetune": 0.013303449940001402,
+        "tft_target_only": 0.0139343852181845
+      }
+    ],
+    "sd_delta": 0.006172376688468784
+  },
+  "confirm_test:tft_target_only_vs_tft_pooled:coverage80": {
+    "a": "tft_target_only",
+    "b": "tft_pooled",
+    "bank": "confirm_test",
+    "mean_delta": -0.12661290322580643,
+    "metric": "coverage80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.7902875175315568,
+        "b": 0.6741584852734923,
+        "delta": -0.11612903225806448,
+        "seed": 82001
+      },
+      {
+        "a": 0.8217040673211782,
+        "b": 0.6371318373071528,
+        "delta": -0.18457223001402534,
+        "seed": 82021
+      },
+      {
+        "a": 0.8111851332398317,
+        "b": 0.7320476858345022,
+        "delta": -0.07913744740532946,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.05349352305454312
+  },
+  "confirm_test:tft_target_only_vs_tft_pooled:interval_score80": {
+    "a": "tft_target_only",
+    "b": "tft_pooled",
+    "bank": "confirm_test",
+    "mean_delta": 0.10634768375916688,
+    "metric": "interval_score80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.17441216869505832,
+        "b": 0.20537398008563407,
+        "delta": 0.030961811390575744,
+        "seed": 82001
+      },
+      {
+        "a": 0.17223493350337488,
+        "b": 0.20712124112801772,
+        "delta": 0.03488630762464284,
+        "seed": 82021
+      },
+      {
+        "a": 0.19023746191737978,
+        "b": 0.44343239417966185,
+        "delta": 0.25319493226228207,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.1271885852282922
+  },
+  "confirm_test:tft_target_only_vs_tft_pooled:mae_log": {
+    "a": "tft_target_only",
+    "b": "tft_pooled",
+    "bank": "confirm_test",
+    "mean_delta": 0.016690634030768235,
+    "metric": "mae_log",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.04111244436153416,
+        "b": 0.0443547319918786,
+        "delta": 0.00324228763034444,
+        "seed": 82001
+      },
+      {
+        "a": 0.03602082641012262,
+        "b": 0.04409277849144126,
+        "delta": 0.00807195208131864,
+        "seed": 82021
+      },
+      {
+        "a": 0.043433526231402536,
+        "b": 0.08219118861204416,
+        "delta": 0.03875766238064163,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.019262573032251897
+  },
+  "confirm_test:tft_target_only_vs_tft_pooled:mae_log:studies": {
+    "a": "tft_target_only",
+    "b": "tft_pooled",
+    "mean_delta": 0.00324228763034444,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-003",
+        "delta": 0.0038929940900099963,
+        "metric": "mae_log",
+        "n_obs_a": 155,
+        "n_obs_b": 155,
+        "tft_pooled": 0.047071042736507876,
+        "tft_target_only": 0.04317804864649788
+      },
+      {
+        "STUDYID": "SYNA-004",
+        "delta": 0.0025915811706788833,
+        "metric": "mae_log",
+        "n_obs_a": 92,
+        "n_obs_b": 92,
+        "tft_pooled": 0.04163842124724933,
+        "tft_target_only": 0.039046840076570444
+      }
+    ],
+    "sd_delta": 0.0009202379003828114
+  },
+  "confirm_test:tft_target_only_vs_tft_pooled:mean_quantile_loss": {
+    "a": "tft_target_only",
+    "b": "tft_pooled",
+    "bank": "confirm_test",
+    "mean_delta": 0.00701251037107791,
+    "metric": "mean_quantile_loss",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.014259171971207824,
+        "b": 0.015610452985370817,
+        "delta": 0.001351281014162993,
+        "seed": 82001
+      },
+      {
+        "a": 0.012888196625244368,
+        "b": 0.01546079274578871,
+        "delta": 0.0025725961205443418,
+        "seed": 82021
+      },
+      {
+        "a": 0.015062427946083045,
+        "b": 0.03217608192460944,
+        "delta": 0.017113653978526395,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.008769135036079206
+  },
+  "confirm_test:tft_target_only_vs_tft_pooled:mean_quantile_loss:studies": {
+    "a": "tft_target_only",
+    "b": "tft_pooled",
+    "mean_delta": 0.0013512810141629956,
+    "metric": "mean_quantile_loss",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-003",
+        "delta": 0.0029947897721999926,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 155,
+        "n_obs_b": 155,
+        "tft_pooled": 0.017578748496431134,
+        "tft_target_only": 0.014583958724231141
+      },
+      {
+        "STUDYID": "SYNA-004",
+        "delta": -0.0002922277438740014,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 92,
+        "n_obs_b": 92,
+        "tft_pooled": 0.013642157474310499,
+        "tft_target_only": 0.0139343852181845
+      }
+    ],
+    "sd_delta": 0.0023242723754948826
+  },
+  "confirm_test:tft_target_only_vs_tft_target_only_cqr:coverage80": {
+    "a": "tft_target_only",
+    "b": "tft_target_only_cqr",
+    "bank": "confirm_test",
+    "mean_delta": 0.03350864890135582,
+    "metric": "coverage80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.7902875175315568,
+        "b": 0.8660238429172511,
+        "delta": 0.0757363253856943,
+        "seed": 82001
+      },
+      {
+        "a": 0.8217040673211782,
+        "b": 0.8217040673211782,
+        "delta": 0.0,
+        "seed": 82021
+      },
+      {
+        "a": 0.8111851332398317,
+        "b": 0.8359747545582048,
+        "delta": 0.024789621318373145,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.038613648198875875
+  },
+  "confirm_test:tft_target_only_vs_tft_target_only_cqr:interval_score80": {
+    "a": "tft_target_only",
+    "b": "tft_target_only_cqr",
+    "bank": "confirm_test",
+    "mean_delta": 0.0013551453465288448,
+    "metric": "interval_score80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.17441216869505832,
+        "b": 0.17722058295812637,
+        "delta": 0.0028084142630680486,
+        "seed": 82001
+      },
+      {
+        "a": 0.17223493350337488,
+        "b": 0.1724557825682297,
+        "delta": 0.00022084906485481115,
+        "seed": 82021
+      },
+      {
+        "a": 0.19023746191737978,
+        "b": 0.19127363462904345,
+        "delta": 0.0010361727116636743,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.0013229440918253875
+  },
+  "confirm_test:tft_target_only_vs_tft_target_only_cqr:mae_log": {
+    "a": "tft_target_only",
+    "b": "tft_target_only_cqr",
+    "bank": "confirm_test",
+    "mean_delta": 0.0,
+    "metric": "mae_log",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.04111244436153416,
+        "b": 0.04111244436153416,
+        "delta": 0.0,
+        "seed": 82001
+      },
+      {
+        "a": 0.03602082641012262,
+        "b": 0.03602082641012262,
+        "delta": 0.0,
+        "seed": 82021
+      },
+      {
+        "a": 0.043433526231402536,
+        "b": 0.043433526231402536,
+        "delta": 0.0,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.0
+  },
+  "confirm_test:tft_target_only_vs_tft_target_only_cqr:mae_log:studies": {
+    "a": "tft_target_only",
+    "b": "tft_target_only_cqr",
+    "mean_delta": 0.0,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-003",
+        "delta": 0.0,
+        "metric": "mae_log",
+        "n_obs_a": 155,
+        "n_obs_b": 155,
+        "tft_target_only": 0.04317804864649788,
+        "tft_target_only_cqr": 0.04317804864649788
+      },
+      {
+        "STUDYID": "SYNA-004",
+        "delta": 0.0,
+        "metric": "mae_log",
+        "n_obs_a": 92,
+        "n_obs_b": 92,
+        "tft_target_only": 0.039046840076570444,
+        "tft_target_only_cqr": 0.039046840076570444
+      }
+    ],
+    "sd_delta": 0.0
+  },
+  "confirm_test:tft_target_only_vs_tft_target_only_cqr:mean_quantile_loss": {
+    "a": "tft_target_only",
+    "b": "tft_target_only_cqr",
+    "bank": "confirm_test",
+    "mean_delta": 2.7102906930576848e-05,
+    "metric": "mean_quantile_loss",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.014259171971207824,
+        "b": 0.014315340256469182,
+        "delta": 5.6168285261358475e-05,
+        "seed": 82001
+      },
+      {
+        "a": 0.012888196625244368,
+        "b": 0.012892613606541464,
+        "delta": 4.416981297095807e-06,
+        "seed": 82021
+      },
+      {
+        "a": 0.015062427946083045,
+        "b": 0.015083151400316321,
+        "delta": 2.072345423327626e-05,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 2.6458881836506225e-05
+  },
+  "confirm_test:tft_target_only_vs_tft_target_only_cqr:mean_quantile_loss:studies": {
+    "a": "tft_target_only",
+    "b": "tft_target_only_cqr",
+    "mean_delta": 5.6168285261365414e-05,
+    "metric": "mean_quantile_loss",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-003",
+        "delta": 4.1046228571650634e-05,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 155,
+        "n_obs_b": 155,
+        "tft_target_only": 0.014583958724231141,
+        "tft_target_only_cqr": 0.014625004952802792
+      },
+      {
+        "STUDYID": "SYNA-004",
+        "delta": 7.12903419510802e-05,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 92,
+        "n_obs_b": 92,
+        "tft_target_only": 0.0139343852181845,
+        "tft_target_only_cqr": 0.01400567556013558
+      }
+    ],
+    "sd_delta": 2.1385817661569433e-05
+  },
+  "official_test_reference:tft_pooled_vs_tft_finetune:coverage80": {
+    "a": "tft_pooled",
+    "b": "tft_finetune",
+    "bank": "official_test_reference",
+    "mean_delta": -0.0017226528854435246,
+    "metric": "coverage80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.8309108527131783,
+        "b": 0.8074935400516796,
+        "delta": -0.023417312661498713,
+        "seed": 82001
+      },
+      {
+        "a": 0.7104328165374676,
+        "b": 0.7010658914728682,
+        "delta": -0.009366925064599352,
+        "seed": 82021
+      },
+      {
+        "a": 0.7543604651162791,
+        "b": 0.7819767441860466,
+        "delta": 0.02761627906976749,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.02636158273150822
+  },
+  "official_test_reference:tft_pooled_vs_tft_finetune:interval_score80": {
+    "a": "tft_pooled",
+    "b": "tft_finetune",
+    "bank": "official_test_reference",
+    "mean_delta": -0.05906889234311339,
+    "metric": "interval_score80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.33814687144675754,
+        "b": 0.20505133839496553,
+        "delta": -0.133095533051792,
+        "seed": 82001
+      },
+      {
+        "a": 0.2968541166365465,
+        "b": 0.25880539474529735,
+        "delta": -0.03804872189124914,
+        "seed": 82021
+      },
+      {
+        "a": 0.19593258802330424,
+        "b": 0.1898701659370052,
+        "delta": -0.006062422086299035,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.06607373528688902
+  },
+  "official_test_reference:tft_pooled_vs_tft_finetune:mae_log": {
+    "a": "tft_pooled",
+    "b": "tft_finetune",
+    "bank": "official_test_reference",
+    "mean_delta": -0.006960892012083495,
+    "metric": "mae_log",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.05729567460563276,
+        "b": 0.04720342618410333,
+        "delta": -0.010092248421529428,
+        "seed": 82001
+      },
+      {
+        "a": 0.056557228663640775,
+        "b": 0.04973655703393527,
+        "delta": -0.006820671629705503,
+        "seed": 82021
+      },
+      {
+        "a": 0.049972214084791675,
+        "b": 0.04600245809977612,
+        "delta": -0.003969755985015554,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.0030636538194642802
+  },
+  "official_test_reference:tft_pooled_vs_tft_finetune:mae_log:studies": {
+    "a": "tft_pooled",
+    "b": "tft_finetune",
+    "mean_delta": -0.010092248421529431,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "delta": -0.004253221884158505,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "tft_finetune": 0.04739397303825153,
+        "tft_pooled": 0.05164719492241004
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "delta": -0.015931274958900357,
+        "metric": "mae_log",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "tft_finetune": 0.047012879329955126,
+        "tft_pooled": 0.06294415428885548
+      }
+    ],
+    "sd_delta": 0.008257630520206376
+  },
+  "official_test_reference:tft_pooled_vs_tft_finetune:mean_quantile_loss": {
+    "a": "tft_pooled",
+    "b": "tft_finetune",
+    "bank": "official_test_reference",
+    "mean_delta": -0.002793023317369725,
+    "metric": "mean_quantile_loss",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.02191972304992415,
+        "b": 0.01653137134024074,
+        "delta": -0.005388351709683409,
+        "seed": 82001
+      },
+      {
+        "a": 0.02094626846705702,
+        "b": 0.018128509038689126,
+        "delta": -0.0028177594283678928,
+        "seed": 82021
+      },
+      {
+        "a": 0.01572086125917924,
+        "b": 0.015547902445121366,
+        "delta": -0.00017295881405787403,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.002607784437089425
+  },
+  "official_test_reference:tft_pooled_vs_tft_finetune:mean_quantile_loss:studies": {
+    "a": "tft_pooled",
+    "b": "tft_finetune",
+    "mean_delta": -0.005388351709683412,
+    "metric": "mean_quantile_loss",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "delta": -0.0008851260871572918,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "tft_finetune": 0.01715631033956026,
+        "tft_pooled": 0.01804143642671755
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "delta": -0.009891577332209533,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "tft_finetune": 0.015906432340921216,
+        "tft_pooled": 0.02579800967313075
+      }
+    ],
+    "sd_delta": 0.006368522749802464
+  },
+  "official_test_reference:tft_target_only_vs_tft_finetune:coverage80": {
+    "a": "tft_target_only",
+    "b": "tft_finetune",
+    "bank": "official_test_reference",
+    "mean_delta": 0.07267441860465114,
+    "metric": "coverage80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.6453488372093024,
+        "b": 0.8074935400516796,
+        "delta": 0.16214470284237725,
+        "seed": 82001
+      },
+      {
+        "a": 0.6823320413436693,
+        "b": 0.7010658914728682,
+        "delta": 0.018733850129198926,
+        "seed": 82021
+      },
+      {
+        "a": 0.7448320413436693,
+        "b": 0.7819767441860466,
+        "delta": 0.03714470284237725,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.07802844798912262
+  },
+  "official_test_reference:tft_target_only_vs_tft_finetune:interval_score80": {
+    "a": "tft_target_only",
+    "b": "tft_finetune",
+    "bank": "official_test_reference",
+    "mean_delta": -0.0005746133946310239,
+    "metric": "interval_score80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.20607438057659339,
+        "b": 0.20505133839496553,
+        "delta": -0.0010230421816278534,
+        "seed": 82001
+      },
+      {
+        "a": 0.27021138257231686,
+        "b": 0.25880539474529735,
+        "delta": -0.011405987827019515,
+        "seed": 82021
+      },
+      {
+        "a": 0.1791649761122509,
+        "b": 0.1898701659370052,
+        "delta": 0.010705189824754296,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.011062407539492974
+  },
+  "official_test_reference:tft_target_only_vs_tft_finetune:mae_log": {
+    "a": "tft_target_only",
+    "b": "tft_finetune",
+    "bank": "official_test_reference",
+    "mean_delta": -0.002864400201390227,
+    "metric": "mae_log",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.04992725539245255,
+        "b": 0.04720342618410333,
+        "delta": -0.002723829208349224,
+        "seed": 82001
+      },
+      {
+        "a": 0.06282318970083106,
+        "b": 0.04973655703393527,
+        "delta": -0.01308663266689579,
+        "seed": 82021
+      },
+      {
+        "a": 0.03878519682870179,
+        "b": 0.04600245809977612,
+        "delta": 0.007217261271074332,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.010152676859535536
+  },
+  "official_test_reference:tft_target_only_vs_tft_finetune:mae_log:studies": {
+    "a": "tft_target_only",
+    "b": "tft_finetune",
+    "mean_delta": -0.002723829208349224,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "delta": 0.01035110627809388,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "tft_finetune": 0.04739397303825153,
+        "tft_target_only": 0.03704286676015765
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "delta": -0.015798764694792328,
+        "metric": "mae_log",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "tft_finetune": 0.047012879329955126,
+        "tft_target_only": 0.06281164402474745
+      }
+    ],
+    "sd_delta": 0.0184907510920811
+  },
+  "official_test_reference:tft_target_only_vs_tft_finetune:mean_quantile_loss": {
+    "a": "tft_target_only",
+    "b": "tft_finetune",
+    "bank": "official_test_reference",
+    "mean_delta": -0.0007059820016180838,
+    "metric": "mean_quantile_loss",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.01676427956508328,
+        "b": 0.01653137134024074,
+        "delta": -0.00023290822484253737,
+        "seed": 82001
+      },
+      {
+        "a": 0.021901261537112027,
+        "b": 0.018128509038689126,
+        "delta": -0.003772752498422901,
+        "seed": 82021
+      },
+      {
+        "a": 0.013660187726710179,
+        "b": 0.015547902445121366,
+        "delta": 0.0018877147184111868,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.0028597327457155625
+  },
+  "official_test_reference:tft_target_only_vs_tft_finetune:mean_quantile_loss:studies": {
+    "a": "tft_target_only",
+    "b": "tft_finetune",
+    "mean_delta": -0.00023290822484253997,
+    "metric": "mean_quantile_loss",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "delta": 0.004739489452694921,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "tft_finetune": 0.01715631033956026,
+        "tft_target_only": 0.012416820886865338
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "delta": -0.005205305902380001,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "tft_finetune": 0.015906432340921216,
+        "tft_target_only": 0.021111738243301217
+      }
+    ],
+    "sd_delta": 0.007032032233085957
+  },
+  "official_test_reference:tft_target_only_vs_tft_pooled:coverage80": {
+    "a": "tft_target_only",
+    "b": "tft_pooled",
+    "bank": "official_test_reference",
+    "mean_delta": 0.07439707149009467,
+    "metric": "coverage80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.6453488372093024,
+        "b": 0.8309108527131783,
+        "delta": 0.18556201550387597,
+        "seed": 82001
+      },
+      {
+        "a": 0.6823320413436693,
+        "b": 0.7104328165374676,
+        "delta": 0.028100775193798277,
+        "seed": 82021
+      },
+      {
+        "a": 0.7448320413436693,
+        "b": 0.7543604651162791,
+        "delta": 0.009528423772609762,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.0967184917299602
+  },
+  "official_test_reference:tft_target_only_vs_tft_pooled:interval_score80": {
+    "a": "tft_target_only",
+    "b": "tft_pooled",
+    "bank": "official_test_reference",
+    "mean_delta": 0.058494278948482366,
+    "metric": "interval_score80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.20607438057659339,
+        "b": 0.33814687144675754,
+        "delta": 0.13207249087016415,
+        "seed": 82001
+      },
+      {
+        "a": 0.27021138257231686,
+        "b": 0.2968541166365465,
+        "delta": 0.026642734064229623,
+        "seed": 82021
+      },
+      {
+        "a": 0.1791649761122509,
+        "b": 0.19593258802330424,
+        "delta": 0.01676761191105333,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.06391161444979289
+  },
+  "official_test_reference:tft_target_only_vs_tft_pooled:mae_log": {
+    "a": "tft_target_only",
+    "b": "tft_pooled",
+    "bank": "official_test_reference",
+    "mean_delta": 0.004096491810693268,
+    "metric": "mae_log",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.04992725539245255,
+        "b": 0.05729567460563276,
+        "delta": 0.007368419213180204,
+        "seed": 82001
+      },
+      {
+        "a": 0.06282318970083106,
+        "b": 0.056557228663640775,
+        "delta": -0.006265961037190286,
+        "seed": 82021
+      },
+      {
+        "a": 0.03878519682870179,
+        "b": 0.049972214084791675,
+        "delta": 0.011187017256089886,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.00917500651344651
+  },
+  "official_test_reference:tft_target_only_vs_tft_pooled:mae_log:studies": {
+    "a": "tft_target_only",
+    "b": "tft_pooled",
+    "mean_delta": 0.007368419213180207,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "delta": 0.014604328162252385,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "tft_pooled": 0.05164719492241004,
+        "tft_target_only": 0.03704286676015765
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "delta": 0.00013251026410802946,
+        "metric": "mae_log",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "tft_pooled": 0.06294415428885548,
+        "tft_target_only": 0.06281164402474745
+      }
+    ],
+    "sd_delta": 0.010233120571874723
+  },
+  "official_test_reference:tft_target_only_vs_tft_pooled:mean_quantile_loss": {
+    "a": "tft_target_only",
+    "b": "tft_pooled",
+    "bank": "official_test_reference",
+    "mean_delta": 0.0020870413157516414,
+    "metric": "mean_quantile_loss",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.01676427956508328,
+        "b": 0.02191972304992415,
+        "delta": 0.0051554434848408714,
+        "seed": 82001
+      },
+      {
+        "a": 0.021901261537112027,
+        "b": 0.02094626846705702,
+        "delta": -0.0009549930700550081,
+        "seed": 82021
+      },
+      {
+        "a": 0.013660187726710179,
+        "b": 0.01572086125917924,
+        "delta": 0.002060673532469061,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.003055303613038872
+  },
+  "official_test_reference:tft_target_only_vs_tft_pooled:mean_quantile_loss:studies": {
+    "a": "tft_target_only",
+    "b": "tft_pooled",
+    "mean_delta": 0.005155443484840872,
+    "metric": "mean_quantile_loss",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "delta": 0.005624615539852213,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "tft_pooled": 0.01804143642671755,
+        "tft_target_only": 0.012416820886865338
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "delta": 0.004686271429829532,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "tft_pooled": 0.02579800967313075,
+        "tft_target_only": 0.021111738243301217
+      }
+    ],
+    "sd_delta": 0.0006635094832834935
+  },
+  "official_test_reference:tft_target_only_vs_tft_target_only_cqr:coverage80": {
+    "a": "tft_target_only",
+    "b": "tft_target_only_cqr",
+    "bank": "official_test_reference",
+    "mean_delta": 0.08042635658914721,
+    "metric": "coverage80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.6453488372093024,
+        "b": 0.7776162790697674,
+        "delta": 0.13226744186046502,
+        "seed": 82001
+      },
+      {
+        "a": 0.6823320413436693,
+        "b": 0.7031653746770026,
+        "delta": 0.02083333333333326,
+        "seed": 82021
+      },
+      {
+        "a": 0.7448320413436693,
+        "b": 0.8330103359173127,
+        "delta": 0.08817829457364335,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.056120045818724616
+  },
+  "official_test_reference:tft_target_only_vs_tft_target_only_cqr:interval_score80": {
+    "a": "tft_target_only",
+    "b": "tft_target_only_cqr",
+    "bank": "official_test_reference",
+    "mean_delta": -0.004444312481619962,
+    "metric": "interval_score80",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.20607438057659339,
+        "b": 0.19692430810954564,
+        "delta": -0.009150072467047743,
+        "seed": 82001
+      },
+      {
+        "a": 0.27021138257231686,
+        "b": 0.26821727353892083,
+        "delta": -0.00199410903339603,
+        "seed": 82021
+      },
+      {
+        "a": 0.1791649761122509,
+        "b": 0.1769762201678348,
+        "delta": -0.0021887559444161153,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 0.00407646962889856
+  },
+  "official_test_reference:tft_target_only_vs_tft_target_only_cqr:mae_log": {
+    "a": "tft_target_only",
+    "b": "tft_target_only_cqr",
+    "bank": "official_test_reference",
+    "mean_delta": -4.625929269271485e-18,
+    "metric": "mae_log",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.04992725539245255,
+        "b": 0.04992725539245253,
+        "delta": -2.0816681711721685e-17,
+        "seed": 82001
+      },
+      {
+        "a": 0.06282318970083106,
+        "b": 0.06282318970083105,
+        "delta": -1.3877787807814457e-17,
+        "seed": 82021
+      },
+      {
+        "a": 0.03878519682870179,
+        "b": 0.03878519682870181,
+        "delta": 2.0816681711721685e-17,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 2.230542315895477e-17
+  },
+  "official_test_reference:tft_target_only_vs_tft_target_only_cqr:mae_log:studies": {
+    "a": "tft_target_only",
+    "b": "tft_target_only_cqr",
+    "mean_delta": -1.734723475976807e-17,
+    "metric": "mae_log",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "delta": -2.0816681711721685e-17,
+        "metric": "mae_log",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "tft_target_only": 0.03704286676015765,
+        "tft_target_only_cqr": 0.03704286676015763
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "delta": -1.3877787807814457e-17,
+        "metric": "mae_log",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "tft_target_only": 0.06281164402474745,
+        "tft_target_only_cqr": 0.06281164402474744
+      }
+    ],
+    "sd_delta": 4.9065389333867974e-18
+  },
+  "official_test_reference:tft_target_only_vs_tft_target_only_cqr:mean_quantile_loss": {
+    "a": "tft_target_only",
+    "b": "tft_target_only_cqr",
+    "bank": "official_test_reference",
+    "mean_delta": -8.888624963240138e-05,
+    "metric": "mean_quantile_loss",
+    "n": 3,
+    "note": "Paired by seed. Positive delta means b is larger than a.",
+    "rows": [
+      {
+        "a": 0.01676427956508328,
+        "b": 0.016581278115742316,
+        "delta": -0.00018300144934096235,
+        "seed": 82001
+      },
+      {
+        "a": 0.021901261537112027,
+        "b": 0.021861379356444104,
+        "delta": -3.9882180667923095e-05,
+        "seed": 82021
+      },
+      {
+        "a": 0.013660187726710179,
+        "b": 0.01361641260782186,
+        "delta": -4.37751188883187e-05,
+        "seed": 82031
+      }
+    ],
+    "sd_delta": 8.152939257797577e-05
+  },
+  "official_test_reference:tft_target_only_vs_tft_target_only_cqr:mean_quantile_loss:studies": {
+    "a": "tft_target_only",
+    "b": "tft_target_only_cqr",
+    "mean_delta": -0.0001830014493409641,
+    "metric": "mean_quantile_loss",
+    "n_studies": 2,
+    "note": "One row per study. Within-study visits are not treated as independent replications.",
+    "rows": [
+      {
+        "STUDYID": "SYNA-010",
+        "delta": 0.00022164665385088558,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 43,
+        "n_obs_b": 43,
+        "tft_target_only": 0.012416820886865338,
+        "tft_target_only_cqr": 0.012638467540716224
+      },
+      {
+        "STUDYID": "SYNA-011",
+        "delta": -0.0005876495525328138,
+        "metric": "mean_quantile_loss",
+        "n_obs_a": 72,
+        "n_obs_b": 72,
+        "tft_target_only": 0.021111738243301217,
+        "tft_target_only_cqr": 0.020524088690768404
+      }
+    ],
+    "sd_delta": 0.0005722588355224615
+  }
+}

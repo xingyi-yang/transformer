@@ -1,0 +1,19 @@
+scope,seed,reused,n_train_series,n_val_series,n_train_obs,n_train_windows,max_epochs,epochs_run,n_optimizer_updates,finetuned,finetune_epochs_run,finetune_n_train_series,finetune_n_optimizer_updates,window_balance,target_normalizer,species_n_animals,target_species,target_species_n_animals,donor_n_animals,target_species_n_studies
+target_only,82001,True,211,54,980,1327,16,17,656,False,,,,study,GroupNormalizer,{'RAT': 214},RAT,214,0,6
+pooled,82001,True,310,54,1548,2166,16,10,603,False,,,,study,GroupNormalizer,"{'DOG': 99, 'RAT': 214}",RAT,214,99,6
+finetune,82001,True,310,54,1548,2166,16,10,603,True,9.0,211.0,328.0,study,GroupNormalizer,{'RAT': 214},RAT,214,0,6
+target_only,82021,True,211,54,980,1327,16,17,656,False,,,,study,GroupNormalizer,{'RAT': 214},RAT,214,0,6
+pooled,82021,False,310,54,1548,2166,16,17,1072,False,,,,study,GroupNormalizer,"{'DOG': 99, 'RAT': 214}",RAT,214,99,6
+finetune,82021,False,310,54,1548,2166,16,17,1072,True,9.0,211.0,328.0,study,GroupNormalizer,{'RAT': 214},RAT,214,0,6
+target_only,82031,True,211,54,980,1327,16,17,656,False,,,,study,GroupNormalizer,{'RAT': 214},RAT,214,0,6
+pooled,82031,False,310,54,1548,2166,16,17,1072,False,,,,study,GroupNormalizer,"{'DOG': 99, 'RAT': 214}",RAT,214,99,6
+finetune,82031,False,310,54,1548,2166,16,17,1072,True,9.0,211.0,328.0,study,GroupNormalizer,{'RAT': 214},RAT,214,0,6
+confirm_target_only,82001,False,243,56,1038,1347,16,17,672,False,,,,study,GroupNormalizer,{'RAT': 246},RAT,246,0,8
+confirm_pooled,82001,False,342,56,1606,2186,16,13,816,False,,,,study,GroupNormalizer,"{'DOG': 99, 'RAT': 246}",RAT,246,99,8
+confirm_finetune,82001,False,342,56,1606,2186,16,13,816,True,6.0,243.0,210.0,study,GroupNormalizer,{'RAT': 246},RAT,246,0,8
+confirm_target_only,82021,False,243,56,1038,1347,16,17,672,False,,,,study,GroupNormalizer,{'RAT': 246},RAT,246,0,8
+confirm_pooled,82021,False,342,56,1606,2186,16,17,1088,False,,,,study,GroupNormalizer,"{'DOG': 99, 'RAT': 246}",RAT,246,99,8
+confirm_finetune,82021,False,342,56,1606,2186,16,17,1088,True,9.0,243.0,336.0,study,GroupNormalizer,{'RAT': 246},RAT,246,0,8
+confirm_target_only,82031,False,243,56,1038,1347,16,11,420,False,,,,study,GroupNormalizer,{'RAT': 246},RAT,246,0,8
+confirm_pooled,82031,False,342,56,1606,2186,16,17,1088,False,,,,study,GroupNormalizer,"{'DOG': 99, 'RAT': 246}",RAT,246,99,8
+confirm_finetune,82031,False,342,56,1606,2186,16,17,1088,True,9.0,243.0,336.0,study,GroupNormalizer,{'RAT': 246},RAT,246,0,8

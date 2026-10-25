@@ -1,0 +1,554 @@
+{
+  "note": "Target-only 80% coverage by study and lead. Official test is a reference diagnosis. The CQR margin used validation only.",
+  "rows": [
+    {
+      "bank": "official_test_reference",
+      "by_lead_days": [
+        {
+          "coverage80": 0.6428571428571429,
+          "frac_above": 0.3392857142857143,
+          "frac_below": 0.017857142857142856,
+          "interval_score80": 0.1577810088094132,
+          "interval_width80": 0.10514216763632638,
+          "lead_days": 7.0,
+          "n_obs": 56
+        },
+        {
+          "coverage80": 0.5789473684210527,
+          "frac_above": 0.3684210526315789,
+          "frac_below": 0.05263157894736842,
+          "interval_score80": 0.26300020068919117,
+          "interval_width80": 0.11926825004711487,
+          "lead_days": 14.0,
+          "n_obs": 57
+        },
+        {
+          "coverage80": 0.5,
+          "frac_above": 0.5,
+          "frac_below": 0.0,
+          "interval_score80": 0.7477878819376889,
+          "interval_width80": 0.14511752128601074,
+          "lead_days": 21.0,
+          "n_obs": 2
+        }
+      ],
+      "by_study": [
+        {
+          "STUDYID": "SYNA-010",
+          "coverage80": 0.7906976744186046,
+          "frac_above": 0.11627906976744186,
+          "frac_below": 0.09302325581395349,
+          "interval_score80": 0.1500823140187251,
+          "interval_width80": 0.11334398180939437,
+          "n_obs": 43
+        },
+        {
+          "STUDYID": "SYNA-011",
+          "coverage80": 0.5,
+          "frac_above": 0.5,
+          "frac_below": 0.0,
+          "interval_score80": 0.2620664471344616,
+          "interval_width80": 0.11253743701510957,
+          "n_obs": 72
+        }
+      ],
+      "coverage80_pooled": 0.6086956521739131,
+      "coverage80_study_balanced": 0.6453488372093024,
+      "frac_above": 0.3565217391304348,
+      "frac_below": 0.034782608695652174,
+      "interval_score80_study_balanced": 0.20607438057659333,
+      "interval_width80_study_balanced": 0.11294070941225197,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 115,
+        "n_matched": 115,
+        "n_obs": 115,
+        "n_obs_key_unique": 115,
+        "n_obs_only": 0,
+        "n_pred": 115,
+        "n_pred_key_unique": 115,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_obs": 115,
+      "n_studies": 2,
+      "seed": 82001,
+      "status": "ok",
+      "weight_mean": 0.9999999999999999
+    },
+    {
+      "bank": "official_validation",
+      "by_lead_days": [
+        {
+          "coverage80": 0.58,
+          "frac_above": 0.34,
+          "frac_below": 0.08,
+          "interval_score80": 0.21271479040640182,
+          "interval_width80": 0.09787648200988769,
+          "lead_days": 3.0,
+          "n_obs": 50
+        },
+        {
+          "coverage80": 0.7222222222222222,
+          "frac_above": 0.2037037037037037,
+          "frac_below": 0.07407407407407407,
+          "interval_score80": 0.19104769800027108,
+          "interval_width80": 0.10503715055960197,
+          "lead_days": 7.0,
+          "n_obs": 54
+        },
+        {
+          "coverage80": 0.76,
+          "frac_above": 0.18,
+          "frac_below": 0.06,
+          "interval_score80": 0.21949021626243237,
+          "interval_width80": 0.11146202087402342,
+          "lead_days": 10.0,
+          "n_obs": 50
+        },
+        {
+          "coverage80": 1.0,
+          "frac_above": 0.0,
+          "frac_below": 0.0,
+          "interval_score80": 0.10949230194091797,
+          "interval_width80": 0.10949230194091797,
+          "lead_days": 11.0,
+          "n_obs": 3
+        },
+        {
+          "coverage80": 0.7777777777777778,
+          "frac_above": 0.14814814814814814,
+          "frac_below": 0.07407407407407407,
+          "interval_score80": 0.231051884025339,
+          "interval_width80": 0.11897158622741705,
+          "lead_days": 14.0,
+          "n_obs": 54
+        },
+        {
+          "coverage80": 0.3333333333333333,
+          "frac_above": 0.6666666666666666,
+          "frac_below": 0.0,
+          "interval_score80": 0.17550812472465793,
+          "interval_width80": 0.12265745798746745,
+          "lead_days": 18.0,
+          "n_obs": 3
+        }
+      ],
+      "by_study": [
+        {
+          "STUDYID": "SYNA-005",
+          "coverage80": 0.6796875,
+          "frac_above": 0.203125,
+          "frac_below": 0.1171875,
+          "interval_score80": 0.2294831282648843,
+          "interval_width80": 0.10953259468078615,
+          "n_obs": 128
+        },
+        {
+          "STUDYID": "SYNA-012",
+          "coverage80": 0.7558139534883721,
+          "frac_above": 0.2441860465116279,
+          "frac_below": 0.0,
+          "interval_score80": 0.18470684447576965,
+          "interval_width80": 0.10743807082952456,
+          "n_obs": 86
+        }
+      ],
+      "coverage80_pooled": 0.7102803738317757,
+      "coverage80_study_balanced": 0.717750726744186,
+      "frac_above": 0.21962616822429906,
+      "frac_below": 0.07009345794392523,
+      "interval_score80_study_balanced": 0.20709498637032697,
+      "interval_width80_study_balanced": 0.10848533275515534,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 214,
+        "n_matched": 214,
+        "n_obs": 214,
+        "n_obs_key_unique": 214,
+        "n_obs_only": 0,
+        "n_pred": 214,
+        "n_pred_key_unique": 214,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_obs": 214,
+      "n_studies": 2,
+      "seed": 82001,
+      "status": "ok",
+      "weight_mean": 1.0
+    },
+    {
+      "bank": "official_test_reference",
+      "by_lead_days": [
+        {
+          "coverage80": 0.7142857142857143,
+          "frac_above": 0.25,
+          "frac_below": 0.03571428571428571,
+          "interval_score80": 0.23281959951458894,
+          "interval_width80": 0.1490923421723502,
+          "lead_days": 7.0,
+          "n_obs": 56
+        },
+        {
+          "coverage80": 0.6140350877192983,
+          "frac_above": 0.2631578947368421,
+          "frac_below": 0.12280701754385964,
+          "interval_score80": 0.32031757357343527,
+          "interval_width80": 0.16814717075280972,
+          "lead_days": 14.0,
+          "n_obs": 57
+        },
+        {
+          "coverage80": 0.5,
+          "frac_above": 0.5,
+          "frac_below": 0.0,
+          "interval_score80": 0.33918683632916835,
+          "interval_width80": 0.17672300338745117,
+          "lead_days": 21.0,
+          "n_obs": 2
+        }
+      ],
+      "by_study": [
+        {
+          "STUDYID": "SYNA-010",
+          "coverage80": 0.7674418604651163,
+          "frac_above": 0.046511627906976744,
+          "frac_below": 0.18604651162790697,
+          "interval_score80": 0.23917469487077633,
+          "interval_width80": 0.1569835973340411,
+          "n_obs": 43
+        },
+        {
+          "STUDYID": "SYNA-011",
+          "coverage80": 0.5972222222222222,
+          "frac_above": 0.3888888888888889,
+          "frac_below": 0.013888888888888888,
+          "interval_score80": 0.3012480702738575,
+          "interval_width80": 0.16023210022184584,
+          "n_obs": 72
+        }
+      ],
+      "coverage80_pooled": 0.6608695652173913,
+      "coverage80_study_balanced": 0.6823320413436693,
+      "frac_above": 0.2608695652173913,
+      "frac_below": 0.0782608695652174,
+      "interval_score80_study_balanced": 0.2702113825723169,
+      "interval_width80_study_balanced": 0.15860784877794348,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 115,
+        "n_matched": 115,
+        "n_obs": 115,
+        "n_obs_key_unique": 115,
+        "n_obs_only": 0,
+        "n_pred": 115,
+        "n_pred_key_unique": 115,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_obs": 115,
+      "n_studies": 2,
+      "seed": 82021,
+      "status": "ok",
+      "weight_mean": 0.9999999999999999
+    },
+    {
+      "bank": "official_validation",
+      "by_lead_days": [
+        {
+          "coverage80": 0.78,
+          "frac_above": 0.08,
+          "frac_below": 0.14,
+          "interval_score80": 0.19996441966967005,
+          "interval_width80": 0.13295289993286136,
+          "lead_days": 3.0,
+          "n_obs": 50
+        },
+        {
+          "coverage80": 0.7592592592592593,
+          "frac_above": 0.1111111111111111,
+          "frac_below": 0.12962962962962962,
+          "interval_score80": 0.20384188085925561,
+          "interval_width80": 0.14423079843874329,
+          "lead_days": 7.0,
+          "n_obs": 54
+        },
+        {
+          "coverage80": 0.82,
+          "frac_above": 0.1,
+          "frac_below": 0.08,
+          "interval_score80": 0.2308664660945032,
+          "interval_width80": 0.15182813644409177,
+          "lead_days": 10.0,
+          "n_obs": 50
+        },
+        {
+          "coverage80": 1.0,
+          "frac_above": 0.0,
+          "frac_below": 0.0,
+          "interval_score80": 0.15211772918701172,
+          "interval_width80": 0.15211772918701172,
+          "lead_days": 11.0,
+          "n_obs": 3
+        },
+        {
+          "coverage80": 0.8148148148148148,
+          "frac_above": 0.09259259259259259,
+          "frac_below": 0.09259259259259259,
+          "interval_score80": 0.2539126932348107,
+          "interval_width80": 0.16020841068691677,
+          "lead_days": 14.0,
+          "n_obs": 54
+        },
+        {
+          "coverage80": 1.0,
+          "frac_above": 0.0,
+          "frac_below": 0.0,
+          "interval_score80": 0.1653126080830889,
+          "interval_width80": 0.1653126080830889,
+          "lead_days": 18.0,
+          "n_obs": 3
+        }
+      ],
+      "by_study": [
+        {
+          "STUDYID": "SYNA-005",
+          "coverage80": 0.75,
+          "frac_above": 0.078125,
+          "frac_below": 0.171875,
+          "interval_score80": 0.24469829538602905,
+          "interval_width80": 0.1480738557875156,
+          "n_obs": 128
+        },
+        {
+          "STUDYID": "SYNA-012",
+          "coverage80": 0.872093023255814,
+          "frac_above": 0.11627906976744186,
+          "frac_below": 0.011627906976744186,
+          "interval_score80": 0.18478140106612587,
+          "interval_width80": 0.1474140300307163,
+          "n_obs": 86
+        }
+      ],
+      "coverage80_pooled": 0.7990654205607477,
+      "coverage80_study_balanced": 0.811046511627907,
+      "frac_above": 0.09345794392523364,
+      "frac_below": 0.10747663551401869,
+      "interval_score80_study_balanced": 0.21473984822607745,
+      "interval_width80_study_balanced": 0.14774394290911597,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 214,
+        "n_matched": 214,
+        "n_obs": 214,
+        "n_obs_key_unique": 214,
+        "n_obs_only": 0,
+        "n_pred": 214,
+        "n_pred_key_unique": 214,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_obs": 214,
+      "n_studies": 2,
+      "seed": 82021,
+      "status": "ok",
+      "weight_mean": 1.0
+    },
+    {
+      "bank": "official_test_reference",
+      "by_lead_days": [
+        {
+          "coverage80": 0.8214285714285714,
+          "frac_above": 0.14285714285714285,
+          "frac_below": 0.03571428571428571,
+          "interval_score80": 0.1304039167284719,
+          "interval_width80": 0.10458019801548542,
+          "lead_days": 7.0,
+          "n_obs": 56
+        },
+        {
+          "coverage80": 0.6666666666666666,
+          "frac_above": 0.2631578947368421,
+          "frac_below": 0.07017543859649122,
+          "interval_score80": 0.2125076444966245,
+          "interval_width80": 0.11623368346900267,
+          "lead_days": 14.0,
+          "n_obs": 57
+        },
+        {
+          "coverage80": 0.5,
+          "frac_above": 0.5,
+          "frac_below": 0.0,
+          "interval_score80": 0.69581215485639,
+          "interval_width80": 0.13868927955627441,
+          "lead_days": 21.0,
+          "n_obs": 2
+        }
+      ],
+      "by_study": [
+        {
+          "STUDYID": "SYNA-010",
+          "coverage80": 0.7674418604651163,
+          "frac_above": 0.09302325581395349,
+          "frac_below": 0.13953488372093023,
+          "interval_score80": 0.17215783370170065,
+          "interval_width80": 0.11250174322793643,
+          "n_obs": 43
+        },
+        {
+          "STUDYID": "SYNA-011",
+          "coverage80": 0.7222222222222222,
+          "frac_above": 0.2777777777777778,
+          "frac_below": 0.0,
+          "interval_score80": 0.18617211852280102,
+          "interval_width80": 0.11002242565155024,
+          "n_obs": 72
+        }
+      ],
+      "coverage80_pooled": 0.7391304347826086,
+      "coverage80_study_balanced": 0.7448320413436693,
+      "frac_above": 0.20869565217391303,
+      "frac_below": 0.05217391304347826,
+      "interval_score80_study_balanced": 0.17916497611225085,
+      "interval_width80_study_balanced": 0.11126208443974334,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 115,
+        "n_matched": 115,
+        "n_obs": 115,
+        "n_obs_key_unique": 115,
+        "n_obs_only": 0,
+        "n_pred": 115,
+        "n_pred_key_unique": 115,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_obs": 115,
+      "n_studies": 2,
+      "seed": 82031,
+      "status": "ok",
+      "weight_mean": 0.9999999999999999
+    },
+    {
+      "bank": "official_validation",
+      "by_lead_days": [
+        {
+          "coverage80": 0.76,
+          "frac_above": 0.18,
+          "frac_below": 0.06,
+          "interval_score80": 0.15468083109884512,
+          "interval_width80": 0.0977633857727051,
+          "lead_days": 3.0,
+          "n_obs": 50
+        },
+        {
+          "coverage80": 0.7407407407407407,
+          "frac_above": 0.07407407407407407,
+          "frac_below": 0.18518518518518517,
+          "interval_score80": 0.15941721151120472,
+          "interval_width80": 0.10459246458830655,
+          "lead_days": 7.0,
+          "n_obs": 54
+        },
+        {
+          "coverage80": 0.72,
+          "frac_above": 0.1,
+          "frac_below": 0.18,
+          "interval_score80": 0.18365406177730073,
+          "interval_width80": 0.11007410049438474,
+          "lead_days": 10.0,
+          "n_obs": 50
+        },
+        {
+          "coverage80": 1.0,
+          "frac_above": 0.0,
+          "frac_below": 0.0,
+          "interval_score80": 0.10718297958374023,
+          "interval_width80": 0.10718297958374023,
+          "lead_days": 11.0,
+          "n_obs": 3
+        },
+        {
+          "coverage80": 0.7222222222222222,
+          "frac_above": 0.09259259259259259,
+          "frac_below": 0.18518518518518517,
+          "interval_score80": 0.20703685433857189,
+          "interval_width80": 0.11330973660504372,
+          "lead_days": 14.0,
+          "n_obs": 54
+        },
+        {
+          "coverage80": 1.0,
+          "frac_above": 0.0,
+          "frac_below": 0.0,
+          "interval_score80": 0.11544243494669597,
+          "interval_width80": 0.11544243494669597,
+          "lead_days": 18.0,
+          "n_obs": 3
+        }
+      ],
+      "by_study": [
+        {
+          "STUDYID": "SYNA-005",
+          "coverage80": 0.6640625,
+          "frac_above": 0.109375,
+          "frac_below": 0.2265625,
+          "interval_score80": 0.19279502980231525,
+          "interval_width80": 0.10788936913013455,
+          "n_obs": 128
+        },
+        {
+          "STUDYID": "SYNA-012",
+          "coverage80": 0.8604651162790697,
+          "frac_above": 0.10465116279069768,
+          "frac_below": 0.03488372093023256,
+          "interval_score80": 0.14762065847197892,
+          "interval_width80": 0.10484453689220338,
+          "n_obs": 86
+        }
+      ],
+      "coverage80_pooled": 0.7429906542056075,
+      "coverage80_study_balanced": 0.7622638081395349,
+      "frac_above": 0.10747663551401869,
+      "frac_below": 0.14953271028037382,
+      "interval_score80_study_balanced": 0.17020784413714707,
+      "interval_width80_study_balanced": 0.10636695301116897,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 214,
+        "n_matched": 214,
+        "n_obs": 214,
+        "n_obs_key_unique": 214,
+        "n_obs_only": 0,
+        "n_pred": 214,
+        "n_pred_key_unique": 214,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_obs": 214,
+      "n_studies": 2,
+      "seed": 82031,
+      "status": "ok",
+      "weight_mean": 1.0
+    }
+  ]
+}

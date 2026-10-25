@@ -1,0 +1,53 @@
+{
+  "candidates": [
+    {
+      "mean": 0.19734755957785055,
+      "n_seeds": 3,
+      "sd": 0.023812477692381026,
+      "values": [
+        0.20709498637032706,
+        0.21473984822607747,
+        0.17020784413714712
+      ],
+      "variant": "tft_target_only"
+    },
+    {
+      "mean": 0.1958979375323354,
+      "n_seeds": 3,
+      "sd": 0.02424487286908312,
+      "values": [
+        0.20399304571809046,
+        0.21505955787616915,
+        0.16864120900274654
+      ],
+      "variant": "tft_target_only_cqr"
+    },
+    {
+      "mean": 0.24016996506815522,
+      "n_seeds": 3,
+      "sd": 0.07848735665120284,
+      "values": [
+        0.3281019511916886,
+        0.17719766998913228,
+        0.21521027402364468
+      ],
+      "variant": "tft_pooled"
+    },
+    {
+      "mean": 0.17804402298454083,
+      "n_seeds": 3,
+      "sd": 0.02582943086703795,
+      "values": [
+        0.19313795132786574,
+        0.14821950297095482,
+        0.19277461465480195
+      ],
+      "variant": "tft_finetune"
+    }
+  ],
+  "metric": "interval_score80",
+  "note": "Official validation only. Official test and the confirm holdout were not used.",
+  "selected": "tft_finetune",
+  "selected_mean": 0.17804402298454083,
+  "test_scores_examined": false
+}
