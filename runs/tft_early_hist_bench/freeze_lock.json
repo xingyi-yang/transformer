@@ -1,0 +1,43 @@
+{
+  "chunk_long_horizons": false,
+  "config_hash": "cdbc0a238e3cd595",
+  "config_path": "configs/tft_early_hist_bench.yaml",
+  "data_source": "existing_official_seq_cells_read_only",
+  "design": false,
+  "encoder_window_day": 14.0,
+  "generate_seed": 71001,
+  "git_revision": "7f5931b2296d4371aba042582ee4d8d5187917a3",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "max_encoder_length": 8,
+  "max_prediction_length": 6,
+  "pooled_cell": "runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_pooled",
+  "preserved": [
+    "runs/v3_eval",
+    "runs/v3_pilot_k0k1",
+    "runs/v3_repl",
+    "runs/v3_research",
+    "runs/v3_closeout",
+    "runs/v3_audit",
+    "runs/v3_increment",
+    "runs/v3_phaseb",
+    "runs/v3_limitations",
+    "runs/v3_objective",
+    "runs/v3_official_seq",
+    "runs/v3_seq_diag",
+    "runs/v3_eval_correct",
+    "runs/v3_cov_chronos",
+    "runs/v3_share_repl",
+    "runs/v3_share_abstain",
+    "runs/v3_share_abstain_run",
+    "runs/v3_donor_rank"
+  ],
+  "real_data": false,
+  "target_only_cell": "runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_target_only",
+  "train_seed": 82001,
+  "writes_v3_locks": false
+}
