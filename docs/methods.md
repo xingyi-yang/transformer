@@ -76,7 +76,11 @@ standardizer; `transformation=None` because `LOGW` is already `ln(grams)`. PyTor
 only looks up group scales through `group_ids`, so mixed-species fits use
 `group_ids=["SPECIES", "USUBJID"]` (each animal remains its own series). MEAN is the
 0.5 quantile; VAR is a quantile-spread approximation. Pooled pretraining can continue on the
-target species via `from_parameters` so donor SPECIES classes are kept. Without `send-bw[tft]`
+target species via `from_parameters` so donor SPECIES classes are kept.
+An 80% Winkler interval score is reported alongside pinball and coverage.
+Target-only undercoverage may be corrected by conformalized quantile
+regression (CQR): a single additive margin fit on validation pairs, leaving
+`q0.5` unchanged. The margin is never fit on a holdout test set. Without `send-bw[tft]`
 it stays `not_run`. It refuses baseline-only / pre-study prediction and `sample_study`.
 Installing the extra is not part of the default environment and is not a scientific-readiness
 claim.

@@ -61,7 +61,8 @@ def _compact_score(block: dict[str, Any]) -> dict[str, Any]:
     out = {"status": block.get("status"), "representation": block.get("representation"),
            "n_scored": block.get("n_scored"), "n_failures": block.get("n_failures")}
     for key in ("mae_log", "rmse_log", "mae_gram", "mean_quantile_loss", "mean_quantile_loss_gram",
-                "coverage80", "interval_width80", "relative_abs_log", "relative_abs_gram"):
+                "coverage80", "interval_width80", "interval_score80",
+                "relative_abs_log", "relative_abs_gram"):
         v = block.get(key)
         if isinstance(v, dict):
             out[key] = {k: v.get(k) for k in ("study_balanced", "pooled", "n_obs", "n_studies") if k in v}

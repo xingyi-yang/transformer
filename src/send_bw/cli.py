@@ -95,7 +95,8 @@ def main(argv: list[str] | None = None) -> int:
                  "v3-limitations", "v3-objective", "v3-official-seq", "v3-seq-diag",
                  "v3-eval-correct", "v3-cov-chronos", "v3-share-repl",
                  "v3-share-abstain", "v3-donor-rank", "historical-audit",
-                 "tft-early-hist-bench", "tft-early-hist-extend", "tft-forecast"]:
+                 "tft-early-hist-bench", "tft-early-hist-extend", "tft-forecast",
+                 "tft-stability"]:
         s = sub.add_parser(name)
         artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout",
                                 "v3-increment", "v3-limitations")
@@ -358,6 +359,20 @@ def main(argv: list[str] | None = None) -> int:
                               "eligible": (out.get("example_summary") or {}).get("n_eligible"),
                               "correctness": (out.get("correctness") or {}).get("ok"),
                               "locked": (out.get("locked_config") or {}),
+                              "n_failures": len(out.get("failures") or []),
+                              "seconds_total": out.get("seconds_total"),
+                              "real_data_accessed": out.get("real_data_accessed"),
+                              "parent": out.get("output_dir")},
+                             indent=2, default=str))
+            return 0
+        if args.cmd == "tft-stability":
+            from send_bw.tft_stability import execute_tft_stability
+
+            out = execute_tft_stability(args.config, force=args.force)
+            print(json.dumps({"status": "ok",
+                              "selected": (out.get("strategy_decision") or {}).get("selected"),
+                              "cqr_adopted": (out.get("cqr_decision") or {}).get("adopted"),
+                              "confirm_test": (out.get("confirm_split") or {}).get("test_studies"),
                               "n_failures": len(out.get("failures") or []),
                               "seconds_total": out.get("seconds_total"),
                               "real_data_accessed": out.get("real_data_accessed"),

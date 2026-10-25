@@ -1,0 +1,71 @@
+{
+  "calibration": {
+    "alpha": 0.2,
+    "apply_to": "target_only",
+    "method": "cqr_additive",
+    "note": "Adopt CQR for target-only if it lowers validation interval score.",
+    "selection_metric": "interval_score80"
+  },
+  "config_hash": "8c27107311dbeeb8",
+  "config_path": "configs/tft_stability.yaml",
+  "confirm_forbidden_test_studies": [
+    "SYNA-007",
+    "SYNA-010",
+    "SYNA-011"
+  ],
+  "confirm_split_seed": 34011,
+  "design": false,
+  "generate_seed": 71001,
+  "git_revision": "4139c6b228b79f95b53a564999fee024817e0ac2",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "official_holdout_test_used_for_search": false,
+  "preserved": [
+    "runs/v3_eval",
+    "runs/v3_pilot_k0k1",
+    "runs/v3_repl",
+    "runs/v3_research",
+    "runs/v3_closeout",
+    "runs/v3_audit",
+    "runs/v3_increment",
+    "runs/v3_phaseb",
+    "runs/v3_limitations",
+    "runs/v3_objective",
+    "runs/v3_official_seq",
+    "runs/v3_seq_diag",
+    "runs/v3_eval_correct",
+    "runs/v3_cov_chronos",
+    "runs/v3_share_repl",
+    "runs/v3_share_abstain",
+    "runs/v3_share_abstain_run",
+    "runs/v3_donor_rank",
+    "runs/tft_early_hist_bench",
+    "runs/tft_early_hist_extend",
+    "runs/tft_primary"
+  ],
+  "real_data": false,
+  "reused_from": "runs/tft_primary",
+  "selection": {
+    "aggregate": "mean_across_seeds",
+    "bank": "official_validation",
+    "candidates": [
+      "tft_target_only",
+      "tft_target_only_cqr",
+      "tft_pooled",
+      "tft_finetune"
+    ],
+    "confirm_bank": "confirm_34011",
+    "metric": "interval_score80"
+  },
+  "stability_seeds": [
+    82001,
+    82021,
+    82031
+  ],
+  "writes_primary": false,
+  "writes_v3_locks": false
+}
