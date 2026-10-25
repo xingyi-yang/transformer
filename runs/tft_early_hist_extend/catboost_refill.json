@@ -1,0 +1,130 @@
+{
+  "catboost_quantile": {
+    "coverage80": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.7304347826086957,
+      "study_balanced": 0.7472545219638242
+    },
+    "crossing_rate": 0.02608695652173913,
+    "interval_width80": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.09978273170658035,
+      "study_balanced": 0.10277625428649338
+    },
+    "label": "quantile CatBoost; cutoff-origin tabular rows; q0.1/0.5/0.9",
+    "mae_gram": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 11.452425430853369,
+      "study_balanced": 11.77491311905099
+    },
+    "mae_log": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.03733310935965766,
+      "study_balanced": 0.03867664961054929
+    },
+    "mean_quantile_loss": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.011368099865952113,
+      "study_balanced": 0.011514635809781144
+    },
+    "mean_quantile_loss_gram": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 3.4628326055000413,
+      "study_balanced": 3.475086757712944
+    },
+    "n_failures": 0,
+    "n_scored": 115,
+    "relative_abs_gram": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.03761515259956346,
+      "study_balanced": 0.03914819304251746
+    },
+    "relative_abs_log": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.00658030819558234,
+      "study_balanced": 0.006829732360632462
+    },
+    "representation": "catboost_quantiles",
+    "rmse_log": {
+      "n_obs": 115,
+      "n_studies": 2,
+      "pooled": 0.04750241725095222,
+      "study_balanced": 0.04835397333965345
+    },
+    "seconds": 3.118548631668091,
+    "status": "ok",
+    "uses_early_history": true
+  },
+  "extra_split_catboost": {
+    "coverage80": {
+      "n_obs": 87,
+      "n_studies": 2,
+      "pooled": 0.7011494252873564,
+      "study_balanced": 0.7013742071881606
+    },
+    "crossing_rate": 0.022988505747126436,
+    "interval_width80": {
+      "n_obs": 87,
+      "n_studies": 2,
+      "pooled": 0.10591180484934845,
+      "study_balanced": 0.1059167191141602
+    },
+    "label": "extra-split quantile CatBoost",
+    "mae_gram": {
+      "n_obs": 87,
+      "n_studies": 2,
+      "pooled": 10.302526591748656,
+      "study_balanced": 10.307747778017568
+    },
+    "mae_log": {
+      "n_obs": 87,
+      "n_studies": 2,
+      "pooled": 0.03541934656424729,
+      "study_balanced": 0.035455160599212575
+    },
+    "mean_quantile_loss": {
+      "n_obs": 87,
+      "n_studies": 2,
+      "pooled": 0.011172148711311777,
+      "study_balanced": 0.011184009990747555
+    },
+    "mean_quantile_loss_gram": {
+      "n_obs": 87,
+      "n_studies": 2,
+      "pooled": 3.291506260066517,
+      "study_balanced": 3.2931953764680464
+    },
+    "n_failures": 0,
+    "n_scored": 87,
+    "relative_abs_gram": {
+      "n_obs": 87,
+      "n_studies": 2,
+      "pooled": 0.03595326796816612,
+      "study_balanced": 0.03599196540374909
+    },
+    "relative_abs_log": {
+      "n_obs": 87,
+      "n_studies": 2,
+      "pooled": 0.00630443620119726,
+      "study_balanced": 0.006311424281459143
+    },
+    "representation": "catboost_quantiles",
+    "rmse_log": {
+      "n_obs": 87,
+      "n_studies": 2,
+      "pooled": 0.04182642979828286,
+      "study_balanced": 0.041704213348112626
+    },
+    "seconds": 3.5203070640563965,
+    "status": "ok",
+    "uses_early_history": true
+  }
+}

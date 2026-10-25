@@ -1,0 +1,22 @@
+{
+  "chronos2_class": "chronos.chronos2.pipeline.Chronos2Pipeline",
+  "packages": {
+    "accelerate": "1.15.0",
+    "catboost": {
+      "ok": true,
+      "version": "1.2.10"
+    },
+    "chronos": "2.3.2",
+    "lightning": "2.6.6",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "peft": "0.21.2",
+    "pytorch_forecasting": "1.8.0",
+    "torch": "2.14.1+cu130",
+    "transformers": "5.20.2"
+  },
+  "python": "3.12.3",
+  "tft_class": "pytorch_forecasting.models.temporal_fusion_transformer._tft.TemporalFusionTransformer",
+  "torch_cuda": false,
+  "torch_device": "cpu"
+}

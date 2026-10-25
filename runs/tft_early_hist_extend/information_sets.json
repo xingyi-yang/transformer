@@ -1,0 +1,39 @@
+{
+  "rows": [
+    {
+      "covariates": "none",
+      "intervals": "unavailable (degenerate quantiles)",
+      "model": "last_value",
+      "test_history": "last encoder LOGW",
+      "train_targets": "none"
+    },
+    {
+      "covariates": "biology, planned regimen, B-spline time/exposure",
+      "intervals": "Gaussian hierarchical residual layer",
+      "model": "spline_gamm",
+      "test_history": "encoder LOGW via Gaussian residual conditioning",
+      "train_targets": "all observed train days"
+    },
+    {
+      "covariates": "baseline-conditioned tokens; not TFT",
+      "intervals": "Gaussian hierarchical residual layer",
+      "model": "transformer_target_only",
+      "test_history": "encoder LOGW via the same Gaussian residual layer",
+      "train_targets": "all observed train days"
+    },
+    {
+      "covariates": "biology, planned regimen, history summaries, target DAY, elapsed times",
+      "intervals": "quantile heads at q0.1/0.5/0.9",
+      "model": "catboost_quantile",
+      "test_history": "encoder summaries only (no future weights)",
+      "train_targets": "one row per train animal \u00d7 cutoff origin \u00d7 observed future DAY"
+    },
+    {
+      "covariates": "static biology/planned + known-future planned-dose features",
+      "intervals": "QuantileLoss; not a Gaussian covariance",
+      "model": "tft_*",
+      "test_history": "observed encoder visits with DAY<=cutoff, last <=max_encoder_length",
+      "train_targets": "PF sliding observed windows (not only the cutoff origin)"
+    }
+  ]
+}

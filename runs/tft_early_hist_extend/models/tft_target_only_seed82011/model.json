@@ -1,0 +1,241 @@
+{
+ "name": "tft",
+ "task": "early_history",
+ "spec": {
+  "species": "RAT",
+  "strains": [
+   "SPRAGUE-DAWLEY",
+   "WISTAR HAN"
+  ],
+  "routes": [
+   "ORAL GAVAGE"
+  ],
+  "sexes": [
+   "F",
+   "M"
+  ],
+  "zb_mean": {
+   "F": 5.248262549231282,
+   "M": 5.5348352549960085
+  },
+  "max_dose": 300.0,
+  "max_day": 28.0,
+  "intervals": [
+   1.0
+  ],
+  "compound_ids": [
+   "CMP03",
+   "CMP04",
+   "CMP05",
+   "CMP06"
+  ],
+  "descriptor_ranges": {
+   "D1": [
+    -3.1696,
+    1.4046
+   ],
+   "D2": [
+    -1.3223,
+    0.5543
+   ],
+   "D3": [
+    -0.2109,
+    1.2754
+   ]
+  },
+  "t_ref": 28.0,
+  "version": "features-v1",
+  "animal_cols": [
+   "SEX_M",
+   "ZB_C",
+   "IS_CONTROL",
+   "LD",
+   "INV_INTERVAL",
+   "START",
+   "END",
+   "D1",
+   "D2",
+   "D3",
+   "STRAIN_WISTAR HAN"
+  ],
+  "time_cols": [
+   "TAU",
+   "EXPO",
+   "OFF",
+   "LCUM"
+  ],
+  "sharing": "context_specific",
+  "species_levels": [
+   "RAT"
+  ],
+  "zb_mean_by_species": {},
+  "declared_species": [],
+  "fixed_schema": false
+ },
+ "quantiles": [
+  0.1,
+  0.25,
+  0.5,
+  0.75,
+  0.9
+ ],
+ "encoder_window_day": 14.0,
+ "max_encoder_length": 8,
+ "max_prediction_length": 6,
+ "min_encoder_length": 1,
+ "history": {
+  "name": "tft",
+  "task": "early_history",
+  "library": "pytorch_forecasting.TemporalFusionTransformer",
+  "official_class": "pytorch_forecasting.TemporalFusionTransformer",
+  "training_scope": "target_only",
+  "not_the_required_transformer": true,
+  "n_train_series": 211,
+  "n_val_series": 54,
+  "n_train_obs": 980,
+  "n_train_windows": 1327,
+  "n_val_windows": 54,
+  "n_optimizer_updates": 656,
+  "epochs_run": 17,
+  "batch_size": 32,
+  "max_encoder_length": 8,
+  "max_prediction_length": 6,
+  "min_encoder_length": 1,
+  "encoder_window_day": 14.0,
+  "quantiles": [
+   0.1,
+   0.25,
+   0.5,
+   0.75,
+   0.9
+  ],
+  "allow_missing_timesteps": true,
+  "observed_rows_only": true,
+  "filled_target_with_zero": false,
+  "validation_windows": "early_history_encoder_day",
+  "training_windows": "sliding_observed_visits",
+  "window_balance": "study",
+  "row_weight": 1.0,
+  "double_balancing": false,
+  "max_epochs": 16,
+  "curves": [
+   {
+    "epoch": 0,
+    "sanity_check_loss": 0.27080053091049194
+   },
+   {
+    "epoch": 0,
+    "train_loss": 0.10334280133247375,
+    "train_loss_step": 0.10334280133247375,
+    "val_loss": 0.11259686201810837
+   },
+   {
+    "epoch": 1,
+    "train_loss": 0.038584258407354355,
+    "train_loss_step": 0.038584258407354355,
+    "val_loss": 0.05272941291332245,
+    "train_loss_epoch": 0.1378558725118637
+   },
+   {
+    "epoch": 2,
+    "train_loss": 0.03351304307579994,
+    "train_loss_step": 0.03351304307579994,
+    "val_loss": 0.042975157499313354,
+    "train_loss_epoch": 0.057372961193323135
+   },
+   {
+    "epoch": 3,
+    "train_loss": 0.026987126097083092,
+    "train_loss_step": 0.026987126097083092,
+    "val_loss": 0.0551118329167366,
+    "train_loss_epoch": 0.034468892961740494
+   },
+   {
+    "epoch": 4,
+    "train_loss": 0.025198202580213547,
+    "train_loss_step": 0.025198202580213547,
+    "val_loss": 0.0510425828397274,
+    "train_loss_epoch": 0.03044334053993225
+   },
+   {
+    "epoch": 5,
+    "train_loss": 0.03574635460972786,
+    "train_loss_step": 0.03574635460972786,
+    "val_loss": 0.04231587052345276,
+    "train_loss_epoch": 0.02692226879298687
+   },
+   {
+    "epoch": 6,
+    "train_loss": 0.026237018406391144,
+    "train_loss_step": 0.026237018406391144,
+    "val_loss": 0.033571675419807434,
+    "train_loss_epoch": 0.027025917544960976
+   },
+   {
+    "epoch": 7,
+    "train_loss": 0.024241069331765175,
+    "train_loss_step": 0.024241069331765175,
+    "val_loss": 0.030325721949338913,
+    "train_loss_epoch": 0.025173522531986237
+   },
+   {
+    "epoch": 8,
+    "train_loss": 0.02239190600812435,
+    "train_loss_step": 0.02239190600812435,
+    "val_loss": 0.030742419883608818,
+    "train_loss_epoch": 0.02434527315199375
+   },
+   {
+    "epoch": 9,
+    "train_loss": 0.020430631935596466,
+    "train_loss_step": 0.020430631935596466,
+    "val_loss": 0.034499384462833405,
+    "train_loss_epoch": 0.024754036217927933
+   },
+   {
+    "epoch": 10,
+    "train_loss": 0.02424423024058342,
+    "train_loss_step": 0.02424423024058342,
+    "val_loss": 0.03206935152411461,
+    "train_loss_epoch": 0.023116685450077057
+   },
+   {
+    "epoch": 11,
+    "train_loss": 0.022105004638433456,
+    "train_loss_step": 0.022105004638433456,
+    "val_loss": 0.030280979350209236,
+    "train_loss_epoch": 0.02208203449845314
+   },
+   {
+    "epoch": 12,
+    "train_loss": 0.02139984630048275,
+    "train_loss_step": 0.02139984630048275,
+    "val_loss": 0.03835228085517883,
+    "train_loss_epoch": 0.02270822413265705
+   },
+   {
+    "epoch": 13,
+    "train_loss": 0.019068775698542595,
+    "train_loss_step": 0.019068775698542595,
+    "val_loss": 0.03167438879609108,
+    "train_loss_epoch": 0.022578872740268707
+   },
+   {
+    "epoch": 14,
+    "train_loss": 0.028164241462945938,
+    "train_loss_step": 0.028164241462945938,
+    "val_loss": 0.02753739431500435,
+    "train_loss_epoch": 0.02181481383740902
+   },
+   {
+    "epoch": 15,
+    "train_loss": 0.02165544591844082,
+    "train_loss_step": 0.02165544591844082,
+    "val_loss": 0.03191162645816803,
+    "train_loss_epoch": 0.02243375964462757
+   }
+  ],
+  "note": "early-history only; baseline-only pre-study and design simulation are not supported; VAR is a quantile-spread approximation"
+ },
+ "not_the_required_transformer": true
+}

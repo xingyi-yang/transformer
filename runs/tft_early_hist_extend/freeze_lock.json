@@ -1,0 +1,64 @@
+{
+  "chunk_long_horizons": false,
+  "config_hash": "69c960b595ae6331",
+  "config_path": "configs/tft_early_hist_extend.yaml",
+  "design": false,
+  "encoder_window_day": 14.0,
+  "generate_seed": 71001,
+  "git_revision": "51da40c979194d48d1f9dc031c4488cf8b011622",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "max_encoder_length": 8,
+  "max_prediction_length": 6,
+  "overwrites_pilot": false,
+  "pilot_dir": "runs/tft_early_hist_bench",
+  "pooled_cell": "runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_pooled",
+  "predeclared": {
+    "declared_before_examining_new_scores": true,
+    "extra_split_mean_seed": 81001,
+    "extra_split_seed": 33001,
+    "extra_split_tft_train_seed": 82001,
+    "extra_train_seeds": [
+      82011
+    ],
+    "official_holdout": {
+      "generate_seed": 71001,
+      "role": "reference; reported errors are not used to tune later models",
+      "test_studies_reference": [
+        "SYNA-010",
+        "SYNA-011"
+      ],
+      "tft_train_seed": 82001
+    },
+    "tuning_on_official_test_errors": false
+  },
+  "preserved": [
+    "runs/v3_eval",
+    "runs/v3_pilot_k0k1",
+    "runs/v3_repl",
+    "runs/v3_research",
+    "runs/v3_closeout",
+    "runs/v3_audit",
+    "runs/v3_increment",
+    "runs/v3_phaseb",
+    "runs/v3_limitations",
+    "runs/v3_objective",
+    "runs/v3_official_seq",
+    "runs/v3_seq_diag",
+    "runs/v3_eval_correct",
+    "runs/v3_cov_chronos",
+    "runs/v3_share_repl",
+    "runs/v3_share_abstain",
+    "runs/v3_share_abstain_run",
+    "runs/v3_donor_rank",
+    "runs/tft_early_hist_bench"
+  ],
+  "real_data": false,
+  "target_only_cell": "runs/v3_official_seq/datasets/d0/trains/t0/cells/d0_t0_matched_target_only",
+  "train_seed": 82001,
+  "writes_v3_locks": false
+}

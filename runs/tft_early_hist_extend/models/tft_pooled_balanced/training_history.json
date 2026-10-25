@@ -1,0 +1,154 @@
+{
+  "allow_missing_timesteps": true,
+  "batch_size": 32,
+  "curves": [
+    {
+      "epoch": 0,
+      "sanity_check_loss": 1.6718671321868896
+    },
+    {
+      "epoch": 0,
+      "train_loss": 0.12257102876901627,
+      "train_loss_step": 0.12257102876901627,
+      "val_loss": 0.12979955971240997
+    },
+    {
+      "epoch": 1,
+      "train_loss": 0.06935398280620575,
+      "train_loss_epoch": 0.4073069989681244,
+      "train_loss_step": 0.06935398280620575,
+      "val_loss": 0.0540696419775486
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.04995715990662575,
+      "train_loss_epoch": 0.08459168672561646,
+      "train_loss_step": 0.04995715990662575,
+      "val_loss": 0.05886969715356827
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.049772948026657104,
+      "train_loss_epoch": 0.06515960395336151,
+      "train_loss_step": 0.049772948026657104,
+      "val_loss": 0.03445284813642502
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.06072467193007469,
+      "train_loss_epoch": 0.05732326954603195,
+      "train_loss_step": 0.06072467193007469,
+      "val_loss": 0.03638644143939018
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.037124987691640854,
+      "train_loss_epoch": 0.054138969630002975,
+      "train_loss_step": 0.037124987691640854,
+      "val_loss": 0.029647324234247208
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.047182369977235794,
+      "train_loss_epoch": 0.05292791873216629,
+      "train_loss_step": 0.047182369977235794,
+      "val_loss": 0.03415165841579437
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.03214557468891144,
+      "train_loss_epoch": 0.04777379333972931,
+      "train_loss_step": 0.03214557468891144,
+      "val_loss": 0.027561020106077194
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.02667434699833393,
+      "train_loss_epoch": 0.042082779109478,
+      "train_loss_step": 0.02667434699833393,
+      "val_loss": 0.02931712567806244
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.03854529187083244,
+      "train_loss_epoch": 0.035809893161058426,
+      "train_loss_step": 0.03854529187083244,
+      "val_loss": 0.025401605293154716
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.02793455868959427,
+      "train_loss_epoch": 0.033716242760419846,
+      "train_loss_step": 0.02793455868959427,
+      "val_loss": 0.026668570935726166
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.03005264885723591,
+      "train_loss_epoch": 0.033111896365880966,
+      "train_loss_step": 0.03005264885723591,
+      "val_loss": 0.03680579736828804
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.030285554006695747,
+      "train_loss_epoch": 0.03247428685426712,
+      "train_loss_step": 0.030285554006695747,
+      "val_loss": 0.03960197791457176
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.02807684801518917,
+      "train_loss_epoch": 0.03256839141249657,
+      "train_loss_step": 0.02807684801518917,
+      "val_loss": 0.0406966432929039
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.027577191591262817,
+      "train_loss_epoch": 0.030505379661917686,
+      "train_loss_step": 0.027577191591262817,
+      "val_loss": 0.030300788581371307
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.029676204547286034,
+      "train_loss_epoch": 0.030385825783014297,
+      "train_loss_step": 0.029676204547286034,
+      "val_loss": 0.027381708845496178
+    }
+  ],
+  "double_balancing": false,
+  "encoder_window_day": 14.0,
+  "epochs_run": 17,
+  "filled_target_with_zero": false,
+  "library": "pytorch_forecasting.TemporalFusionTransformer",
+  "max_encoder_length": 8,
+  "max_epochs": 16,
+  "max_prediction_length": 6,
+  "min_encoder_length": 1,
+  "n_optimizer_updates": 1072,
+  "n_train_obs": 1548,
+  "n_train_series": 310,
+  "n_train_windows": 2166,
+  "n_val_series": 54,
+  "n_val_windows": 54,
+  "name": "tft",
+  "not_the_required_transformer": true,
+  "note": "early-history only; baseline-only pre-study and design simulation are not supported; VAR is a quantile-spread approximation",
+  "observed_rows_only": true,
+  "official_class": "pytorch_forecasting.TemporalFusionTransformer",
+  "quantiles": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "row_weight": 1.0,
+  "task": "early_history",
+  "training_scope": "pooled",
+  "training_windows": "sliding_observed_visits",
+  "validation_windows": "early_history_encoder_day",
+  "window_balance": "study"
+}

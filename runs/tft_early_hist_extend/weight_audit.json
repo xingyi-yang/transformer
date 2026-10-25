@@ -1,0 +1,372 @@
+{
+  "pooled": {
+    "after_if_corrected": {
+      "decoder_steps_per_study": {
+        "SYNA-002": 278,
+        "SYNA-003": 1816,
+        "SYNA-004": 393,
+        "SYNA-006": 247,
+        "SYNA-007": 193,
+        "SYNA-009": 355,
+        "SYNA-D001": 2140,
+        "SYNA-D002": 197,
+        "SYNA-D003": 232
+      },
+      "decoder_weight_sum_per_study": {
+        "SYNA-002": 278.0,
+        "SYNA-003": 1816.0,
+        "SYNA-004": 393.0,
+        "SYNA-006": 247.0,
+        "SYNA-007": 193.0,
+        "SYNA-009": 355.0,
+        "SYNA-D001": 2140.0,
+        "SYNA-D002": 197.0,
+        "SYNA-D003": 232.0
+      },
+      "effective_loss_share_uniform_windows": {
+        "SYNA-002": 0.0475132455990429,
+        "SYNA-003": 0.310374294992309,
+        "SYNA-004": 0.06716800546915057,
+        "SYNA-006": 0.042215005981883436,
+        "SYNA-007": 0.032985814390702445,
+        "SYNA-009": 0.06067338916424543,
+        "SYNA-D001": 0.36574944453939495,
+        "SYNA-D002": 0.03366945821227141,
+        "SYNA-D003": 0.03965134165099983
+      },
+      "expected_loss_share_if_study_sampler": {
+        "SYNA-002": 0.09075078129070037,
+        "SYNA-003": 0.1842223432638529,
+        "SYNA-004": 0.08974657062570988,
+        "SYNA-006": 0.09114818852813228,
+        "SYNA-007": 0.09100468035905965,
+        "SYNA-009": 0.0903916954654494,
+        "SYNA-D001": 0.18285114689106882,
+        "SYNA-D002": 0.0903802258936355,
+        "SYNA-D003": 0.08950436768239121
+      },
+      "expected_uniform_window_contrib": {
+        "SYNA-002": 0.1283471837488458,
+        "SYNA-003": 0.8384118190212373,
+        "SYNA-004": 0.1814404432132964,
+        "SYNA-006": 0.11403508771929824,
+        "SYNA-007": 0.08910433979686057,
+        "SYNA-009": 0.16389658356417358,
+        "SYNA-D001": 0.9879963065558633,
+        "SYNA-D002": 0.0909510618651893,
+        "SYNA-D003": 0.10710987996306556
+      },
+      "intended_objective": "equal average of per-study forecast losses",
+      "max_minus_min_effective_share": 0.3327636301486925,
+      "max_minus_min_window_share": 0.2253000923361034,
+      "n_studies": 9,
+      "n_windows": 2166,
+      "note": "Effective share is the sum of decoder-step WEIGHT over windows of that study, divided by the grand total. This is the quantity PF QuantileLoss reduces. Window counts alone omit decoder length and WEIGHT.",
+      "sampler": "study_balanced_window_sampler_WEIGHT_1",
+      "species_windows": {
+        "DOG": 839,
+        "RAT": 1327
+      },
+      "window_count_share": {
+        "SYNA-002": 0.07202216066481995,
+        "SYNA-003": 0.23176361957525393,
+        "SYNA-004": 0.10295475530932595,
+        "SYNA-006": 0.06371191135734072,
+        "SYNA-007": 0.04986149584487535,
+        "SYNA-009": 0.09233610341643583,
+        "SYNA-D001": 0.27516158818097874,
+        "SYNA-D002": 0.05124653739612189,
+        "SYNA-D003": 0.060941828254847646
+      },
+      "windows_per_study": {
+        "SYNA-002": 156,
+        "SYNA-003": 502,
+        "SYNA-004": 223,
+        "SYNA-006": 138,
+        "SYNA-007": 108,
+        "SYNA-009": 200,
+        "SYNA-D001": 596,
+        "SYNA-D002": 111,
+        "SYNA-D003": 132
+      }
+    },
+    "before": {
+      "decoder_steps_per_study": {
+        "SYNA-002": 278,
+        "SYNA-003": 1816,
+        "SYNA-004": 393,
+        "SYNA-006": 247,
+        "SYNA-007": 193,
+        "SYNA-009": 355,
+        "SYNA-D001": 2140,
+        "SYNA-D002": 197,
+        "SYNA-D003": 232
+      },
+      "decoder_weight_sum_per_study": {
+        "SYNA-002": 380.2275132275132,
+        "SYNA-003": 1006.2936763129688,
+        "SYNA-004": 370.09289617486337,
+        "SYNA-006": 383.4804804804805,
+        "SYNA-007": 382.30268199233717,
+        "SYNA-009": 370.7777777777778,
+        "SYNA-D001": 996.7387387387388,
+        "SYNA-D002": 377.2185185185186,
+        "SYNA-D003": 370.1975308641975
+      },
+      "effective_loss_share_uniform_windows": {
+        "SYNA-002": 0.08199276921655402,
+        "SYNA-003": 0.21699851351008612,
+        "SYNA-004": 0.07980732684800335,
+        "SYNA-006": 0.08269424342334547,
+        "SYNA-007": 0.08244026138295546,
+        "SYNA-009": 0.07995501563236238,
+        "SYNA-D001": 0.21493807399914086,
+        "SYNA-D002": 0.08134390557527196,
+        "SYNA-D003": 0.07982989041228042
+      },
+      "expected_loss_share_if_study_sampler": {
+        "SYNA-002": 0.11004172343782943,
+        "SYNA-003": 0.0905022693114161,
+        "SYNA-004": 0.0749280324806977,
+        "SYNA-006": 0.1254592304125705,
+        "SYNA-007": 0.15981665333156359,
+        "SYNA-009": 0.08369936136280373,
+        "SYNA-D001": 0.07550461903670963,
+        "SYNA-D002": 0.15342935843437439,
+        "SYNA-D003": 0.12661875219203483
+      },
+      "expected_uniform_window_contrib": {
+        "SYNA-002": 0.1755436349157494,
+        "SYNA-003": 0.46458618481669844,
+        "SYNA-004": 0.17086467967445215,
+        "SYNA-006": 0.17704546651915073,
+        "SYNA-007": 0.17650169990412612,
+        "SYNA-009": 0.17118087616702576,
+        "SYNA-D001": 0.46017485629674,
+        "SYNA-D002": 0.17415444068260322,
+        "SYNA-D003": 0.17091298747192868
+      },
+      "intended_objective": "equal average of per-study forecast losses",
+      "max_minus_min_effective_share": 0.13719118666208277,
+      "max_minus_min_window_share": 0.2253000923361034,
+      "n_studies": 9,
+      "n_windows": 2166,
+      "note": "Effective share is the sum of decoder-step WEIGHT over windows of that study, divided by the grand total. This is the quantity PF QuantileLoss reduces. Window counts alone omit decoder length and WEIGHT.",
+      "sampler": "uniform_windows_plus_row_study_WEIGHT",
+      "species_windows": {
+        "DOG": 839,
+        "RAT": 1327
+      },
+      "window_count_share": {
+        "SYNA-002": 0.07202216066481995,
+        "SYNA-003": 0.23176361957525393,
+        "SYNA-004": 0.10295475530932595,
+        "SYNA-006": 0.06371191135734072,
+        "SYNA-007": 0.04986149584487535,
+        "SYNA-009": 0.09233610341643583,
+        "SYNA-D001": 0.27516158818097874,
+        "SYNA-D002": 0.05124653739612189,
+        "SYNA-D003": 0.060941828254847646
+      },
+      "windows_per_study": {
+        "SYNA-002": 156,
+        "SYNA-003": 502,
+        "SYNA-004": 223,
+        "SYNA-006": 138,
+        "SYNA-007": 108,
+        "SYNA-009": 200,
+        "SYNA-D001": 596,
+        "SYNA-D002": 111,
+        "SYNA-D003": 132
+      }
+    },
+    "correction": {
+      "applied_when": "config window_balance=study",
+      "double_balancing": false,
+      "method": "WeightedRandomSampler on PF windows with p proportional to 1/n_windows[study]",
+      "remaining_imbalance": "Studies with longer decoder sequences still contribute more steps per drawn window. That residual is recorded, not removed by a second incompatible weight.",
+      "row_weight": 1.0
+    },
+    "imbalance_confirmed": true,
+    "n_train_obs": 1548,
+    "n_train_series": 310,
+    "target_vs_donor": {
+      "available": true,
+      "donor": {
+        "decoder_weight_sum": 1744.154788121455,
+        "n_studies": 3,
+        "n_windows": 839
+      },
+      "target": {
+        "decoder_weight_sum": 2893.175025965941,
+        "n_studies": 6,
+        "n_windows": 1327
+      },
+      "target_species": "RAT"
+    },
+    "threshold_max_minus_min_effective_share": 0.05
+  },
+  "target_only": {
+    "after_if_corrected": {
+      "decoder_steps_per_study": {
+        "SYNA-002": 278,
+        "SYNA-003": 1816,
+        "SYNA-004": 393,
+        "SYNA-006": 247,
+        "SYNA-007": 193,
+        "SYNA-009": 355
+      },
+      "decoder_weight_sum_per_study": {
+        "SYNA-002": 278.0,
+        "SYNA-003": 1816.0,
+        "SYNA-004": 393.0,
+        "SYNA-006": 247.0,
+        "SYNA-007": 193.0,
+        "SYNA-009": 355.0
+      },
+      "effective_loss_share_uniform_windows": {
+        "SYNA-002": 0.08470444850700792,
+        "SYNA-003": 0.5533211456429007,
+        "SYNA-004": 0.11974405850091407,
+        "SYNA-006": 0.0752589884216941,
+        "SYNA-007": 0.05880560633759903,
+        "SYNA-009": 0.10816575258988421
+      },
+      "expected_loss_share_if_study_sampler": {
+        "SYNA-002": 0.14240682720417736,
+        "SYNA-003": 0.2890831244778772,
+        "SYNA-004": 0.1408310120694536,
+        "SYNA-006": 0.14303044171179652,
+        "SYNA-007": 0.14280524758404517,
+        "SYNA-009": 0.14184334695265005
+      },
+      "expected_uniform_window_contrib": {
+        "SYNA-002": 0.20949510173323285,
+        "SYNA-003": 1.3685003767897512,
+        "SYNA-004": 0.2961567445365486,
+        "SYNA-006": 0.18613413715146948,
+        "SYNA-007": 0.14544084400904295,
+        "SYNA-009": 0.26752072343632255
+      },
+      "intended_objective": "equal average of per-study forecast losses",
+      "max_minus_min_effective_share": 0.4945155393053017,
+      "max_minus_min_window_share": 0.2969103240391861,
+      "n_studies": 6,
+      "n_windows": 1327,
+      "note": "Effective share is the sum of decoder-step WEIGHT over windows of that study, divided by the grand total. This is the quantity PF QuantileLoss reduces. Window counts alone omit decoder length and WEIGHT.",
+      "sampler": "study_balanced_window_sampler_WEIGHT_1",
+      "species_windows": {
+        "RAT": 1327
+      },
+      "window_count_share": {
+        "SYNA-002": 0.1175584024114544,
+        "SYNA-003": 0.37829691032403917,
+        "SYNA-004": 0.1680482290881688,
+        "SYNA-006": 0.1039939713639789,
+        "SYNA-007": 0.08138658628485305,
+        "SYNA-009": 0.15071590052750566
+      },
+      "windows_per_study": {
+        "SYNA-002": 156,
+        "SYNA-003": 502,
+        "SYNA-004": 223,
+        "SYNA-006": 138,
+        "SYNA-007": 108,
+        "SYNA-009": 200
+      }
+    },
+    "before": {
+      "decoder_steps_per_study": {
+        "SYNA-002": 278,
+        "SYNA-003": 1816,
+        "SYNA-004": 393,
+        "SYNA-006": 247,
+        "SYNA-007": 193,
+        "SYNA-009": 355
+      },
+      "decoder_weight_sum_per_study": {
+        "SYNA-002": 361.4735449735449,
+        "SYNA-003": 956.6602357984993,
+        "SYNA-004": 351.8387978142076,
+        "SYNA-006": 364.56606606606596,
+        "SYNA-007": 363.44636015325665,
+        "SYNA-009": 352.48989898989896
+      },
+      "effective_loss_share_uniform_windows": {
+        "SYNA-002": 0.13142222983919444,
+        "SYNA-003": 0.34781638417364635,
+        "SYNA-004": 0.12791929034825708,
+        "SYNA-006": 0.1325465887956254,
+        "SYNA-007": 0.1321394933114004,
+        "SYNA-009": 0.12815601353187633
+      },
+      "expected_loss_share_if_study_sampler": {
+        "SYNA-002": 0.17075364968231732,
+        "SYNA-003": 0.14043394002445939,
+        "SYNA-004": 0.11626712677598824,
+        "SYNA-006": 0.19467726249656925,
+        "SYNA-007": 0.2479902711792392,
+        "SYNA-009": 0.12987774984142672
+      },
+      "expected_uniform_window_contrib": {
+        "SYNA-002": 0.27239905423778815,
+        "SYNA-003": 0.7209195446861336,
+        "SYNA-004": 0.26513850626541646,
+        "SYNA-006": 0.27472951474458623,
+        "SYNA-007": 0.2738857273197111,
+        "SYNA-009": 0.26562916276556064
+      },
+      "intended_objective": "equal average of per-study forecast losses",
+      "max_minus_min_effective_share": 0.21989709382538927,
+      "max_minus_min_window_share": 0.2969103240391861,
+      "n_studies": 6,
+      "n_windows": 1327,
+      "note": "Effective share is the sum of decoder-step WEIGHT over windows of that study, divided by the grand total. This is the quantity PF QuantileLoss reduces. Window counts alone omit decoder length and WEIGHT.",
+      "sampler": "uniform_windows_plus_row_study_WEIGHT",
+      "species_windows": {
+        "RAT": 1327
+      },
+      "window_count_share": {
+        "SYNA-002": 0.1175584024114544,
+        "SYNA-003": 0.37829691032403917,
+        "SYNA-004": 0.1680482290881688,
+        "SYNA-006": 0.1039939713639789,
+        "SYNA-007": 0.08138658628485305,
+        "SYNA-009": 0.15071590052750566
+      },
+      "windows_per_study": {
+        "SYNA-002": 156,
+        "SYNA-003": 502,
+        "SYNA-004": 223,
+        "SYNA-006": 138,
+        "SYNA-007": 108,
+        "SYNA-009": 200
+      }
+    },
+    "correction": {
+      "applied_when": "config window_balance=study",
+      "double_balancing": false,
+      "method": "WeightedRandomSampler on PF windows with p proportional to 1/n_windows[study]",
+      "remaining_imbalance": "Studies with longer decoder sequences still contribute more steps per drawn window. That residual is recorded, not removed by a second incompatible weight.",
+      "row_weight": 1.0
+    },
+    "imbalance_confirmed": true,
+    "n_train_obs": 980,
+    "n_train_series": 211,
+    "target_vs_donor": {
+      "available": true,
+      "donor": {
+        "decoder_weight_sum": 0.0,
+        "n_studies": 0,
+        "n_windows": 0
+      },
+      "target": {
+        "decoder_weight_sum": 2750.4749037954734,
+        "n_studies": 6,
+        "n_windows": 1327
+      },
+      "target_species": "RAT"
+    },
+    "threshold_max_minus_min_effective_share": 0.05
+  }
+}

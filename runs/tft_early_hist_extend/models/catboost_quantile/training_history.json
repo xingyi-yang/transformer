@@ -1,0 +1,86 @@
+{
+  "cat_features": [
+    "SEX",
+    "STRAIN",
+    "SPECIES",
+    "ROUTE",
+    "COMPOUND_ID",
+    "CTRL"
+  ],
+  "curves": {
+    "0.1": {
+      "best_iteration": 115,
+      "tree_count": 116
+    },
+    "0.5": {
+      "best_iteration": 195,
+      "tree_count": 196
+    },
+    "0.9": {
+      "best_iteration": 190,
+      "tree_count": 191
+    }
+  },
+  "features": [
+    "SEX",
+    "STRAIN",
+    "SPECIES",
+    "ROUTE",
+    "COMPOUND_ID",
+    "CTRL",
+    "ZB_C",
+    "LD",
+    "INV_INTERVAL",
+    "START",
+    "END",
+    "D1",
+    "D2",
+    "D3",
+    "latest_logw",
+    "latest_weight_g",
+    "logw_std",
+    "n_encoder",
+    "history_span",
+    "recent_trend",
+    "trend_missing",
+    "var_missing",
+    "origin_day",
+    "last_obs_day",
+    "target_day",
+    "elapsed_from_origin",
+    "elapsed_from_last_obs"
+  ],
+  "information": "Uses permitted biology, planned regimen, and encoder summaries. Does not see future target weights as features.",
+  "library": "catboost.CatBoostRegressor",
+  "loss": "separate Quantile heads (not MultiQuantile; one model per level)",
+  "name": "catboost_quantile",
+  "not_tft": true,
+  "origins": "cutoff",
+  "quantiles": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "train_rows": {
+    "cutoff": 14.0,
+    "fabricated_days": false,
+    "fabricated_slope": false,
+    "n_animals": 210,
+    "n_rows": 487,
+    "n_studies": 6,
+    "n_trend_missing": 10,
+    "note": "Forecast origin is the configured cutoff. Encoder and targets are that animal's observed DAY values. Trend is missing unless two encoder visits have a positive DAY span.",
+    "origins": "cutoff"
+  },
+  "val_rows": {
+    "cutoff": 14.0,
+    "fabricated_days": false,
+    "fabricated_slope": false,
+    "n_animals": 54,
+    "n_rows": 214,
+    "n_studies": 2,
+    "n_trend_missing": 0,
+    "note": "Forecast origin is the configured cutoff. Encoder and targets are that animal's observed DAY values. Trend is missing unless two encoder visits have a positive DAY span.",
+    "origins": "cutoff"
+  }
+}

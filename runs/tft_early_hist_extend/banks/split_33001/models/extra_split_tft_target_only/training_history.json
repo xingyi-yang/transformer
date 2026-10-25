@@ -1,0 +1,154 @@
+{
+  "allow_missing_timesteps": true,
+  "batch_size": 32,
+  "curves": [
+    {
+      "epoch": 0,
+      "sanity_check_loss": 0.27855169773101807
+    },
+    {
+      "epoch": 0,
+      "train_loss": 0.04517331346869469,
+      "train_loss_step": 0.04517331346869469,
+      "val_loss": 0.04424774646759033
+    },
+    {
+      "epoch": 1,
+      "train_loss": 0.03173629939556122,
+      "train_loss_epoch": 0.09062046557664871,
+      "train_loss_step": 0.03173629939556122,
+      "val_loss": 0.036651432514190674
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.030017727985978127,
+      "train_loss_epoch": 0.03892527520656586,
+      "train_loss_step": 0.030017727985978127,
+      "val_loss": 0.033560287207365036
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.029825469478964806,
+      "train_loss_epoch": 0.032888319343328476,
+      "train_loss_step": 0.029825469478964806,
+      "val_loss": 0.029316941276192665
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.028509730473160744,
+      "train_loss_epoch": 0.029913976788520813,
+      "train_loss_step": 0.028509730473160744,
+      "val_loss": 0.026616482064127922
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.023944435641169548,
+      "train_loss_epoch": 0.028324542567133904,
+      "train_loss_step": 0.023944435641169548,
+      "val_loss": 0.026791291311383247
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.024493834003806114,
+      "train_loss_epoch": 0.024637117981910706,
+      "train_loss_step": 0.024493834003806114,
+      "val_loss": 0.02571832574903965
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.024514885619282722,
+      "train_loss_epoch": 0.024404043331742287,
+      "train_loss_step": 0.024514885619282722,
+      "val_loss": 0.02776191383600235
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.021281274035573006,
+      "train_loss_epoch": 0.02388302981853485,
+      "train_loss_step": 0.021281274035573006,
+      "val_loss": 0.02549309842288494
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.023686090484261513,
+      "train_loss_epoch": 0.022588111460208893,
+      "train_loss_step": 0.023686090484261513,
+      "val_loss": 0.026145758107304573
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.020444495603442192,
+      "train_loss_epoch": 0.023361315950751305,
+      "train_loss_step": 0.020444495603442192,
+      "val_loss": 0.024493705481290817
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.019409414380788803,
+      "train_loss_epoch": 0.022864261642098427,
+      "train_loss_step": 0.019409414380788803,
+      "val_loss": 0.02349364571273327
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.02028384804725647,
+      "train_loss_epoch": 0.02274732105433941,
+      "train_loss_step": 0.02028384804725647,
+      "val_loss": 0.024957364425063133
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.01972097158432007,
+      "train_loss_epoch": 0.021389175206422806,
+      "train_loss_step": 0.01972097158432007,
+      "val_loss": 0.02660488523542881
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.020455654710531235,
+      "train_loss_epoch": 0.020722275599837303,
+      "train_loss_step": 0.020455654710531235,
+      "val_loss": 0.025673069059848785
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.022787125781178474,
+      "train_loss_epoch": 0.020623737946152687,
+      "train_loss_step": 0.022787125781178474,
+      "val_loss": 0.024797385558485985
+    }
+  ],
+  "double_balancing": false,
+  "encoder_window_day": 14.0,
+  "epochs_run": 17,
+  "filled_target_with_zero": false,
+  "library": "pytorch_forecasting.TemporalFusionTransformer",
+  "max_encoder_length": 8,
+  "max_epochs": 16,
+  "max_prediction_length": 6,
+  "min_encoder_length": 1,
+  "n_optimizer_updates": 944,
+  "n_train_obs": 1354,
+  "n_train_series": 273,
+  "n_train_windows": 1889,
+  "n_val_series": 69,
+  "n_val_windows": 73,
+  "name": "tft",
+  "not_the_required_transformer": true,
+  "note": "early-history only; baseline-only pre-study and design simulation are not supported; VAR is a quantile-spread approximation",
+  "observed_rows_only": true,
+  "official_class": "pytorch_forecasting.TemporalFusionTransformer",
+  "quantiles": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "row_weight": 1.0,
+  "task": "early_history",
+  "training_scope": "target_only",
+  "training_windows": "sliding_observed_visits",
+  "validation_windows": "early_history_encoder_day",
+  "window_balance": "study"
+}

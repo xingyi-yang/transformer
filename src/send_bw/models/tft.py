@@ -255,6 +255,11 @@ class TFTEarlyHistoryModel(ResponseModel):
         if val_panel.empty:
             raise RuntimeError("TFT validation panel is empty after the encoder-length filter")
 
+        window_balance = str(config.get("window_balance") or "").strip().lower()
+        if window_balance == "study":
+            train_panel = _unit_row_weights(train_panel)
+            val_panel = _unit_row_weights(val_panel)
+
         seed = int(config.get("seed", 0))
         import torch
 
@@ -295,10 +300,16 @@ class TFTEarlyHistoryModel(ResponseModel):
                 "TFT validation has no windows whose encoder ends at DAY <= "
                 f"{self.encoder_window_day} with later observed targets") from e
         self.dataset_parameters = training.get_parameters()
-        train_dl = training.to_dataloader(
-            train=True, batch_size=int(config.get("batch_size", 64)), num_workers=0)
+        batch_size = int(config.get("batch_size", 64))
+        if window_balance == "study":
+            sampler = _study_window_sampler(training, train_panel)
+            train_dl = training.to_dataloader(
+                train=True, batch_size=batch_size, num_workers=0, sampler=sampler, shuffle=False)
+        else:
+            train_dl = training.to_dataloader(
+                train=True, batch_size=batch_size, num_workers=0)
         val_dl = validation_ds.to_dataloader(
-            train=False, batch_size=int(config.get("batch_size", 64)), num_workers=0)
+            train=False, batch_size=batch_size, num_workers=0)
 
         loss = QuantileLoss(quantiles=self.quantiles)
         tft = TemporalFusionTransformer.from_dataset(
@@ -316,10 +327,12 @@ class TFTEarlyHistoryModel(ResponseModel):
             log_interval=-1,
             log_val_interval=-1,
         )
+        curve = _loss_callback_cls()()
         with tempfile.TemporaryDirectory(prefix="send_bw_tft_") as tmp:
             callbacks = [
                 EarlyStopping(monitor="val_loss", patience=int(config.get("patience", 6)), mode="min"),
                 ModelCheckpoint(dirpath=tmp, filename="best", monitor="val_loss", mode="min", save_top_k=1),
+                curve,
             ]
             trainer = _make_trainer(tmp, int(config.get("max_epochs", 20)), callbacks)
             trainer.fit(tft, train_dl, val_dl)
@@ -330,7 +343,10 @@ class TFTEarlyHistoryModel(ResponseModel):
                 self.net = tft
             self.net.eval()
             self._best_checkpoint_bytes = Path(best).read_bytes() if best else None
+            n_updates = int(getattr(trainer, "global_step", 0) or 0)
+            epochs_run = int(getattr(trainer, "current_epoch", 0) or 0) + 1
 
+        n_train_windows = int(len(training))
         self.history = {
             "name": self.name,
             "task": self.task,
@@ -341,6 +357,11 @@ class TFTEarlyHistoryModel(ResponseModel):
             "n_train_series": int(train_panel["USUBJID"].nunique()),
             "n_val_series": int(val_panel["USUBJID"].nunique()),
             "n_train_obs": int(len(train_panel)),
+            "n_train_windows": n_train_windows,
+            "n_val_windows": int(len(validation_ds)),
+            "n_optimizer_updates": n_updates,
+            "epochs_run": epochs_run,
+            "batch_size": batch_size,
             "max_encoder_length": self.max_encoder_length,
             "max_prediction_length": self.max_prediction_length,
             "min_encoder_length": self.min_encoder_length,
@@ -351,7 +372,11 @@ class TFTEarlyHistoryModel(ResponseModel):
             "filled_target_with_zero": False,
             "validation_windows": "early_history_encoder_day",
             "training_windows": "sliding_observed_visits",
+            "window_balance": window_balance or "row_study_WEIGHT_uniform_windows",
+            "row_weight": 1.0 if window_balance == "study" else "study_balanced_per_obs_row",
+            "double_balancing": False,
             "max_epochs": int(config.get("max_epochs", 20)),
+            "curves": curve.rows,
             "note": ("early-history only; baseline-only pre-study and design simulation are not supported; "
                      "VAR is a quantile-spread approximation"),
         }
@@ -547,6 +572,51 @@ class TFTEarlyHistoryModel(ResponseModel):
         m.net = TemporalFusionTransformer.load_from_checkpoint(path / "tft.ckpt")
         m.net.eval()
         return m
+
+
+def _unit_row_weights(panel: pd.DataFrame) -> pd.DataFrame:
+    out = panel.copy()
+    out["WEIGHT"] = 1.0
+    return out
+
+
+def _study_window_sampler(dataset, panel: pd.DataFrame):
+    """Equal study probability over PF windows. Requires WEIGHT=1 (no double balance)."""
+    from torch.utils.data import WeightedRandomSampler
+
+    decoded = dataset.decoded_index.copy()
+    decoded["USUBJID"] = decoded["USUBJID"].astype(str)
+    key = panel[["USUBJID", "STUDYID"]].drop_duplicates()
+    key["USUBJID"] = key["USUBJID"].astype(str)
+    merged = decoded.merge(key, on="USUBJID", how="left")
+    n = merged.groupby(merged["STUDYID"].astype(str)).size()
+    w = merged["STUDYID"].astype(str).map(lambda s: 1.0 / float(n[s])).to_numpy(float)
+    return WeightedRandomSampler(weights=w, num_samples=int(len(merged)), replacement=True)
+
+
+def _loss_callback_cls():
+    try:
+        from lightning.pytorch.callbacks import Callback
+    except ImportError:  # pragma: no cover
+        from pytorch_lightning.callbacks import Callback
+
+    class _LossCurveCallback(Callback):
+        def __init__(self):
+            super().__init__()
+            self.rows: list[dict[str, Any]] = []
+
+        def on_validation_epoch_end(self, trainer, pl_module):
+            row: dict[str, Any] = {"epoch": int(trainer.current_epoch)}
+            for key, val in (trainer.callback_metrics or {}).items():
+                if "loss" not in str(key):
+                    continue
+                try:
+                    row[str(key)] = float(val.detach().cpu()) if hasattr(val, "detach") else float(val)
+                except (TypeError, ValueError):
+                    continue
+            self.rows.append(row)
+
+    return _LossCurveCallback
 
 
 def _enough_visits(panel: pd.DataFrame, min_len: int) -> pd.DataFrame:
