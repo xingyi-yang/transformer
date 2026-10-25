@@ -167,7 +167,10 @@ to `[ancova]`.
    environment, do not treat a local extra-enabled fit as design qualification, and
    do not implement Chronos-2/DeepAR unless they are named. The analysis chapter
    stays as written.
-6. A **proposed** v3 planning packet (not implemented, v2 untouched) is in
-   `CURSOR_PROJECT_SPEC_v3.md` and `docs/v3/`. The new scientific question is
-   nonlinear multi-species information sharing. Do not enable design
-   recommendations as its acceptance criterion.
+6. v3 stages 1–2 **software** is in the tree (frozen target manifests,
+   nested donor-only train additions, explicit `SPECIES_*`, sign-defined
+   transfer table, prespec in `src/send_bw/pilot.py`). Selective sharing
+   remains required later and is deferred. The first scored task is
+   predose-conditioned prediction. `configs/v3_pilot.smoke.yaml` is
+   proposed for review and has **not** been executed. Do not enable design
+   recommendations. Do not access real data. v2 defaults are unchanged.

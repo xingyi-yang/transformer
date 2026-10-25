@@ -27,6 +27,7 @@ class MeanDesign:
     off_knots: list[float]
     strain_cols: list[str]
     route_cols: list[str]
+    species_cols: list[str] = field(default_factory=list)
     rich: bool = True
     col_names: list[str] = field(default_factory=list)
     scale: list[float] = field(default_factory=list)
@@ -41,7 +42,8 @@ class MeanDesign:
         ek = list(np.quantile(ek_src, np.linspace(0, 1, n_expo_knots + 2)[1:-1])) if len(ek_src) else []
         d = MeanDesign(tau_hi, expo_hi, off_hi, sorted(set(np.round(tk, 4))), sorted(set(np.round(ek, 4))), [],
                        [c for c in F.columns if c.startswith("STRAIN_")],
-                       [c for c in F.columns if c.startswith("ROUTE_")], rich)
+                       [c for c in F.columns if c.startswith("ROUTE_")],
+                       [c for c in F.columns if c.startswith("SPECIES_")], rich)
         return d
 
     def _blocks(self, F: pd.DataFrame) -> list[tuple[str, np.ndarray]]:
@@ -53,6 +55,8 @@ class MeanDesign:
         ld = F["LD"].to_numpy()[:, None]
         blocks = [("tb", TB), ("tb_sex", TB * sex), ("tb_zb", TB * zb)]
         for c in self.strain_cols:
+            blocks.append((f"tb_{c}", TB * F[c].to_numpy()[:, None]))
+        for c in self.species_cols:
             blocks.append((f"tb_{c}", TB * F[c].to_numpy()[:, None]))
         blocks += [("eb_ld", EB * ld), ("eb_ld2", EB * ld**2)]
         for dname in ["D1", "D2", "D3"]:
@@ -84,4 +88,6 @@ class MeanDesign:
 
     @staticmethod
     def from_dict(d: dict) -> MeanDesign:
-        return MeanDesign(**d)
+        raw = dict(d)
+        raw.setdefault("species_cols", [])
+        return MeanDesign(**raw)

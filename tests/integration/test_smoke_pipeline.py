@@ -48,7 +48,9 @@ def test_artifacts_written(smoke_run):
     _, _, run = smoke_run
     for rel in ["manifest.json", "canonical/bw_obs.parquet", "canonical/provenance.json", "qc/data_dictionary.md",
                 "qc/mapping_report.json", "qc/quarantine.csv", "qc/exclusions.csv", "qc/completeness.csv",
-                "splits/splits.csv", "splits/splits.json", "features/feature_spec.json", "cohort/obs.parquet",
+                "splits/splits.csv", "splits/splits.json", "splits/target_splits.csv",
+                "splits/target_manifest.json", "splits/donor_order.json",
+                "features/feature_spec.json", "cohort/obs.parquet",
                 "models/spline/model.json", "models/transformer/members.pt", "models/spline/training_history.json",
                 "models/optional_models_status.json", "evaluation/metrics.json", "design/design_summary.json",
                 "design/request_validation.json", "report/report.md", "report/report.html"]:

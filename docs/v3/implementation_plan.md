@@ -1,7 +1,8 @@
 # Staged implementation plan
 
 Preserve working v2 infrastructure. Implement only what the new goal needs,
-in order. **This plan is proposed.** No stage below has been executed as v3.
+in order. **Stages 1–2 software is in the repository.** The Stage 3 training wave has
+not been launched. Selective sharing remains required later and is deferred.
 
 Do not: overwrite v2, add optional model families, enable design
 recommendations, launch large training runs, or treat tests as readiness.
@@ -19,16 +20,19 @@ with no `donor_species` key required.
 
 ## Stage 1 — freeze and include (infrastructure)
 
+**Status: implemented (software).** Training wave not launched.
+
 **Goal.** A donor study can enter **train** without changing the target
 split hash, and can be left out (v2 behavior) with one config flag.
 
-Work (when authorized to implement):
+Work:
 
-1. Split generation of target vs donor studies (separate seed namespace)
+1. Split generation of target vs donor studies (separate `donor` seed namespace)
 2. Cohort: `donor_species` + `sharing` (default empty / context_specific)
-3. Split freeze: `train_target` / `test_target` hashes independent of \(k\)
+3. Split freeze: `train_target` / `validation_target` / `test_target` hashes independent of \(k\)
 4. Tests: v2 exclusion reproduced; donor-in-train does not flip target hash;
-   unseen species still refused
+   unseen species still refused; target records unchanged; donor isolation;
+   stable donor generation
 
 Out of scope: new models, design, real data, sparse-history grid.
 
@@ -37,19 +41,27 @@ Acceptance (software): unit tests green; no smoke default change; no
 
 ## Stage 2 — pooled feature + scoring table
 
+**Status: implemented (software).** Predose-conditioned is the first scored
+task. Design-stage and `Wall14` scoring are deferred with Stage 3.
+Selective sharing is required later and is not implemented.
+
 **Goal.** Pooled spline and pooled transformer can fit with an explicit
-species token/column; reports show \(S_0\) vs \(S_k\) on `test_target`.
+species token/column; a sign-defined paired transfer table can be built
+from \(S_0\) vs \(S_k\) on `test_target`.
 
 Work:
 
-1. `SPECIES_*` in `FeatureSpec` only when `sharing: pooled`
-2. Transformer: optional species context token in a **named** variant;
+1. `SPECIES_*` in `FeatureSpec` only when `sharing: pooled` and more than one
+   species is in the training animals
+2. Transformer: species context token only when `SPECIES_*` columns exist;
    default transformer remains v2 (no species token)
-3. Evaluation: emit design-stage / predose / `Wall14` on `test_target`
-4. Harmful-transfer rows in the report (sign preserved)
+3. Evaluation: predose-conditioned (`evaluate_prestudy`) is the first pilot
+   task; design-stage / `Wall14` are later
+4. Harmful-transfer rows (`evaluation/transfer.py`) with published sign
 
-Acceptance: synthetic compile-check with \(k=0,1\) and 1-member transformer;
-\(\Delta_k\) present even if harmful; labels on the report.
+Acceptance: unit tests for species features, serialization, zero-donor
+equivalence, training-only preprocessing, and the transfer table. Do **not**
+run the training wave here.
 
 **Do not** run research-scale or locked B=2000 here.
 

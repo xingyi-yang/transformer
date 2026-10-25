@@ -11,6 +11,7 @@ import pandas as pd
 from send_bw.utils.artifacts import cache_key, read_json, write_json
 
 SPLITS = ("train", "validation", "test", "test_compound_holdout")
+TARGET_SPLIT_NAMES = ("train", "validation", "test")
 
 
 def make_study_splits(study_context: pd.DataFrame, cfg: dict[str, Any], seed: int) -> pd.DataFrame:
@@ -65,3 +66,39 @@ def load_frozen_splits(path: Path) -> pd.DataFrame:
 def assert_disjoint(splits: pd.DataFrame) -> None:
     if splits["STUDYID"].duplicated().any():
         raise ValueError("a study appears in more than one split")
+
+
+def target_manifest(splits: pd.DataFrame) -> dict[str, Any]:
+    """Per-split hashes of target-species STUDYIDs. Donors must not appear here."""
+    out: dict[str, Any] = {"version": "target-manifest-v1"}
+    all_ids: list[str] = []
+    for name in TARGET_SPLIT_NAMES:
+        ids = sorted(splits.loc[splits["SPLIT"] == name, "STUDYID"].astype(str).tolist())
+        out[name] = {"studyids": ids, "n": len(ids), "hash": cache_key(ids)}
+        all_ids.extend(ids)
+    out["all_target"] = {"studyids": sorted(all_ids), "n": len(all_ids), "hash": cache_key(sorted(all_ids))}
+    return out
+
+
+def freeze_target_manifests(splits: pd.DataFrame, path: Path) -> dict[str, Any]:
+    man = target_manifest(splits)
+    write_json(path, man)
+    return man
+
+
+def donor_study_order(study_ids) -> list[str]:
+    """Declared nested order: STUDYID sort. First k donors are a prefix of this list."""
+    return sorted({str(s) for s in study_ids})
+
+
+def compose_train_with_donors(target_splits: pd.DataFrame, donor_ids: list[str], k: int) -> pd.DataFrame:
+    """Add the first k donors to train only. Validation and test stay target-only."""
+    ids = donor_study_order(donor_ids)[: max(0, int(k))]
+    overlap = set(target_splits["STUDYID"].astype(str)) & set(ids)
+    if overlap:
+        raise ValueError(f"donor studies overlap target splits: {sorted(overlap)}")
+    extra = pd.DataFrame({"STUDYID": ids, "SPLIT": "train"})
+    out = pd.concat([target_splits[["STUDYID", "SPLIT"]].astype(str), extra], ignore_index=True)
+    out = out.sort_values("STUDYID").reset_index(drop=True)
+    assert_disjoint(out)
+    return out

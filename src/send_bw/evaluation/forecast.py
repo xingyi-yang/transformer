@@ -143,7 +143,7 @@ def evaluate_prestudy(model: ResponseModel, data: ModelData, n_draws: int = 200,
                crps=("crps", "mean"), n=("err_log", "size")).reset_index())
     pit_hist = np.histogram(obs_df["pit"], bins=10, range=(0, 1))[0].tolist()
     summary = {
-        "task": "pre_study_new_study", "model": model.name,
+        "task": "pre_study_new_study", "task_alias": "predose_conditioned", "model": model.name,
         "effective_sample_sizes": {"n_studies": int(len(st)), "n_animals": int(st["n_animals"].sum()),
                                    "n_obs": int(len(obs_df))},
         "observation_weighted": {"rmse_log": float(np.sqrt(np.mean(obs_df["err_log"] ** 2))),

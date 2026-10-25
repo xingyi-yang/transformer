@@ -26,7 +26,7 @@ FEATURE_REGISTRY: dict[str, str] = {
     "U_STUDY_BASELINE": "truth_only", "DOSE_DEVIATION": "truth_only", "DEATH_DAY": "truth_only",
     "ACTUAL_DOSE": "truth_only",
 }
-PREFIX_REGISTRY = {"STRAIN_": "production", "ROUTE_": "production"}
+PREFIX_REGISTRY = {"STRAIN_": "production", "ROUTE_": "production", "SPECIES_": "production"}
 
 
 def availability(col: str) -> str:
@@ -66,23 +66,48 @@ class FeatureSpec:
     version: str = "features-v1"
     animal_cols: list[str] = field(default_factory=list)
     time_cols: list[str] = field(default_factory=list)
+    sharing: str = "context_specific"
+    species_levels: list[str] = field(default_factory=list)
+    zb_mean_by_species: dict[str, dict[str, float]] = field(default_factory=dict)
 
     @staticmethod
-    def fit(animals: pd.DataFrame, obs: pd.DataFrame, compound_ref: pd.DataFrame, species: str) -> FeatureSpec:
+    def fit(animals: pd.DataFrame, obs: pd.DataFrame, compound_ref: pd.DataFrame, species: str,
+            sharing: str = "context_specific") -> FeatureSpec:
+        from send_bw.data.qc import parse_sharing
+
+        sharing = parse_sharing(sharing)
+        species_u = str(species).upper()
+        if sharing == "pooled" and "SPECIES" in animals.columns:
+            species_levels = sorted({str(s).upper() for s in animals["SPECIES"].dropna()})
+        else:
+            species_levels = [species_u]
+        tgt = animals
+        if "SPECIES" in animals.columns:
+            tgt_mask = animals["SPECIES"].astype(str).str.upper() == species_u
+            if tgt_mask.any():
+                tgt = animals.loc[tgt_mask]
+        zb_mean = {s: float(g["BASELINE_LOGW"].mean()) for s, g in tgt.groupby("SEX")}
+        zb_mean_by_species: dict[str, dict[str, float]] = {}
+        if sharing == "pooled" and len(species_levels) > 1 and "SPECIES" in animals.columns:
+            sp_key = animals["SPECIES"].astype(str).str.upper()
+            for (sp, sx), g in animals.groupby([sp_key, "SEX"]):
+                zb_mean_by_species.setdefault(str(sp), {})[str(sx)] = float(g["BASELINE_LOGW"].mean())
         cref = compound_ref.set_index("COMPOUND_ID")
         cids = sorted(set(animals["COMPOUND_ID"].dropna()))
         rng = {d: [float(cref.loc[cids, d].astype(float).min()), float(cref.loc[cids, d].astype(float).max())]
                for d in DESCRIPTORS} if cids else {d: [0.0, 0.0] for d in DESCRIPTORS}
         spec = FeatureSpec(
-            species=species, strains=sorted(animals["STRAIN"].dropna().unique().tolist()),
+            species=species_u, strains=sorted(animals["STRAIN"].dropna().unique().tolist()),
             routes=sorted(animals["ROUTE"].dropna().unique().tolist()),
             sexes=sorted(animals["SEX"].unique().tolist()),
-            zb_mean={s: float(g["BASELINE_LOGW"].mean()) for s, g in animals.groupby("SEX")},
+            zb_mean=zb_mean,
             max_dose=float(animals["PLANNED_DOSE"].max()), max_day=float(obs["DAY"].max()),
             intervals=sorted({float(x) for x in animals["INTERVAL_DAYS"].dropna()}),
-            compound_ids=cids, descriptor_ranges=rng)
+            compound_ids=cids, descriptor_ranges=rng, sharing=sharing,
+            species_levels=species_levels, zb_mean_by_species=zb_mean_by_species)
         spec.animal_cols = (["SEX_M", "ZB_C", "IS_CONTROL", "LD", "INV_INTERVAL", "START", "END"] + DESCRIPTORS
-                            + [f"STRAIN_{s}" for s in spec.strains[1:]] + [f"ROUTE_{r}" for r in spec.routes[1:]])
+                            + [f"STRAIN_{s}" for s in spec.strains[1:]] + [f"ROUTE_{r}" for r in spec.routes[1:]]
+                            + [f"SPECIES_{s}" for s in spec.species_levels[1:]])
         spec.time_cols = ["TAU", "EXPO", "OFF", "LCUM"]
         check_no_leakage(spec.animal_cols + spec.time_cols)
         return spec
@@ -92,16 +117,29 @@ class FeatureSpec:
 
     @staticmethod
     def from_dict(d: dict[str, Any]) -> FeatureSpec:
-        return FeatureSpec(**d)
+        raw = dict(d)
+        raw.setdefault("sharing", "context_specific")
+        raw.setdefault("species_levels", [])
+        raw.setdefault("zb_mean_by_species", {})
+        return FeatureSpec(**raw)
+
+    def _species_series(self, animals: pd.DataFrame) -> pd.Series:
+        if "SPECIES" in animals.columns:
+            return animals["SPECIES"].astype(str).str.upper()
+        return pd.Series([self.species.upper()] * len(animals), index=animals.index)
+
+    def allowed_species(self) -> set[str]:
+        return {self.species.upper()} | {str(s).upper() for s in self.species_levels}
 
     # ------------------------------------------------------------- applicability gates
     def check_context(self, animals: pd.DataFrame, compound_ref: pd.DataFrame, horizon: float | None = None,
                       dose_extrapolation_factor: float = 1.0) -> list[str]:
         problems = []
         cref = compound_ref.set_index("COMPOUND_ID") if len(compound_ref) else pd.DataFrame()
-        for s in set(animals.get("SPECIES", pd.Series([self.species]))):
-            if str(s).upper() != self.species:
-                problems.append(f"species {s} not supported (trained on {self.species})")
+        allowed = self.allowed_species()
+        for s in set(self._species_series(animals)):
+            if str(s).upper() not in allowed:
+                problems.append(f"species {s} not supported (trained on {sorted(allowed)})")
         for st in set(animals["STRAIN"].dropna()):
             if st not in self.strains:
                 problems.append(f"strain {st} not seen in training; no silent mapping to a familiar strain")
@@ -135,7 +173,12 @@ class FeatureSpec:
         a = animals
         out = pd.DataFrame(index=a.index)
         out["SEX_M"] = (a["SEX"] == "M").astype(float)
-        out["ZB_C"] = a["BASELINE_LOGW"].astype(float) - a["SEX"].map(self.zb_mean).astype(float)
+        sp = self._species_series(a)
+        if self.zb_mean_by_species:
+            means = [float(self.zb_mean_by_species[s][x]) for s, x in zip(sp, a["SEX"], strict=True)]
+            out["ZB_C"] = a["BASELINE_LOGW"].astype(float) - np.asarray(means, float)
+        else:
+            out["ZB_C"] = a["BASELINE_LOGW"].astype(float) - a["SEX"].map(self.zb_mean).astype(float)
         ctrl = a["IS_CONTROL"].astype(bool)
         dose = a["PLANNED_DOSE"].astype(float).where(~ctrl, 0.0).fillna(0.0)
         out["IS_CONTROL"] = ctrl.astype(float)
@@ -153,6 +196,8 @@ class FeatureSpec:
             out[f"STRAIN_{s}"] = (a["STRAIN"] == s).astype(float)
         for r in self.routes[1:]:
             out[f"ROUTE_{r}"] = (a["ROUTE"] == r).astype(float)
+        for s in self.species_levels[1:]:
+            out[f"SPECIES_{s}"] = (sp == s).astype(float)
         return out[self.animal_cols]
 
     def time_features(self, day: np.ndarray, animals_rows: pd.DataFrame) -> pd.DataFrame:

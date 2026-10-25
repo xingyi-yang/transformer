@@ -6,9 +6,22 @@ other-species studies help or harm target-species prediction?
 **First execution surface:** synthetic generator A (already emits DOG).
 Not biological validation. Not design qualification. No real data.
 
-**Models.** Context-specific vs pooled on the **existing** spline (linear
-comparator) and custom transformer (nonlinear). Bayesian and TFT are
-`not_run` unless a later amendment says otherwise. No new families.
+**Models.** Context-specific vs pooled on the **existing** hierarchical
+spline (ridge-penalized B-spline time/exposure basis with sex, baseline,
+strain, dose, compound, interval, route, and recovery interactions; pooled
+adds the same time-basis interactions for `SPECIES_*`) and the custom
+baseline-conditioned transformer (neural mean; pooled adds a species
+context token when `SPECIES_*` columns exist). Do **not** call the spline
+a linear-in-time model. Bayesian and TFT are `not_run` unless a later
+amendment says otherwise. No new families.
+
+**Selective sharing** is required in the eventual benchmark and is
+**deferred** (not implemented in stages 1–2). `sharing: selective` must
+raise.
+
+**First scored task.** Predose-conditioned prediction (v2
+`evaluate_prestudy`). Design-stage scoring and early-history are later
+waves.
 
 **Design engine.** Off. No `propose-design` in the pilot config.
 
@@ -55,20 +68,23 @@ a model.
 |---|---|---|
 | Context-specific | Fit | Repeat the \(k=0\) artifact (do not refit). This is \(S_0\) |
 | Pooled | `not_run` (no donors) | Fit with explicit species feature |
-| Selective (v1) | `not_run` | Optional in a **later** wave; not required to start |
+| Selective (v1) | `not_run` | **Required later; deferred.** Not implemented in stages 1–2. |
 
-First locked synthetic wave: context-specific + pooled only.
+First locked synthetic wave: context-specific + pooled only. Selective
+sharing stays required for the eventual benchmark and is not started here.
 
 ## 4. Score only `test_target`
 
-Stages (same holdout observations):
+**Wave 1 (this protocol’s first execution):** predose-conditioned only
+(observed baselines; v2 `evaluate_prestudy`).
+
+Later waves (same holdout observations; not started):
 
 1. Design-stage (sampled baselines from **target-train** baseline
    distribution; no holdout predose)
-2. Predose-conditioned (observed baselines; v2 `evaluate_prestudy`)
-3. Early-history `Wall14` (v2 window)
+2. Early-history `Wall14` (v2 window)
 
-Sparse-history grid is a **second** wave. Do not block wave 1 on it.
+Sparse-history grid is a **later** wave. Do not block wave 1 on it.
 
 Metrics (study-balanced): RMSE log, CRPS log, contrast bias at \(T=28\) if
 estimable. Report \(n\) studies / animals / obs.
