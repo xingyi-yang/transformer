@@ -33,6 +33,12 @@ No additional training. Prior artifacts are preserved and **superseded** for the
 - RMSE: `['spline_pooled', 'transformer_pooled', 'transformer_target_only', 'tft_target_only', 'spline_target_only', 'tft_pooled', 'last_value', 'chronos2_target_only', 'chronos2_pooled', 'chronos2_zero_shot']`
 - Legacy animal MAE: `['spline_pooled', 'transformer_pooled', 'transformer_target_only', 'spline_target_only', 'tft_target_only', 'tft_pooled', 'last_value', 'chronos2_target_only', 'chronos2_pooled', 'chronos2_zero_shot']`
 
+### Ranking and sign changes vs published official-seq tables
+
+- Corrected MAE and true RMSE produce the same ranking.
+- Study-balanced MAE ranking differs from legacy animal-balanced MAE (rank 4: tft_target_only vs spline_target_only, rank 5: spline_target_only vs tft_target_only).
+- Transfer signs (helpful/harmful) do not change vs published official-seq deltas.
+
 ### Paired transfer (pooled − target-only; Δ>0 harmful)
 
 | family | metric | target-only | pooled | Δ | sign | published Δ | sign changed |

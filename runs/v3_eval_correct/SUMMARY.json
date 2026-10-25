@@ -102,7 +102,7 @@
     "config_hash": "f4b5b4a680982f01",
     "config_path": "configs/v3_eval_correct.frozen.yaml",
     "design": false,
-    "git_revision": "9865d223771ff7368be9eba85e70ee9e89f33f88",
+    "git_revision": "655fe1ed48a832634c0ee3266ccbe1174f962253",
     "grouping": "STUDYID",
     "labels": [
       "Synthetic diagnostic.",
@@ -476,6 +476,27 @@
         "rmse_log": 0.15104188222956427
       }
     ],
+    "ranking_sign_changes": {
+      "any_transfer_sign_changed": false,
+      "grouping_note": "Study-balanced MAE ranking differs from legacy animal-balanced MAE (rank 4: tft_target_only vs spline_target_only, rank 5: spline_target_only vs tft_target_only).",
+      "legacy_vs_study_mae_rank_swaps": [
+        {
+          "legacy_animal_mae": "spline_target_only",
+          "rank": 4,
+          "study_balanced_mae": "tft_target_only"
+        },
+        {
+          "legacy_animal_mae": "tft_target_only",
+          "rank": 5,
+          "study_balanced_mae": "spline_target_only"
+        }
+      ],
+      "mae_equals_rmse_ranking": true,
+      "mae_rmse_note": "Corrected MAE and true RMSE produce the same ranking.",
+      "sign_note": "Transfer signs (helpful/harmful) do not change vs published official-seq deltas.",
+      "study_mae_equals_legacy_animal_mae_ranking": false,
+      "transfer_signs_changed": []
+    },
     "results": {
       "chronos2_pooled": {
         "chronos_label": "history_only_univariate",
