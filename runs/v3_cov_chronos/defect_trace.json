@@ -1,0 +1,312 @@
+{
+  "affected_published_metrics": [
+    "runs/v3_official_seq",
+    "runs/v3_seq_diag"
+  ],
+  "defects": {
+    "rmse_log_was_abs_error": {
+      "formula": "sqrt((point - y)^2) == |error|",
+      "where": "quantile_forecast.score_quantile_table before PR #12"
+    },
+    "studyid_merge_collision": {
+      "effect": "STUDYID_x/STUDYID_y; grouping fell back to USUBJID (animals, not studies)",
+      "where": "same scorer, merge of obs and pred both carrying STUDYID"
+    }
+  },
+  "rescore_needed": [],
+  "rescored": "runs/v3_eval_correct",
+  "runs": {
+    "runs/v3_closeout": {
+      "evidence": [],
+      "grouping": "STUDYID from ModelData, not a prediction merge",
+      "note": "mae_log and rmse_log already differ; this is not the |error| defect.",
+      "published_metric_affected": false,
+      "rescore_needed": false,
+      "rmse_definition": "sqrt(mean e^2) per study, then mean of studies (true RMSE)",
+      "scorer": "send_bw.evaluation.forecast.evaluate / evaluate_early_history",
+      "validation_selection": {
+        "chronos2": "not trained on these runs",
+        "spline": "weighted RMSE of residuals (wrmse); not quantile rmse_log",
+        "tft": "Lightning val_loss (quantile); not used on these runs",
+        "transformer": "weighted sqrt(mean w*(p-y)^2); not quantile rmse_log"
+      }
+    },
+    "runs/v3_eval": {
+      "evidence": [
+        {
+          "mae_log": 0.0676173716111947,
+          "path": "runs/v3_eval/cells/both_pooled_k1_fix_primary/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.08442548227024083
+        },
+        {
+          "mae_log": 0.039600592081245244,
+          "path": "runs/v3_eval/cells/both_pooled_k1_fix_primary/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.04886048916272816
+        },
+        {
+          "mae_log": 0.038295178701182105,
+          "path": "runs/v3_eval/cells/matched_context_specific_k0_var_primary/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.04711933490367955
+        },
+        {
+          "mae_log": 0.03423006520100086,
+          "path": "runs/v3_eval/cells/matched_context_specific_k0_var_primary/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.04221239918094281
+        }
+      ],
+      "grouping": "STUDYID from ModelData, not a prediction merge",
+      "note": "mae_log and rmse_log already differ; this is not the |error| defect.",
+      "published_metric_affected": false,
+      "rescore_needed": false,
+      "rmse_definition": "sqrt(mean e^2) per study, then mean of studies (true RMSE)",
+      "scorer": "send_bw.evaluation.forecast.evaluate / evaluate_early_history",
+      "validation_selection": {
+        "chronos2": "not trained on these runs",
+        "spline": "weighted RMSE of residuals (wrmse); not quantile rmse_log",
+        "tft": "Lightning val_loss (quantile); not used on these runs",
+        "transformer": "weighted sqrt(mean w*(p-y)^2); not quantile rmse_log"
+      }
+    },
+    "runs/v3_eval_correct": {
+      "grouping": "STUDYID from observations",
+      "note": "PR #12 correction. Not a training run.",
+      "published_metric_affected": false,
+      "rescore_needed": false,
+      "rmse_definition": "true RMSE; mae_log named separately",
+      "scorer": "corrected score_quantile_table"
+    },
+    "runs/v3_increment": {
+      "evidence": [],
+      "grouping": "STUDYID from ModelData, not a prediction merge",
+      "note": "mae_log and rmse_log already differ; this is not the |error| defect.",
+      "published_metric_affected": false,
+      "rescore_needed": false,
+      "rmse_definition": "sqrt(mean e^2) per study, then mean of studies (true RMSE)",
+      "scorer": "send_bw.evaluation.forecast.evaluate / evaluate_early_history",
+      "validation_selection": {
+        "chronos2": "not trained on these runs",
+        "spline": "weighted RMSE of residuals (wrmse); not quantile rmse_log",
+        "tft": "Lightning val_loss (quantile); not used on these runs",
+        "transformer": "weighted sqrt(mean w*(p-y)^2); not quantile rmse_log"
+      }
+    },
+    "runs/v3_objective": {
+      "evidence": [
+        {
+          "mae_log": 0.047642761663594484,
+          "path": "runs/v3_objective/eval/datasets/d2/trains/t0/cells/d2_t0_growth_shift_pooled_k1_stt4/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.059026946331106056
+        },
+        {
+          "mae_log": 0.050009357687686176,
+          "path": "runs/v3_objective/eval/datasets/d2/trains/t0/cells/d2_t0_growth_shift_pooled_k1_stt4/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.06652410856578181
+        },
+        {
+          "mae_log": 0.06861084930928989,
+          "path": "runs/v3_objective/eval/datasets/d2/trains/t0/cells/d2_t0_growth_shift_pooled_k1_stt4/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.0870944979839455
+        },
+        {
+          "mae_log": 0.05496421431871659,
+          "path": "runs/v3_objective/eval/datasets/d2/trains/t0/cells/d2_t0_growth_shift_pooled_k1_stt4/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.07192657074995731
+        }
+      ],
+      "grouping": "STUDYID from ModelData, not a prediction merge",
+      "note": "mae_log and rmse_log already differ; this is not the |error| defect.",
+      "published_metric_affected": false,
+      "rescore_needed": false,
+      "rmse_definition": "sqrt(mean e^2) per study, then mean of studies (true RMSE)",
+      "scorer": "send_bw.evaluation.forecast.evaluate / evaluate_early_history",
+      "validation_selection": {
+        "chronos2": "not trained on these runs",
+        "spline": "weighted RMSE of residuals (wrmse); not quantile rmse_log",
+        "tft": "Lightning val_loss (quantile); not used on these runs",
+        "transformer": "weighted sqrt(mean w*(p-y)^2); not quantile rmse_log"
+      }
+    },
+    "runs/v3_official_seq": {
+      "already_rescored_in": "runs/v3_eval_correct",
+      "grouping": "STUDYID if merge kept the column",
+      "note": "Tables in this run dir are preserved. Corrected MAE/true RMSE live in eval_correct.",
+      "published_metric_affected": true,
+      "published_n_studies": null,
+      "rescore_needed": false,
+      "rmse_definition": "sqrt((point-y)^2) = |error| (MAE), published as rmse_log",
+      "scorer": "send_bw.evaluation.quantile_forecast.score_quantile_table (pre-PR #12)",
+      "validation_selection": {
+        "chronos2": "eval_loss only when validation survived Chronos length filter; empty validation raises before any selection",
+        "spline": "not affected (wrmse on Gaussian residuals)",
+        "tft": "not affected (Lightning val_loss)",
+        "transformer": "not affected (true weighted val RMSE)"
+      }
+    },
+    "runs/v3_pilot_k0k1": {
+      "evidence": [
+        {
+          "mae_log": 0.0813882491079289,
+          "path": "runs/v3_pilot_k0k1/k1/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.10240654612223574
+        },
+        {
+          "mae_log": 0.04745688208482651,
+          "path": "runs/v3_pilot_k0k1/k1/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.06012068731753312
+        },
+        {
+          "mae_log": 0.04772149216884332,
+          "path": "runs/v3_pilot_k0k1/k1/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.05917268766641911
+        },
+        {
+          "mae_log": 0.046219389856643416,
+          "path": "runs/v3_pilot_k0k1/k1/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.057860046461956784
+        }
+      ],
+      "grouping": "STUDYID from ModelData, not a prediction merge",
+      "note": "mae_log and rmse_log already differ; this is not the |error| defect.",
+      "published_metric_affected": false,
+      "rescore_needed": false,
+      "rmse_definition": "sqrt(mean e^2) per study, then mean of studies (true RMSE)",
+      "scorer": "send_bw.evaluation.forecast.evaluate / evaluate_early_history",
+      "validation_selection": {
+        "chronos2": "not trained on these runs",
+        "spline": "weighted RMSE of residuals (wrmse); not quantile rmse_log",
+        "tft": "Lightning val_loss (quantile); not used on these runs",
+        "transformer": "weighted sqrt(mean w*(p-y)^2); not quantile rmse_log"
+      }
+    },
+    "runs/v3_repl": {
+      "evidence": [
+        {
+          "mae_log": 0.09798828415808518,
+          "path": "runs/v3_repl/replicates/r0/cells/r0_both_selective_regularized_k1/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.1387668265776119
+        },
+        {
+          "mae_log": 0.04297788263209129,
+          "path": "runs/v3_repl/replicates/r0/cells/r0_both_selective_regularized_k1/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.05632545919530828
+        },
+        {
+          "mae_log": 0.05072719938168053,
+          "path": "runs/v3_repl/replicates/r0/cells/r0_both_selective_regularized_k1/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.06592010147071875
+        },
+        {
+          "mae_log": 0.0701710687466422,
+          "path": "runs/v3_repl/replicates/r0/cells/r0_both_selective_regularized_k1/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.08942086434144514
+        }
+      ],
+      "grouping": "STUDYID from ModelData, not a prediction merge",
+      "note": "mae_log and rmse_log already differ; this is not the |error| defect.",
+      "published_metric_affected": false,
+      "rescore_needed": false,
+      "rmse_definition": "sqrt(mean e^2) per study, then mean of studies (true RMSE)",
+      "scorer": "send_bw.evaluation.forecast.evaluate / evaluate_early_history",
+      "validation_selection": {
+        "chronos2": "not trained on these runs",
+        "spline": "weighted RMSE of residuals (wrmse); not quantile rmse_log",
+        "tft": "Lightning val_loss (quantile); not used on these runs",
+        "transformer": "weighted sqrt(mean w*(p-y)^2); not quantile rmse_log"
+      }
+    },
+    "runs/v3_research": {
+      "evidence": [
+        {
+          "mae_log": 0.03245603625275375,
+          "path": "runs/v3_research/datasets/d1/trains/t0/cells/d1_t0_both_selective_k1_full/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.04196349019452143
+        },
+        {
+          "mae_log": 0.044550803666601635,
+          "path": "runs/v3_research/datasets/d1/trains/t0/cells/d1_t0_both_selective_k1_full/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.05668198688358866
+        },
+        {
+          "mae_log": 0.035645073300103206,
+          "path": "runs/v3_research/datasets/d1/trains/t0/cells/d1_t0_both_selective_k1_full/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.04461847173994398
+        },
+        {
+          "mae_log": 0.039486733098905206,
+          "path": "runs/v3_research/datasets/d1/trains/t0/cells/d1_t0_both_selective_k1_full/evaluation/metrics.json",
+          "rmse_equals_mae": false,
+          "rmse_gt_mae": true,
+          "rmse_log": 0.04929704562630718
+        }
+      ],
+      "grouping": "STUDYID from ModelData, not a prediction merge",
+      "note": "mae_log and rmse_log already differ; this is not the |error| defect.",
+      "published_metric_affected": false,
+      "rescore_needed": false,
+      "rmse_definition": "sqrt(mean e^2) per study, then mean of studies (true RMSE)",
+      "scorer": "send_bw.evaluation.forecast.evaluate / evaluate_early_history",
+      "validation_selection": {
+        "chronos2": "not trained on these runs",
+        "spline": "weighted RMSE of residuals (wrmse); not quantile rmse_log",
+        "tft": "Lightning val_loss (quantile); not used on these runs",
+        "transformer": "weighted sqrt(mean w*(p-y)^2); not quantile rmse_log"
+      }
+    },
+    "runs/v3_seq_diag": {
+      "already_rescored_in": "runs/v3_eval_correct",
+      "grouping": "STUDYID if merge kept the column",
+      "note": "Tables in this run dir are preserved. Corrected MAE/true RMSE live in eval_correct.",
+      "published_metric_affected": true,
+      "published_n_studies": null,
+      "rescore_needed": false,
+      "rmse_definition": "sqrt((point-y)^2) = |error| (MAE), published as rmse_log",
+      "scorer": "send_bw.evaluation.quantile_forecast.score_quantile_table (pre-PR #12)",
+      "validation_selection": {
+        "chronos2": "eval_loss only when validation survived Chronos length filter; empty validation raises before any selection",
+        "spline": "not affected (wrmse on Gaussian residuals)",
+        "tft": "not affected (Lightning val_loss)",
+        "transformer": "not affected (true weighted val RMSE)"
+      }
+    }
+  },
+  "validation_selection_affected": false,
+  "validation_selection_note": "Spline wrmse, transformer val_rmse, and TFT val_loss did not use the defective quantile rmse_log. Chronos-2 dataset-0 failed at validation length filtering before eval_loss selection."
+}

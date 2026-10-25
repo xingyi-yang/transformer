@@ -407,7 +407,7 @@ def _write_report(parent: Path, out: dict[str, Any], defect: dict[str, Any]) -> 
         f"`{defect.get('validation_selection_affected')}`",
         f"- {defect.get('validation_selection_note')}",
         "",
-        "## Official-seq frozen holdout (this run)",
+        "## Fresh frozen holdout",
         "",
         f"- generate_seed / train_seed: `{out.get('freeze_lock', {}).get('generate_seed')}` / "
         f"`{out.get('freeze_lock', {}).get('train_seed')}`",

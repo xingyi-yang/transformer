@@ -1,0 +1,132 @@
+{
+ "name": "tft",
+ "task": "early_history",
+ "spec": {
+  "species": "RAT",
+  "strains": [
+   "BEAGLE",
+   "SPRAGUE-DAWLEY",
+   "WISTAR HAN"
+  ],
+  "routes": [
+   "ORAL GAVAGE"
+  ],
+  "sexes": [
+   "F",
+   "M"
+  ],
+  "zb_mean": {
+   "F": 5.291907249728608,
+   "M": 5.572622293289623
+  },
+  "max_dose": 1000.0,
+  "max_day": 28.0,
+  "intervals": [
+   1.0,
+   7.0
+  ],
+  "compound_ids": [
+   "CMP01",
+   "CMP02",
+   "CMP03",
+   "CMP05",
+   "CMP06"
+  ],
+  "descriptor_ranges": {
+   "D1": [
+    -0.6218,
+    1.0969
+   ],
+   "D2": [
+    -0.825,
+    1.8165
+   ],
+   "D3": [
+    -1.0333,
+    0.8109
+   ]
+  },
+  "t_ref": 28.0,
+  "version": "features-v1",
+  "animal_cols": [
+   "SEX_M",
+   "ZB_C",
+   "IS_CONTROL",
+   "LD",
+   "INV_INTERVAL",
+   "START",
+   "END",
+   "D1",
+   "D2",
+   "D3",
+   "STRAIN_SPRAGUE-DAWLEY",
+   "STRAIN_WISTAR HAN",
+   "SPECIES_RAT"
+  ],
+  "time_cols": [
+   "TAU",
+   "EXPO",
+   "OFF",
+   "LCUM"
+  ],
+  "sharing": "pooled",
+  "species_levels": [
+   "DOG",
+   "RAT"
+  ],
+  "zb_mean_by_species": {
+   "DOG": {
+    "F": 9.05425680610971,
+    "M": 9.186497967501966
+   },
+   "RAT": {
+    "F": 5.291907249728608,
+    "M": 5.572622293289623
+   }
+  },
+  "declared_species": [
+   "RAT",
+   "DOG"
+  ],
+  "fixed_schema": false
+ },
+ "quantiles": [
+  0.1,
+  0.25,
+  0.5,
+  0.75,
+  0.9
+ ],
+ "encoder_window_day": 14.0,
+ "max_encoder_length": 8,
+ "max_prediction_length": 6,
+ "min_encoder_length": 1,
+ "history": {
+  "name": "tft",
+  "task": "early_history",
+  "library": "pytorch_forecasting.TemporalFusionTransformer",
+  "official_class": "pytorch_forecasting.TemporalFusionTransformer",
+  "training_scope": "pooled",
+  "not_the_required_transformer": true,
+  "n_train_series": 308,
+  "n_val_series": 81,
+  "n_train_obs": 2070,
+  "max_encoder_length": 8,
+  "max_prediction_length": 6,
+  "min_encoder_length": 1,
+  "encoder_window_day": 14.0,
+  "quantiles": [
+   0.1,
+   0.25,
+   0.5,
+   0.75,
+   0.9
+  ],
+  "allow_missing_timesteps": true,
+  "observed_rows_only": true,
+  "filled_target_with_zero": false,
+  "max_epochs": 8,
+  "note": "early-history only; baseline-only pre-study and design simulation are not supported; VAR is a quantile-spread approximation"
+ },
+ "not_the_required_transformer": true
+}
