@@ -150,7 +150,12 @@ def build_observed_panel(data: ModelData) -> pd.DataFrame:
     panel = panel.sort_values(["USUBJID", "DAY"], kind="stable").reset_index(drop=True)
     panel["time_idx"] = panel.groupby("USUBJID", sort=False).cumcount().astype(int)
     for c in STATIC_CATS:
-        panel[c] = panel[c].astype(str)
+        if c not in panel.columns:
+            panel[c] = "UNK"
+        panel[c] = panel[c].astype(object).where(pd.notna(panel[c]), "UNK").map(str)
+    for c in STATIC_REALS + KNOWN_REALS + ["WEIGHT"]:
+        if c in panel.columns:
+            panel[c] = pd.to_numeric(panel[c], errors="coerce").fillna(0.0)
     return panel
 
 
@@ -202,6 +207,9 @@ class TFTEarlyHistoryModel(ResponseModel):
         torch.manual_seed(seed)
         np.random.seed(seed)
 
+        from pytorch_forecasting.data import NaNLabelEncoder
+
+        cat_enc = {c: NaNLabelEncoder(add_nan=True) for c in list(GROUP_IDS) + list(STATIC_CATS)}
         ds_kwargs = dict(
             time_idx="time_idx",
             target=TARGET,
@@ -219,6 +227,7 @@ class TFTEarlyHistoryModel(ResponseModel):
             add_relative_time_idx=True,
             add_target_scales=False,
             add_encoder_length=True,
+            categorical_encoders=cat_enc,
         )
         training = TimeSeriesDataSet(train_panel, **ds_kwargs)
         validation_ds = _call_dataset_factory(TimeSeriesDataSet.from_dataset, training, val_panel, predict=False)
@@ -263,6 +272,8 @@ class TFTEarlyHistoryModel(ResponseModel):
             "name": self.name,
             "task": self.task,
             "library": "pytorch_forecasting.TemporalFusionTransformer",
+            "official_class": "pytorch_forecasting.TemporalFusionTransformer",
+            "training_scope": str(config.get("training_scope", "unspecified")),
             "not_the_required_transformer": True,
             "n_train_series": int(train_panel["USUBJID"].nunique()),
             "n_val_series": int(val_panel["USUBJID"].nunique()),
@@ -322,32 +333,85 @@ class TFTEarlyHistoryModel(ResponseModel):
             min_encoder_length=self.min_encoder_length, max_encoder_length=enc_cap)
         raw = self.net.predict(pred_ds, mode="quantiles", return_index=True)
         q, index = _unpack_predict(raw, pred_ds)
-        mean, var = quantiles_to_mean_var(q, self.quantiles)
+        return self._align_quantiles(q, index, panel, times, as_marginals=True)
+
+    def predict_quantiles(self, context: pd.DataFrame, times: np.ndarray,
+                          history: pd.DataFrame | None = None) -> pd.DataFrame:
+        """Official TFT quantile forecasts. Not a trajectory simulator."""
+        if history is None or not len(history):
+            raise ValueError(BASELINE_ONLY_REASON)
+        if self.net is None or self.dataset_parameters is None or self.spec is None:
+            raise RuntimeError("TFT adapter is not fitted")
+        TimeSeriesDataSet, _, _ = _pf()
+        times = np.asarray(times, float)
+        ctx = context.reset_index(drop=True)
+        hist = history.copy()
+        if "LOGW" not in hist.columns:
+            raise ValueError("early-history encoder requires LOGW")
+        rows = []
+        for _, animal in ctx.iterrows():
+            u = animal["USUBJID"]
+            hh = hist.loc[hist["USUBJID"] == u].sort_values("DAY")
+            if hh.empty:
+                continue
+            enc = self._animal_rows(animal, hh["DAY"].to_numpy(float), hh["LOGW"].to_numpy(float))
+            dec = self._animal_rows(animal, times, np.repeat(hh["LOGW"].to_numpy(float)[-1], len(times)))
+            both = pd.concat([enc, dec], ignore_index=True)
+            both["time_idx"] = np.arange(len(both), dtype=int)
+            rows.append(both)
+        if not rows:
+            return pd.DataFrame()
+        panel = pd.concat(rows, ignore_index=True)
+        n_dec = int(len(times))
+        enc_cap = max(self.max_encoder_length, int(panel.groupby("USUBJID").size().max() - n_dec))
+        pred_ds = _call_dataset_factory(
+            TimeSeriesDataSet.from_parameters, self.dataset_parameters, panel, predict=True,
+            min_prediction_length=n_dec, max_prediction_length=n_dec,
+            min_encoder_length=self.min_encoder_length, max_encoder_length=enc_cap)
+        raw = self.net.predict(pred_ds, mode="quantiles", return_index=True)
+        q, index = _unpack_predict(raw, pred_ds)
+        return self._align_quantiles(q, index, panel, times, as_marginals=False)
+
+    def _align_quantiles(self, q: np.ndarray, index: pd.DataFrame | None, panel: pd.DataFrame,
+                         times: np.ndarray, *, as_marginals: bool) -> pd.DataFrame:
         if index is None:
             raise RuntimeError("TFT predict() did not return an index; cannot align USUBJID/DAY")
         out = index.copy()
         if "USUBJID" not in out.columns:
             raise RuntimeError("TFT predict index is missing USUBJID")
-        # decoder time_idx maps back to the panel DAY
         key = panel[["USUBJID", "time_idx", "DAY"]].drop_duplicates()
         tcol = "time_idx" if "time_idx" in out.columns else None
-        if tcol is None:
-            # some PF versions store the decoder start; broadcast times in order
-            recs = []
-            for i, u in enumerate(out["USUBJID"].to_numpy()):
-                for j, t in enumerate(times):
-                    recs.append((u, t, float(mean[i, j]), float(var[i, j])))
-            return pd.DataFrame(recs, columns=["USUBJID", "DAY", "MEAN", "VAR"])
         recs = []
         for i, row in out.reset_index(drop=True).iterrows():
             u = row["USUBJID"]
-            for j in range(mean.shape[1]):
-                ti = int(row[tcol]) + j if mean.ndim > 1 else int(row[tcol])
-                hit = key[(key["USUBJID"] == u) & (key["time_idx"] == ti)]
-                day = float(hit["DAY"].iloc[0]) if len(hit) else float(times[min(j, len(times) - 1)])
-                recs.append((u, day, float(mean[i, j] if mean.ndim > 1 else mean[i]),
-                             float(var[i, j] if var.ndim > 1 else var[i])))
-        return pd.DataFrame(recs, columns=["USUBJID", "DAY", "MEAN", "VAR"])
+            n_h = q.shape[1] if q.ndim > 1 else 1
+            for j in range(n_h):
+                if tcol is None:
+                    day = float(times[min(j, len(times) - 1)])
+                else:
+                    ti = int(row[tcol]) + j if q.ndim > 1 else int(row[tcol])
+                    hit = key[(key["USUBJID"] == u) & (key["time_idx"] == ti)]
+                    day = float(hit["DAY"].iloc[0]) if len(hit) else float(times[min(j, len(times) - 1)])
+                if q.ndim >= 3:
+                    vec = q[i, j]
+                elif q.ndim == 2:
+                    vec = q[i] if q.shape[1] == len(self.quantiles) and n_h == 1 else q[i, j] if q.shape[0] == len(out) else q[j]
+                else:
+                    vec = q
+                vec = np.atleast_1d(np.asarray(vec, float))
+                item = {"USUBJID": u, "DAY": day}
+                for k, lev in enumerate(self.quantiles):
+                    if k < len(vec):
+                        item[f"q{lev}"] = float(vec[k])
+                if as_marginals:
+                    mean, var = quantiles_to_mean_var(vec.reshape(1, -1), self.quantiles)
+                    item["MEAN"] = float(mean[0])
+                    item["VAR"] = float(var[0])
+                recs.append(item)
+        cols = ["USUBJID", "DAY"] + [f"q{q}" for q in self.quantiles]
+        if as_marginals:
+            cols += ["MEAN", "VAR"]
+        return pd.DataFrame(recs)[ [c for c in cols if c in pd.DataFrame(recs).columns] ]
 
     def _animal_rows(self, animal: pd.Series, days: np.ndarray, logw: np.ndarray) -> pd.DataFrame:
         n = len(days)

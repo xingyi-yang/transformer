@@ -1,0 +1,99 @@
+# Official TFT (pytorch-forecasting TemporalFusionTransformer) and
+# Chronos-2 (chronos.Chronos2Pipeline, amazon/chronos-2).
+# Common early-history task. Identical target holdouts and DAY<=14 cutoff.
+# Synthetic only. No design. No real data.
+# Synthetic diagnostic. Not design qualification. No operational recommendation.
+run_name: v3_official_seq
+output_dir: runs/v3_official_seq
+generate_seed: 71001
+train_seed: 81001
+seed: 81001
+official_seq:
+  bank: matched
+  n_donor_studies: 3
+  encoder_window_day: 14
+synthetic:
+  enabled: true
+  out_dir: runs/v3_official_seq/datasets/d0/banks/matched/synthetic
+  generator: A
+  n_studies: 12
+  n_other_species_studies: 3
+  n_compounds: 6
+  n_per_sex: [3, 4]
+  donor_scenario: matched
+mapping: configs/mappings/example_send.yaml
+source:
+  type: local
+  root: runs/v3_official_seq/datasets/d0/banks/matched/synthetic/send
+  layout: per_study
+  metadata_dir: runs/v3_official_seq/datasets/d0/banks/matched/synthetic/metadata
+cohort:
+  species: RAT
+  donor_species: [DOG]
+  sharing: context_specific
+  n_donor_studies: 0
+  study_classes: [REPEAT_DOSE_TOX]
+  max_day: 28
+splits:
+  method: random
+  validation: 0.2
+  test: 0.2
+  compound_holdout_auto: 1
+models:
+  spline:
+    enabled: true
+    n_bootstrap: 4
+    oof_folds: 5
+    seed: 81001
+  transformer:
+    enabled: true
+    n_members: 1
+    max_epochs: 8
+    patience: 4
+    d_model: 32
+    n_heads: 2
+    n_layers: 1
+    seed: 81001
+    torch_threads: 2
+  bayesian:
+    enabled: false
+  optional:
+    tft:
+      enabled: true
+      max_epochs: 8
+      patience: 4
+      hidden_size: 16
+      lstm_layers: 1
+      attention_head_size: 2
+      hidden_continuous_size: 8
+      batch_size: 32
+      lr: 0.003
+      encoder_window_day: 14
+      max_encoder_length: 8
+      max_prediction_length: 6
+      min_encoder_length: 1
+      torch_threads: 2
+    chronos2:
+      enabled: true
+      download_permission: true
+      pretrained_id: amazon/chronos-2
+      device_map: cpu
+      finetune_mode: lora
+      num_steps: 40
+      batch_size: 8
+      lr: 0.00001
+      prediction_length: 6
+      min_past: 2
+      encoder_window_day: 14
+    deepar: {enabled: false}
+evaluation:
+  tasks: [early_history]
+  early_history_window_day: 14
+  n_draws: 40
+  contrast_day: 28
+design: {}
+labels:
+  - Synthetic diagnostic.
+  - Not design qualification.
+  - No real-data validation.
+  - No operational recommendation.
