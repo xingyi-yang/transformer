@@ -246,6 +246,8 @@ def execute_v3_cov_chronos(config_path: str | Path, force: bool = False) -> dict
             sc_h["seconds"] = time.time() - t1
             sc_h["chronos_label"] = HISTORY_ONLY
             results["chronos2_zero_shot_history"] = sc_h
+            reloads["chronos2_zero_shot"] = _reload_check(
+                Chronos2EarlyHistoryModel.load, dest, zs, test, window)
             zs.covariate_mode = COVARIATE_AWARE
             t2 = time.time()
             sc_c = _score_quantiles(zs, test, window, "chronos2_quantiles",
@@ -254,8 +256,6 @@ def execute_v3_cov_chronos(config_path: str | Path, force: bool = False) -> dict
             sc_c["seconds"] = time.time() - t2
             sc_c["chronos_label"] = COVARIATE_AWARE
             results["chronos2_zero_shot_covariate"] = sc_c
-            reloads["chronos2_zero_shot"] = _reload_check(
-                Chronos2EarlyHistoryModel.load, dest, zs, test, window)
         except Exception as e:  # noqa: BLE001
             results["chronos2_zero_shot_history"] = {
                 "status": "failed", "reason": f"{type(e).__name__}: {e}"}
