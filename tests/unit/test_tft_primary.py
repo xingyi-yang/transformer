@@ -13,6 +13,7 @@ from send_bw.models.tft import (
     STATIC_CATS,
     build_target_normalizer,
     cat_label,
+    dataset_group_ids,
     uses_target_scales,
 )
 from send_bw.tft_early_hist_extend import load_yaml
@@ -110,6 +111,47 @@ def test_species_normalizer_skips_relu_and_groups_when_mixed():
     assert enc.transformation is None
     assert uses_target_scales(mixed, {}) is True
     assert uses_target_scales(one, {}) is False
+    assert dataset_group_ids(mixed, {}) == ["SPECIES", "USUBJID"]
+    assert dataset_group_ids(one, {}) == ["USUBJID"]
+
+
+@pytest.mark.skipif(not PF_INSTALLED, reason="pytorch_forecasting extra not installed")
+def test_species_grouped_dataset_getitem_does_not_raise():
+    from pytorch_forecasting import TimeSeriesDataSet
+    from pytorch_forecasting.data import NaNLabelEncoder
+
+    from send_bw.models.tft import STATIC_REALS, TARGET, build_target_normalizer
+
+    rows = []
+    for sp, level in (("RAT", 5.6), ("DOG", 9.1)):
+        for a in range(3):
+            for t, day in enumerate((7.0, 14.0, 21.0, 28.0)):
+                rows.append({
+                    "USUBJID": f"{sp}-{a}", "STUDYID": f"{sp}-S", "SPECIES": sp,
+                    "SEX": "M", "STRAIN": "X", "ROUTE": "ORAL", "COMPOUND_ID": "UNK",
+                    "CTRL": "C", "DAY": day, "TAU": day, "EXPO": 0.0, "OFF": 0.0, "LCUM": 0.0,
+                    "ZB_C": 0.0, "LD": 0.0, "INV_INTERVAL": 1.0, "START": 0.0, "END": 28.0,
+                    "D1": 0.0, "D2": 0.0, "D3": 0.0, "LOGW": level + 0.01 * t,
+                    "WEIGHT": 1.0, "time_idx": t,
+                })
+    panel = pd.DataFrame(rows)
+    groups = dataset_group_ids(panel, {})
+    cats = ["SEX", "STRAIN", "SPECIES", "ROUTE", "COMPOUND_ID", "CTRL"]
+    ds = TimeSeriesDataSet(
+        panel,
+        time_idx="time_idx", target=TARGET, group_ids=groups, weight="WEIGHT",
+        max_encoder_length=3, min_encoder_length=1, max_prediction_length=2,
+        min_prediction_length=1,
+        static_categoricals=cats, static_reals=list(STATIC_REALS),
+        time_varying_known_reals=["DAY", "TAU", "EXPO", "OFF", "LCUM"],
+        time_varying_unknown_reals=[TARGET],
+        allow_missing_timesteps=True, add_relative_time_idx=True,
+        add_target_scales=True, add_encoder_length=True,
+        categorical_encoders={c: NaNLabelEncoder(add_nan=True) for c in groups + cats},
+        target_normalizer=build_target_normalizer(panel, {}),
+    )
+    sample = ds[0]
+    assert sample is not None
 
 
 def test_diagnosis_reads_locked_extra_split_without_writing(tmp_path):

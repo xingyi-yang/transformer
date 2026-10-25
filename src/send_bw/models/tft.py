@@ -179,6 +179,20 @@ def build_target_normalizer(panel: pd.DataFrame, config: dict[str, Any] | None =
     return GroupNormalizer(method="standard", center=True, transformation=None)
 
 
+def dataset_group_ids(panel: pd.DataFrame, config: dict[str, Any] | None = None) -> list[str]:
+    """Series identity for TimeSeriesDataSet.
+
+    PF ``GroupNormalizer.get_parameters`` only sees ``group_ids``. A SPECIES-grouped
+    scale therefore requires SPECIES as the first group id. USUBJID remains in the
+    key so each animal is still its own series.
+    """
+    if "SPECIES" in panel.columns and int(panel["SPECIES"].nunique()) > 1:
+        kind = str((config or {}).get("target_normalizer") or "species_or_global").strip().lower()
+        if kind in {"species", "species_or_global"}:
+            return ["SPECIES", "USUBJID"]
+    return list(GROUP_IDS)
+
+
 def uses_target_scales(panel: pd.DataFrame, config: dict[str, Any] | None = None) -> bool:
     """Group/encoder scales are network inputs; a single global standardizer is not."""
     cfg = config or {}
@@ -380,13 +394,14 @@ class TFTEarlyHistoryModel(ResponseModel):
 
         from pytorch_forecasting.data import NaNLabelEncoder
 
-        cat_enc = {c: NaNLabelEncoder(add_nan=True) for c in list(GROUP_IDS) + list(STATIC_CATS)}
+        group_ids = dataset_group_ids(train_panel, config)
+        cat_enc = {c: NaNLabelEncoder(add_nan=True) for c in list(group_ids) + list(STATIC_CATS)}
         target_normalizer = build_target_normalizer(train_panel, config)
         add_scales = uses_target_scales(train_panel, config)
         ds_kwargs = dict(
             time_idx="time_idx",
             target=TARGET,
-            group_ids=list(GROUP_IDS),
+            group_ids=list(group_ids),
             weight="WEIGHT",
             max_encoder_length=self.max_encoder_length,
             min_encoder_length=self.min_encoder_length,
@@ -493,6 +508,7 @@ class TFTEarlyHistoryModel(ResponseModel):
             "max_epochs": int(config.get("max_epochs", 20)),
             "target_normalizer": normalizer_record(fitted_norm),
             "add_target_scales": add_scales,
+            "group_ids": list(group_ids),
             "cat_label": "UNK_not_nan",
             "categorical_classes": categorical_encoder_classes(self.dataset_parameters),
             "curves": curve.rows,

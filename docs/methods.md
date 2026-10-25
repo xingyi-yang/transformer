@@ -72,7 +72,9 @@ days are acceptable, but unobserved `LOGW` is never filled with 0) and
 `TemporalFusionTransformer.from_dataset` on CPU. Missing static categoricals use the token
 `UNK` at train and predict time (NaN is not the string `"nan"`). The default target scale is
 a SPECIES-grouped `GroupNormalizer` when more than one species is present, otherwise a global
-standardizer; `transformation=None` because `LOGW` is already `ln(grams)`. MEAN is the
+standardizer; `transformation=None` because `LOGW` is already `ln(grams)`. PyTorch Forecasting
+only looks up group scales through `group_ids`, so mixed-species fits use
+`group_ids=["SPECIES", "USUBJID"]` (each animal remains its own series). MEAN is the
 0.5 quantile; VAR is a quantile-spread approximation. Pooled pretraining can continue on the
 target species via `from_parameters` so donor SPECIES classes are kept. Without `send-bw[tft]`
 it stays `not_run`. It refuses baseline-only / pre-study prediction and `sample_study`.
