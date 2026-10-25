@@ -1,0 +1,159 @@
+{
+  "audit": {
+    "n_pr14_cells": 8
+  },
+  "authorization_present": false,
+  "design_run": false,
+  "erratum": {
+    "all_supported": true,
+    "claims": [
+      {
+        "dataset_index": 0,
+        "id": "pr14_d0_spline_selective",
+        "numbers": {
+          "selective": {
+            "mae": 0.02681164782693095,
+            "pinball": 0.009630390139144466,
+            "rmse": 0.03549778403147913
+          },
+          "selective_regularized": {
+            "mae": 0.02672306117912723,
+            "pinball": 0.010118019139484508,
+            "rmse": 0.0353805221277278
+          },
+          "target_only": {
+            "mae": 0.027418126804387516,
+            "pinball": 0.010024264515448644,
+            "rmse": 0.03623816900100929
+          }
+        },
+        "statement": "On dataset 0, unregularized spline selective improves MAE, RMSE, and pinball; selective_regularized improves MAE/RMSE but worsens pinball.",
+        "supported": true
+      },
+      {
+        "dataset_index": 1,
+        "id": "pr14_d1_chronos_vs_last_value",
+        "numbers": {
+          "chronos2_pooled_history_mae": 0.10319112388267877,
+          "chronos2_target_only_history_mae": 0.10263138490208294,
+          "chronos2_zero_shot_history_mae": 0.10945143355554868,
+          "chronos2_zero_shot_history_rmse": 0.12595961648751774,
+          "last_value_mae": 0.10637670252259208,
+          "last_value_rmse": 0.12334966098175218
+        },
+        "statement": "On PR #14 dataset 1, history-only Chronos fine-tunes beat last-value; only history-only zero-shot Chronos trails it.",
+        "supported": true
+      }
+    ],
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "source": "runs/v3_share_repl/SUMMARY.json",
+    "status": "ok"
+  },
+  "execute_command": "send-bw v3-share-abstain --config configs/v3_share_abstain.frozen.yaml",
+  "execute_requires": "share_abstain.execute: true in the frozen config after approval",
+  "freeze_lock": {
+    "abstention": {
+      "metric": "val_rmse_log",
+      "min_improvement": 0.0,
+      "threshold_from_test": false,
+      "tie": "target_only"
+    },
+    "abstention_reuses": [
+      "target_only",
+      "selected_one"
+    ],
+    "additional_fits_for_abstention": 0,
+    "banks": [
+      "matched",
+      "both"
+    ],
+    "compute_cap_seconds": 600,
+    "config_hash": "9d0152f5a465cfa9",
+    "config_path": "configs/v3_share_abstain.frozen.yaml",
+    "dataset_variability_estimated": true,
+    "densities": [
+      "full",
+      "sparse"
+    ],
+    "design": false,
+    "donor_rng_seed": 91001,
+    "encoder_window_day": 14.0,
+    "estimated_runtime_seconds": {
+      "lower": 120,
+      "point": 180,
+      "upper": 480
+    },
+    "execute": false,
+    "fabricate_encoder_history": false,
+    "generate_seeds": [
+      76001,
+      77010
+    ],
+    "git_revision": "da46768c0883b979e4520e41d00ee3fbcb3c4a79",
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "n_dataset_seeds": 2,
+    "n_model_fits": 68,
+    "n_train_seeds": 1,
+    "n_trained_cells": 34,
+    "new_architectures": false,
+    "not_sparse_encoder": true,
+    "policy_arms": [
+      "target_only",
+      "random_one",
+      "selected_one",
+      "pooled_all",
+      "selected_abstain",
+      "selected_regularized"
+    ],
+    "preserved": [
+      "runs/v3_eval",
+      "runs/v3_pilot_k0k1",
+      "runs/v3_repl",
+      "runs/v3_research",
+      "runs/v3_closeout",
+      "runs/v3_audit",
+      "runs/v3_increment",
+      "runs/v3_phaseb",
+      "runs/v3_limitations",
+      "runs/v3_objective",
+      "runs/v3_official_seq",
+      "runs/v3_seq_diag",
+      "runs/v3_eval_correct",
+      "runs/v3_cov_chronos",
+      "runs/v3_share_repl"
+    ],
+    "real_data": false,
+    "retune_after_test": false,
+    "selector_sees_generator_labels": false,
+    "sparse_kind": "sparse_target_study_training",
+    "sparse_target_train_n": 4,
+    "train_seeds": [
+      85001
+    ],
+    "training_seed_variability_estimated": false
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "new_architectures": false,
+  "output_dir": "runs/v3_share_abstain",
+  "protected": {
+    "changed": [],
+    "unchanged": true
+  },
+  "real_data_accessed": false,
+  "status": "locked_not_executed"
+}

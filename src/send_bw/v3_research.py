@@ -156,6 +156,18 @@ def _cell_cfg(base: dict[str, Any], parent: Path, spec: dict[str, Any], *,
         cfg["splits"]["reuse_target_from"] = reuse_target_from
     else:
         cfg["splits"].pop("reuse_target_from", None)
+    if spec.get("selected_donor_ids") is not None:
+        cfg["splits"]["selected_donor_ids"] = list(spec["selected_donor_ids"])
+    else:
+        cfg["splits"].pop("selected_donor_ids", None)
+    if spec.get("donor_rule"):
+        cfg["splits"]["donor_rule"] = spec["donor_rule"]
+    else:
+        cfg["splits"].pop("donor_rule", None)
+    if spec.get("donor_rng_seed") is not None:
+        cfg["splits"]["donor_rng_seed"] = int(spec["donor_rng_seed"])
+    else:
+        cfg["splits"].pop("donor_rng_seed", None)
     cfg["design"] = {}
     budgets = ((cfg.get("research") or {}).get("budgets") or {}).get("primary") or {}
     models_cfg = dict(cfg.get("models") or {})

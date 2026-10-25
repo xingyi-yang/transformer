@@ -1,0 +1,86 @@
+{
+  "abstention": {
+    "metric": "val_rmse_log",
+    "min_improvement": 0.0,
+    "threshold_from_test": false,
+    "tie": "target_only"
+  },
+  "abstention_reuses": [
+    "target_only",
+    "selected_one"
+  ],
+  "additional_fits_for_abstention": 0,
+  "banks": [
+    "matched",
+    "both"
+  ],
+  "compute_cap_seconds": 600,
+  "config_hash": "9d0152f5a465cfa9",
+  "config_path": "configs/v3_share_abstain.frozen.yaml",
+  "dataset_variability_estimated": true,
+  "densities": [
+    "full",
+    "sparse"
+  ],
+  "design": false,
+  "donor_rng_seed": 91001,
+  "encoder_window_day": 14.0,
+  "estimated_runtime_seconds": {
+    "lower": 120,
+    "point": 180,
+    "upper": 480
+  },
+  "execute": false,
+  "fabricate_encoder_history": false,
+  "generate_seeds": [
+    76001,
+    77010
+  ],
+  "git_revision": "da46768c0883b979e4520e41d00ee3fbcb3c4a79",
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "n_dataset_seeds": 2,
+  "n_model_fits": 68,
+  "n_train_seeds": 1,
+  "n_trained_cells": 34,
+  "new_architectures": false,
+  "not_sparse_encoder": true,
+  "policy_arms": [
+    "target_only",
+    "random_one",
+    "selected_one",
+    "pooled_all",
+    "selected_abstain",
+    "selected_regularized"
+  ],
+  "preserved": [
+    "runs/v3_eval",
+    "runs/v3_pilot_k0k1",
+    "runs/v3_repl",
+    "runs/v3_research",
+    "runs/v3_closeout",
+    "runs/v3_audit",
+    "runs/v3_increment",
+    "runs/v3_phaseb",
+    "runs/v3_limitations",
+    "runs/v3_objective",
+    "runs/v3_official_seq",
+    "runs/v3_seq_diag",
+    "runs/v3_eval_correct",
+    "runs/v3_cov_chronos",
+    "runs/v3_share_repl"
+  ],
+  "real_data": false,
+  "retune_after_test": false,
+  "selector_sees_generator_labels": false,
+  "sparse_kind": "sparse_target_study_training",
+  "sparse_target_train_n": 4,
+  "train_seeds": [
+    85001
+  ],
+  "training_seed_variability_estimated": false
+}

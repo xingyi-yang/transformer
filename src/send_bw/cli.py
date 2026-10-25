@@ -94,7 +94,7 @@ def main(argv: list[str] | None = None) -> int:
                  "v3-eval", "v3-repl", "v3-research", "v3-closeout", "v3-increment",
                  "v3-limitations", "v3-objective", "v3-official-seq", "v3-seq-diag",
                  "v3-eval-correct", "v3-cov-chronos", "v3-share-repl",
-                 "historical-audit"]:
+                 "v3-share-abstain", "historical-audit"]:
         s = sub.add_parser(name)
         artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout",
                                 "v3-increment", "v3-limitations")
@@ -263,6 +263,24 @@ def main(argv: list[str] | None = None) -> int:
                               "n_failures": len(out.get("failures") or []),
                               "chronos_complete": (out.get("chronos_finetune_pool") or {}).get(
                                   "n_complete"),
+                              "real_data_accessed": out.get("real_data_accessed"),
+                              "parent": out.get("output_dir")},
+                             indent=2, default=str))
+            return 0
+        if args.cmd == "v3-share-abstain":
+            from send_bw.v3_share_abstain import execute_v3_share_abstain
+
+            out = execute_v3_share_abstain(args.config, force=args.force)
+            lock = out.get("freeze_lock") or {}
+            print(json.dumps({"status": out.get("status"),
+                              "n_dataset_seeds": lock.get("n_dataset_seeds"),
+                              "n_train_seeds": lock.get("n_train_seeds"),
+                              "generate_seeds": lock.get("generate_seeds"),
+                              "train_seeds": lock.get("train_seeds"),
+                              "execute": lock.get("execute"),
+                              "n_model_fits": lock.get("n_model_fits"),
+                              "estimated_runtime_seconds": lock.get("estimated_runtime_seconds"),
+                              "protected_unchanged": (out.get("protected") or {}).get("unchanged"),
                               "real_data_accessed": out.get("real_data_accessed"),
                               "parent": out.get("output_dir")},
                              indent=2, default=str))

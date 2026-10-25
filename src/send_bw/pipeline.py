@@ -235,7 +235,7 @@ class Run:
             sparse_meta["target_manifest_test_hash"] = tman["test"]["hash"]
             write_json(self.p("splits", "sparse_target_train.json"), sparse_meta)
         donor_parts_a, donor_parts_o = [], []
-        if donor_mode:
+        if ccfg.donor_species:
             for ds in ccfg.donor_species:
                 dc = select_cohort(t, replace(target_cfg, species=str(ds).upper()))
                 if len(dc.animals):
@@ -249,13 +249,28 @@ class Run:
             donor_animals = target_cohort.animals.iloc[0:0]
             donor_obs = target_cohort.obs.iloc[0:0]
             donor_ids_all = []
-        k = min(int(ccfg.n_donor_studies) if donor_mode else 0, len(donor_ids_all))
-        selected = donor_ids_all[:k]
+        from send_bw.share_policy import resolve_donors
+
+        explicit = scfg.get("selected_donor_ids")
+        rule = scfg.get("donor_rule") or ("prefix" if donor_mode else "zero")
+        picked = resolve_donors(
+            donor_ids_all,
+            k=int(ccfg.n_donor_studies) if donor_mode else 0,
+            rule=str(rule),
+            rng_seed=scfg.get("donor_rng_seed"),
+            explicit=list(explicit) if explicit is not None else None,
+            allow_donors=bool(donor_mode or explicit is not None),
+        )
+        selected = list(picked["selected"])
+        k = int(picked["k"])
         write_json(self.p("splits", "donor_order.json"), {
             "studyids": donor_ids_all, "k": k, "selected": selected,
             "sharing": ccfg.sharing, "donor_species": list(ccfg.donor_species),
+            "rule": picked.get("rule"), "rng_seed": picked.get("rng_seed"),
+            "test_outcomes_used": False, "validation_outcomes_used": False,
+            "eligible_recorded": True,
         })
-        splits = compose_train_with_donors(splits_target, donor_ids_all, k)
+        splits = compose_train_with_donors(splits_target, selected, len(selected))
         h = freeze_splits(splits, self.p("splits", "splits"))
         animals = target_cohort.animals.copy()
         obs = target_cohort.obs.copy()

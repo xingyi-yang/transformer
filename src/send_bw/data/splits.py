@@ -94,6 +94,15 @@ def donor_study_order(study_ids) -> list[str]:
 def compose_train_with_donors(target_splits: pd.DataFrame, donor_ids: list[str], k: int) -> pd.DataFrame:
     """Add the first k donors to train only. Validation and test stay target-only."""
     ids = donor_study_order(donor_ids)[: max(0, int(k))]
+    return compose_train_with_selected_donors(target_splits, ids)
+
+
+def compose_train_with_selected_donors(target_splits: pd.DataFrame,
+                                       selected_ids: list[str]) -> pd.DataFrame:
+    """Add the listed donors to train only. Validation and test stay target-only."""
+    ids = [str(s) for s in selected_ids]
+    if len(ids) != len(set(ids)):
+        raise ValueError("duplicate selected donor STUDYIDs")
     overlap = set(target_splits["STUDYID"].astype(str)) & set(ids)
     if overlap:
         raise ValueError(f"donor studies overlap target splits: {sorted(overlap)}")
