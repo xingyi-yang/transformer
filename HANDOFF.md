@@ -46,7 +46,10 @@ Real-data qualification stage: **1** (implemented and mock-tested only).
 `pytest -q tests`: **141 passed**, 2 skipped (this environment). This includes the mock-Snowflake
 equivalence, messy-fixture, leakage, v3 stages 1–2 freeze/donor/species/transfer tests,
 integration CLI smoke, and skipped Bayesian/TFT extras. `ruff check src tests`: clean.
-The v3 pilot training wave was **not** launched.
+The approved synthetic **k=0 then k=1** wave was executed from freeze commit
+`9f1da17` / config hash `4112f7ae47000c25` and stopped after k=1. Signs were
+published as computed (transformer transfer on the frozen target test was
+harmful). The protocol was not retuned. See `docs/v3/k0k1_RESULTS.md`.
 
 **Smoke run** (`configs/smoke.yaml`, seed 20261017):
 - **Data**:
@@ -169,10 +172,10 @@ to `[ancova]`.
    environment, do not treat a local extra-enabled fit as design qualification, and
    do not implement Chronos-2/DeepAR unless they are named. The analysis chapter
    stays as written.
-6. v3 stages 1–2 **software** is in the tree (frozen target manifests,
-   nested donor-only train additions, explicit `SPECIES_*`, sign-defined
-   transfer table, prespec in `src/send_bw/pilot.py`). Selective sharing
-   remains required later and is deferred. The first scored task is
-   predose-conditioned prediction. `configs/v3_pilot.smoke.yaml` is
-   proposed for review and has **not** been executed. Do not enable design
-   recommendations. Do not access real data. v2 defaults are unchanged.
+6. The approved synthetic pilot **k=0 then k=1** was executed from freeze
+   commit `9f1da17` / config hash `4112f7ae47000c25`. Predose-conditioned
+   spline + one-member transformer only. Target manifests held. Transformer
+   transfer on the frozen target test was **harmful** (RMSE/CRPS/contrast);
+   spline was slightly helpful. Signs were published; the protocol was not
+   retuned. Design, extra families, real data, and k=2,3 stayed off.
+   Artifacts: `runs/v3_pilot_k0k1/` and `docs/v3/k0k1_RESULTS.md`.

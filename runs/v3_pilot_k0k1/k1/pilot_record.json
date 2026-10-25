@@ -1,0 +1,266 @@
+{
+  "covariance_provenance": {
+    "covariance_parameters_bootstrapped": false,
+    "fitted_on": "spline study-level out-of-fold residuals (train studies)",
+    "layer": "HierarchicalCovariance",
+    "shared_with_transformer": true,
+    "spline_covariance": {
+      "ell": 4.435102451206173,
+      "fit_info": {
+        "converged": true,
+        "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+        "n_animals": 470,
+        "n_obs": 2789,
+        "n_studies": 10,
+        "nll": -4499.342192542599,
+        "params_at_bound": [
+          "sigma_m"
+        ]
+      },
+      "sd_a0": 0.028361430342252407,
+      "sd_a1": 0.12179089531668748,
+      "sd_s0": 0.05400775815793842,
+      "sd_s1": 0.11624417520091501,
+      "sigma_m": 0.00010000000000000009,
+      "sigma_p": 0.03934194877700294
+    }
+  },
+  "donor_order": {
+    "donor_species": [
+      "DOG"
+    ],
+    "k": 1,
+    "selected": [
+      "SYNA-D001"
+    ],
+    "sharing": "pooled",
+    "studyids": [
+      "SYNA-D001",
+      "SYNA-D002",
+      "SYNA-D003"
+    ]
+  },
+  "hyperparameters": {
+    "retuned_after_test": false,
+    "selected_on": "validation_target",
+    "spline_alpha": 0.1,
+    "spline_validation_rmse_by_alpha": {
+      "0.1": 0.06049152885767283,
+      "1.0": 0.060599461526137106,
+      "10.0": 0.06154488667870069,
+      "100.0": 0.06565826227589568,
+      "1000.0": 0.07373392547706362,
+      "10000.0": 0.11835300148718934,
+      "300.0": 0.068755415574836,
+      "3000.0": 0.08656829020445858
+    },
+    "transformer_best_val_rmse_member0": 0.04978054016828537
+  },
+  "k": 1,
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "optimizer_steps": {
+    "spline": {
+      "alphas_evaluated": 8,
+      "method": "ridge_closed_form",
+      "n_bootstrap_members": 7,
+      "oof_folds": 5
+    },
+    "transformer": {
+      "approx_adamw_steps": 160,
+      "batch_size": 64,
+      "max_epochs": 20,
+      "member0_epochs_run": 20,
+      "n_members": 1,
+      "n_train_animals": 470,
+      "patience": 6
+    }
+  },
+  "runtime_seconds": {
+    "evaluate": 0.8504126071929932,
+    "prepare": 0.36627888679504395,
+    "train_spline": 0.6094834804534912,
+    "train_transformer": 1.9890811443328857
+  },
+  "sharing": "pooled",
+  "species_schema": {
+    "animal_cols": [
+      "SEX_M",
+      "ZB_C",
+      "IS_CONTROL",
+      "LD",
+      "INV_INTERVAL",
+      "START",
+      "END",
+      "D1",
+      "D2",
+      "D3",
+      "STRAIN_SPRAGUE-DAWLEY",
+      "STRAIN_WISTAR HAN",
+      "ROUTE_ORAL GAVAGE",
+      "SPECIES_RAT"
+    ],
+    "sharing": "pooled",
+    "species": "RAT",
+    "species_feature_columns": [
+      "SPECIES_RAT"
+    ],
+    "species_levels": [
+      "DOG",
+      "RAT"
+    ],
+    "transformer_token_groups": {
+      "baseline": [
+        "ZB_C"
+      ],
+      "bio": [
+        "SEX_M",
+        "STRAIN_SPRAGUE-DAWLEY",
+        "STRAIN_WISTAR HAN"
+      ],
+      "compound": [
+        "D1",
+        "D2",
+        "D3",
+        "IS_CONTROL"
+      ],
+      "regimen": [
+        "LD",
+        "INV_INTERVAL",
+        "START",
+        "END",
+        "ROUTE_ORAL GAVAGE"
+      ],
+      "species": [
+        "SPECIES_RAT"
+      ]
+    }
+  },
+  "study_weights": {
+    "note": "each STUDYID has equal total weight; totals average toward n_obs/n_studies",
+    "per_study_total_train": {
+      "SYNA-001": 278.9,
+      "SYNA-003": 278.90000000000003,
+      "SYNA-004": 278.9,
+      "SYNA-006": 278.9000000000001,
+      "SYNA-010": 278.90000000000003,
+      "SYNA-011": 278.8999999999999,
+      "SYNA-013": 278.9,
+      "SYNA-014": 278.9,
+      "SYNA-015": 278.9,
+      "SYNA-D001": 278.90000000000003
+    },
+    "rule": "study_balanced"
+  },
+  "target_manifest": {
+    "all_target": {
+      "hash": "d8aa4e2e093e11b9",
+      "n": 15,
+      "studyids": [
+        "SYNA-001",
+        "SYNA-002",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-005",
+        "SYNA-006",
+        "SYNA-007",
+        "SYNA-009",
+        "SYNA-010",
+        "SYNA-011",
+        "SYNA-012",
+        "SYNA-013",
+        "SYNA-014",
+        "SYNA-015",
+        "SYNA-016"
+      ]
+    },
+    "test": {
+      "hash": "04d76ef2e097f9ff",
+      "n": 3,
+      "studyids": [
+        "SYNA-002",
+        "SYNA-005",
+        "SYNA-007"
+      ]
+    },
+    "train": {
+      "hash": "cbdb10a6c2f1bfdf",
+      "n": 9,
+      "studyids": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-010",
+        "SYNA-011",
+        "SYNA-013",
+        "SYNA-014",
+        "SYNA-015"
+      ]
+    },
+    "validation": {
+      "hash": "509b5d25bd90188b",
+      "n": 3,
+      "studyids": [
+        "SYNA-009",
+        "SYNA-012",
+        "SYNA-016"
+      ]
+    },
+    "version": "target-manifest-v1"
+  },
+  "task": "predose_conditioned",
+  "training_composition": {
+    "donor_studies_in_train": [
+      "SYNA-D001"
+    ],
+    "n_train_animals": 470,
+    "n_train_obs": 2789,
+    "n_train_studies": 10,
+    "n_validation_animals": 132,
+    "n_validation_obs": 872,
+    "species_counts_train_studies": {
+      "DOG": 1,
+      "RAT": 9
+    },
+    "study_weighting": "study_balanced",
+    "test_studies": [
+      "SYNA-002",
+      "SYNA-005",
+      "SYNA-007"
+    ],
+    "train_studies": [
+      "SYNA-001",
+      "SYNA-003",
+      "SYNA-004",
+      "SYNA-006",
+      "SYNA-010",
+      "SYNA-011",
+      "SYNA-013",
+      "SYNA-014",
+      "SYNA-015",
+      "SYNA-D001"
+    ],
+    "validation_studies": [
+      "SYNA-009",
+      "SYNA-012",
+      "SYNA-016"
+    ]
+  },
+  "uncertainty": {
+    "incompletely_estimated": [
+      "covariance parameters are not bootstrapped",
+      "transformer n_members=1 (no bootstrap members)"
+    ],
+    "parameter_uncertainty": "Spline mean members are a study bootstrap (incompletely: covariance not bootstrapped). Transformer n_members=1: no bootstrap spread, so transformer parameter uncertainty is incompletely estimated.",
+    "predictive_variability": "New-study sampling uses HierarchicalCovariance draws (study + animal + residual). That is predictive variability under the fitted residual layer."
+  },
+  "warnings": [
+    "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+    "50 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+  ]
+}

@@ -1,0 +1,113 @@
+run_name: v3_pilot_k0
+output_dir: runs/v3_pilot_k0k1/k0
+seed: 20261024
+pilot:
+  task: predose_conditioned
+  k_schedule:
+  - 0
+  - 1
+  stop_after_k: 1
+  models:
+  - spline
+  - transformer
+  retune_after_test: false
+  design: false
+  real_data: false
+  extra_families: false
+  selective_sharing: required_deferred
+synthetic:
+  enabled: false
+  out_dir: runs/v3_pilot_k0k1/synthetic
+  generator: A
+  n_studies: 16
+  n_other_species_studies: 3
+  n_compounds: 7
+  n_per_sex:
+  - 4
+  - 6
+mapping: configs/mappings/example_send.yaml
+source:
+  type: local
+  root: runs/v3_pilot_k0k1/synthetic/send
+  layout: per_study
+  metadata_dir: runs/v3_pilot_k0k1/synthetic/metadata
+cohort:
+  species: RAT
+  donor_species:
+  - DOG
+  sharing: context_specific
+  n_donor_studies: 0
+  study_classes:
+  - REPEAT_DOSE_TOX
+  max_day: 28
+splits:
+  method: random
+  validation: 0.2
+  test: 0.2
+  compound_holdout_auto: 1
+models:
+  spline:
+    enabled: true
+    n_bootstrap: 6
+    oof_folds: 5
+    n_time_knots: 3
+    n_expo_knots: 2
+    ridge_alphas:
+    - 0.1
+    - 1.0
+    - 10.0
+    - 100.0
+    - 300.0
+    - 1000.0
+    - 3000.0
+    - 10000.0
+    seed: 20261024
+  transformer:
+    enabled: true
+    n_members: 1
+    max_epochs: 20
+    patience: 6
+    d_model: 32
+    n_heads: 2
+    n_layers: 1
+    batch_size: 64
+    seed: 20261024
+    torch_threads: 4
+  bayesian:
+    enabled: false
+  optional:
+    tft:
+      enabled: false
+    chronos2:
+      enabled: false
+    deepar:
+      enabled: false
+evaluation:
+  tasks:
+  - predose_conditioned
+  n_draws: 80
+  contrast_day: 28
+design: {}
+labels:
+- Synthetic diagnostic.
+- Not design qualification.
+- No real-data validation.
+- No operational recommendation.
+prespec:
+  task: predose_conditioned
+  study_weighting: study_balanced
+  donor_order: STUDYID sort
+  donor_schedule_k:
+  - 0
+  - 1
+  hyperparameter_split: validation_target
+  selective_sharing: required_deferred
+  uncertainty:
+    predictive_variability: HierarchicalCovariance study/animal/residual draws in
+      sample_study
+    parameter_uncertainty_spline: study-bootstrap of the mean only (n_bootstrap=6
+      including member 0)
+    parameter_uncertainty_transformer: n_members=1 so no bootstrap spread; incompletely
+      estimated
+    covariance_parameters: not bootstrapped
+    no_fabricated_baseline_only: true

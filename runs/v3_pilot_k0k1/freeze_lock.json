@@ -1,0 +1,109 @@
+{
+  "config_hash": "4112f7ae47000c25",
+  "config_path": "configs/v3_pilot.k0k1.frozen.yaml",
+  "design": false,
+  "extra_families": false,
+  "frozen_before": "generate_train_evaluate",
+  "git_revision": "9f1da17dcc52f22154364c9caf751a6601b78760",
+  "k_schedule": [
+    0,
+    1
+  ],
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "prespec": {
+    "donor_schedule": {
+      "k0": "context_specific / zero-donor equivalence",
+      "k_levels": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "nested": true,
+      "order": "STUDYID sort"
+    },
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "root_seed": 20261024,
+    "seed_namespaces": {
+      "evaluate_predose": "run.seed + 17",
+      "generate_compounds": [
+        "compounds"
+      ],
+      "generate_donor_study": [
+        "donor",
+        "{d}"
+      ],
+      "generate_target_study": [
+        "study",
+        "{s}"
+      ],
+      "spline_fit": "models.spline.seed or run.seed",
+      "target_splits": "run.seed",
+      "transformer_fit": "models.transformer.seed or run.seed"
+    },
+    "selective_sharing": "required_deferred",
+    "spline_budget": {
+      "n_bootstrap": 6,
+      "n_expo_knots": 2,
+      "n_time_knots": 3,
+      "oof_folds": 5,
+      "ridge_alphas": [
+        0.1,
+        1.0,
+        10.0,
+        100.0,
+        300.0,
+        1000.0,
+        3000.0,
+        10000.0
+      ]
+    },
+    "study_weighting": "study_balanced",
+    "study_weighting_rule": "Each STUDYID contributes equal total weight via study_balanced_weights; weights average to 1. Donor studies in a pooled train set receive the same per-study total as target studies. Validation stays target-only.",
+    "task": "predose_conditioned",
+    "transformer_budget_smoke": {
+      "d_model": 32,
+      "max_epochs": 20,
+      "n_heads": 2,
+      "n_layers": 1,
+      "n_members": 1,
+      "patience": 6
+    },
+    "tuning_rules": {
+      "spline": "Select ridge alpha by validation study-balanced WRMSE on the frozen target-species validation studies. Do not use donor rows for early stopping.",
+      "transformer": "Early-stop on validation RMSE. Covariance is the shared spline HierarchicalCovariance (required). Member 0 is the full-train mean; later members are study-bootstrap refits of the mean only."
+    },
+    "uncertainty_safeguards": {
+      "covariance": "HierarchicalCovariance on study-level OOF residuals; covariance parameters are not bootstrapped",
+      "no_design_recommendations": true,
+      "no_fabricated_baseline_only": true,
+      "parameter": "study-bootstrap of the mean only",
+      "transformer_covariance": "shared with the spline; required; not a separately fitted residual"
+    }
+  },
+  "real_data": false,
+  "retune_after_test": false,
+  "selective_sharing": "required_deferred",
+  "stop_after_k": 1,
+  "uncertainty": {
+    "parameter_uncertainty": "Spline: study-bootstrap of the mean only (n_bootstrap includes member 0). Transformer: n_members=1, so there is no bootstrap member spread. Covariance parameters are not bootstrapped. Parameter uncertainty is incompletely estimated; do not treat predictive intervals as complete parameter-uncertainty intervals.",
+    "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer.",
+    "safeguards": {
+      "covariance": "HierarchicalCovariance on study-level OOF residuals; covariance parameters are not bootstrapped",
+      "no_design_recommendations": true,
+      "no_fabricated_baseline_only": true,
+      "parameter": "study-bootstrap of the mean only",
+      "transformer_covariance": "shared with the spline; required; not a separately fitted residual"
+    }
+  }
+}

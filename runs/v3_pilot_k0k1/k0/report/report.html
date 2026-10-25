@@ -1,0 +1,103 @@
+<!doctype html><html><head><meta charset='utf-8'><title>REAL-DATA RUN - qualification stage must be checked before any use</title><style>body{font-family:sans-serif;max-width:1200px;margin:auto;font-size:13px}table{border-collapse:collapse;font-size:11px}td,th{border:1px solid #ccc;padding:2px 5px}blockquote{background:#fff3cd;padding:6px;border-left:4px solid #e0a800}</style></head><body>
+<h1>send_bw report: v3_pilot_k0</h1>
+<blockquote><b>REAL-DATA RUN - qualification stage must be checked before any use</b></blockquote>
+<p>Body weight is the only modelled endpoint. Results cannot establish total animal requirements for a toxicology program, cannot justify reducing welfare observations or protocol checks, and are not regulatory-grade.</p>
+<h2>Run provenance</h2>
+<ul>
+<li>config: <code>runs/v3_pilot_k0k1/k0/effective.yaml</code> (hash <code>43575581e7be5616</code>), seed 20261024</li>
+<li>git revision: 9f1da17dcc52f22154364c9caf751a6601b78760</li>
+<li>software: matplotlib=3.11.2, numpy=2.5.4, pandas=3.1.0, platform=Linux-6.12.94+-x86_64-with-glibc2.39, pyarrow=26.0.0, pydantic=2.14.1, python=3.12.3, scikit-learn=1.9.1, scipy=1.18.1, torch=2.14.1</li>
+</ul>
+<table><tr><th>stage</th><th>status</th><th>seconds</th><th>key</th></tr>
+<tr><td>evaluate</td><td>NA</td><td>0.9</td><td>NA</td></tr>
+<tr><td>ingest</td><td>NA</td><td>0.6</td><td>2665b0bc959b5441</td></tr>
+<tr><td>optional_models</td><td>{&#x27;chronos2&#x27;: &#x27;not_run&#x27;, &#x27;deepar&#x27;: &#x27;not_run&#x27;, &#x27;tft&#x27;: &#x27;not_run&#x27;}</td><td>NA</td><td>NA</td></tr>
+<tr><td>prepare</td><td>NA</td><td>0.2</td><td>1b47cd92c654e0fe</td></tr>
+<tr><td>train_spline</td><td>trained</td><td>0.5</td><td>fcacbb15a24f0616</td></tr>
+<tr><td>train_transformer</td><td>trained</td><td>2.2</td><td>384899ff8cfde5a8</td></tr>
+</table>
+<h2>Data ingestion and QC</h2>
+<ul>
+<li>weights: 7855, animals: 894, quarantined/flagged records: 0, mapping version: example-send-0.1</li>
+<li>eligible animals: 722, modelling observations: 4437</li>
+<li>QC checks: {&#x27;all_obs_have_animal&#x27;: True, &#x27;arm_keys_resolved&#x27;: True, &#x27;finite_log_weights&#x27;: True, &#x27;n_quarantined_hard&#x27;: 0, &#x27;n_quarantined_soft&#x27;: 0, &#x27;one_baseline_per_animal_max&#x27;: True, &#x27;passed&#x27;: True, &#x27;positive_weights&#x27;: True, &#x27;sex_values&#x27;: [&#x27;F&#x27;, &#x27;M&#x27;], &#x27;unique_animal_keys&#x27;: True, &#x27;unique_obs_keys&#x27;: True}</li>
+</ul>
+<p>Exclusion counts (animals):</p>
+<table><tr><th>reason</th><th>n</th></tr>
+<tr><td>species_out_of_scope</td><td>170</td></tr>
+<tr><td>too_few_post_baseline_obs</td><td>3</td></tr>
+</table>
+<p>Limitations recorded during ingestion:</p>
+<ul>
+<li>3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)</li>
+<li>50 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects</li>
+</ul>
+<p>Mapping warnings by type: none</p>
+<p>Frozen study-level splits: {&#x27;test&#x27;: 3, &#x27;test_compound_holdout&#x27;: 1, &#x27;train&#x27;: 9, &#x27;validation&#x27;: 3} (hash <code>4797ef4589ea7e7f</code>); compound holdout: [&#x27;CMP02&#x27;]</p>
+<p>Target-species manifests (frozen before donors): train n=9 hash <code>cbdb10a6c2f1bfdf</code>; validation n=3 hash <code>509b5d25bd90188b</code>; test n=3 hash <code>04d76ef2e097f9ff</code>. Sharing: context_specific; donors selected: 0.</p>
+<h2>Models</h2>
+<h3>spline</h3>
+<ul>
+<li>ridge alpha 0.1 (validation-selected), train RMSE 0.0437, validation RMSE 0.0597, OOF RMSE 0.1589, 62 mean parameters, 7 study-bootstrap members</li>
+<li>covariance (OOF residual ML): ell=3.6072, sd_a0=0.0386, sd_a1=0.1081, sd_s0=0.0619, sd_s1=0.1028, sigma_m=0.0001, sigma_p=0.0379</li>
+<li>covariance fit: {&#x27;converged&#x27;: True, &#x27;message&#x27;: &#x27;CONVERGENCE: RELATIVE REDUCTION OF F &lt;= FACTR*EPSMCH&#x27;, &#x27;n_animals&#x27;: 420, &#x27;n_obs&#x27;: 2402, &#x27;n_studies&#x27;: 9, &#x27;nll&#x27;: -3824.16952875301, &#x27;params_at_bound&#x27;: [&#x27;sigma_m&#x27;]}</li>
+</ul>
+<h3>transformer</h3>
+<ul>
+<li>architecture {&#x27;d_model&#x27;: 32, &#x27;dropout&#x27;: 0.1, &#x27;group_dims&#x27;: {&#x27;baseline&#x27;: 1, &#x27;bio&#x27;: 2, &#x27;compound&#x27;: 4, &#x27;regimen&#x27;: 5}, &#x27;n_heads&#x27;: 2, &#x27;n_layers&#x27;: 1, &#x27;q_dim&#x27;: 5} (custom baseline-conditioned transformer; NOT a TFT)</li>
+<li>members (study-bootstrap except member 0): m0: best val RMSE 0.0501 after 10 epochs (seed 20261024)</li>
+<li>covariance layer shared with the spline model (primary mean-function comparison)</li>
+</ul>
+<img src='plots/transformer_training.png' alt='transformer training' style='max-width:100%'>
+<h3>bayesian: not_run</h3>
+<h3>Optional models (not required benchmarks)</h3>
+<table><tr><th>model</th><th>status</th><th>task</th><th>reason</th></tr>
+<tr><td>chronos2</td><td>not_run</td><td>secondary (early-history, zero-shot first; fine-tuning separate)</td><td>disabled in config</td></tr>
+<tr><td>deepar</td><td>not_run</td><td>secondary (early-history forecasting)</td><td>disabled in config</td></tr>
+<tr><td>tft</td><td>not_run</td><td>secondary (early-history forecasting)</td><td>disabled in config</td></tr>
+</table>
+<h2>Held-out evaluation</h2>
+<h3>Primary task: pre-study prediction of new studies</h3>
+<table><tr><th>model</th><th>split</th><th>studies</th><th>obs</th><th>RMSE log</th><th>RMSE g</th><th>MAE g</th><th>cov80</th><th>cov95</th><th>CRPS</th><th>SB RMSE</th><th>SB cov95</th><th>energy</th><th>grp-mean cov90</th><th>contrast cov90</th><th>contrast bias</th><th>var ratio</th><th>incr ratio</th><th>max cov90</th></tr>
+<tr><td>spline</td><td>test_compound_holdout</td><td>1</td><td>389</td><td>0.164</td><td>74.705</td><td>58.877</td><td>0.990</td><td>1.000</td><td>0.100</td><td>0.164</td><td>1.000</td><td>0.318</td><td>1.000</td><td>1.000</td><td>0.242</td><td>2.745</td><td>4.816</td><td>1.000</td></tr>
+<tr><td>spline</td><td>test</td><td>3</td><td>774</td><td>0.059</td><td>16.992</td><td>12.419</td><td>0.999</td><td>1.000</td><td>0.040</td><td>0.061</td><td>1.000</td><td>0.116</td><td>1.000</td><td>1.000</td><td>-0.011</td><td>2.947</td><td>1.931</td><td>1.000</td></tr>
+<tr><td>transformer</td><td>test_compound_holdout</td><td>1</td><td>389</td><td>0.052</td><td>14.384</td><td>10.856</td><td>0.997</td><td>1.000</td><td>0.036</td><td>0.052</td><td>1.000</td><td>0.116</td><td>1.000</td><td>0.750</td><td>0.066</td><td>2.799</td><td>1.649</td><td>1.000</td></tr>
+<tr><td>transformer</td><td>test</td><td>3</td><td>774</td><td>0.057</td><td>17.190</td><td>12.400</td><td>0.997</td><td>1.000</td><td>0.038</td><td>0.054</td><td>1.000</td><td>0.107</td><td>1.000</td><td>1.000</td><td>0.041</td><td>2.990</td><td>1.798</td><td>1.000</td></tr>
+</table>
+<p>SB = study-balanced. Coverage targets: cov80=0.80, cov95=0.95, group-mean/contrast/max cov90=0.90; variance and increment ratios target 1. Few test studies -&gt; wide uncertainty.</p>
+<p>Residual correlation by gap (observed vs predicted):</p>
+<table><tr><th>model</th><th>split</th><th>gap_bin</th><th>corr_obs</th><th>corr_pred</th><th>n_pairs</th></tr>
+<tr><td>spline</td><td>test_compound_holdout</td><td>(0,4]</td><td>0.904</td><td>0.888</td><td>7</td></tr>
+<tr><td>spline</td><td>test_compound_holdout</td><td>(4,8]</td><td>0.854</td><td>0.821</td><td>6</td></tr>
+<tr><td>spline</td><td>test_compound_holdout</td><td>(8,15]</td><td>0.785</td><td>0.732</td><td>9</td></tr>
+<tr><td>spline</td><td>test_compound_holdout</td><td>(15,100]</td><td>0.606</td><td>0.577</td><td>6</td></tr>
+<tr><td>spline</td><td>test</td><td>(0,4]</td><td>0.901</td><td>0.878</td><td>14</td></tr>
+<tr><td>spline</td><td>test</td><td>(4,8]</td><td>0.840</td><td>0.817</td><td>15</td></tr>
+<tr><td>spline</td><td>test</td><td>(8,15]</td><td>0.749</td><td>0.725</td><td>20</td></tr>
+<tr><td>spline</td><td>test</td><td>(15,100]</td><td>0.595</td><td>0.571</td><td>13</td></tr>
+<tr><td>transformer</td><td>test_compound_holdout</td><td>(0,4]</td><td>0.904</td><td>0.889</td><td>7</td></tr>
+<tr><td>transformer</td><td>test_compound_holdout</td><td>(4,8]</td><td>0.854</td><td>0.826</td><td>6</td></tr>
+<tr><td>transformer</td><td>test_compound_holdout</td><td>(8,15]</td><td>0.785</td><td>0.753</td><td>9</td></tr>
+<tr><td>transformer</td><td>test_compound_holdout</td><td>(15,100]</td><td>0.606</td><td>0.633</td><td>6</td></tr>
+<tr><td>transformer</td><td>test</td><td>(0,4]</td><td>0.901</td><td>0.874</td><td>14</td></tr>
+<tr><td>transformer</td><td>test</td><td>(4,8]</td><td>0.840</td><td>0.800</td><td>15</td></tr>
+<tr><td>transformer</td><td>test</td><td>(8,15]</td><td>0.749</td><td>0.716</td><td>20</td></tr>
+<tr><td>transformer</td><td>test</td><td>(15,100]</td><td>0.595</td><td>0.575</td><td>13</td></tr>
+</table>
+<h3>Secondary task: early-history forecasting (kept separate)</h3>
+<p>(none)</p>
+<p>Success on the secondary task does not establish success on the primary task.</p>
+<img src='plots/trajectories.png' alt='trajectories' style='max-width:100%'>
+<h2>Experimental design</h2>
+<p>Design stage not run.</p>
+<h2>Statistical assumptions not yet validated</h2>
+<ul>
+<li>Pooled-sex analysis assumes a common treatment effect across sexes.</li>
+<li>The production default final analysis is endpoint ANCOVA. GLS is requestable and is not a default after locked synthetic diagnostics; it is not design qualification.</li>
+<li>GLS benefit from intermediate visits relies on the fixed quadratic group-difference basis; bias is only checked under the simulated mechanisms.</li>
+<li>The working covariance is a historical plug-in from training studies; model-based SEs with df = N_animals - (3 + G k) are an approximation (no Kenward-Roger).</li>
+<li>Missingness is simulated as MAR missed visits and non-informative dropout; informative termination is not addressed and no power claims are made for it.</li>
+<li>Spline/transformer parameter uncertainty comes from study bootstrap of the mean only; covariance parameter uncertainty is not propagated for those models.</li>
+<li>Synthetic generators are illustrative and not biologically validated.</li>
+</ul>
+</body></html>

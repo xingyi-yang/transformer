@@ -411,13 +411,16 @@ def _write_results_md(parent: Path, summary: dict[str, Any], m0: dict, m1: dict)
     for block in (summary.get("transfer_table") or {}).values():
         rows.extend(block.get("rows") or [])
     if rows:
-        lines += ["| model | k | metric | S0 | Sk | delta | sign |", "|---|---|---|---|---|---|---|"]
-        for r in rows:
-            if r.get("metric") in ("rmse_log", "crps", "contrast_bias"):
-                lines.append(
-                    f"| {r.get('model')} | {r.get('k')} | {r.get('metric')} | "
-                    f"{r.get('S0')} | {r.get('Sk')} | {r.get('delta')} | {r.get('sign')} |"
-                )
+        lines += ["| split | model | k | metric | S0 | Sk | delta | sign |",
+                  "|---|---|---|---|---|---|---|---|"]
+        for key, block in (summary.get("transfer_table") or {}).items():
+            split = str(key).split("|")[1] if "|" in str(key) else ""
+            for r in block.get("rows") or []:
+                if r.get("metric") in ("rmse_log", "crps", "contrast_bias"):
+                    lines.append(
+                        f"| {split} | {r.get('model')} | {r.get('k')} | {r.get('metric')} | "
+                        f"{r.get('S0')} | {r.get('Sk')} | {r.get('delta')} | {r.get('sign')} |"
+                    )
     else:
         lines.append("(no rows)")
     lines += ["", "## Artifact locations", "",

@@ -1,7 +1,8 @@
 # Frozen k=0 → k=1 synthetic pilot
 
-**Status: frozen before execution.** Do not edit the effective YAML after the
-freeze commit. Do not retune after viewing target-test metrics.
+**Status: frozen, then executed; stopped after k=1.** Do not edit the effective
+YAML after the freeze commit. Do not retune after viewing target-test metrics.
+Recorded results: `docs/v3/k0k1_RESULTS.md` and `runs/v3_pilot_k0k1/`.
 
 Effective configuration: `configs/v3_pilot.k0k1.frozen.yaml`
 

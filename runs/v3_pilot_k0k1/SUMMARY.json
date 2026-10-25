@@ -1,0 +1,598 @@
+{
+  "donor_isolation": {
+    "k0_selected": [],
+    "k1_available": [
+      "SYNA-D001",
+      "SYNA-D002",
+      "SYNA-D003"
+    ],
+    "k1_selected": [
+      "SYNA-D001"
+    ]
+  },
+  "failures": [],
+  "freeze_lock": {
+    "config_hash": "4112f7ae47000c25",
+    "config_path": "configs/v3_pilot.k0k1.frozen.yaml",
+    "design": false,
+    "extra_families": false,
+    "frozen_before": "generate_train_evaluate",
+    "git_revision": "9f1da17dcc52f22154364c9caf751a6601b78760",
+    "k_schedule": [
+      0,
+      1
+    ],
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "prespec": {
+      "donor_schedule": {
+        "k0": "context_specific / zero-donor equivalence",
+        "k_levels": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "nested": true,
+        "order": "STUDYID sort"
+      },
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "root_seed": 20261024,
+      "seed_namespaces": {
+        "evaluate_predose": "run.seed + 17",
+        "generate_compounds": [
+          "compounds"
+        ],
+        "generate_donor_study": [
+          "donor",
+          "{d}"
+        ],
+        "generate_target_study": [
+          "study",
+          "{s}"
+        ],
+        "spline_fit": "models.spline.seed or run.seed",
+        "target_splits": "run.seed",
+        "transformer_fit": "models.transformer.seed or run.seed"
+      },
+      "selective_sharing": "required_deferred",
+      "spline_budget": {
+        "n_bootstrap": 6,
+        "n_expo_knots": 2,
+        "n_time_knots": 3,
+        "oof_folds": 5,
+        "ridge_alphas": [
+          0.1,
+          1.0,
+          10.0,
+          100.0,
+          300.0,
+          1000.0,
+          3000.0,
+          10000.0
+        ]
+      },
+      "study_weighting": "study_balanced",
+      "study_weighting_rule": "Each STUDYID contributes equal total weight via study_balanced_weights; weights average to 1. Donor studies in a pooled train set receive the same per-study total as target studies. Validation stays target-only.",
+      "task": "predose_conditioned",
+      "transformer_budget_smoke": {
+        "d_model": 32,
+        "max_epochs": 20,
+        "n_heads": 2,
+        "n_layers": 1,
+        "n_members": 1,
+        "patience": 6
+      },
+      "tuning_rules": {
+        "spline": "Select ridge alpha by validation study-balanced WRMSE on the frozen target-species validation studies. Do not use donor rows for early stopping.",
+        "transformer": "Early-stop on validation RMSE. Covariance is the shared spline HierarchicalCovariance (required). Member 0 is the full-train mean; later members are study-bootstrap refits of the mean only."
+      },
+      "uncertainty_safeguards": {
+        "covariance": "HierarchicalCovariance on study-level OOF residuals; covariance parameters are not bootstrapped",
+        "no_design_recommendations": true,
+        "no_fabricated_baseline_only": true,
+        "parameter": "study-bootstrap of the mean only",
+        "transformer_covariance": "shared with the spline; required; not a separately fitted residual"
+      }
+    },
+    "real_data": false,
+    "retune_after_test": false,
+    "selective_sharing": "required_deferred",
+    "stop_after_k": 1,
+    "uncertainty": {
+      "parameter_uncertainty": "Spline: study-bootstrap of the mean only (n_bootstrap includes member 0). Transformer: n_members=1, so there is no bootstrap member spread. Covariance parameters are not bootstrapped. Parameter uncertainty is incompletely estimated; do not treat predictive intervals as complete parameter-uncertainty intervals.",
+      "predictive_variability": "HierarchicalCovariance study, animal, and residual draws in sample_study. This is predictive variability of new-study trajectories under the fitted residual layer.",
+      "safeguards": {
+        "covariance": "HierarchicalCovariance on study-level OOF residuals; covariance parameters are not bootstrapped",
+        "no_design_recommendations": true,
+        "no_fabricated_baseline_only": true,
+        "parameter": "study-bootstrap of the mean only",
+        "transformer_covariance": "shared with the spline; required; not a separately fitted residual"
+      }
+    }
+  },
+  "k_records": {
+    "0": {
+      "donor_studies_in_train": [],
+      "hyperparameters": {
+        "retuned_after_test": false,
+        "selected_on": "validation_target",
+        "spline_alpha": 0.1,
+        "spline_validation_rmse_by_alpha": {
+          "0.1": 0.05971432151641498,
+          "1.0": 0.05990653871541328,
+          "10.0": 0.06158266875988889,
+          "100.0": 0.07014134884697441,
+          "1000.0": 0.09427223926350362,
+          "10000.0": 0.14569326963621596,
+          "300.0": 0.07930021950536437,
+          "3000.0": 0.11399182315807067
+        },
+        "transformer_best_val_rmse_member0": 0.050119806081056595
+      },
+      "optimizer_steps": {
+        "spline": {
+          "alphas_evaluated": 8,
+          "method": "ridge_closed_form",
+          "n_bootstrap_members": 7,
+          "oof_folds": 5
+        },
+        "transformer": {
+          "approx_adamw_steps": 70,
+          "batch_size": 64,
+          "max_epochs": 20,
+          "member0_epochs_run": 10,
+          "n_members": 1,
+          "n_train_animals": 420,
+          "patience": 6
+        }
+      },
+      "runtime_seconds": {
+        "evaluate": 0.8665688037872314,
+        "prepare": 0.15603923797607422,
+        "train_spline": 0.5183172225952148,
+        "train_transformer": 2.2355237007141113
+      },
+      "sharing": "context_specific",
+      "species_schema": {
+        "animal_cols": [
+          "SEX_M",
+          "ZB_C",
+          "IS_CONTROL",
+          "LD",
+          "INV_INTERVAL",
+          "START",
+          "END",
+          "D1",
+          "D2",
+          "D3",
+          "STRAIN_WISTAR HAN",
+          "ROUTE_ORAL GAVAGE"
+        ],
+        "sharing": "context_specific",
+        "species": "RAT",
+        "species_feature_columns": [],
+        "species_levels": [
+          "RAT"
+        ],
+        "transformer_token_groups": {
+          "baseline": [
+            "ZB_C"
+          ],
+          "bio": [
+            "SEX_M",
+            "STRAIN_WISTAR HAN"
+          ],
+          "compound": [
+            "D1",
+            "D2",
+            "D3",
+            "IS_CONTROL"
+          ],
+          "regimen": [
+            "LD",
+            "INV_INTERVAL",
+            "START",
+            "END",
+            "ROUTE_ORAL GAVAGE"
+          ]
+        }
+      },
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-010",
+        "SYNA-011",
+        "SYNA-013",
+        "SYNA-014",
+        "SYNA-015"
+      ],
+      "warnings": [
+        "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+        "50 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+      ]
+    },
+    "1": {
+      "donor_studies_in_train": [
+        "SYNA-D001"
+      ],
+      "hyperparameters": {
+        "retuned_after_test": false,
+        "selected_on": "validation_target",
+        "spline_alpha": 0.1,
+        "spline_validation_rmse_by_alpha": {
+          "0.1": 0.06049152885767283,
+          "1.0": 0.060599461526137106,
+          "10.0": 0.06154488667870069,
+          "100.0": 0.06565826227589568,
+          "1000.0": 0.07373392547706362,
+          "10000.0": 0.11835300148718934,
+          "300.0": 0.068755415574836,
+          "3000.0": 0.08656829020445858
+        },
+        "transformer_best_val_rmse_member0": 0.04978054016828537
+      },
+      "optimizer_steps": {
+        "spline": {
+          "alphas_evaluated": 8,
+          "method": "ridge_closed_form",
+          "n_bootstrap_members": 7,
+          "oof_folds": 5
+        },
+        "transformer": {
+          "approx_adamw_steps": 160,
+          "batch_size": 64,
+          "max_epochs": 20,
+          "member0_epochs_run": 20,
+          "n_members": 1,
+          "n_train_animals": 470,
+          "patience": 6
+        }
+      },
+      "runtime_seconds": {
+        "evaluate": 0.8504126071929932,
+        "prepare": 0.36627888679504395,
+        "train_spline": 0.6094834804534912,
+        "train_transformer": 1.9890811443328857
+      },
+      "sharing": "pooled",
+      "species_schema": {
+        "animal_cols": [
+          "SEX_M",
+          "ZB_C",
+          "IS_CONTROL",
+          "LD",
+          "INV_INTERVAL",
+          "START",
+          "END",
+          "D1",
+          "D2",
+          "D3",
+          "STRAIN_SPRAGUE-DAWLEY",
+          "STRAIN_WISTAR HAN",
+          "ROUTE_ORAL GAVAGE",
+          "SPECIES_RAT"
+        ],
+        "sharing": "pooled",
+        "species": "RAT",
+        "species_feature_columns": [
+          "SPECIES_RAT"
+        ],
+        "species_levels": [
+          "DOG",
+          "RAT"
+        ],
+        "transformer_token_groups": {
+          "baseline": [
+            "ZB_C"
+          ],
+          "bio": [
+            "SEX_M",
+            "STRAIN_SPRAGUE-DAWLEY",
+            "STRAIN_WISTAR HAN"
+          ],
+          "compound": [
+            "D1",
+            "D2",
+            "D3",
+            "IS_CONTROL"
+          ],
+          "regimen": [
+            "LD",
+            "INV_INTERVAL",
+            "START",
+            "END",
+            "ROUTE_ORAL GAVAGE"
+          ],
+          "species": [
+            "SPECIES_RAT"
+          ]
+        }
+      },
+      "train_studies": [
+        "SYNA-001",
+        "SYNA-003",
+        "SYNA-004",
+        "SYNA-006",
+        "SYNA-010",
+        "SYNA-011",
+        "SYNA-013",
+        "SYNA-014",
+        "SYNA-015",
+        "SYNA-D001"
+      ],
+      "warnings": [
+        "3 weight(s) dated from SEND study day because BWDTC was partial (DATE_UNCERTAIN)",
+        "50 administration record(s) deviate from the planned regimen; models use planned regimens only, so outcomes include deviation effects"
+      ]
+    }
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "metrics_test": {
+    "spline|test|pre_study": {
+      "contrast_bias": {
+        "k0": -0.010604365988220978,
+        "k1": 0.0049579710553760425
+      },
+      "k0": {
+        "cov80": 0.9978070175438596,
+        "cov95": 1.0,
+        "crps": 0.041405723856932655,
+        "mae_log": 0.04821869490566167,
+        "rmse_log": 0.06135304836267915
+      },
+      "k1": {
+        "cov80": 0.9985632183908045,
+        "cov95": 1.0,
+        "crps": 0.04025865452997673,
+        "mae_log": 0.04745688208482651,
+        "rmse_log": 0.06012068731753312
+      }
+    },
+    "transformer|test|pre_study": {
+      "contrast_bias": {
+        "k0": 0.041213103830102356,
+        "k1": 0.042848697620298665
+      },
+      "k0": {
+        "cov80": 0.9982905982905983,
+        "cov95": 1.0,
+        "crps": 0.03699239404039405,
+        "mae_log": 0.04146071870403577,
+        "rmse_log": 0.05381178777560128
+      },
+      "k1": {
+        "cov80": 0.9880341880341881,
+        "cov95": 1.0,
+        "crps": 0.03947798690535312,
+        "mae_log": 0.046219389856643416,
+        "rmse_log": 0.057860046461956784
+      }
+    }
+  },
+  "retuned_after_test": false,
+  "seconds_total": 10.810404062271118,
+  "target_manifest_check": {
+    "test": "04d76ef2e097f9ff",
+    "train": "cbdb10a6c2f1bfdf",
+    "validation": "509b5d25bd90188b"
+  },
+  "transfer_table": {
+    "spline|test_compound_holdout|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "spline",
+      "rows": [
+        {
+          "S0": 0.16402898712136052,
+          "Sk": 0.10240654612223574,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": -0.06162244099912478,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "spline",
+          "sign": "helpful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.09996591147431404,
+          "Sk": 0.06291797695519935,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": -0.037047934519114686,
+          "k": 1,
+          "metric": "crps",
+          "model": "spline",
+          "sign": "helpful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.24160963591870238,
+          "Sk": 0.25786036283196856,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": 0.016250726913266178,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "spline",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "required_deferred",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "spline|test|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "spline",
+      "rows": [
+        {
+          "S0": 0.06135304836267915,
+          "Sk": 0.06012068731753312,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": -0.001232361045146034,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "spline",
+          "sign": "helpful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.041405723856932655,
+          "Sk": 0.04025865452997673,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": -0.0011470693269559282,
+          "k": 1,
+          "metric": "crps",
+          "model": "spline",
+          "sign": "helpful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": -0.010604365988220978,
+          "Sk": 0.0049579710553760425,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": -0.005646394932844936,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "spline",
+          "sign": "helpful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "required_deferred",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "transformer|test_compound_holdout|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "transformer",
+      "rows": [
+        {
+          "S0": 0.05161734619426325,
+          "Sk": 0.05917268766641911,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.007555341472155856,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "transformer",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.036319945132309295,
+          "Sk": 0.03967288505883519,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.003352939926525897,
+          "k": 1,
+          "metric": "crps",
+          "model": "transformer",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.06582660208492513,
+          "Sk": 0.0755650631192134,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": 0.00973846103428827,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "transformer",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "required_deferred",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    },
+    "transformer|test|pre_study": {
+      "labels": [
+        "Synthetic diagnostic.",
+        "Not design qualification.",
+        "No real-data validation.",
+        "No operational recommendation."
+      ],
+      "model": "transformer",
+      "rows": [
+        {
+          "S0": 0.05381178777560128,
+          "Sk": 0.057860046461956784,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.004048258686355506,
+          "k": 1,
+          "metric": "rmse_log",
+          "model": "transformer",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.03699239404039405,
+          "Sk": 0.03947798690535312,
+          "convention": "delta = Sk - S0; delta>0 is harmful for RMSE/CRPS",
+          "delta": 0.0024855928649590714,
+          "k": 1,
+          "metric": "crps",
+          "model": "transformer",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        },
+        {
+          "S0": 0.041213103830102356,
+          "Sk": 0.042848697620298665,
+          "convention": "delta = |Sk| - |S0| on contrast_bias; delta>0 is harmful",
+          "delta": 0.0016355937901963088,
+          "k": 1,
+          "metric": "contrast_bias",
+          "model": "transformer",
+          "sign": "harmful",
+          "task": "predose_conditioned"
+        }
+      ],
+      "selective_sharing": "required_deferred",
+      "sharing_regimes": [
+        "context_specific (S0)",
+        "pooled (Sk)"
+      ],
+      "task": "predose_conditioned"
+    }
+  }
+}
