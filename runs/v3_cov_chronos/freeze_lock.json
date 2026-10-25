@@ -1,0 +1,38 @@
+{
+  "config_hash": "b5361a37f172cb10",
+  "config_path": "configs/v3_cov_chronos.frozen.yaml",
+  "covariate_information": "origin_only",
+  "design": false,
+  "encoder_window_day": 14.0,
+  "fabricate_encoder_history": false,
+  "generate_seed": 73001,
+  "git_revision": "7f54430b48232d6eedc8a06e1f017992608c570a",
+  "history_only_comparator_retained": true,
+  "identical_information_cutoff": true,
+  "identical_target_holdouts": true,
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation."
+  ],
+  "metrics": "corrected study-balanced MAE and true RMSE",
+  "new_architectures": false,
+  "preserved": [
+    "runs/v3_eval",
+    "runs/v3_pilot_k0k1",
+    "runs/v3_repl",
+    "runs/v3_research",
+    "runs/v3_closeout",
+    "runs/v3_audit",
+    "runs/v3_increment",
+    "runs/v3_phaseb",
+    "runs/v3_limitations",
+    "runs/v3_objective",
+    "runs/v3_official_seq",
+    "runs/v3_seq_diag",
+    "runs/v3_eval_correct"
+  ],
+  "real_data": false,
+  "train_seed": 83001
+}

@@ -1,0 +1,1061 @@
+{
+  "authorization_present": false,
+  "blockers": [],
+  "chronos_finetune_pool": {
+    "aggregated_across_incomplete": false,
+    "covariate_aware_complete": true,
+    "history_only_complete": true,
+    "label_covariate": "covariate_aware_origin",
+    "label_history": "history_only_univariate"
+  },
+  "defect_trace": {
+    "affected_published_metrics": [
+      "runs/v3_official_seq",
+      "runs/v3_seq_diag"
+    ],
+    "rescore_needed": [],
+    "validation_selection_affected": false
+  },
+  "design_run": false,
+  "encoder_window_day": 14.0,
+  "failures": [],
+  "freeze_lock": {
+    "config_hash": "b5361a37f172cb10",
+    "config_path": "configs/v3_cov_chronos.frozen.yaml",
+    "covariate_information": "origin_only",
+    "design": false,
+    "encoder_window_day": 14.0,
+    "fabricate_encoder_history": false,
+    "generate_seed": 73001,
+    "git_revision": "7f54430b48232d6eedc8a06e1f017992608c570a",
+    "history_only_comparator_retained": true,
+    "identical_information_cutoff": true,
+    "identical_target_holdouts": true,
+    "labels": [
+      "Synthetic diagnostic.",
+      "Not design qualification.",
+      "No real-data validation.",
+      "No operational recommendation."
+    ],
+    "metrics": "corrected study-balanced MAE and true RMSE",
+    "new_architectures": false,
+    "preserved": [
+      "runs/v3_eval",
+      "runs/v3_pilot_k0k1",
+      "runs/v3_repl",
+      "runs/v3_research",
+      "runs/v3_closeout",
+      "runs/v3_audit",
+      "runs/v3_increment",
+      "runs/v3_phaseb",
+      "runs/v3_limitations",
+      "runs/v3_objective",
+      "runs/v3_official_seq",
+      "runs/v3_seq_diag",
+      "runs/v3_eval_correct"
+    ],
+    "real_data": false,
+    "train_seed": 83001
+  },
+  "labels": [
+    "Synthetic diagnostic.",
+    "Not design qualification.",
+    "No real-data validation.",
+    "No operational recommendation.",
+    "Covariate-aware Chronos-2.",
+    "History-only comparator retained.",
+    "Corrected MAE and true RMSE."
+  ],
+  "new_architectures": false,
+  "output_dir": "runs/v3_cov_chronos",
+  "paired_transfer": {
+    "chronos2_finetune_covariate": {
+      "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+      "rows": [
+        {
+          "delta_pooled_minus_target": 0.0035178044746662085,
+          "harmful_if_positive": true,
+          "metric": "mae_log",
+          "pooled": 0.11945461329711696,
+          "sign": "harmful",
+          "target_only": 0.11593680882245075
+        },
+        {
+          "delta_pooled_minus_target": 0.003330720813967236,
+          "harmful_if_positive": true,
+          "metric": "rmse_log",
+          "pooled": 0.1372454933265051,
+          "sign": "harmful",
+          "target_only": 0.13391477251253786
+        },
+        {
+          "delta_pooled_minus_target": -0.00023606013896800698,
+          "harmful_if_positive": true,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.04759970825346709,
+          "sign": "helpful",
+          "target_only": 0.0478357683924351
+        }
+      ]
+    },
+    "chronos2_finetune_history": {
+      "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+      "rows": [
+        {
+          "delta_pooled_minus_target": 0.0016026693231919187,
+          "harmful_if_positive": true,
+          "metric": "mae_log",
+          "pooled": 0.14379974598753115,
+          "sign": "harmful",
+          "target_only": 0.14219707666433923
+        },
+        {
+          "delta_pooled_minus_target": 0.0015593242227472937,
+          "harmful_if_positive": true,
+          "metric": "rmse_log",
+          "pooled": 0.1607721396678054,
+          "sign": "harmful",
+          "target_only": 0.1592128154450581
+        },
+        {
+          "delta_pooled_minus_target": 0.00033110259844920664,
+          "harmful_if_positive": true,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.046566295872897234,
+          "sign": "harmful",
+          "target_only": 0.04623519327444803
+        }
+      ]
+    },
+    "spline": {
+      "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+      "rows": [
+        {
+          "delta_pooled_minus_target": 7.418533657957416e-05,
+          "harmful_if_positive": true,
+          "metric": "mae_log",
+          "pooled": 0.03827418323797971,
+          "sign": "harmful",
+          "target_only": 0.038199997901400135
+        },
+        {
+          "delta_pooled_minus_target": -0.001149031797957431,
+          "harmful_if_positive": true,
+          "metric": "rmse_log",
+          "pooled": 0.0483757884085042,
+          "sign": "helpful",
+          "target_only": 0.04952482020646163
+        },
+        {
+          "delta_pooled_minus_target": 0.006619874335437214,
+          "harmful_if_positive": true,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.02008689643894638,
+          "sign": "harmful",
+          "target_only": 0.013467022103509165
+        }
+      ]
+    },
+    "tft": {
+      "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+      "rows": [
+        {
+          "delta_pooled_minus_target": 0.016407663221971118,
+          "harmful_if_positive": true,
+          "metric": "mae_log",
+          "pooled": 0.05493977860137429,
+          "sign": "harmful",
+          "target_only": 0.038532115379403174
+        },
+        {
+          "delta_pooled_minus_target": 0.020439245992757094,
+          "harmful_if_positive": true,
+          "metric": "rmse_log",
+          "pooled": 0.06797486576771226,
+          "sign": "harmful",
+          "target_only": 0.04753561977495517
+        },
+        {
+          "delta_pooled_minus_target": 0.0061482309088053515,
+          "harmful_if_positive": true,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.01914708655828883,
+          "sign": "harmful",
+          "target_only": 0.012998855649483478
+        }
+      ]
+    },
+    "transformer": {
+      "note": "Paired on the same target-study holdout and encoder cutoff. \u0394>0 harmful.",
+      "rows": [
+        {
+          "delta_pooled_minus_target": 0.014507845999341427,
+          "harmful_if_positive": true,
+          "metric": "mae_log",
+          "pooled": 0.0516803953947078,
+          "sign": "harmful",
+          "target_only": 0.03717254939536637
+        },
+        {
+          "delta_pooled_minus_target": 0.020008490136811052,
+          "harmful_if_positive": true,
+          "metric": "rmse_log",
+          "pooled": 0.06932680313165647,
+          "sign": "harmful",
+          "target_only": 0.04931831299484542
+        },
+        {
+          "delta_pooled_minus_target": 0.006287516807423956,
+          "harmful_if_positive": true,
+          "metric": "mean_quantile_loss",
+          "pooled": 0.019576714113939672,
+          "sign": "harmful",
+          "target_only": 0.013289197306515716
+        }
+      ]
+    }
+  },
+  "predose_evaluated": false,
+  "preflights": {
+    "chronos2_pooled_covariate": {
+      "can_fit": true,
+      "covariate_mode": "covariate_aware_origin",
+      "fabricated_history": false,
+      "min_adapter_len": 3,
+      "min_past": 2,
+      "note": "Chronos2Dataset keeps series with context.shape[-1] >= min_past + prediction_length. Seq-diag dataset 0 had eligible train series; fine-tune failed because validation_inputs was empty after this filter.",
+      "prediction_length": 6,
+      "required_observed_visits": 8,
+      "train": {
+        "empty_after_filter": false,
+        "fabricated_history": false,
+        "n_dropped": 125,
+        "n_input_to_chronos": 307,
+        "n_kept": 182,
+        "postprocess_length_histogram": {
+          "3": 4,
+          "4": 80,
+          "5": 2,
+          "6": 3,
+          "7": 36,
+          "8": 182
+        },
+        "required_length": 8,
+        "split": "train"
+      },
+      "validation": {
+        "empty_after_filter": false,
+        "fabricated_history": false,
+        "n_dropped": 50,
+        "n_input_to_chronos": 81,
+        "n_kept": 31,
+        "postprocess_length_histogram": {
+          "3": 7,
+          "4": 38,
+          "6": 1,
+          "7": 4,
+          "8": 31
+        },
+        "required_length": 8,
+        "split": "validation"
+      },
+      "validation_usable": true
+    },
+    "chronos2_pooled_history": {
+      "can_fit": true,
+      "covariate_mode": "history_only_univariate",
+      "fabricated_history": false,
+      "min_adapter_len": 3,
+      "min_past": 2,
+      "note": "Chronos2Dataset keeps series with context.shape[-1] >= min_past + prediction_length. Seq-diag dataset 0 had eligible train series; fine-tune failed because validation_inputs was empty after this filter.",
+      "prediction_length": 6,
+      "required_observed_visits": 8,
+      "train": {
+        "empty_after_filter": false,
+        "fabricated_history": false,
+        "n_dropped": 125,
+        "n_input_to_chronos": 307,
+        "n_kept": 182,
+        "postprocess_length_histogram": {
+          "3": 4,
+          "4": 80,
+          "5": 2,
+          "6": 3,
+          "7": 36,
+          "8": 182
+        },
+        "required_length": 8,
+        "split": "train"
+      },
+      "validation": {
+        "empty_after_filter": false,
+        "fabricated_history": false,
+        "n_dropped": 50,
+        "n_input_to_chronos": 81,
+        "n_kept": 31,
+        "postprocess_length_histogram": {
+          "3": 7,
+          "4": 38,
+          "6": 1,
+          "7": 4,
+          "8": 31
+        },
+        "required_length": 8,
+        "split": "validation"
+      },
+      "validation_usable": true
+    },
+    "chronos2_target_only_covariate": {
+      "can_fit": true,
+      "covariate_mode": "covariate_aware_origin",
+      "fabricated_history": false,
+      "min_adapter_len": 3,
+      "min_past": 2,
+      "note": "Chronos2Dataset keeps series with context.shape[-1] >= min_past + prediction_length. Seq-diag dataset 0 had eligible train series; fine-tune failed because validation_inputs was empty after this filter.",
+      "prediction_length": 6,
+      "required_observed_visits": 8,
+      "train": {
+        "empty_after_filter": false,
+        "fabricated_history": false,
+        "n_dropped": 85,
+        "n_input_to_chronos": 206,
+        "n_kept": 121,
+        "postprocess_length_histogram": {
+          "3": 4,
+          "4": 52,
+          "5": 1,
+          "6": 3,
+          "7": 25,
+          "8": 121
+        },
+        "required_length": 8,
+        "split": "train"
+      },
+      "validation": {
+        "empty_after_filter": false,
+        "fabricated_history": false,
+        "n_dropped": 50,
+        "n_input_to_chronos": 81,
+        "n_kept": 31,
+        "postprocess_length_histogram": {
+          "3": 7,
+          "4": 38,
+          "6": 1,
+          "7": 4,
+          "8": 31
+        },
+        "required_length": 8,
+        "split": "validation"
+      },
+      "validation_usable": true
+    },
+    "chronos2_target_only_history": {
+      "can_fit": true,
+      "covariate_mode": "history_only_univariate",
+      "fabricated_history": false,
+      "min_adapter_len": 3,
+      "min_past": 2,
+      "note": "Chronos2Dataset keeps series with context.shape[-1] >= min_past + prediction_length. Seq-diag dataset 0 had eligible train series; fine-tune failed because validation_inputs was empty after this filter.",
+      "prediction_length": 6,
+      "required_observed_visits": 8,
+      "train": {
+        "empty_after_filter": false,
+        "fabricated_history": false,
+        "n_dropped": 85,
+        "n_input_to_chronos": 206,
+        "n_kept": 121,
+        "postprocess_length_histogram": {
+          "3": 4,
+          "4": 52,
+          "5": 1,
+          "6": 3,
+          "7": 25,
+          "8": 121
+        },
+        "required_length": 8,
+        "split": "train"
+      },
+      "validation": {
+        "empty_after_filter": false,
+        "fabricated_history": false,
+        "n_dropped": 50,
+        "n_input_to_chronos": 81,
+        "n_kept": 31,
+        "postprocess_length_histogram": {
+          "3": 7,
+          "4": 38,
+          "6": 1,
+          "7": 4,
+          "8": 31
+        },
+        "required_length": 8,
+        "split": "validation"
+      },
+      "validation_usable": true
+    }
+  },
+  "real_data_accessed": false,
+  "reload_checks": {
+    "chronos2_pooled_covariate": {
+      "max_abs_median_diff": 4.76837158203125e-07,
+      "n_compared": 2,
+      "ok": true
+    },
+    "chronos2_pooled_history": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    },
+    "chronos2_target_only_covariate": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    },
+    "chronos2_target_only_history": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    },
+    "chronos2_zero_shot": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    },
+    "tft_pooled": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    },
+    "tft_target_only": {
+      "max_abs_median_diff": 0.0,
+      "n_compared": 2,
+      "ok": true
+    }
+  },
+  "results": {
+    "chronos2_pooled_covariate": {
+      "chronos_label": "covariate_aware_origin",
+      "covariates_used": true,
+      "coverage80": 1.0,
+      "crps_justified": false,
+      "grouping": "STUDYID",
+      "interval_width80": 0.9410933275493598,
+      "mae_log": 0.11945461329711696,
+      "mean_quantile_loss": 0.04759970825346709,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 143,
+        "n_matched": 143,
+        "n_obs": 143,
+        "n_obs_key_unique": 143,
+        "n_obs_only": 0,
+        "n_pred": 143,
+        "n_pred_key_unique": 143,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_scored": 143,
+      "n_studies": 2,
+      "point_definition": "median",
+      "preflight": {
+        "can_fit": true,
+        "covariate_mode": "covariate_aware_origin",
+        "fabricated_history": false,
+        "min_adapter_len": 3,
+        "min_past": 2,
+        "note": "Chronos2Dataset keeps series with context.shape[-1] >= min_past + prediction_length. Seq-diag dataset 0 had eligible train series; fine-tune failed because validation_inputs was empty after this filter.",
+        "prediction_length": 6,
+        "required_observed_visits": 8,
+        "train": {
+          "empty_after_filter": false,
+          "fabricated_history": false,
+          "n_dropped": 125,
+          "n_input_to_chronos": 307,
+          "n_kept": 182,
+          "postprocess_length_histogram": {
+            "3": 4,
+            "4": 80,
+            "5": 2,
+            "6": 3,
+            "7": 36,
+            "8": 182
+          },
+          "required_length": 8,
+          "split": "train"
+        },
+        "validation": {
+          "empty_after_filter": false,
+          "fabricated_history": false,
+          "n_dropped": 50,
+          "n_input_to_chronos": 81,
+          "n_kept": 31,
+          "postprocess_length_histogram": {
+            "3": 7,
+            "4": 38,
+            "6": 1,
+            "7": 4,
+            "8": 31
+          },
+          "required_length": 8,
+          "split": "validation"
+        },
+        "validation_usable": true
+      },
+      "rmse_log": 0.1372454933265051,
+      "seconds": 14.680471658706665,
+      "status": "ok"
+    },
+    "chronos2_pooled_history": {
+      "chronos_label": "history_only_univariate",
+      "covariates_used": false,
+      "coverage80": 0.9796146044624746,
+      "crps_justified": false,
+      "grouping": "STUDYID",
+      "interval_width80": 0.7721328025899117,
+      "mae_log": 0.14379974598753115,
+      "mean_quantile_loss": 0.046566295872897234,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 143,
+        "n_matched": 143,
+        "n_obs": 143,
+        "n_obs_key_unique": 143,
+        "n_obs_only": 0,
+        "n_pred": 143,
+        "n_pred_key_unique": 143,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_scored": 143,
+      "n_studies": 2,
+      "point_definition": "median",
+      "preflight": {
+        "can_fit": true,
+        "covariate_mode": "history_only_univariate",
+        "fabricated_history": false,
+        "min_adapter_len": 3,
+        "min_past": 2,
+        "note": "Chronos2Dataset keeps series with context.shape[-1] >= min_past + prediction_length. Seq-diag dataset 0 had eligible train series; fine-tune failed because validation_inputs was empty after this filter.",
+        "prediction_length": 6,
+        "required_observed_visits": 8,
+        "train": {
+          "empty_after_filter": false,
+          "fabricated_history": false,
+          "n_dropped": 125,
+          "n_input_to_chronos": 307,
+          "n_kept": 182,
+          "postprocess_length_histogram": {
+            "3": 4,
+            "4": 80,
+            "5": 2,
+            "6": 3,
+            "7": 36,
+            "8": 182
+          },
+          "required_length": 8,
+          "split": "train"
+        },
+        "validation": {
+          "empty_after_filter": false,
+          "fabricated_history": false,
+          "n_dropped": 50,
+          "n_input_to_chronos": 81,
+          "n_kept": 31,
+          "postprocess_length_histogram": {
+            "3": 7,
+            "4": 38,
+            "6": 1,
+            "7": 4,
+            "8": 31
+          },
+          "required_length": 8,
+          "split": "validation"
+        },
+        "validation_usable": true
+      },
+      "rmse_log": 0.1607721396678054,
+      "seconds": 9.846946954727173,
+      "status": "ok"
+    },
+    "chronos2_target_only_covariate": {
+      "chronos_label": "covariate_aware_origin",
+      "covariates_used": true,
+      "coverage80": 1.0,
+      "crps_justified": false,
+      "grouping": "STUDYID",
+      "interval_width80": 0.9579713817542272,
+      "mae_log": 0.11593680882245075,
+      "mean_quantile_loss": 0.0478357683924351,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 143,
+        "n_matched": 143,
+        "n_obs": 143,
+        "n_obs_key_unique": 143,
+        "n_obs_only": 0,
+        "n_pred": 143,
+        "n_pred_key_unique": 143,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_scored": 143,
+      "n_studies": 2,
+      "point_definition": "median",
+      "preflight": {
+        "can_fit": true,
+        "covariate_mode": "covariate_aware_origin",
+        "fabricated_history": false,
+        "min_adapter_len": 3,
+        "min_past": 2,
+        "note": "Chronos2Dataset keeps series with context.shape[-1] >= min_past + prediction_length. Seq-diag dataset 0 had eligible train series; fine-tune failed because validation_inputs was empty after this filter.",
+        "prediction_length": 6,
+        "required_observed_visits": 8,
+        "train": {
+          "empty_after_filter": false,
+          "fabricated_history": false,
+          "n_dropped": 85,
+          "n_input_to_chronos": 206,
+          "n_kept": 121,
+          "postprocess_length_histogram": {
+            "3": 4,
+            "4": 52,
+            "5": 1,
+            "6": 3,
+            "7": 25,
+            "8": 121
+          },
+          "required_length": 8,
+          "split": "train"
+        },
+        "validation": {
+          "empty_after_filter": false,
+          "fabricated_history": false,
+          "n_dropped": 50,
+          "n_input_to_chronos": 81,
+          "n_kept": 31,
+          "postprocess_length_histogram": {
+            "3": 7,
+            "4": 38,
+            "6": 1,
+            "7": 4,
+            "8": 31
+          },
+          "required_length": 8,
+          "split": "validation"
+        },
+        "validation_usable": true
+      },
+      "rmse_log": 0.13391477251253786,
+      "seconds": 14.817448616027832,
+      "status": "ok"
+    },
+    "chronos2_target_only_history": {
+      "chronos_label": "history_only_univariate",
+      "covariates_used": false,
+      "coverage80": 0.9796146044624746,
+      "crps_justified": false,
+      "grouping": "STUDYID",
+      "interval_width80": 0.7694170765170703,
+      "mae_log": 0.14219707666433923,
+      "mean_quantile_loss": 0.04623519327444803,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 143,
+        "n_matched": 143,
+        "n_obs": 143,
+        "n_obs_key_unique": 143,
+        "n_obs_only": 0,
+        "n_pred": 143,
+        "n_pred_key_unique": 143,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_scored": 143,
+      "n_studies": 2,
+      "point_definition": "median",
+      "preflight": {
+        "can_fit": true,
+        "covariate_mode": "history_only_univariate",
+        "fabricated_history": false,
+        "min_adapter_len": 3,
+        "min_past": 2,
+        "note": "Chronos2Dataset keeps series with context.shape[-1] >= min_past + prediction_length. Seq-diag dataset 0 had eligible train series; fine-tune failed because validation_inputs was empty after this filter.",
+        "prediction_length": 6,
+        "required_observed_visits": 8,
+        "train": {
+          "empty_after_filter": false,
+          "fabricated_history": false,
+          "n_dropped": 85,
+          "n_input_to_chronos": 206,
+          "n_kept": 121,
+          "postprocess_length_histogram": {
+            "3": 4,
+            "4": 52,
+            "5": 1,
+            "6": 3,
+            "7": 25,
+            "8": 121
+          },
+          "required_length": 8,
+          "split": "train"
+        },
+        "validation": {
+          "empty_after_filter": false,
+          "fabricated_history": false,
+          "n_dropped": 50,
+          "n_input_to_chronos": 81,
+          "n_kept": 31,
+          "postprocess_length_histogram": {
+            "3": 7,
+            "4": 38,
+            "6": 1,
+            "7": 4,
+            "8": 31
+          },
+          "required_length": 8,
+          "split": "validation"
+        },
+        "validation_usable": true
+      },
+      "rmse_log": 0.1592128154450581,
+      "seconds": 10.412426948547363,
+      "status": "ok"
+    },
+    "chronos2_zero_shot_covariate": {
+      "chronos_label": "covariate_aware_origin",
+      "covariates_used": true,
+      "coverage80": 1.0,
+      "crps_justified": false,
+      "grouping": "STUDYID",
+      "interval_width80": 0.9304858574760855,
+      "mae_log": 0.130482899948589,
+      "mean_quantile_loss": 0.048253130961932636,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 143,
+        "n_matched": 143,
+        "n_obs": 143,
+        "n_obs_key_unique": 143,
+        "n_obs_only": 0,
+        "n_pred": 143,
+        "n_pred_key_unique": 143,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_scored": 143,
+      "n_studies": 2,
+      "point_definition": "median",
+      "preflight": null,
+      "rmse_log": 0.14778855774173,
+      "seconds": 3.643310070037842,
+      "status": "ok"
+    },
+    "chronos2_zero_shot_history": {
+      "chronos_label": "history_only_univariate",
+      "covariates_used": false,
+      "coverage80": 0.9796146044624746,
+      "crps_justified": false,
+      "grouping": "STUDYID",
+      "interval_width80": 0.7750185278801599,
+      "mae_log": 0.15251938829977252,
+      "mean_quantile_loss": 0.04820599838254321,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 143,
+        "n_matched": 143,
+        "n_obs": 143,
+        "n_obs_key_unique": 143,
+        "n_obs_only": 0,
+        "n_pred": 143,
+        "n_pred_key_unique": 143,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_scored": 143,
+      "n_studies": 2,
+      "point_definition": "median",
+      "preflight": null,
+      "rmse_log": 0.1693307632665275,
+      "seconds": 2.737886667251587,
+      "status": "ok"
+    },
+    "last_value": {
+      "chronos_label": null,
+      "covariates_used": null,
+      "coverage80": 0.0,
+      "crps_justified": false,
+      "grouping": "STUDYID",
+      "interval_width80": 0.0,
+      "mae_log": 0.12822733194341013,
+      "mean_quantile_loss": 0.06411366597170506,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 143,
+        "n_matched": 143,
+        "n_obs": 143,
+        "n_obs_key_unique": 143,
+        "n_obs_only": 0,
+        "n_pred": 143,
+        "n_pred_key_unique": 143,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_scored": 143,
+      "n_studies": 2,
+      "point_definition": "median",
+      "preflight": null,
+      "rmse_log": 0.14580259781220675,
+      "seconds": 0.03481340408325195,
+      "status": "ok"
+    },
+    "spline_pooled": {
+      "chronos_label": null,
+      "covariates_used": null,
+      "coverage80": 0.9913793103448276,
+      "crps_justified": true,
+      "grouping": "STUDYID",
+      "interval_width80": 0.3368086267029724,
+      "mae_log": 0.03827418323797971,
+      "mean_quantile_loss": 0.02008689643894638,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 143,
+        "n_matched": 143,
+        "n_obs": 143,
+        "n_obs_key_unique": 143,
+        "n_obs_only": 0,
+        "n_pred": 144,
+        "n_pred_key_unique": 144,
+        "n_pred_only": 1,
+        "one_to_one": true
+      },
+      "n_scored": 143,
+      "n_studies": 2,
+      "point_definition": "gaussian_mean",
+      "preflight": null,
+      "rmse_log": 0.0483757884085042,
+      "seconds": 3.881957769393921,
+      "status": "ok"
+    },
+    "spline_target_only": {
+      "chronos_label": null,
+      "covariates_used": null,
+      "coverage80": 0.8141987829614605,
+      "crps_justified": true,
+      "grouping": "STUDYID",
+      "interval_width80": 0.12470042467922537,
+      "mae_log": 0.038199997901400135,
+      "mean_quantile_loss": 0.013467022103509165,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 143,
+        "n_matched": 143,
+        "n_obs": 143,
+        "n_obs_key_unique": 143,
+        "n_obs_only": 0,
+        "n_pred": 144,
+        "n_pred_key_unique": 144,
+        "n_pred_only": 1,
+        "one_to_one": true
+      },
+      "n_scored": 143,
+      "n_studies": 2,
+      "point_definition": "gaussian_mean",
+      "preflight": null,
+      "rmse_log": 0.04952482020646163,
+      "seconds": 3.892725706100464,
+      "status": "ok"
+    },
+    "tft_pooled": {
+      "chronos_label": null,
+      "covariates_used": null,
+      "coverage80": 0.9117647058823529,
+      "crps_justified": false,
+      "grouping": "STUDYID",
+      "interval_width80": 0.22598929052178807,
+      "mae_log": 0.05493977860137429,
+      "mean_quantile_loss": 0.01914708655828883,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 143,
+        "n_matched": 143,
+        "n_obs": 143,
+        "n_obs_key_unique": 143,
+        "n_obs_only": 0,
+        "n_pred": 143,
+        "n_pred_key_unique": 143,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_scored": 143,
+      "n_studies": 2,
+      "point_definition": "median",
+      "preflight": null,
+      "rmse_log": 0.06797486576771226,
+      "seconds": 36.69494581222534,
+      "status": "ok"
+    },
+    "tft_target_only": {
+      "chronos_label": null,
+      "covariates_used": null,
+      "coverage80": 0.7789046653144016,
+      "crps_justified": false,
+      "grouping": "STUDYID",
+      "interval_width80": 0.1156685439858427,
+      "mae_log": 0.038532115379403174,
+      "mean_quantile_loss": 0.012998855649483478,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 143,
+        "n_matched": 143,
+        "n_obs": 143,
+        "n_obs_key_unique": 143,
+        "n_obs_only": 0,
+        "n_pred": 143,
+        "n_pred_key_unique": 143,
+        "n_pred_only": 0,
+        "one_to_one": true
+      },
+      "n_scored": 143,
+      "n_studies": 2,
+      "point_definition": "median",
+      "preflight": null,
+      "rmse_log": 0.04753561977495517,
+      "seconds": 29.3671452999115,
+      "status": "ok"
+    },
+    "transformer_pooled": {
+      "chronos_label": null,
+      "covariates_used": null,
+      "coverage80": 0.938843813387424,
+      "crps_justified": true,
+      "grouping": "STUDYID",
+      "interval_width80": 0.24710241091342502,
+      "mae_log": 0.0516803953947078,
+      "mean_quantile_loss": 0.019576714113939672,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 143,
+        "n_matched": 143,
+        "n_obs": 143,
+        "n_obs_key_unique": 143,
+        "n_obs_only": 0,
+        "n_pred": 144,
+        "n_pred_key_unique": 144,
+        "n_pred_only": 1,
+        "one_to_one": true
+      },
+      "n_scored": 143,
+      "n_studies": 2,
+      "point_definition": "gaussian_mean",
+      "preflight": null,
+      "rmse_log": 0.06932680313165647,
+      "seconds": 0.992577314376831,
+      "status": "ok"
+    },
+    "transformer_target_only": {
+      "chronos_label": null,
+      "covariates_used": null,
+      "coverage80": 0.7871196754563894,
+      "crps_justified": true,
+      "grouping": "STUDYID",
+      "interval_width80": 0.11215430705450107,
+      "mae_log": 0.03717254939536637,
+      "mean_quantile_loss": 0.013289197306515716,
+      "merge": {
+        "duplicate_obs_keys": 0,
+        "duplicate_pred_keys": 0,
+        "grouping_column": "STUDYID",
+        "inflated": false,
+        "n_keys_in_both": 143,
+        "n_matched": 143,
+        "n_obs": 143,
+        "n_obs_key_unique": 143,
+        "n_obs_only": 0,
+        "n_pred": 144,
+        "n_pred_key_unique": 144,
+        "n_pred_only": 1,
+        "one_to_one": true
+      },
+      "n_scored": 143,
+      "n_studies": 2,
+      "point_definition": "gaussian_mean",
+      "preflight": null,
+      "rmse_log": 0.04931831299484542,
+      "seconds": 0.9332494735717773,
+      "status": "ok"
+    }
+  },
+  "seconds_total": 139.31223106384277,
+  "target_holdout_hashes": {
+    "pooled": {
+      "all_target": "11ccd2a44fb8550f",
+      "test": "c978494c8169f581",
+      "validation": "7b7f4d224ea8042b"
+    },
+    "target_only": {
+      "all_target": "11ccd2a44fb8550f",
+      "test": "c978494c8169f581",
+      "validation": "7b7f4d224ea8042b"
+    }
+  },
+  "training_commands": [
+    "send-bw generate --config runs/v3_cov_chronos/datasets/d0/banks/matched/effective.yaml",
+    "send-bw train --config runs/v3_cov_chronos/datasets/d0/trains/t0/cells/d0_t0_matched_target_only/effective.yaml --models spline transformer",
+    "send-bw train --config runs/v3_cov_chronos/datasets/d0/trains/t0/cells/d0_t0_matched_pooled/effective.yaml --models spline transformer"
+  ],
+  "versions": {
+    "chronos2_class": "chronos.chronos2.pipeline.Chronos2Pipeline",
+    "packages": {
+      "accelerate": "1.15.0",
+      "chronos": "2.3.2",
+      "lightning": "2.6.6",
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "peft": "0.21.2",
+      "pytorch_forecasting": "1.8.0",
+      "torch": "2.14.1+cu130",
+      "transformers": "5.20.2"
+    },
+    "python": "3.12.3",
+    "tft_class": "pytorch_forecasting.models.temporal_fusion_transformer._tft.TemporalFusionTransformer",
+    "torch_cuda": false,
+    "torch_device": "cpu"
+  }
+}

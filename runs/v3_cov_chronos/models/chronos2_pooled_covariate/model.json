@@ -1,0 +1,179 @@
+{
+ "name": "chronos2",
+ "task": "early_history",
+ "official_class": "chronos.Chronos2Pipeline",
+ "pretrained_id": "amazon/chronos-2",
+ "mode": "finetune_pooled",
+ "quantiles": [
+  0.1,
+  0.25,
+  0.5,
+  0.75,
+  0.9
+ ],
+ "encoder_window_day": 14.0,
+ "covariate_mode": "covariate_aware_origin",
+ "history": {
+  "name": "chronos2",
+  "task": "early_history",
+  "library": "chronos.Chronos2Pipeline",
+  "pretrained_id": "amazon/chronos-2",
+  "mode": "finetune_pooled",
+  "finetune_mode": "lora",
+  "num_steps": 40,
+  "n_train_series": 307,
+  "n_val_series": 81,
+  "prediction_length": 6,
+  "covariate_mode": "covariate_aware_origin",
+  "preflight": {
+   "covariate_mode": "covariate_aware_origin",
+   "min_past": 2,
+   "prediction_length": 6,
+   "required_observed_visits": 8,
+   "min_adapter_len": 3,
+   "train": {
+    "split": "train",
+    "n_input_to_chronos": 307,
+    "postprocess_length_histogram": {
+     "3": 4,
+     "4": 80,
+     "5": 2,
+     "6": 3,
+     "7": 36,
+     "8": 182
+    },
+    "required_length": 8,
+    "n_kept": 182,
+    "n_dropped": 125,
+    "empty_after_filter": false,
+    "fabricated_history": false
+   },
+   "validation": {
+    "split": "validation",
+    "n_input_to_chronos": 81,
+    "postprocess_length_histogram": {
+     "3": 7,
+     "4": 38,
+     "6": 1,
+     "7": 4,
+     "8": 31
+    },
+    "required_length": 8,
+    "n_kept": 31,
+    "n_dropped": 50,
+    "empty_after_filter": false,
+    "fabricated_history": false
+   },
+   "can_fit": true,
+   "validation_usable": true,
+   "fabricated_history": false,
+   "note": "Chronos2Dataset keeps series with context.shape[-1] >= min_past + prediction_length. Seq-diag dataset 0 had eligible train series; fine-tune failed because validation_inputs was empty after this filter."
+  },
+  "validation_skipped_empty_after_length_filter": false,
+  "quantiles": [
+   0.1,
+   0.25,
+   0.5,
+   0.75,
+   0.9
+  ],
+  "device_map": "cpu",
+  "seconds": 9.940186262130737,
+  "checkpoint": "runs/v3_cov_chronos/models/chronos2_pooled_covariate/finetune/finetuned-ckpt",
+  "observed_rows_only": true,
+  "filled_target_with_zero": false,
+  "not_the_required_transformer": true,
+  "forecast_type": "quantiles",
+  "note": "official Chronos2Pipeline fine-tune; quantile forecasts only; not a trajectory simulator; encoder is observed visits"
+ },
+ "not_the_required_transformer": true,
+ "spec": {
+  "species": "RAT",
+  "strains": [
+   "BEAGLE",
+   "SPRAGUE-DAWLEY",
+   "WISTAR HAN"
+  ],
+  "routes": [
+   "ORAL GAVAGE"
+  ],
+  "sexes": [
+   "F",
+   "M"
+  ],
+  "zb_mean": {
+   "F": 5.291907249728608,
+   "M": 5.572622293289623
+  },
+  "max_dose": 1000.0,
+  "max_day": 28.0,
+  "intervals": [
+   1.0,
+   7.0
+  ],
+  "compound_ids": [
+   "CMP01",
+   "CMP02",
+   "CMP03",
+   "CMP05",
+   "CMP06"
+  ],
+  "descriptor_ranges": {
+   "D1": [
+    -0.6218,
+    1.0969
+   ],
+   "D2": [
+    -0.825,
+    1.8165
+   ],
+   "D3": [
+    -1.0333,
+    0.8109
+   ]
+  },
+  "t_ref": 28.0,
+  "version": "features-v1",
+  "animal_cols": [
+   "SEX_M",
+   "ZB_C",
+   "IS_CONTROL",
+   "LD",
+   "INV_INTERVAL",
+   "START",
+   "END",
+   "D1",
+   "D2",
+   "D3",
+   "STRAIN_SPRAGUE-DAWLEY",
+   "STRAIN_WISTAR HAN",
+   "SPECIES_RAT"
+  ],
+  "time_cols": [
+   "TAU",
+   "EXPO",
+   "OFF",
+   "LCUM"
+  ],
+  "sharing": "pooled",
+  "species_levels": [
+   "DOG",
+   "RAT"
+  ],
+  "zb_mean_by_species": {
+   "DOG": {
+    "F": 9.05425680610971,
+    "M": 9.186497967501966
+   },
+   "RAT": {
+    "F": 5.291907249728608,
+    "M": 5.572622293289623
+   }
+  },
+  "declared_species": [
+   "RAT",
+   "DOG"
+  ],
+  "fixed_schema": false
+ }
+}

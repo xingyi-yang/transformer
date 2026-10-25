@@ -1,0 +1,73 @@
+{
+  "checkpoint": "runs/v3_cov_chronos/models/chronos2_target_only_history/finetune/finetuned-ckpt",
+  "covariate_mode": "history_only_univariate",
+  "device_map": "cpu",
+  "filled_target_with_zero": false,
+  "finetune_mode": "lora",
+  "forecast_type": "quantiles",
+  "library": "chronos.Chronos2Pipeline",
+  "mode": "finetune_target_only",
+  "n_train_series": 206,
+  "n_val_series": 81,
+  "name": "chronos2",
+  "not_the_required_transformer": true,
+  "note": "official Chronos2Pipeline fine-tune; quantile forecasts only; not a trajectory simulator; encoder is observed visits",
+  "num_steps": 40,
+  "observed_rows_only": true,
+  "prediction_length": 6,
+  "preflight": {
+    "can_fit": true,
+    "covariate_mode": "history_only_univariate",
+    "fabricated_history": false,
+    "min_adapter_len": 3,
+    "min_past": 2,
+    "note": "Chronos2Dataset keeps series with context.shape[-1] >= min_past + prediction_length. Seq-diag dataset 0 had eligible train series; fine-tune failed because validation_inputs was empty after this filter.",
+    "prediction_length": 6,
+    "required_observed_visits": 8,
+    "train": {
+      "empty_after_filter": false,
+      "fabricated_history": false,
+      "n_dropped": 85,
+      "n_input_to_chronos": 206,
+      "n_kept": 121,
+      "postprocess_length_histogram": {
+        "3": 4,
+        "4": 52,
+        "5": 1,
+        "6": 3,
+        "7": 25,
+        "8": 121
+      },
+      "required_length": 8,
+      "split": "train"
+    },
+    "validation": {
+      "empty_after_filter": false,
+      "fabricated_history": false,
+      "n_dropped": 50,
+      "n_input_to_chronos": 81,
+      "n_kept": 31,
+      "postprocess_length_histogram": {
+        "3": 7,
+        "4": 38,
+        "6": 1,
+        "7": 4,
+        "8": 31
+      },
+      "required_length": 8,
+      "split": "validation"
+    },
+    "validation_usable": true
+  },
+  "pretrained_id": "amazon/chronos-2",
+  "quantiles": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "seconds": 7.903892755508423,
+  "task": "early_history",
+  "validation_skipped_empty_after_length_filter": false
+}

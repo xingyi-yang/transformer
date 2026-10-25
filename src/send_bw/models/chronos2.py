@@ -25,6 +25,15 @@ from send_bw.models.optional_adapters import BASELINE_ONLY_REASON, DESIGN_REASON
 NAME = "chronos2"
 OFFICIAL_ID = "amazon/chronos-2"
 OFFICIAL_CLASS = "chronos.Chronos2Pipeline"
+# Known at the forecast origin. DAY is the planned visit time, not an outcome.
+ORIGIN_STATIC = ("SEX", "STRAIN", "SPECIES", "ROUTE", "PLANNED_DOSE")
+KNOWN_FUTURE = ORIGIN_STATIC + ("DAY",)
+FORBIDDEN_COVARIATES = (
+    "LOGW", "Y", "WEIGHT_G", "ACTUAL_DOSE", "EXDOSE_ACTUAL", "DOSE_DEVIATION",
+    "DISPOSITION", "DISPOSITION_DAY", "DEATH_DAY", "Z0_TRUE", "Z_LATENT",
+)
+HISTORY_ONLY = "history_only_univariate"
+COVARIATE_AWARE = "covariate_aware_origin"
 
 
 def verify_chronos2_api() -> dict[str, Any]:
@@ -59,6 +68,16 @@ def _require_api() -> dict[str, Any]:
     return v
 
 
+def _static_value(row: Any, name: str) -> Any:
+    if row is None:
+        return 0.0 if name == "PLANNED_DOSE" else ""
+    if name == "PLANNED_DOSE":
+        v = row.get("PLANNED_DOSE")
+        return 0.0 if v is None or (isinstance(v, float) and np.isnan(v)) else float(v)
+    v = row.get(name, "")
+    return "" if v is None or (isinstance(v, float) and np.isnan(v)) else str(v)
+
+
 def observed_series(data: ModelData) -> list[dict[str, Any]]:
     """One observed LOGW path per animal. No interpolated calendar days."""
     out = []
@@ -68,14 +87,123 @@ def observed_series(data: ModelData) -> list[dict[str, Any]]:
         if g.empty:
             continue
         row = animals.loc[u] if u in animals.index else None
-        out.append({
+        rec = {
             "USUBJID": str(u),
             "STUDYID": str(g["STUDYID"].iloc[0]),
-            "SPECIES": None if row is None else str(row.get("SPECIES", "")),
-            "DAY": g["DAY"].to_numpy(float),
-            "LOGW": g["LOGW"].to_numpy(float),
-        })
+            "DAY": g["DAY"].to_numpy(float).copy(),
+            "LOGW": g["LOGW"].to_numpy(float).copy(),
+        }
+        for name in ORIGIN_STATIC:
+            rec[name] = _static_value(row, name)
+        out.append(rec)
     return out
+
+
+def chronos_postprocess_lengths(inputs: list[Any], prediction_length: int) -> list[int]:
+    """Lengths Chronos2Dataset filters on: ``context.shape[-1]`` after official preprocess."""
+    if not inputs:
+        return []
+    from chronos.chronos2.preprocess import from_list_of_dicts, from_list_of_tensors
+
+    first = inputs[0]
+    if isinstance(first, dict) and "context" in first:
+        prepared = inputs
+    elif isinstance(first, dict):
+        prepared = from_list_of_dicts(inputs, prediction_length=int(prediction_length))
+    else:
+        arrays = [np.asarray(x, float).copy() for x in inputs]
+        prepared = from_list_of_tensors(arrays, prediction_length=int(prediction_length))
+    return [int(x["context"].shape[-1]) for x in prepared]
+
+
+def _length_block(inputs: list[Any], *, split: str, min_past: int,
+                  prediction_length: int) -> dict[str, Any]:
+    need = int(min_past) + int(prediction_length)
+    lengths = chronos_postprocess_lengths(inputs, prediction_length)
+    hist = {int(k): int(v) for k, v in pd.Series(lengths).value_counts().sort_index().items()} if lengths else {}
+    n_kept = int(sum(L >= need for L in lengths))
+    return {
+        "split": split,
+        "n_input_to_chronos": int(len(inputs)),
+        "postprocess_length_histogram": hist,
+        "required_length": need,
+        "n_kept": n_kept,
+        "n_dropped": int(len(lengths) - n_kept),
+        "empty_after_filter": bool(n_kept == 0),
+        "fabricated_history": False,
+    }
+
+
+def build_chronos_fit_inputs(data: ModelData, covariate_mode: str,
+                             min_adapter_len: int = 3) -> list[Any]:
+    """Inputs actually passed to Chronos ``fit``. History is not padded."""
+    mode = covariate_mode or HISTORY_ONLY
+    out: list[Any] = []
+    for s in observed_series(data):
+        logw = np.asarray(s["LOGW"], float).copy()
+        if len(logw) < int(min_adapter_len):
+            continue
+        if mode == HISTORY_ONLY:
+            out.append(logw)
+            continue
+        n = len(logw)
+        past = {name: np.array([s[name]] * n) for name in ORIGIN_STATIC}
+        past["DAY"] = np.asarray(s["DAY"], float).copy()
+        leaked = [k for k in past if k in FORBIDDEN_COVARIATES]
+        if leaked:
+            raise ValueError(f"refusing outcome covariates at origin: {leaked}")
+        out.append({"target": logw, "past_covariates": past})
+    return out
+
+
+def build_chronos_predict_item(series: dict[str, Any], future_days: np.ndarray,
+                               covariate_mode: str) -> Any:
+    """One inference item. Encoder = observed history only; future LOGW is not a covariate."""
+    enc = np.asarray(series["LOGW"], float).copy()
+    if covariate_mode == HISTORY_ONLY:
+        return enc
+    n = len(enc)
+    fut = np.asarray(future_days, float)
+    past = {name: np.array([series[name]] * n) for name in ORIGIN_STATIC}
+    past["DAY"] = np.asarray(series["DAY"], float).copy()
+    future = {name: np.array([series[name]] * len(fut)) for name in ORIGIN_STATIC}
+    future["DAY"] = fut.copy()
+    leaked = [k for k in list(past) + list(future) if k in FORBIDDEN_COVARIATES]
+    if leaked:
+        raise ValueError(f"refusing outcome covariates at origin: {leaked}")
+    if "LOGW" in future:
+        raise ValueError("future LOGW is not available at the forecast origin")
+    return {"target": enc, "past_covariates": past, "future_covariates": future}
+
+
+def chronos_fit_preflight(train: ModelData, validation: ModelData, *,
+                          min_past: int, prediction_length: int,
+                          covariate_mode: str = HISTORY_ONLY,
+                          min_adapter_len: int = 3) -> dict[str, Any]:
+    """Compare raw visit counts to Chronos post-process lengths. Do not pad."""
+    train_in = build_chronos_fit_inputs(train, covariate_mode, min_adapter_len)
+    val_in = build_chronos_fit_inputs(validation, covariate_mode, min_adapter_len)
+    train_b = _length_block(train_in, split="train", min_past=min_past,
+                            prediction_length=prediction_length)
+    val_b = _length_block(val_in, split="validation", min_past=min_past,
+                          prediction_length=prediction_length)
+    return {
+        "covariate_mode": covariate_mode,
+        "min_past": int(min_past),
+        "prediction_length": int(prediction_length),
+        "required_observed_visits": int(min_past) + int(prediction_length),
+        "min_adapter_len": int(min_adapter_len),
+        "train": train_b,
+        "validation": val_b,
+        "can_fit": not train_b["empty_after_filter"],
+        "validation_usable": not val_b["empty_after_filter"],
+        "fabricated_history": False,
+        "note": (
+            "Chronos2Dataset keeps series with context.shape[-1] >= min_past + prediction_length. "
+            "Seq-diag dataset 0 had eligible train series; fine-tune failed because "
+            "validation_inputs was empty after this filter."
+        ),
+    }
 
 
 class Chronos2EarlyHistoryModel(ResponseModel):
@@ -94,6 +222,8 @@ class Chronos2EarlyHistoryModel(ResponseModel):
         self.mode: str = "zero_shot"
         self.pretrained_id: str = OFFICIAL_ID
         self.encoder_window_day: float = 14.0
+        self.covariate_mode: str = HISTORY_ONLY
+        self.last_preflight: dict[str, Any] = {}
 
     def fit(self, train: ModelData, validation: ModelData, config: dict[str, Any]) -> dict[str, Any]:
         """Fine-tune the official pipeline. Zero-shot uses ``load_pretrained`` instead."""
@@ -105,27 +235,49 @@ class Chronos2EarlyHistoryModel(ResponseModel):
         self.quantiles = [float(q) for q in config.get("quantiles", QUANTILES)]
         self.mode = str(config.get("mode", "finetune"))
         self.pretrained_id = str(config.get("pretrained_id", OFFICIAL_ID))
+        self.covariate_mode = str(config.get("covariate_mode", HISTORY_ONLY))
+        if self.covariate_mode not in {HISTORY_ONLY, COVARIATE_AWARE}:
+            raise ValueError(f"unknown covariate_mode {self.covariate_mode}")
         device = str(config.get("device_map", "cpu"))
         t0 = time.time()
         pipe = Chronos2Pipeline.from_pretrained(self.pretrained_id, device_map=device)
-        train_s = [s["LOGW"] for s in observed_series(train) if len(s["LOGW"]) >= 3]
-        val_s = [s["LOGW"] for s in observed_series(validation) if len(s["LOGW"]) >= 3]
+        pred_len = int(config.get("prediction_length", 6))
+        min_past = int(config.get("min_past", 2))
+        pre = chronos_fit_preflight(
+            train, validation, min_past=min_past, prediction_length=pred_len,
+            covariate_mode=self.covariate_mode)
+        self.last_preflight = pre
+        if not pre["can_fit"]:
+            raise RuntimeError(
+                "Chronos-2 fine-tune preflight: train dataset empty after Chronos "
+                f"length filter (need >= {pre['required_observed_visits']} observed visits; "
+                f"kept {pre['train']['n_kept']}). History was not padded."
+            )
+        train_s = build_chronos_fit_inputs(train, self.covariate_mode)
+        val_s = build_chronos_fit_inputs(validation, self.covariate_mode)
+        if self.covariate_mode == COVARIATE_AWARE:
+            from chronos.chronos2.preprocess import from_list_of_dicts
+
+            train_s = from_list_of_dicts(
+                train_s, prediction_length=pred_len, known_covariates_names=list(KNOWN_FUTURE))
+            if pre["validation_usable"]:
+                val_s = from_list_of_dicts(
+                    val_s, prediction_length=pred_len, known_covariates_names=list(KNOWN_FUTURE))
         if len(train_s) < 2:
             raise RuntimeError("Chronos-2 fine-tune: fewer than 2 observed training series")
-        pred_len = int(config.get("prediction_length", 6))
         out_dir = config.get("finetune_dir")
         steps = int(config.get("num_steps", 80))
         ft_mode = str(config.get("finetune_mode", "lora"))
         self.pipeline = pipe.fit(
             inputs=train_s,
             prediction_length=pred_len,
-            validation_inputs=val_s or None,
+            validation_inputs=(val_s if pre["validation_usable"] else None),
             finetune_mode=ft_mode,
             learning_rate=float(config.get("lr", 1e-5)),
             num_steps=steps,
             batch_size=int(config.get("batch_size", 8)),
             output_dir=out_dir,
-            min_past=int(config.get("min_past", 2)),
+            min_past=min_past,
         )
         ckpt = None
         if out_dir:
@@ -140,8 +292,11 @@ class Chronos2EarlyHistoryModel(ResponseModel):
             "finetune_mode": ft_mode,
             "num_steps": steps,
             "n_train_series": len(train_s),
-            "n_val_series": len(val_s),
+            "n_val_series": 0 if not pre["validation_usable"] else len(val_s),
             "prediction_length": pred_len,
+            "covariate_mode": self.covariate_mode,
+            "preflight": pre,
+            "validation_skipped_empty_after_length_filter": not pre["validation_usable"],
             "quantiles": self.quantiles,
             "device_map": device,
             "seconds": time.time() - t0,
@@ -163,6 +318,7 @@ class Chronos2EarlyHistoryModel(ResponseModel):
         self.pretrained_id = str(config.get("pretrained_id", OFFICIAL_ID))
         self.quantiles = [float(q) for q in config.get("quantiles", QUANTILES)]
         self.encoder_window_day = float(config.get("encoder_window_day", 14))
+        self.covariate_mode = str(config.get("covariate_mode", HISTORY_ONLY))
         t0 = time.time()
         self.pipeline = Chronos2Pipeline.from_pretrained(
             self.pretrained_id, device_map=str(config.get("device_map", "cpu")))
@@ -180,6 +336,7 @@ class Chronos2EarlyHistoryModel(ResponseModel):
             "seconds": time.time() - t0,
             "observed_rows_only": True, "filled_target_with_zero": False,
             "not_the_required_transformer": True, "forecast_type": "quantiles",
+            "covariate_mode": self.covariate_mode,
             "note": "official Chronos2Pipeline zero-shot; no fine-tune",
         }
         return self.history
@@ -213,19 +370,27 @@ class Chronos2EarlyHistoryModel(ResponseModel):
         times = np.asarray(times, float)
         hist = history.copy()
         recs = []
+        animals = context.set_index("USUBJID") if "USUBJID" in context.columns else context
         for _, animal in context.reset_index(drop=True).iterrows():
             u = animal["USUBJID"]
             hh = hist.loc[hist["USUBJID"] == u].sort_values("DAY")
             if hh.empty:
                 continue
-            enc = hh["LOGW"].to_numpy(float)
+            series = {
+                "USUBJID": str(u),
+                "DAY": hh["DAY"].to_numpy(float).copy(),
+                "LOGW": hh["LOGW"].to_numpy(float).copy(),
+            }
+            row = animal
+            if u in getattr(animals, "index", []):
+                row = animals.loc[u]
+            for name in ORIGIN_STATIC:
+                series[name] = _static_value(row, name)
+            item = build_chronos_predict_item(series, times, self.covariate_mode)
             fut = times
-            if "DAY" in hist.columns:
-                # score only requested future times; still no fabricated encoder
-                pass
             try:
                 qs, _mean = self.pipeline.predict_quantiles(
-                    [enc], prediction_length=int(len(fut)), quantile_levels=self.quantiles)
+                    [item], prediction_length=int(len(fut)), quantile_levels=self.quantiles)
             except Exception as e:  # noqa: BLE001
                 raise RuntimeError(f"Chronos2Pipeline.predict_quantiles failed: {type(e).__name__}: {e}") from e
             arr = np.asarray(qs[0].detach().cpu() if hasattr(qs[0], "detach") else qs[0], float)
@@ -252,6 +417,7 @@ class Chronos2EarlyHistoryModel(ResponseModel):
             "name": self.name, "task": self.task, "official_class": OFFICIAL_CLASS,
             "pretrained_id": self.pretrained_id, "mode": self.mode,
             "quantiles": self.quantiles, "encoder_window_day": self.encoder_window_day,
+            "covariate_mode": self.covariate_mode,
             "history": self.history, "not_the_required_transformer": True,
             "spec": None if self.spec is None else self.spec.to_dict(),
         }, indent=1, default=float), encoding="utf-8")
@@ -270,6 +436,7 @@ class Chronos2EarlyHistoryModel(ResponseModel):
         m.pretrained_id = d.get("pretrained_id", OFFICIAL_ID)
         m.quantiles = [float(x) for x in d.get("quantiles", QUANTILES)]
         m.encoder_window_day = float(d.get("encoder_window_day", 14))
+        m.covariate_mode = d.get("covariate_mode", HISTORY_ONLY)
         m.history = d.get("history") or {}
         if d.get("spec"):
             m.spec = FeatureSpec.from_dict(d["spec"])

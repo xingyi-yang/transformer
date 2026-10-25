@@ -1,0 +1,44 @@
+{
+  "can_fit": true,
+  "covariate_mode": "covariate_aware_origin",
+  "fabricated_history": false,
+  "min_adapter_len": 3,
+  "min_past": 2,
+  "note": "Chronos2Dataset keeps series with context.shape[-1] >= min_past + prediction_length. Seq-diag dataset 0 had eligible train series; fine-tune failed because validation_inputs was empty after this filter.",
+  "prediction_length": 6,
+  "required_observed_visits": 8,
+  "train": {
+    "empty_after_filter": false,
+    "fabricated_history": false,
+    "n_dropped": 125,
+    "n_input_to_chronos": 307,
+    "n_kept": 182,
+    "postprocess_length_histogram": {
+      "3": 4,
+      "4": 80,
+      "5": 2,
+      "6": 3,
+      "7": 36,
+      "8": 182
+    },
+    "required_length": 8,
+    "split": "train"
+  },
+  "validation": {
+    "empty_after_filter": false,
+    "fabricated_history": false,
+    "n_dropped": 50,
+    "n_input_to_chronos": 81,
+    "n_kept": 31,
+    "postprocess_length_histogram": {
+      "3": 7,
+      "4": 38,
+      "6": 1,
+      "7": 4,
+      "8": 31
+    },
+    "required_length": 8,
+    "split": "validation"
+  },
+  "validation_usable": true
+}

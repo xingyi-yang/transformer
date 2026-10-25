@@ -93,7 +93,7 @@ def main(argv: list[str] | None = None) -> int:
                  "design", "report", "run-all", "validate-request", "propose-design", "v3-pilot",
                  "v3-eval", "v3-repl", "v3-research", "v3-closeout", "v3-increment",
                  "v3-limitations", "v3-objective", "v3-official-seq", "v3-seq-diag",
-                 "v3-eval-correct", "historical-audit"]:
+                 "v3-eval-correct", "v3-cov-chronos", "historical-audit"]:
         s = sub.add_parser(name)
         artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout",
                                 "v3-increment", "v3-limitations")
@@ -231,6 +231,20 @@ def main(argv: list[str] | None = None) -> int:
                               "official_seq_rewritten": False,
                               "covariate_aware_comparison": out.get("covariate_aware_comparison"),
                               "n_finetune_failures": len(out.get("chronos_finetune_failures") or []),
+                              "real_data_accessed": out.get("real_data_accessed"),
+                              "parent": out.get("output_dir")},
+                             indent=2, default=str))
+            return 0
+        if args.cmd == "v3-cov-chronos":
+            from send_bw.v3_cov_chronos import execute_v3_cov_chronos
+
+            out = execute_v3_cov_chronos(args.config, force=args.force)
+            print(json.dumps({"status": "ok",
+                              "n_failures": len(out.get("failures") or []),
+                              "history_only_complete": (out.get("chronos_finetune_pool") or {}).get(
+                                  "history_only_complete"),
+                              "covariate_aware_complete": (out.get("chronos_finetune_pool") or {}).get(
+                                  "covariate_aware_complete"),
                               "real_data_accessed": out.get("real_data_accessed"),
                               "parent": out.get("output_dir")},
                              indent=2, default=str))
