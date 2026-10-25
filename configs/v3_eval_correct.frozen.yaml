@@ -1,0 +1,24 @@
+# Evaluation correctness. Rescore saved predictions only. No training.
+# Synthetic diagnostic. Not design qualification. No operational recommendation.
+run_name: v3_eval_correct
+output_dir: runs/v3_eval_correct
+generate_seed: 1
+train_seed: 2
+eval_correct:
+  official_seq_dir: runs/v3_official_seq
+  seq_diag_dir: runs/v3_seq_diag
+  encoder_window_day: 14
+  chronos_min_past: 2
+  chronos_prediction_length: 6
+  train: false
+  predose: false
+source:
+  type: local
+design: {}
+evaluation:
+  tasks: [early_history]
+labels:
+  - Synthetic diagnostic.
+  - Not design qualification.
+  - No real-data validation.
+  - No operational recommendation.

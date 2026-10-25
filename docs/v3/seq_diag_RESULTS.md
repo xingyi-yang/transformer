@@ -1,5 +1,10 @@
 # Bounded official-sequence diagnostic
 
+> **SUPERSEDED for the name `rmse_log` and for Chronos-2 fine-tune pooling.**
+> `rmse_log` below is `|error|`. Dataset-0 Chronos LoRA failed and must not be
+> averaged with dataset 1. Corrected metrics:
+> [eval_correct_RESULTS.md](eval_correct_RESULTS.md). These tables are preserved.
+
 > **Synthetic diagnostic. Exploratory. Not design qualification. No real-data validation. No operational recommendation.**
 
 PR #10 (`runs/v3_official_seq/`) is frozen and was not rewritten. Early-history is scored separately from predose. Design stayed off.
