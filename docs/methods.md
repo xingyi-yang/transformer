@@ -136,6 +136,12 @@ The official holdout is 12 RAT + 3 DOG studies (`generate_seed=71001`).
 (`generate_seed=81011`) and reruns last_value / target-only / pooled /
 fine-tune with the locked TFT knobs. That bank is not a replacement for
 the official holdout and is not used to retune.
+Default cohort selection keeps only post-baseline `TREATMENT` weights, so
+the DAY≤14 encoder often has two weekly visits (7, 14) or four
+twice-weekly visits (3, 7, 10, 14). Generator A still records predose
+visits at `DAY` −7 and 0. `send-bw tft-longer-ctx` reattaches those
+observed rows as encoder context on the same splits and cutoff; it does
+not invent days and does not add recovery visits.
 
 `D1`, `D2`, `D3` are curated **production** descriptors in
 `metadata/compound_reference.csv`. They are not SEND domains. A comparable

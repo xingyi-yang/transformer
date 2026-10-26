@@ -1,0 +1,37 @@
+{
+  "n_long_pairs": 708,
+  "n_shared_pairs": 708,
+  "n_short_pairs": 708,
+  "note": "Negative delta means the longer encoder has lower study-balanced MAE.",
+  "read_only": true,
+  "rows": [
+    {
+      "delta_long_minus_short": 0.0,
+      "mae_long": 0.09075799857309412,
+      "mae_short": 0.09075799857309412,
+      "model": "last_value"
+    },
+    {
+      "delta_long_minus_short": 0.013182217259290509,
+      "mae_long": 0.04961044780397316,
+      "mae_short": 0.03642823054468265,
+      "model": "tft_target_only"
+    },
+    {
+      "delta_long_minus_short": -0.0024207292570816163,
+      "mae_long": 0.04887833122443339,
+      "mae_short": 0.05129906048151501,
+      "model": "tft_pooled"
+    },
+    {
+      "delta_long_minus_short": -0.009653033187973309,
+      "mae_long": 0.03750763800098232,
+      "mae_short": 0.04716067118895563,
+      "model": "tft_finetune"
+    }
+  ],
+  "same_target_pairs": true,
+  "source": "runs/tft_larger_bank",
+  "status": "ok",
+  "used_to_retune": false
+}
