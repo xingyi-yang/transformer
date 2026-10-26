@@ -106,6 +106,8 @@ def main(argv: list[str] | None = None) -> int:
         if name == "rich-hist-cmp":
             s.add_argument("--smoke", action="store_true",
                            help="development-data pipeline smoke; does not score test")
+            s.add_argument("--score-only", action="store_true",
+                           help="reload frozen checkpoints and rescore; do not retrain")
         if name == "train":
             s.add_argument("--models", nargs="*")
         if artifact_cmd:
@@ -451,7 +453,8 @@ def main(argv: list[str] | None = None) -> int:
         if args.cmd == "rich-hist-cmp":
             from send_bw.rich_hist_cmp import execute_rich_hist_cmp
 
-            out = execute_rich_hist_cmp(args.config, force=args.force, smoke=args.smoke)
+            out = execute_rich_hist_cmp(args.config, force=args.force, smoke=args.smoke,
+                                       score_only=args.score_only)
             print(json.dumps({"status": out.get("status"),
                               "version": out.get("version"),
                               "score_split": out.get("score_split"),

@@ -162,6 +162,38 @@ def test_inventory_reports_dead_animals_missing_from_windows():
     assert "already_dead_at_origin" in str(inv["missing_by_reason"])
 
 
+def test_score_matched_does_not_inflate_shared_target_days_across_origins():
+    examples = pd.DataFrame({
+        "USUBJID": ["U1", "U1"],
+        "STUDYID": ["S1", "S1"],
+        "origin": [7.0, 14.0],
+        "target_day": [21.0, 21.0],
+        "target_logw": [5.3, 5.3],
+        "horizon": [14.0, 7.0],
+        "lead_from_origin": [14.0, 7.0],
+        "SCHEDULE": ["weekly", "weekly"],
+        "duration_days": [28.0, 28.0],
+        "n_encoder_available": [3, 4],
+    })
+    pred = pd.DataFrame({
+        "USUBJID": ["U1", "U1"],
+        "STUDYID": ["S1", "S1"],
+        "DAY": [21.0, 21.0],
+        "origin": [7.0, 14.0],
+        "q0.5": [5.10, 5.25],
+        "q0.1": [5.00, 5.15],
+        "q0.25": [5.05, 5.20],
+        "q0.75": [5.15, 5.30],
+        "q0.9": [5.20, 5.35],
+    })
+    families = pd.DataFrame({"STUDYID": ["S1"], "trajectory_family_id": ["S1"]})
+    from send_bw.rich_hist_cmp import score_matched
+
+    block = score_matched(examples, pred, families=families, representation="tft_quantiles")
+    assert block["n_matched_pairs"] == 2
+    assert block["n_scored"] == 2
+
+
 def test_last_value_is_origin_specific_and_does_not_leak_later_visits():
     examples = pd.DataFrame({
         "USUBJID": ["U1", "U1"],

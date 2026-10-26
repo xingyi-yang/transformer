@@ -351,19 +351,33 @@ def schedule_balanced_mae(err: np.ndarray, studies: np.ndarray, schedules: np.nd
 
 def score_matched(examples: pd.DataFrame, pred: pd.DataFrame, *,
                   families: pd.DataFrame, representation: str) -> dict[str, Any]:
+    """Score one row per (USUBJID, origin, target_day). USUBJID+DAY is not unique."""
     fut = examples.rename(columns={"target_day": "DAY", "target_logw": "LOGW"}).copy()
     fut["DAY"] = fut["DAY"].astype(float)
     fut["USUBJID"] = fut["USUBJID"].astype(str)
+    fut["origin"] = fut["origin"].astype(float)
     if "LEAD_DAYS" not in fut.columns:
         fut["LEAD_DAYS"] = fut["lead_from_origin"]
-    block = score_aligned_quantiles(fut, pred, representation=representation)
-    mm = examples.copy()
-    mm["USUBJID"] = mm["USUBJID"].astype(str)
-    mm["DAY"] = mm["target_day"].astype(float)
     pr = pred.copy()
     pr["USUBJID"] = pr["USUBJID"].astype(str)
     pr["DAY"] = pr["DAY"].astype(float)
-    hit = mm.merge(pr, on=["USUBJID", "DAY"], how="inner", suffixes=("", "_pred"))
+    keys = ["USUBJID", "DAY"]
+    if "origin" in pr.columns:
+        pr["origin"] = pr["origin"].astype(float)
+        keys = ["USUBJID", "origin", "DAY"]
+    pr = pr.drop_duplicates(keys, keep="first")
+    # score_aligned_quantiles keys on USUBJID+DAY; make origin-specific rows unique.
+    fut_s = fut.copy()
+    pr_s = pr.copy()
+    if "origin" in pr.columns:
+        fut_s["USUBJID"] = fut_s["USUBJID"] + "::" + fut_s["origin"].map(lambda x: f"{float(x):g}")
+        pr_s["USUBJID"] = pr_s["USUBJID"] + "::" + pr_s["origin"].map(lambda x: f"{float(x):g}")
+    block = score_aligned_quantiles(fut_s, pr_s, representation=representation)
+    mm = examples.copy()
+    mm["USUBJID"] = mm["USUBJID"].astype(str)
+    mm["DAY"] = mm["target_day"].astype(float)
+    mm["origin"] = mm["origin"].astype(float)
+    hit = mm.merge(pr, on=keys, how="inner", suffixes=("", "_pred"))
     if hit.empty:
         block["family_balanced_mae"] = None
         block["schedule_balanced_mae"] = None
@@ -553,6 +567,7 @@ def _predict_last_value(examples: pd.DataFrame) -> pd.DataFrame:
             "USUBJID": str(r["USUBJID"]),
             "STUDYID": r["STUDYID"],
             "DAY": float(r["target_day"]),
+            "origin": float(r["origin"]),
             "MEAN": val,
             "point": val,
             "point_definition": "last_observed_encoder_LOGW_at_origin",
@@ -571,6 +586,8 @@ def _predict_pop(model: PopulationOnlyModel, examples: pd.DataFrame, animals: pd
         if u not in ctx.index:
             continue
         pred = model.predict_logw(ctx.loc[[u]].reset_index(drop=True), np.array([float(r["target_day"])]))
+        pred = pred.copy()
+        pred["origin"] = float(r["origin"])
         recs.append(pred)
     return pd.concat(recs, ignore_index=True) if recs else pd.DataFrame()
 
@@ -593,6 +610,7 @@ def _predict_spline(model: SplineModel, examples: pd.DataFrame, animals: pd.Data
             for q in COMMON_Q:
                 pred[f"q{q}"] = mu.ravel()
         pred["STUDYID"] = r["STUDYID"]
+        pred["origin"] = float(r["origin"])
         recs.append(pred)
     return pd.concat(recs, ignore_index=True) if recs else pd.DataFrame()
 
@@ -650,6 +668,7 @@ def _predict_tft(model, examples: pd.DataFrame, animals: pd.DataFrame, kind: str
                .drop_duplicates("USUBJID")
                .set_index("USUBJID")["STUDYID"])
         pred["STUDYID"] = pred["USUBJID"].map(sid)
+        pred["origin"] = float(origin)
         recs.append(pred)
     return (pd.concat(recs, ignore_index=True) if recs else pd.DataFrame()), fails
 
@@ -658,10 +677,15 @@ def _cqr_margin(cal_ex: pd.DataFrame, cal_pred: pd.DataFrame, alpha: float = 0.2
     mm = cal_ex.copy()
     mm["USUBJID"] = mm["USUBJID"].astype(str)
     mm["DAY"] = mm["target_day"].astype(float)
+    mm["origin"] = mm["origin"].astype(float)
     pr = cal_pred.copy()
     pr["USUBJID"] = pr["USUBJID"].astype(str)
     pr["DAY"] = pr["DAY"].astype(float)
-    hit = mm.merge(pr, on=["USUBJID", "DAY"], how="inner")
+    keys = ["USUBJID", "DAY"]
+    if "origin" in pr.columns:
+        pr["origin"] = pr["origin"].astype(float)
+        keys = ["USUBJID", "origin", "DAY"]
+    hit = mm.merge(pr, on=keys, how="inner")
     if hit.empty or "q0.1" not in hit.columns:
         return {"status": "skipped", "reason": "no calibration quantile rows"}
     y = hit["target_logw"].to_numpy(float)
@@ -742,7 +766,7 @@ def _compact(block: dict[str, Any]) -> dict[str, Any]:
 
 
 def execute_rich_hist_cmp(config_path: str | Path, force: bool = False,
-                          smoke: bool = False) -> dict[str, Any]:
+                          smoke: bool = False, score_only: bool = False) -> dict[str, Any]:
     cfg = load_yaml(config_path) if not isinstance(config_path, dict) else config_path
     parent = Path(cfg.get("output_dir") or OUTPUT_DEFAULT)
     _refuse_locked(parent)
@@ -754,7 +778,7 @@ def execute_rich_hist_cmp(config_path: str | Path, force: bool = False,
     train_seed = int(cfg.get("train_seed") or cfg.get("seed"))
     if train_seed in {OFFICIAL_GENERATE_SEED, LARGER_GENERATE_SEED, BANK_GENERATE_SEED, BANK_SPLIT_SEED}:
         raise HistCmpError("train_seed collides with a locked or bank seed")
-    if parent.exists() and not force and (parent / "SUMMARY.json").is_file() and not smoke:
+    if parent.exists() and not force and (parent / "SUMMARY.json").is_file() and not smoke and not score_only:
         return read_json(parent / "SUMMARY.json")
     parent.mkdir(parents=True, exist_ok=True)
     for sub in ("preflight", "splits", "preprocess", "models", "predictions"):
@@ -883,69 +907,112 @@ def execute_rich_hist_cmp(config_path: str | Path, force: bool = False,
     preds: dict[str, pd.DataFrame] = {}
     failures: dict[str, Any] = {}
 
-    # --- last value (no fit)
-    preds["last_value"] = _predict_last_value(score_ex)
-    results["last_value"] = score_matched(score_ex, preds["last_value"], families=assigned,
-                                          representation="last_value")
-    results["last_value"]["uses_individual_history"] = "latest_only"
-    results["last_value"]["trained"] = False
-
-    # --- population only
-    pop = PopulationOnlyModel()
-    pop.fit(train, val, {"ridge_alphas": [0.1, 1.0, 10.0, 100.0, 300.0, 1000.0]})
-    preds["population_only"] = _predict_pop(pop, score_ex, animals_all)
-    results["population_only"] = score_matched(score_ex, preds["population_only"], families=assigned,
-                                               representation="population_ridge")
-    results["population_only"]["validation_rmse"] = pop.history.get("validation_rmse")
-    results["population_only"]["uses_individual_history"] = False
-    results["population_only"]["uses_baseline_weight"] = False
-
-    # --- spline benchmark
-    spline = SplineModel()
-    spline.fit(train, val, {"n_bootstrap": 3 if smoke else 5, "seed": train_seed,
-                            "ridge_alphas": [1.0, 10.0, 100.0, 1000.0]})
-    preds["spline"] = _predict_spline(spline, score_ex, animals_all)
-    results["spline"] = score_matched(score_ex, preds["spline"], families=assigned,
-                                      representation="gaussian")
-    results["spline"]["validation_rmse"] = spline.history.get("validation_rmse")
-    results["spline"]["uses_baseline_weight"] = True
-    results["spline"]["uses_visit_history"] = False
-    spline.save(parent / "models" / "spline")
-
-    # --- TFT variants (separately trained)
-    from send_bw.models.tft import TFTEarlyHistoryModel
-
     tft_specs = {
         "latest_weight": {"max_encoder_length": 1, "min_encoder_length": 1, "kind": "latest"},
         "short_history": {"max_encoder_length": 2, "min_encoder_length": 1, "kind": "short"},
         "full_history": {"max_encoder_length": FULL_ENCODER_CAP, "min_encoder_length": 1, "kind": "full"},
     }
     loss_trace = None
-    for name, spec_t in tft_specs.items():
-        t1 = time.time()
-        cfg_t = dict(tft_base)
-        cfg_t.update({k: spec_t[k] for k in ("max_encoder_length", "min_encoder_length")})
-        model = TFTEarlyHistoryModel()
-        hist = model.fit(train, val, cfg_t)
-        if name == "full_history":
-            loss_trace = _loss_trace(model, train)
-        pred, fails = _predict_tft(model, score_ex, animals_all, spec_t["kind"])
-        preds[name] = pred
-        failures[name] = fails
-        block = score_matched(score_ex, pred, families=assigned, representation="tft_quantiles")
-        block["seconds"] = time.time() - t1
-        block["max_encoder_length"] = spec_t["max_encoder_length"]
-        block["n_failures"] = len(fails)
-        block["best_val_loss"] = None
-        for row in reversed(hist.get("curves") or []):
-            if row.get("val_loss") is not None:
-                block["best_val_loss"] = float(row["val_loss"])
-                break
-        block["uses_baseline_weight"] = True
-        block["uses_visit_history"] = spec_t["kind"]
-        block["separately_trained"] = True
-        results[name] = block
-        model.save(parent / "models" / name)
+    if score_only:
+        if smoke:
+            raise HistCmpError("score_only is not a smoke path")
+        from send_bw.models.tft import TFTEarlyHistoryModel as _T
+
+        pop = PopulationOnlyModel()
+        spline = SplineModel.load(parent / "models" / "spline")
+        preds["last_value"] = _predict_last_value(score_ex)
+        results["last_value"] = score_matched(score_ex, preds["last_value"], families=assigned,
+                                              representation="last_value")
+        results["last_value"]["uses_individual_history"] = "latest_only"
+        results["last_value"]["trained"] = False
+        results["last_value"]["rescored"] = True
+        # population-only has no serializer; refit on train only (same ridge grid, no test use)
+        pop.fit(train, val, {"ridge_alphas": [0.1, 1.0, 10.0, 100.0, 300.0, 1000.0]})
+        preds["population_only"] = _predict_pop(pop, score_ex, animals_all)
+        results["population_only"] = score_matched(score_ex, preds["population_only"], families=assigned,
+                                                   representation="population_ridge")
+        results["population_only"]["validation_rmse"] = pop.history.get("validation_rmse")
+        results["population_only"]["uses_individual_history"] = False
+        results["population_only"]["uses_baseline_weight"] = False
+        preds["spline"] = _predict_spline(spline, score_ex, animals_all)
+        results["spline"] = score_matched(score_ex, preds["spline"], families=assigned,
+                                          representation="gaussian")
+        results["spline"]["validation_rmse"] = spline.history.get("validation_rmse")
+        results["spline"]["uses_baseline_weight"] = True
+        results["spline"]["uses_visit_history"] = False
+        for name, spec_t in tft_specs.items():
+            model = _T.load(parent / "models" / name)
+            if name == "full_history":
+                loss_trace = _loss_trace(model, train)
+            pred, fails = _predict_tft(model, score_ex, animals_all, spec_t["kind"])
+            preds[name] = pred
+            failures[name] = fails
+            block = score_matched(score_ex, pred, families=assigned, representation="tft_quantiles")
+            block["max_encoder_length"] = spec_t["max_encoder_length"]
+            block["n_failures"] = len(fails)
+            block["uses_baseline_weight"] = True
+            block["uses_visit_history"] = spec_t["kind"]
+            block["separately_trained"] = True
+            block["rescored_from_checkpoint"] = True
+            results[name] = block
+    else:
+        # --- last value (no fit)
+        preds["last_value"] = _predict_last_value(score_ex)
+        results["last_value"] = score_matched(score_ex, preds["last_value"], families=assigned,
+                                              representation="last_value")
+        results["last_value"]["uses_individual_history"] = "latest_only"
+        results["last_value"]["trained"] = False
+
+        # --- population only
+        pop = PopulationOnlyModel()
+        pop.fit(train, val, {"ridge_alphas": [0.1, 1.0, 10.0, 100.0, 300.0, 1000.0]})
+        preds["population_only"] = _predict_pop(pop, score_ex, animals_all)
+        results["population_only"] = score_matched(score_ex, preds["population_only"], families=assigned,
+                                                   representation="population_ridge")
+        results["population_only"]["validation_rmse"] = pop.history.get("validation_rmse")
+        results["population_only"]["uses_individual_history"] = False
+        results["population_only"]["uses_baseline_weight"] = False
+
+        # --- spline benchmark
+        spline = SplineModel()
+        spline.fit(train, val, {"n_bootstrap": 3 if smoke else 5, "seed": train_seed,
+                                "ridge_alphas": [1.0, 10.0, 100.0, 1000.0]})
+        preds["spline"] = _predict_spline(spline, score_ex, animals_all)
+        results["spline"] = score_matched(score_ex, preds["spline"], families=assigned,
+                                          representation="gaussian")
+        results["spline"]["validation_rmse"] = spline.history.get("validation_rmse")
+        results["spline"]["uses_baseline_weight"] = True
+        results["spline"]["uses_visit_history"] = False
+        spline.save(parent / "models" / "spline")
+
+        # --- TFT variants (separately trained)
+        from send_bw.models.tft import TFTEarlyHistoryModel
+
+        for name, spec_t in tft_specs.items():
+            t1 = time.time()
+            cfg_t = dict(tft_base)
+            cfg_t.update({k: spec_t[k] for k in ("max_encoder_length", "min_encoder_length")})
+            model = TFTEarlyHistoryModel()
+            hist = model.fit(train, val, cfg_t)
+            if name == "full_history":
+                loss_trace = _loss_trace(model, train)
+            pred, fails = _predict_tft(model, score_ex, animals_all, spec_t["kind"])
+            preds[name] = pred
+            failures[name] = fails
+            block = score_matched(score_ex, pred, families=assigned, representation="tft_quantiles")
+            block["seconds"] = time.time() - t1
+            block["max_encoder_length"] = spec_t["max_encoder_length"]
+            block["n_failures"] = len(fails)
+            block["best_val_loss"] = None
+            for row in reversed(hist.get("curves") or []):
+                if row.get("val_loss") is not None:
+                    block["best_val_loss"] = float(row["val_loss"])
+                    break
+            block["uses_baseline_weight"] = True
+            block["uses_visit_history"] = spec_t["kind"]
+            block["separately_trained"] = True
+            results[name] = block
+            model.save(parent / "models" / name)
 
     # calibration CQR for full-history intervals (not model selection)
     cqr = {"status": "skipped", "reason": "smoke or empty calibration"}
@@ -1019,6 +1086,7 @@ def execute_rich_hist_cmp(config_path: str | Path, force: bool = False,
         "models_trained": [k for k in ("population_only", "spline", "latest_weight",
                                        "short_history", "full_history") if k in results],
         "tuned_from_test": False,
+        "score_only": bool(score_only),
         "bank_regenerated": False,
         "locked_dirs_written": False,
         "interpretation": {
