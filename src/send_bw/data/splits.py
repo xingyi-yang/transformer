@@ -11,7 +11,9 @@ import pandas as pd
 from send_bw.utils.artifacts import cache_key, read_json, write_json
 
 SPLITS = ("train", "validation", "test", "test_compound_holdout")
+CALIBRATED_SPLITS = ("train", "validation", "calibration", "test", "test_compound_holdout")
 TARGET_SPLIT_NAMES = ("train", "validation", "test")
+CALIBRATED_TARGET_SPLIT_NAMES = ("train", "validation", "calibration", "test")
 
 
 def make_study_splits(study_context: pd.DataFrame, cfg: dict[str, Any], seed: int) -> pd.DataFrame:
@@ -47,6 +49,60 @@ def make_study_splits(study_context: pd.DataFrame, cfg: dict[str, Any], seed: in
     return out.reset_index(drop=True)
 
 
+def make_study_splits_calibrated(study_context: pd.DataFrame, cfg: dict[str, Any], seed: int,
+                                 groups: dict[str, str] | None = None) -> pd.DataFrame:
+    """Study-level train / validation / calibration / test assignment.
+
+    Does not replace ``make_study_splits``. Official hashes stay on the
+    three-way helper. ``groups`` maps STUDYID -> pair/group key so paired
+    dense/sparse siblings stay in one partition. Calibration is separate
+    from validation (checkpoint selection) and from test.
+    """
+    studies = study_context[["STUDYID", "STUDY_START"]].copy()
+    studies["COMPOUND_ID"] = studies["STUDYID"].map(cfg.get("_study_compound", {}))
+    holdout = set(cfg.get("compound_holdout", []) or [])
+    rng = np.random.default_rng(seed)
+    is_hold = studies["COMPOUND_ID"].isin(holdout)
+    rest = studies[~is_hold].copy()
+    group_of = {str(s): str((groups or {}).get(str(s), s)) for s in rest["STUDYID"]}
+    members: dict[str, list[str]] = {}
+    for sid in rest["STUDYID"].astype(str):
+        members.setdefault(group_of[sid], []).append(sid)
+    if cfg.get("method", "random") == "chronological":
+        start = rest.set_index(rest["STUDYID"].astype(str))["STUDY_START"]
+        keys = sorted(members, key=lambda k: (str(start.loc[members[k][0]]), k))
+    else:
+        keys = sorted(members)
+        rng.shuffle(keys)
+    n = len(keys)
+    n_test = max(1, int(round(cfg.get("test", 0.20) * n)))
+    n_val = max(1, int(round(cfg.get("validation", 0.15) * n)))
+    n_cal = max(1, int(round(cfg.get("calibration", 0.15) * n)))
+    if n_test + n_val + n_cal >= n:
+        raise ValueError("calibrated split fractions leave no training groups")
+    if cfg.get("method", "random") == "chronological":
+        test_k = keys[n - n_test:]
+        val_k = keys[n - n_test - n_val:n - n_test]
+        cal_k = keys[n - n_test - n_val - n_cal:n - n_test - n_val]
+        train_k = keys[: n - n_test - n_val - n_cal]
+    else:
+        test_k, val_k = keys[:n_test], keys[n_test:n_test + n_val]
+        cal_k = keys[n_test + n_val:n_test + n_val + n_cal]
+        train_k = keys[n_test + n_val + n_cal:]
+    assign: dict[str, str] = {}
+    for label, ks in (("test", test_k), ("validation", val_k), ("calibration", cal_k), ("train", train_k)):
+        for k in ks:
+            for sid in members[k]:
+                assign[sid] = label
+    for sid in studies.loc[is_hold, "STUDYID"].astype(str):
+        assign[sid] = "test_compound_holdout"
+    out = pd.DataFrame({"STUDYID": list(assign), "SPLIT": list(assign.values()),
+                        "GROUP": [group_of.get(s, s) for s in assign]}).sort_values("STUDYID")
+    if (out["SPLIT"] == "train").sum() < 2:
+        raise ValueError("fewer than 2 training studies; increase n_studies")
+    return out.reset_index(drop=True)
+
+
 def freeze_splits(splits: pd.DataFrame, path: Path) -> str:
     h = cache_key(splits.sort_values("STUDYID").to_dict("records"))
     splits.to_csv(path.with_suffix(".csv"), index=False)
@@ -70,9 +126,18 @@ def assert_disjoint(splits: pd.DataFrame) -> None:
 
 def target_manifest(splits: pd.DataFrame) -> dict[str, Any]:
     """Per-split hashes of target-species STUDYIDs. Donors must not appear here."""
-    out: dict[str, Any] = {"version": "target-manifest-v1"}
+    return _manifest(splits, TARGET_SPLIT_NAMES, "target-manifest-v1")
+
+
+def calibrated_target_manifest(splits: pd.DataFrame) -> dict[str, Any]:
+    """Four-way target manifest including calibration. Official three-way helper is unchanged."""
+    return _manifest(splits, CALIBRATED_TARGET_SPLIT_NAMES, "target-manifest-calibrated-v1")
+
+
+def _manifest(splits: pd.DataFrame, names: tuple[str, ...], version: str) -> dict[str, Any]:
+    out: dict[str, Any] = {"version": version}
     all_ids: list[str] = []
-    for name in TARGET_SPLIT_NAMES:
+    for name in names:
         ids = sorted(splits.loc[splits["SPLIT"] == name, "STUDYID"].astype(str).tolist())
         out[name] = {"studyids": ids, "n": len(ids), "hash": cache_key(ids)}
         all_ids.extend(ids)

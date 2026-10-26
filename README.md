@@ -38,7 +38,8 @@ compiler, so PyTensor warns "g++ not available" (harmless) and NUTS runs through
 `send-bw <command> --config <yaml>`: `generate`, `inspect-source`, `ingest`, `prepare`, `validate-real`, `train`,
 `evaluate`, `design`, `report`, `run-all`, `validate-request`, `propose-design`,
 `tft-forecast` (primary early-history TFT workflow), `tft-stability`,
-`tft-study-cv`, `tft-larger-bank`, `tft-longer-ctx`, `tft-early-hist-bench`,
+`tft-study-cv`, `tft-larger-bank`, `tft-longer-ctx`, `rich-hist`,
+`tft-early-hist-bench`,
 `tft-early-hist-extend`.
 `validate-request` and `propose-design` also accept `--model <run dir | models dir | model dir>`, for
 inference from serialized artifacts without a training config.
@@ -132,6 +133,18 @@ comparison on the same larger-bank splits:
 That command writes `runs/tft_longer_ctx/` only. The cutoff stays DAY≤14
 and the targets stay the later observed visits. Recovery rows are not
 added. Fine-tune remains experimental.
+
+A new synthetic bank (`send-bw rich-hist`, `generate_seed=91021`) rebuilds
+28-day and ~90-day studies with weekly / twice-weekly / dense calendars so
+later forecast origins can use more than one or two observed visits.
+It writes `runs/rich_hist_v1/` only and does not retrain models or
+overwrite locked experiments. Schedules are experimental scenarios, not
+authorized historical protocols.
+
+```powershell
+.\.venv\Scripts\send-bw rich-hist --config configs/rich_hist_v1.yaml
+#   send-bw rich-hist --config configs/rich_hist_v1.yaml
+```
 
 Configs: `configs/smoke.yaml`, `configs/bayesian_smoke.yaml` (executed); `configs/research.yaml` and
 `configs/bayesian_research.yaml` (larger; **not executed**); `configs/real_local.example.yaml` and

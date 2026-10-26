@@ -49,6 +49,70 @@ from send_bw.utils.seeds import SeedStream
 T_REF = 28.0
 STRAINS = {"RAT": ["SPRAGUE-DAWLEY", "WISTAR HAN"], "DOG": ["BEAGLE"]}
 ROUTES = ["ORAL GAVAGE", "INTRAVENOUS"]
+SCHEDULE_KINDS = ("weekly", "twice_weekly", "dense")
+SLOPE_BASES = ("linear_tref", "saturating")
+
+# Experimental schedule labels. Not verified representations of real in-vivo protocols.
+# No authorized historical schedule metadata were available.
+SCHEDULE_ASSUMPTIONS = (
+    "Synthetic methodological benchmark. Not real-data validation or operational qualification. "
+    "Weekly / twice-weekly / dense calendars are experimental scenarios. "
+    "No signed historical authorization; schedules are not empirical protocol estimates."
+)
+
+
+def slope_tau(times: np.ndarray, basis: str = "linear_tref", tau_g: float = 40.0) -> np.ndarray:
+    """Time basis for study/animal random slopes.
+
+    linear_tref: t / 28 (official short-study basis).
+    saturating: (1-exp(-t/tau_g)) / (1-exp(-28/tau_g)) so tau(28)=1 and long
+    horizons do not grow linearly past the official 28-day scale.
+    """
+    t = np.asarray(times, dtype=float)
+    if basis in (None, "linear_tref"):
+        return t / T_REF
+    if basis == "saturating":
+        denom = 1.0 - np.exp(-T_REF / float(tau_g))
+        return (1.0 - np.exp(-t / float(tau_g))) / denom
+    raise ValueError(f"unknown slope_basis {basis!r}; expected one of {SLOPE_BASES}")
+
+
+def planned_visit_days(duration: float, schedule: str,
+                       pretreatment_days: tuple[float, ...] = (-7.0, 0.0),
+                       include_terminal: bool = True) -> list[float]:
+    """Configured measurement days. Dense is the weekly grid union every-2-day even days.
+
+    Dense includes weekly days so paired sparse weekly observations are an exact
+    subset of the dense calendar. Days are generated from the process, not interpolated.
+    """
+    T = float(duration)
+    if schedule == "weekly":
+        treat = list(np.arange(7.0, T + 1e-9, 7.0))
+    elif schedule == "twice_weekly":
+        treat = sorted(set(np.concatenate([
+            np.arange(3.0, T + 1e-9, 7.0),
+            np.arange(7.0, T + 1e-9, 7.0),
+        ]).tolist()))
+    elif schedule == "dense":
+        even = list(np.arange(2.0, T + 1e-9, 2.0))
+        weekly = list(np.arange(7.0, T + 1e-9, 7.0))
+        treat = sorted(set(even + weekly))
+    else:
+        raise ValueError(f"unknown schedule {schedule!r}; expected one of {SCHEDULE_KINDS}")
+    days = [float(x) for x in pretreatment_days] + [float(x) for x in treat]
+    if include_terminal and T not in days:
+        days.append(T)
+    return sorted({float(x) for x in days})
+
+
+def recovery_visit_days(duration: float, recovery_days: float, interval: float = 7.0) -> list[float]:
+    """Post-duration recovery visits at interval spacing, e.g. T+7, T+14."""
+    T = float(duration)
+    rec = float(recovery_days)
+    if rec <= 0:
+        return []
+    n = max(1, int(round(rec / float(interval))))
+    return [T + float(interval) * (i + 1) for i in range(n)]
 
 
 def ou_cov(times: np.ndarray, sigma: float, ell: float) -> np.ndarray:
@@ -306,7 +370,16 @@ ARMCD_STYLES = [
 
 
 def generate_dataset(cfg: dict[str, Any], out_dir: str | Path, seed: int) -> dict[str, Any]:
-    """Write SEND-like domains (per-study folders), curated metadata and hidden truth."""
+    """Write SEND-like domains (per-study folders), curated metadata and hidden truth.
+
+    Official defaults (no ``longitudinal`` block) stay on the original 28-day
+    random weekly/twice-weekly path. A ``longitudinal`` block selects the
+    versioned rich-history generator and does not rewrite official banks.
+    """
+    if cfg.get("longitudinal"):
+        from send_bw.data.longitudinal import generate_longitudinal_dataset
+
+        return generate_longitudinal_dataset(cfg, out_dir, seed)
     out = Path(out_dir)
     mark_generated(out)
     send_dir, meta_dir, truth_dir = out / "send", out / "metadata", out / "truth"

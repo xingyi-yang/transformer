@@ -96,7 +96,8 @@ def main(argv: list[str] | None = None) -> int:
                  "v3-eval-correct", "v3-cov-chronos", "v3-share-repl",
                  "v3-share-abstain", "v3-donor-rank", "historical-audit",
                  "tft-early-hist-bench", "tft-early-hist-extend", "tft-forecast",
-                 "tft-stability", "tft-study-cv", "tft-larger-bank", "tft-longer-ctx"]:
+                 "tft-stability", "tft-study-cv", "tft-larger-bank", "tft-longer-ctx",
+                 "rich-hist"]:
         s = sub.add_parser(name)
         artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout",
                                 "v3-increment", "v3-limitations")
@@ -424,6 +425,23 @@ def main(argv: list[str] | None = None) -> int:
                               "n_failures": len(out.get("failures") or []),
                               "seconds_total": out.get("seconds_total"),
                               "real_data_accessed": out.get("real_data_accessed"),
+                              "parent": out.get("output_dir")},
+                             indent=2, default=str))
+            return 0
+        if args.cmd == "rich-hist":
+            from send_bw.rich_hist import execute_rich_hist
+
+            out = execute_rich_hist(args.config, force=args.force)
+            print(json.dumps({"status": out.get("status"),
+                              "version": out.get("version"),
+                              "n_studies": out.get("n_studies"),
+                              "n_animals": out.get("n_animals"),
+                              "n_obs_cohort": out.get("n_obs_cohort"),
+                              "mean_encoder_available": (out.get("encoder_report") or {}).get(
+                                  "overall_mean_encoder_available"),
+                              "integrity_passed": (out.get("integrity") or {}).get("passed"),
+                              "models_trained": out.get("models_trained"),
+                              "label": out.get("label"),
                               "parent": out.get("output_dir")},
                              indent=2, default=str))
             return 0
