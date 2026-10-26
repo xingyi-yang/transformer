@@ -38,7 +38,7 @@ compiler, so PyTensor warns "g++ not available" (harmless) and NUTS runs through
 `send-bw <command> --config <yaml>`: `generate`, `inspect-source`, `ingest`, `prepare`, `validate-real`, `train`,
 `evaluate`, `design`, `report`, `run-all`, `validate-request`, `propose-design`,
 `tft-forecast` (primary early-history TFT workflow), `tft-stability`,
-`tft-study-cv`, `tft-early-hist-bench`, `tft-early-hist-extend`.
+`tft-study-cv`, `tft-larger-bank`, `tft-early-hist-bench`, `tft-early-hist-extend`.
 `validate-request` and `propose-design` also accept `--model <run dir | models dir | model dir>`, for
 inference from serialized artifacts without a training config.
 
@@ -104,6 +104,19 @@ transformer / CatBoost information sets, Chronos visit-rank vs elapsed
 day, CQR order statistic, one TFT batch) writes only
 `runs/forecast_method_audit/` and does not retrain or overwrite locked
 dirs. Target-only remains the development reference.
+
+A larger Generator A bank (36 RAT + 6 DOG, `generate_seed=81011`) reruns
+the locked-knob comparison without touching the official 71001 holdout:
+
+```powershell
+.\.venv\Scripts\send-bw tft-larger-bank --config configs/tft_larger_bank.yaml
+#   send-bw tft-larger-bank --config configs/tft_larger_bank.yaml
+```
+
+That command writes `runs/tft_larger_bank/` only. Learning rate, hidden
+size, dropout, and duration stay at the locked primary values. Official
+and new test errors are not used to retune. Fine-tune remains
+experimental even if it has lower MAE on the new bank.
 
 Configs: `configs/smoke.yaml`, `configs/bayesian_smoke.yaml` (executed); `configs/research.yaml` and
 `configs/bayesian_research.yaml` (larger; **not executed**); `configs/real_local.example.yaml` and

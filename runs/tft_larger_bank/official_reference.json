@@ -1,0 +1,267 @@
+{
+  "generate_seed": 71001,
+  "n_scored": 115,
+  "note": "Official 12 RAT + 3 DOG bank, generate_seed=71001. Different studies.",
+  "read_only": true,
+  "results": {
+    "last_value": {
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.0,
+        "study_balanced": 0.0
+      },
+      "crossing_rate": 0.0,
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.0,
+        "study_balanced": 0.0
+      },
+      "label": "last observed encoder LOGW; degenerate quantiles; no covariates",
+      "mae_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 36.26434782608695,
+        "study_balanced": 34.45012919896641
+      },
+      "mae_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.11876327761791937,
+        "study_balanced": 0.11404581646847428
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.059381638808959684,
+        "study_balanced": 0.05702290823423714
+      },
+      "mean_quantile_loss_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 18.132173913043477,
+        "study_balanced": 17.225064599483204
+      },
+      "n_failures": 0,
+      "n_scored": 115,
+      "relative_abs_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.10986629544312783,
+        "study_balanced": 0.10580284815517334
+      },
+      "relative_abs_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.020603678478613198,
+        "study_balanced": 0.019830647533646148
+      },
+      "representation": "last_value",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.13784783308321508,
+        "study_balanced": 0.13073640885243382
+      },
+      "seconds": 0.0499269962310791,
+      "status": "ok",
+      "uses_early_history": true
+    },
+    "tft_finetune": {
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.8,
+        "study_balanced": 0.8074935400516796
+      },
+      "crossing_rate": 0.0,
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.15783442207004714,
+        "study_balanced": 0.16308621681013774
+      },
+      "label": "pooled pretrain then target-species fine-tune; SPECIES classes kept",
+      "mae_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 13.924060945236121,
+        "study_balanced": 13.776695338001554
+      },
+      "mae_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.04715537523827465,
+        "study_balanced": 0.04720342618410333
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.016373778027368863,
+        "study_balanced": 0.01653137134024074
+      },
+      "mean_quantile_loss_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 4.803311083861098,
+        "study_balanced": 4.787669419534811
+      },
+      "n_failures": 0,
+      "n_scored": 115,
+      "relative_abs_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.046286282529041683,
+        "study_balanced": 0.04645017788287427
+      },
+      "relative_abs_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.008332454025087995,
+        "study_balanced": 0.008360167700320002
+      },
+      "representation": "tft_quantiles",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.058677270773754224,
+        "study_balanced": 0.05880378923111349
+      },
+      "seconds": 11.101246118545532,
+      "status": "ok",
+      "uses_early_history": true
+    },
+    "tft_pooled": {
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.8,
+        "study_balanced": 0.8309108527131783
+      },
+      "crossing_rate": 0.0,
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.251473389501157,
+        "study_balanced": 0.2536842554268603
+      },
+      "label": "pooled TFT with species-or-global normalizer and UNK cat labels",
+      "mae_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 17.99515693645729,
+        "study_balanced": 17.411580406601935
+      },
+      "mae_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.05872007383009762,
+        "study_balanced": 0.05729567460563276
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.022897725763602335,
+        "study_balanced": 0.02191972304992415
+      },
+      "mean_quantile_loss_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 6.979129845321885,
+        "study_balanced": 6.617217765614688
+      },
+      "n_failures": 0,
+      "n_scored": 115,
+      "relative_abs_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.057526711169893566,
+        "study_balanced": 0.05663805698481568
+      },
+      "relative_abs_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.010293086873488712,
+        "study_balanced": 0.010073171782688229
+      },
+      "representation": "tft_quantiles",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.07910086885148424,
+        "study_balanced": 0.07460409265350018
+      },
+      "seconds": 11.181915283203125,
+      "status": "ok",
+      "uses_early_history": true
+    },
+    "tft_target_only": {
+      "coverage80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.6086956521739131,
+        "study_balanced": 0.6453488372093024
+      },
+      "crossing_rate": 0.0,
+      "interval_width80": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.11283901463384213,
+        "study_balanced": 0.11294070941225196
+      },
+      "label": "target-only TFT after validation-led search; SPECIES constant",
+      "mae_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 16.17419087221247,
+        "study_balanced": 15.040940938146985
+      },
+      "mae_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.05317636209103127,
+        "study_balanced": 0.04992725539245255
+      },
+      "mean_quantile_loss": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.01786059523176432,
+        "study_balanced": 0.01676427956508328
+      },
+      "mean_quantile_loss_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 5.486625998893857,
+        "study_balanced": 5.094457125037485
+      },
+      "n_failures": 0,
+      "n_scored": 115,
+      "relative_abs_gram": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.05154430975020846,
+        "study_balanced": 0.04858573983448281
+      },
+      "relative_abs_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.009322761603297165,
+        "study_balanced": 0.008772653462613014
+      },
+      "representation": "tft_quantiles",
+      "rmse_log": {
+        "n_obs": 115,
+        "n_studies": 2,
+        "pooled": 0.06427313108467543,
+        "study_balanced": 0.059792911138081314
+      },
+      "seconds": 9.287614583969116,
+      "status": "ok",
+      "uses_early_history": true
+    }
+  },
+  "source": "runs/tft_primary/SUMMARY.json",
+  "status": "ok",
+  "used_to_retune": false
+}

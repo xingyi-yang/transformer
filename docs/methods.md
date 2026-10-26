@@ -131,6 +131,11 @@ sequence index is still unit steps. Official_seq did not use that mode.
 Official forecasting data are **Generator A** only. Growth is one saturating
 exponential with shared `tau_g = 40`. Generator B (Gompertz, Hill/tolerance,
 random walk, t-noise) is a design-stress mechanism, not the official bank.
+The official holdout is 12 RAT + 3 DOG studies (`generate_seed=71001`).
+`send-bw tft-larger-bank` generates a separate 36 RAT + 6 DOG bank
+(`generate_seed=81011`) and reruns last_value / target-only / pooled /
+fine-tune with the locked TFT knobs. That bank is not a replacement for
+the official holdout and is not used to retune.
 
 `D1`, `D2`, `D3` are curated **production** descriptors in
 `metadata/compound_reference.csv`. They are not SEND domains. A comparable

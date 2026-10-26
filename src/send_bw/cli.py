@@ -96,7 +96,7 @@ def main(argv: list[str] | None = None) -> int:
                  "v3-eval-correct", "v3-cov-chronos", "v3-share-repl",
                  "v3-share-abstain", "v3-donor-rank", "historical-audit",
                  "tft-early-hist-bench", "tft-early-hist-extend", "tft-forecast",
-                 "tft-stability", "tft-study-cv"]:
+                 "tft-stability", "tft-study-cv", "tft-larger-bank"]:
         s = sub.add_parser(name)
         artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout",
                                 "v3-increment", "v3-limitations")
@@ -387,6 +387,22 @@ def main(argv: list[str] | None = None) -> int:
                               "reference": out.get("development_reference"),
                               "consistent": (out.get("consistency_mae") or {}).get(
                                   "any_consistent_improvement"),
+                              "n_failures": len(out.get("failures") or []),
+                              "seconds_total": out.get("seconds_total"),
+                              "real_data_accessed": out.get("real_data_accessed"),
+                              "parent": out.get("output_dir")},
+                             indent=2, default=str))
+            return 0
+        if args.cmd == "tft-larger-bank":
+            from send_bw.tft_larger_bank import execute_tft_larger_bank
+
+            out = execute_tft_larger_bank(args.config, force=args.force)
+            print(json.dumps({"status": "ok",
+                              "reference": out.get("development_reference"),
+                              "eligible": (out.get("example_summary") or {}).get("n_eligible"),
+                              "lowest_mae": (out.get("ranking_mae_study_balanced") or {}).get(
+                                  "lowest_mae"),
+                              "finetune_promoted": out.get("finetune_promoted"),
                               "n_failures": len(out.get("failures") or []),
                               "seconds_total": out.get("seconds_total"),
                               "real_data_accessed": out.get("real_data_accessed"),

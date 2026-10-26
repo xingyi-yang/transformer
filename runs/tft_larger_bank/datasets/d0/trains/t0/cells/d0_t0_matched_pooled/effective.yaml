@@ -1,0 +1,83 @@
+run_name: v3_research_d0_t0_matched_pooled
+output_dir: runs/tft_larger_bank/datasets/d0/trains/t0/cells/d0_t0_matched_pooled
+official_primary_dir: runs/tft_primary
+locked_tft_config: runs/tft_primary/locked_tft_config.json
+generate_seed: 81011
+train_seed: 83011
+seed: 83011
+larger_bank:
+  bank: matched
+  n_donor_studies: 6
+  encoder_window_day: 14
+  target_species: RAT
+  development_reference: tft_target_only
+  official_generate_seed: 71001
+  search: false
+synthetic:
+  enabled: false
+  out_dir: runs/tft_larger_bank/datasets/d0/banks/matched/synthetic
+  generator: A
+  n_studies: 36
+  n_other_species_studies: 6
+  n_compounds: 8
+  n_per_sex:
+  - 3
+  - 4
+  donor_scenario: matched
+mapping: configs/mappings/example_send.yaml
+source:
+  type: local
+  root: runs/tft_larger_bank/datasets/d0/banks/matched/synthetic/send
+  metadata_dir: runs/tft_larger_bank/datasets/d0/banks/matched/synthetic/metadata
+cohort:
+  species: RAT
+  donor_species:
+  - DOG
+  sharing: pooled
+  n_donor_studies: 6
+  study_classes:
+  - REPEAT_DOSE_TOX
+  max_day: 28
+splits:
+  method: random
+  validation: 0.2
+  test: 0.2
+  compound_holdout_auto: 1
+  reuse_target_from: runs/tft_larger_bank/datasets/d0/trains/t0/cells/d0_t0_matched_target_only/splits
+models:
+  spline:
+    enabled: false
+    seed: 83011
+  transformer:
+    enabled: false
+    seed: 83011
+  bayesian:
+    enabled: false
+    seed: 83011
+  optional:
+    tft:
+      enabled: false
+    chronos2:
+      enabled: false
+    deepar:
+      enabled: false
+finetune:
+  lr: 0.001
+  max_epochs: 8
+  patience: 4
+evaluation:
+  tasks:
+  - early_history
+  early_history_window_day: 14.0
+  common_quantiles:
+  - 0.1
+  - 0.25
+  - 0.5
+  - 0.75
+  - 0.9
+design: {}
+labels:
+- Synthetic diagnostic.
+- Not design qualification.
+- No real-data validation.
+- No operational recommendation.

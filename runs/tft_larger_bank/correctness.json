@@ -1,0 +1,91 @@
+{
+  "history_not_updated_with_predictions": true,
+  "n_checked": 4,
+  "ok": true,
+  "rows": [
+    {
+      "USUBJID": "SYNA-008-0022",
+      "days_match": true,
+      "derived_encoder_days": [
+        7.0,
+        14.0
+      ],
+      "derived_target_days": [
+        21.0
+      ],
+      "dummy_decoder_fill_invariant": true,
+      "logw_is_ln_weight_g": true,
+      "n_targets": 1,
+      "pred_days": [
+        21.0
+      ],
+      "quantiles_ordered": true,
+      "single_horizon_matches_first_multi": true,
+      "usubjid_match": true
+    },
+    {
+      "USUBJID": "SYNA-021-0017",
+      "days_match": true,
+      "derived_encoder_days": [
+        7.0,
+        14.0
+      ],
+      "derived_target_days": [
+        28.0
+      ],
+      "dummy_decoder_fill_invariant": true,
+      "logw_is_ln_weight_g": true,
+      "n_targets": 1,
+      "pred_days": [
+        28.0
+      ],
+      "quantiles_ordered": true,
+      "single_horizon_matches_first_multi": true,
+      "usubjid_match": true
+    },
+    {
+      "USUBJID": "SYNA-034-0013",
+      "days_match": true,
+      "derived_encoder_days": [
+        7.0,
+        14.0
+      ],
+      "derived_target_days": [
+        28.0
+      ],
+      "dummy_decoder_fill_invariant": true,
+      "logw_is_ln_weight_g": true,
+      "n_targets": 1,
+      "pred_days": [
+        28.0
+      ],
+      "quantiles_ordered": true,
+      "single_horizon_matches_first_multi": true,
+      "usubjid_match": true
+    },
+    {
+      "USUBJID": "SYNA-008-0001",
+      "days_match": true,
+      "derived_encoder_days": [
+        7.0,
+        14.0
+      ],
+      "derived_target_days": [
+        21.0,
+        28.0
+      ],
+      "dummy_decoder_fill_invariant": true,
+      "logw_is_ln_weight_g": true,
+      "n_targets": 2,
+      "pred_days": [
+        21.0,
+        28.0
+      ],
+      "quantiles_ordered": true,
+      "single_horizon_matches_first_multi": true,
+      "usubjid_match": true
+    }
+  ],
+  "scored_pairs_are_example_targets": true,
+  "units": "predictions are LOGW = ln(WEIGHT_G in grams); grams = exp(q0.5)"
+}
