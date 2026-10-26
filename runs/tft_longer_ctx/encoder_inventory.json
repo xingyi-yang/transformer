@@ -1,0 +1,247 @@
+{
+  "attach_pooled": {
+    "test": {
+      "extra_days": [
+        -7.0,
+        0.0
+      ],
+      "invented_days": false,
+      "n_animals_with_extra": 258,
+      "n_rows_added": 516,
+      "recovery_added": false
+    },
+    "test_compound_holdout": {
+      "extra_days": [
+        -7.0,
+        0.0
+      ],
+      "invented_days": false,
+      "n_animals_with_extra": 34,
+      "n_rows_added": 68,
+      "recovery_added": false
+    },
+    "train": {
+      "extra_days": [
+        -7.0,
+        0.0
+      ],
+      "invented_days": false,
+      "n_animals_with_extra": 832,
+      "n_rows_added": 1664,
+      "recovery_added": false
+    },
+    "validation": {
+      "extra_days": [
+        -7.0,
+        0.0
+      ],
+      "invented_days": false,
+      "n_animals_with_extra": 230,
+      "n_rows_added": 460,
+      "recovery_added": false
+    }
+  },
+  "attach_target_only": {
+    "test": {
+      "extra_days": [
+        -7.0,
+        0.0
+      ],
+      "invented_days": false,
+      "n_animals_with_extra": 258,
+      "n_rows_added": 516,
+      "recovery_added": false
+    },
+    "test_compound_holdout": {
+      "extra_days": [
+        -7.0,
+        0.0
+      ],
+      "invented_days": false,
+      "n_animals_with_extra": 34,
+      "n_rows_added": 68,
+      "recovery_added": false
+    },
+    "train": {
+      "extra_days": [
+        -7.0,
+        0.0
+      ],
+      "invented_days": false,
+      "n_animals_with_extra": 654,
+      "n_rows_added": 1308,
+      "recovery_added": false
+    },
+    "validation": {
+      "extra_days": [
+        -7.0,
+        0.0
+      ],
+      "invented_days": false,
+      "n_animals_with_extra": 230,
+      "n_rows_added": 460,
+      "recovery_added": false
+    }
+  },
+  "long_with_pretreatment": {
+    "mean_encoder_used": 4.75,
+    "n_animals": 256,
+    "n_encoder_used": {
+      "4": 155,
+      "5": 10,
+      "6": 91
+    },
+    "patterns": [
+      {
+        "days": [
+          -7.0,
+          0.0,
+          7.0,
+          14.0
+        ],
+        "n_animals": 154
+      },
+      {
+        "days": [
+          -7.0,
+          0.0,
+          3.0,
+          7.0,
+          10.0,
+          14.0
+        ],
+        "n_animals": 91
+      },
+      {
+        "days": [
+          -7.0,
+          0.0,
+          7.0,
+          10.0,
+          14.0
+        ],
+        "n_animals": 5
+      },
+      {
+        "days": [
+          -7.0,
+          0.0,
+          3.0,
+          7.0,
+          14.0
+        ],
+        "n_animals": 2
+      },
+      {
+        "days": [
+          -7.0,
+          0.0,
+          3.0,
+          10.0,
+          14.0
+        ],
+        "n_animals": 2
+      },
+      {
+        "days": [
+          -7.0,
+          0.0,
+          3.0,
+          7.0,
+          10.0
+        ],
+        "n_animals": 1
+      },
+      {
+        "days": [
+          -7.0,
+          0.0,
+          3.0,
+          7.0
+        ],
+        "n_animals": 1
+      }
+    ],
+    "unique_encoder_days": [
+      -7.0,
+      0.0,
+      3.0,
+      7.0,
+      10.0,
+      14.0
+    ]
+  },
+  "note": "Same DAY<=14 cutoff. Extra encoder rows are observed pretreatment/baseline only.",
+  "short_treatment_only": {
+    "mean_encoder_used": 2.75,
+    "n_animals": 256,
+    "n_encoder_used": {
+      "2": 155,
+      "3": 10,
+      "4": 91
+    },
+    "patterns": [
+      {
+        "days": [
+          7.0,
+          14.0
+        ],
+        "n_animals": 154
+      },
+      {
+        "days": [
+          3.0,
+          7.0,
+          10.0,
+          14.0
+        ],
+        "n_animals": 91
+      },
+      {
+        "days": [
+          7.0,
+          10.0,
+          14.0
+        ],
+        "n_animals": 5
+      },
+      {
+        "days": [
+          3.0,
+          7.0,
+          14.0
+        ],
+        "n_animals": 2
+      },
+      {
+        "days": [
+          3.0,
+          10.0,
+          14.0
+        ],
+        "n_animals": 2
+      },
+      {
+        "days": [
+          3.0,
+          7.0,
+          10.0
+        ],
+        "n_animals": 1
+      },
+      {
+        "days": [
+          3.0,
+          7.0
+        ],
+        "n_animals": 1
+      }
+    ],
+    "unique_encoder_days": [
+      3.0,
+      7.0,
+      10.0,
+      14.0
+    ]
+  }
+}
