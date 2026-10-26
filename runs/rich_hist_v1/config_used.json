@@ -1,0 +1,251 @@
+{
+  "cohort": {
+    "exclude_fasted": true,
+    "include_pretreatment": true,
+    "min_post_baseline_obs": 1,
+    "species": "RAT",
+    "study_classes": [
+      "REPEAT_DOSE_TOX"
+    ]
+  },
+  "design": {},
+  "generate_seed": 91021,
+  "labels": [
+    "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+    "Experimental schedules. Not verified representations of real in-vivo protocols.",
+    "Not a correction of locked experiments. Not model-superiority evidence."
+  ],
+  "mapping": "configs/mappings/example_send.yaml",
+  "models": {
+    "bayesian": {
+      "enabled": false
+    },
+    "optional": {
+      "tft": {
+        "enabled": false
+      }
+    },
+    "spline": {
+      "enabled": false
+    },
+    "transformer": {
+      "enabled": false
+    }
+  },
+  "output_dir": "runs/rich_hist_v1",
+  "run_name": "rich_hist_v1",
+  "seed": 92031,
+  "source": {
+    "layout": "per_study",
+    "metadata_dir": "runs/rich_hist_v1/synthetic/metadata",
+    "root": "runs/rich_hist_v1/synthetic/send",
+    "type": "local"
+  },
+  "split_seed": 92031,
+  "splits": {
+    "calibration": 0.15,
+    "method": "random",
+    "test": 0.2,
+    "train": 0.5,
+    "validation": 0.15
+  },
+  "synthetic": {
+    "enabled": true,
+    "generator": "A",
+    "longitudinal": {
+      "p_dropout_challenging": 0.08,
+      "scenarios": [
+        {
+          "dropout_kind": "ordinary",
+          "duration": 28,
+          "id": "rat28_weekly",
+          "n_studies": 4,
+          "recovery_days": 14,
+          "recovery_prob": 0.5,
+          "schedule": "weekly",
+          "slope_basis": "linear_tref",
+          "species": "RAT",
+          "treatment_days": 28
+        },
+        {
+          "dropout_kind": "ordinary",
+          "duration": 28,
+          "id": "rat28_twice",
+          "n_studies": 4,
+          "recovery_days": 14,
+          "recovery_prob": 0.5,
+          "schedule": "twice_weekly",
+          "slope_basis": "linear_tref",
+          "species": "RAT",
+          "treatment_days": 28
+        },
+        {
+          "dropout_kind": "ordinary",
+          "duration": 28,
+          "id": "rat28_dense",
+          "n_studies": 3,
+          "recovery_days": 14,
+          "recovery_prob": 0.5,
+          "schedule": "dense",
+          "slope_basis": "linear_tref",
+          "species": "RAT",
+          "treatment_days": 28
+        },
+        {
+          "dropout_kind": "ordinary",
+          "duration": 90,
+          "id": "rat90_weekly",
+          "n_studies": 4,
+          "recovery_days": 14,
+          "recovery_prob": 0.5,
+          "schedule": "weekly",
+          "slope_basis": "saturating",
+          "species": "RAT",
+          "treatment_days": 56
+        },
+        {
+          "dropout_kind": "ordinary",
+          "duration": 90,
+          "id": "rat90_twice",
+          "n_studies": 4,
+          "recovery_days": 14,
+          "recovery_prob": 0.5,
+          "schedule": "twice_weekly",
+          "slope_basis": "saturating",
+          "species": "RAT",
+          "treatment_days": 56
+        },
+        {
+          "dropout_kind": "ordinary",
+          "duration": 90,
+          "id": "rat90_dense",
+          "n_studies": 3,
+          "recovery_days": 14,
+          "recovery_prob": 0.5,
+          "schedule": "dense",
+          "slope_basis": "saturating",
+          "species": "RAT",
+          "treatment_days": 56
+        },
+        {
+          "dropout_kind": "ordinary",
+          "duration": 90,
+          "id": "rat90_weekly_fulltreat",
+          "n_studies": 2,
+          "recovery_days": 14,
+          "recovery_prob": 0.5,
+          "schedule": "weekly",
+          "slope_basis": "saturating",
+          "species": "RAT",
+          "treatment_days": 90
+        },
+        {
+          "dropout_kind": "challenging",
+          "duration": 90,
+          "id": "rat90_weekly_challenging",
+          "n_studies": 2,
+          "recovery_days": 14,
+          "recovery_prob": 0.5,
+          "schedule": "weekly",
+          "slope_basis": "saturating",
+          "species": "RAT",
+          "treatment_days": 56
+        },
+        {
+          "dense_schedule": "dense",
+          "dropout_kind": "ordinary",
+          "duration": 28,
+          "id": "pair28_dense_weekly",
+          "n_pairs": 2,
+          "paired": true,
+          "recovery_days": 14,
+          "recovery_prob": 0.5,
+          "slope_basis": "linear_tref",
+          "sparse_schedule": "weekly",
+          "species": "RAT",
+          "treatment_days": 28
+        },
+        {
+          "dense_schedule": "dense",
+          "dropout_kind": "ordinary",
+          "duration": 90,
+          "id": "pair90_dense_weekly",
+          "n_pairs": 4,
+          "paired": true,
+          "recovery_days": 14,
+          "recovery_prob": 0.5,
+          "slope_basis": "saturating",
+          "sparse_schedule": "weekly",
+          "species": "RAT",
+          "treatment_days": 56
+        },
+        {
+          "dropout_kind": "ordinary",
+          "duration": 28,
+          "id": "dog28_weekly",
+          "n_studies": 2,
+          "recovery_days": 14,
+          "recovery_prob": 0.5,
+          "schedule": "weekly",
+          "slope_basis": "linear_tref",
+          "species": "DOG",
+          "treatment_days": 28
+        },
+        {
+          "dropout_kind": "ordinary",
+          "duration": 90,
+          "id": "dog90_weekly",
+          "n_studies": 2,
+          "recovery_days": 14,
+          "recovery_prob": 0.5,
+          "schedule": "weekly",
+          "slope_basis": "saturating",
+          "species": "DOG",
+          "treatment_days": 56
+        },
+        {
+          "dropout_kind": "ordinary",
+          "duration": 90,
+          "id": "dog90_twice",
+          "n_studies": 2,
+          "recovery_days": 14,
+          "recovery_prob": 0.5,
+          "schedule": "twice_weekly",
+          "slope_basis": "saturating",
+          "species": "DOG",
+          "treatment_days": 56
+        }
+      ],
+      "study_prefix": "SYNRH"
+    },
+    "n_compounds": 8,
+    "n_per_sex": [
+      3,
+      4
+    ],
+    "out_dir": "runs/rich_hist_v1/synthetic",
+    "p_death": 0.015,
+    "p_dose_deviation": 0.04,
+    "p_missing": 0.02
+  },
+  "windows": {
+    "horizons": [
+      7,
+      14
+    ],
+    "model_encoder_limit": 8,
+    "origins_by_duration": {
+      "28": [
+        7,
+        14
+      ],
+      "90": [
+        14,
+        28,
+        42,
+        56
+      ]
+    },
+    "short_history_k": 2
+  }
+}

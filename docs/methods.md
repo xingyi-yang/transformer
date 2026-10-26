@@ -143,6 +143,28 @@ visits at `DAY` −7 and 0. `send-bw tft-longer-ctx` reattaches those
 observed rows as encoder context on the same splits and cutoff; it does
 not invent days and does not add recovery visits.
 
+`send-bw rich-hist` is a **new** Generator A bank (`runs/rich_hist_v1/`,
+`generate_seed=91021`), not a correction of the locked 71001 / 81011
+experiments. Study duration, measurement schedule, treatment duration,
+and recovery duration are configurable. 28-day studies keep the official
+`t/28` slope basis. ~90-day studies use a saturating slope basis
+`(1-exp(-t/τ_g))/(1-exp(-28/τ_g))` so random slopes do not grow
+mechanically as `t/28`. Weekly / twice-weekly / dense calendars are
+**experimental scenarios**. No signed historical authorization exists;
+do not treat them as empirical protocol estimates.
+`CohortConfig.include_pretreatment` (default false) can keep observed
+predose rows in the modelling table. Forecast windows record origin,
+last observed day, encoder count, encoder span, target day, lead from
+origin, and lead from last observation. A short-history (last 2 visits)
+table is written for later ablation. If a model cap truncates the
+encoder, excluded visits are counted. Study-level splits are
+train / validation / calibration / test; paired dense/sparse siblings
+that share a latent path stay in one partition. FeatureSpec is fit on
+training studies only. This command does not train models.
+
+Synthetic methodological benchmark. Not real-data validation or
+operational qualification.
+
 `D1`, `D2`, `D3` are curated **production** descriptors in
 `metadata/compound_reference.csv`. They are not SEND domains. A comparable
 table must be supplied at prediction time; missing descriptors on an active arm

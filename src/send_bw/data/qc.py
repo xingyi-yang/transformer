@@ -32,6 +32,10 @@ class CohortConfig:
     donor_species: list[str] = field(default_factory=list)
     sharing: str = "context_specific"
     n_donor_studies: int = 0
+    # Official default drops baseline / PRETREATMENT rows. Rich-history banks
+    # may keep observed predose visits in the modelling table. Eligibility
+    # still requires min_post_baseline_obs post-baseline treatment visits.
+    include_pretreatment: bool = False
 
     @staticmethod
     def from_dict(d: dict[str, Any] | None) -> CohortConfig:
@@ -87,8 +91,10 @@ def select_cohort(t: CanonicalTables, cfg: CohortConfig) -> Cohort:
     if cfg.exclude_uncertain_dates:
         obs = obs[~obs["DATE_UNCERTAIN"]]
     post = obs[(~obs["IS_BASELINE"]) & (obs["PHASE"] != "PRETREATMENT")]
+    kept = obs.copy() if cfg.include_pretreatment else post
     if cfg.max_day is not None:
         post = post[post["DAY"] <= cfg.max_day]
+        kept = kept[kept["DAY"] <= cfg.max_day]
     n_post = post.groupby("USUBJID").size()
     for u in animals["USUBJID"]:
         if n_post.get(u, 0) < cfg.min_post_baseline_obs:
@@ -101,7 +107,7 @@ def select_cohort(t: CanonicalTables, cfg: CohortConfig) -> Cohort:
                       suffixes=("", "_REG"))
     elig["DISPOSITION"] = elig["USUBJID"].map(status["DISPOSITION"])
     elig["DISPOSITION_DAY"] = elig["USUBJID"].map(status["DISPOSITION_DAY"])
-    mobs = post[post["USUBJID"].isin(set(elig["USUBJID"]))].copy()
+    mobs = kept[kept["USUBJID"].isin(set(elig["USUBJID"]))].copy()
     mobs = mobs.merge(elig[["USUBJID", "BASELINE_LOGW", "BASELINE_DAY"]], on="USUBJID", how="left",
                       validate="many_to_one")
     mobs["Y"] = mobs["LOGW"] - mobs["BASELINE_LOGW"]

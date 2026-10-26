@@ -1,0 +1,30 @@
+{
+  "exclude_counts": {
+    "already_dead_at_origin": 18,
+    "target_day_not_observed": 192
+  },
+  "history_kind": "full",
+  "horizons": [
+    7.0,
+    14.0
+  ],
+  "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+  "max_encoder_length": null,
+  "n_animals": 1332,
+  "n_excluded_rows": 210,
+  "n_pairs": 8244,
+  "note": "Encoder uses every observed visit with DAY<=origin unless a model limit is set. Limits are reported as n_encoder_excluded_by_limit. Targets are observed days at origin+horizon only. No interpolation.",
+  "origins_by_duration": {
+    "28.0": [
+      7.0,
+      14.0
+    ],
+    "90.0": [
+      14.0,
+      28.0,
+      42.0,
+      56.0
+    ]
+  },
+  "short_history_k": 2
+}

@@ -1,0 +1,196 @@
+# Rich-history synthetic benchmark v1.
+# New versioned bank. Not a correction of locked experiments.
+# Synthetic methodological benchmark. Not real-data validation or operational qualification.
+# No authorized historical schedule metadata. Calendars are experimental scenarios.
+run_name: rich_hist_v1
+output_dir: runs/rich_hist_v1
+generate_seed: 91021
+split_seed: 92031
+seed: 92031
+mapping: configs/mappings/example_send.yaml
+source:
+  type: local
+  root: runs/rich_hist_v1/synthetic/send
+  layout: per_study
+  metadata_dir: runs/rich_hist_v1/synthetic/metadata
+synthetic:
+  enabled: true
+  out_dir: runs/rich_hist_v1/synthetic
+  generator: A
+  n_compounds: 8
+  n_per_sex: [3, 4]
+  p_missing: 0.02
+  p_death: 0.015
+  p_dose_deviation: 0.04
+  longitudinal:
+    study_prefix: SYNRH
+    p_dropout_challenging: 0.08
+    scenarios:
+      - id: rat28_weekly
+        species: RAT
+        n_studies: 4
+        duration: 28
+        schedule: weekly
+        treatment_days: 28
+        recovery_days: 14
+        recovery_prob: 0.5
+        slope_basis: linear_tref
+        dropout_kind: ordinary
+      - id: rat28_twice
+        species: RAT
+        n_studies: 4
+        duration: 28
+        schedule: twice_weekly
+        treatment_days: 28
+        recovery_days: 14
+        recovery_prob: 0.5
+        slope_basis: linear_tref
+        dropout_kind: ordinary
+      - id: rat28_dense
+        species: RAT
+        n_studies: 3
+        duration: 28
+        schedule: dense
+        treatment_days: 28
+        recovery_days: 14
+        recovery_prob: 0.5
+        slope_basis: linear_tref
+        dropout_kind: ordinary
+      - id: rat90_weekly
+        species: RAT
+        n_studies: 4
+        duration: 90
+        schedule: weekly
+        treatment_days: 56
+        recovery_days: 14
+        recovery_prob: 0.5
+        slope_basis: saturating
+        dropout_kind: ordinary
+      - id: rat90_twice
+        species: RAT
+        n_studies: 4
+        duration: 90
+        schedule: twice_weekly
+        treatment_days: 56
+        recovery_days: 14
+        recovery_prob: 0.5
+        slope_basis: saturating
+        dropout_kind: ordinary
+      - id: rat90_dense
+        species: RAT
+        n_studies: 3
+        duration: 90
+        schedule: dense
+        treatment_days: 56
+        recovery_days: 14
+        recovery_prob: 0.5
+        slope_basis: saturating
+        dropout_kind: ordinary
+      - id: rat90_weekly_fulltreat
+        species: RAT
+        n_studies: 2
+        duration: 90
+        schedule: weekly
+        treatment_days: 90
+        recovery_days: 14
+        recovery_prob: 0.5
+        slope_basis: saturating
+        dropout_kind: ordinary
+      - id: rat90_weekly_challenging
+        species: RAT
+        n_studies: 2
+        duration: 90
+        schedule: weekly
+        treatment_days: 56
+        recovery_days: 14
+        recovery_prob: 0.5
+        slope_basis: saturating
+        dropout_kind: challenging
+      - id: pair28_dense_weekly
+        species: RAT
+        paired: true
+        n_pairs: 2
+        duration: 28
+        dense_schedule: dense
+        sparse_schedule: weekly
+        treatment_days: 28
+        recovery_days: 14
+        recovery_prob: 0.5
+        slope_basis: linear_tref
+        dropout_kind: ordinary
+      - id: pair90_dense_weekly
+        species: RAT
+        paired: true
+        n_pairs: 4
+        duration: 90
+        dense_schedule: dense
+        sparse_schedule: weekly
+        treatment_days: 56
+        recovery_days: 14
+        recovery_prob: 0.5
+        slope_basis: saturating
+        dropout_kind: ordinary
+      - id: dog28_weekly
+        species: DOG
+        n_studies: 2
+        duration: 28
+        schedule: weekly
+        treatment_days: 28
+        recovery_days: 14
+        recovery_prob: 0.5
+        slope_basis: linear_tref
+        dropout_kind: ordinary
+      - id: dog90_weekly
+        species: DOG
+        n_studies: 2
+        duration: 90
+        schedule: weekly
+        treatment_days: 56
+        recovery_days: 14
+        recovery_prob: 0.5
+        slope_basis: saturating
+        dropout_kind: ordinary
+      - id: dog90_twice
+        species: DOG
+        n_studies: 2
+        duration: 90
+        schedule: twice_weekly
+        treatment_days: 56
+        recovery_days: 14
+        recovery_prob: 0.5
+        slope_basis: saturating
+        dropout_kind: ordinary
+cohort:
+  species: RAT
+  study_classes: [REPEAT_DOSE_TOX]
+  include_pretreatment: true
+  exclude_fasted: true
+  min_post_baseline_obs: 1
+splits:
+  method: random
+  train: 0.50
+  validation: 0.15
+  calibration: 0.15
+  test: 0.20
+windows:
+  origins_by_duration:
+    28: [7, 14]
+    90: [14, 28, 42, 56]
+  horizons: [7, 14]
+  short_history_k: 2
+  model_encoder_limit: 8
+models:
+  spline:
+    enabled: false
+  transformer:
+    enabled: false
+  bayesian:
+    enabled: false
+  optional:
+    tft:
+      enabled: false
+design: {}
+labels:
+  - Synthetic methodological benchmark. Not real-data validation or operational qualification.
+  - Experimental schedules. Not verified representations of real in-vivo protocols.
+  - Not a correction of locked experiments. Not model-superiority evidence.
