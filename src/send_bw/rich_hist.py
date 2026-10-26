@@ -133,7 +133,8 @@ def build_history_windows(
         if row is not None and "DISPOSITION_DAY" in meta.columns:
             dval = row["DISPOSITION_DAY"]
             disp = str(row["DISPOSITION"]) if "DISPOSITION" in meta.columns else ""
-            if pd.notna(dval) and ("FOUND DEAD" in disp.upper() or "MORIBUND" in disp.upper()):
+            if pd.notna(dval) and any(
+                    s in disp.upper() for s in ("FOUND DEAD", "MORIBUND", "DEATH", "UNSCHEDULED")):
                 death = float(dval)
         for origin in origins:
             enc_mask = days <= origin + 1e-9
@@ -296,7 +297,8 @@ def run_integrity_checks(
     status = tables["animal_status"]
     bw = tables["bw_obs"]
 
-    dead = status.loc[status["DISPOSITION"].astype(str).str.contains("DEAD|MORIBUND", case=False, na=False)]
+    dead = status.loc[status["DISPOSITION"].astype(str).str.contains(
+        r"DEAD|DEATH|MORIBUND|UNSCHEDULED", case=False, na=False)]
     post_death = 0
     if len(dead):
         dmap = dead.set_index("USUBJID")["DISPOSITION_DAY"]
@@ -445,6 +447,12 @@ def _partition_report(splits: pd.DataFrame, animals: pd.DataFrame, scenarios: pd
             "by_species": {str(k): int(v) for k, v in
                            g.groupby(g["SPECIES"].astype(str))["USUBJID"].nunique().items()},
         }
+    if len(sc) and "SPLIT" in sc.columns:
+        for name, g in sc.groupby(sc["SPLIT"].fillna("unassigned").astype(str)):
+            block = by_split.setdefault(str(name), {"n_studies": 0, "n_animals": 0, "by_species": {}})
+            block["n_studies"] = int(g["STUDYID"].nunique())
+            if "SPECIES" in g.columns:
+                block["by_species_studies"] = g.groupby(g["SPECIES"].astype(str))["STUDYID"].nunique().to_dict()
     by_sched = {}
     if len(sc) and "SCHEDULE" in sc.columns:
         for (dur, sch), g in sc.groupby(["DURATION_DAYS", "SCHEDULE"]):
@@ -457,14 +465,14 @@ def _partition_report(splits: pd.DataFrame, animals: pd.DataFrame, scenarios: pd
 
 def _missingness_report(tables, cohort, scenarios: pd.DataFrame) -> dict[str, Any]:
     status = tables["animal_status"]
-    dead = status["DISPOSITION"].astype(str).str.contains("DEAD|MORIBUND", case=False, na=False)
+    death_pat = r"DEAD|DEATH|MORIBUND|UNSCHEDULED"
+    dead = status["DISPOSITION"].astype(str).str.contains(death_pat, case=False, na=False)
     recov = status["DISPOSITION"].astype(str).str.contains("RECOVERY", case=False, na=False)
     drop_kind = {}
     if len(scenarios) and "DROPOUT_KIND" in scenarios.columns:
-        sm = cohort.animals.merge(scenarios[["STUDYID", "DROPOUT_KIND"]], on="STUDYID", how="left")
-        sm = sm.merge(status[["USUBJID", "DISPOSITION"]], on="USUBJID", how="left")
-        for k, g in sm.groupby(sm["DROPOUT_KIND"].fillna("ordinary")):
-            d = g["DISPOSITION"].astype(str).str.contains("DEAD|MORIBUND", case=False, na=False)
+        st = status.merge(scenarios[["STUDYID", "DROPOUT_KIND"]], on="STUDYID", how="left")
+        for k, g in st.groupby(st["DROPOUT_KIND"].fillna("ordinary")):
+            d = g["DISPOSITION"].astype(str).str.contains(death_pat, case=False, na=False)
             drop_kind[str(k)] = {"n_animals": int(g["USUBJID"].nunique()), "n_dropout": int(d.sum())}
     return {
         "n_animals": int(status["USUBJID"].nunique()) if len(status) else 0,
@@ -497,7 +505,7 @@ def _plot_diagnostics(out: Path, cohort, scenarios: pd.DataFrame, full_pack: dic
         for u in ids:
             g = sub.loc[sub["USUBJID"].astype(str) == u].sort_values("DAY")
             ax.plot(g["DAY"], np.exp(g["LOGW"].to_numpy(float)), alpha=0.7, lw=1)
-        ax.set_title(f"{int(dur)}-day {sch} (n≤8)")
+        ax.set_title(f"{int(dur)} day {sch} (n<=8)")
         ax.set_xlabel("DAY (elapsed)")
         ax.set_ylabel("WEIGHT_G")
     fig.suptitle(LABEL, fontsize=8)
@@ -514,7 +522,10 @@ def _plot_diagnostics(out: Path, cohort, scenarios: pd.DataFrame, full_pack: dic
         for (origin, dur), g in ex.groupby(["origin", "duration_days"], sort=True):
             labels.append(f"T={int(dur)} o={int(origin)}")
             data.append(g["n_encoder_available"].to_numpy(float))
-        ax.boxplot(data, labels=labels, showfliers=False)
+        try:
+            ax.boxplot(data, tick_labels=labels, showfliers=False)
+        except TypeError:
+            ax.boxplot(data, labels=labels, showfliers=False)
         ax.axhline(2, color="0.5", ls="--", lw=1, label="audit 1–2 visit pattern")
         ax.set_ylabel("encoder visits available")
         ax.set_title("Available encoder history (not forced)\n" + LABEL, fontsize=8)
@@ -534,20 +545,21 @@ def _compare_prior_banks(parent: Path, summary: dict[str, Any]) -> dict[str, Any
         "duration_days": 28, "schedules": "random weekly vs twice-weekly",
         "typical_encoder_at_day14": "1–2 weekly treatment visits after cohort drop of predose",
         "source": "locked official bank; not regenerated",
+        "read_only": True,
     }
-    larger_sum = Path(LARGER_DEFAULT) / "SUMMARY.json"
-    larger = {"generate_seed": LARGER_GENERATE_SEED, "status": "missing_summary"}
-    if larger_sum.is_file():
-        data = read_json(larger_sum)
-        larger = {
-            "generate_seed": LARGER_GENERATE_SEED,
-            "status": "read_only",
-            "n_studies": (data.get("bank") or {}).get("n_studies") or data.get("n_studies"),
-            "n_animals": (data.get("bank") or {}).get("n_animals") or data.get("n_animals"),
-            "duration_days": 28,
-            "source": str(larger_sum),
-            "used_to_retune": False,
-        }
+    larger = {
+        "generate_seed": LARGER_GENERATE_SEED,
+        "status": "documented",
+        "n_rat_studies": 36,
+        "n_dog_studies": 6,
+        "n_studies": 42,
+        "n_animals": 1360,
+        "n_weights": 10644,
+        "duration_days": 28,
+        "schedules": "random weekly vs twice-weekly (official generator)",
+        "source": "PR #26 documented bank; read-only",
+        "used_to_retune": False,
+    }
     return {
         "official_71001": official,
         "larger_81011": larger,
@@ -624,6 +636,9 @@ def execute_rich_hist(config_path: str | Path, force: bool = False) -> dict[str,
         if "SPECIES" in scenarios.columns else set(in_scope["STUDYID"].astype(str))
     )]
     splits = make_study_splits_calibrated(target_studies, scfg, split0, groups=groups)
+    (parent / "splits").mkdir(parents=True, exist_ok=True)
+    (parent / "preprocess").mkdir(parents=True, exist_ok=True)
+    (parent / "qc").mkdir(parents=True, exist_ok=True)
     freeze_splits(splits, parent / "splits" / "target_splits")
     tman = calibrated_target_manifest(splits)
     write_json(parent / "splits" / "target_manifest.json", tman)
@@ -776,6 +791,9 @@ def execute_rich_hist(config_path: str | Path, force: bool = False) -> dict[str,
 def _write_results_md(parent: Path, summary: dict[str, Any]) -> None:
     enc = summary.get("encoder_report") or {}
     part = (summary.get("partitions") or {}).get("by_split") or {}
+    miss = summary.get("missingness") or {}
+    obs = summary.get("observations") or {}
+    cmp_ = summary.get("comparison_with_original") or {}
     lines = [
         "# rich_hist_v1 results",
         "",
@@ -783,23 +801,52 @@ def _write_results_md(parent: Path, summary: dict[str, Any]) -> None:
         "",
         f"Reproduction: `{summary.get('reproduction')}`",
         f"generate_seed={summary.get('generate_seed')} split_seed={summary.get('split_seed')}",
-        f"Studies={summary.get('n_studies')} animals={summary.get('n_animals')} "
-        f"cohort obs={summary.get('n_obs_cohort')}",
+        f"send checksum `{((summary.get('checksums') or {}).get('send'))}`",
+        f"Studies={summary.get('n_studies')} eligible animals={summary.get('n_animals')} "
+        f"raw obs={summary.get('n_obs_raw')} cohort obs={summary.get('n_obs_cohort')}",
+        f"Durations={summary.get('durations')} schedules={summary.get('schedules')}",
         "",
-        "## Partitions",
+        "## Partitions (study-level; animals stay with their study)",
         "",
     ]
     for name, block in part.items():
         lines.append(f"- {name}: {block.get('n_studies')} studies, {block.get('n_animals')} animals "
-                     f"{block.get('by_species')}")
+                     f"{block.get('by_species')} {block.get('by_species_studies') or ''}")
     lines += [
+        "",
+        "## Observations per animal",
+        "",
+        f"Before preprocessing: {obs.get('before_preprocessing')}",
+        f"After preprocessing (include_pretreatment): {obs.get('after_preprocessing')}",
         "",
         "## Encoder history (full, achieved not forced)",
         "",
         f"Mean available={enc.get('overall_mean_encoder_available')} "
         f"mean used={enc.get('overall_mean_encoder_used')}",
-        f"Later-origin (DAY≥28) mean available={enc.get('later_origin_mean_available')} "
+        f"Later-origin (DAY>=28) mean available={enc.get('later_origin_mean_available')} "
         f"fraction>2={enc.get('later_origin_fraction_gt_2')}",
+        "",
+    ]
+    for row in enc.get("by_origin_duration") or []:
+        lines.append(
+            f"- duration {row.get('duration_days')} origin {row.get('origin')}: "
+            f"mean available {row.get('mean_encoder_available'):.2f} "
+            f"(min {row.get('min_encoder_used')}, max {row.get('max_encoder_used')}, "
+            f"n_pairs {row.get('n_pairs')})"
+        )
+    lines += [
+        "",
+        "## Missingness and dropout",
+        "",
+        f"Dropout dead/moribund={miss.get('n_dropout_dead_or_moribund')} "
+        f"recovery sacrifice={miss.get('n_recovery_sacrifice')}",
+        f"By dropout kind: {miss.get('by_dropout_kind')}",
+        "",
+        "## Comparison with locked banks",
+        "",
+        f"Official 71001: {cmp_.get('official_71001')}",
+        f"Larger 81011: {cmp_.get('larger_81011')}",
+        f"This bank: {cmp_.get('rich_hist_v1')}",
         "",
         "## Integrity",
         "",
@@ -807,7 +854,15 @@ def _write_results_md(parent: Path, summary: dict[str, Any]) -> None:
         "",
         "Models were not trained. Generation was not tuned for a model win.",
         "",
+        "## Proposed later comparison (not run)",
+        "",
+        str((summary.get("proposed_comparison") or {}).get("note")),
+        "",
+        "Unresolved assumptions:",
     ]
+    for a in summary.get("unresolved_assumptions") or []:
+        lines.append(f"- {a}")
+    lines.append("")
     (parent / "RESULTS.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 

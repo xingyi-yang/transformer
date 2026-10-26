@@ -1,0 +1,128 @@
+{
+  "compounds": {
+    "CMP01": {
+      "A": 0.16907860861787125,
+      "ED50": 47.06993584083857,
+      "tau_off": 7.703474234658065,
+      "tau_on": 6.758341286350281
+    },
+    "CMP02": {
+      "A": 0.03344518957689492,
+      "ED50": 51.589043604380535,
+      "tau_off": 9.871431140990799,
+      "tau_on": 8.446989152127776
+    },
+    "CMP03": {
+      "A": 0.11971803344045936,
+      "ED50": 34.64070136270793,
+      "tau_off": 8.867661110608717,
+      "tau_on": 5.728393673074741
+    },
+    "CMP04": {
+      "A": 0.11433084721683485,
+      "ED50": 64.25225360014656,
+      "tau_off": 12.015933389282758,
+      "tau_on": 7.628944142052574
+    },
+    "CMP05": {
+      "A": 0.1970746003170927,
+      "ED50": 32.77809498570783,
+      "tau_off": 10.241254765496581,
+      "tau_on": 6.423298027548788
+    },
+    "CMP06": {
+      "A": 0.04712400891291004,
+      "ED50": 35.64980017753759,
+      "tau_off": 10.610707856149475,
+      "tau_on": 5.873411003714976
+    },
+    "CMP07": {
+      "A": 0.045396768491255984,
+      "ED50": 75.80317474790264,
+      "tau_off": 11.22747049070022,
+      "tau_on": 5.893790834581637
+    },
+    "CMP08": {
+      "A": 0.14308233840603635,
+      "ED50": 15.297486773708062,
+      "tau_off": 13.679421788641118,
+      "tau_on": 7.809277218948758
+    }
+  },
+  "generator": "A",
+  "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+  "longitudinal": true,
+  "params": {
+    "baseline": {
+      "DOG": {
+        "F": [
+          9.047821442478408,
+          0.08
+        ],
+        "M": [
+          9.210340371976184,
+          0.08
+        ]
+      },
+      "RAT": {
+        "F": [
+          5.272999558563747,
+          0.065
+        ],
+        "M": [
+          5.560681631015528,
+          0.07
+        ]
+      }
+    },
+    "compound_link": {
+      "a0": -1.0,
+      "a1": 0.9,
+      "a2": -0.6,
+      "amax": 0.3,
+      "ed50_0": 3.6888794541139363,
+      "ed50_3": 0.5,
+      "noise_a": 0.3,
+      "noise_ed": 0.25
+    },
+    "ell": 6.0,
+    "fasting_shift": -0.045,
+    "gmax": {
+      "DOG": {
+        "F": 0.06,
+        "M": 0.08
+      },
+      "RAT": {
+        "F": 0.52,
+        "M": 0.95
+      }
+    },
+    "gmax_baseline_slope": 1.2,
+    "route_factor": {
+      "INTRAVENOUS": 1.4,
+      "ORAL GAVAGE": 1.0
+    },
+    "sd_animal_slope": 0.045,
+    "sd_study_slope": 0.035,
+    "sigma_m": 0.01,
+    "sigma_p": 0.022,
+    "strain_factor": {
+      "BEAGLE": 1.0,
+      "SPRAGUE-DAWLEY": 1.0,
+      "WISTAR HAN": 0.88
+    },
+    "study_baseline_sd": 0.04,
+    "tau_g": 40.0,
+    "tau_off": [
+      6.0,
+      14.0
+    ],
+    "tau_on": [
+      4.0,
+      10.0
+    ]
+  },
+  "schedule_assumptions": "Synthetic methodological benchmark. Not real-data validation or operational qualification. Weekly / twice-weekly / dense calendars are experimental scenarios. No signed historical authorization; schedules are not empirical protocol estimates.",
+  "seed": 91021,
+  "warning": "TRUTH-ONLY. Not for model fitting."
+}

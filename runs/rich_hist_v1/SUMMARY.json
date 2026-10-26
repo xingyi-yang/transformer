@@ -1,0 +1,460 @@
+{
+  "checksums": {
+    "full_windows": "9ac125614c66a1daeb3f4b22eb31d1b707c89813c0dadc21b1b316f9c71695b0",
+    "metadata": "8922b1459c8f742e15d1e5ca905e480aaf7944c4541c234fe1fba1e2f91aec9d",
+    "send": "3b36f81a6da9a3af7d104ef6584d7eab5b4f37bcee881446cf27670923946a3e",
+    "splits": "76e61d069bb161b2fc4b828a4eff48a8e674efaaf6edefb77c9629d3d3a8e728"
+  },
+  "comparison_with_original": {
+    "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+    "larger_81011": {
+      "duration_days": 28,
+      "generate_seed": 81011,
+      "n_animals": 1360,
+      "n_dog_studies": 6,
+      "n_rat_studies": 36,
+      "n_studies": 42,
+      "n_weights": 10644,
+      "schedules": "random weekly vs twice-weekly (official generator)",
+      "source": "PR #26 documented bank; read-only",
+      "status": "documented",
+      "used_to_retune": false
+    },
+    "note": "New versioned bank. Not a correction of locked experiments. Not evidence that any model is superior.",
+    "official_71001": {
+      "duration_days": 28,
+      "generate_seed": 71001,
+      "n_dog_studies": 3,
+      "n_rat_studies": 12,
+      "read_only": true,
+      "schedules": "random weekly vs twice-weekly",
+      "source": "locked official bank; not regenerated",
+      "typical_encoder_at_day14": "1\u20132 weekly treatment visits after cohort drop of predose"
+    },
+    "rich_hist_v1": {
+      "durations": [
+        28.0,
+        90.0
+      ],
+      "generate_seed": 91021,
+      "mean_encoder_available": 10.586487142163998,
+      "n_animals": 1338,
+      "n_obs_after": 28936,
+      "n_studies": 44,
+      "schedules": [
+        "dense",
+        "twice_weekly",
+        "weekly"
+      ]
+    }
+  },
+  "durations": [
+    28.0,
+    90.0
+  ],
+  "encoder_report": {
+    "achieved_not_forced": true,
+    "by_origin_duration": [
+      {
+        "duration_days": 28.0,
+        "max_encoder_used": 6,
+        "mean_encoder_available": 4.2279888785912885,
+        "mean_encoder_used": 4.2279888785912885,
+        "mean_excluded_by_limit": 0.0,
+        "mean_span": 13.883225208526413,
+        "median_encoder_used": 4.0,
+        "min_encoder_used": 2,
+        "n_animals": 553,
+        "n_gt_2_available": 1065,
+        "n_gt_2_used": 1065,
+        "n_pairs": 1079,
+        "n_truncated": 0,
+        "origin": 7.0
+      },
+      {
+        "duration_days": 28.0,
+        "max_encoder_used": 10,
+        "mean_encoder_available": 6.451612903225806,
+        "mean_encoder_used": 6.451612903225806,
+        "mean_excluded_by_limit": 0.0,
+        "mean_span": 20.84516129032258,
+        "median_encoder_used": 6.0,
+        "min_encoder_used": 3,
+        "n_animals": 553,
+        "n_gt_2_available": 1085,
+        "n_gt_2_used": 1085,
+        "n_pairs": 1085,
+        "n_truncated": 0,
+        "origin": 14.0
+      },
+      {
+        "duration_days": 90.0,
+        "max_encoder_used": 10,
+        "mean_encoder_available": 6.169190256747861,
+        "mean_encoder_used": 6.169190256747861,
+        "mean_excluded_by_limit": 0.0,
+        "mean_span": 20.895984200131664,
+        "median_encoder_used": 4.0,
+        "min_encoder_used": 3,
+        "n_animals": 779,
+        "n_gt_2_available": 1519,
+        "n_gt_2_used": 1519,
+        "n_pairs": 1519,
+        "n_truncated": 0,
+        "origin": 14.0
+      },
+      {
+        "duration_days": 90.0,
+        "max_encoder_used": 18,
+        "mean_encoder_available": 10.346736980883323,
+        "mean_encoder_used": 10.346736980883323,
+        "mean_excluded_by_limit": 0.0,
+        "mean_span": 34.90903098220171,
+        "median_encoder_used": 9.0,
+        "min_encoder_used": 4,
+        "n_animals": 778,
+        "n_gt_2_available": 1517,
+        "n_gt_2_used": 1517,
+        "n_pairs": 1517,
+        "n_truncated": 0,
+        "origin": 28.0
+      },
+      {
+        "duration_days": 90.0,
+        "max_encoder_used": 26,
+        "mean_encoder_available": 14.548788474132285,
+        "mean_encoder_used": 14.548788474132285,
+        "mean_excluded_by_limit": 0.0,
+        "mean_span": 48.85527177472168,
+        "median_encoder_used": 12.0,
+        "min_encoder_used": 6,
+        "n_animals": 776,
+        "n_gt_2_available": 1527,
+        "n_gt_2_used": 1527,
+        "n_pairs": 1527,
+        "n_truncated": 0,
+        "origin": 42.0
+      },
+      {
+        "duration_days": 90.0,
+        "max_encoder_used": 34,
+        "mean_encoder_available": 18.74093605800923,
+        "mean_encoder_used": 18.74093605800923,
+        "mean_excluded_by_limit": 0.0,
+        "mean_span": 62.91694133157548,
+        "median_encoder_used": 10.0,
+        "min_encoder_used": 8,
+        "n_animals": 773,
+        "n_gt_2_available": 1517,
+        "n_gt_2_used": 1517,
+        "n_pairs": 1517,
+        "n_truncated": 0,
+        "origin": 56.0
+      }
+    ],
+    "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+    "later_origin_fraction_gt_2": 1.0,
+    "later_origin_mean_available": 14.545494409120806,
+    "overall_mean_encoder_available": 10.586487142163998,
+    "overall_mean_encoder_used": 10.586487142163998
+  },
+  "forbidden_at_origin": [
+    "Z0_TRUE",
+    "Z_LATENT",
+    "U_STUDY_SLOPE",
+    "U_STUDY_BASELINE",
+    "DOSE_DEVIATION",
+    "DEATH_DAY",
+    "ACTUAL_DOSE",
+    "ACTUAL_END_DAY",
+    "future LOGW (DAY>origin)",
+    "future missingness",
+    "future death",
+    "future dosing deviations"
+  ],
+  "generate_seed": 91021,
+  "git_revision": "a5053a9716246f374cf0400b46641b33c17bf64e",
+  "integrity": {
+    "later_origin_mean_available": 14.545494409120806,
+    "passed": true
+  },
+  "known_at_origin": [
+    "SEX",
+    "SPECIES",
+    "STRAIN",
+    "IS_CONTROL",
+    "PLANNED_DOSE",
+    "ROUTE",
+    "INTERVAL_DAYS",
+    "START_DAY",
+    "END_DAY",
+    "D1",
+    "D2",
+    "D3",
+    "BASELINE_LOGW",
+    "BASELINE_DAY",
+    "observed LOGW with DAY<=origin",
+    "planned regimen only"
+  ],
+  "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+  "locked_dirs_written": false,
+  "mapping_report": {
+    "n_issues": 4
+  },
+  "missingness": {
+    "by_dropout_kind": {
+      "challenging": {
+        "n_animals": 52,
+        "n_dropout": 6
+      },
+      "ordinary": {
+        "n_animals": 1510,
+        "n_dropout": 25
+      }
+    },
+    "challenging_dropout": "separately configurable; later-biased day; still independent of weight",
+    "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+    "n_animals": 1562,
+    "n_dropout_dead_or_moribund": 31,
+    "n_recovery_sacrifice": 269,
+    "ordinary_missingness": "p_missing on day>0; predose DAY -7 and 0 are never MCAR-dropped"
+  },
+  "models_trained": false,
+  "n_animals": 1338,
+  "n_eligible_animals": 1338,
+  "n_exclusions": 224,
+  "n_obs_cohort": 28936,
+  "n_obs_raw": 33014,
+  "n_pairs_latent": 6,
+  "n_studies": 44,
+  "obs_per_animal_cohort": {
+    "max": 55,
+    "mean": 21.626307922272048,
+    "median": 15.0,
+    "min": 3
+  },
+  "obs_per_animal_raw": {
+    "max": 56,
+    "mean": 21.13572343149808,
+    "median": 16.0,
+    "min": 2
+  },
+  "observations": {
+    "after_preprocessing": {
+      "max": 55,
+      "mean": 21.626307922272048,
+      "median": 15.0,
+      "min": 3,
+      "n_animals": 1338,
+      "n_obs": 28936
+    },
+    "before_preprocessing": {
+      "max": 56,
+      "mean": 21.13572343149808,
+      "median": 16.0,
+      "min": 2,
+      "n_animals": 1562,
+      "n_obs": 33014
+    },
+    "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification."
+  },
+  "output_dir": "runs/rich_hist_v1",
+  "partitions": {
+    "by_duration_schedule": {
+      "28d_dense": {
+        "n_studies": 5,
+        "splits": {
+          "test": 3,
+          "train": 2
+        }
+      },
+      "28d_twice_weekly": {
+        "n_studies": 4,
+        "splits": {
+          "test": 1,
+          "train": 1,
+          "validation": 2
+        }
+      },
+      "28d_weekly": {
+        "n_studies": 8,
+        "splits": {
+          "other_species": 2,
+          "test": 1,
+          "train": 4,
+          "validation": 1
+        }
+      },
+      "90d_dense": {
+        "n_studies": 7,
+        "splits": {
+          "calibration": 1,
+          "test": 1,
+          "train": 4,
+          "validation": 1
+        }
+      },
+      "90d_twice_weekly": {
+        "n_studies": 6,
+        "splits": {
+          "calibration": 1,
+          "other_species": 2,
+          "train": 3
+        }
+      },
+      "90d_weekly": {
+        "n_studies": 14,
+        "splits": {
+          "calibration": 4,
+          "other_species": 2,
+          "test": 1,
+          "train": 6,
+          "validation": 1
+        }
+      }
+    },
+    "by_split": {
+      "calibration": {
+        "by_species": {
+          "RAT": 188
+        },
+        "by_species_studies": {
+          "RAT": 6
+        },
+        "n_animals": 188,
+        "n_studies": 6
+      },
+      "other_species": {
+        "by_species": {},
+        "by_species_studies": {
+          "DOG": 6
+        },
+        "n_animals": 0,
+        "n_studies": 6
+      },
+      "test": {
+        "by_species": {
+          "RAT": 260
+        },
+        "by_species_studies": {
+          "RAT": 7
+        },
+        "n_animals": 260,
+        "n_studies": 7
+      },
+      "train": {
+        "by_species": {
+          "RAT": 748
+        },
+        "by_species_studies": {
+          "RAT": 20
+        },
+        "n_animals": 748,
+        "n_studies": 20
+      },
+      "validation": {
+        "by_species": {
+          "RAT": 142
+        },
+        "by_species_studies": {
+          "RAT": 5
+        },
+        "n_animals": 142,
+        "n_studies": 5
+      }
+    },
+    "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification."
+  },
+  "plots": [
+    "runs/rich_hist_v1/plots/trajectories_by_scenario.png",
+    "runs/rich_hist_v1/plots/encoder_history_by_origin.png"
+  ],
+  "proposed_comparison": {
+    "not_run": true,
+    "note": "Compare on this bank without retuning generation. Population-only uses planned covariates and no individual weights. Latest-weight uses the last observation at or before origin. Short-history uses the last two observed visits. Full-history uses every eligible observed visit through the origin. Score study-balanced MAE on the frozen test studies. Do not use test errors to retune.",
+    "predictors": [
+      "population_only",
+      "latest_weight",
+      "short_history",
+      "full_history"
+    ],
+    "same_splits": true,
+    "same_targets": true
+  },
+  "qc": {
+    "all_obs_have_animal": true,
+    "arm_keys_resolved": true,
+    "finite_log_weights": true,
+    "n_quarantined_hard": 0,
+    "n_quarantined_soft": 0,
+    "one_baseline_per_animal_max": true,
+    "passed": true,
+    "positive_weights": true,
+    "sex_values": [
+      "F",
+      "M"
+    ],
+    "unique_animal_keys": true,
+    "unique_obs_keys": true
+  },
+  "reproduction": "send-bw rich-hist --config configs/rich_hist_v1.yaml",
+  "schedule_assumptions": "Synthetic methodological benchmark. Not real-data validation or operational qualification. Weekly / twice-weekly / dense calendars are experimental scenarios. No signed historical authorization; schedules are not empirical protocol estimates.",
+  "schedules": [
+    "dense",
+    "twice_weekly",
+    "weekly"
+  ],
+  "seconds_total": 11.839272737503052,
+  "species": [
+    "DOG",
+    "RAT"
+  ],
+  "split_seed": 92031,
+  "status": "ok",
+  "tuned_for_model_win": false,
+  "unresolved_assumptions": [
+    "Schedules are experimental, not authorized historical protocol aggregates.",
+    "Saturating slope basis is a modelling choice to avoid linear t/28 blow-up at day 90.",
+    "Challenging dropout is later-biased but still independent of weight (not MNAR).",
+    "DOG studies are inventory-only (other_species); this bank is not a sharing experiment.",
+    "90-day saturating-exponential growth is still one family; not a claim of biological realism."
+  ],
+  "version": "rich_hist_v1",
+  "versions": {
+    "chronos2_class": "chronos.chronos2.pipeline.Chronos2Pipeline",
+    "packages": {
+      "accelerate": "1.15.0",
+      "chronos": "2.3.2",
+      "lightning": "2.6.6",
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "peft": "0.21.2",
+      "pytorch_forecasting": "1.8.0",
+      "torch": "2.14.1+cu130",
+      "transformers": "5.20.2"
+    },
+    "python": "3.12.3",
+    "tft_class": "pytorch_forecasting.models.temporal_fusion_transformer._tft.TemporalFusionTransformer",
+    "torch_cuda": false,
+    "torch_device": "cpu"
+  },
+  "window_counts": {
+    "full": {
+      "exclude_counts": {
+        "already_dead_at_origin": 18,
+        "target_day_not_observed": 192
+      },
+      "n_animals": 1332,
+      "n_pairs": 8244
+    },
+    "short": {
+      "n_animals": 1332,
+      "n_pairs": 8244
+    },
+    "truncated": {
+      "model_encoder_limit": 8,
+      "n_pairs": 8244,
+      "n_truncated_pairs": 3866
+    }
+  }
+}
