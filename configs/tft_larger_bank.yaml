@@ -1,0 +1,91 @@
+# Larger Generator A bank + locked-knob TFT comparison (synthetic diagnostic).
+# Seeds, sizes, and TFT knobs are predeclared. Official holdout test errors
+# are not used to choose hyperparameters. This is not the official 71001 bank.
+# Windows are observed DAY values only. No illustrative calendars.
+# Synthetic diagnostic. Not design qualification. No real-data validation.
+# No operational recommendation.
+run_name: tft_larger_bank
+output_dir: runs/tft_larger_bank
+official_primary_dir: runs/tft_primary
+locked_tft_config: runs/tft_primary/locked_tft_config.json
+generate_seed: 81011
+train_seed: 83011
+seed: 83011
+larger_bank:
+  bank: matched
+  n_donor_studies: 6
+  encoder_window_day: 14
+  target_species: RAT
+  development_reference: tft_target_only
+  official_generate_seed: 71001
+  search: false
+synthetic:
+  enabled: true
+  out_dir: runs/tft_larger_bank/datasets/d0/banks/matched/synthetic
+  generator: A
+  n_studies: 36
+  n_other_species_studies: 6
+  n_compounds: 8
+  n_per_sex: [3, 4]
+  donor_scenario: matched
+mapping: configs/mappings/example_send.yaml
+source:
+  type: local
+  root: runs/tft_larger_bank/datasets/d0/banks/matched/synthetic/send
+  layout: per_study
+  metadata_dir: runs/tft_larger_bank/datasets/d0/banks/matched/synthetic/metadata
+cohort:
+  species: RAT
+  donor_species: [DOG]
+  sharing: context_specific
+  n_donor_studies: 0
+  study_classes: [REPEAT_DOSE_TOX]
+  max_day: 28
+splits:
+  method: random
+  validation: 0.2
+  test: 0.2
+  compound_holdout_auto: 1
+models:
+  spline:
+    enabled: false
+  transformer:
+    enabled: false
+  bayesian:
+    enabled: false
+  optional:
+    tft:
+      enabled: true
+      hidden_size: 16
+      lstm_layers: 1
+      attention_head_size: 2
+      hidden_continuous_size: 8
+      batch_size: 32
+      lr: 0.01
+      dropout: 0.1
+      max_epochs: 16
+      patience: 6
+      encoder_window_day: 14
+      max_encoder_length: 8
+      max_prediction_length: 6
+      min_encoder_length: 1
+      torch_threads: 2
+      window_balance: study
+      target_normalizer: species_or_global
+      quantiles: [0.1, 0.25, 0.5, 0.75, 0.9]
+      optimizer: adamw
+      seed: 83011
+finetune:
+  lr: 0.001
+  max_epochs: 8
+  patience: 4
+evaluation:
+  tasks: [early_history]
+  early_history_window_day: 14
+  common_quantiles: [0.1, 0.25, 0.5, 0.75, 0.9]
+design: {}
+labels:
+  - Synthetic diagnostic.
+  - Not design qualification.
+  - No real-data validation.
+  - No operational recommendation.
