@@ -734,6 +734,8 @@ def execute_rich_hist_cmp(config_path: str | Path, force: bool = False,
     if parent.exists() and not force and (parent / "SUMMARY.json").is_file() and not smoke:
         return read_json(parent / "SUMMARY.json")
     parent.mkdir(parents=True, exist_ok=True)
+    for sub in ("preflight", "splits", "preprocess", "models", "predictions"):
+        (parent / sub).mkdir(parents=True, exist_ok=True)
     t0 = time.time()
 
     packed = _load_bank(bank, cfg["mapping"])
