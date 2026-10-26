@@ -162,6 +162,21 @@ train / validation / calibration / test; paired dense/sparse siblings
 that share a latent path stay in one partition. FeatureSpec is fit on
 training studies only. This command does not train models.
 
+`send-bw rich-hist-cmp` is a **new** versioned experiment
+(`runs/rich_hist_cmp/`, `train_seed=93041`) on the frozen bank. It does
+not regenerate or retune trajectories. Preflight checks trajectory-family
+independence (dense/sparse siblings share a latent path), reconciles the
+1,338-vs-1,332 animal inventory, and records actual consumed encoder
+lengths before any model is fit. Full-history uses
+`max_encoder_length=40` so the bank's available visits are not silently
+cut at 8. Variants A–D plus last-value and the existing spline share the
+same eligible `(USUBJID, origin, target_day)` keys. B–D keep identical
+baseline `ZB_C` and are separately trained TFTs; inference-only
+truncation of one checkpoint is not the experiment. Primary metric is
+study-balanced MAE on LOGW. Pair-level CQR is not a conformal guarantee.
+A null is not proof that history is useless in real studies; a positive
+is not real-data validation.
+
 Synthetic methodological benchmark. Not real-data validation or
 operational qualification.
 
