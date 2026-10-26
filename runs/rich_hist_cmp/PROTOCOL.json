@@ -1,0 +1,165 @@
+{
+  "aggregation": {
+    "dense_not_overweighted": "Dense studies have more target rows; study-balanced and schedule-balanced prevent extra row count from dominating.",
+    "family_balanced": "mean |e| within trajectory_family_id, then unweighted mean of families",
+    "schedule_balanced": "study-balanced MAE within schedule, then unweighted mean of schedules",
+    "study_balanced": "mean |e| within study, then unweighted mean of studies"
+  },
+  "bank": {
+    "generate_seed": 91021,
+    "regenerated": false,
+    "source": "runs/rich_hist_v1",
+    "split_seed": 92031,
+    "tuned_for_model_win": false
+  },
+  "baseline_weight": {
+    "isolates": "longitudinal history, not baseline access",
+    "latest_short_full": "identical observed BASELINE_LOGW / ZB_C",
+    "population_only": "none (no ZB_C, no individual LOGW)"
+  },
+  "conformal": "CQR uses pair-level residuals on calibration. Animals contribute multiple pairs. This does not establish standard conformal coverage.",
+  "eligible_targets": "Frozen rich_hist_v1 full-history example rows. The same (USUBJID, origin, target_day) keys are scored for every variant.",
+  "encoder_audit": {
+    "full": {
+      "full_history_keeps_all": true,
+      "history_kind": "full",
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "max_encoder_length": 40,
+      "mean_available": 10.586487142163998,
+      "mean_consumed": 10.586487142163998,
+      "mean_excluded": 0.0,
+      "n_pairs": 8244,
+      "n_truncated_pairs": 0,
+      "silent_full_truncation_pairs": 0
+    },
+    "latest": {
+      "full_history_keeps_all": true,
+      "history_kind": "latest",
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "max_encoder_length": 1,
+      "mean_available": 10.586487142163998,
+      "mean_consumed": 1.0,
+      "mean_excluded": 9.586487142163998,
+      "n_pairs": 8244,
+      "n_truncated_pairs": 8244,
+      "silent_full_truncation_pairs": 0
+    },
+    "legacy_cap8_not_used_for_full": true,
+    "legacy_cap8_would_truncate_pairs": 3866,
+    "short": {
+      "full_history_keeps_all": true,
+      "history_kind": "short",
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "max_encoder_length": 2,
+      "mean_available": 10.586487142163998,
+      "mean_consumed": 2.0,
+      "mean_excluded": 8.586487142163998,
+      "n_pairs": 8244,
+      "n_truncated_pairs": 8230,
+      "silent_full_truncation_pairs": 0
+    }
+  },
+  "family_independence": {
+    "crossing_families": [],
+    "families_by_split": {
+      "calibration": 5,
+      "test": 6,
+      "train": 16,
+      "validation": 5
+    },
+    "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+    "n_crossing_families": 0,
+    "n_independent_families": 32,
+    "n_target_studies": 38,
+    "note": "trajectory_family_id is PAIR_ID for dense/sparse siblings that share a latent path, otherwise STUDYID. Study-ID separation alone is not independence when siblings share realizations.",
+    "passed": true
+  },
+  "full_encoder_cap": 40,
+  "horizons_calendar_days": [
+    7,
+    14
+  ],
+  "inventory": {
+    "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+    "missing_by_reason": {
+      "already_dead_at_origin": 2,
+      "already_dead_at_origin;target_day_not_observed": 4
+    },
+    "missing_by_split": {
+      "test": 3,
+      "train": 3
+    },
+    "n_cohort_animals": 1338,
+    "n_missing_from_windows": 6,
+    "n_window_animals": 1332,
+    "note": "Cohort count includes every eligible RAT animal. Window count keeps animals with at least one observed target after an eligible origin. Animals already dead or removed at every origin do not enter windows."
+  },
+  "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+  "loss_scale": "resolved by a one-batch trace of the pinned TFT after fit",
+  "matched_architecture_B_D": {
+    "batch_size": 32,
+    "dropout": 0.1,
+    "hidden_size": 16,
+    "lr": 0.01,
+    "max_epochs": 16,
+    "not_inference_only_truncation": true,
+    "patience": 6,
+    "separately_trained": true,
+    "target_normalizer": "species_or_global",
+    "window_balance": "study"
+  },
+  "max_available_encoder_visits_in_bank": 34,
+  "metrics": {
+    "also": [
+      "family-balanced MAE (independent trajectory families)",
+      "schedule-balanced MAE (unweighted mean of schedule-level study-balanced MAE)",
+      "by origin, calendar horizon, schedule, duration, available-history bin",
+      "per-study MAE",
+      "80% interval coverage and width (TFT native; CQR experimental)",
+      "consumed encoder length and truncation rate"
+    ],
+    "primary": "study-balanced MAE on LOGW"
+  },
+  "model_selection_rule": "Lowest validation loss among the candidate's own validation metric. Test errors are not inspected for selection.",
+  "not": [
+    "real-data validation",
+    "operational qualification",
+    "proof that history is useless in real studies if the result is null"
+  ],
+  "origins_by_duration": {
+    "28": [
+      7,
+      14
+    ],
+    "90": [
+      14,
+      28,
+      42,
+      56
+    ]
+  },
+  "research_question": "Does additional observed individual history improve future body-weight prediction under this synthetic generator?",
+  "seeds": {
+    "generate_seed": 91021,
+    "split_seed": 92031,
+    "train_seed": 93041
+  },
+  "split_source": "bank_preserved",
+  "splits": {
+    "calibration": "interval CQR margin only; not checkpoint selection",
+    "test": "final evaluation only; not used to tune",
+    "train": "fit",
+    "validation": "model selection (val loss / val RMSE / val MAE)"
+  },
+  "training_validation_filter": "TFT validation windows use encoder DAY<=14.0 and decoder DAY>14.0. Predict clip is raised to 1000.0 so origin-specific history is not recut at day 14.",
+  "tuned_from_test": false,
+  "variants": {
+    "full_history": "TFT, max_encoder_length=40, all eligible visits through origin + common covariates + baseline",
+    "last_value": "benchmark: last encoder LOGW, no covariates",
+    "latest_weight": "TFT, max_encoder_length=1, last observed visit + common covariates + baseline",
+    "population_only": "planned biology/regimen/descriptors + time; no individual weights",
+    "short_history": "TFT, max_encoder_length=2, last two visits + common covariates + baseline",
+    "spline": "benchmark: existing spline on Y, uses baseline + planned features, no visit history"
+  },
+  "version": "rich_hist_cmp_v1"
+}

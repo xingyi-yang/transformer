@@ -759,7 +759,7 @@ def _compact(block: dict[str, Any]) -> dict[str, Any]:
         "mae_log", "rmse_log", "coverage80", "interval_width80",
         "family_balanced_mae", "schedule_balanced_mae",
         "by_origin", "by_horizon", "by_schedule", "by_duration",
-        "by_available_history",
+        "by_available_history", "per_study",
     )}
     out["label"] = LABEL
     return out
