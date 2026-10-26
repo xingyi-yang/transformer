@@ -96,7 +96,7 @@ def main(argv: list[str] | None = None) -> int:
                  "v3-eval-correct", "v3-cov-chronos", "v3-share-repl",
                  "v3-share-abstain", "v3-donor-rank", "historical-audit",
                  "tft-early-hist-bench", "tft-early-hist-extend", "tft-forecast",
-                 "tft-stability", "tft-study-cv", "tft-larger-bank"]:
+                 "tft-stability", "tft-study-cv", "tft-larger-bank", "tft-longer-ctx"]:
         s = sub.add_parser(name)
         artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout",
                                 "v3-increment", "v3-limitations")
@@ -400,6 +400,24 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"status": "ok",
                               "reference": out.get("development_reference"),
                               "eligible": (out.get("example_summary") or {}).get("n_eligible"),
+                              "lowest_mae": (out.get("ranking_mae_study_balanced") or {}).get(
+                                  "lowest_mae"),
+                              "finetune_promoted": out.get("finetune_promoted"),
+                              "n_failures": len(out.get("failures") or []),
+                              "seconds_total": out.get("seconds_total"),
+                              "real_data_accessed": out.get("real_data_accessed"),
+                              "parent": out.get("output_dir")},
+                             indent=2, default=str))
+            return 0
+        if args.cmd == "tft-longer-ctx":
+            from send_bw.tft_longer_ctx import execute_tft_longer_ctx
+
+            out = execute_tft_longer_ctx(args.config, force=args.force)
+            print(json.dumps({"status": "ok",
+                              "reference": out.get("development_reference"),
+                              "eligible": (out.get("example_summary") or {}).get("n_eligible"),
+                              "encoder_mean": ((out.get("encoder_inventory") or {}).get("long") or {}).get(
+                                  "mean_encoder_used"),
                               "lowest_mae": (out.get("ranking_mae_study_balanced") or {}).get(
                                   "lowest_mae"),
                               "finetune_promoted": out.get("finetune_promoted"),

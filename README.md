@@ -38,7 +38,8 @@ compiler, so PyTensor warns "g++ not available" (harmless) and NUTS runs through
 `send-bw <command> --config <yaml>`: `generate`, `inspect-source`, `ingest`, `prepare`, `validate-real`, `train`,
 `evaluate`, `design`, `report`, `run-all`, `validate-request`, `propose-design`,
 `tft-forecast` (primary early-history TFT workflow), `tft-stability`,
-`tft-study-cv`, `tft-larger-bank`, `tft-early-hist-bench`, `tft-early-hist-extend`.
+`tft-study-cv`, `tft-larger-bank`, `tft-longer-ctx`, `tft-early-hist-bench`,
+`tft-early-hist-extend`.
 `validate-request` and `propose-design` also accept `--model <run dir | models dir | model dir>`, for
 inference from serialized artifacts without a training config.
 
@@ -117,6 +118,20 @@ That command writes `runs/tft_larger_bank/` only. Learning rate, hidden
 size, dropout, and duration stay at the locked primary values. Official
 and new test errors are not used to retune. Fine-tune remains
 experimental even if it has lower MAE on the new bank.
+
+Default cohort tables drop pretreatment / baseline rows, so a weekly
+animal's DAY≤14 encoder is often only 7 and 14. Longer context reattaches
+the observed predose visits (`DAY` −7 and 0) and reruns the same locked
+comparison on the same larger-bank splits:
+
+```powershell
+.\.venv\Scripts\send-bw tft-longer-ctx --config configs/tft_longer_ctx.yaml
+#   send-bw tft-longer-ctx --config configs/tft_longer_ctx.yaml
+```
+
+That command writes `runs/tft_longer_ctx/` only. The cutoff stays DAY≤14
+and the targets stay the later observed visits. Recovery rows are not
+added. Fine-tune remains experimental.
 
 Configs: `configs/smoke.yaml`, `configs/bayesian_smoke.yaml` (executed); `configs/research.yaml` and
 `configs/bayesian_research.yaml` (larger; **not executed**); `configs/real_local.example.yaml` and
