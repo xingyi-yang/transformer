@@ -1,0 +1,15 @@
+{
+  "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+  "missing_by_reason": {
+    "already_dead_at_origin": 2,
+    "already_dead_at_origin;target_day_not_observed": 4
+  },
+  "missing_by_split": {
+    "test": 3,
+    "train": 3
+  },
+  "n_cohort_animals": 1338,
+  "n_missing_from_windows": 6,
+  "n_window_animals": 1332,
+  "note": "Cohort count includes every eligible RAT animal. Window count keeps animals with at least one observed target after an eligible origin. Animals already dead or removed at every origin do not enter windows."
+}

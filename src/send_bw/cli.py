@@ -97,12 +97,17 @@ def main(argv: list[str] | None = None) -> int:
                  "v3-share-abstain", "v3-donor-rank", "historical-audit",
                  "tft-early-hist-bench", "tft-early-hist-extend", "tft-forecast",
                  "tft-stability", "tft-study-cv", "tft-larger-bank", "tft-longer-ctx",
-                 "rich-hist"]:
+                 "rich-hist", "rich-hist-cmp"]:
         s = sub.add_parser(name)
         artifact_cmd = name in ("validate-request", "propose-design", "v3-closeout",
                                 "v3-increment", "v3-limitations")
         s.add_argument("--config", required=not artifact_cmd and name != "v3-closeout")
         s.add_argument("--force", action="store_true")
+        if name == "rich-hist-cmp":
+            s.add_argument("--smoke", action="store_true",
+                           help="development-data pipeline smoke; does not score test")
+            s.add_argument("--score-only", action="store_true",
+                           help="reload frozen checkpoints and rescore; do not retrain")
         if name == "train":
             s.add_argument("--models", nargs="*")
         if artifact_cmd:
@@ -441,6 +446,23 @@ def main(argv: list[str] | None = None) -> int:
                                   "overall_mean_encoder_available"),
                               "integrity_passed": (out.get("integrity") or {}).get("passed"),
                               "models_trained": out.get("models_trained"),
+                              "label": out.get("label"),
+                              "parent": out.get("output_dir")},
+                             indent=2, default=str))
+            return 0
+        if args.cmd == "rich-hist-cmp":
+            from send_bw.rich_hist_cmp import execute_rich_hist_cmp
+
+            out = execute_rich_hist_cmp(args.config, force=args.force, smoke=args.smoke,
+                                       score_only=args.score_only)
+            print(json.dumps({"status": out.get("status"),
+                              "version": out.get("version"),
+                              "score_split": out.get("score_split"),
+                              "primary_mae_log_study_balanced": out.get("primary_mae_log_study_balanced"),
+                              "families_independent": (out.get("family_independence") or {}).get("passed"),
+                              "encoder_full_keeps_all": out.get("encoder_full_keeps_all"),
+                              "tuned_from_test": out.get("tuned_from_test"),
+                              "bank_regenerated": out.get("bank_regenerated"),
                               "label": out.get("label"),
                               "parent": out.get("output_dir")},
                              indent=2, default=str))

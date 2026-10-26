@@ -1,0 +1,1463 @@
+{
+  "bank_dir": "runs/rich_hist_v1",
+  "bank_regenerated": false,
+  "checksums": {
+    "bank_full_windows": "9ac125614c66a1daeb3f4b22eb31d1b707c89813c0dadc21b1b316f9c71695b0",
+    "protocol": "4ac84fa9335b9f068fe95a60e9d46929ae8598b5e9f85d95e7db5c2d3c2bc4e5"
+  },
+  "cqr": {
+    "alpha": 0.2,
+    "conformal_claim": false,
+    "k": 1175,
+    "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+    "margin": 0.00540755651962499,
+    "n": 1467,
+    "rule": "Romano k=ceil((n+1)(1-a)); pair-level; not study-balanced",
+    "status": "ok"
+  },
+  "encoder_full_keeps_all": true,
+  "family_independence": {
+    "crossing_families": [],
+    "families_by_split": {
+      "calibration": 5,
+      "test": 6,
+      "train": 16,
+      "validation": 5
+    },
+    "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+    "n_crossing_families": 0,
+    "n_independent_families": 32,
+    "n_target_studies": 38,
+    "note": "trajectory_family_id is PAIR_ID for dense/sparse siblings that share a latent path, otherwise STUDYID. Study-ID separation alone is not independence when siblings share realizations.",
+    "passed": true
+  },
+  "generate_seed": 91021,
+  "git_revision": "08fb8be64edd421c30b94ea8d0286a20da6db507",
+  "interpretation": {
+    "null_is_not": "proof that history is useless in real studies",
+    "positive_is_not": "real-data validation or operational qualification"
+  },
+  "inventory": {
+    "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+    "missing_by_reason": {
+      "already_dead_at_origin": 2,
+      "already_dead_at_origin;target_day_not_observed": 4
+    },
+    "missing_by_split": {
+      "test": 3,
+      "train": 3
+    },
+    "n_cohort_animals": 1338,
+    "n_missing_from_windows": 6,
+    "n_window_animals": 1332,
+    "note": "Cohort count includes every eligible RAT animal. Window count keeps animals with at least one observed target after an eligible origin. Animals already dead or removed at every origin do not enter windows."
+  },
+  "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+  "legacy_cap8_would_truncate_pairs": 3866,
+  "locked_dirs_written": false,
+  "loss_scale_trace": {
+    "decoder_y_masked_mean": 5.996579647064209,
+    "evidence": "decoder y and TFT.forward prediction sit on raw LOGW (~5\u20136), not a standardized residual. QuantileLoss is 2\u00d7 pinball after transform_output.",
+    "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+    "loss_target": "raw_LOGW",
+    "panel_logw_mean": 5.70562992423309,
+    "pf_quantile_loss": "2 * pinball on raw LOGW after transform_output",
+    "prediction_masked_mean": 5.975862979888916,
+    "status": "ok"
+  },
+  "models_trained": [
+    "population_only",
+    "spline",
+    "latest_weight",
+    "short_history",
+    "full_history"
+  ],
+  "n_scored_pairs": 1289,
+  "output_dir": "runs/rich_hist_cmp",
+  "paired_deltas": {
+    "full_history_minus_last_value": {
+      "definition": "positive => a worse than b (higher study MAE)",
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "mean_delta_a_minus_b": -0.05468892713315258,
+      "n_studies": 7,
+      "n_studies_a_better": 7,
+      "n_studies_b_better": 0,
+      "name_a": "full_history",
+      "name_b": "last_value"
+    },
+    "full_history_minus_latest_weight": {
+      "definition": "positive => a worse than b (higher study MAE)",
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "mean_delta_a_minus_b": 0.012121398485200774,
+      "n_studies": 7,
+      "n_studies_a_better": 2,
+      "n_studies_b_better": 5,
+      "name_a": "full_history",
+      "name_b": "latest_weight"
+    },
+    "full_history_minus_short_history": {
+      "definition": "positive => a worse than b (higher study MAE)",
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "mean_delta_a_minus_b": 0.004314710437528834,
+      "n_studies": 7,
+      "n_studies_a_better": 2,
+      "n_studies_b_better": 5,
+      "name_a": "full_history",
+      "name_b": "short_history"
+    },
+    "full_history_minus_spline": {
+      "definition": "positive => a worse than b (higher study MAE)",
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "mean_delta_a_minus_b": -0.0028872888211169323,
+      "n_studies": 7,
+      "n_studies_a_better": 4,
+      "n_studies_b_better": 3,
+      "name_a": "full_history",
+      "name_b": "spline"
+    },
+    "latest_weight_minus_population_only": {
+      "definition": "positive => a worse than b (higher study MAE)",
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "mean_delta_a_minus_b": -0.8600430626253945,
+      "n_studies": 7,
+      "n_studies_a_better": 7,
+      "n_studies_b_better": 0,
+      "name_a": "latest_weight",
+      "name_b": "population_only"
+    },
+    "short_history_minus_latest_weight": {
+      "definition": "positive => a worse than b (higher study MAE)",
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "mean_delta_a_minus_b": 0.007806688047671942,
+      "n_studies": 7,
+      "n_studies_a_better": 2,
+      "n_studies_b_better": 5,
+      "name_a": "short_history",
+      "name_b": "latest_weight"
+    }
+  },
+  "primary_mae_log_study_balanced": {
+    "full_history": 0.04668491787402292,
+    "last_value": 0.10137384500717551,
+    "latest_weight": 0.03456351938882215,
+    "population_only": 0.8946065820142165,
+    "short_history": 0.04237020743649409,
+    "spline": 0.04957220669513985
+  },
+  "reproduction": "send-bw rich-hist-cmp --config configs/rich_hist_cmp.yaml",
+  "research_question": "Does additional observed individual history improve future body-weight prediction under this synthetic generator?",
+  "results": {
+    "full_history": {
+      "by_available_history": [
+        {
+          "key": "1-2",
+          "mae_log_pooled": 0.06408724795269749,
+          "mae_log_study_balanced": 0.06408724795269749,
+          "n": 4,
+          "n_studies": 1
+        },
+        {
+          "key": "3-4",
+          "mae_log_pooled": 0.03434026328227229,
+          "mae_log_study_balanced": 0.03509359886724009,
+          "n": 324,
+          "n_studies": 3
+        },
+        {
+          "key": "5-8",
+          "mae_log_pooled": 0.04743570290594385,
+          "mae_log_study_balanced": 0.050569345991012635,
+          "n": 446,
+          "n_studies": 5
+        },
+        {
+          "key": "9-16",
+          "mae_log_pooled": 0.053608694987226015,
+          "mae_log_study_balanced": 0.05377691958223847,
+          "n": 336,
+          "n_studies": 5
+        },
+        {
+          "key": "17+",
+          "mae_log_pooled": 0.04263299298237259,
+          "mae_log_study_balanced": 0.04263299298237259,
+          "n": 179,
+          "n_studies": 1
+        }
+      ],
+      "by_duration": [
+        {
+          "key": 28.0,
+          "mae_log_pooled": 0.046179224986758936,
+          "mae_log_study_balanced": 0.047899276667025405,
+          "n": 731,
+          "n_studies": 5
+        },
+        {
+          "key": 90.0,
+          "mae_log_pooled": 0.0437737125189065,
+          "mae_log_study_balanced": 0.04364902089151673,
+          "n": 558,
+          "n_studies": 2
+        }
+      ],
+      "by_horizon": [
+        {
+          "key": 7.0,
+          "mae_log_pooled": 0.04012409577450761,
+          "mae_log_study_balanced": 0.040985337899376785,
+          "n": 647,
+          "n_studies": 7
+        },
+        {
+          "key": 14.0,
+          "mae_log_pooled": 0.050190740007420846,
+          "mae_log_study_balanced": 0.05244786552393569,
+          "n": 642,
+          "n_studies": 7
+        }
+      ],
+      "by_origin": [
+        {
+          "key": 7.0,
+          "mae_log_pooled": 0.04674387109969159,
+          "mae_log_study_balanced": 0.04861321961314511,
+          "n": 368,
+          "n_studies": 5
+        },
+        {
+          "key": 14.0,
+          "mae_log_pooled": 0.04365739209093126,
+          "mae_log_study_balanced": 0.04486221039839855,
+          "n": 502,
+          "n_studies": 7
+        },
+        {
+          "key": 28.0,
+          "mae_log_pooled": 0.043497256227871414,
+          "mae_log_study_balanced": 0.04395419345275965,
+          "n": 140,
+          "n_studies": 2
+        },
+        {
+          "key": 42.0,
+          "mae_log_pooled": 0.0374730369585629,
+          "mae_log_study_balanced": 0.03692455649754171,
+          "n": 139,
+          "n_studies": 2
+        },
+        {
+          "key": 56.0,
+          "mae_log_pooled": 0.05547586890995981,
+          "mae_log_study_balanced": 0.05446491599620541,
+          "n": 140,
+          "n_studies": 2
+        }
+      ],
+      "by_schedule": [
+        {
+          "key": "dense",
+          "mae_log_pooled": 0.05070274150112768,
+          "mae_log_study_balanced": 0.053058671693500356,
+          "n": 636,
+          "n_studies": 4
+        },
+        {
+          "key": "twice_weekly",
+          "mae_log_pooled": 0.03748020632410139,
+          "mae_log_study_balanced": 0.03748020632410139,
+          "n": 178,
+          "n_studies": 1
+        },
+        {
+          "key": "weekly",
+          "mae_log_pooled": 0.04055647311676496,
+          "mae_log_study_balanced": 0.038539766010028835,
+          "n": 475,
+          "n_studies": 2
+        }
+      ],
+      "coverage80": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.7719162141194724,
+        "study_balanced": 0.7602366276796383,
+        "weight_mean": 0.9999999999999998
+      },
+      "family_balanced_mae": {
+        "family_balanced": 0.0478260077312764,
+        "n_families": 6,
+        "n_obs": 1289
+      },
+      "interval_width80": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.12071692434922034,
+        "study_balanced": 0.12024075423572138,
+        "weight_mean": 0.9999999999999998
+      },
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "mae_log": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.045137893755524135,
+        "study_balanced": 0.04668491787402292,
+        "weight_mean": 0.9999999999999998
+      },
+      "n_failures": 0,
+      "n_matched_pairs": 1289,
+      "n_scored": 1289,
+      "rmse_log": {
+        "definition": "per-study sqrt(mean e^2), then mean of studies; pooled=sqrt(mean e^2)",
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.0573820057701602,
+        "study_balanced": 0.058020553399448664
+      },
+      "schedule_balanced_mae": {
+        "by_schedule": {
+          "dense": 0.053058671693500356,
+          "twice_weekly": 0.03748020632410139,
+          "weekly": 0.038539766010028835
+        },
+        "n_schedules": 3,
+        "schedule_balanced": 0.04302621467587686
+      },
+      "status": "ok"
+    },
+    "full_history_cqr": {
+      "by_available_history": [
+        {
+          "key": "1-2",
+          "mae_log_pooled": 0.06408724795269749,
+          "mae_log_study_balanced": 0.06408724795269749,
+          "n": 4,
+          "n_studies": 1
+        },
+        {
+          "key": "3-4",
+          "mae_log_pooled": 0.03434026328227229,
+          "mae_log_study_balanced": 0.03509359886724009,
+          "n": 324,
+          "n_studies": 3
+        },
+        {
+          "key": "5-8",
+          "mae_log_pooled": 0.04743570290594385,
+          "mae_log_study_balanced": 0.050569345991012635,
+          "n": 446,
+          "n_studies": 5
+        },
+        {
+          "key": "9-16",
+          "mae_log_pooled": 0.053608694987226015,
+          "mae_log_study_balanced": 0.05377691958223847,
+          "n": 336,
+          "n_studies": 5
+        },
+        {
+          "key": "17+",
+          "mae_log_pooled": 0.04263299298237259,
+          "mae_log_study_balanced": 0.04263299298237259,
+          "n": 179,
+          "n_studies": 1
+        }
+      ],
+      "by_duration": [
+        {
+          "key": 28.0,
+          "mae_log_pooled": 0.046179224986758936,
+          "mae_log_study_balanced": 0.047899276667025405,
+          "n": 731,
+          "n_studies": 5
+        },
+        {
+          "key": 90.0,
+          "mae_log_pooled": 0.0437737125189065,
+          "mae_log_study_balanced": 0.04364902089151673,
+          "n": 558,
+          "n_studies": 2
+        }
+      ],
+      "by_horizon": [
+        {
+          "key": 7.0,
+          "mae_log_pooled": 0.04012409577450761,
+          "mae_log_study_balanced": 0.040985337899376785,
+          "n": 647,
+          "n_studies": 7
+        },
+        {
+          "key": 14.0,
+          "mae_log_pooled": 0.050190740007420846,
+          "mae_log_study_balanced": 0.05244786552393569,
+          "n": 642,
+          "n_studies": 7
+        }
+      ],
+      "by_origin": [
+        {
+          "key": 7.0,
+          "mae_log_pooled": 0.04674387109969159,
+          "mae_log_study_balanced": 0.04861321961314511,
+          "n": 368,
+          "n_studies": 5
+        },
+        {
+          "key": 14.0,
+          "mae_log_pooled": 0.04365739209093126,
+          "mae_log_study_balanced": 0.04486221039839855,
+          "n": 502,
+          "n_studies": 7
+        },
+        {
+          "key": 28.0,
+          "mae_log_pooled": 0.043497256227871414,
+          "mae_log_study_balanced": 0.04395419345275965,
+          "n": 140,
+          "n_studies": 2
+        },
+        {
+          "key": 42.0,
+          "mae_log_pooled": 0.0374730369585629,
+          "mae_log_study_balanced": 0.03692455649754171,
+          "n": 139,
+          "n_studies": 2
+        },
+        {
+          "key": 56.0,
+          "mae_log_pooled": 0.05547586890995981,
+          "mae_log_study_balanced": 0.05446491599620541,
+          "n": 140,
+          "n_studies": 2
+        }
+      ],
+      "by_schedule": [
+        {
+          "key": "dense",
+          "mae_log_pooled": 0.05070274150112768,
+          "mae_log_study_balanced": 0.053058671693500356,
+          "n": 636,
+          "n_studies": 4
+        },
+        {
+          "key": "twice_weekly",
+          "mae_log_pooled": 0.03748020632410139,
+          "mae_log_study_balanced": 0.03748020632410139,
+          "n": 178,
+          "n_studies": 1
+        },
+        {
+          "key": "weekly",
+          "mae_log_pooled": 0.04055647311676496,
+          "mae_log_study_balanced": 0.038539766010028835,
+          "n": 475,
+          "n_studies": 2
+        }
+      ],
+      "coverage80": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.8021722265321956,
+        "study_balanced": 0.7923276499958034,
+        "weight_mean": 0.9999999999999998
+      },
+      "family_balanced_mae": {
+        "family_balanced": 0.0478260077312764,
+        "n_families": 6,
+        "n_obs": 1289
+      },
+      "interval_width80": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.13153203738847033,
+        "study_balanced": 0.13105586727497137,
+        "weight_mean": 0.9999999999999998
+      },
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "mae_log": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.045137893755524135,
+        "study_balanced": 0.04668491787402292,
+        "weight_mean": 0.9999999999999998
+      },
+      "n_failures": null,
+      "n_matched_pairs": 1289,
+      "n_scored": 1289,
+      "rmse_log": {
+        "definition": "per-study sqrt(mean e^2), then mean of studies; pooled=sqrt(mean e^2)",
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.0573820057701602,
+        "study_balanced": 0.058020553399448664
+      },
+      "schedule_balanced_mae": {
+        "by_schedule": {
+          "dense": 0.053058671693500356,
+          "twice_weekly": 0.03748020632410139,
+          "weekly": 0.038539766010028835
+        },
+        "n_schedules": 3,
+        "schedule_balanced": 0.04302621467587686
+      },
+      "status": "ok"
+    },
+    "last_value": {
+      "by_available_history": [
+        {
+          "key": "1-2",
+          "mae_log_pooled": 0.1454400064560255,
+          "mae_log_study_balanced": 0.1454400064560255,
+          "n": 4,
+          "n_studies": 1
+        },
+        {
+          "key": "3-4",
+          "mae_log_pooled": 0.10934934498163097,
+          "mae_log_study_balanced": 0.11109049255163002,
+          "n": 324,
+          "n_studies": 3
+        },
+        {
+          "key": "5-8",
+          "mae_log_pooled": 0.1008432423148724,
+          "mae_log_study_balanced": 0.10890270181647455,
+          "n": 446,
+          "n_studies": 5
+        },
+        {
+          "key": "9-16",
+          "mae_log_pooled": 0.09761009892785075,
+          "mae_log_study_balanced": 0.09836554336346744,
+          "n": 336,
+          "n_studies": 5
+        },
+        {
+          "key": "17+",
+          "mae_log_pooled": 0.06348080609261722,
+          "mae_log_study_balanced": 0.06348080609261722,
+          "n": 179,
+          "n_studies": 1
+        }
+      ],
+      "by_duration": [
+        {
+          "key": 28.0,
+          "mae_log_pooled": 0.10946568303839158,
+          "mae_log_study_balanced": 0.10999496101571479,
+          "n": 731,
+          "n_studies": 5
+        },
+        {
+          "key": 90.0,
+          "mae_log_pooled": 0.08087397330031852,
+          "mae_log_study_balanced": 0.07982105498582728,
+          "n": 558,
+          "n_studies": 2
+        }
+      ],
+      "by_horizon": [
+        {
+          "key": 7.0,
+          "mae_log_pooled": 0.06968306808086706,
+          "mae_log_study_balanced": 0.07225016804110554,
+          "n": 647,
+          "n_studies": 7
+        },
+        {
+          "key": 14.0,
+          "mae_log_pooled": 0.1247073930752663,
+          "mae_log_study_balanced": 0.1307905498036845,
+          "n": 642,
+          "n_studies": 7
+        }
+      ],
+      "by_origin": [
+        {
+          "key": 7.0,
+          "mae_log_pooled": 0.11696001243998033,
+          "mae_log_study_balanced": 0.1179135245718433,
+          "n": 368,
+          "n_studies": 5
+        },
+        {
+          "key": 14.0,
+          "mae_log_pooled": 0.10313019326323143,
+          "mae_log_study_balanced": 0.10293560509801405,
+          "n": 502,
+          "n_studies": 7
+        },
+        {
+          "key": 28.0,
+          "mae_log_pooled": 0.08097135874510603,
+          "mae_log_study_balanced": 0.08033146049802452,
+          "n": 140,
+          "n_studies": 2
+        },
+        {
+          "key": 42.0,
+          "mae_log_pooled": 0.05781419471884831,
+          "mae_log_study_balanced": 0.057435004218831215,
+          "n": 139,
+          "n_studies": 2
+        },
+        {
+          "key": 56.0,
+          "mae_log_pooled": 0.07830204654537332,
+          "mae_log_study_balanced": 0.07606287257835104,
+          "n": 140,
+          "n_studies": 2
+        }
+      ],
+      "by_schedule": [
+        {
+          "key": "dense",
+          "mae_log_pooled": 0.09570986010446017,
+          "mae_log_study_balanced": 0.10129522042852783,
+          "n": 636,
+          "n_studies": 4
+        },
+        {
+          "key": "twice_weekly",
+          "mae_log_pooled": 0.11270040338452647,
+          "mae_log_study_balanced": 0.11270040338452647,
+          "n": 178,
+          "n_studies": 1
+        },
+        {
+          "key": "weekly",
+          "mae_log_pooled": 0.09308410226054649,
+          "mae_log_study_balanced": 0.09586781497579538,
+          "n": 475,
+          "n_studies": 2
+        }
+      ],
+      "coverage80": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.0007757951900698216,
+        "study_balanced": 0.0008025682182985554,
+        "weight_mean": 0.9999999999999998
+      },
+      "family_balanced_mae": {
+        "family_balanced": 0.10107065457603026,
+        "n_families": 6,
+        "n_obs": 1289
+      },
+      "interval_width80": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.0,
+        "study_balanced": 0.0,
+        "weight_mean": 0.9999999999999998
+      },
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "mae_log": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.09708851156139796,
+        "study_balanced": 0.10137384500717551,
+        "weight_mean": 0.9999999999999998
+      },
+      "n_failures": null,
+      "n_matched_pairs": 1289,
+      "n_scored": 1289,
+      "rmse_log": {
+        "definition": "per-study sqrt(mean e^2), then mean of studies; pooled=sqrt(mean e^2)",
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.11531926249043135,
+        "study_balanced": 0.11839228322372565
+      },
+      "schedule_balanced_mae": {
+        "by_schedule": {
+          "dense": 0.10129522042852783,
+          "twice_weekly": 0.11270040338452647,
+          "weekly": 0.09586781497579538
+        },
+        "n_schedules": 3,
+        "schedule_balanced": 0.10328781292961657
+      },
+      "status": "ok"
+    },
+    "latest_weight": {
+      "by_available_history": [
+        {
+          "key": "1-2",
+          "mae_log_pooled": 0.06552565246502895,
+          "mae_log_study_balanced": 0.06552565246502895,
+          "n": 4,
+          "n_studies": 1
+        },
+        {
+          "key": "3-4",
+          "mae_log_pooled": 0.03729558377032788,
+          "mae_log_study_balanced": 0.0364991323698765,
+          "n": 324,
+          "n_studies": 3
+        },
+        {
+          "key": "5-8",
+          "mae_log_pooled": 0.03309552899095951,
+          "mae_log_study_balanced": 0.03410221249098879,
+          "n": 446,
+          "n_studies": 5
+        },
+        {
+          "key": "9-16",
+          "mae_log_pooled": 0.03335291186627801,
+          "mae_log_study_balanced": 0.03304790895391112,
+          "n": 336,
+          "n_studies": 5
+        },
+        {
+          "key": "17+",
+          "mae_log_pooled": 0.0301262075994846,
+          "mae_log_study_balanced": 0.0301262075994846,
+          "n": 179,
+          "n_studies": 1
+        }
+      ],
+      "by_duration": [
+        {
+          "key": 28.0,
+          "mae_log_pooled": 0.036930365968243964,
+          "mae_log_study_balanced": 0.03639864085443631,
+          "n": 731,
+          "n_studies": 5
+        },
+        {
+          "key": 90.0,
+          "mae_log_pooled": 0.029945429580654312,
+          "mae_log_study_balanced": 0.029975715724786748,
+          "n": 558,
+          "n_studies": 2
+        }
+      ],
+      "by_horizon": [
+        {
+          "key": 7.0,
+          "mae_log_pooled": 0.029663566502968843,
+          "mae_log_study_balanced": 0.030176852967022265,
+          "n": 647,
+          "n_studies": 7
+        },
+        {
+          "key": 14.0,
+          "mae_log_pooled": 0.038182740967866974,
+          "mae_log_study_balanced": 0.03899860814409212,
+          "n": 642,
+          "n_studies": 7
+        }
+      ],
+      "by_origin": [
+        {
+          "key": 7.0,
+          "mae_log_pooled": 0.03780545206109823,
+          "mae_log_study_balanced": 0.0372233862625428,
+          "n": 368,
+          "n_studies": 5
+        },
+        {
+          "key": 14.0,
+          "mae_log_pooled": 0.034373090791348745,
+          "mae_log_study_balanced": 0.03399004500679392,
+          "n": 502,
+          "n_studies": 7
+        },
+        {
+          "key": 28.0,
+          "mae_log_pooled": 0.028576544920183394,
+          "mae_log_study_balanced": 0.028957171873636202,
+          "n": 140,
+          "n_studies": 2
+        },
+        {
+          "key": 42.0,
+          "mae_log_pooled": 0.0289268395714422,
+          "mae_log_study_balanced": 0.02881718482309039,
+          "n": 139,
+          "n_studies": 2
+        },
+        {
+          "key": 56.0,
+          "mae_log_pooled": 0.03226001645567202,
+          "mae_log_study_balanced": 0.03201903993020785,
+          "n": 140,
+          "n_studies": 2
+        }
+      ],
+      "by_schedule": [
+        {
+          "key": "dense",
+          "mae_log_pooled": 0.03331866051374842,
+          "mae_log_study_balanced": 0.03353308944172739,
+          "n": 636,
+          "n_studies": 4
+        },
+        {
+          "key": "twice_weekly",
+          "mae_log_pooled": 0.03749281551001096,
+          "mae_log_study_balanced": 0.03749281551001096,
+          "n": 178,
+          "n_studies": 1
+        },
+        {
+          "key": "weekly",
+          "mae_log_pooled": 0.0333500168026642,
+          "mae_log_study_balanced": 0.03515973122241725,
+          "n": 475,
+          "n_studies": 2
+        }
+      ],
+      "coverage80": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.761055081458495,
+        "study_balanced": 0.7483126279759948,
+        "weight_mean": 0.9999999999999998
+      },
+      "family_balanced_mae": {
+        "family_balanced": 0.03357244227088614,
+        "n_families": 6,
+        "n_obs": 1289
+      },
+      "interval_width80": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.09863524588621153,
+        "study_balanced": 0.09922538971433978,
+        "weight_mean": 0.9999999999999998
+      },
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "mae_log": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.033906630898984824,
+        "study_balanced": 0.03456351938882215,
+        "weight_mean": 0.9999999999999998
+      },
+      "n_failures": 0,
+      "n_matched_pairs": 1289,
+      "n_scored": 1289,
+      "rmse_log": {
+        "definition": "per-study sqrt(mean e^2), then mean of studies; pooled=sqrt(mean e^2)",
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.04301901763051813,
+        "study_balanced": 0.04340687369444006
+      },
+      "schedule_balanced_mae": {
+        "by_schedule": {
+          "dense": 0.03353308944172739,
+          "twice_weekly": 0.03749281551001096,
+          "weekly": 0.03515973122241725
+        },
+        "n_schedules": 3,
+        "schedule_balanced": 0.03539521205805187
+      },
+      "status": "ok"
+    },
+    "population_only": {
+      "by_available_history": [
+        {
+          "key": "1-2",
+          "mae_log_pooled": 1.4996525586369565,
+          "mae_log_study_balanced": 1.4996525586369565,
+          "n": 4,
+          "n_studies": 1
+        },
+        {
+          "key": "3-4",
+          "mae_log_pooled": 1.1417708393922796,
+          "mae_log_study_balanced": 1.07872621724703,
+          "n": 324,
+          "n_studies": 3
+        },
+        {
+          "key": "5-8",
+          "mae_log_pooled": 0.8381894386642907,
+          "mae_log_study_balanced": 0.9061067410025142,
+          "n": 446,
+          "n_studies": 5
+        },
+        {
+          "key": "9-16",
+          "mae_log_pooled": 0.7494844192955552,
+          "mae_log_study_balanced": 0.735634744481369,
+          "n": 336,
+          "n_studies": 5
+        },
+        {
+          "key": "17+",
+          "mae_log_pooled": 0.2997603839459361,
+          "mae_log_study_balanced": 0.2997603839459361,
+          "n": 179,
+          "n_studies": 1
+        }
+      ],
+      "by_duration": [
+        {
+          "key": 28.0,
+          "mae_log_pooled": 1.137690404292295,
+          "mae_log_study_balanced": 1.0958063117610526,
+          "n": 731,
+          "n_studies": 5
+        },
+        {
+          "key": 90.0,
+          "mae_log_pooled": 0.4007115410643038,
+          "mae_log_study_balanced": 0.39160725764712645,
+          "n": 558,
+          "n_studies": 2
+        }
+      ],
+      "by_horizon": [
+        {
+          "key": 7.0,
+          "mae_log_pooled": 0.8359598875016366,
+          "mae_log_study_balanced": 0.9095643951009943,
+          "n": 647,
+          "n_studies": 7
+        },
+        {
+          "key": 14.0,
+          "mae_log_pooled": 0.8012191249812934,
+          "mae_log_study_balanced": 0.8795114095317285,
+          "n": 642,
+          "n_studies": 7
+        }
+      ],
+      "by_origin": [
+        {
+          "key": 7.0,
+          "mae_log_pooled": 1.156264407375007,
+          "mae_log_study_balanced": 1.11150372997395,
+          "n": 368,
+          "n_studies": 5
+        },
+        {
+          "key": 14.0,
+          "mae_log_pooled": 0.9482980400792431,
+          "mae_log_study_balanced": 0.9113052328259662,
+          "n": 502,
+          "n_studies": 7
+        },
+        {
+          "key": 28.0,
+          "mae_log_pooled": 0.38938024855333614,
+          "mae_log_study_balanced": 0.3749227240605214,
+          "n": 140,
+          "n_studies": 2
+        },
+        {
+          "key": 42.0,
+          "mae_log_pooled": 0.3356733476704948,
+          "mae_log_study_balanced": 0.339101720027683,
+          "n": 139,
+          "n_studies": 2
+        },
+        {
+          "key": 56.0,
+          "mae_log_pooled": 0.37518555210071997,
+          "mae_log_study_balanced": 0.3632391359938151,
+          "n": 140,
+          "n_studies": 2
+        }
+      ],
+      "by_schedule": [
+        {
+          "key": "dense",
+          "mae_log_pooled": 0.7396387666099802,
+          "mae_log_study_balanced": 0.7961258478002422,
+          "n": 636,
+          "n_studies": 4
+        },
+        {
+          "key": "twice_weekly",
+          "mae_log_pooled": 1.2830639739903373,
+          "mae_log_study_balanced": 1.2830639739903373,
+          "n": 178,
+          "n_studies": 1
+        },
+        {
+          "key": "weekly",
+          "mae_log_pooled": 0.7504275421417301,
+          "mae_log_study_balanced": 0.8973393544541048,
+          "n": 475,
+          "n_studies": 2
+        }
+      ],
+      "coverage80": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.0,
+        "study_balanced": 0.0,
+        "weight_mean": 0.9999999999999998
+      },
+      "family_balanced_mae": {
+        "family_balanced": 0.8210032050054951,
+        "n_families": 6,
+        "n_obs": 1289
+      },
+      "interval_width80": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.0,
+        "study_balanced": 0.0,
+        "weight_mean": 0.9999999999999998
+      },
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "mae_log": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.8186568855326218,
+        "study_balanced": 0.8946065820142165,
+        "weight_mean": 0.9999999999999998
+      },
+      "n_failures": null,
+      "n_matched_pairs": 1289,
+      "n_scored": 1289,
+      "rmse_log": {
+        "definition": "per-study sqrt(mean e^2), then mean of studies; pooled=sqrt(mean e^2)",
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.9635422113324457,
+        "study_balanced": 0.9223923712021879
+      },
+      "schedule_balanced_mae": {
+        "by_schedule": {
+          "dense": 0.7961258478002422,
+          "twice_weekly": 1.2830639739903373,
+          "weekly": 0.8973393544541048
+        },
+        "n_schedules": 3,
+        "schedule_balanced": 0.9921763920815615
+      },
+      "status": "ok"
+    },
+    "short_history": {
+      "by_available_history": [
+        {
+          "key": "1-2",
+          "mae_log_pooled": 0.0888086320011594,
+          "mae_log_study_balanced": 0.0888086320011594,
+          "n": 4,
+          "n_studies": 1
+        },
+        {
+          "key": "3-4",
+          "mae_log_pooled": 0.040507889449909684,
+          "mae_log_study_balanced": 0.04259635894491808,
+          "n": 324,
+          "n_studies": 3
+        },
+        {
+          "key": "5-8",
+          "mae_log_pooled": 0.04328774154894273,
+          "mae_log_study_balanced": 0.0461180167134431,
+          "n": 446,
+          "n_studies": 5
+        },
+        {
+          "key": "9-16",
+          "mae_log_pooled": 0.04357699488312386,
+          "mae_log_study_balanced": 0.04354536836499915,
+          "n": 336,
+          "n_studies": 5
+        },
+        {
+          "key": "17+",
+          "mae_log_pooled": 0.03349691096187357,
+          "mae_log_study_balanced": 0.03349691096187357,
+          "n": 179,
+          "n_studies": 1
+        }
+      ],
+      "by_duration": [
+        {
+          "key": 28.0,
+          "mae_log_pooled": 0.04325215798683126,
+          "mae_log_study_balanced": 0.04388796670377815,
+          "n": 731,
+          "n_studies": 5
+        },
+        {
+          "key": 90.0,
+          "mae_log_pooled": 0.0390799521418193,
+          "mae_log_study_balanced": 0.03857580926828395,
+          "n": 558,
+          "n_studies": 2
+        }
+      ],
+      "by_horizon": [
+        {
+          "key": 7.0,
+          "mae_log_pooled": 0.037733371770736164,
+          "mae_log_study_balanced": 0.03842212029021933,
+          "n": 647,
+          "n_studies": 7
+        },
+        {
+          "key": 14.0,
+          "mae_log_pooled": 0.045187615650845045,
+          "mae_log_study_balanced": 0.04635496982323446,
+          "n": 642,
+          "n_studies": 7
+        }
+      ],
+      "by_origin": [
+        {
+          "key": 7.0,
+          "mae_log_pooled": 0.045534582175125585,
+          "mae_log_study_balanced": 0.04649673924400545,
+          "n": 368,
+          "n_studies": 5
+        },
+        {
+          "key": 14.0,
+          "mae_log_pooled": 0.04172761861915717,
+          "mae_log_study_balanced": 0.041828494877769365,
+          "n": 502,
+          "n_studies": 7
+        },
+        {
+          "key": 28.0,
+          "mae_log_pooled": 0.035934294807837434,
+          "mae_log_study_balanced": 0.03587813449578338,
+          "n": 140,
+          "n_studies": 2
+        },
+        {
+          "key": 42.0,
+          "mae_log_pooled": 0.03114212156044416,
+          "mae_log_study_balanced": 0.030675689311891026,
+          "n": 139,
+          "n_studies": 2
+        },
+        {
+          "key": 56.0,
+          "mae_log_pooled": 0.045431384473190894,
+          "mae_log_study_balanced": 0.04441390347039878,
+          "n": 140,
+          "n_studies": 2
+        }
+      ],
+      "by_schedule": [
+        {
+          "key": "dense",
+          "mae_log_pooled": 0.04175950887981434,
+          "mae_log_study_balanced": 0.043702735737238964,
+          "n": 636,
+          "n_studies": 4
+        },
+        {
+          "key": "twice_weekly",
+          "mae_log_pooled": 0.04507426431403469,
+          "mae_log_study_balanced": 0.04507426431403469,
+          "n": 178,
+          "n_studies": 1
+        },
+        {
+          "key": "weekly",
+          "mae_log_pooled": 0.0396666822906289,
+          "mae_log_study_balanced": 0.03835312239623405,
+          "n": 475,
+          "n_studies": 2
+        }
+      ],
+      "coverage80": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.7703646237393328,
+        "study_balanced": 0.7643220241742167,
+        "weight_mean": 0.9999999999999998
+      },
+      "family_balanced_mae": {
+        "family_balanced": 0.04323898263843604,
+        "n_families": 6,
+        "n_obs": 1289
+      },
+      "interval_width80": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.12168023232991979,
+        "study_balanced": 0.12228662307843623,
+        "weight_mean": 0.9999999999999998
+      },
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "mae_log": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.041446036294421125,
+        "study_balanced": 0.04237020743649409,
+        "weight_mean": 0.9999999999999998
+      },
+      "n_failures": 0,
+      "n_matched_pairs": 1289,
+      "n_scored": 1289,
+      "rmse_log": {
+        "definition": "per-study sqrt(mean e^2), then mean of studies; pooled=sqrt(mean e^2)",
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.05216535357374979,
+        "study_balanced": 0.05272925456539423
+      },
+      "schedule_balanced_mae": {
+        "by_schedule": {
+          "dense": 0.04370273573723896,
+          "twice_weekly": 0.04507426431403469,
+          "weekly": 0.03835312239623405
+        },
+        "n_schedules": 3,
+        "schedule_balanced": 0.04237670748250257
+      },
+      "status": "ok"
+    },
+    "spline": {
+      "by_available_history": [
+        {
+          "key": "1-2",
+          "mae_log_pooled": 0.08123915690282324,
+          "mae_log_study_balanced": 0.08123915690282324,
+          "n": 4,
+          "n_studies": 1
+        },
+        {
+          "key": "3-4",
+          "mae_log_pooled": 0.044897293712073336,
+          "mae_log_study_balanced": 0.042690237124197776,
+          "n": 324,
+          "n_studies": 3
+        },
+        {
+          "key": "5-8",
+          "mae_log_pooled": 0.04982868733121809,
+          "mae_log_study_balanced": 0.045580662316660074,
+          "n": 446,
+          "n_studies": 5
+        },
+        {
+          "key": "9-16",
+          "mae_log_pooled": 0.054942452837717023,
+          "mae_log_study_balanced": 0.05372764286951759,
+          "n": 336,
+          "n_studies": 5
+        },
+        {
+          "key": "17+",
+          "mae_log_pooled": 0.06300839592427641,
+          "mae_log_study_balanced": 0.06300839592427641,
+          "n": 179,
+          "n_studies": 1
+        }
+      ],
+      "by_duration": [
+        {
+          "key": 28.0,
+          "mae_log_pooled": 0.04559272822943103,
+          "mae_log_study_balanced": 0.045482525639181294,
+          "n": 731,
+          "n_studies": 5
+        },
+        {
+          "key": 90.0,
+          "mae_log_pooled": 0.06004687639471441,
+          "mae_log_study_balanced": 0.05979640933503626,
+          "n": 558,
+          "n_studies": 2
+        }
+      ],
+      "by_horizon": [
+        {
+          "key": 7.0,
+          "mae_log_pooled": 0.0480148512413859,
+          "mae_log_study_balanced": 0.045457386331385144,
+          "n": 647,
+          "n_studies": 7
+        },
+        {
+          "key": 14.0,
+          "mae_log_pooled": 0.05571469254016828,
+          "mae_log_study_balanced": 0.053725088752279916,
+          "n": 642,
+          "n_studies": 7
+        }
+      ],
+      "by_origin": [
+        {
+          "key": 7.0,
+          "mae_log_pooled": 0.04110048962457796,
+          "mae_log_study_balanced": 0.040841928494866515,
+          "n": 368,
+          "n_studies": 5
+        },
+        {
+          "key": 14.0,
+          "mae_log_pooled": 0.048397628013217016,
+          "mae_log_study_balanced": 0.048373187935582554,
+          "n": 502,
+          "n_studies": 7
+        },
+        {
+          "key": 28.0,
+          "mae_log_pooled": 0.053352751970262714,
+          "mae_log_study_balanced": 0.053230018675072294,
+          "n": 140,
+          "n_studies": 2
+        },
+        {
+          "key": 42.0,
+          "mae_log_pooled": 0.07051861051632209,
+          "mae_log_study_balanced": 0.0694833438576393,
+          "n": 139,
+          "n_studies": 2
+        },
+        {
+          "key": 56.0,
+          "mae_log_pooled": 0.0724455698705681,
+          "mae_log_study_balanced": 0.0725946616644698,
+          "n": 140,
+          "n_studies": 2
+        }
+      ],
+      "by_schedule": [
+        {
+          "key": "dense",
+          "mae_log_pooled": 0.05101811990101072,
+          "mae_log_study_balanced": 0.048957185637566306,
+          "n": 636,
+          "n_studies": 4
+        },
+        {
+          "key": "twice_weekly",
+          "mae_log_pooled": 0.035048740677388585,
+          "mae_log_study_balanced": 0.035048740677388585,
+          "n": 178,
+          "n_studies": 1
+        },
+        {
+          "key": "weekly",
+          "mae_log_pooled": 0.05925945529757208,
+          "mae_log_study_balanced": 0.0580639818191626,
+          "n": 475,
+          "n_studies": 2
+        }
+      ],
+      "coverage80": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.934833204034135,
+        "study_balanced": 0.92728494432733,
+        "weight_mean": 0.9999999999999998
+      },
+      "family_balanced_mae": {
+        "family_balanced": 0.04875214134663344,
+        "n_families": 6,
+        "n_obs": 1289
+      },
+      "interval_width80": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.2609952618720691,
+        "study_balanced": 0.24189445571999668,
+        "weight_mean": 0.9999999999999998
+      },
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "mae_log": {
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.05184983814116735,
+        "study_balanced": 0.04957220669513985,
+        "weight_mean": 0.9999999999999998
+      },
+      "n_failures": null,
+      "n_matched_pairs": 1289,
+      "n_scored": 1289,
+      "rmse_log": {
+        "definition": "per-study sqrt(mean e^2), then mean of studies; pooled=sqrt(mean e^2)",
+        "n_obs": 1289,
+        "n_studies": 7,
+        "pooled": 0.06708012955646504,
+        "study_balanced": 0.06260461184031173
+      },
+      "schedule_balanced_mae": {
+        "by_schedule": {
+          "dense": 0.048957185637566306,
+          "twice_weekly": 0.035048740677388585,
+          "weekly": 0.0580639818191626
+        },
+        "n_schedules": 3,
+        "schedule_balanced": 0.04735663604470583
+      },
+      "status": "ok"
+    }
+  },
+  "score_encoder": {
+    "full": {
+      "full_history_keeps_all": true,
+      "history_kind": "full",
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "max_encoder_length": 40,
+      "mean_available": 9.250581846392553,
+      "mean_consumed": 9.250581846392553,
+      "mean_excluded": 0.0,
+      "n_pairs": 1289,
+      "n_truncated_pairs": 0,
+      "silent_full_truncation_pairs": 0
+    },
+    "latest": {
+      "full_history_keeps_all": true,
+      "history_kind": "latest",
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "max_encoder_length": 1,
+      "mean_available": 9.250581846392553,
+      "mean_consumed": 1.0,
+      "mean_excluded": 8.250581846392553,
+      "n_pairs": 1289,
+      "n_truncated_pairs": 1289,
+      "silent_full_truncation_pairs": 0
+    },
+    "short": {
+      "full_history_keeps_all": true,
+      "history_kind": "short",
+      "label": "Synthetic methodological benchmark. Not real-data validation or operational qualification.",
+      "max_encoder_length": 2,
+      "mean_available": 9.250581846392553,
+      "mean_consumed": 2.0,
+      "mean_excluded": 7.250581846392552,
+      "n_pairs": 1289,
+      "n_truncated_pairs": 1285,
+      "silent_full_truncation_pairs": 0
+    }
+  },
+  "score_only": true,
+  "score_split": "test",
+  "seconds_total": 177.10609698295593,
+  "smoke": false,
+  "split_seed": 92031,
+  "split_source": "bank_preserved",
+  "status": "ok",
+  "train_seed": 93041,
+  "tuned_from_test": false,
+  "version": "rich_hist_cmp_v1",
+  "versions": {
+    "chronos2_class": "chronos.chronos2.pipeline.Chronos2Pipeline",
+    "packages": {
+      "accelerate": "1.15.0",
+      "chronos": "2.3.2",
+      "lightning": "2.6.6",
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "peft": "0.21.2",
+      "pytorch_forecasting": "1.8.0",
+      "torch": "2.14.1+cu130",
+      "transformers": "5.20.2"
+    },
+    "python": "3.12.3",
+    "tft_class": "pytorch_forecasting.models.temporal_fusion_transformer._tft.TemporalFusionTransformer",
+    "torch_cuda": false,
+    "torch_device": "cpu"
+  }
+}

@@ -39,6 +39,7 @@ compiler, so PyTensor warns "g++ not available" (harmless) and NUTS runs through
 `evaluate`, `design`, `report`, `run-all`, `validate-request`, `propose-design`,
 `tft-forecast` (primary early-history TFT workflow), `tft-stability`,
 `tft-study-cv`, `tft-larger-bank`, `tft-longer-ctx`, `rich-hist`,
+`rich-hist-cmp`,
 `tft-early-hist-bench`,
 `tft-early-hist-extend`.
 `validate-request` and `propose-design` also accept `--model <run dir | models dir | model dir>`, for
@@ -144,6 +145,18 @@ authorized historical protocols.
 ```powershell
 .\.venv\Scripts\send-bw rich-hist --config configs/rich_hist_v1.yaml
 #   send-bw rich-hist --config configs/rich_hist_v1.yaml
+```
+
+`send-bw rich-hist-cmp` is the matched history-length comparison on that
+frozen bank. It does not regenerate trajectories. Population-only,
+latest-weight, short-history, and full-history variants are trained
+separately; last-value and the existing spline are benchmarks. Output is
+`runs/rich_hist_cmp/` only.
+
+```powershell
+.\.venv\Scripts\send-bw rich-hist-cmp --config configs/rich_hist_cmp.yaml --smoke
+.\.venv\Scripts\send-bw rich-hist-cmp --config configs/rich_hist_cmp.yaml
+#   send-bw rich-hist-cmp --config configs/rich_hist_cmp.yaml
 ```
 
 Configs: `configs/smoke.yaml`, `configs/bayesian_smoke.yaml` (executed); `configs/research.yaml` and

@@ -1,0 +1,69 @@
+# Matched history-length comparison on the frozen rich_hist_v1 bank.
+# Does not regenerate or retune trajectories. Does not overwrite locked runs.
+# Synthetic methodological benchmark. Not real-data validation or operational qualification.
+run_name: rich_hist_cmp
+output_dir: runs/rich_hist_cmp
+bank_dir: runs/rich_hist_v1
+generate_seed: 91021
+split_seed: 92031
+train_seed: 93041
+seed: 93041
+mapping: configs/mappings/example_send.yaml
+source:
+  type: local
+  root: runs/rich_hist_v1/synthetic/send
+  layout: per_study
+  metadata_dir: runs/rich_hist_v1/synthetic/metadata
+history_cmp:
+  origins_by_duration:
+    28: [7, 14]
+    90: [14, 28, 42, 56]
+  horizons: [7, 14]
+  full_encoder_cap: 40
+  short_history_k: 2
+  latest_history_k: 1
+  val_encoder_day: 14
+  predict_clip_day: 1000
+  primary_metric: study_balanced_mae_logw
+  model_selection: validation_loss
+  tuned_from_test: false
+  bank_regenerated: false
+cohort:
+  species: RAT
+  study_classes: [REPEAT_DOSE_TOX]
+  include_pretreatment: true
+  exclude_fasted: true
+  min_post_baseline_obs: 1
+models:
+  spline:
+    enabled: true
+  transformer:
+    enabled: false
+  bayesian:
+    enabled: false
+  optional:
+    tft:
+      enabled: true
+      hidden_size: 16
+      lstm_layers: 1
+      attention_head_size: 2
+      hidden_continuous_size: 8
+      batch_size: 32
+      lr: 0.01
+      dropout: 0.1
+      max_epochs: 16
+      patience: 6
+      encoder_window_day: 14
+      max_prediction_length: 6
+      min_encoder_length: 1
+      torch_threads: 2
+      window_balance: study
+      target_normalizer: species_or_global
+      quantiles: [0.1, 0.25, 0.5, 0.75, 0.9]
+      optimizer: adamw
+      seed: 93041
+design: {}
+labels:
+  - Synthetic methodological benchmark. Not real-data validation or operational qualification.
+  - Frozen rich_hist_v1 bank. Trajectories were not regenerated or tuned for this comparison.
+  - A null is not proof that history is useless in real studies. A positive is not real-data validation.
