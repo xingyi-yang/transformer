@@ -598,36 +598,59 @@ def _predict_spline(model: SplineModel, examples: pd.DataFrame, animals: pd.Data
 
 
 def _predict_tft(model, examples: pd.DataFrame, animals: pd.DataFrame, kind: str) -> tuple[pd.DataFrame, list]:
-    from send_bw.tft_examples import quantile_table_from_model
-
+    """One Lightning session per origin. History stays origin-specific per animal."""
     model.encoder_window_day = PREDICT_CLIP_DAY
     animals = animals.copy()
     animals["USUBJID"] = animals["USUBJID"].astype(str)
+    ctx_all = animals.drop_duplicates("USUBJID").set_index(
+        animals.drop_duplicates("USUBJID")["USUBJID"].astype(str))
     recs = []
     fails: list = []
-    for (u, _origin), g in examples.groupby(["USUBJID", "origin"], sort=False):
-        rec = g.iloc[0].to_dict()
-        days = _parse_list(rec.get("encoder_days"))
-        logw = _parse_list(rec.get("encoder_logw"))
-        if kind == "latest":
-            days, logw = days[-1:], logw[-1:]
-        elif kind == "short":
-            days, logw = days[-2:], logw[-2:]
-        pack = {"examples": pd.DataFrame([{
-            "USUBJID": str(u), "STUDYID": rec["STUDYID"],
-            "encoder_days": days, "encoder_logw": logw,
-            "target_days": [float(x) for x in g["target_day"]],
-            "target_logw": [float(x) for x in g["target_logw"]],
-            "last_encoder_day": float(days[-1]) if days else None,
-        }])}
-        hist = pd.DataFrame([
-            {"USUBJID": str(u), "STUDYID": rec["STUDYID"], "DAY": float(d), "LOGW": float(z)}
-            for d, z in zip(days, logw, strict=True)
-        ])
-        pred, f = quantile_table_from_model(model, animals, pack, hist)
-        if len(pred):
-            recs.append(pred)
-        fails.extend(f)
+    for origin, g in examples.groupby("origin", sort=False):
+        hist_rows: list[dict[str, Any]] = []
+        ctx_rows: list[pd.DataFrame] = []
+        seen: set[str] = set()
+        target_days = sorted({float(x) for x in g["target_day"]})
+        for r in g.to_dict("records"):
+            u = str(r["USUBJID"])
+            if u not in ctx_all.index:
+                fails.append({"USUBJID": u, "reason": "animal_missing_from_context"})
+                continue
+            if u in seen:
+                continue
+            seen.add(u)
+            days = _parse_list(r.get("encoder_days"))
+            logw = _parse_list(r.get("encoder_logw"))
+            if kind == "latest":
+                days, logw = days[-1:], logw[-1:]
+            elif kind == "short":
+                days, logw = days[-2:], logw[-2:]
+            if not days:
+                fails.append({"USUBJID": u, "reason": "empty_encoder"})
+                continue
+            ctx_rows.append(ctx_all.loc[[u]].reset_index(drop=True))
+            for d, z in zip(days, logw, strict=True):
+                hist_rows.append({"USUBJID": u, "STUDYID": r["STUDYID"],
+                                  "DAY": float(d), "LOGW": float(z)})
+        if not ctx_rows:
+            continue
+        ctx = pd.concat(ctx_rows, ignore_index=True)
+        hist = pd.DataFrame(hist_rows)
+        try:
+            pred = model.predict_quantiles(ctx, np.asarray(target_days, float), history=hist)
+        except Exception as e:  # noqa: BLE001
+            fails.append({"origin": float(origin), "reason": f"{type(e).__name__}: {e}"})
+            continue
+        if pred is None or pred.empty:
+            fails.append({"origin": float(origin), "reason": "empty_prediction"})
+            continue
+        pred = pred.copy()
+        pred["USUBJID"] = pred["USUBJID"].astype(str)
+        sid = (g.assign(USUBJID=g["USUBJID"].astype(str))
+               .drop_duplicates("USUBJID")
+               .set_index("USUBJID")["STUDYID"])
+        pred["STUDYID"] = pred["USUBJID"].map(sid)
+        recs.append(pred)
     return (pd.concat(recs, ignore_index=True) if recs else pd.DataFrame()), fails
 
 
